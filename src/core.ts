@@ -8,7 +8,7 @@ export type Mode = 'flashcards' | 'flashcards-basic' | 'quiz' | 'grammar' | 'rev
 export const isFlashcardMode = (mode: Mode) => mode === 'flashcards' || mode === 'flashcards-basic';
 export type AnswerMode = 'choice' | 'text' | 'mixed';
 export interface Item { key: string; moduleId: string; version: number; type: 'word' | 'exercise'; id: string; input: 'choice' | 'text' }
-export interface Attempt { key: string; first: boolean; answer: string; corrections: number; corrected: boolean }
+export interface Attempt { lastAnswer?: string; key: string; first: boolean; answer: string; corrections: number; corrected: boolean }
 export interface Session { id: string; moduleId: string; mode: Mode; answerMode: AnswerMode; previous: boolean; startedAt: string; completedAt: string | null; items: Item[]; index: number; phase: 'question' | 'revealed' | 'feedback' | 'retry'; lastCorrect: boolean | null; attempts: Attempt[]; repeatKeys: string[] }
 export interface Progress { version: 1; sessions: Session[]; active: Session | null; words: Record<string, 'known' | 'review'>; difficult: string[] }
 export interface Backup { app: 'hania-language'; version: 1; exportedAt: string; progress: Progress }
@@ -96,6 +96,7 @@ export function recordAnswer(p: Progress, exercise: Exercise, answer: string) {
   const firstInSession = !attempt;
   if (!attempt) { attempt = { key: item.key, first: correct, answer, corrections: 0, corrected: false }; s.attempts.push(attempt); }
   else { attempt.corrections++; attempt.corrected ||= correct; }
+  attempt.lastAnswer = answer;
   if (!correct) {
     if (!p.difficult.includes(item.key)) p.difficult.push(item.key);
     if (!s.repeatKeys.includes(item.key)) {
@@ -146,7 +147,7 @@ export function validateBackup(input: unknown): Backup {
     if (!obj(v) || !str(v.id) || !str(v.moduleId) || !['flashcards','flashcards-basic','quiz','grammar','review'].includes(v.mode as string) || !['choice','text','mixed'].includes(v.answerMode as string) || typeof v.previous !== 'boolean' || !date(v.startedAt) || !(completed ? date(v.completedAt) : v.completedAt === null) || !['question','revealed','feedback','retry'].includes(v.phase as string) || !(v.lastCorrect === null || typeof v.lastCorrect === 'boolean')) return false;
     if (!Array.isArray(v.items) || !v.items.length || v.items.length > 1000 || !integer(v.index) || (completed ? v.index !== v.items.length : v.index >= v.items.length) || !strings(v.repeatKeys)) return false;
     if (!v.items.every(i => obj(i) && str(i.key) && str(i.moduleId) && integer(i.version) && i.version > 0 && ['word','exercise'].includes(i.type as string) && str(i.id) && ['text','choice'].includes(i.input as string) && i.key === `${i.moduleId}@${i.version}:${i.type}:${i.id}`)) return false;
-    if (!Array.isArray(v.attempts) || v.attempts.length > v.items.length || !v.attempts.every(a => obj(a) && str(a.key) && typeof a.first === 'boolean' && typeof a.answer === 'string' && a.answer.length <= 2000 && integer(a.corrections) && typeof a.corrected === 'boolean' && (v.items as Item[]).some(i => i.key === a.key))) return false;
+    if (!Array.isArray(v.attempts) || v.attempts.length > v.items.length || !v.attempts.every(a => obj(a) && str(a.key) && typeof a.first === 'boolean' && typeof a.answer === 'string' && a.answer.length <= 2000 && (a.lastAnswer === undefined || (typeof a.lastAnswer === 'string' && a.lastAnswer.length <= 2000)) && integer(a.corrections) && typeof a.corrected === 'boolean' && (v.items as Item[]).some(i => i.key === a.key))) return false;
     if (new Set(v.attempts.map(a => a.key)).size !== v.attempts.length) return false;
     if (!(v.repeatKeys as string[]).every(k => (v.items as Item[]).some(i => i.key === k))) return false;
     if (!completed) {

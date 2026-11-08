@@ -14,7 +14,9 @@ Aktualizacja aktywnych fiszek: oba zestawy wymagają odpowiedzi (wybór, wpisywa
 
 Ilustracje po odpowiedzi: 97 słówek (oraz odpowiadające im quizy) i 59 zadań gramatycznych mają ilustrację z podpisem. Wykorzystano kolorowe piktogramy i własne lokalne rysunki SVG produktów. Ilustracja jest widoczna od początku pytania i podczas poprawy w fiszkach, quizach, gramatyce i powtórkach. Podpis jest pokazywany dopiero po sprawdzeniu odpowiedzi. W 26 zadaniach z wariantami w nawiasie wymuszono odpowiedzi zamknięte, także w trybie wpisywania i starszych sesjach. Pole `illustration` i opcjonalne `responseType` edytuje się w treści.
 
-Weryfikacja po aktualizacji: 34 testy jednostkowe, check:content i build poprawne; 20 testów zbudowanej aplikacji pod /HaniaAngielski/. Sprawdzono 320×640, 360×740, szerokości 390 i 430 oraz 844×390, wczytanie starej kopii bez zmiany jej danych, oba zestawy i kontrast sprawdzanych tekstów.
+Po błędzie we wszystkich trybach pokazujemy „Twoja odpowiedź” i „Poprawna odpowiedź”, z podkreśleniem oraz kolorem odmiennych fragmentów. Porównanie wybiera najbliższy akceptowany wariant i uwzględnia tolerancję oceniania. Ostatnia odpowiedź jest zapisywana osobno w opcjonalnym `lastAnswer`; `answer` oraz pierwszy wynik pozostają zachowane. Stare kopie nadal są obsługiwane; gdy nie zawierają ostatniej poprawki, widok wyjaśnia brak tego zapisu. Poprawiono również spacje przy ukrywanych na telefonie podziałach wiersza na stronie głównej.
+
+Weryfikacja po aktualizacji: 37 testów jednostkowych, check:content i build poprawne; 25 testów zbudowanej aplikacji pod /HaniaAngielski/. Sprawdzono 320×640, 360×740, szerokości 390 i 430 oraz 844×390, wczytanie starej kopii bez zmiany jej danych, oba zestawy i kontrast sprawdzanych tekstów.
 
 Testy domyślnie korzystają z Chromium, Edge jest dostępny przez zmienną środowiskową. Osobny CI sprawdza push i pull request; GitHub Pages publikuje push na main i umożliwia uruchomienie ręczne.
 

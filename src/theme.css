@@ -230,6 +230,15 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
 
 .answer-illustration img{display:block;width:160px;height:112px;max-width:100%;object-fit:contain;margin:0 auto}
 
+.answer-comparison{margin:12px 0}
+.answer-comparison>div{padding:10px 12px;margin:8px 0;border:1px solid #d8c6e9;border-radius:9px;background:#fffcff;color:#4f3564}
+.answer-comparison>div>span{font-size:12px;font-weight:700}
+.answer-comparison>div>p{margin:4px 0 0;font-size:17px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+.answer-comparison mark{padding:0 1px;border-radius:3px;text-decoration:underline;text-underline-offset:3px;font-weight:700}
+.given-answer mark{background:#fbe0ea;color:#842448}
+.expected-answer mark{background:#e8e0fb;color:#51318a}
+.answer-comparison>small{display:block;font-size:12px;line-height:1.5;color:#684e7b}
+
 .question-illustration{margin:0 auto 14px;padding:10px;width:min(100%,280px);flex-shrink:0}
 @media(max-width:600px),(max-height:500px){
   .studying .question-illustration{margin:0 auto 10px;padding:4px;width:100%;border:0;background:transparent}
