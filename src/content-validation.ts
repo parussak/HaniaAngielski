@@ -13,7 +13,7 @@ export function assembleModule(metadata: any, words: any, quiz: any, exercises: 
     if (!word || distractors.some(w=>!w)) throw new Error(`Quiz ${entry.id}: brak wskazanego słówka.`);
     const options=distractors.map(w=>w!.back);
     options.unshift(word.back);
-    return { id:entry.id, rev:entry.rev??word.rev??1, kind:'vocabulary', prompt:entry.prompt ?? `Podaj po angielsku: ${word.front}`, answers:word.answers ?? [word.back], options, explanation:entry.explanation ?? `„${word.back}” oznacza „${word.front}”.`, requires:[metadata.id], caseSensitive:false, source:word.source };
+    return { id:entry.id, wordId:word.id, rev:entry.rev??word.rev??1, kind:'vocabulary', prompt:entry.prompt ?? `Podaj po angielsku: ${word.front}`, answers:word.answers ?? [word.back], options, explanation:entry.explanation ?? `„${word.back}” oznacza „${word.front}”.`, requires:[metadata.id], caseSensitive:false, source:word.source };
   });
   return {...metadata, words, exercises:[...compiled,...exercises], grammar};
 }

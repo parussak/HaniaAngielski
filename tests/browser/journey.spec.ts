@@ -8,20 +8,23 @@ test('telefon: fiszki, quiz mieszany, powtórka błędów i brak błędów zasob
   page.on('response',response=>{if(response.url().startsWith(origin) && response.status()>=400) failures.push(`${response.status()} ${response.url()}`);});
   await page.goto('./');
   await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
-  await page.getByRole('button',{name:/Rozpocznij naukę/}).tap();
-  await page.getByRole('button',{name:'Pokaż odpowiedź'}).tap();
+  await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();
+  await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).tap();
   const reviewWord=await page.locator('.question').innerText();
-  await page.getByRole('button',{name:'Jeszcze poćwiczę',exact:true}).tap();
+  await page.getByRole('textbox').fill('wrong');
+  await page.getByRole('button',{name:/Sprawdź/}).tap();
+  await page.getByRole('button',{name:'Dalej',exact:false}).tap();
   await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
-  await page.getByRole('button',{name:'Pokaż odpowiedź'}).tap();
-  await page.getByRole('button',{name:'Znam to',exact:false}).tap();
+  const front=await page.locator('.question').innerText();
+  await page.getByRole('textbox').fill(modules[0].words.find(w=>w.front===front)!.back);
+  await page.getByRole('button',{name:/Sprawdź/}).tap();
+  await page.getByRole('button',{name:'Dalej',exact:false}).tap();
   await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
   await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
   await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
-  await page.getByRole('button',{name:/^Quiz słownictwa/}).tap();
   await page.getByText('Trochę wybieram, trochę wpisuję',{exact:true}).tap();
   page.once('dialog',dialog=>dialog.accept());
-  await page.getByRole('button',{name:/Rozpocznij naukę/}).tap();
+  await page.getByRole('button',{name:/^Quiz słownictwa/}).tap();
   const all=modules[0].exercises;
   let sawText=false,sawChoice=false;
   for(let index=0;index<10;index++) {
@@ -49,7 +52,6 @@ test('telefon: fiszki, quiz mieszany, powtórka błędów i brak błędów zasob
   await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
   await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
   await page.getByRole('button',{name:/^Powtórka błędów/}).tap();
-  await page.getByRole('button',{name:/Rozpocznij naukę/}).tap();
   await expect(page.locator('.question')).toBeVisible();
   expect([q,reviewWord]).toContain(await page.locator('.question').innerText());
   expect(failures).toEqual([]);

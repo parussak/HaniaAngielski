@@ -8,9 +8,8 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   await expect(page.getByRole('heading',{name:'Cześć, Haniu'})).toBeVisible();
   await page.screenshot({path:'test-results/home-desktop.png',fullPage:true});
   await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();
-  await page.getByRole('button',{name:/^Gramatyka/}).click();
   await page.getByText('Wpisuję odpowiedź',{exact:true}).click();
-  await page.getByRole('button',{name:/Rozpocznij naukę/}).click();
+  await page.getByRole('button',{name:/^Gramatyka/}).click();
   const prompt = await page.locator('.question').innerText();
   const q = data.exercises.find((q:any)=>q.prompt===prompt);
   await page.getByRole('textbox').fill('wrong');
@@ -37,19 +36,21 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   await expect(page.locator('.summary-score')).toContainText('9 / 10');
   await page.getByRole('button',{name:'Moja nauka',exact:true}).click();
   await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();
+  await page.getByText('Wpisuję odpowiedź',{exact:true}).click();
   await page.getByRole('button',{name:'Fiszki',exact:true}).click();
-  await page.getByRole('button',{name:/Rozpocznij naukę/}).click();
-  await page.getByRole('button',{name:'Pokaż odpowiedź'}).click();
-  const revealed = await page.locator('.flash-answer').innerText();
+
+  const revealed = await page.locator('.question').innerText();
+  await page.getByRole('textbox').fill(data.words.find(w=>w.front===revealed)!.back);
+  await page.getByRole('button',{name:/Sprawdź/}).click();
   await page.reload(); await page.getByRole('button',{name:'Kontynuuj',exact:true}).click();
-  await expect(page.locator('.flash-answer')).toHaveText(revealed);
+  await expect(page.locator('.question')).toHaveText(revealed);
   await page.getByRole('button',{name:'Kopia postępów',exact:true}).click();
   const downloaded=page.waitForEvent('download');
   await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).click();
   const download=await downloaded; const path=(await download.path())!;
   const original=JSON.parse(readFileSync(path,'utf8'));
   expect(original.progress.sessions).toHaveLength(1);
-  expect(original.progress.active.phase).toBe('revealed');
+  expect(original.progress.active.phase).toBe('feedback');
   // Druga karta nie może równocześnie nadpisać wyników.
   const duplicate=await page.context().newPage(); await duplicate.goto('./');
   await expect(duplicate.getByRole('heading',{name:'Nauka jest otwarta w innej karcie'})).toBeVisible(); await duplicate.close();
@@ -71,19 +72,22 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   await expect(mobile.getByRole('status')).toContainText('Kopia została wczytana');
   await mobile.reload();
   await mobile.getByRole('button',{name:'Kontynuuj',exact:true}).click();
-  await expect(mobile.locator('.flash-answer')).toHaveText(revealed);
-  await mobile.getByRole('button',{name:'Znam to',exact:false}).click();
+  await expect(mobile.locator('.question')).toHaveText(revealed);
+  await expect(mobile.locator('.feedback.correct')).toBeVisible();
+  await mobile.getByRole('button',{name:'Dalej',exact:false}).click();
   await mobile.getByRole('button',{name:'Moje postępy',exact:true}).click();
   await expect(mobile.locator('.history-score')).toContainText('9/10');
   expect(errors).toEqual([]); await context.close();
 });
 test('nieudany zapis nie udaje sukcesu i nie zmienia poprzednich wyników',async({page})=>{
   await page.goto('./'); await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();
-  await page.getByRole('button',{name:/Rozpocznij naukę/}).click();
+  await page.getByText('Wpisuję odpowiedź',{exact:true}).click();
+  await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).click();
   await page.evaluate(()=>{IDBObjectStore.prototype.put=function(){throw new DOMException('Full','QuotaExceededError');};});
-  await page.getByRole('button',{name:'Pokaż odpowiedź'}).click();
+  await page.getByRole('textbox').fill('wrong');
+  await page.getByRole('button',{name:/Sprawdź/}).click();
   await expect(page.getByRole('alert')).toContainText('Nie udało się zapisać zmiany');
-  await expect(page.getByRole('button',{name:'Pokaż odpowiedź'})).toBeVisible();
+  await expect(page.getByRole('textbox')).toBeVisible();
   await page.reload(); await page.getByRole('button',{name:'Kontynuuj',exact:true}).click();
-  await expect(page.getByRole('button',{name:'Pokaż odpowiedź'})).toBeVisible();
+  await expect(page.getByRole('textbox')).toBeVisible();
 });

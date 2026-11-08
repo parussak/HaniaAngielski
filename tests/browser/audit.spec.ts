@@ -5,11 +5,10 @@ async function oneQuestion(page:any,id='g-count-milk'){
   await page.route('**/content/02-food/cwiczenia.json',(r:any)=>r.fulfill({json:tasks.filter((q:any)=>q.id===id)}));
   await page.route('**/content/02-food/quiz.json',(r:any)=>r.fulfill({json:[]}));
   await page.goto('./');await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();
-  await page.getByRole('button',{name:/^Gramatyka/}).click();
 }
 for(const [width,height] of [[320,640],[360,740],[844,390]])test(`I5: pytanie, opcja i Dalej dostępne nad paskiem ${width}x${height}`,async({page})=>{
   await page.setViewportSize({width,height});await oneQuestion(page);
-  await page.getByText('Wybieram odpowiedź',{exact:true}).click();await page.getByRole('button',{name:/Rozpocznij naukę/}).click();
+  await page.getByText('Wybieram odpowiedź',{exact:true}).click();await page.getByRole('button',{name:'Gramatyka',exact:true}).click();
   await expect(page.locator('.question')).toBeVisible();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
   const nav=await page.locator('.sidebar nav').boundingBox();
   const option=await page.locator('.option').first().boundingBox();
@@ -25,7 +24,7 @@ for(const [width,height] of [[320,640],[360,740],[844,390]])test(`I5: pytanie, o
 });
 test('K1/D6: po błędzie i poprawce trudność zostaje; retry przenosi fokus do pola',async({page})=>{
   await oneQuestion(page,'g-some-milk-positive');
-  await page.getByText('Wpisuję odpowiedź',{exact:true}).click();await page.getByRole('button',{name:/Rozpocznij naukę/}).click();
+  await page.getByText('Wpisuję odpowiedź',{exact:true}).click();await page.getByRole('button',{name:'Gramatyka',exact:true}).click();
   await page.getByRole('textbox').fill('any');await page.getByRole('button',{name:/Sprawdź/}).click();
   await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).click();
   await expect(page.getByRole('textbox')).toBeFocused();
@@ -42,7 +41,7 @@ test('I7: stara kopia i zmiana wersji modułu zachowują fiszkę i jej status',a
   await page.locator('#import-file').setInputFiles({name:'old.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(old))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
   await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await page.getByRole('button',{name:'Kontynuuj',exact:true}).click();
-  await expect(page.getByRole('button',{name:'Pokaż odpowiedź'})).toBeVisible();
+  await expect(page.getByRole('textbox')).toBeVisible();
   await page.getByRole('button',{name:'Kopia postępów',exact:true}).click();
   const downloaded=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).click();
   const file=await(await downloaded).path();expect(JSON.parse(readFileSync(file!,'utf8')).progress).toEqual(old.progress);
@@ -72,6 +71,6 @@ test('czytelność: funkcjonalny tekst ma 12px i kontrast co najmniej 4,5:1',asy
   };
   await expect(page.getByRole('heading',{name:'Cześć, Haniu'})).toBeVisible();await check();
   await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();await check();
-  await page.getByRole('button',{name:/^Gramatyka/}).click();await page.getByText('Wybieram odpowiedź',{exact:true}).click();
-  await page.getByRole('button',{name:/Rozpocznij naukę/}).click();await expect(page.locator('.option').first()).toBeVisible();await check();
+  await page.getByText('Wybieram odpowiedź',{exact:true}).click();
+  await page.getByRole('button',{name:'Gramatyka',exact:true}).click();await expect(page.locator('.option').first()).toBeVisible();await check();
 });

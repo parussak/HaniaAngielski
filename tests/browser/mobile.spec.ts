@@ -21,9 +21,8 @@ test.describe('telefon — dotyk i małe ekrany', () => {
       if (width === 390) await page.screenshot({path:'test-results/cat-home-mobile.png',fullPage:true});
       await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
       await checkWidth();
-      await page.getByRole('button',{name:/^Quiz słownictwa/}).tap();
       await page.getByText('Wybieram odpowiedź',{exact:true}).tap();
-      await page.getByRole('button',{name:/Rozpocznij naukę/}).tap();
+      await page.getByRole('button',{name:/^Quiz słownictwa/}).tap();
       await expect(page.locator('.option')).toHaveCount(3);
       await checkWidth();
       const option = page.locator('.option').first();
@@ -42,9 +41,8 @@ test.describe('telefon — dotyk i małe ekrany', () => {
     await page.setViewportSize({width:390,height:844});
     await page.goto('./');
     await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
-    await page.getByRole('button',{name:/^Gramatyka/}).tap();
     await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();
-    await page.getByRole('button',{name:/Rozpocznij naukę/}).tap();
+    await page.getByRole('button',{name:/^Gramatyka/}).tap();
     const question = await page.locator('.question').innerText();
     const exercise=module.exercises.find((q:any)=>q.prompt===question);
     await page.getByRole('textbox').fill('wrong');
