@@ -235,8 +235,13 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
 .answer-comparison>div>span{font-size:12px;font-weight:700}
 .answer-comparison>div>p{margin:4px 0 0;font-size:17px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
 .answer-comparison mark{padding:0 1px;border-radius:3px;text-decoration:underline;text-underline-offset:3px;font-weight:700}
-.given-answer mark{background:#fbe0ea;color:#842448}
-.expected-answer mark{background:#e8e0fb;color:#51318a}
+.feedback.correct{background:#edf6ef;color:#285b3a}
+.feedback.incorrect{background:#f7f4f7;color:#625565}
+.answer-comparison>.given-answer{background:#faf9fb;border-color:#e4dee7;color:#706575}
+.answer-comparison>.given-answer>p{font-size:15px}
+.given-answer mark{background:transparent;color:inherit;font-weight:400;text-decoration:line-through;text-decoration-color:#a499a8;text-decoration-thickness:1px}
+.answer-comparison>.expected-answer{background:#edf6ef;border-color:#b8d8c1;color:#285b3a}
+.expected-answer mark{background:#d8eddf;color:#205331}
 .answer-comparison>small{display:block;font-size:12px;line-height:1.5;color:#684e7b}
 
 .question-illustration{margin:0 auto 14px;padding:10px;width:min(100%,280px);flex-shrink:0}
