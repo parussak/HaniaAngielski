@@ -21,7 +21,7 @@ npm.cmd run build
 npm.cmd run preview
 ```
 
-Testy całej ścieżki w przeglądarce (wymagają zainstalowanego Microsoft Edge):
+Testy przeglądarkowe domyślnie używają Chromium (`npx playwright install chromium`). Na Windows możesz użyć Edge, ustawiając przed testami `$env:HANIA_BROWSER_CHANNEL='msedge'`. Na innych systemach użyj `npm` i `npx` zamiast `npm.cmd` i `npx.cmd`.
 
 ```powershell
 npx.cmd playwright test
@@ -39,7 +39,7 @@ Testy automatycznie uruchamiają i zatrzymują własny lokalny serwer na porcie 
 
 Wyniki są przypisane do przeglądarki i adresu strony, nie do konta. Zmiana przeglądarki, portu lub adresu wymaga przeniesienia kopii. Tryb prywatny i czyszczenie danych mogą usunąć postępy. Aplikacja blokuje równoczesny zapis z drugiej karty tej samej przeglądarki. Po zamknięciu pierwszej karty odśwież drugą. Przy błędzie zapisu poprzedni zapis pozostaje, a zmiana nie jest zatwierdzana.
 
-Nie ma kont, synchronizacji, automatycznego przetwarzania PDF ani gwarantowanego działania offline. Do nauki z gotowych zestawów nie jest potrzebna usługa AI. Czcionki z Google Fonts są opcjonalne; przy braku połączenia używane są systemowe.
+Nie ma kont, synchronizacji, automatycznego przetwarzania PDF ani gwarantowanego działania offline. Do nauki z gotowych zestawów nie jest potrzebna usługa AI. Czcionki są systemowe i nie są pobierane z Google Fonts. Nie dodano manifestu aplikacji.
 
 ## Edytowanie materiałów i dodawanie modułu
 
@@ -54,13 +54,13 @@ Treści znajdują się w **public/content**, niezależnie od kodu strony w `src`
 
 [Instrukcja edycji materiałów](public/content/README.md) zawiera przykłady. Po zmianie uruchom `npm.cmd run check:content`. Podczas lokalnej nauki wystarczy zapisać pliki i odświeżyć stronę. Do opublikowania poprawek na GitHub Pages należy ponowić workflow publikacji.
 
-Przy zmianie znaczenia zadania lub prawidłowej odpowiedzi zwiększ `version` modułu. Historia dawnej wersji pozostaje w kopii, ale nie można kontynuować sesji wymagającej nieobecnej wersji. Kopia nie zawiera treści modułów. Zdjęcia źródłowe są w pomijanym przez Git folderze `.local-materials`.
+Przy zmianie znaczenia konkretnego słówka lub zadania zwiększ jego opcjonalne `rev` (domyślnie 1). Pozostałe elementy zachowują postępy. Zmiana `version` całego modułu nie resetuje wyników. Dawne kopie formatu 1 z kluczami `@1` pozostają zgodne. Kopia nie zawiera treści modułów. Zdjęcia źródłowe są w pomijanym przez Git folderze `.local-materials`.
 
 [Zakres i źródła modułu Food](docs/materialy-food.md).
 
 ## GitHub Pages
 
-Konfiguracja Vite używa względnych ścieżek, więc aplikacja obsługuje adres w podkatalogu repozytorium. Dołączono workflow `.github/workflows/pages.yml`. Po umieszczeniu projektu w swoim repozytorium wybierz w Settings → Pages źródło „GitHub Actions”, a następnie uruchom workflow „Publish Pages”. Publikacja nie została wykonana w ramach przygotowania lokalnej wersji.
+Konfiguracja Vite używa względnych ścieżek, więc aplikacja obsługuje adres w podkatalogu repozytorium. Workflow `.github/workflows/pages.yml` publikuje po ręcznym uruchomieniu „Publish Pages”. Użytkowniczka opublikowała wcześniejszą wersję. Bieżące poprawki wymagają ponownej publikacji po wysłaniu zmian do repozytorium. Osobny workflow `checks.yml` sprawdza push i pull request bez publikowania strony.
 
 Wszystkie opublikowane moduły są publicznymi plikami strony. Wyniki pozostają wyłącznie lokalnie. Baza postępów i blokada karty są oddzielone według ścieżki aplikacji, aby różne repozytoria na GitHub Pages nie współdzieliły danych. Do testów najlepiej używać innego profilu przeglądarki.
 
@@ -68,4 +68,16 @@ Wszystkie opublikowane moduły są publicznymi plikami strony. Wyniki pozostają
 
 - [Wymagania](docs/wymagania.md)
 - [Plan pierwszej wersji](docs/plan-pierwszej-wersji.md)
-# HaniaAngielski
+## Test zbudowanej strony w podkatalogu
+
+Po zbudowaniu aplikacji można sprawdzić pliki z `dist` pod ścieżką taką jak na GitHub Pages:
+
+```powershell
+npm.cmd run build
+$env:HANIA_BROWSER_CHANNEL='msedge'
+$env:HANIA_TEST_BUILD='1'
+npx.cmd playwright test
+Remove-Item Env:HANIA_TEST_BUILD
+```
+
+Testy używają odizolowanych danych. Bez zmiennej `HANIA_TEST_BUILD` uruchamiają wersję deweloperską. Zmienna `HANIA_BASE_URL` służy do sprawdzania innego adresu i ma pierwszeństwo przed lokalnym podglądem.

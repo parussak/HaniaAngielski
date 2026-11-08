@@ -5,8 +5,7 @@
     "distractorIds": [
       "biscuit",
       "bread"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-biscuit",
@@ -14,8 +13,7 @@
     "distractorIds": [
       "bread",
       "cereal"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-bread",
@@ -23,8 +21,7 @@
     "distractorIds": [
       "cheese",
       "cereal"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-cereal",
@@ -32,8 +29,7 @@
     "distractorIds": [
       "cheese",
       "chicken"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-cheese",
@@ -41,8 +37,7 @@
     "distractorIds": [
       "chicken",
       "chips"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-chicken",
@@ -50,8 +45,7 @@
     "distractorIds": [
       "fish",
       "chips"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-chips",
@@ -59,8 +53,7 @@
     "distractorIds": [
       "fish",
       "fruit"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-fish",
@@ -68,8 +61,7 @@
     "distractorIds": [
       "fruit",
       "ham"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-fruit",
@@ -77,8 +69,7 @@
     "distractorIds": [
       "meat",
       "ham"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-ham",
@@ -86,8 +77,7 @@
     "distractorIds": [
       "meat",
       "orange-juice"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-meat",
@@ -95,8 +85,7 @@
     "distractorIds": [
       "orange-juice",
       "pancake"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-orange-juice",
@@ -104,8 +93,7 @@
     "distractorIds": [
       "pasta",
       "pancake"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-pancake",
@@ -113,8 +101,7 @@
     "distractorIds": [
       "pasta",
       "potato"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-pasta",
@@ -122,8 +109,7 @@
     "distractorIds": [
       "potato",
       "rice"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-potato",
@@ -131,8 +117,7 @@
     "distractorIds": [
       "salad",
       "rice"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-rice",
@@ -140,8 +125,7 @@
     "distractorIds": [
       "salad",
       "sandwich"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-salad",
@@ -149,8 +133,7 @@
     "distractorIds": [
       "sandwich",
       "sausage"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-sandwich",
@@ -158,8 +141,7 @@
     "distractorIds": [
       "tomato",
       "sausage"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-sausage",
@@ -167,8 +149,7 @@
     "distractorIds": [
       "tomato",
       "tuna"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-tomato",
@@ -176,8 +157,7 @@
     "distractorIds": [
       "tuna",
       "vegetable"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-tuna",
@@ -185,8 +165,7 @@
     "distractorIds": [
       "water",
       "vegetable"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-vegetable",
@@ -194,8 +173,7 @@
     "distractorIds": [
       "water",
       "yoghurt"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-water",
@@ -203,8 +181,7 @@
     "distractorIds": [
       "yoghurt",
       "breakfast"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-yoghurt",
@@ -212,8 +189,7 @@
     "distractorIds": [
       "diary",
       "breakfast"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-breakfast",
@@ -221,8 +197,7 @@
     "distractorIds": [
       "diary",
       "dinner"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-diary",
@@ -230,17 +205,15 @@
     "distractorIds": [
       "dinner",
       "jam"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-dinner",
     "wordId": "dinner",
     "distractorIds": [
-      "lunch",
-      "jam"
-    ],
-    "correctPosition": 1
+      "breakfast",
+      "recipe"
+    ]
   },
   {
     "id": "v-jam",
@@ -248,8 +221,7 @@
     "distractorIds": [
       "lunch",
       "make"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-lunch",
@@ -258,7 +230,7 @@
       "make",
       "apple"
     ],
-    "correctPosition": 2
+    "prompt": "Podaj po angielsku: lekki posiłek w środku dnia, np. w szkole."
   },
   {
     "id": "v-make",
@@ -266,8 +238,7 @@
     "distractorIds": [
       "biscuit",
       "apple"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-butter",
@@ -275,8 +246,7 @@
     "distractorIds": [
       "horrible",
       "look"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-chocolate",
@@ -284,8 +254,7 @@
     "distractorIds": [
       "look",
       "put"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-egg",
@@ -293,8 +262,7 @@
     "distractorIds": [
       "recipe",
       "put"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-flour",
@@ -302,8 +270,7 @@
     "distractorIds": [
       "recipe",
       "butter"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-lemon",
@@ -311,8 +278,7 @@
     "distractorIds": [
       "butter",
       "chocolate"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-milk",
@@ -320,8 +286,7 @@
     "distractorIds": [
       "egg",
       "chocolate"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-strawberry",
@@ -329,8 +294,7 @@
     "distractorIds": [
       "egg",
       "flour"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-sugar",
@@ -338,8 +302,7 @@
     "distractorIds": [
       "flour",
       "lemon"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-cool",
@@ -347,8 +310,7 @@
     "distractorIds": [
       "milk",
       "lemon"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-good-idea",
@@ -356,8 +318,7 @@
     "distractorIds": [
       "milk",
       "strawberry"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-what-a-disaster",
@@ -365,8 +326,7 @@
     "distractorIds": [
       "strawberry",
       "sugar"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-birthday",
@@ -374,8 +334,7 @@
     "distractorIds": [
       "cool",
       "sugar"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-chocolate-cake",
@@ -383,8 +342,7 @@
     "distractorIds": [
       "cool",
       "good-idea"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-decorate",
@@ -392,8 +350,7 @@
     "distractorIds": [
       "good-idea",
       "what-a-disaster"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-horrible",
@@ -401,8 +358,7 @@
     "distractorIds": [
       "birthday",
       "what-a-disaster"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-look",
@@ -410,8 +366,7 @@
     "distractorIds": [
       "birthday",
       "chocolate-cake"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-put",
@@ -419,8 +374,7 @@
     "distractorIds": [
       "chocolate-cake",
       "decorate"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-recipe",
@@ -428,8 +382,7 @@
     "distractorIds": [
       "horrible",
       "decorate"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-a-bar-of-chocolate",
@@ -437,8 +390,7 @@
     "distractorIds": [
       "go-for-a-swim",
       "go-to-the-beach"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-a-bottle-of-water",
@@ -446,8 +398,7 @@
     "distractorIds": [
       "go-to-the-beach",
       "go-to-the-park"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-a-can-of-cola",
@@ -455,8 +406,7 @@
     "distractorIds": [
       "have-a-picnic",
       "go-to-the-park"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-a-carton-of-juice",
@@ -464,8 +414,7 @@
     "distractorIds": [
       "have-a-picnic",
       "how-many"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-a-jar-of-jam",
@@ -473,8 +422,7 @@
     "distractorIds": [
       "how-many",
       "how-much"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-a-packet-of-biscuits",
@@ -482,8 +430,7 @@
     "distractorIds": [
       "quick",
       "how-much"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-all-of",
@@ -491,8 +438,7 @@
     "distractorIds": [
       "quick",
       "seagull"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-beach",
@@ -500,8 +446,7 @@
     "distractorIds": [
       "seagull",
       "terrible"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-beautiful",
@@ -509,8 +454,7 @@
     "distractorIds": [
       "a-bar-of-chocolate",
       "terrible"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-can-t-wait",
@@ -518,8 +462,7 @@
     "distractorIds": [
       "a-bar-of-chocolate",
       "a-bottle-of-water"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-chicken-legs",
@@ -527,8 +470,7 @@
     "distractorIds": [
       "a-bottle-of-water",
       "a-can-of-cola"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-go-for-a-swim",
@@ -536,8 +478,7 @@
     "distractorIds": [
       "a-carton-of-juice",
       "a-can-of-cola"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-go-to-the-beach",
@@ -545,8 +486,7 @@
     "distractorIds": [
       "a-carton-of-juice",
       "a-jar-of-jam"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-go-to-the-park",
@@ -554,8 +494,7 @@
     "distractorIds": [
       "a-jar-of-jam",
       "a-packet-of-biscuits"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-have-a-picnic",
@@ -563,8 +502,7 @@
     "distractorIds": [
       "all-of",
       "a-packet-of-biscuits"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-how-many",
@@ -572,8 +510,7 @@
     "distractorIds": [
       "all-of",
       "beach"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-how-much",
@@ -581,8 +518,7 @@
     "distractorIds": [
       "beach",
       "beautiful"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-quick",
@@ -590,8 +526,7 @@
     "distractorIds": [
       "can-t-wait",
       "beautiful"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-seagull",
@@ -599,8 +534,7 @@
     "distractorIds": [
       "can-t-wait",
       "chicken-legs"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-terrible",
@@ -608,8 +542,7 @@
     "distractorIds": [
       "chicken-legs",
       "go-for-a-swim"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-anything-else",
@@ -617,8 +550,7 @@
     "distractorIds": [
       "milkshake",
       "would-you-like-anything-to-drink"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-can-i-have-a-vegetarian-pizza-please",
@@ -626,8 +558,7 @@
     "distractorIds": [
       "milkshake",
       "anything-else"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-i-d-like-a-lemonade-please",
@@ -635,8 +566,7 @@
     "distractorIds": [
       "anything-else",
       "can-i-have-a-vegetarian-pizza-please"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-what-would-you-like",
@@ -644,8 +574,7 @@
     "distractorIds": [
       "i-d-like-a-lemonade-please",
       "can-i-have-a-vegetarian-pizza-please"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-would-you-like-anything-to-drink",
@@ -653,8 +582,7 @@
     "distractorIds": [
       "i-d-like-a-lemonade-please",
       "what-would-you-like"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-milkshake",
@@ -662,8 +590,7 @@
     "distractorIds": [
       "what-would-you-like",
       "would-you-like-anything-to-drink"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-all-over-the-world",
@@ -671,8 +598,7 @@
     "distractorIds": [
       "in-the-air",
       "have-fun"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-art",
@@ -680,8 +606,7 @@
     "distractorIds": [
       "in-the-air",
       "ingredient"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-celebrity",
@@ -689,8 +614,7 @@
     "distractorIds": [
       "ingredient",
       "on-top"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-cook",
@@ -698,8 +622,7 @@
     "distractorIds": [
       "pan",
       "on-top"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-cottage-cheese",
@@ -707,8 +630,7 @@
     "distractorIds": [
       "pan",
       "popular"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-cream",
@@ -716,8 +638,7 @@
     "distractorIds": [
       "popular",
       "round"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-good-luck",
@@ -725,8 +646,7 @@
     "distractorIds": [
       "special",
       "round"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-have-fun",
@@ -734,8 +654,7 @@
     "distractorIds": [
       "special",
       "sweet"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-in-the-air",
@@ -743,8 +662,7 @@
     "distractorIds": [
       "sweet",
       "throw"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-ingredient",
@@ -752,8 +670,7 @@
     "distractorIds": [
       "use",
       "throw"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-on-top",
@@ -761,8 +678,7 @@
     "distractorIds": [
       "use",
       "all-over-the-world"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-pan",
@@ -770,8 +686,7 @@
     "distractorIds": [
       "all-over-the-world",
       "art"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-popular",
@@ -779,8 +694,7 @@
     "distractorIds": [
       "celebrity",
       "art"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-round",
@@ -788,8 +702,7 @@
     "distractorIds": [
       "celebrity",
       "cook"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-special",
@@ -797,8 +710,7 @@
     "distractorIds": [
       "cook",
       "cottage-cheese"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-sweet",
@@ -806,8 +718,7 @@
     "distractorIds": [
       "cream",
       "cottage-cheese"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-throw",
@@ -815,8 +726,7 @@
     "distractorIds": [
       "cream",
       "good-luck"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-use",
@@ -824,8 +734,7 @@
     "distractorIds": [
       "good-luck",
       "have-fun"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-have-a-quick-breakfast",
@@ -833,8 +742,7 @@
     "distractorIds": [
       "toaster",
       "toast"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-toast",
@@ -842,8 +750,7 @@
     "distractorIds": [
       "toaster",
       "frying-pan"
-    ],
-    "correctPosition": 0
+    ]
   },
   {
     "id": "v-toaster",
@@ -851,8 +758,7 @@
     "distractorIds": [
       "frying-pan",
       "enjoy-your-meal"
-    ],
-    "correctPosition": 2
+    ]
   },
   {
     "id": "v-frying-pan",
@@ -860,8 +766,7 @@
     "distractorIds": [
       "toast",
       "enjoy-your-meal"
-    ],
-    "correctPosition": 1
+    ]
   },
   {
     "id": "v-enjoy-your-meal",
@@ -869,7 +774,6 @@
     "distractorIds": [
       "toast",
       "toaster"
-    ],
-    "correctPosition": 0
+    ]
   }
 ]

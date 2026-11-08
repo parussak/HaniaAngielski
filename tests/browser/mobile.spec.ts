@@ -8,7 +8,7 @@ test.describe('telefon — dotyk i małe ekrany', () => {
   for (const width of [320, 360, 390, 430]) {
     test(`czytelny układ bez poziomego przewijania: ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 844 });
-      await page.goto('/');
+      await page.goto('./');
       await expect(page.getByRole('heading',{name:'Cześć, Haniu'})).toBeVisible();
       const checkWidth = async () => expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
       await checkWidth();
@@ -40,7 +40,7 @@ test.describe('telefon — dotyk i małe ekrany', () => {
   }
   test('gramatyka: wpisywanie, błąd, poprawa, obrót telefonu, wznowienie i wynik',async({page})=>{
     await page.setViewportSize({width:390,height:844});
-    await page.goto('/');
+    await page.goto('./');
     await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
     await page.getByRole('button',{name:/^Gramatyka/}).tap();
     await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();

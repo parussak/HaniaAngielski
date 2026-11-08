@@ -61,12 +61,12 @@ test('walidacja odrzuca uszkodzone pliki, wersje, indeksy i próby wstrzyknięci
   ]) { const b=backup(p); edit(b); assert.throws(()=>validateBackup(b)); }
   assert.throws(()=>validateBackup(null));
 });
-test('brakujące moduły i dawne wersje zachowują dane, ale blokują wznowienie', () => {
+test('brakujący moduł blokuje wznowienie, a nowe wydanie zachowuje dawną sesję', () => {
   const p = emptyProgress(); p.active = makeSession(modules,m,'quiz','mixed',false,p);
   const restored = validateBackup(backup(p)).progress;
   assert.ok(sessionCompatible(modules,restored.active!));
   assert.ok(!sessionCompatible([],restored.active!));
-  assert.ok(!sessionCompatible([{...m,version:2}],restored.active!));
+  assert.ok(sessionCompatible([{...m,version:2}],restored.active!));
   assert.deepEqual(restored,p);
 });
 test('IndexedDB zapisuje stan, odtwarza kopię i zachowuje stan po nieudanej transakcji',async()=>{

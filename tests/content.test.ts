@@ -18,13 +18,13 @@ test('materiały Food mają źródła, komplet słów i wszystkie zagadnienia gr
 test('jedna poprawka słówka aktualizuje fiszkę, pytanie i odpowiedź quizu',()=>{
   const m=modules[0]; const words=structuredClone(m.words);
   words[0].front='Zmienione polskie hasło'; words[0].back='edited answer'; words[0].answers=['edited answer'];
-  const compiled=assembleModule(m,words,[{id:'one',wordId:words[0].id,distractorIds:[words[1].id,words[2].id],correctPosition:1}],[],m.grammar);
+  const compiled=assembleModule(m,words,[{id:'one',wordId:words[0].id,distractorIds:[words[1].id,words[2].id]}],[],m.grammar);
   const result=validateModules([compiled])[0];
   assert.equal(result.words[0].front,'Zmienione polskie hasło');
   assert.ok(result.exercises[0].prompt.includes('Zmienione polskie hasło'));
   assert.deepEqual(result.exercises[0].answers,['edited answer']);
-  assert.equal(result.exercises[0].options[1],'edited answer');
-  assert.throws(()=>assembleModule(m,words,[{id:'bad',wordId:'missing',distractorIds:[words[1].id],correctPosition:0}],[],m.grammar));
+  assert.ok(result.exercises[0].options.includes('edited answer'));
+  assert.throws(()=>assembleModule(m,words,[{id:'bad',wordId:'missing',distractorIds:[words[1].id]}],[],m.grammar));
 });
 test('walidator chroni edycję treści: duplikaty, brak klucza, dwa poprawne wybory, nieistniejące zależności',()=>{
   for(const edit of [

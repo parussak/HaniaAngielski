@@ -1,0 +1,56 @@
+import {test,expect} from '@playwright/test';
+import {modules} from '../materials.ts';
+test.use({isMobile:true,hasTouch:true,viewport:{width:390,height:844}});
+test('telefon: fiszki, quiz mieszany, powtórka błędów i brak błędów zasobów',async({page})=>{
+  const failures:string[]=[];
+  const origin=new URL(test.info().project.use.baseURL!).origin;
+  page.on('pageerror',err=>failures.push(err.message));
+  page.on('response',response=>{if(response.url().startsWith(origin) && response.status()>=400) failures.push(`${response.status()} ${response.url()}`);});
+  await page.goto('./');
+  await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
+  await page.getByRole('button',{name:/Rozpocznij naukę/}).tap();
+  await page.getByRole('button',{name:'Pokaż odpowiedź'}).tap();
+  const reviewWord=await page.locator('.question').innerText();
+  await page.getByRole('button',{name:'Jeszcze poćwiczę',exact:true}).tap();
+  await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
+  await page.getByRole('button',{name:'Pokaż odpowiedź'}).tap();
+  await page.getByRole('button',{name:'Znam to',exact:false}).tap();
+  await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
+  await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
+  await page.getByRole('button',{name:/^Quiz słownictwa/}).tap();
+  await page.getByText('Trochę wybieram, trochę wpisuję',{exact:true}).tap();
+  page.once('dialog',dialog=>dialog.accept());
+  await page.getByRole('button',{name:/Rozpocznij naukę/}).tap();
+  const all=modules[0].exercises;
+  let sawText=false,sawChoice=false;
+  for(let index=0;index<10;index++) {
+    const prompt=await page.locator('.question').innerText();
+    const word=all.find(w=>w.prompt===prompt)!;
+    if(await page.getByRole('textbox').isVisible()) {
+      sawText=true; await page.getByRole('textbox').fill(index===0?'wrong':word.answers[0]);
+      await page.getByRole('button',{name:/Sprawdź/}).tap();
+    }else{
+      sawChoice=true;
+      if(index===0) { const wrong=page.locator('.option').filter({hasNotText:word.answers[0]}).first(); await wrong.tap(); }
+      else await page.getByRole('button',{name:word.answers[0],exact:true}).tap();
+    }
+    await expect(page.locator('.feedback')).toBeVisible();
+    await page.getByRole('button',{name:'Dalej',exact:false}).tap();
+    await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
+  }
+  expect(sawText).toBeTruthy();expect(sawChoice).toBeTruthy();
+  // Błędny pierwszy wyraz wraca raz. Drugą próbę pomijamy z błędem, aby sprawdzić powtórkę.
+  const q=await page.locator('.question').innerText();
+  if(await page.getByRole('textbox').isVisible()) { await page.getByRole('textbox').fill('wrong'); await page.getByRole('button',{name:/Sprawdź/}).tap(); }
+  else {const word=all.find(w=>w.prompt===q)!;await page.locator('.option').filter({hasNotText:word.answers[0]}).first().tap();}
+  await page.getByRole('button',{name:'Dalej',exact:false}).tap();
+  await expect(page.getByRole('heading',{name:'Dobra robota, Haniu!'})).toBeVisible();
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
+  await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
+  await page.getByRole('button',{name:/^Powtórka błędów/}).tap();
+  await page.getByRole('button',{name:/Rozpocznij naukę/}).tap();
+  await expect(page.locator('.question')).toBeVisible();
+  expect([q,reviewWord]).toContain(await page.locator('.question').innerText());
+  expect(failures).toEqual([]);
+});

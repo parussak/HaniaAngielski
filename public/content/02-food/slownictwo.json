@@ -398,8 +398,7 @@
     "front": "Fajnie!",
     "back": "Cool!",
     "answers": [
-      "Cool!",
-      "Cool"
+      "Cool!"
     ],
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33"
@@ -409,8 +408,7 @@
     "front": "Świetny pomysł!",
     "back": "Good idea!",
     "answers": [
-      "Good idea!",
-      "Good idea"
+      "Good idea!"
     ],
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33"
@@ -420,8 +418,7 @@
     "front": "Ale katastrofa!",
     "back": "What a disaster!",
     "answers": [
-      "What a disaster!",
-      "What a disaster"
+      "What a disaster!"
     ],
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33"
@@ -565,9 +562,7 @@
     "front": "wszystkie / wszyscy",
     "back": "all of",
     "answers": [
-      "all of",
-      "all of...",
-      "all of ..."
+      "all of"
     ],
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33"
@@ -659,9 +654,7 @@
     "front": "Ile? (liczba rzeczy policzalnych)",
     "back": "How many",
     "answers": [
-      "How many",
-      "How many?",
-      "How many...?"
+      "How many"
     ],
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33"
@@ -671,9 +664,7 @@
     "front": "Ile? (ilość czegoś niepoliczalnego)",
     "back": "How much",
     "answers": [
-      "How much",
-      "How much?",
-      "How much...?"
+      "How much"
     ],
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33"
@@ -715,8 +706,7 @@
     "front": "Coś jeszcze?",
     "back": "Anything else?",
     "answers": [
-      "Anything else?",
-      "Anything else"
+      "Anything else?"
     ],
     "group": "Lekcja 2.4",
     "source": "Podręcznik, Wordlist, s. 33"
@@ -726,8 +716,7 @@
     "front": "Czy mogę prosić pizzę wegetariańską?",
     "back": "Can I have a vegetarian pizza, please?",
     "answers": [
-      "Can I have a vegetarian pizza, please?",
-      "Can I have a vegetarian pizza, please"
+      "Can I have a vegetarian pizza, please?"
     ],
     "group": "Lekcja 2.4",
     "source": "Podręcznik, Wordlist, s. 33"
@@ -738,9 +727,7 @@
     "back": "I'd like a lemonade, please.",
     "answers": [
       "I'd like a lemonade, please.",
-      "I'd like a lemonade, please",
-      "I would like a lemonade, please.",
-      "I would like a lemonade, please"
+      "I would like a lemonade, please."
     ],
     "group": "Lekcja 2.4",
     "source": "Podręcznik, Wordlist, s. 33"
@@ -750,8 +737,7 @@
     "front": "Na co masz ochotę?",
     "back": "What would you like?",
     "answers": [
-      "What would you like?",
-      "What would you like"
+      "What would you like?"
     ],
     "group": "Lekcja 2.4",
     "source": "Podręcznik, Wordlist, s. 33"
@@ -761,8 +747,7 @@
     "front": "Czy masz ochotę na coś do picia?",
     "back": "Would you like anything to drink?",
     "answers": [
-      "Would you like anything to drink?",
-      "Would you like anything to drink"
+      "Would you like anything to drink?"
     ],
     "group": "Lekcja 2.4",
     "source": "Podręcznik, Wordlist, s. 33"
@@ -844,8 +829,7 @@
     "front": "Powodzenia!",
     "back": "Good luck!",
     "answers": [
-      "Good luck!",
-      "Good luck"
+      "Good luck!"
     ],
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33"
@@ -898,7 +882,7 @@
     "answers": [
       "pan",
       "a pan",
-      "a pan"
+      "frying pan"
     ],
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33"
@@ -1010,8 +994,7 @@
     "front": "Smacznego!",
     "back": "Enjoy your meal!",
     "answers": [
-      "Enjoy your meal!",
-      "Enjoy your meal"
+      "Enjoy your meal!"
     ],
     "group": "Word blog",
     "source": "Zeszyt ćwiczeń, s. 21"

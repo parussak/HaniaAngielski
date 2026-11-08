@@ -164,3 +164,52 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
   .import-confirm{scroll-margin-bottom:100px}
 }
 @media(max-width:360px){.stats-grid{grid-template-columns:1fr}.stats-grid article{display:flex;align-items:center;gap:13px}.stats-grid .stat-icon{margin:0}.stats-grid article div{display:flex;gap:12px;align-items:center}.hero h2{font-size:23px}.demo-badge{font-size:7px}.nav-item{font-size:10px}}
+
+/* Podczas nauki pytanie i działania zajmują ekran, bez ozdobnego nagłówka. */
+:is(.brand-sub,.profile div>span,.nav-label,.nav-item,.local-note,.local-note span,.topbar,.local-chip,.eyebrow,.tag,.date-pill,.welcome p,.hero p,.hero .tag,.hero .primary,.stats-grid article div>span,.stats-grid strong small,.section-heading p,.count,.section-hint,.module-number,.demo-badge,.module-meta,.module-body p,.topic-tags>span,.soft-tag,.module-bottom>span,.coming-card p,.coming-card .soft-tag,.demo-note,footer,.mode-card>span:last-child,.mode-card>strong,.segmented label span,.checkbox,.muted,.back,.text-button,.exercise-label,.option>span,.under-card,.history-row span,.history-row strong,.history-score small,.source-reference,.note-panel p,.alert){font-size:12px!important}
+:is(.brand-sub,.profile div>span,.nav-label,.nav-item,.local-note,.local-note span,.topbar,.topbar b,.eyebrow,.date-pill,.welcome p,.hero p,.stats-grid article div>span,.stats-grid strong small,.section-heading p,.count,.section-hint,.module-number,.demo-badge,.module-meta,.module-body p,.topic-tags>span,.soft-tag,.module-bottom>span,.coming-card h3,.coming-card p,.coming-card .soft-tag,.demo-note,footer,.lead,.panel>p,.study-card>p,.mode-card>span:last-child,.segmented label span,.muted,.back,.text-button,.exercise-label,.option>span,.under-card,.history-row span,.history-score small,.source-reference,.note-panel p,.resume p){color:#684e7b!important}
+.brand-sub{font-size:9px!important;letter-spacing:1px}
+.feedback.correct{color:#304c7e}
+.feedback.incorrect{color:#823b68}
+.local-chip{color:#485c91}
+.tag{color:#684484}
+.mode-card>span:last-child{line-height:1.65}
+.hero .tag,.demo-badge{letter-spacing:.5px}
+.primary,.secondary,.option,.nav-item,.round-button{min-height:44px}
+@media(max-width:600px),(max-height:500px){
+  .studying{overflow:hidden}
+  .studying .sidebar{position:static;width:auto;height:0;padding:0;border:0}
+  .studying .sidebar>:not(nav){display:none}
+  .studying .sidebar nav{position:fixed;inset:auto 0 0;display:flex;margin:0;z-index:20;background:#fffcff;border-top:1px solid #dfd0ef;padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));gap:4px}
+  .studying .nav-item{flex:1;width:auto;display:flex;flex-direction:row;justify-content:center;gap:6px;min-height:44px;margin:0;padding:6px;border-radius:9px;font-size:12px}
+  .studying .nav-item svg{width:19px;height:19px}
+  .studying .nav-dot{display:none}
+  .studying main{margin:0;min-height:0;height:100dvh;padding:0 0 calc(58px + env(safe-area-inset-bottom,0px))}
+  .studying .topbar,.studying footer,.studying .under-card{display:none}
+  .studying .content{height:100%;min-height:0;display:flex;flex-direction:column;padding:6px 12px;margin:0 auto}
+  .studying .back{flex-shrink:0;font-size:12px;line-height:1.5;min-height:32px;margin:0;text-align:left}
+  .studying .study-heading{flex-shrink:0;min-height:30px}
+  .studying .study-heading .eyebrow{display:none}
+  .studying .study-heading h1{font-size:19px;line-height:1.4;letter-spacing:-.4px}
+  .studying .study-heading .tag{font-size:12px;padding:4px 8px;letter-spacing:0}
+  .studying .progress-track{flex-shrink:0;height:4px;margin:6px 0 10px}
+  .studying .study-card{display:flex;flex-direction:column;flex:1;width:100%;min-height:0;overflow-y:auto;padding:14px;margin:0 auto;border-radius:12px;scroll-padding-bottom:10px}
+  .studying .exercise-label{font-size:10px;line-height:1.5;margin:0 0 10px;flex-shrink:0}
+  .studying .question{flex-shrink:0;font-size:20px;line-height:1.4;margin:0 0 10px;overflow-wrap:anywhere}
+  .studying .study-card>p{font-size:12px!important;line-height:1.6;margin:0 0 12px}
+  .studying .answer-options{margin:4px 0 0;width:100%;gap:9px}
+  .studying .option{font-size:15px;min-height:48px;padding:10px 12px;gap:10px}
+  .studying .option>span{flex-shrink:0;font-size:12px}
+  .studying .study-card:has(.feedback){overflow:hidden}
+  .studying .study-card:has(.feedback) .exercise-label{display:none}
+  .studying .feedback{flex:1;overflow-y:auto;min-height:40px;width:100%;margin:0;padding:12px;font-size:14px;line-height:1.6}
+  .studying .feedback p{margin-top:7px}
+  .studying .feedback .source-reference{font-size:12px!important}
+  .studying .actions{flex-shrink:0;display:flex;flex-direction:row;gap:8px;margin:12px 0 0;padding:0;background:white}
+  .studying .actions>button{width:auto;flex:1;min-height:44px;font-size:13px;padding:9px}
+  .studying #answer-form{margin:4px 0 0;width:100%;gap:10px}
+  .studying .answer-input{min-height:48px;font-size:17px;padding:10px 12px}
+  .studying #answer-form .primary{min-height:44px;font-size:14px}
+  .studying .flash-answer{font-size:27px;margin:12px 0}
+  .studying .alert{flex-shrink:0;margin:4px 12px;font-size:12px;padding:6px 10px;max-height:70px;overflow:auto}
+}

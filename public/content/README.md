@@ -50,22 +50,21 @@ W `quiz.json` każdy wpis wskazuje słowo oraz identyfikatory błędnych odpowie
 {
   "id": "v-apple",
   "wordId": "apple",
-  "distractorIds": ["biscuit", "bread"],
-  "correctPosition": 0
+  "distractorIds": ["biscuit", "bread"]
 }
 ```
 
-`correctPosition` liczymy od zera: 0 oznacza pierwszy przycisk. Możesz opcjonalnie dodać `prompt` (własne pytanie po polsku) i `explanation` (własne wyjaśnienie). Bez nich aplikacja składa pytanie i objaśnienie z hasła słownikowego. Dodatkowe synonimy z `answers` nie mogą występować wśród błędnych wariantów.
+Pozycja poprawnej odpowiedzi jest tasowana dla każdej sesji i pytania. Po wznowieniu tej samej sesji układ pozostaje taki sam. Możesz opcjonalnie dodać `prompt` (własne pytanie po polsku) i `explanation` (własne wyjaśnienie). Bez nich aplikacja składa pytanie i objaśnienie z hasła słownikowego. Dodatkowe synonimy z `answers` nie mogą występować wśród błędnych wariantów.
 
 ## Poprawienie gramatyki i zadań
 
 - `gramatyka.json`: `title`, `explanation`, `examples` i `source` określają zawartość ściągi.
 - `cwiczenia.json`: `prompt` to polecenie; `answers` to dozwolone odpowiedzi; `options` to przyciski w trybie wyboru; `explanation` to objaśnienie po odpowiedzi; `ruleId` wskazuje zasadę ze ściągi; `requires` wskazuje moduły potrzebne do rozwiązania.
-- `caseSensitive` określa, czy wielkość liter ma znaczenie. Zbędne spacje oraz prosty i typograficzny apostrof są traktowane jednakowo.
+- `caseSensitive` określa, czy wielkość liter ma znaczenie. Zbędne spacje, prosty i typograficzny apostrof oraz kropki, przecinki, wykrzykniki, pytajniki i wielokropki nie wpływają na ocenę. Nie wpisuj wariantów różniących się tylko takimi znakami do `answers` — wystarczy jeden.
 - Gdy w zadaniu nie potrzeba rodzajnika, dozwolone odpowiedzi obejmują `brak` oraz znaki `—`, `–` i `-`.
 - Poprawienie treści ściągi nie zmienia automatycznie wyjaśnień zadań. Jeśli zmieniasz regułę, sprawdź także zadania wskazujące jej `ruleId`.
 
-Nie zmieniaj identyfikatorów przy zwykłej korekcie literówki. Gdy zmieniasz sens materiału lub prawidłową odpowiedź, zwiększ `version` w `modul.json`, aby dawne wyniki nie zostały przypisane do nowego zadania. Historia poprzedniej wersji pozostaje, ale jej sesja nie będzie wznawiana na zmienionym materiale.
+Nie zmieniaj identyfikatorów przy zwykłej korekcie literówki. Gdy zmieniasz sens konkretnego słówka lub zadania, dodaj mu `rev: 2` (lub zwiększ dotychczasowe `rev`). Brak pola oznacza rewizję 1. Słówko przekazuje rewizję także swojemu pytaniu w quizie, chyba że wpis w `quiz.json` ma własne `rev`. Historia starego elementu pozostaje archiwalna, a inne elementy zachowują statusy. Pole `version` w `modul.json` opisuje wydanie całego zestawu i samo nie zmienia kluczy postępu. Dawne kopie formatu 1 z kluczami `@1` działają bez migracji.
 
 ## Sprawdzenie i odświeżenie
 

@@ -1,4 +1,5 @@
 import type { Module, Word, Exercise } from './core.ts';
+import { normalizeAnswer } from './answers.ts';
 
 // Pytania słownikowe wskazują słówka, zamiast dublować ich tekst i odpowiedzi.
 export function assembleModule(metadata: any, words: any, quiz: any, exercises: any, grammar: any) {
@@ -6,13 +7,13 @@ export function assembleModule(metadata: any, words: any, quiz: any, exercises: 
   if (!words.every(w=>w && typeof w.id==='string' && typeof w.front==='string' && typeof w.back==='string')) throw new Error('Niepoprawne słówko w slownictwo.json.');
   const vocabulary = new Map<string, Word>(words.map(w=>[w.id,w]));
   const compiled: Exercise[] = quiz.map((entry: any) => {
-    if (!entry || typeof entry.id!=='string' || typeof entry.wordId!=='string' || !Array.isArray(entry.distractorIds) || entry.distractorIds.length<1 || !entry.distractorIds.every((id: unknown)=>typeof id==='string') || !Number.isInteger(entry.correctPosition) || entry.correctPosition<0 || entry.correctPosition>entry.distractorIds.length || (entry.prompt!==undefined && typeof entry.prompt!=='string') || (entry.explanation!==undefined && typeof entry.explanation!=='string')) throw new Error('Niepoprawny wpis w quiz.json.');
+    if (!entry || typeof entry.id!=='string' || typeof entry.wordId!=='string' || !Array.isArray(entry.distractorIds) || entry.distractorIds.length<1 || !entry.distractorIds.every((id: unknown)=>typeof id==='string') || (entry.prompt!==undefined && typeof entry.prompt!=='string') || (entry.explanation!==undefined && typeof entry.explanation!=='string')) throw new Error('Niepoprawny wpis w quiz.json.');
     const word = vocabulary.get(entry.wordId);
     const distractors: (Word | undefined)[] = entry.distractorIds.map((id: string)=>vocabulary.get(id));
     if (!word || distractors.some(w=>!w)) throw new Error(`Quiz ${entry.id}: brak wskazanego słówka.`);
     const options=distractors.map(w=>w!.back);
-    options.splice(entry.correctPosition,0,word.back);
-    return { id:entry.id, kind:'vocabulary', prompt:entry.prompt ?? `Podaj po angielsku: ${word.front}`, answers:word.answers ?? [word.back], options, explanation:entry.explanation ?? `„${word.back}” oznacza „${word.front}”.`, requires:[metadata.id], caseSensitive:false, source:word.source };
+    options.unshift(word.back);
+    return { id:entry.id, rev:entry.rev??word.rev??1, kind:'vocabulary', prompt:entry.prompt ?? `Podaj po angielsku: ${word.front}`, answers:word.answers ?? [word.back], options, explanation:entry.explanation ?? `„${word.back}” oznacza „${word.front}”.`, requires:[metadata.id], caseSensitive:false, source:word.source };
   });
   return {...metadata, words, exercises:[...compiled,...exercises], grammar};
 }
@@ -31,11 +32,13 @@ export function validateModules(input: unknown): Module[] {
     if (!Array.isArray(m.exercises) || !m.exercises.length) return fail(`brak zadań (${m.id}).`);
     for (const q of m.exercises) {
       if (!obj(q) || !text(q.id) || !['grammar','vocabulary'].includes(q.kind as string) || !text(q.prompt) || !texts(q.answers) || !texts(q.options) || q.options.length<2 || new Set(q.options).size!==q.options.length || !text(q.explanation) || !texts(q.requires) || !q.requires.includes(m.id as string) || typeof q.caseSensitive!=='boolean' || !text(q.source)) return fail(`niepoprawne zadanie (${m.id}/${q?.id ?? '?'}).`);
-      const normalized = (s: string) => q.caseSensitive ? s.trim() : s.trim().toLocaleLowerCase();
+      const normalized = (s: string) => normalizeAnswer(s,q.caseSensitive as boolean);
       if (q.options.filter(o=>(q.answers as string[]).some(a=>normalized(a)===normalized(o))).length !== 1) return fail(`zadanie musi mieć dokładnie jeden poprawny wariant wyboru (${q.id}).`);
       if (q.ruleId !== undefined && !m.grammar.some(r=>r.id===q.ruleId)) return fail(`brak reguły dla ${q.id}.`);
     }
     unique(m.words,`${m.id}/słówka`); unique(m.exercises,`${m.id}/zadania`); unique(m.grammar,`${m.id}/gramatyka`);
+    for(const word of m.words)if(word.answers && new Set(word.answers.map((a: string)=>normalizeAnswer(a))).size!==word.answers.length)return fail(`powtórzona odpowiedź: ${word.id}.`);
+    for(const element of [...m.words,...m.exercises])if(element.rev!==undefined && (!Number.isSafeInteger(element.rev)||element.rev<1))return fail(`niepoprawna rewizja ${element.id}.`);
   }
   const modules = input as Module[]; unique(modules,'moduły');
   for(const m of modules) for(const q of m.exercises) for(const required of q.requires) {

@@ -10,7 +10,7 @@
       "policzalny",
       "niepoliczalny"
     ],
-    "explanation": "Możemy liczyć pojedyncze sztuki. W tym znaczeniu rzeczownik jest policzalny, gdy można liczyć sztuki; nazwy substancji i jedzenia traktowanego jako masa są niepoliczalne.",
+    "explanation": "Możemy liczyć pojedyncze sztuki. To rzeczownik policzalny.",
     "requires": [
       "unit-2-food"
     ],
@@ -29,7 +29,7 @@
       "policzalny",
       "niepoliczalny"
     ],
-    "explanation": "Możemy liczyć pojedyncze sztuki. W tym znaczeniu rzeczownik jest policzalny, gdy można liczyć sztuki; nazwy substancji i jedzenia traktowanego jako masa są niepoliczalne.",
+    "explanation": "Możemy liczyć pojedyncze sztuki. To rzeczownik policzalny.",
     "requires": [
       "unit-2-food"
     ],
@@ -48,7 +48,7 @@
       "policzalny",
       "niepoliczalny"
     ],
-    "explanation": "Możemy liczyć pojedyncze sztuki. W tym znaczeniu rzeczownik jest policzalny, gdy można liczyć sztuki; nazwy substancji i jedzenia traktowanego jako masa są niepoliczalne.",
+    "explanation": "Możemy liczyć pojedyncze sztuki. To rzeczownik policzalny.",
     "requires": [
       "unit-2-food"
     ],
@@ -67,7 +67,7 @@
       "policzalny",
       "niepoliczalny"
     ],
-    "explanation": "W tym znaczeniu mówimy o substancji, nie o pojedynczych sztukach. W tym znaczeniu rzeczownik jest policzalny, gdy można liczyć sztuki; nazwy substancji i jedzenia traktowanego jako masa są niepoliczalne.",
+    "explanation": "W tym znaczeniu to rzeczownik niepoliczalny. Nie liczymy pojedynczych sztuk.",
     "requires": [
       "unit-2-food"
     ],
@@ -86,7 +86,7 @@
       "policzalny",
       "niepoliczalny"
     ],
-    "explanation": "W tym znaczeniu mówimy o substancji, nie o pojedynczych sztukach. W tym znaczeniu rzeczownik jest policzalny, gdy można liczyć sztuki; nazwy substancji i jedzenia traktowanego jako masa są niepoliczalne.",
+    "explanation": "W tym znaczeniu to rzeczownik niepoliczalny. Nie liczymy pojedynczych sztuk.",
     "requires": [
       "unit-2-food"
     ],
@@ -105,7 +105,7 @@
       "policzalny",
       "niepoliczalny"
     ],
-    "explanation": "W tym znaczeniu mówimy o substancji, nie o pojedynczych sztukach. W tym znaczeniu rzeczownik jest policzalny, gdy można liczyć sztuki; nazwy substancji i jedzenia traktowanego jako masa są niepoliczalne.",
+    "explanation": "W tym znaczeniu to rzeczownik niepoliczalny. Nie liczymy pojedynczych sztuk.",
     "requires": [
       "unit-2-food"
     ],
@@ -124,7 +124,7 @@
       "policzalny",
       "niepoliczalny"
     ],
-    "explanation": "W tym znaczeniu mówimy o substancji, nie o pojedynczych sztukach. W tym znaczeniu rzeczownik jest policzalny, gdy można liczyć sztuki; nazwy substancji i jedzenia traktowanego jako masa są niepoliczalne.",
+    "explanation": "W tym znaczeniu to rzeczownik niepoliczalny. Nie liczymy pojedynczych sztuk.",
     "requires": [
       "unit-2-food"
     ],
@@ -143,7 +143,7 @@
       "policzalny",
       "niepoliczalny"
     ],
-    "explanation": "W tym znaczeniu mówimy o substancji, nie o pojedynczych sztukach. W tym znaczeniu rzeczownik jest policzalny, gdy można liczyć sztuki; nazwy substancji i jedzenia traktowanego jako masa są niepoliczalne.",
+    "explanation": "W tym znaczeniu to rzeczownik niepoliczalny. Nie liczymy pojedynczych sztuk.",
     "requires": [
       "unit-2-food"
     ],
@@ -599,7 +599,7 @@
       "isn't",
       "are"
     ],
-    "explanation": "Do pytania Are there pasuje No, there aren't. Możesz też napisać are not.",
+    "explanation": "Po Are there…? przecząca odpowiedź to No, there aren't. Możesz też wpisać are not.",
     "requires": [
       "unit-2-food"
     ],
@@ -820,7 +820,7 @@
   {
     "id": "g-lot-apples",
     "kind": "grammar",
-    "prompt": "Uzupełnij wyrażeniem znaczącym „dużo”: There are ___ apples.",
+    "prompt": "Wybierz trzywyrazowe wyrażenie oznaczające dużo: There are ___ apples.",
     "answers": [
       "a lot of"
     ],
@@ -840,7 +840,7 @@
   {
     "id": "g-container-water",
     "kind": "grammar",
-    "prompt": "Wpisz nazwę opakowania z modułu: a ___ of water.",
+    "prompt": "Wpisz nazwę opakowania (butelka): a ___ of water.",
     "answers": [
       "bottle"
     ],
@@ -860,7 +860,7 @@
   {
     "id": "g-container-chocolate",
     "kind": "grammar",
-    "prompt": "Wpisz nazwę opakowania z modułu: a ___ of chocolate.",
+    "prompt": "Wpisz nazwę opakowania (tabliczka): a ___ of chocolate.",
     "answers": [
       "bar"
     ],
@@ -880,14 +880,14 @@
   {
     "id": "g-container-cola",
     "kind": "grammar",
-    "prompt": "Wpisz nazwę opakowania z modułu: a ___ of cola.",
+    "prompt": "Wpisz nazwę opakowania (puszka): a ___ of cola.",
     "answers": [
       "can"
     ],
     "options": [
       "can",
-      "bottle",
-      "bar"
+      "bar",
+      "packet"
     ],
     "explanation": "W tym module ćwiczymy wyrażenie „a can of cola”. Liczymy opakowania. Bottle to butelka, bar to tabliczka, can to puszka, carton to karton, jar to słoik, packet to paczka.",
     "requires": [
@@ -900,14 +900,14 @@
   {
     "id": "g-container-juice",
     "kind": "grammar",
-    "prompt": "Wpisz nazwę opakowania z modułu: a ___ of juice.",
+    "prompt": "Wpisz nazwę opakowania (karton): a ___ of juice.",
     "answers": [
       "carton"
     ],
     "options": [
       "carton",
-      "bottle",
-      "bar"
+      "bar",
+      "packet"
     ],
     "explanation": "W tym module ćwiczymy wyrażenie „a carton of juice”. Liczymy opakowania. Bottle to butelka, bar to tabliczka, can to puszka, carton to karton, jar to słoik, packet to paczka.",
     "requires": [
@@ -920,7 +920,7 @@
   {
     "id": "g-container-jam",
     "kind": "grammar",
-    "prompt": "Wpisz nazwę opakowania z modułu: a ___ of jam.",
+    "prompt": "Wpisz nazwę opakowania (słoik): a ___ of jam.",
     "answers": [
       "jar"
     ],
@@ -940,7 +940,7 @@
   {
     "id": "g-container-biscuits",
     "kind": "grammar",
-    "prompt": "Wpisz nazwę opakowania z modułu: a ___ of biscuits.",
+    "prompt": "Wpisz nazwę opakowania (paczka): a ___ of biscuits.",
     "answers": [
       "packet"
     ],
@@ -1145,7 +1145,7 @@
       "because",
       "so"
     ],
-    "explanation": "Wizyty w pizzerii wynikają z tego, że brat lubi pizzę. Przed skutkiem użyj so.",
+    "explanation": "W tym zdaniu so znaczy więc. Łączy podany powód z jego skutkiem.",
     "requires": [
       "unit-2-food"
     ],

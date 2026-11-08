@@ -1,0 +1,109 @@
+{
+  "app": "hania-language",
+  "version": 1,
+  "exportedAt": "2026-11-08T17:40:03.652Z",
+  "progress": {
+    "version": 1,
+    "sessions": [],
+    "active": {
+      "id": "47324e90-cec6-4a9d-be33-5317e0c36de6",
+      "moduleId": "unit-2-food",
+      "mode": "flashcards",
+      "answerMode": "text",
+      "previous": false,
+      "startedAt": "2026-11-08T17:40:03.650Z",
+      "completedAt": null,
+      "items": [
+        {
+          "key": "unit-2-food@1:word:butter",
+          "moduleId": "unit-2-food",
+          "version": 1,
+          "type": "word",
+          "id": "butter",
+          "input": "text"
+        },
+        {
+          "key": "unit-2-food@1:word:enjoy-your-meal",
+          "moduleId": "unit-2-food",
+          "version": 1,
+          "type": "word",
+          "id": "enjoy-your-meal",
+          "input": "text"
+        },
+        {
+          "key": "unit-2-food@1:word:cook",
+          "moduleId": "unit-2-food",
+          "version": 1,
+          "type": "word",
+          "id": "cook",
+          "input": "text"
+        },
+        {
+          "key": "unit-2-food@1:word:strawberry",
+          "moduleId": "unit-2-food",
+          "version": 1,
+          "type": "word",
+          "id": "strawberry",
+          "input": "text"
+        },
+        {
+          "key": "unit-2-food@1:word:can-i-have-a-vegetarian-pizza-please",
+          "moduleId": "unit-2-food",
+          "version": 1,
+          "type": "word",
+          "id": "can-i-have-a-vegetarian-pizza-please",
+          "input": "text"
+        },
+        {
+          "key": "unit-2-food@1:word:breakfast",
+          "moduleId": "unit-2-food",
+          "version": 1,
+          "type": "word",
+          "id": "breakfast",
+          "input": "text"
+        },
+        {
+          "key": "unit-2-food@1:word:how-many",
+          "moduleId": "unit-2-food",
+          "version": 1,
+          "type": "word",
+          "id": "how-many",
+          "input": "text"
+        },
+        {
+          "key": "unit-2-food@1:word:would-you-like-anything-to-drink",
+          "moduleId": "unit-2-food",
+          "version": 1,
+          "type": "word",
+          "id": "would-you-like-anything-to-drink",
+          "input": "text"
+        },
+        {
+          "key": "unit-2-food@1:word:lemon",
+          "moduleId": "unit-2-food",
+          "version": 1,
+          "type": "word",
+          "id": "lemon",
+          "input": "text"
+        },
+        {
+          "key": "unit-2-food@1:word:cereal",
+          "moduleId": "unit-2-food",
+          "version": 1,
+          "type": "word",
+          "id": "cereal",
+          "input": "text"
+        }
+      ],
+      "index": 0,
+      "phase": "question",
+      "lastCorrect": null,
+      "attempts": [],
+      "repeatKeys": []
+    },
+    "words": {
+      "unit-2-food@1:word:butter": "review"
+    },
+    "difficult": []
+  }
+}

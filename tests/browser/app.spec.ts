@@ -4,7 +4,7 @@ import { modules } from '../materials.ts';
 const data = modules[0];
 test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządzeniu', async ({ page, browser }) => {
   const errors: string[] = []; page.on('pageerror',e=>errors.push(e.message));
-  await page.goto('/');
+  await page.goto('./');
   await expect(page.getByRole('heading',{name:'Cześć, Haniu'})).toBeVisible();
   await page.screenshot({path:'test-results/home-desktop.png',fullPage:true});
   await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();
@@ -51,10 +51,10 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   expect(original.progress.sessions).toHaveLength(1);
   expect(original.progress.active.phase).toBe('revealed');
   // Druga karta nie może równocześnie nadpisać wyników.
-  const duplicate=await page.context().newPage(); await duplicate.goto('/');
+  const duplicate=await page.context().newPage(); await duplicate.goto('./');
   await expect(duplicate.getByRole('heading',{name:'Nauka jest otwarta w innej karcie'})).toBeVisible(); await duplicate.close();
-  const context=await browser.newContext({viewport:{width:390,height:844}});
-  const mobile=await context.newPage(); await mobile.goto('/');
+  const context=await browser.newContext({baseURL: test.info().project.use.baseURL, viewport:{width:390,height:844}});
+  const mobile=await context.newPage(); await mobile.goto('./');
   await expect(mobile.getByRole('heading',{name:'Cześć, Haniu'})).toBeVisible();
   expect(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
   await mobile.screenshot({path:'test-results/home-mobile.png',fullPage:true});
@@ -78,7 +78,7 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   expect(errors).toEqual([]); await context.close();
 });
 test('nieudany zapis nie udaje sukcesu i nie zmienia poprzednich wyników',async({page})=>{
-  await page.goto('/'); await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();
+  await page.goto('./'); await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();
   await page.getByRole('button',{name:/Rozpocznij naukę/}).click();
   await page.evaluate(()=>{IDBObjectStore.prototype.put=function(){throw new DOMException('Full','QuotaExceededError');};});
   await page.getByRole('button',{name:'Pokaż odpowiedź'}).click();
