@@ -1,0 +1,77 @@
+import { test, expect } from '@playwright/test';
+import { readFileSync } from 'node:fs';
+const module = JSON.parse(readFileSync(new URL('../../src/data/modules.json', import.meta.url),'utf8'))[0];
+
+test.describe('telefon — dotyk i małe ekrany', () => {
+  test.use({ isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
+  for (const width of [320, 360, 390, 430]) {
+    test(`czytelny układ bez poziomego przewijania: ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 844 });
+      await page.goto('/');
+      await expect(page.getByRole('heading',{name:'Cześć, Haniu'})).toBeVisible();
+      const checkWidth = async () => expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+      await checkWidth();
+      await expect(page.locator('.cat-illustration')).toBeVisible();
+      for (const nav of await page.locator('.nav-item').all()) {
+        const rect = await nav.boundingBox();
+        expect(rect!.height).toBeGreaterThanOrEqual(44);
+        expect(rect!.width).toBeGreaterThanOrEqual(44);
+      }
+      if (width === 390) await page.screenshot({path:'test-results/cat-home-mobile.png',fullPage:true});
+      await page.getByRole('button',{name:'Otwórz moduł Mój mały świat'}).tap();
+      await checkWidth();
+      await page.getByRole('button',{name:/^Quiz słownictwa/}).tap();
+      await page.getByText('Wybieram odpowiedź',{exact:true}).tap();
+      await page.getByRole('button',{name:/Rozpocznij naukę/}).tap();
+      await expect(page.locator('.option')).toHaveCount(3);
+      await checkWidth();
+      const option = page.locator('.option').first();
+      expect((await option.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+      await option.tap();
+      await expect(page.locator('.feedback')).toBeVisible();
+      await checkWidth();
+      await page.getByRole('button',{name:'Moje postępy',exact:true}).tap();
+      await checkWidth();
+      await page.getByRole('button',{name:'Kopia postępów',exact:true}).tap();
+      await checkWidth();
+      await expect(page.getByText('Wybierz plik kopii',{exact:true})).toBeVisible();
+    });
+  }
+  test('gramatyka: wpisywanie, błąd, poprawa, obrót telefonu, wznowienie i wynik',async({page})=>{
+    await page.setViewportSize({width:390,height:844});
+    await page.goto('/');
+    await page.getByRole('button',{name:'Otwórz moduł Mój mały świat'}).tap();
+    await page.getByRole('button',{name:/^Gramatyka/}).tap();
+    await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();
+    await page.getByRole('button',{name:/Rozpocznij naukę/}).tap();
+    const question = await page.locator('.question').innerText();
+    const exercise=module.exercises.find((q:any)=>q.prompt===question);
+    await page.getByRole('textbox').fill('wrong');
+    // Pole >=16px ogranicza automatyczne powiększanie strony przy wpisywaniu na iOS.
+    expect(await page.getByRole('textbox').evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(16);
+    await page.getByRole('button',{name:/Sprawdź/}).tap();
+    await expect(page.getByText('Spokojnie, tak właśnie się uczymy.')).toBeVisible();
+    await page.screenshot({path:'test-results/cat-feedback-mobile.png',fullPage:true});
+    await page.reload(); await page.getByRole('button',{name:'Kontynuuj',exact:true}).tap();
+    await expect(page.getByText('Spokojnie, tak właśnie się uczymy.')).toBeVisible();
+    await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();
+    await page.getByRole('textbox').fill(exercise.answers[0]);
+    await page.getByRole('button',{name:/Sprawdź/}).tap();
+    await page.setViewportSize({width:844,height:390});
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+    await page.getByRole('button',{name:'Dalej',exact:false}).tap();
+    await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
+    await page.setViewportSize({width:390,height:844});
+    for(let i=0;i<6;i++) {
+      if(await page.getByRole('heading',{name:'Dobra robota, Haniu!'}).isVisible()) break;
+      const prompt=await page.locator('.question').innerText();
+      const q=module.exercises.find((q:any)=>q.prompt===prompt);
+      await page.getByRole('textbox').fill(q.answers[0]);
+      await page.getByRole('button',{name:/Sprawdź/}).tap();
+      await page.getByRole('button',{name:'Dalej',exact:false}).tap();
+      await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
+    }
+    await expect(page.locator('.summary-score')).toContainText('3 / 4');
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+  });
+});
