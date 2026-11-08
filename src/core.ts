@@ -1,6 +1,7 @@
-export interface Word { id: string; front: string; back: string }
-export interface Exercise { id: string; kind: 'vocabulary' | 'grammar'; prompt: string; answers: string[]; options: string[]; explanation: string; requires: string[]; caseSensitive: boolean }
-export interface Module { id: string; version: number; order: number; name: string; subtitle: string; language: string; source: string; demo: boolean; topics: string[]; words: Word[]; exercises: Exercise[] }
+export interface Word { id: string; front: string; back: string; group?: string; source?: string; answers?: string[] }
+export interface Exercise { id: string; kind: 'vocabulary' | 'grammar'; prompt: string; answers: string[]; options: string[]; explanation: string; requires: string[]; caseSensitive: boolean; source?: string; ruleId?: string }
+export interface GrammarRule { id: string; title: string; explanation: string; examples: string[]; source: string }
+export interface Module { id: string; version: number; order: number; name: string; subtitle: string; language: string; source: string; label: string; cover: string; topics: string[]; words: Word[]; exercises: Exercise[]; grammar: GrammarRule[] }
 export type Mode = 'flashcards' | 'quiz' | 'grammar' | 'review';
 export type AnswerMode = 'choice' | 'text' | 'mixed';
 export interface Item { key: string; moduleId: string; version: number; type: 'word' | 'exercise'; id: string; input: 'choice' | 'text' }
@@ -41,7 +42,7 @@ export function resolveItem(modules: Module[], item: Item) {
 }
 export function sessionCompatible(modules: Module[], s: Session) { return s.items.every(item => !!resolveItem(modules, item)); }
 export function isCorrect(exercise: Exercise, answer: string) {
-  const normalize = (s: string) => { const value = s.normalize('NFC').trim().replace(/\s+/g, ' '); return exercise.caseSensitive ? value : value.toLocaleLowerCase(); };
+  const normalize = (s: string) => { const value = s.normalize('NFC').trim().replace(/[’‘]/g, "'").replace(/\s+/g, ' '); return exercise.caseSensitive ? value : value.toLocaleLowerCase(); };
   return exercise.answers.some(a => normalize(a) === normalize(answer));
 }
 export function recordAnswer(p: Progress, exercise: Exercise, answer: string) {

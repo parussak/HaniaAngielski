@@ -1,0 +1,1019 @@
+[
+  {
+    "id": "apple",
+    "front": "jabłko",
+    "back": "apple",
+    "answers": [
+      "apple",
+      "an apple"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "biscuit",
+    "front": "ciasteczko / herbatnik",
+    "back": "biscuit",
+    "answers": [
+      "biscuit",
+      "a biscuit"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "bread",
+    "front": "chleb",
+    "back": "bread",
+    "answers": [
+      "bread"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "cereal",
+    "front": "płatki śniadaniowe",
+    "back": "cereal",
+    "answers": [
+      "cereal"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "cheese",
+    "front": "ser",
+    "back": "cheese",
+    "answers": [
+      "cheese"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "chicken",
+    "front": "kurczak (mięso)",
+    "back": "chicken",
+    "answers": [
+      "chicken"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "chips",
+    "front": "frytki",
+    "back": "chips",
+    "answers": [
+      "chips"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "fish",
+    "front": "ryba",
+    "back": "fish",
+    "answers": [
+      "fish"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "fruit",
+    "front": "owoc / owoce",
+    "back": "fruit",
+    "answers": [
+      "fruit"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "ham",
+    "front": "szynka",
+    "back": "ham",
+    "answers": [
+      "ham"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "meat",
+    "front": "mięso",
+    "back": "meat",
+    "answers": [
+      "meat"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "orange-juice",
+    "front": "sok pomarańczowy",
+    "back": "orange juice",
+    "answers": [
+      "orange juice"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "pancake",
+    "front": "naleśnik",
+    "back": "pancake",
+    "answers": [
+      "pancake",
+      "a pancake"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "pasta",
+    "front": "makaron",
+    "back": "pasta",
+    "answers": [
+      "pasta"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "potato",
+    "front": "ziemniak",
+    "back": "potato",
+    "answers": [
+      "potato",
+      "a potato"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "rice",
+    "front": "ryż",
+    "back": "rice",
+    "answers": [
+      "rice"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "salad",
+    "front": "sałatka",
+    "back": "salad",
+    "answers": [
+      "salad",
+      "a salad"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "sandwich",
+    "front": "kanapka",
+    "back": "sandwich",
+    "answers": [
+      "sandwich",
+      "a sandwich"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "sausage",
+    "front": "kiełbaska",
+    "back": "sausage",
+    "answers": [
+      "sausage",
+      "a sausage"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "tomato",
+    "front": "pomidor",
+    "back": "tomato",
+    "answers": [
+      "tomato",
+      "a tomato"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "tuna",
+    "front": "tuńczyk",
+    "back": "tuna",
+    "answers": [
+      "tuna"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "vegetable",
+    "front": "warzywo",
+    "back": "vegetable",
+    "answers": [
+      "vegetable",
+      "a vegetable"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "water",
+    "front": "woda",
+    "back": "water",
+    "answers": [
+      "water"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "yoghurt",
+    "front": "jogurt",
+    "back": "yoghurt",
+    "answers": [
+      "yoghurt",
+      "yogurt"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "breakfast",
+    "front": "śniadanie",
+    "back": "breakfast",
+    "answers": [
+      "breakfast"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "diary",
+    "front": "dzienniczek",
+    "back": "diary",
+    "answers": [
+      "diary",
+      "a diary"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "dinner",
+    "front": "obiad",
+    "back": "dinner",
+    "answers": [
+      "dinner"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "jam",
+    "front": "dżem",
+    "back": "jam",
+    "answers": [
+      "jam"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "lunch",
+    "front": "lunch",
+    "back": "lunch",
+    "answers": [
+      "lunch"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "make",
+    "front": "robić / przyrządzać",
+    "back": "make",
+    "answers": [
+      "make"
+    ],
+    "group": "Lekcja 2.1",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "butter",
+    "front": "masło",
+    "back": "butter",
+    "answers": [
+      "butter"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "chocolate",
+    "front": "czekolada",
+    "back": "chocolate",
+    "answers": [
+      "chocolate"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "egg",
+    "front": "jajko",
+    "back": "egg",
+    "answers": [
+      "egg",
+      "an egg"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "flour",
+    "front": "mąka",
+    "back": "flour",
+    "answers": [
+      "flour"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "lemon",
+    "front": "cytryna",
+    "back": "lemon",
+    "answers": [
+      "lemon",
+      "a lemon"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "milk",
+    "front": "mleko",
+    "back": "milk",
+    "answers": [
+      "milk"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "strawberry",
+    "front": "truskawka",
+    "back": "strawberry",
+    "answers": [
+      "strawberry",
+      "a strawberry"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "sugar",
+    "front": "cukier",
+    "back": "sugar",
+    "answers": [
+      "sugar"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "cool",
+    "front": "Fajnie!",
+    "back": "Cool!",
+    "answers": [
+      "Cool!",
+      "Cool"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "good-idea",
+    "front": "Świetny pomysł!",
+    "back": "Good idea!",
+    "answers": [
+      "Good idea!",
+      "Good idea"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "what-a-disaster",
+    "front": "Ale katastrofa!",
+    "back": "What a disaster!",
+    "answers": [
+      "What a disaster!",
+      "What a disaster"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "birthday",
+    "front": "urodziny",
+    "back": "birthday",
+    "answers": [
+      "birthday",
+      "a birthday"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "chocolate-cake",
+    "front": "ciasto czekoladowe",
+    "back": "chocolate cake",
+    "answers": [
+      "chocolate cake",
+      "a chocolate cake"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "decorate",
+    "front": "dekorować",
+    "back": "decorate",
+    "answers": [
+      "decorate"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "horrible",
+    "front": "okropny",
+    "back": "horrible",
+    "answers": [
+      "horrible",
+      "terrible"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "look",
+    "front": "patrzeć",
+    "back": "look",
+    "answers": [
+      "look"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "put",
+    "front": "kłaść",
+    "back": "put",
+    "answers": [
+      "put"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "recipe",
+    "front": "przepis",
+    "back": "recipe",
+    "answers": [
+      "recipe",
+      "a recipe"
+    ],
+    "group": "Lekcja 2.2",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "a-bar-of-chocolate",
+    "front": "tabliczka czekolady",
+    "back": "a bar of chocolate",
+    "answers": [
+      "a bar of chocolate"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "a-bottle-of-water",
+    "front": "butelka wody",
+    "back": "a bottle of water",
+    "answers": [
+      "a bottle of water"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "a-can-of-cola",
+    "front": "puszka coli",
+    "back": "a can of cola",
+    "answers": [
+      "a can of cola"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "a-carton-of-juice",
+    "front": "karton soku",
+    "back": "a carton of juice",
+    "answers": [
+      "a carton of juice"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "a-jar-of-jam",
+    "front": "słoik dżemu",
+    "back": "a jar of jam",
+    "answers": [
+      "a jar of jam"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "a-packet-of-biscuits",
+    "front": "paczka herbatników",
+    "back": "a packet of biscuits",
+    "answers": [
+      "a packet of biscuits"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "all-of",
+    "front": "wszystkie / wszyscy",
+    "back": "all of",
+    "answers": [
+      "all of",
+      "all of...",
+      "all of ..."
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "beach",
+    "front": "plaża",
+    "back": "beach",
+    "answers": [
+      "beach",
+      "a beach"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "beautiful",
+    "front": "piękny",
+    "back": "beautiful",
+    "answers": [
+      "beautiful"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "can-t-wait",
+    "front": "nie móc się doczekać",
+    "back": "can't wait",
+    "answers": [
+      "can't wait",
+      "cannot wait"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "chicken-legs",
+    "front": "kurze udka",
+    "back": "chicken legs",
+    "answers": [
+      "chicken legs"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "go-for-a-swim",
+    "front": "iść popływać",
+    "back": "go for a swim",
+    "answers": [
+      "go for a swim"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "go-to-the-beach",
+    "front": "iść na plażę",
+    "back": "go to the beach",
+    "answers": [
+      "go to the beach"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "go-to-the-park",
+    "front": "iść do parku",
+    "back": "go to the park",
+    "answers": [
+      "go to the park"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "have-a-picnic",
+    "front": "zorganizować piknik",
+    "back": "have a picnic",
+    "answers": [
+      "have a picnic"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "how-many",
+    "front": "Ile? (liczba rzeczy policzalnych)",
+    "back": "How many",
+    "answers": [
+      "How many",
+      "How many?",
+      "How many...?"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "how-much",
+    "front": "Ile? (ilość czegoś niepoliczalnego)",
+    "back": "How much",
+    "answers": [
+      "How much",
+      "How much?",
+      "How much...?"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "quick",
+    "front": "szybki",
+    "back": "quick",
+    "answers": [
+      "quick"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "seagull",
+    "front": "mewa",
+    "back": "seagull",
+    "answers": [
+      "seagull",
+      "a seagull"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "terrible",
+    "front": "straszny",
+    "back": "terrible",
+    "answers": [
+      "terrible",
+      "horrible"
+    ],
+    "group": "Lekcja 2.3",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "anything-else",
+    "front": "Coś jeszcze?",
+    "back": "Anything else?",
+    "answers": [
+      "Anything else?",
+      "Anything else"
+    ],
+    "group": "Lekcja 2.4",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "can-i-have-a-vegetarian-pizza-please",
+    "front": "Czy mogę prosić pizzę wegetariańską?",
+    "back": "Can I have a vegetarian pizza, please?",
+    "answers": [
+      "Can I have a vegetarian pizza, please?",
+      "Can I have a vegetarian pizza, please"
+    ],
+    "group": "Lekcja 2.4",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "i-d-like-a-lemonade-please",
+    "front": "Poproszę lemoniadę.",
+    "back": "I'd like a lemonade, please.",
+    "answers": [
+      "I'd like a lemonade, please.",
+      "I'd like a lemonade, please",
+      "I would like a lemonade, please.",
+      "I would like a lemonade, please"
+    ],
+    "group": "Lekcja 2.4",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "what-would-you-like",
+    "front": "Na co masz ochotę?",
+    "back": "What would you like?",
+    "answers": [
+      "What would you like?",
+      "What would you like"
+    ],
+    "group": "Lekcja 2.4",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "would-you-like-anything-to-drink",
+    "front": "Czy masz ochotę na coś do picia?",
+    "back": "Would you like anything to drink?",
+    "answers": [
+      "Would you like anything to drink?",
+      "Would you like anything to drink"
+    ],
+    "group": "Lekcja 2.4",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "milkshake",
+    "front": "koktajl mleczny",
+    "back": "milkshake",
+    "answers": [
+      "milkshake",
+      "a milkshake"
+    ],
+    "group": "Lekcja 2.4",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "all-over-the-world",
+    "front": "na całym świecie",
+    "back": "all over the world",
+    "answers": [
+      "all over the world"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "art",
+    "front": "sztuka",
+    "back": "art",
+    "answers": [
+      "art"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "celebrity",
+    "front": "sławna osoba",
+    "back": "celebrity",
+    "answers": [
+      "celebrity",
+      "a celebrity"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "cook",
+    "front": "gotować",
+    "back": "cook",
+    "answers": [
+      "cook"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "cottage-cheese",
+    "front": "twarożek",
+    "back": "cottage cheese",
+    "answers": [
+      "cottage cheese"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "cream",
+    "front": "śmietana",
+    "back": "cream",
+    "answers": [
+      "cream"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "good-luck",
+    "front": "Powodzenia!",
+    "back": "Good luck!",
+    "answers": [
+      "Good luck!",
+      "Good luck"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "have-fun",
+    "front": "dobrze się bawić",
+    "back": "have fun",
+    "answers": [
+      "have fun"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "in-the-air",
+    "front": "w powietrzu",
+    "back": "in the air",
+    "answers": [
+      "in the air"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "ingredient",
+    "front": "składnik",
+    "back": "ingredient",
+    "answers": [
+      "ingredient",
+      "an ingredient"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "on-top",
+    "front": "na górze / na wierzchu",
+    "back": "on top",
+    "answers": [
+      "on top"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "pan",
+    "front": "rondel / patelnia",
+    "back": "pan",
+    "answers": [
+      "pan",
+      "a pan",
+      "a pan"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "popular",
+    "front": "popularny",
+    "back": "popular",
+    "answers": [
+      "popular"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "round",
+    "front": "okrągły",
+    "back": "round",
+    "answers": [
+      "round"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "special",
+    "front": "specjalny",
+    "back": "special",
+    "answers": [
+      "special"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "sweet",
+    "front": "słodki",
+    "back": "sweet",
+    "answers": [
+      "sweet"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "throw",
+    "front": "rzucać",
+    "back": "throw",
+    "answers": [
+      "throw"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "use",
+    "front": "używać",
+    "back": "use",
+    "answers": [
+      "use"
+    ],
+    "group": "Lekcja 2.5",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "have-a-quick-breakfast",
+    "front": "zjeść szybkie śniadanie",
+    "back": "have a quick breakfast",
+    "answers": [
+      "have a quick breakfast"
+    ],
+    "group": "Lekcja 2.6",
+    "source": "Podręcznik, Wordlist, s. 33"
+  },
+  {
+    "id": "toast",
+    "front": "tost / grzanka",
+    "back": "toast",
+    "answers": [
+      "toast"
+    ],
+    "group": "Word blog",
+    "source": "Zeszyt ćwiczeń, s. 21"
+  },
+  {
+    "id": "toaster",
+    "front": "toster",
+    "back": "toaster",
+    "answers": [
+      "toaster",
+      "a toaster"
+    ],
+    "group": "Word blog",
+    "source": "Zeszyt ćwiczeń, s. 21"
+  },
+  {
+    "id": "frying-pan",
+    "front": "patelnia do smażenia",
+    "back": "frying pan",
+    "answers": [
+      "frying pan",
+      "a frying pan"
+    ],
+    "group": "Word blog",
+    "source": "Zeszyt ćwiczeń, s. 21"
+  },
+  {
+    "id": "enjoy-your-meal",
+    "front": "Smacznego!",
+    "back": "Enjoy your meal!",
+    "answers": [
+      "Enjoy your meal!",
+      "Enjoy your meal"
+    ],
+    "group": "Word blog",
+    "source": "Zeszyt ćwiczeń, s. 21"
+  }
+]

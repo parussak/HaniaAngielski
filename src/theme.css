@@ -83,6 +83,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
 .summary-score{color:#845bb3}
 .summary-score small,.summary-score span{color:#886fa0}
 .loading{color:#8961b1}
+.grammar-guide details{border-top:1px solid var(--line);padding:8px 0}
+.grammar-guide summary{cursor:pointer;min-height:46px;padding:12px 0;font-weight:650;color:#78549f;line-height:1.6}
+.grammar-guide details p,.grammar-guide li{font-size:14px;line-height:1.9;color:#716280}
+.grammar-guide li{padding-bottom:5px}
+.source-reference{font-size:11px!important;line-height:1.7!important;color:#79678e!important}
 .nav-item,.text-button{min-height:44px}
 .file-label{min-height:48px}
 @media(min-width:601px) and (max-width:1050px){.hero-art.cat-art{width:210px;height:210px;right:0;top:50px;opacity:.5}.hero>div:first-child{z-index:1}}

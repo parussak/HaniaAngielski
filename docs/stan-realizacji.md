@@ -2,6 +2,12 @@
 
 8 listopada 2026 r.
 
+## Aktualizacja: moduł 2 Food
+
+Materiał przykładowy zastąpiono modułem z przesłanych zdjęć: 97 fiszek, 156 zadań i 9 objaśnień zasad. Treści przeniesiono do osobnego folderu `public/content` i są wczytywane jako pliki niezależne od kodu aplikacji. Szczegóły: [zakres i źródła](materialy-food.md), [instrukcja edycji](../public/content/README.md). Poniższy opis demonstracji dokumentuje wcześniejszy etap; demonstracja nie jest już dostępna do nauki. Publikacja na GitHub Pages i sprawdzenie na fizycznym telefonie pozostają do wykonania.
+
+Po zmianie materiałów przeszło 11 testów logiki i danych, 9 testów przeglądarkowych oraz budowanie wersji do publikacji. Sprawdzono także edycję plików bez zmian kodu, wyświetlanie ściągi i czytelny błąd po uszkodzeniu pliku materiałów.
+
 ## Zrealizowane lokalnie
 
 - Responsywna aplikacja „Małe kroki” dla Hani.

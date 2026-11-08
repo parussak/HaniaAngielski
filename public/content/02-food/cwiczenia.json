@@ -1,0 +1,1156 @@
+[
+  {
+    "id": "g-count-egg",
+    "kind": "grammar",
+    "prompt": "„egg” (jajko) — rzeczownik policzalny czy niepoliczalny w znaczeniu jedzenia?",
+    "answers": [
+      "policzalny"
+    ],
+    "options": [
+      "policzalny",
+      "niepoliczalny"
+    ],
+    "explanation": "Możemy liczyć pojedyncze sztuki. W tym znaczeniu rzeczownik jest policzalny, gdy można liczyć sztuki; nazwy substancji i jedzenia traktowanego jako masa są niepoliczalne.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "countable",
+    "source": "Podręcznik, s. 27"
+  },
+  {
+    "id": "g-count-strawberry",
+    "kind": "grammar",
+    "prompt": "„strawberry” (truskawka) — rzeczownik policzalny czy niepoliczalny w znaczeniu jedzenia?",
+    "answers": [
+      "policzalny"
+    ],
+    "options": [
+      "policzalny",
+      "niepoliczalny"
+    ],
+    "explanation": "Możemy liczyć pojedyncze sztuki. W tym znaczeniu rzeczownik jest policzalny, gdy można liczyć sztuki; nazwy substancji i jedzenia traktowanego jako masa są niepoliczalne.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "countable",
+    "source": "Podręcznik, s. 27"
+  },
+  {
+    "id": "g-count-apple",
+    "kind": "grammar",
+    "prompt": "„apple” (jabłko) — rzeczownik policzalny czy niepoliczalny w znaczeniu jedzenia?",
+    "answers": [
+      "policzalny"
+    ],
+    "options": [
+      "policzalny",
+      "niepoliczalny"
+    ],
+    "explanation": "Możemy liczyć pojedyncze sztuki. W tym znaczeniu rzeczownik jest policzalny, gdy można liczyć sztuki; nazwy substancji i jedzenia traktowanego jako masa są niepoliczalne.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "countable",
+    "source": "Podręcznik, s. 27"
+  },
+  {
+    "id": "g-count-milk",
+    "kind": "grammar",
+    "prompt": "„milk” (mleko) — rzeczownik policzalny czy niepoliczalny w znaczeniu jedzenia?",
+    "answers": [
+      "niepoliczalny"
+    ],
+    "options": [
+      "policzalny",
+      "niepoliczalny"
+    ],
+    "explanation": "W tym znaczeniu mówimy o substancji, nie o pojedynczych sztukach. W tym znaczeniu rzeczownik jest policzalny, gdy można liczyć sztuki; nazwy substancji i jedzenia traktowanego jako masa są niepoliczalne.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "countable",
+    "source": "Podręcznik, s. 27"
+  },
+  {
+    "id": "g-count-sugar",
+    "kind": "grammar",
+    "prompt": "„sugar” (cukier) — rzeczownik policzalny czy niepoliczalny w znaczeniu jedzenia?",
+    "answers": [
+      "niepoliczalny"
+    ],
+    "options": [
+      "policzalny",
+      "niepoliczalny"
+    ],
+    "explanation": "W tym znaczeniu mówimy o substancji, nie o pojedynczych sztukach. W tym znaczeniu rzeczownik jest policzalny, gdy można liczyć sztuki; nazwy substancji i jedzenia traktowanego jako masa są niepoliczalne.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "countable",
+    "source": "Podręcznik, s. 27"
+  },
+  {
+    "id": "g-count-flour",
+    "kind": "grammar",
+    "prompt": "„flour” (mąka) — rzeczownik policzalny czy niepoliczalny w znaczeniu jedzenia?",
+    "answers": [
+      "niepoliczalny"
+    ],
+    "options": [
+      "policzalny",
+      "niepoliczalny"
+    ],
+    "explanation": "W tym znaczeniu mówimy o substancji, nie o pojedynczych sztukach. W tym znaczeniu rzeczownik jest policzalny, gdy można liczyć sztuki; nazwy substancji i jedzenia traktowanego jako masa są niepoliczalne.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "countable",
+    "source": "Podręcznik, s. 27"
+  },
+  {
+    "id": "g-count-butter",
+    "kind": "grammar",
+    "prompt": "„butter” (masło) — rzeczownik policzalny czy niepoliczalny w znaczeniu jedzenia?",
+    "answers": [
+      "niepoliczalny"
+    ],
+    "options": [
+      "policzalny",
+      "niepoliczalny"
+    ],
+    "explanation": "W tym znaczeniu mówimy o substancji, nie o pojedynczych sztukach. W tym znaczeniu rzeczownik jest policzalny, gdy można liczyć sztuki; nazwy substancji i jedzenia traktowanego jako masa są niepoliczalne.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "countable",
+    "source": "Podręcznik, s. 27"
+  },
+  {
+    "id": "g-count-water",
+    "kind": "grammar",
+    "prompt": "„water” (woda) — rzeczownik policzalny czy niepoliczalny w znaczeniu jedzenia?",
+    "answers": [
+      "niepoliczalny"
+    ],
+    "options": [
+      "policzalny",
+      "niepoliczalny"
+    ],
+    "explanation": "W tym znaczeniu mówimy o substancji, nie o pojedynczych sztukach. W tym znaczeniu rzeczownik jest policzalny, gdy można liczyć sztuki; nazwy substancji i jedzenia traktowanego jako masa są niepoliczalne.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "countable",
+    "source": "Podręcznik, s. 27"
+  },
+  {
+    "id": "g-article-egg",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: I have ___ egg for breakfast.",
+    "answers": [
+      "an"
+    ],
+    "options": [
+      "a",
+      "an",
+      "brak"
+    ],
+    "explanation": "Poprawnie: I have an egg for breakfast. Przed jednym policzalnym rzeczownikiem używamy a/an. An poprzedza dźwięk samogłoski. Przy niepoliczalnym rzeczowniku nie stosujemy a/an.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "articles",
+    "source": "Podręcznik, s. 27; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-article-apple",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: I eat ___ apple a day.",
+    "answers": [
+      "an"
+    ],
+    "options": [
+      "a",
+      "an",
+      "brak"
+    ],
+    "explanation": "Poprawnie: I eat an apple a day. Przed jednym policzalnym rzeczownikiem używamy a/an. An poprzedza dźwięk samogłoski. Przy niepoliczalnym rzeczowniku nie stosujemy a/an.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "articles",
+    "source": "Podręcznik, s. 27; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-article-sandwich",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Can I have ___ sandwich, please?",
+    "answers": [
+      "a"
+    ],
+    "options": [
+      "a",
+      "an",
+      "brak"
+    ],
+    "explanation": "Poprawnie: Can I have a sandwich, please? Przed jednym policzalnym rzeczownikiem używamy a/an. An poprzedza dźwięk samogłoski. Przy niepoliczalnym rzeczowniku nie stosujemy a/an.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "articles",
+    "source": "Podręcznik, s. 27; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-article-lemon",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: There is ___ lemon.",
+    "answers": [
+      "a"
+    ],
+    "options": [
+      "a",
+      "an",
+      "brak"
+    ],
+    "explanation": "Poprawnie: There is a lemon. Przed jednym policzalnym rzeczownikiem używamy a/an. An poprzedza dźwięk samogłoski. Przy niepoliczalnym rzeczowniku nie stosujemy a/an.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "articles",
+    "source": "Podręcznik, s. 27; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-article-milk",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: I have ___ milk with my cereal. (a / an / brak)",
+    "answers": [
+      "brak",
+      "—",
+      "-",
+      "–"
+    ],
+    "options": [
+      "a",
+      "an",
+      "brak"
+    ],
+    "explanation": "Poprawnie: I have milk with my cereal. Przed jednym policzalnym rzeczownikiem używamy a/an. An poprzedza dźwięk samogłoski. Przy niepoliczalnym rzeczowniku nie stosujemy a/an.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "articles",
+    "source": "Podręcznik, s. 27; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-article-butter",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: I like bread with ___ butter. (a / an / brak)",
+    "answers": [
+      "brak",
+      "—",
+      "-",
+      "–"
+    ],
+    "options": [
+      "a",
+      "an",
+      "brak"
+    ],
+    "explanation": "Poprawnie: I like bread with butter. Przed jednym policzalnym rzeczownikiem używamy a/an. An poprzedza dźwięk samogłoski. Przy niepoliczalnym rzeczowniku nie stosujemy a/an.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "articles",
+    "source": "Podręcznik, s. 27; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-article-juice",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: I drink ___ orange juice. (a / an / brak)",
+    "answers": [
+      "brak",
+      "—",
+      "-",
+      "–"
+    ],
+    "options": [
+      "a",
+      "an",
+      "brak"
+    ],
+    "explanation": "Poprawnie: I drink orange juice. Przed jednym policzalnym rzeczownikiem używamy a/an. An poprzedza dźwięk samogłoski. Przy niepoliczalnym rzeczowniku nie stosujemy a/an.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "articles",
+    "source": "Podręcznik, s. 27; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-some-milk-positive",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (some / any): There is ___ milk.",
+    "answers": [
+      "some"
+    ],
+    "options": [
+      "some",
+      "any"
+    ],
+    "explanation": "To zdanie twierdzące o mleku. Poprawnie: There is some milk.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "some-any",
+    "source": "Podręcznik, s. 27 i 30 (adaptacja)"
+  },
+  {
+    "id": "g-some-eggs-positive",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (some / any): There are ___ eggs.",
+    "answers": [
+      "some"
+    ],
+    "options": [
+      "some",
+      "any"
+    ],
+    "explanation": "To zdanie twierdzące o jajkach. Poprawnie: There are some eggs.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "some-any",
+    "source": "Podręcznik, s. 27 i 30 (adaptacja)"
+  },
+  {
+    "id": "g-some-milk-negative",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (some / any): There isn't ___ milk.",
+    "answers": [
+      "any"
+    ],
+    "options": [
+      "some",
+      "any"
+    ],
+    "explanation": "Przeczenie wymaga tutaj any. Poprawnie: There isn't any milk.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "some-any",
+    "source": "Podręcznik, s. 27 i 30 (adaptacja)"
+  },
+  {
+    "id": "g-some-eggs-negative",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (some / any): There aren't ___ eggs.",
+    "answers": [
+      "any"
+    ],
+    "options": [
+      "some",
+      "any"
+    ],
+    "explanation": "Przeczenie wymaga tutaj any. Poprawnie: There aren't any eggs.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "some-any",
+    "source": "Podręcznik, s. 27 i 30 (adaptacja)"
+  },
+  {
+    "id": "g-some-strawberries-question",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (some / any): Are there ___ strawberries?",
+    "answers": [
+      "any"
+    ],
+    "options": [
+      "some",
+      "any"
+    ],
+    "explanation": "To zwykłe pytanie o dostępność truskawek. Poprawnie: Are there any strawberries?",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "some-any",
+    "source": "Podręcznik, s. 27 i 30 (adaptacja)"
+  },
+  {
+    "id": "g-some-flour-question",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (some / any): Is there ___ flour?",
+    "answers": [
+      "any"
+    ],
+    "options": [
+      "some",
+      "any"
+    ],
+    "explanation": "To zwykłe pytanie o mąkę. Poprawnie: Is there any flour?",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "some-any",
+    "source": "Podręcznik, s. 27 i 30 (adaptacja)"
+  },
+  {
+    "id": "g-some-sugar-positive",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (some / any): There is ___ sugar.",
+    "answers": [
+      "some"
+    ],
+    "options": [
+      "some",
+      "any"
+    ],
+    "explanation": "To zdanie twierdzące o cukrze. Poprawnie: There is some sugar.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "some-any",
+    "source": "Podręcznik, s. 27 i 30 (adaptacja)"
+  },
+  {
+    "id": "g-some-butter-negative",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (some / any): There isn't ___ butter.",
+    "answers": [
+      "any"
+    ],
+    "options": [
+      "some",
+      "any"
+    ],
+    "explanation": "To przeczenie o maśle. Poprawnie: There isn't any butter.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "some-any",
+    "source": "Podręcznik, s. 27 i 30 (adaptacja)"
+  },
+  {
+    "id": "g-some-request",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (some / any): Can I have ___ chips, please?",
+    "answers": [
+      "some"
+    ],
+    "options": [
+      "some",
+      "any"
+    ],
+    "explanation": "W uprzejmej prośbie o jedzenie używamy tutaj some, mimo że zdanie ma postać pytania. Poprawnie: Can I have some chips, please?",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "some-any",
+    "source": "Podręcznik, s. 27 i 30 (adaptacja)"
+  },
+  {
+    "id": "g-there-milk",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: There ___ some milk.",
+    "answers": [
+      "is"
+    ],
+    "options": [
+      "is",
+      "are"
+    ],
+    "explanation": "Mleko jest niepoliczalne. There is pasuje do liczby pojedynczej i do rzeczowników niepoliczalnych. There are pasuje do liczby mnogiej.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "there",
+    "source": "Podręcznik, s. 27 i 29; notatki (adaptacja)"
+  },
+  {
+    "id": "g-there-water",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: There ___ a lot of water.",
+    "answers": [
+      "is"
+    ],
+    "options": [
+      "is",
+      "are"
+    ],
+    "explanation": "Woda jest niepoliczalna. There is pasuje do liczby pojedynczej i do rzeczowników niepoliczalnych. There are pasuje do liczby mnogiej.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "there",
+    "source": "Podręcznik, s. 27 i 29; notatki (adaptacja)"
+  },
+  {
+    "id": "g-there-apples",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: There ___ some apples.",
+    "answers": [
+      "are"
+    ],
+    "options": [
+      "is",
+      "are"
+    ],
+    "explanation": "Apples to liczba mnoga. There is pasuje do liczby pojedynczej i do rzeczowników niepoliczalnych. There are pasuje do liczby mnogiej.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "there",
+    "source": "Podręcznik, s. 27 i 29; notatki (adaptacja)"
+  },
+  {
+    "id": "g-there-egg",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: There ___ an egg.",
+    "answers": [
+      "is"
+    ],
+    "options": [
+      "is",
+      "are"
+    ],
+    "explanation": "Mówimy o jednym jajku. There is pasuje do liczby pojedynczej i do rzeczowników niepoliczalnych. There are pasuje do liczby mnogiej.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "there",
+    "source": "Podręcznik, s. 27 i 29; notatki (adaptacja)"
+  },
+  {
+    "id": "g-there-bottles",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: There ___ two bottles of water.",
+    "answers": [
+      "are"
+    ],
+    "options": [
+      "is",
+      "are"
+    ],
+    "explanation": "Liczymy dwie butelki, więc używamy liczby mnogiej. There is pasuje do liczby pojedynczej i do rzeczowników niepoliczalnych. There are pasuje do liczby mnogiej.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "there",
+    "source": "Podręcznik, s. 27 i 29; notatki (adaptacja)"
+  },
+  {
+    "id": "g-short-milk",
+    "kind": "grammar",
+    "prompt": "Uzupełnij krótką odpowiedź: Is there any milk? Yes, there ___.",
+    "answers": [
+      "is"
+    ],
+    "options": [
+      "is",
+      "are",
+      "isn't"
+    ],
+    "explanation": "Pytanie zaczyna się od Is there, więc twierdząca odpowiedź brzmi Yes, there is.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "there",
+    "source": "Podręcznik, s. 27 (adaptacja)"
+  },
+  {
+    "id": "g-short-eggs",
+    "kind": "grammar",
+    "prompt": "Uzupełnij przeczącą odpowiedź: Are there any eggs? No, there ___ .",
+    "answers": [
+      "aren't",
+      "are not"
+    ],
+    "options": [
+      "aren't",
+      "isn't",
+      "are"
+    ],
+    "explanation": "Do pytania Are there pasuje No, there aren't. Możesz też napisać are not.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "there",
+    "source": "Podręcznik, s. 27 (adaptacja)"
+  },
+  {
+    "id": "g-how-water",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (How much / How many): ___ water is there?",
+    "answers": [
+      "How much"
+    ],
+    "options": [
+      "How much",
+      "How many"
+    ],
+    "explanation": "Woda jest niepoliczalna. How many pyta o liczbę policzalnych rzeczy, a how much o ilość czegoś niepoliczalnego.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "much-many",
+    "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-how-apples",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (How much / How many): ___ apples are there?",
+    "answers": [
+      "How many"
+    ],
+    "options": [
+      "How much",
+      "How many"
+    ],
+    "explanation": "Jabłka możemy liczyć. How many pyta o liczbę policzalnych rzeczy, a how much o ilość czegoś niepoliczalnego.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "much-many",
+    "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-how-milk",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (How much / How many): ___ milk is there?",
+    "answers": [
+      "How much"
+    ],
+    "options": [
+      "How much",
+      "How many"
+    ],
+    "explanation": "Mleko jest niepoliczalne. How many pyta o liczbę policzalnych rzeczy, a how much o ilość czegoś niepoliczalnego.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "much-many",
+    "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-how-eggs",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (How much / How many): ___ eggs are there?",
+    "answers": [
+      "How many"
+    ],
+    "options": [
+      "How much",
+      "How many"
+    ],
+    "explanation": "Jajka możemy liczyć. How many pyta o liczbę policzalnych rzeczy, a how much o ilość czegoś niepoliczalnego.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "much-many",
+    "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-how-chocolate",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (How much / How many): ___ chocolate is there?",
+    "answers": [
+      "How much"
+    ],
+    "options": [
+      "How much",
+      "How many"
+    ],
+    "explanation": "Czekolada jako jedzenie jest niepoliczalna. How many pyta o liczbę policzalnych rzeczy, a how much o ilość czegoś niepoliczalnego.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "much-many",
+    "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-how-biscuits",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (How much / How many): ___ biscuits are there?",
+    "answers": [
+      "How many"
+    ],
+    "options": [
+      "How much",
+      "How many"
+    ],
+    "explanation": "Herbatniki możemy liczyć. How many pyta o liczbę policzalnych rzeczy, a how much o ilość czegoś niepoliczalnego.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "much-many",
+    "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-how-bottles",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (How much / How many): ___ bottles of water are there?",
+    "answers": [
+      "How many"
+    ],
+    "options": [
+      "How much",
+      "How many"
+    ],
+    "explanation": "Liczymy butelki, a nie wodę. How many pyta o liczbę policzalnych rzeczy, a how much o ilość czegoś niepoliczalnego.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "much-many",
+    "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-how-cartons",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (How much / How many): ___ cartons of juice are there?",
+    "answers": [
+      "How many"
+    ],
+    "options": [
+      "How much",
+      "How many"
+    ],
+    "explanation": "Liczymy kartony soku. How many pyta o liczbę policzalnych rzeczy, a how much o ilość czegoś niepoliczalnego.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "much-many",
+    "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-how-cheese",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (How much / How many): ___ cheese is there?",
+    "answers": [
+      "How much"
+    ],
+    "options": [
+      "How much",
+      "How many"
+    ],
+    "explanation": "Ser jako jedzenie jest niepoliczalny. How many pyta o liczbę policzalnych rzeczy, a how much o ilość czegoś niepoliczalnego.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "much-many",
+    "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-how-jam",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (How much / How many): ___ jam is there?",
+    "answers": [
+      "How much"
+    ],
+    "options": [
+      "How much",
+      "How many"
+    ],
+    "explanation": "Dżem jest niepoliczalny. How many pyta o liczbę policzalnych rzeczy, a how much o ilość czegoś niepoliczalnego.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "much-many",
+    "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-lot-water",
+    "kind": "grammar",
+    "prompt": "Uzupełnij wyrażeniem znaczącym „dużo”: There is ___ water.",
+    "answers": [
+      "a lot of"
+    ],
+    "options": [
+      "a lot of",
+      "a lot",
+      "many"
+    ],
+    "explanation": "A lot of znaczy dużo. Stosujemy je z rzeczownikami niepoliczalnymi i z policzalnymi w liczbie mnogiej.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "a-lot-of",
+    "source": "Podręcznik, s. 29; notatki (adaptacja)"
+  },
+  {
+    "id": "g-lot-apples",
+    "kind": "grammar",
+    "prompt": "Uzupełnij wyrażeniem znaczącym „dużo”: There are ___ apples.",
+    "answers": [
+      "a lot of"
+    ],
+    "options": [
+      "much",
+      "a lot of",
+      "a lot"
+    ],
+    "explanation": "A lot of znaczy dużo. Stosujemy je z rzeczownikami niepoliczalnymi i z policzalnymi w liczbie mnogiej.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "a-lot-of",
+    "source": "Podręcznik, s. 29; notatki (adaptacja)"
+  },
+  {
+    "id": "g-container-water",
+    "kind": "grammar",
+    "prompt": "Wpisz nazwę opakowania z modułu: a ___ of water.",
+    "answers": [
+      "bottle"
+    ],
+    "options": [
+      "bottle",
+      "bar",
+      "can"
+    ],
+    "explanation": "W tym module ćwiczymy wyrażenie „a bottle of water”. Liczymy opakowania. Bottle to butelka, bar to tabliczka, can to puszka, carton to karton, jar to słoik, packet to paczka.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "containers",
+    "source": "Podręcznik, s. 29 i 33; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-container-chocolate",
+    "kind": "grammar",
+    "prompt": "Wpisz nazwę opakowania z modułu: a ___ of chocolate.",
+    "answers": [
+      "bar"
+    ],
+    "options": [
+      "bar",
+      "bottle",
+      "can"
+    ],
+    "explanation": "W tym module ćwiczymy wyrażenie „a bar of chocolate”. Liczymy opakowania. Bottle to butelka, bar to tabliczka, can to puszka, carton to karton, jar to słoik, packet to paczka.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "containers",
+    "source": "Podręcznik, s. 29 i 33; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-container-cola",
+    "kind": "grammar",
+    "prompt": "Wpisz nazwę opakowania z modułu: a ___ of cola.",
+    "answers": [
+      "can"
+    ],
+    "options": [
+      "can",
+      "bottle",
+      "bar"
+    ],
+    "explanation": "W tym module ćwiczymy wyrażenie „a can of cola”. Liczymy opakowania. Bottle to butelka, bar to tabliczka, can to puszka, carton to karton, jar to słoik, packet to paczka.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "containers",
+    "source": "Podręcznik, s. 29 i 33; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-container-juice",
+    "kind": "grammar",
+    "prompt": "Wpisz nazwę opakowania z modułu: a ___ of juice.",
+    "answers": [
+      "carton"
+    ],
+    "options": [
+      "carton",
+      "bottle",
+      "bar"
+    ],
+    "explanation": "W tym module ćwiczymy wyrażenie „a carton of juice”. Liczymy opakowania. Bottle to butelka, bar to tabliczka, can to puszka, carton to karton, jar to słoik, packet to paczka.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "containers",
+    "source": "Podręcznik, s. 29 i 33; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-container-jam",
+    "kind": "grammar",
+    "prompt": "Wpisz nazwę opakowania z modułu: a ___ of jam.",
+    "answers": [
+      "jar"
+    ],
+    "options": [
+      "jar",
+      "bottle",
+      "bar"
+    ],
+    "explanation": "W tym module ćwiczymy wyrażenie „a jar of jam”. Liczymy opakowania. Bottle to butelka, bar to tabliczka, can to puszka, carton to karton, jar to słoik, packet to paczka.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "containers",
+    "source": "Podręcznik, s. 29 i 33; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-container-biscuits",
+    "kind": "grammar",
+    "prompt": "Wpisz nazwę opakowania z modułu: a ___ of biscuits.",
+    "answers": [
+      "packet"
+    ],
+    "options": [
+      "packet",
+      "bottle",
+      "bar"
+    ],
+    "explanation": "W tym module ćwiczymy wyrażenie „a packet of biscuits”. Liczymy opakowania. Bottle to butelka, bar to tabliczka, can to puszka, carton to karton, jar to słoik, packet to paczka.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "containers",
+    "source": "Podręcznik, s. 29 i 33; zeszyt ćwiczeń, s. 20 (adaptacja)"
+  },
+  {
+    "id": "g-container-plural",
+    "kind": "grammar",
+    "prompt": "Uzupełnij liczbę mnogą od bottle: two ___ of water.",
+    "answers": [
+      "bottles"
+    ],
+    "options": [
+      "bottles",
+      "bottle",
+      "bottles of"
+    ],
+    "explanation": "Two oznacza dwie, więc bottle zmienia się w bottles. Of jest już zapisane po luce.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "containers",
+    "source": "Notatki; podręcznik, s. 29 (adaptacja)"
+  },
+  {
+    "id": "g-order-would",
+    "kind": "grammar",
+    "prompt": "Uzupełnij pytanie kelnera: What ___ you like?",
+    "answers": [
+      "would"
+    ],
+    "options": [
+      "would",
+      "can",
+      "are"
+    ],
+    "explanation": "What would you like? to pytanie „Na co masz ochotę?”.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Podręcznik, s. 30 i 33 (adaptacja)"
+  },
+  {
+    "id": "g-order-can",
+    "kind": "grammar",
+    "prompt": "Uzupełnij uprzejmą prośbę: ___ I have a lemonade, please?",
+    "answers": [
+      "Can"
+    ],
+    "options": [
+      "Can",
+      "Would",
+      "Are"
+    ],
+    "explanation": "Can I have …, please? to uprzejma prośba o podanie czegoś.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Podręcznik, s. 30 i 33 (adaptacja)"
+  },
+  {
+    "id": "g-order-like",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: I'd ___ a strawberry milkshake, please.",
+    "answers": [
+      "like"
+    ],
+    "options": [
+      "like",
+      "have",
+      "can"
+    ],
+    "explanation": "I'd like znaczy „Poproszę” lub „Chciałabym / chciałbym”.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Podręcznik, s. 30 (adaptacja)"
+  },
+  {
+    "id": "g-order-else",
+    "kind": "grammar",
+    "prompt": "Uzupełnij pytanie „Coś jeszcze?”: Anything ___?",
+    "answers": [
+      "else"
+    ],
+    "options": [
+      "else",
+      "like",
+      "please"
+    ],
+    "explanation": "Pełny zwrot to Anything else?",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Podręcznik, s. 30 i 33 (adaptacja)"
+  },
+  {
+    "id": "g-order-drink",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Would you like anything to ___?",
+    "answers": [
+      "drink"
+    ],
+    "options": [
+      "drink",
+      "make",
+      "put"
+    ],
+    "explanation": "Pytanie o coś do picia brzmi Would you like anything to drink?",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Podręcznik, s. 30 i 33 (adaptacja)"
+  },
+  {
+    "id": "g-so-sport",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (so / because): I play a lot of sport ___ I'm always hungry.",
+    "answers": [
+      "so"
+    ],
+    "options": [
+      "so",
+      "because"
+    ],
+    "explanation": "Uprawianie sportu to przyczyna, a głód to skutek. Przed skutkiem użyj so — więc.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "so-because",
+    "source": "Podręcznik, s. 32"
+  },
+  {
+    "id": "g-because-sport",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (so / because): I'm always hungry ___ I play a lot of sport.",
+    "answers": [
+      "because"
+    ],
+    "options": [
+      "so",
+      "because"
+    ],
+    "explanation": "Po luce podajemy powód głodu. Because oznacza ponieważ.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "so-because",
+    "source": "Podręcznik, s. 32"
+  },
+  {
+    "id": "g-because-eggs",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (so / because): My dad often cooks eggs ___ he loves them.",
+    "answers": [
+      "because"
+    ],
+    "options": [
+      "because",
+      "so"
+    ],
+    "explanation": "Tata gotuje jajka, ponieważ je lubi. Po luce podano przyczynę.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "so-because",
+    "source": "Podręcznik, s. 32, ćw. 5"
+  },
+  {
+    "id": "g-so-pizza",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (so / because): My brother loves pizza ___ he often goes to a pizzeria.",
+    "answers": [
+      "so"
+    ],
+    "options": [
+      "because",
+      "so"
+    ],
+    "explanation": "Wizyty w pizzerii wynikają z tego, że brat lubi pizzę. Przed skutkiem użyj so.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "so-because",
+    "source": "Podręcznik, s. 32, ćw. 5"
+  }
+]

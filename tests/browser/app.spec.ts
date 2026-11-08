@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 import { readFileSync } from 'node:fs';
-const modules = JSON.parse(readFileSync(new URL('../../src/data/modules.json', import.meta.url),'utf8'));
+import { modules } from '../materials.ts';
 const data = modules[0];
 test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządzeniu', async ({ page, browser }) => {
   const errors: string[] = []; page.on('pageerror',e=>errors.push(e.message));
   await page.goto('/');
   await expect(page.getByRole('heading',{name:'Cześć, Haniu'})).toBeVisible();
   await page.screenshot({path:'test-results/home-desktop.png',fullPage:true});
-  await page.getByRole('button',{name:'Otwórz moduł Mój mały świat'}).click();
+  await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();
   await page.getByRole('button',{name:/^Gramatyka/}).click();
   await page.getByText('Wpisuję odpowiedź',{exact:true}).click();
   await page.getByRole('button',{name:/Rozpocznij naukę/}).click();
@@ -24,7 +24,7 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   await page.getByRole('button',{name:/Sprawdź/}).click();
   await page.getByRole('button',{name:'Dalej',exact:false}).click();
   await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
-  for(let i=0;i<6;i++) {
+  for(let i=0;i<12;i++) {
     if(await page.getByRole('heading',{name:'Dobra robota, Haniu!'}).isVisible()) break;
     const text = await page.locator('.question').innerText();
     const exercise=data.exercises.find((q:any)=>q.prompt===text);
@@ -34,9 +34,9 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
     await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
   }
   await expect(page.getByRole('heading',{name:'Dobra robota, Haniu!'})).toBeVisible();
-  await expect(page.locator('.summary-score')).toContainText('3 / 4');
+  await expect(page.locator('.summary-score')).toContainText('9 / 10');
   await page.getByRole('button',{name:'Moja nauka',exact:true}).click();
-  await page.getByRole('button',{name:'Otwórz moduł Mój mały świat'}).click();
+  await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();
   await page.getByRole('button',{name:/^Fiszki/}).click();
   await page.getByRole('button',{name:/Rozpocznij naukę/}).click();
   await page.getByRole('button',{name:'Pokaż odpowiedź'}).click();
@@ -74,11 +74,11 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   await expect(mobile.locator('.flash-answer')).toHaveText(revealed);
   await mobile.getByRole('button',{name:'Znam to',exact:false}).click();
   await mobile.getByRole('button',{name:'Moje postępy',exact:true}).click();
-  await expect(mobile.locator('.history-score')).toContainText('3/4');
+  await expect(mobile.locator('.history-score')).toContainText('9/10');
   expect(errors).toEqual([]); await context.close();
 });
 test('nieudany zapis nie udaje sukcesu i nie zmienia poprzednich wyników',async({page})=>{
-  await page.goto('/'); await page.getByRole('button',{name:'Otwórz moduł Mój mały świat'}).click();
+  await page.goto('/'); await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();
   await page.getByRole('button',{name:/Rozpocznij naukę/}).click();
   await page.evaluate(()=>{IDBObjectStore.prototype.put=function(){throw new DOMException('Full','QuotaExceededError');};});
   await page.getByRole('button',{name:'Pokaż odpowiedź'}).click();

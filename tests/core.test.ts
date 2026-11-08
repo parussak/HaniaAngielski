@@ -1,14 +1,14 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { modules } from './materials.ts';
 import { indexedDB } from 'fake-indexeddb';
 import { backup, emptyProgress, eligibleModules, isCorrect, makeSession, markWord, next, recordAnswer, score, sessionCompatible, validateBackup, type Module } from '../src/core.ts';
 import { load, save } from '../src/storage.ts';
-const modules: Module[] = JSON.parse(readFileSync(new URL('../src/data/modules.json', import.meta.url),'utf8'));
+
 const m = modules[0];
 test('ocenianie normalizuje spacje i wielkość liter, zachowuje istotne znaki', () => {
-  assert.ok(isCorrect(m.exercises[0],'  A   BOOK  '));
-  assert.ok(!isCorrect(m.exercises[0],'books'));
+  assert.ok(isCorrect(m.exercises[0], '  ' + m.exercises[0].answers[0].toUpperCase() + '  '));
+  assert.ok(!isCorrect(m.exercises[0],'not-an-answer'));
   assert.ok(!isCorrect({...m.exercises[0],answers:['café']},'cafe'));
   assert.ok(!isCorrect({...m.exercises[0],answers:['I'],caseSensitive:true},'i'));
 });
@@ -33,7 +33,7 @@ test('odkrycie fiszki nie oznacza jej znajomości; trudna fiszka wraca raz', () 
 });
 test('zakres pomija późniejsze moduły i zadania wymagające niedozwolonych treści', () => {
   const prior = {...m,id:'prior',order:0,exercises:[],words:[]};
-  const future = {...m,id:'future',order:2};
+  const future = {...m,id:'future',order:3};
   assert.deepEqual(eligibleModules([prior,m,future],m,false).map(m=>m.id),[m.id]);
   assert.deepEqual(eligibleModules([prior,m,future],m,true).map(m=>m.id),['prior',m.id]);
   const scoped = {...m,exercises:[...m.exercises,{...m.exercises[0],id:'forbidden',requires:['future']}]};
@@ -45,7 +45,7 @@ test('pełna sesja jest archiwizowana tylko raz i przechodzi eksport', () => {
     const item = p.active.items[p.active.index]; const q = m.exercises.find(e=>e.id===item.id)!;
     recordAnswer(p,q,q.answers[0]); next(p);
   }
-  next(p); assert.equal(p.sessions.length,1); assert.equal(score(p.sessions[0]).correct,4);
+  next(p); assert.equal(p.sessions.length,1); assert.equal(score(p.sessions[0]).correct,10);
   assert.deepEqual(validateBackup(backup(p)).progress,p);
 });
 test('walidacja odrzuca uszkodzone pliki, wersje, indeksy i próby wstrzyknięcia HTML do stanu', () => {

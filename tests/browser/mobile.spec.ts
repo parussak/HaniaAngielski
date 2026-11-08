@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { readFileSync } from 'node:fs';
-const module = JSON.parse(readFileSync(new URL('../../src/data/modules.json', import.meta.url),'utf8'))[0];
+import { modules } from '../materials.ts';
+const module = modules[0];
 
 test.describe('telefon — dotyk i małe ekrany', () => {
   test.use({ isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
@@ -18,7 +19,7 @@ test.describe('telefon — dotyk i małe ekrany', () => {
         expect(rect!.width).toBeGreaterThanOrEqual(44);
       }
       if (width === 390) await page.screenshot({path:'test-results/cat-home-mobile.png',fullPage:true});
-      await page.getByRole('button',{name:'Otwórz moduł Mój mały świat'}).tap();
+      await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
       await checkWidth();
       await page.getByRole('button',{name:/^Quiz słownictwa/}).tap();
       await page.getByText('Wybieram odpowiedź',{exact:true}).tap();
@@ -40,7 +41,7 @@ test.describe('telefon — dotyk i małe ekrany', () => {
   test('gramatyka: wpisywanie, błąd, poprawa, obrót telefonu, wznowienie i wynik',async({page})=>{
     await page.setViewportSize({width:390,height:844});
     await page.goto('/');
-    await page.getByRole('button',{name:'Otwórz moduł Mój mały świat'}).tap();
+    await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
     await page.getByRole('button',{name:/^Gramatyka/}).tap();
     await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();
     await page.getByRole('button',{name:/Rozpocznij naukę/}).tap();
@@ -62,7 +63,7 @@ test.describe('telefon — dotyk i małe ekrany', () => {
     await page.getByRole('button',{name:'Dalej',exact:false}).tap();
     await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
     await page.setViewportSize({width:390,height:844});
-    for(let i=0;i<6;i++) {
+    for(let i=0;i<12;i++) {
       if(await page.getByRole('heading',{name:'Dobra robota, Haniu!'}).isVisible()) break;
       const prompt=await page.locator('.question').innerText();
       const q=module.exercises.find((q:any)=>q.prompt===prompt);
@@ -71,7 +72,7 @@ test.describe('telefon — dotyk i małe ekrany', () => {
       await page.getByRole('button',{name:'Dalej',exact:false}).tap();
       await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
     }
-    await expect(page.locator('.summary-score')).toContainText('3 / 4');
+    await expect(page.locator('.summary-score')).toContainText('9 / 10');
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
   });
 });

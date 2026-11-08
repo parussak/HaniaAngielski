@@ -94,8 +94,8 @@ Przed udostępnieniem aplikacji należy potwierdzić, że:
 
 ## Informacje jeszcze nieustalone
 
-- Język nauki, tytuł i wydanie podręcznika oraz poziom Hani.
-- Materiały pierwszego modułu i dostępność klucza odpowiedzi.
+- Tytuł i wydanie podręcznika oraz poziom Hani. Język potwierdzony materiałami: angielski.
+- Dostępność pełnego klucza odpowiedzi i nagrań. Materiały modułu 2 Food zostały przekazane w 27 zdjęciach i opracowane w aplikacji.
 - Potrzeba odsłuchiwania wymowy w pierwszej wersji.
 
 Szczegóły realizacji pierwszej wersji opisuje [plan](plan-pierwszej-wersji.md). Propozycje techniczne w planie nie zastępują powyższych ustaleń.
