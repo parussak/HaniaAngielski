@@ -52,7 +52,7 @@ Treści znajdują się w **public/content**, niezależnie od kodu strony w `src`
 - `02-food/gramatyka.json` — zasady, objaśnienia i przykłady.
 - `02-food/cwiczenia.json` — zadania, klucze odpowiedzi i wyjaśnienia po błędzie.
 
-[Instrukcja edycji materiałów](public/content/README.md) zawiera przykłady. Po zmianie uruchom `npm.cmd run check:content`. Podczas lokalnej nauki wystarczy zapisać pliki i odświeżyć stronę. Do opublikowania poprawek na GitHub Pages należy ponowić workflow publikacji.
+[Instrukcja edycji materiałów](public/content/README.md) zawiera przykłady. Po zmianie uruchom `npm.cmd run check:content`. Podczas lokalnej nauki wystarczy zapisać pliki i odświeżyć stronę. Po wysłaniu zmian na `main` GitHub automatycznie sprawdzi, zbuduje i opublikuje aplikację.
 
 Przy zmianie znaczenia konkretnego słówka lub zadania zwiększ jego opcjonalne `rev` (domyślnie 1). Pozostałe elementy zachowują postępy. Zmiana `version` całego modułu nie resetuje wyników. Dawne kopie formatu 1 z kluczami `@1` pozostają zgodne. Kopia nie zawiera treści modułów. Zdjęcia źródłowe są w pomijanym przez Git folderze `.local-materials`.
 
@@ -60,7 +60,7 @@ Przy zmianie znaczenia konkretnego słówka lub zadania zwiększ jego opcjonalne
 
 ## GitHub Pages
 
-Konfiguracja Vite używa względnych ścieżek, więc aplikacja obsługuje adres w podkatalogu repozytorium. Workflow `.github/workflows/pages.yml` publikuje po ręcznym uruchomieniu „Publish Pages”. Użytkowniczka opublikowała wcześniejszą wersję. Bieżące poprawki wymagają ponownej publikacji po wysłaniu zmian do repozytorium. Osobny workflow `checks.yml` sprawdza push i pull request bez publikowania strony.
+Konfiguracja Vite używa względnych ścieżek, więc aplikacja obsługuje adres w podkatalogu repozytorium. Workflow `.github/workflows/pages.yml` automatycznie publikuje każdy push na `main`, po poprawnym przejściu testów i budowania. Można go też uruchomić ręcznie przez „Publish Pages → Run workflow”. Osobny workflow `checks.yml` sprawdza push i pull request bez publikowania strony.
 
 Wszystkie opublikowane moduły są publicznymi plikami strony. Wyniki pozostają wyłącznie lokalnie. Baza postępów i blokada karty są oddzielone według ścieżki aplikacji, aby różne repozytoria na GitHub Pages nie współdzieliły danych. Do testów najlepiej używać innego profilu przeglądarki.
 
