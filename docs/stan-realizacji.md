@@ -12,7 +12,9 @@ Na małym ekranie pytanie i działania zajmują ekran bez dużego nagłówka; d�
 
 Aktualizacja aktywnych fiszek: oba zestawy wymagają odpowiedzi (wybór, wpisywanie lub tryb mieszany). Sposób odpowiedzi wybiera się przed dotknięciem kafelka. Każdy kafelek od razu zaczyna sesję; usunięto osobny przycisk startu na dole. Zakres wcześniejszych modułów i źródła są rozwijane. Błąd pokazuje poprawną odpowiedź i wyjaśnienie, umożliwia poprawę i zapisuje trudność do kolejnej sesji. Nowe wyniki fiszek obejmują pierwsze próby i poprawki; stare wyniki, kopie i identyfikatory pozostają obsługiwane.
 
-Weryfikacja po aktualizacji: 32 testy jednostkowe, check:content i build poprawne; 18 testów zbudowanej aplikacji pod /HaniaAngielski/. Sprawdzono 320×640, 360×740, szerokości 390 i 430 oraz 844×390, wczytanie starej kopii bez zmiany jej danych, oba zestawy i kontrast sprawdzanych tekstów.
+Ilustracje po odpowiedzi: 97 słówek (oraz odpowiadające im quizy) i 59 zadań gramatycznych mają ilustrację z podpisem. Wykorzystano kolorowe piktogramy i własne lokalne rysunki SVG produktów. Ilustracja jest ukryta podczas odpowiadania i poprawy; pokazuje się pod wyjaśnieniem. W 26 zadaniach z wariantami w nawiasie wymuszono odpowiedzi zamknięte, także w trybie wpisywania i starszych sesjach. Pole `illustration` i opcjonalne `responseType` edytuje się w treści.
+
+Weryfikacja po aktualizacji: 34 testy jednostkowe, check:content i build poprawne; 20 testów zbudowanej aplikacji pod /HaniaAngielski/. Sprawdzono 320×640, 360×740, szerokości 390 i 430 oraz 844×390, wczytanie starej kopii bez zmiany jej danych, oba zestawy i kontrast sprawdzanych tekstów.
 
 Testy domyślnie korzystają z Chromium, Edge jest dostępny przez zmienną środowiskową. Osobny CI sprawdza push i pull request; GitHub Pages publikuje push na main i umożliwia uruchomienie ręczne.
 

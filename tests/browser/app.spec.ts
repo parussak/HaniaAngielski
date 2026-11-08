@@ -1,3 +1,4 @@
+import {answerQuestion} from './helpers.ts';
 import { test, expect } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { modules } from '../materials.ts';
@@ -12,23 +13,20 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   await page.getByRole('button',{name:/^Gramatyka/}).click();
   const prompt = await page.locator('.question').innerText();
   const q = data.exercises.find((q:any)=>q.prompt===prompt);
-  await page.getByRole('textbox').fill('wrong');
-  await page.getByRole('button',{name:/Sprawdź/}).click();
+  await answerQuestion(page,q,false);
   await expect(page.getByText('Spokojnie, tak właśnie się uczymy.')).toBeVisible();
   await page.reload();
   await page.getByRole('button',{name:'Kontynuuj',exact:true}).click();
   await expect(page.getByText('Spokojnie, tak właśnie się uczymy.')).toBeVisible();
   await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).click();
-  await page.getByRole('textbox').fill(q.answers[0]);
-  await page.getByRole('button',{name:/Sprawdź/}).click();
+  await answerQuestion(page,q);
   await page.getByRole('button',{name:'Dalej',exact:false}).click();
   await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
   for(let i=0;i<12;i++) {
     if(await page.getByRole('heading',{name:'Dobra robota, Haniu!'}).isVisible()) break;
     const text = await page.locator('.question').innerText();
     const exercise=data.exercises.find((q:any)=>q.prompt===text);
-    await page.getByRole('textbox').fill(exercise.answers[0]);
-    await page.getByRole('button',{name:/Sprawdź/}).click();
+    await answerQuestion(page,exercise);
     await page.getByRole('button',{name:'Dalej',exact:false}).click();
     await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
   }

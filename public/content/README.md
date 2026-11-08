@@ -74,6 +74,21 @@ Nie zmieniaj identyfikatorów przy zwykłej korekcie literówki. Gdy zmieniasz s
 
 ## Sprawdzenie i odświeżenie
 
+### Obrazki po odpowiedzi i zadania zamknięte
+
+Słówko w `slownictwo.json` oraz zadanie w `cwiczenia.json` mogą mieć pole `illustration`. Jest ono wyświetlane po sprawdzeniu odpowiedzi, także błędnej. Przed odpowiedzią oraz podczas poprawy obrazek jest ukryty. Quiz automatycznie korzysta z ilustracji wskazanego słówka.
+
+```json
+"illustration": {
+  "symbol": "🍎",
+  "caption": "apple — jabłko"
+}
+```
+
+Zamiast `symbol` można podać `src`, np. `"src": "illustrations/sugar.svg"`. Plik umieść w `public/illustrations/`. Wspierane są lokalne pliki SVG o nazwach z małych liter, cyfr i myślników. Podaj jeden z tych dwóch wariantów i zawsze dodaj podpis `caption`. Obrazki w gramatyce mogą przedstawiać konkretny wyraz ze zdania; nie muszą ilustrować samej reguły. To dodatkowe pomoce wizualne, a nie reprodukcje podręcznika.
+
+Pole `"responseType": "choice"` w zadaniu wymusza przyciski z `options`, również gdy Hania wybierze wpisywanie. Polecenia z wariantami rozdzielonymi ukośnikiem w nawiasach, np. `(so / because)` lub `[some / any]`, także automatycznie korzystają z przycisków. Dotyczy to nowych i wcześniej zapisanych sesji. Samo dodanie ilustracji lub zmiana sposobu odpowiedzi nie wymaga zmiany identyfikatorów ani `rev`.
+
 Po zapisaniu plików uruchom z głównego folderu:
 
 ```powershell

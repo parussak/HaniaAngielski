@@ -13,7 +13,7 @@ export function assembleModule(metadata: any, words: any, quiz: any, exercises: 
     if (!word || distractors.some(w=>!w)) throw new Error(`Quiz ${entry.id}: brak wskazanego słówka.`);
     const options=distractors.map(w=>w!.back);
     options.unshift(word.back);
-    return { id:entry.id, wordId:word.id, rev:entry.rev??word.rev??1, kind:'vocabulary', prompt:entry.prompt ?? `Podaj po angielsku: ${word.front}`, answers:word.answers ?? [word.back], options, explanation:entry.explanation ?? `„${word.back}” oznacza „${word.front}”.`, requires:[metadata.id], caseSensitive:false, source:word.source };
+    return { illustration:word.illustration, id:entry.id, wordId:word.id, rev:entry.rev??word.rev??1, kind:'vocabulary', prompt:entry.prompt ?? `Podaj po angielsku: ${word.front}`, answers:word.answers ?? [word.back], options, explanation:entry.explanation ?? `„${word.back}” oznacza „${word.front}”.`, requires:[metadata.id], caseSensitive:false, source:word.source };
   });
   return {...metadata, words, exercises:[...compiled,...exercises], grammar};
 }
@@ -35,10 +35,14 @@ export function validateModules(input: unknown): Module[] {
       if (!obj(q) || !text(q.id) || !['grammar','vocabulary'].includes(q.kind as string) || !text(q.prompt) || !texts(q.answers) || !texts(q.options) || q.options.length<2 || new Set(q.options).size!==q.options.length || !text(q.explanation) || !texts(q.requires) || !q.requires.includes(m.id as string) || typeof q.caseSensitive!=='boolean' || !text(q.source)) return fail(`niepoprawne zadanie (${m.id}/${q?.id ?? '?'}).`);
       const normalized = (s: string) => normalizeAnswer(s,q.caseSensitive as boolean);
       if (q.options.filter(o=>(q.answers as string[]).some(a=>normalized(a)===normalized(o))).length !== 1) return fail(`zadanie musi mieć dokładnie jeden poprawny wariant wyboru (${q.id}).`);
+      if (q.responseType !== undefined && q.responseType !== 'choice') return fail(`niepoprawny sposób odpowiedzi (${q.id}).`);
       if (q.ruleId !== undefined && !m.grammar.some(r=>r.id===q.ruleId)) return fail(`brak reguły dla ${q.id}.`);
     }
     unique(m.words,`${m.id}/słówka`); unique(m.exercises,`${m.id}/zadania`); unique(m.grammar,`${m.id}/gramatyka`);
     for(const word of m.words)if(word.answers && new Set(word.answers.map((a: string)=>normalizeAnswer(a))).size!==word.answers.length)return fail(`powtórzona odpowiedź: ${word.id}.`);
+    for(const element of [...m.words,...m.exercises]){
+      if(element.illustration!==undefined && (!obj(element.illustration) || !((text(element.illustration.symbol) && element.illustration.symbol.length<=24 && element.illustration.src===undefined) || (text(element.illustration.src) && /^illustrations\/[a-z0-9-]+\.svg$/.test(element.illustration.src) && element.illustration.symbol===undefined)) || !text(element.illustration.caption)))return fail(`niepoprawna ilustracja ${element.id}.`);
+    }
     for(const element of [...m.words,...m.exercises])if(element.rev!==undefined && (!Number.isSafeInteger(element.rev)||element.rev<1))return fail(`niepoprawna rewizja ${element.id}.`);
   }
   const modules = input as Module[]; unique(modules,'moduły');

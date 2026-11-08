@@ -1,3 +1,4 @@
+import {answerQuestion} from './helpers.ts';
 import { test, expect } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { modules } from '../materials.ts';
@@ -45,17 +46,13 @@ test.describe('telefon — dotyk i małe ekrany', () => {
     await page.getByRole('button',{name:/^Gramatyka/}).tap();
     const question = await page.locator('.question').innerText();
     const exercise=module.exercises.find((q:any)=>q.prompt===question);
-    await page.getByRole('textbox').fill('wrong');
-    // Pole >=16px ogranicza automatyczne powiększanie strony przy wpisywaniu na iOS.
-    expect(await page.getByRole('textbox').evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(16);
-    await page.getByRole('button',{name:/Sprawdź/}).tap();
+    await answerQuestion(page,exercise,false);
     await expect(page.getByText('Spokojnie, tak właśnie się uczymy.')).toBeVisible();
     await page.screenshot({path:'test-results/cat-feedback-mobile.png',fullPage:true});
     await page.reload(); await page.getByRole('button',{name:'Kontynuuj',exact:true}).tap();
     await expect(page.getByText('Spokojnie, tak właśnie się uczymy.')).toBeVisible();
     await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();
-    await page.getByRole('textbox').fill(exercise.answers[0]);
-    await page.getByRole('button',{name:/Sprawdź/}).tap();
+    await answerQuestion(page,exercise);
     await page.setViewportSize({width:844,height:390});
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
     await page.getByRole('button',{name:'Dalej',exact:false}).tap();
@@ -65,8 +62,7 @@ test.describe('telefon — dotyk i małe ekrany', () => {
       if(await page.getByRole('heading',{name:'Dobra robota, Haniu!'}).isVisible()) break;
       const prompt=await page.locator('.question').innerText();
       const q=module.exercises.find((q:any)=>q.prompt===prompt);
-      await page.getByRole('textbox').fill(q.answers[0]);
-      await page.getByRole('button',{name:/Sprawdź/}).tap();
+      await answerQuestion(page,q);
       await page.getByRole('button',{name:'Dalej',exact:false}).tap();
       await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
     }

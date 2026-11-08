@@ -23,16 +23,16 @@ for(const [width,height] of [[320,640],[360,740],[844,390]])test(`I5: pytanie, o
   await page.screenshot({path:`test-results/audit-${width}x${height}.png`});
 });
 test('K1/D6: po błędzie i poprawce trudność zostaje; retry przenosi fokus do pola',async({page})=>{
-  await oneQuestion(page,'g-some-milk-positive');
+  await oneQuestion(page,'g-there-milk');
   await page.getByText('Wpisuję odpowiedź',{exact:true}).click();await page.getByRole('button',{name:'Gramatyka',exact:true}).click();
-  await page.getByRole('textbox').fill('any');await page.getByRole('button',{name:/Sprawdź/}).click();
+  await page.getByRole('textbox').fill('are');await page.getByRole('button',{name:/Sprawdź/}).click();
   await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).click();
   await expect(page.getByRole('textbox')).toBeFocused();
-  await page.getByRole('textbox').fill('some');await page.getByRole('button',{name:/Sprawdź/}).click();
+  await page.getByRole('textbox').fill('is');await page.getByRole('button',{name:/Sprawdź/}).click();
   await page.getByRole('button',{name:'Kopia postępów',exact:true}).click();
   const downloaded=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).click();
   const file=await(await downloaded).path();const p=JSON.parse(readFileSync(file!,'utf8')).progress;
-  expect(p.difficult).toContain('unit-2-food@1:exercise:g-some-milk-positive');
+  expect(p.difficult).toContain('unit-2-food@1:exercise:g-there-milk');
 });
 test('I7: stara kopia i zmiana wersji modułu zachowują fiszkę i jej status',async({page})=>{
   const old=JSON.parse(readFileSync(new URL('../fixtures/backup-v1.json',import.meta.url),'utf8'));

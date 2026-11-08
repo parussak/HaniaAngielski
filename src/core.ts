@@ -1,6 +1,7 @@
 import { normalizeAnswer } from './answers.ts';
-export interface Word { id: string; front: string; back: string; group?: string; source?: string; answers?: string[]; rev?: number }
-export interface Exercise { id: string; wordId?: string; kind: 'vocabulary' | 'grammar'; prompt: string; answers: string[]; options: string[]; explanation: string; requires: string[]; caseSensitive: boolean; source?: string; ruleId?: string; rev?: number }
+export interface Illustration { symbol?: string; src?: string; caption: string }
+export interface Word { illustration?: Illustration; id: string; front: string; back: string; group?: string; source?: string; answers?: string[]; rev?: number }
+export interface Exercise { illustration?: Illustration; responseType?: 'choice'; id: string; wordId?: string; kind: 'vocabulary' | 'grammar'; prompt: string; answers: string[]; options: string[]; explanation: string; requires: string[]; caseSensitive: boolean; source?: string; ruleId?: string; rev?: number }
 export interface GrammarRule { id: string; title: string; explanation: string; examples: string[]; source: string }
 export interface Module { id: string; version: number; order: number; name: string; subtitle: string; language: string; source: string; label: string; cover: string; topics: string[]; words: Word[]; exercises: Exercise[]; grammar: GrammarRule[]; basicFlashcardIds?: string[] }
 export type Mode = 'flashcards' | 'flashcards-basic' | 'quiz' | 'grammar' | 'review';
@@ -23,6 +24,12 @@ export function optionsFor(exercise: Exercise, session: Pick<Session,'id'|'index
   let seed=2166136261;
   for(const ch of `${session.id}:${session.index}`)seed=Math.imul(seed^ch.charCodeAt(0),16777619)>>>0;
   return shuffle(exercise.options,()=>{seed=(seed+0x6D2B79F5)>>>0;let t=Math.imul(seed^(seed>>>15),1|seed);t^=t+Math.imul(t^(t>>>7),61|t);return ((t^(t>>>14))>>>0)/4294967296;});
+}
+export function requiresChoice(q: Exercise) {
+  return q.responseType === 'choice' || /[([][^)\]]*\s\/\s[^)\]]*[)\]]/.test(q.prompt);
+}
+export function inputFor(q: Exercise, preferred: Item['input']) {
+  return requiresChoice(q) ? 'choice' : preferred;
 }
 export function eligibleModules(modules: Module[], selected: Module, previous: boolean) {
   return modules.filter(m => m.id === selected.id || (previous && m.order < selected.order));
@@ -56,7 +63,7 @@ export function makeSession(modules: Module[], selected: Module, mode: Mode, ans
   const priority=(item: Item)=>progress.difficult.includes(item.key)||progress.words[item.key]==='review'?0:!seen.has(item.key)?1:2;
   const selectedItems=[0,1,2].flatMap(rank=>shuffle(items.filter(i=>priority(i)===rank))).slice(0,10);
   let questionIndex=0;
-  for(const item of selectedItems){item.input=answerMode==='mixed'?(questionIndex++%2?'text':'choice'):answerMode;}
+  for(const item of selectedItems){item.input=inputFor(questionFor(modules,item),answerMode==='mixed'?(questionIndex++%2?'text':'choice'):answerMode);}
   return { id: crypto.randomUUID(), moduleId: selected.id, mode, answerMode, previous, startedAt: new Date().toISOString(), completedAt: null, items: selectedItems, index: 0, phase: 'question', lastCorrect: null, attempts: [], repeatKeys: [] };
 }
 export function resolveItem(modules: Module[], item: Item) {
@@ -74,7 +81,7 @@ export function questionFor(modules: Module[], item: Item): Exercise {
   const linked = module.exercises.find(q=>q.kind==='vocabulary' && q.wordId===word.id);
   const answers = word.answers ?? [word.back];
   const options = linked?.options ?? [word.back,...module.words.filter(w=>!answers.some(a=>normalizeAnswer(a)===normalizeAnswer(w.back))).map(w=>w.back).filter((v,i,a)=>a.indexOf(v)===i).slice(0,2)];
-  return { id:word.id, kind:'vocabulary', prompt:word.front, answers, options, explanation:linked?.explanation ?? '„'+word.back+'” oznacza „'+word.front+'”.', requires:[module.id], caseSensitive:false, source:word.source };
+  return { illustration:word.illustration, id:word.id, kind:'vocabulary', prompt:word.front, answers, options, explanation:linked?.explanation ?? '„'+word.back+'” oznacza „'+word.front+'”.', requires:[module.id], caseSensitive:false, source:word.source };
 }
 export function sessionCompatible(modules: Module[], s: Session) { return s.items.every(item => !!resolveItem(modules, item)); }
 export function isCorrect(exercise: Exercise, answer: string) {
