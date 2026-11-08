@@ -32,6 +32,7 @@ Testy automatycznie uruchamiają i zatrzymują własny lokalny serwer na porcie 
 ## Korzystanie
 
 1. Wybierz moduł i rodzaj ćwiczeń.
+   W module Food dostępne są „Fiszki podstawa” (38 haseł z ramek Vocabulary) oraz „Fiszki” (wszystkie 97 haseł). Oba zestawy współdzielą postępy tych samych słów.
 2. Dla quizów lub gramatyki wybierz odpowiedzi zamknięte, wpisywanie lub tryb mieszany.
 3. Po błędzie przeczytaj wyjaśnienie i spróbuj ponownie. Pierwsza próba jest liczona osobno od poprawek. Trudne zadanie wraca raz na końcu sesji.
 4. Postępy zapisują się po każdej odpowiedzi w IndexedDB. Rozpoczętą sesję można wznowić z ekranu głównego.

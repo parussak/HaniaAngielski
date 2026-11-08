@@ -17,6 +17,12 @@ public/content/
 
 `src` zawiera wygląd i działanie strony. `tests` sprawdza poprawność. Zdjęcia źródłowe są w lokalnym, pomijanym przez Git folderze `.local-materials`; nie są publikowane na stronie.
 
+## Dwa zestawy fiszek
+
+„Fiszki podstawa” obejmują 38 haseł z ramek Vocabulary: Food and drink (1), Food and drink (2) i Containers (podręcznik s. 25, 27 i 29). Tłumaczenia pochodzą z Wordlist. „Fiszki” obejmują wszystkie 97 dotychczasowych haseł.
+
+Lista identyfikatorów podstawowych znajduje się w polu `basicFlashcardIds` w `02-food/modul.json`. Aby zmienić zakres, edytuj tę listę, bez kopiowania słów i bez zmiany kodu. Tłumaczenie nadal poprawia się raz w `slownictwo.json`. Postępy tego samego słowa są wspólne dla obu zestawów. Quizy i gramatyka zachowują pełny materiał modułu.
+
 ## Poprawienie słówka lub tłumaczenia
 
 Otwórz `02-food/slownictwo.json` i znajdź słowo. Przykład:

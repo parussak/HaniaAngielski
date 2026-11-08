@@ -2,8 +2,9 @@ import { normalizeAnswer } from './answers.ts';
 export interface Word { id: string; front: string; back: string; group?: string; source?: string; answers?: string[]; rev?: number }
 export interface Exercise { id: string; kind: 'vocabulary' | 'grammar'; prompt: string; answers: string[]; options: string[]; explanation: string; requires: string[]; caseSensitive: boolean; source?: string; ruleId?: string; rev?: number }
 export interface GrammarRule { id: string; title: string; explanation: string; examples: string[]; source: string }
-export interface Module { id: string; version: number; order: number; name: string; subtitle: string; language: string; source: string; label: string; cover: string; topics: string[]; words: Word[]; exercises: Exercise[]; grammar: GrammarRule[] }
-export type Mode = 'flashcards' | 'quiz' | 'grammar' | 'review';
+export interface Module { id: string; version: number; order: number; name: string; subtitle: string; language: string; source: string; label: string; cover: string; topics: string[]; words: Word[]; exercises: Exercise[]; grammar: GrammarRule[]; basicFlashcardIds?: string[] }
+export type Mode = 'flashcards' | 'flashcards-basic' | 'quiz' | 'grammar' | 'review';
+export const isFlashcardMode = (mode: Mode) => mode === 'flashcards' || mode === 'flashcards-basic';
 export type AnswerMode = 'choice' | 'text' | 'mixed';
 export interface Item { key: string; moduleId: string; version: number; type: 'word' | 'exercise'; id: string; input: 'choice' | 'text' }
 export interface Attempt { key: string; first: boolean; answer: string; corrections: number; corrected: boolean }
@@ -31,15 +32,16 @@ export function makeSession(modules: Module[], selected: Module, mode: Mode, ans
   const allowed = new Set(available.map(m => m.id));
   const items: Item[] = [];
   for (const m of available) {
-    if (mode === 'flashcards' || mode === 'review') {
+    if (isFlashcardMode(mode) || mode === 'review') {
       for (const w of m.words) {
+        if (mode==='flashcards-basic' && m.basicFlashcardIds && !m.basicFlashcardIds.includes(w.id)) continue;
         const key=keyFor(m,'word',w.id);
         if (mode==='review' && !progress.difficult.includes(key) && progress.words[key]!=='review') continue;
-        if (mode==='flashcards' && progress.words[key]==='known') continue;
+        if (isFlashcardMode(mode) && progress.words[key]==='known') continue;
         items.push({ key, moduleId: m.id, version: w.rev ?? 1, type: 'word', id: w.id, input: 'text' });
       }
     }
-    if (mode !== 'flashcards') {
+    if (!isFlashcardMode(mode)) {
       for (const e of m.exercises) {
         const key = keyFor(m, 'exercise', e.id);
         if (!e.requires.every(id => allowed.has(id))) continue;
@@ -122,7 +124,7 @@ export function validateBackup(input: unknown): Backup {
   const strings = (v: unknown): v is string[] => Array.isArray(v) && v.length <= 100000 && v.every(str);
   const integer = (v: unknown): v is number => Number.isSafeInteger(v) && (v as number) >= 0;
   const validSession = (v: unknown, completed: boolean): boolean => {
-    if (!obj(v) || !str(v.id) || !str(v.moduleId) || !['flashcards','quiz','grammar','review'].includes(v.mode as string) || !['choice','text','mixed'].includes(v.answerMode as string) || typeof v.previous !== 'boolean' || !date(v.startedAt) || !(completed ? date(v.completedAt) : v.completedAt === null) || !['question','revealed','feedback','retry'].includes(v.phase as string) || !(v.lastCorrect === null || typeof v.lastCorrect === 'boolean')) return false;
+    if (!obj(v) || !str(v.id) || !str(v.moduleId) || !['flashcards','flashcards-basic','quiz','grammar','review'].includes(v.mode as string) || !['choice','text','mixed'].includes(v.answerMode as string) || typeof v.previous !== 'boolean' || !date(v.startedAt) || !(completed ? date(v.completedAt) : v.completedAt === null) || !['question','revealed','feedback','retry'].includes(v.phase as string) || !(v.lastCorrect === null || typeof v.lastCorrect === 'boolean')) return false;
     if (!Array.isArray(v.items) || !v.items.length || v.items.length > 1000 || !integer(v.index) || (completed ? v.index !== v.items.length : v.index >= v.items.length) || !strings(v.repeatKeys)) return false;
     if (!v.items.every(i => obj(i) && str(i.key) && str(i.moduleId) && integer(i.version) && i.version > 0 && ['word','exercise'].includes(i.type as string) && str(i.id) && ['text','choice'].includes(i.input as string) && i.key === `${i.moduleId}@${i.version}:${i.type}:${i.id}`)) return false;
     if (!Array.isArray(v.attempts) || v.attempts.length > v.items.length || !v.attempts.every(a => obj(a) && str(a.key) && typeof a.first === 'boolean' && typeof a.answer === 'string' && a.answer.length <= 2000 && integer(a.corrections) && typeof a.corrected === 'boolean' && (v.items as Item[]).some(i => i.key === a.key && i.type === 'exercise'))) return false;

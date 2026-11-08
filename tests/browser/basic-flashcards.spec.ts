@@ -1,0 +1,24 @@
+import {test,expect} from '@playwright/test';
+import {readFileSync} from 'node:fs';
+import {modules} from '../materials.ts';
+test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+test('telefon: wybór podstawy i pełnych fiszek, zakres zapisany w kopii',async({page})=>{
+  await page.goto('./');await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
+  await expect(page.getByRole('button',{name:'Fiszki podstawa',exact:true})).toHaveAttribute('aria-pressed','true');
+  await expect(page.locator('#mode-description-flashcards-basic')).toContainText('38');
+  await expect(page.locator('#mode-description-flashcards')).toContainText('97');
+  await expect(page.getByRole('group',{name:'Sposób odpowiadania'})).toHaveCount(0);
+  await page.getByRole('button',{name:/Rozpocznij naukę/}).tap();
+  await expect(page.getByRole('heading',{name:'Fiszki podstawa',exact:true})).toBeVisible();
+  await page.getByRole('button',{name:'Kopia postępów',exact:true}).tap();
+  const downloaded=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).tap();
+  const file=await(await downloaded).path();const session=JSON.parse(readFileSync(file!,'utf8')).progress.active;
+  expect(session.mode).toBe('flashcards-basic');
+  expect(session.items.every((i:any)=>i.type==='word'&&modules[0].basicFlashcardIds!.includes(i.id))).toBeTruthy();
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
+  await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
+  await page.getByRole('button',{name:'Fiszki',exact:true}).tap();
+  page.once('dialog',d=>d.accept());await page.getByRole('button',{name:/Rozpocznij naukę/}).tap();
+  await expect(page.getByRole('heading',{name:'Fiszki',exact:true})).toBeVisible();
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+});

@@ -37,7 +37,7 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   await expect(page.locator('.summary-score')).toContainText('9 / 10');
   await page.getByRole('button',{name:'Moja nauka',exact:true}).click();
   await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();
-  await page.getByRole('button',{name:/^Fiszki/}).click();
+  await page.getByRole('button',{name:'Fiszki',exact:true}).click();
   await page.getByRole('button',{name:/Rozpocznij naukę/}).click();
   await page.getByRole('button',{name:'Pokaż odpowiedź'}).click();
   const revealed = await page.locator('.flash-answer').innerText();
