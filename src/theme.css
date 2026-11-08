@@ -218,7 +218,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
 .session-settings summary{min-height:44px;cursor:pointer;padding:10px 0;font-weight:600}
 .session-settings .checkbox{margin-top:12px}
 
-/* Ilustracja pojawia się po odpowiedzi, w przewijanej części wyjaśnienia. */
+/* Ilustracje pytania i wyjaśnienia korzystają z tych samych materiałów. */
 .answer-illustration{margin:18px 0 0;text-align:center;border-radius:14px;padding:16px;background:#fffcff;border:1px solid #dfd0ef;color:#52416b}
 .answer-illustration [role="img"]{display:block;font-size:76px;line-height:1.3;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
 .answer-illustration figcaption{font-size:14px;line-height:1.5;margin-top:8px;overflow-wrap:anywhere}
@@ -229,3 +229,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
 }
 
 .answer-illustration img{display:block;width:160px;height:112px;max-width:100%;object-fit:contain;margin:0 auto}
+
+.question-illustration{margin:0 auto 14px;padding:10px;width:min(100%,280px);flex-shrink:0}
+@media(max-width:600px),(max-height:500px){
+  .studying .question-illustration{margin:0 auto 10px;padding:4px;width:100%;border:0;background:transparent}
+  .studying .question-illustration [role="img"]{font-size:48px;line-height:1.2}
+  .studying .question-illustration img{width:100px;height:70px}
+}

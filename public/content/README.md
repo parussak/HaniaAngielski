@@ -76,7 +76,7 @@ Nie zmieniaj identyfikatorów przy zwykłej korekcie literówki. Gdy zmieniasz s
 
 ### Obrazki po odpowiedzi i zadania zamknięte
 
-Słówko w `slownictwo.json` oraz zadanie w `cwiczenia.json` mogą mieć pole `illustration`. Jest ono wyświetlane po sprawdzeniu odpowiedzi, także błędnej. Przed odpowiedzią oraz podczas poprawy obrazek jest ukryty. Quiz automatycznie korzysta z ilustracji wskazanego słówka.
+Słówko w `slownictwo.json` oraz zadanie w `cwiczenia.json` mogą mieć pole `illustration`. Obrazek jest widoczny od początku pytania i podczas poprawy. Podpis `caption` jest wyświetlany dopiero po sprawdzeniu odpowiedzi, także błędnej. Quiz automatycznie korzysta z ilustracji wskazanego słówka.
 
 ```json
 "illustration": {
