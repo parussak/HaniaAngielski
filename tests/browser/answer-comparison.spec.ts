@@ -18,7 +18,7 @@ for(const [mode,input] of [['flashcards-basic','text'],['flashcards','choice'],[
     await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();
     await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:'Kontynuuj',exact:true}).tap();
     let given='';
-    if(input==='text'){
+    if(input==='text'||mode==='review'){
       given=type==='word'?'aple':'botle';await page.getByRole('textbox').fill(given);await page.getByRole('button',{name:/Sprawdź/}).tap();
     }else{
       const options=page.locator('.option');

@@ -1,5 +1,5 @@
 import {freshAdventure,lessonKey,type Journey,type Stage} from './adventure.ts';
-import {inputFor,resolveItem,type Progress,type Session,type Module,type Item,type AnswerMode} from './core.ts';
+import {inputFor,questionFor,resolveItem,type Progress,type Session,type Module,type Item,type AnswerMode} from './core.ts';
 import type {HistoryPage} from './history.ts';
 
 export interface ReviewItem {item:Item;correct:number;due:number}
@@ -49,15 +49,15 @@ export function reviewStats(p:Progress,j:Journey,stage?:Stage){
 }
 const plural=(n:number,one:string,few:string,many:string)=>`${n} ${n===1?one:n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?few:many}`;
 export function pendingLabel(stats:{words:number;tasks:number}){return [stats.words?plural(stats.words,'słówko','słówka','słówek'):'',stats.tasks?plural(stats.tasks,'zadanie','zadania','zadań'):''].filter(Boolean).join(' i ');}
-export function makeStageReviewSession(modules:Module[],j:Journey,stage:Stage,answerMode:AnswerMode,p:Progress):Session|null{
+export function makeStageReviewSession(modules:Module[],j:Journey,stage:Stage,_answerMode:AnswerMode,p:Progress):Session|null{
   const state=reviewState(p,stageKey(j,stage));
   const remaining=Object.values(state?.items??{}).filter(e=>e.correct<3);
   if(!state||!remaining.length)return null;
   if(remaining.some(e=>!resolveItem(modules,e.item)))throw new Error('Część powtórki wymaga wcześniejszej wersji materiałów. Zapisane wyniki pozostają zachowane.');
   const round=Math.max(state.round+1,Math.min(...remaining.map(e=>e.due)));
   const items=remaining.filter(e=>e.due<=round).sort((a,b)=>a.correct-b.correct||a.due-b.due||a.item.key.localeCompare(b.item.key)).slice(0,10).map(e=>structuredClone(e.item));
-  items.forEach((item,i)=>{const data=resolveItem(modules,item)!;item.input=item.type==='exercise'?inputFor(data as import('./core.ts').Exercise,answerMode==='mixed'?(i%2?'text':'choice'):answerMode):answerMode==='mixed'?(i%2?'text':'choice'):answerMode;});
-  return {id:crypto.randomUUID(),moduleId:j.moduleId,mode:'review',stageReview:{id:stageKey(j,stage),title:`Powtórka · ${stage.title}`,round},answerMode,previous:false,startedAt:new Date().toISOString(),completedAt:null,items,index:0,phase:'question',lastCorrect:null,attempts:[],repeatKeys:[]};
+  items.forEach(item=>item.input=inputFor(questionFor(modules,item),'text','review'));
+  return {id:crypto.randomUUID(),moduleId:j.moduleId,mode:'review',stageReview:{id:stageKey(j,stage),title:`Powtórka · ${stage.title}`,round},answerMode:'text',previous:false,startedAt:new Date().toISOString(),completedAt:null,items,index:0,phase:'question',lastCorrect:null,attempts:[],repeatKeys:[]};
 }
 export function finishStageReview(p:Progress,s:Session){
   if(!s.stageReview||!s.completedAt||!s.items.every(i=>s.attempts.some(a=>a.key===i.key)))return false;

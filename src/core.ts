@@ -28,10 +28,16 @@ export function optionsFor(exercise: Exercise, session: Pick<Session,'id'|'index
   return shuffle(exercise.options,()=>{seed=(seed+0x6D2B79F5)>>>0;let t=Math.imul(seed^(seed>>>15),1|seed);t^=t+Math.imul(t^(t>>>7),61|t);return ((t^(t>>>14))>>>0)/4294967296;});
 }
 export function requiresChoice(q: Exercise) {
-  return q.responseType === 'choice' || /[([][^)\]]*\s\/\s[^)\]]*[)\]]/.test(q.prompt);
+  if(q.responseType==='choice'||/[([][^)\]]*\s*\/\s*[^)\]]*[)\]]/.test(q.prompt))return true;
+  // Explicit alternatives can also be written as prose, without brackets.
+  // Match whole options so "policzalny" cannot match inside "niepoliczalny".
+  const options=q.options.map(o=>o.trim().normalize('NFC')).filter(Boolean).sort((a,b)=>b.length-a.length)
+    .map(o=>o.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/\s+/g,'\\s+')).join('|');
+  const alternatives=new RegExp(`(?:^|[^\\p{L}\\p{N}])(?:${options})\\s*(?:/|czy|lub|albo|or)\\s*(?:${options})(?=$|[^\\p{L}\\p{N}])`,'iu');
+  return alternatives.test(q.prompt.normalize('NFC')) || /\b(?:nie)?policzaln[yae]\s*(?:czy|lub|albo|\/)\s*(?:nie)?policzaln[yae]\b/iu.test(q.prompt);
 }
-export function inputFor(q: Exercise, preferred: Item['input']) {
-  return requiresChoice(q) ? 'choice' : preferred;
+export function inputFor(q: Exercise, preferred: Item['input'],mode?:Mode) {
+  return requiresChoice(q) ? 'choice' : mode==='review'?'text':preferred;
 }
 export function eligibleModules(modules: Module[], selected: Module, previous: boolean) {
   return modules.filter(m => m.id === selected.id || (previous && m.order < selected.order));
@@ -66,8 +72,8 @@ export function makeSession(modules: Module[], selected: Module, mode: Mode, ans
   const priority=(item: Item)=>progress.difficult.includes(item.key)||progress.words[item.key]==='review'?0:!seen.has(item.key)?1:2;
   const selectedItems=[0,1,2].flatMap(rank=>shuffle(items.filter(i=>priority(i)===rank))).slice(0,10);
   let questionIndex=0;
-  for(const item of selectedItems){item.input=inputFor(questionFor(modules,item),answerMode==='mixed'?(questionIndex++%2?'text':'choice'):answerMode);}
-  return { id: crypto.randomUUID(), moduleId: selected.id, mode, answerMode, previous, startedAt: new Date().toISOString(), completedAt: null, items: selectedItems, index: 0, phase: 'question', lastCorrect: null, attempts: [], repeatKeys: [] };
+  for(const item of selectedItems){item.input=inputFor(questionFor(modules,item),answerMode==='mixed'?(questionIndex++%2?'text':'choice'):answerMode,mode);}
+  return { id: crypto.randomUUID(), moduleId: selected.id, mode, answerMode:mode==='review'?'text':answerMode, previous, startedAt: new Date().toISOString(), completedAt: null, items: selectedItems, index: 0, phase: 'question', lastCorrect: null, attempts: [], repeatKeys: [] };
 }
 export function resolveItem(modules: Module[], item: Item) {
   const m = modules.find(m => m.id === item.moduleId);

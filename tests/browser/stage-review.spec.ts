@@ -18,6 +18,7 @@ async function importProgress(page:Page,p:Progress){
 }
 async function openFirstStage(page:Page){const node=page.locator('.journey-stage').first();if(await node.getAttribute('open')===null)await node.locator('summary').tap();return node;}
 async function correct(page:Page){
+  await expect(page.locator('#answer, .option').first()).toBeVisible();
   const text=await page.locator('.question').innerText(),word=modules[0].words.find(w=>w.front===text),q=modules[0].exercises.find(q=>q.prompt===text),value=word?.back??q!.answers[0];
   if(await page.getByRole('textbox').isVisible()){await page.getByRole('textbox').fill(value);await page.getByRole('button',{name:/Sprawdź/}).tap();}else await page.getByRole('button',{name:value,exact:true}).tap();
   await expect(page.locator('.feedback.correct')).toBeVisible();
@@ -48,7 +49,7 @@ test('nowy błąd zeruje serię, poprawki nie zwiększają jej, mobilne przycisk
   const p=oldFixture(),item={key:keyFor(modules[0],'word','apple'),moduleId:j.moduleId,version:1,type:'word' as const,id:'apple',input:'text' as const};
   p.adventure!.reviewSchema=1;p.adventure!.reviewArchiveHead=null;p.adventure!.stageReviews={[id]:{round:3,items:{[item.key]:{item,correct:2,due:6}}}};
   await importProgress(page,p);const node=await openFirstStage(page);await node.locator('.stage-review-step').tap();await expect(page.locator('.review-meter')).toContainText('2/3');
-  const wrong=page.locator('.option').filter({hasNotText:'apple'}).first();await wrong.tap();await expect(page.locator('.feedback.incorrect')).toBeVisible();await expect(page.locator('.review-meter')).toContainText('0/3');
+  await expect(page.locator('.option')).toHaveCount(0);await page.getByRole('textbox').fill('aple');await page.getByRole('button',{name:/Sprawdź/}).tap();await expect(page.locator('.feedback.incorrect')).toBeVisible();await expect(page.locator('.review-meter')).toContainText('0/3');
   for(const viewport of [{width:320,height:640},{width:844,height:390}]){await page.setViewportSize(viewport);const nav=await page.locator('.sidebar nav').boundingBox(),button=await page.getByRole('button',{name:/Dalej/}).boundingBox();expect(button!.y+button!.height).toBeLessThanOrEqual(nav!.y);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();}
   await page.setViewportSize({width:390,height:844});await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();await correct(page);await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('.question')).toBeVisible();await correct(page);await page.getByRole('button',{name:/Dalej/}).tap();
   await expect(page.locator('.review-result')).toContainText('1 słówko');await expect(page.locator('.lesson-reward')).toContainText('Tura zapisana');await page.screenshot({path:'test-results/stage-review-result-mobile.png'});
