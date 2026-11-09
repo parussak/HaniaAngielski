@@ -3,7 +3,7 @@
 h1,h2,h3{color:#44335f}
 h1[tabindex="-1"]:focus{outline:none}
 .brand-icon{background:#f2e7fc;color:#9060ba}
-.brand-sub,.profile div>span,.nav-label,.welcome p,.section-heading p,.lead,.muted,.module-body p,.coming-card p,.panel>p,.study-card>p,.resume p,.empty p{color:#736581!important}
+.brand-sub,.profile .profile-details>span,.nav-label,.welcome p,.section-heading p,.lead,.muted,.module-body p,.coming-card p,.panel>p,.study-card>p,.resume p,.empty p{color:#736581!important}
 .avatar{background:#fce0ef;border-color:#fff1f8;color:#a74681}
 .tiny-flower,.wave{color:#c474ab}
 .nav-item{color:#736581}
@@ -166,8 +166,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
 @media(max-width:360px){.stats-grid{grid-template-columns:1fr}.stats-grid article{display:flex;align-items:center;gap:13px}.stats-grid .stat-icon{margin:0}.stats-grid article div{display:flex;gap:12px;align-items:center}.hero h2{font-size:23px}.demo-badge{font-size:7px}.nav-item{font-size:10px}}
 
 /* Podczas nauki pytanie i działania zajmują ekran, bez ozdobnego nagłówka. */
-:is(.brand-sub,.profile div>span,.nav-label,.nav-item,.local-note,.local-note span,.topbar,.local-chip,.eyebrow,.tag,.date-pill,.welcome p,.hero p,.hero .tag,.hero .primary,.stats-grid article div>span,.stats-grid strong small,.section-heading p,.count,.section-hint,.module-number,.demo-badge,.module-meta,.module-body p,.topic-tags>span,.soft-tag,.module-bottom>span,.coming-card p,.coming-card .soft-tag,.demo-note,footer,.mode-card>span:last-child,.mode-card>strong,.segmented label span,.checkbox,.muted,.back,.text-button,.exercise-label,.option>span,.under-card,.history-row span,.history-row strong,.history-score small,.source-reference,.note-panel p,.alert){font-size:12px!important}
-:is(.brand-sub,.profile div>span,.nav-label,.nav-item,.local-note,.local-note span,.topbar,.topbar b,.eyebrow,.date-pill,.welcome p,.hero p,.stats-grid article div>span,.stats-grid strong small,.section-heading p,.count,.section-hint,.module-number,.demo-badge,.module-meta,.module-body p,.topic-tags>span,.soft-tag,.module-bottom>span,.coming-card h3,.coming-card p,.coming-card .soft-tag,.demo-note,footer,.lead,.panel>p,.study-card>p,.mode-card>span:last-child,.segmented label span,.muted,.back,.text-button,.exercise-label,.option>span,.under-card,.history-row span,.history-score small,.source-reference,.note-panel p,.resume p){color:#684e7b!important}
+:is(.brand-sub,.profile .profile-details>span,.nav-label,.nav-item,.local-note,.local-note span,.topbar,.local-chip,.eyebrow,.tag,.date-pill,.welcome p,.hero p,.hero .tag,.hero .primary,.stats-grid article div>span,.stats-grid strong small,.section-heading p,.count,.section-hint,.module-number,.demo-badge,.module-meta,.module-body p,.topic-tags>span,.soft-tag,.module-bottom>span,.coming-card p,.coming-card .soft-tag,.demo-note,footer,.mode-card>span:last-child,.mode-card>strong,.segmented label span,.checkbox,.muted,.back,.text-button,.exercise-label,.option>span,.under-card,.history-row span,.history-row strong,.history-score small,.source-reference,.note-panel p,.alert){font-size:12px!important}
+:is(.brand-sub,.profile .profile-details>span,.nav-label,.nav-item,.local-note,.local-note span,.topbar,.topbar b,.eyebrow,.date-pill,.welcome p,.hero p,.stats-grid article div>span,.stats-grid strong small,.section-heading p,.count,.section-hint,.module-number,.demo-badge,.module-meta,.module-body p,.topic-tags>span,.soft-tag,.module-bottom>span,.coming-card h3,.coming-card p,.coming-card .soft-tag,.demo-note,footer,.lead,.panel>p,.study-card>p,.mode-card>span:last-child,.segmented label span,.muted,.back,.text-button,.exercise-label,.option>span,.under-card,.history-row span,.history-score small,.source-reference,.note-panel p,.resume p){color:#684e7b!important}
 .brand-sub{font-size:9px!important;letter-spacing:1px}
 .feedback.correct{color:#304c7e}
 .feedback.incorrect{color:#823b68}
@@ -253,6 +253,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
 .account-error{background:#f8edf2;color:#7d3053!important;border:1px solid #dfc0cc;border-radius:9px;padding:12px;overflow-wrap:anywhere}
 .account-email{overflow-wrap:anywhere}
 .profile strong{overflow-wrap:anywhere}
+.profile{width:100%;min-height:44px;padding:10px 6px;border:1px solid #e5d9f1;border-radius:12px;background:transparent;color:#4f3564;text-align:left}
+.profile:hover{background:#f3effc;border-color:#c5abe9}
+.profile .profile-details{min-width:0}
+.profile .profile-details>span{display:block}
+@media(max-width:600px){.profile{width:44px;height:44px;padding:0;justify-content:center;border-radius:50%;top:15px;right:17px}}
 .welcome h1,.summary h1{overflow-wrap:anywhere}
 .account-settings details{border-top:1px solid #e4d9ee;padding:12px 0}
 .account-settings summary{cursor:pointer;font-size:14px;font-weight:600;color:#58416d;line-height:1.6;min-height:44px;padding:10px 0}

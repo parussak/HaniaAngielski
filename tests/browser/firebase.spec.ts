@@ -43,6 +43,17 @@ async function signIn(page:any,email='parent@example.test'){
   await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
 }
 
+test('awatar otwiera konto na komputerze i telefonie, także klawiaturą',async({page})=>{
+  for(const width of [1280,390]){
+    await page.setViewportSize({width,height:844});await page.goto('./');
+    const profile=page.getByRole('button',{name:'Ustawienia konta',exact:true});
+    await expect(profile).toBeVisible();expect((await profile.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+    if(width===1280){await profile.focus();await profile.press('Enter');}else await profile.click();
+    await expect(page.getByRole('heading',{name:'Konto i synchronizacja',exact:true})).toBeVisible();
+    await expect(page.getByLabel('E-mail',{exact:true})).toBeVisible();
+  }
+});
+
 test('konto: migracja gościa, automatyczny zapis, drugie urządzenie i wylogowanie',async({browser})=>{
   const cloud=backend(),a=await browser.newContext({baseURL:test.info().project.use.baseURL,viewport:{width:390,height:844}}),b=await browser.newContext({baseURL:test.info().project.use.baseURL,viewport:{width:390,height:844}});
   try{
