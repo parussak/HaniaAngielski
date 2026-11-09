@@ -32,4 +32,14 @@ Wcześniejsza wersja działa na GitHub Pages. Tych poprawek nie commitowano, nie
 
 Szczegółowy raport: [raport-poprawek-audyt.md](raport-poprawek-audyt.md). Instrukcja treści: [public/content/README.md](../public/content/README.md).
 
+## Kocia mapa, domek i części historii
+
+Dodano siedem etapów Food i 41 lekcji, obejmujących wszystkie 97 słówek i zadania gramatyczne/rozmówki. Lekcja zaczyna się od słówek lub przykładów reguł, potem przechodzi do ćwiczeń. Pierwsze ukończenie daje 3 gwiazdki; powtórka błędów daje 1 gwiazdkę raz dziennie. Sześć dekoracji domku można kupować, ustawiać, zamieniać i chować. Postęp i zakupy są częścią zapisu konta i kopii, a własny trening pozostaje dostępny. Szczegóły: [kocia-przygoda.md](kocia-przygoda.md).
+
+Starsze pełne sesje są zachowane w niezmiennych częściach lokalnych i chmurowych. Bieżąca migawka przechowuje najwyżej 30 ostatnich sesji, podsumowania oraz początek łańcucha historii. Import/eksport uwzględnia pełne archiwum, a stare kopie pozostają zgodne. Sprawdzono migrację 1500 sesji, błędy zapisu, integralność części, statystyki i kolejność wysyłania. Przy pobraniu starego dużego zapisu konta migracja odbywa się automatycznie. [historia.md](historia.md).
+
+Weryfikacja tej wersji: 65 testów jednostkowych i 41 testów zbudowanej aplikacji przeszło. Sprawdzono zakup po ukończeniu lekcji, brak podwójnej nagrody, ustawienie po odświeżeniu, kopie na drugim urządzeniu, odrębność kont, testową synchronizację domku, naukę i domek offline oraz układ mobilny. Adapter konta w testach jest atrapą; nie tworzono rzeczywistych kont ani nie publikowano reguł. Gotowe pliki strony: 4 138 399 bajtów, wzrost o 55 942 bajty (1,37%) względem poprzedniej wersji. Wszystkie siedem nowych grafik domku to łącznie 3374 bajty SVG.
+
+**Przed publikacją strony użytkowniczka musi opublikować aktualną zawartość `firestore.rules` w konsoli Firebase.** Reguły dodają prywatne części historii; stara reguła bieżącego zapisu jest zachowana. Nie wykonano commita, pushu ani zdalnego wdrożenia reguł.
+
 Dodano osobny tryb Rozmówki: 12 nowych krótkich dialogów z jedną luką, utworzonych w zakresie słownictwa i gramatyki Food, z oznaczeniem adaptacji. Wybór i wpisywanie, porównanie błędnej odpowiedzi, wznowienie, kopie i synchronizacja korzystają z dotychczasowego mechanizmu. Nowy plik treści: `public/content/02-food/rozmowki.json`. Wszystkie ilustracje zastąpiono spójnymi pastelowymi SVG, a zadania gramatyczne mają scenki przedstawiające sytuację zdania zamiast samego emoji. Identyfikatory i rewizje dotychczasowych zadań pozostały bez zmian.

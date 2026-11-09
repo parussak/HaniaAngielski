@@ -33,6 +33,11 @@ test('PWA: manifest, ikony i zimny start bez sieci; fiszki, quiz, gramatyka i wz
   await expect(offline.locator('.cat-mascot image')).toHaveAttribute('href',/\/cats\/(happy-teachers|play-celebrate)\.png$/);
   expect(await offline.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
   await offline.screenshot({path:'test-results/pwa-offline-mobile.png'});
+  await offline.getByRole('button',{name:'Moja nauka',exact:true}).tap();
+  await offline.getByRole('button',{name:'Kocia mapa Food →'}).tap();await expect(offline.locator('.journey-stage')).toHaveCount(7);
+  await offline.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await expect(offline.locator('.learn-word')).toHaveCount(5);
+  await offline.getByRole('button',{name:'Domek',exact:true}).tap();await expect(offline.locator('.room-background')).toHaveJSProperty('complete',true);
+  expect(await offline.locator('.room-background').evaluate((img:HTMLImageElement)=>img.naturalWidth)).toBeGreaterThan(0);
 });
 
 test('PWA: konto po zimnym starcie offline zachowuje odpowiedź i synchronizuje po połączeniu',async({page,context})=>{

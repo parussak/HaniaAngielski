@@ -44,6 +44,12 @@ Konto otworzysz wskaźnikiem zapisu u góry albo przez „Kopia postępów”. P
 
 Po pierwszym pobraniu materiałów aplikacja działa offline i może być instalowana jako PWA z ikoną kotka. [Instrukcja instalacji i testu offline](docs/pwa.md). Konto synchronizuje lokalne zmiany po odzyskaniu połączenia w otwartej aplikacji lub przy kolejnym uruchomieniu. Nie ma automatycznego przetwarzania PDF. Do nauki z gotowych zestawów nie jest potrzebna usługa AI. Czcionki są systemowe i nie są pobierane z Google Fonts. Manifest PWA i wersjonowany service worker są częścią aplikacji.
 
+## Kocia przygoda i domek
+
+Na stronie głównej przycisk **Kocia mapa Food** otwiera siedem etapów i 41 krótkich lekcji z wprowadzeniem, przykładami i ćwiczeniami. Pierwsze ukończenie lekcji daje 3 ★, a pierwsza ukończona powtórka błędów danego dnia 1 ★. W zakładce **Domek** można kupić sześć dekoracji i wybierać ich ustawienie. Mapa, saldo i domek działają offline i są częścią zapisu danego konta oraz pliku kopii. Dotychczasowe swobodne ćwiczenia pozostają dostępne.
+
+**Przed publikacją tej wersji opublikuj aktualny plik `firestore.rules` w Firebase.** Dodaje obsługę osobnych części starszej historii. Instrukcje: [mapa i domek](docs/kocia-przygoda.md), [historia i aktualizacja reguł](docs/historia.md).
+
 ## Edytowanie materiałów i dodawanie modułu
 
 Treści znajdują się w **public/content**, niezależnie od kodu strony w `src`. Aplikacja pobiera je jako osobne pliki, a nie jako część programu.
@@ -55,6 +61,7 @@ Treści znajdują się w **public/content**, niezależnie od kodu strony w `src`
 - `02-food/gramatyka.json` — zasady, objaśnienia i przykłady.
 - `02-food/cwiczenia.json` — zadania, klucze odpowiedzi i wyjaśnienia po błędzie.
 - `02-food/rozmowki.json` — 12 dialogów z lukami w osobnym trybie „Rozmówki”; wybór lub wpisywanie odpowiedzi, polskie wyjaśnienia i powtórka błędów.
+- `02-food/sciezka.json` — etapy i lekcje kociej mapy, wskazujące istniejące słówka, zadania i reguły.
 
 Słówka, gramatyka i rozmówki używają lokalnych pastelowych ilustracji SVG pasujących do kotków. Gramatyka przedstawia sytuację ze zdania (np. brak mleka, dwie butelki wody, zamawianie czy powód i skutek). [Edycja ilustracji](public/illustrations/README.md).
 

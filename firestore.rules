@@ -1,6 +1,18 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    match /users/{uid}/history/{pageId} {
+      function owner() { return request.auth != null && request.auth.uid == uid; }
+      allow get: if owner();
+      // Immutable archive chunks. No list, update or delete permissions.
+      allow create: if owner() && pageId.matches('^[a-f0-9]{64}$')
+        && request.resource.data.keys().hasAll(['format','payload','createdAt'])
+        && request.resource.data.keys().hasOnly(['format','payload','createdAt'])
+        && request.resource.data.format == 1
+        && request.resource.data.payload is string
+        && request.resource.data.payload.size() <= 200000
+        && request.resource.data.createdAt == request.time;
+    }
     match /users/{uid}/progress/main {
       function owner() { return request.auth != null && request.auth.uid == uid; }
       function valid() {

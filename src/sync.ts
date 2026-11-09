@@ -6,6 +6,7 @@ export interface AccountCache {
   localVersion: number; lastSync: string | null; recovery: Progress | null;
 }
 export interface SyncPorts {
+  prepare?:(progress:Progress)=>Promise<Progress>;
   read(uid: string): Promise<AccountCache | undefined>;
   save(uid: string, cache: AccountCache): Promise<void>;
   fetch(uid: string): Promise<RemoteProgress | null>;
@@ -15,7 +16,7 @@ export class SyncConflict extends Error {
   remote: RemoteProgress | null;
   constructor(remote: RemoteProgress | null) { super('Wyniki na koncie zmieniły się na innym urządzeniu.');this.remote=remote; }
 }
-export function hasProgress(p: Progress) { return !!(p.active || p.sessions.length || p.difficult.length || Object.keys(p.words).length); }
+export function hasProgress(p: Progress) { return !!(p.active || p.sessions.length || p.history?.sessions || p.adventure?.earned || p.difficult.length || Object.keys(p.words).length); }
 const checked=(p: Progress)=>validateBackup(backup(p)).progress;
 export function validateCache(cache: AccountCache): AccountCache {
   if(cache.version!==1 || !(cache.revision===null || (Number.isSafeInteger(cache.revision)&&cache.revision>=0)) || typeof cache.dirty!=='boolean' || !Number.isSafeInteger(cache.localVersion) || cache.localVersion<0 || !(cache.lastSync===null || (typeof cache.lastSync==='string' && Number.isFinite(Date.parse(cache.lastSync)))))throw new Error('Nie można odczytać lokalnych danych konta. Zapis gościa pozostał bez zmian.');
@@ -47,6 +48,13 @@ export class ProgressSync {
       if(epoch!==this.epoch)return;
       this.uid=uid;this.conflict=null;this.error=null;
       this.cache=stored?validateCache(stored):{version:1,progress:emptyProgress(),revision:null,dirty:false,localVersion:0,lastSync:null,recovery:null};
+      if(stored&&this.ports.prepare){
+        const prepared=await this.ports.prepare(this.cache.progress);
+        if(JSON.stringify(prepared)!==JSON.stringify(this.cache.progress)){
+          this.cache={...this.cache,progress:prepared,dirty:true,localVersion:this.cache.localVersion+1};
+          await this.ports.save(uid,this.cache);
+        }
+      }
       this.offerGuest=!stored&&hasProgress(guest);
       this.status='checking';this.changed(true);
     });
@@ -57,11 +65,14 @@ export class ProgressSync {
       this.uid=null;this.cache=null;this.conflict=null;this.offerGuest=false;this.status='local';this.error=null;this.changed(false);
     });
   }
-  async save(progress: Progress) {
+  async save(progress: Progress,expectedVersion?:number) {
     const epoch=this.epoch;
     await this.serial(async()=>{
       if(epoch!==this.epoch || !this.uid || !this.cache)throw new Error('Konto się zmieniło. Spróbuj ponownie.');
-      const next={...this.cache,progress:checked(progress),dirty:true,localVersion:this.cache.localVersion+1};
+      if(expectedVersion!==undefined&&this.cache.localVersion!==expectedVersion)throw new Error('Wyniki konta zmieniły się w tle. Spróbuj wykonać ten krok ponownie.');
+      const prepared=this.ports.prepare?await this.ports.prepare(checked(progress)):checked(progress);
+      if(epoch!==this.epoch)throw new Error('Konto się zmieniło. Spróbuj ponownie.');
+      const next={...this.cache,progress:prepared,dirty:true,localVersion:this.cache.localVersion+1};
       await this.ports.save(this.uid,next);this.cache=next;
       this.status=this.conflict?'conflict':'pending';this.changed(false);
     });
@@ -70,7 +81,8 @@ export class ProgressSync {
     const epoch=this.epoch;
     await this.serial(async()=>{
       if(epoch!==this.epoch || !this.uid || !this.cache)return;
-      const next={...this.cache,recovery:structuredClone(this.cache.progress),progress:checked(guest),dirty:true,localVersion:this.cache.localVersion+1};
+      const prepared=this.ports.prepare?await this.ports.prepare(checked(guest)):checked(guest);
+      const next={...this.cache,recovery:structuredClone(this.cache.progress),progress:prepared,dirty:true,localVersion:this.cache.localVersion+1};
       await this.ports.save(this.uid,next);this.cache=next;this.offerGuest=false;this.status='pending';this.changed(true);
     });
   }
@@ -101,10 +113,14 @@ export class ProgressSync {
         await this.serial(async()=>{
           if(epoch!==this.epoch || !this.cache || this.cache.localVersion!==snapshot.localVersion || this.cache.dirty)return;
           if(!remote && snapshot.revision && hasProgress(snapshot.progress))throw new SyncConflict(null);
-          const next={...this.cache,progress:remote?checked(remote.progress):this.cache.progress,revision,lastSync:new Date().toISOString()};
+          const incoming=remote?checked(remote.progress):this.cache.progress;
+          const prepared=this.ports.prepare?await this.ports.prepare(incoming):incoming;
+          const migrated=JSON.stringify(prepared)!==JSON.stringify(incoming);
+          const dataChanged=JSON.stringify(prepared)!==JSON.stringify(this.cache.progress);
+          const next={...this.cache,progress:prepared,revision,dirty:migrated,localVersion:this.cache.localVersion+Number(migrated||dataChanged),lastSync:new Date().toISOString()};
           await this.ports.save(uid,next);
           const different=JSON.stringify(next.progress)!==JSON.stringify(this.cache.progress);
-          this.cache=next;this.status='saved';this.changed(different);
+          this.cache=next;this.status=migrated?'pending':'saved';this.changed(different);
         });
         if(this.cache?.dirty)this.status='pending';
       }
@@ -127,7 +143,9 @@ export class ProgressSync {
     await this.serial(async()=>{
       if(!this.uid || !this.cache || !this.conflict)return;
       const remote=this.conflict.remote;
-      const next={...this.cache,recovery:structuredClone(choice==='cloud'?this.cache.progress:remote?.progress??emptyProgress()),progress:choice==='cloud'?checked(remote?.progress??emptyProgress()):this.cache.progress,revision:remote?.revision??0,dirty:choice==='local',localVersion:this.cache.localVersion+1};
+      const chosen=choice==='cloud'?checked(remote?.progress??emptyProgress()):this.cache.progress;
+      const prepared=this.ports.prepare?await this.ports.prepare(chosen):chosen;
+      const next={...this.cache,recovery:structuredClone(choice==='cloud'?this.cache.progress:remote?.progress??emptyProgress()),progress:prepared,revision:remote?.revision??0,dirty:choice==='local'||JSON.stringify(prepared)!==JSON.stringify(chosen),localVersion:this.cache.localVersion+1};
       await this.ports.save(this.uid,next);
       if(epoch!==this.epoch)return;
       this.cache=next;this.conflict=null;this.status=next.dirty?'pending':'saved';this.changed(true);

@@ -14,9 +14,14 @@ public/content/
     gramatyka.json             zasady i przykłady w rozwijanej ściądze
     cwiczenia.json             zadania, odpowiedzi i wyjaśnienia
     rozmowki.json              krótkie dialogi z jedną luką
+    sciezka.json               siedem etapów Food i kolejność 41 lekcji
 ```
 
 `src` zawiera wygląd i działanie strony. `tests` sprawdza poprawność. Zdjęcia źródłowe są w lokalnym, pomijanym przez Git folderze `.local-materials`; nie są publikowane na stronie.
+
+## Kocia mapa Food
+
+`sciezka.json` opisuje etapy i lekcje, niezależnie od kodu. Każda lekcja wskazuje `wordIds`, `exerciseIds` i `ruleIds` z pozostałych plików, więc zmiana słówka lub zadania jest widoczna także w lekcji. `title` i `intro` określają tytuł oraz wprowadzenie. Zachowaj identyfikatory lekcji przy poprawianiu tytułów: według nich przyznawane są jednorazowe nagrody. [Pełna instrukcja mapy i domku](../../docs/kocia-przygoda.md).
 
 ## Dwa zestawy fiszek
 

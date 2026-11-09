@@ -4,6 +4,9 @@ import {emptyProgress} from '../src/core.ts';
 import {ProgressSync,SyncConflict,validateCache,type AccountCache,type RemoteProgress,type SyncPorts} from '../src/sync.ts';
 import {readStored,writeStored,load,save} from '../src/storage.ts';
 import {indexedDB} from 'fake-indexeddb';
+import {compactHistory,sessionCount,type HistoryPage} from '../src/history.ts';
+import {modules} from './materials.ts';
+import {makeSession,questionFor,recordAnswer,next} from '../src/core.ts';
 
 const copy=<T>(value:T)=>structuredClone(value);
 const sample=(name:string)=>({...emptyProgress(),words:{[name]:'known' as const}});
@@ -21,6 +24,21 @@ function server(){
   return {remote,make};
 }
 function deferred<T>(){let resolve!:(value:T)=>void;const promise=new Promise<T>(r=>resolve=r);return {promise,resolve};}
+
+test('stary duży zapis z chmury jest migrowany przed kolejnym wysłaniem bez utraty sesji',async()=>{
+  const p=emptyProgress();p.active=makeSession(modules,modules[0],'grammar','text',false,p);p.active.items=p.active.items.slice(0,1);recordAnswer(p,questionFor(modules,p.active.items[0]),questionFor(modules,p.active.items[0]).answers[0]);next(p);
+  const one=p.sessions[0];p.sessions=Array.from({length:80},(_,i)=>({...copy(one),id:'old-'+i}));
+  const serverState=server(),{sync,ports}=serverState.make(),pages=new Map<string,HistoryPage>();
+  ports.prepare=progress=>compactHistory(progress,async page=>{pages.set(page.id,page);});
+  serverState.remote.set('a',{revision:1,progress:p});await sync.connect('a',emptyProgress());await sync.sync();
+  assert.equal(sync.status,'pending');assert.equal(sessionCount(sync.cache!.progress),80);assert.equal(sync.cache!.progress.sessions.length,30);assert.ok(pages.size);
+  await sync.sync();assert.equal(sync.status,'saved');assert.equal(sessionCount(serverState.remote.get('a')!.progress),80);
+});
+test('zmiana z drugiego urządzenia nie jest nadpisana przez lokalny krok oparty na starszej wersji',async()=>{
+  const state=server(),{sync}=state.make();await sync.connect('a',emptyProgress());await sync.sync();
+  const version=sync.cache!.localVersion;state.remote.set('a',{revision:1,progress:sample('other-device')});await sync.sync();
+  await assert.rejects(sync.save(sample('stale'),version),/zmieniły się w tle/);assert.deepEqual(sync.cache!.progress,sample('other-device'));
+});
 
 test('pierwsze połączenie pobiera konto, nie wysyła automatycznie postępów gościa',async()=>{
   const s=server();s.remote.set('a',{revision:3,progress:sample('cloud')});const {sync}=s.make();

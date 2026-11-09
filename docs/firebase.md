@@ -42,7 +42,8 @@ Alternatywnie osoba korzystająca z Firebase CLI może wdrożyć same reguły pr
 - Jeżeli dwa urządzenia zmienią zapis niezależnie, automatyczne nadpisanie zostaje zatrzymane. W **Konto i synchronizacja** można pobrać obie wersje i wskazać wersję do dalszej nauki. Nie łączymy automatycznie historii i rozpoczętych sesji.
 - Przegrana wersja pozostaje w lokalnej **kopii sprzed zmiany**. Przechowywana jest jedna taka kopia na konto; kolejny świadomy wybór wersji zastąpi tę kopię. Warto pobrać pliki przed następnym wyborem.
 - Wylogowanie przywraca osobny zapis gościa. Nie kopiuje wyników konta do gościa ani do innego konta. Lokalna pamięć konta pozostaje na tym urządzeniu; aplikacja jest przeznaczona do zaufanych urządzeń rodzinnych.
-- Limit pojedynczego zapisu wynosi 700 000 bajtów. Po przekroczeniu limitu dalsza nauka zapisuje się lokalnie, pojawia się informacja i można pobrać kopię. Rozdzielenie dużej historii na wiele dokumentów jest możliwym kolejnym krokiem.
+- Bieżąca migawka zachowuje maksymalnie 30 ostatnich pełnych sesji i podsumowanie starszych wyników. Starsze pełne odpowiedzi są dzielone na niezmienne części `users/{uid}/history/{hash}`. Nie są pobierane ani przepisywane przy każdej odpowiedzi. Limit 700 000 bajtów pozostaje zabezpieczeniem bieżącego dokumentu, a części mają limit 200 000 bajtów. **Wersja z mapą i domkiem wymaga jednorazowego opublikowania aktualnego `firestore.rules`.** [Szczegóły historii i kopii](historia.md).
+- Postęp lekcji, gwiazdki, zakupy i ustawienie domku znajdują się w postępach użytkownika i podlegają tej samej ochronie przed nadpisaniem przez drugie urządzenie. Nie wysyłamy grafiki pokoju ani plików wyposażenia do bazy.
 
 ## Weryfikacja
 

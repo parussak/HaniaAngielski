@@ -5,6 +5,8 @@ import {getFirestore,doc,getDocFromServer,runTransaction,serverTimestamp} from '
 import {firebaseConfig} from './firebase-config.ts';
 import {backup,validateBackup,type Progress} from './core.ts';
 import {SyncConflict,type RemoteProgress} from './sync.ts';
+import {checkPage,byteSize,publishHistory,type HistoryPage} from './history.ts';
+import {localHistoryPage,putHistoryPage} from './storage.ts';
 
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);auth.languageCode='pl';
@@ -38,6 +40,27 @@ export async function changePassword(password:string,nextPassword:string,uid:str
   const user=await reauthenticate(password,uid);await updatePassword(user,nextPassword);
 }
 const reference=(uid:string)=>doc(db,'users',uid,'progress','main');
+const historyReference=(uid:string,id:string)=>doc(db,'users',uid,'history',id);
+export async function fetchHistoryPage(uid:string,id:string):Promise<HistoryPage>{
+  await requireUser(uid);
+  if(!/^[a-f0-9]{64}$/.test(id))throw new Error('Niepoprawny identyfikator historii.');
+  const cached=await localHistoryPage(id);if(cached)return checkPage(cached);
+  const snapshot=await getDocFromServer(historyReference(uid,id));
+  if(!snapshot.exists())throw new Error('Nie można pobrać starszej historii. Sprawdź połączenie i reguły Firebase.');
+  const data=snapshot.data();if(data.format!==1||typeof data.payload!=='string')throw new Error('Niepoprawna część historii.');
+  const page=await checkPage(JSON.parse(data.payload) as HistoryPage);if(page.id!==id)throw new Error('Niepoprawna część historii.');
+  await putHistoryPage(page);return page;
+}
+async function uploadHistory(uid:string,head:string|null|undefined,remoteHead:string|null|undefined){
+  // Oldest first; the main CAS is committed only once ALL pages exist remotely.
+  await publishHistory(head,remoteHead,async id=>await localHistoryPage(id)??await fetchHistoryPage(uid,id),async page=>{
+    await requireUser(uid);const payload=JSON.stringify(page);if(byteSize(page)>200000)throw new Error('Zbyt duża część historii.');
+    await runTransaction(db,async tx=>{const ref=historyReference(uid,page.id),old=await tx.get(ref);
+      if(old.exists()){if(old.data().payload!==payload)throw new Error('Niezgodna część historii.');return;}
+      tx.set(ref,{format:1,payload,createdAt:serverTimestamp()});
+    });
+  });
+}
 function decode(data: any): RemoteProgress {
   if(data?.format!==1 || !Number.isSafeInteger(data.revision) || data.revision<1 || typeof data.payload!=='string')throw new Error('Nieobsługiwany zapis na koncie. Lokalna kopia pozostała bez zmian.');
   return {revision:data.revision,progress:validateBackup(JSON.parse(data.payload)).progress};
@@ -51,6 +74,10 @@ export async function pushProgress(uid:string,progress:Progress,expectedRevision
   await requireUser(uid);
   const payload=JSON.stringify(backup(progress));
   if(new TextEncoder().encode(payload).length>700000)throw new Error('Historia jest za duża do pojedynczego zapisu w chmurze. Zapis lokalny działa; pobierz kopię postępów.');
+  const before=await getDocFromServer(reference(uid));
+  const base=before.exists()?decode(before.data()):null;
+  if((base?.revision??0)!==expectedRevision)throw new SyncConflict(base);
+  await uploadHistory(uid,progress.history?.head,base?.progress.history?.head);
   return runTransaction(db,async transaction=>{
     const ref=reference(uid),snapshot=await transaction.get(ref);
     const remote=snapshot.exists()?decode(snapshot.data()):null;

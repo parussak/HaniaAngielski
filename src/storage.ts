@@ -1,4 +1,5 @@
-import { emptyProgress, type Progress } from './core.ts';
+import { emptyProgress,validateBackup,backup,type Progress } from './core.ts';
+import {checkPage,byteSize,type HistoryPage} from './history.ts';
 let dbPromise: Promise<IDBDatabase> | undefined;
 export const storageNamespace = `hania-language:${typeof location === 'undefined' ? 'test' : new URL('.', location.href).pathname}`;
 function database() {
@@ -31,3 +32,9 @@ export async function writeStored(key: string, value: unknown): Promise<void> {
 }
 export async function load(): Promise<Progress> { return (await readStored<Progress>('current')) ?? emptyProgress(); }
 export async function save(p: Progress): Promise<void> { await writeStored('current',p); }
+export async function putHistoryPage(page:HistoryPage){
+  if(!page || !/^[a-f0-9]{64}$/.test(page.id)||byteSize(page)>200000)throw new Error('Niepoprawna część historii.');
+  validateBackup(backup({...emptyProgress(),sessions:page.sessions}));await checkPage(page);
+  await writeStored(`history-page:${page.id}`,page);
+}
+export async function localHistoryPage(id:string){return readStored<HistoryPage>(`history-page:${id}`);}

@@ -1,0 +1,653 @@
+{
+  "version": 1,
+  "moduleId": "unit-2-food",
+  "title": "Kocia przygoda · Food",
+  "stages": [
+    {
+      "id": "food",
+      "title": "Jedzenie i napoje",
+      "cat": "albert",
+      "illustration": "illustrations/word-apple.svg",
+      "lessons": [
+        {
+          "id": "food-words-1",
+          "title": "Pierwsze smaki",
+          "intro": "Poznaj kilka słówek z Food. Obejrzyj obrazki, przeczytaj słowa i ich znaczenia. Potem spróbujesz przypomnieć je sobie bez podpowiedzi.",
+          "wordIds": [
+            "apple",
+            "biscuit",
+            "bread",
+            "cereal",
+            "cheese"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "food-words-2",
+          "title": "Co jest na talerzu?",
+          "intro": "Poznaj kilka słówek z Food. Obejrzyj obrazki, przeczytaj słowa i ich znaczenia. Potem spróbujesz przypomnieć je sobie bez podpowiedzi.",
+          "wordIds": [
+            "chicken",
+            "chips",
+            "fish",
+            "fruit",
+            "ham"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "food-words-3",
+          "title": "Obiad i napoje",
+          "intro": "Poznaj kilka słówek z Food. Obejrzyj obrazki, przeczytaj słowa i ich znaczenia. Potem spróbujesz przypomnieć je sobie bez podpowiedzi.",
+          "wordIds": [
+            "meat",
+            "orange-juice",
+            "pancake",
+            "pasta",
+            "potato"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "food-words-4",
+          "title": "Obiad i przekąski",
+          "intro": "Poznaj kilka słówek z Food. Obejrzyj obrazki, przeczytaj słowa i ich znaczenia. Potem spróbujesz przypomnieć je sobie bez podpowiedzi.",
+          "wordIds": [
+            "rice",
+            "salad",
+            "sandwich",
+            "sausage",
+            "tomato"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "food-words-5",
+          "title": "Ryba, warzywa i nabiał",
+          "intro": "Poznaj kilka słówek z Food. Obejrzyj obrazki, przeczytaj słowa i ich znaczenia. Potem spróbujesz przypomnieć je sobie bez podpowiedzi.",
+          "wordIds": [
+            "tuna",
+            "vegetable",
+            "water",
+            "yoghurt"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        }
+      ]
+    },
+    {
+      "id": "breakfast",
+      "title": "Śniadanie",
+      "cat": "maja",
+      "illustration": "illustrations/word-cereal.svg",
+      "lessons": [
+        {
+          "id": "breakfast-words-1",
+          "title": "Posiłki i plan dnia",
+          "intro": "Maja zaprasza do kuchni. Poznaj słówka potrzebne do śniadania i przygotowywania jedzenia.",
+          "wordIds": [
+            "breakfast",
+            "diary",
+            "dinner",
+            "jam",
+            "lunch"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "breakfast-words-2",
+          "title": "Składniki w kuchni",
+          "intro": "Maja zaprasza do kuchni. Poznaj słówka potrzebne do śniadania i przygotowywania jedzenia.",
+          "wordIds": [
+            "make",
+            "butter",
+            "chocolate",
+            "egg",
+            "flour"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "breakfast-words-3",
+          "title": "Mleko, owoce i cukier",
+          "intro": "Maja zaprasza do kuchni. Poznaj słówka potrzebne do śniadania i przygotowywania jedzenia.",
+          "wordIds": [
+            "lemon",
+            "milk",
+            "strawberry",
+            "sugar",
+            "cool"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "breakfast-words-4",
+          "title": "Kuchenne niespodzianki",
+          "intro": "Maja zaprasza do kuchni. Poznaj słówka potrzebne do śniadania i przygotowywania jedzenia.",
+          "wordIds": [
+            "good-idea",
+            "what-a-disaster",
+            "birthday",
+            "chocolate-cake",
+            "decorate"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "breakfast-words-5",
+          "title": "Przepis i przygotowanie",
+          "intro": "Maja zaprasza do kuchni. Poznaj słówka potrzebne do śniadania i przygotowywania jedzenia.",
+          "wordIds": [
+            "horrible",
+            "look",
+            "put",
+            "recipe"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        }
+      ]
+    },
+    {
+      "id": "counting",
+      "title": "Co można policzyć?",
+      "cat": "olus",
+      "illustration": "illustrations/word-egg.svg",
+      "lessons": [
+        {
+          "id": "counting-countable-1",
+          "title": "Co liczymy na sztuki?",
+          "intro": "Oluś najpierw pokaże Ci zasadę i przykłady. Potem sprawdzisz ją w krótkich zdaniach.",
+          "wordIds": [],
+          "exerciseIds": [
+            "g-count-egg",
+            "g-count-strawberry",
+            "g-count-apple",
+            "g-count-milk",
+            "g-count-sugar",
+            "g-count-flour"
+          ],
+          "ruleIds": [
+            "countable"
+          ]
+        },
+        {
+          "id": "counting-countable-2",
+          "title": "Co liczymy na sztuki? — dalszy krok",
+          "intro": "Oluś najpierw pokaże Ci zasadę i przykłady. Potem sprawdzisz ją w krótkich zdaniach.",
+          "wordIds": [],
+          "exerciseIds": [
+            "g-count-butter",
+            "g-count-water"
+          ],
+          "ruleIds": [
+            "countable"
+          ]
+        },
+        {
+          "id": "counting-articles-1",
+          "title": "A, an czy bez rodzajnika?",
+          "intro": "Oluś najpierw pokaże Ci zasadę i przykłady. Potem sprawdzisz ją w krótkich zdaniach.",
+          "wordIds": [],
+          "exerciseIds": [
+            "g-article-egg",
+            "g-article-apple",
+            "g-article-sandwich",
+            "g-article-lemon",
+            "g-article-milk",
+            "g-article-butter"
+          ],
+          "ruleIds": [
+            "articles"
+          ]
+        },
+        {
+          "id": "counting-articles-2",
+          "title": "A, an czy bez rodzajnika? — dalszy krok",
+          "intro": "Oluś najpierw pokaże Ci zasadę i przykłady. Potem sprawdzisz ją w krótkich zdaniach.",
+          "wordIds": [],
+          "exerciseIds": [
+            "g-article-juice"
+          ],
+          "ruleIds": [
+            "articles"
+          ]
+        },
+        {
+          "id": "counting-some-any-1",
+          "title": "Some i any",
+          "intro": "Oluś najpierw pokaże Ci zasadę i przykłady. Potem sprawdzisz ją w krótkich zdaniach.",
+          "wordIds": [],
+          "exerciseIds": [
+            "g-some-milk-positive",
+            "g-some-eggs-positive",
+            "g-some-milk-negative",
+            "g-some-eggs-negative",
+            "g-some-strawberries-question",
+            "g-some-flour-question"
+          ],
+          "ruleIds": [
+            "some-any"
+          ]
+        },
+        {
+          "id": "counting-some-any-2",
+          "title": "Some i any — dalszy krok",
+          "intro": "Oluś najpierw pokaże Ci zasadę i przykłady. Potem sprawdzisz ją w krótkich zdaniach.",
+          "wordIds": [],
+          "exerciseIds": [
+            "g-some-sugar-positive",
+            "g-some-butter-negative",
+            "g-some-request"
+          ],
+          "ruleIds": [
+            "some-any"
+          ]
+        },
+        {
+          "id": "counting-there-1",
+          "title": "Co jest w lodówce?",
+          "intro": "Oluś najpierw pokaże Ci zasadę i przykłady. Potem sprawdzisz ją w krótkich zdaniach.",
+          "wordIds": [],
+          "exerciseIds": [
+            "g-there-milk",
+            "g-there-water",
+            "g-there-apples",
+            "g-there-egg",
+            "g-there-bottles",
+            "g-short-milk"
+          ],
+          "ruleIds": [
+            "there"
+          ]
+        },
+        {
+          "id": "counting-there-2",
+          "title": "Co jest w lodówce? — dalszy krok",
+          "intro": "Oluś najpierw pokaże Ci zasadę i przykłady. Potem sprawdzisz ją w krótkich zdaniach.",
+          "wordIds": [],
+          "exerciseIds": [
+            "g-short-eggs"
+          ],
+          "ruleIds": [
+            "there"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quantities",
+      "title": "Ilości i opakowania",
+      "cat": "felix",
+      "illustration": "illustrations/word-a-bottle-of-water.svg",
+      "lessons": [
+        {
+          "id": "quantities-words-1",
+          "title": "Butelki, tabliczki i puszki",
+          "intro": "Felix pakuje zakupy. Liczymy opakowania, a ich nazwy łączymy z zawartością słowem of.",
+          "wordIds": [
+            "a-bar-of-chocolate",
+            "a-bottle-of-water",
+            "a-can-of-cola",
+            "a-carton-of-juice",
+            "a-jar-of-jam"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "quantities-words-2",
+          "title": "Kartony, słoiki i paczki",
+          "intro": "Felix pakuje zakupy. Liczymy opakowania, a ich nazwy łączymy z zawartością słowem of.",
+          "wordIds": [
+            "a-packet-of-biscuits"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "quantities-much-many-1",
+          "title": "Ile? How much i how many",
+          "intro": "Przeczytaj zasadę. Zwróć uwagę, czy pytamy o ilość, czy liczymy osobne rzeczy.",
+          "wordIds": [],
+          "exerciseIds": [
+            "g-how-water",
+            "g-how-apples",
+            "g-how-milk",
+            "g-how-eggs",
+            "g-how-chocolate",
+            "g-how-biscuits"
+          ],
+          "ruleIds": [
+            "much-many"
+          ]
+        },
+        {
+          "id": "quantities-much-many-2",
+          "title": "Ile? How much i how many — dalszy krok",
+          "intro": "Przeczytaj zasadę. Zwróć uwagę, czy pytamy o ilość, czy liczymy osobne rzeczy.",
+          "wordIds": [],
+          "exerciseIds": [
+            "g-how-bottles",
+            "g-how-cartons",
+            "g-how-cheese",
+            "g-how-jam"
+          ],
+          "ruleIds": [
+            "much-many"
+          ]
+        },
+        {
+          "id": "quantities-a-lot-of-1",
+          "title": "Dużo: a lot of",
+          "intro": "Przeczytaj zasadę. Zwróć uwagę, czy pytamy o ilość, czy liczymy osobne rzeczy.",
+          "wordIds": [],
+          "exerciseIds": [
+            "g-lot-water",
+            "g-lot-apples"
+          ],
+          "ruleIds": [
+            "a-lot-of"
+          ]
+        },
+        {
+          "id": "quantities-containers-1",
+          "title": "Opakowania w zdaniach",
+          "intro": "Przeczytaj zasadę. Zwróć uwagę, czy pytamy o ilość, czy liczymy osobne rzeczy.",
+          "wordIds": [],
+          "exerciseIds": [
+            "g-container-water",
+            "g-container-chocolate",
+            "g-container-cola",
+            "g-container-juice",
+            "g-container-jam",
+            "g-container-biscuits"
+          ],
+          "ruleIds": [
+            "containers"
+          ]
+        },
+        {
+          "id": "quantities-containers-2",
+          "title": "Opakowania w zdaniach — dalszy krok",
+          "intro": "Przeczytaj zasadę. Zwróć uwagę, czy pytamy o ilość, czy liczymy osobne rzeczy.",
+          "wordIds": [],
+          "exerciseIds": [
+            "g-container-plural"
+          ],
+          "ruleIds": [
+            "containers"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "restaurant",
+      "title": "W restauracji",
+      "cat": "krzywolap",
+      "illustration": "illustrations/word-sandwich.svg",
+      "lessons": [
+        {
+          "id": "restaurant-words-1",
+          "title": "Pierwsze zamówienie",
+          "intro": "Krzywołap odwiedza restaurację. Poznaj uprzejme pytania i odpowiedzi, których użyjesz w rozmowie.",
+          "wordIds": [
+            "anything-else",
+            "can-i-have-a-vegetarian-pizza-please",
+            "i-d-like-a-lemonade-please",
+            "what-would-you-like",
+            "would-you-like-anything-to-drink"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "restaurant-words-2",
+          "title": "Coś do picia?",
+          "intro": "Krzywołap odwiedza restaurację. Poznaj uprzejme pytania i odpowiedzi, których użyjesz w rozmowie.",
+          "wordIds": [
+            "milkshake",
+            "enjoy-your-meal"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "restaurant-grammar",
+          "title": "Uprzejmie zamawiamy",
+          "intro": "Zobacz, jak kelner pyta o zamówienie i jak uprzejmie poprosić o jedzenie.",
+          "wordIds": [],
+          "exerciseIds": [
+            "g-order-would",
+            "g-order-can",
+            "g-order-like",
+            "g-order-else",
+            "g-order-drink"
+          ],
+          "ruleIds": [
+            "ordering"
+          ]
+        },
+        {
+          "id": "restaurant-dialogue-1",
+          "title": "Rozmowa przy stoliku",
+          "intro": "Przeczytaj obie wypowiedzi. Uzupełnij tylko jedno brakujące słowo w każdej rozmowie.",
+          "wordIds": [],
+          "exerciseIds": [
+            "d-what-would",
+            "d-can-i-have",
+            "d-id-like",
+            "d-anything-else"
+          ],
+          "ruleIds": [
+            "ordering",
+            "some-any"
+          ]
+        },
+        {
+          "id": "restaurant-dialogue-2",
+          "title": "Rozmowa przy stoliku — dalszy krok",
+          "intro": "Przeczytaj obie wypowiedzi. Uzupełnij tylko jedno brakujące słowo w każdej rozmowie.",
+          "wordIds": [],
+          "exerciseIds": [
+            "d-to-drink",
+            "d-some-chips",
+            "d-no-milk"
+          ],
+          "ruleIds": [
+            "ordering",
+            "some-any"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reasons",
+      "title": "Powód i skutek",
+      "cat": "albert",
+      "illustration": "illustrations/word-chicken.svg",
+      "lessons": [
+        {
+          "id": "reasons-so-because",
+          "title": "Dlaczego? I co z tego wynika?",
+          "intro": "Albert pomaga odróżnić powód od skutku. Najpierw przeczytaj przykłady z because i so.",
+          "wordIds": [],
+          "exerciseIds": [
+            "g-so-sport",
+            "g-because-sport",
+            "g-because-eggs",
+            "g-so-pizza",
+            "d-hungry-because"
+          ],
+          "ruleIds": [
+            "so-because"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "picnic",
+      "title": "Koci piknik",
+      "cat": "maja",
+      "illustration": "illustrations/word-have-a-picnic.svg",
+      "lessons": [
+        {
+          "id": "picnic-words-1",
+          "title": "Pakujemy się na piknik",
+          "intro": "Przed piknikiem poznaj pozostałe słówka i zwroty z modułu Food. Niektóre opisują przygotowania, miejsca i wspólne spędzanie czasu.",
+          "wordIds": [
+            "all-of",
+            "beach",
+            "beautiful",
+            "can-t-wait",
+            "chicken-legs"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "picnic-words-2",
+          "title": "Idziemy do parku",
+          "intro": "Przed piknikiem poznaj pozostałe słówka i zwroty z modułu Food. Niektóre opisują przygotowania, miejsca i wspólne spędzanie czasu.",
+          "wordIds": [
+            "go-for-a-swim",
+            "go-to-the-beach",
+            "go-to-the-park",
+            "have-a-picnic",
+            "how-many"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "picnic-words-3",
+          "title": "Co widzimy dookoła?",
+          "intro": "Przed piknikiem poznaj pozostałe słówka i zwroty z modułu Food. Niektóre opisują przygotowania, miejsca i wspólne spędzanie czasu.",
+          "wordIds": [
+            "how-much",
+            "quick",
+            "seagull",
+            "terrible",
+            "all-over-the-world"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "picnic-words-4",
+          "title": "Smaki i pomysły",
+          "intro": "Przed piknikiem poznaj pozostałe słówka i zwroty z modułu Food. Niektóre opisują przygotowania, miejsca i wspólne spędzanie czasu.",
+          "wordIds": [
+            "art",
+            "celebrity",
+            "cook",
+            "cottage-cheese",
+            "cream"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "picnic-words-5",
+          "title": "Gotujemy i bawimy się",
+          "intro": "Przed piknikiem poznaj pozostałe słówka i zwroty z modułu Food. Niektóre opisują przygotowania, miejsca i wspólne spędzanie czasu.",
+          "wordIds": [
+            "good-luck",
+            "have-fun",
+            "in-the-air",
+            "ingredient",
+            "on-top"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "picnic-words-6",
+          "title": "Jeszcze kilka odkryć",
+          "intro": "Przed piknikiem poznaj pozostałe słówka i zwroty z modułu Food. Niektóre opisują przygotowania, miejsca i wspólne spędzanie czasu.",
+          "wordIds": [
+            "pan",
+            "popular",
+            "round",
+            "special",
+            "sweet"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "picnic-words-7",
+          "title": "Gotowi na wspólny posiłek",
+          "intro": "Przed piknikiem poznaj pozostałe słówka i zwroty z modułu Food. Niektóre opisują przygotowania, miejsca i wspólne spędzanie czasu.",
+          "wordIds": [
+            "throw",
+            "use",
+            "have-a-quick-breakfast",
+            "toast",
+            "toaster"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "picnic-words-8",
+          "title": "Ostatnie przygotowania",
+          "intro": "Przed piknikiem poznaj pozostałe słówka i zwroty z modułu Food. Niektóre opisują przygotowania, miejsca i wspólne spędzanie czasu.",
+          "wordIds": [
+            "frying-pan"
+          ],
+          "exerciseIds": [],
+          "ruleIds": []
+        },
+        {
+          "id": "picnic-inventory",
+          "title": "Misja: sprawdzamy zapasy",
+          "intro": "Sprawdź, co mamy, czego brakuje i ile rzeczy zabierzemy na piknik.",
+          "wordIds": [],
+          "exerciseIds": [
+            "d-no-milk",
+            "d-yes-milk",
+            "d-how-many",
+            "d-how-much",
+            "d-two-bottles"
+          ],
+          "ruleIds": [
+            "some-any",
+            "there",
+            "much-many",
+            "containers"
+          ]
+        },
+        {
+          "id": "picnic-finale",
+          "title": "Misja: zapraszamy kotki na piknik",
+          "intro": "To ostatni krok Food. Użyj poznanych zasad i zwrotów w kilku sytuacjach. Błędy możesz poprawić — każdy krok się liczy.",
+          "wordIds": [],
+          "exerciseIds": [
+            "g-some-request",
+            "g-container-plural",
+            "g-lot-apples",
+            "d-to-drink",
+            "g-because-sport"
+          ],
+          "ruleIds": [
+            "some-any",
+            "containers",
+            "a-lot-of",
+            "ordering",
+            "so-because"
+          ]
+        }
+      ]
+    }
+  ]
+}
