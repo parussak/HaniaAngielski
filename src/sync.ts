@@ -16,7 +16,7 @@ export class SyncConflict extends Error {
   remote: RemoteProgress | null;
   constructor(remote: RemoteProgress | null) { super('Wyniki na koncie zmieniły się na innym urządzeniu.');this.remote=remote; }
 }
-export function hasProgress(p: Progress) { return !!(p.active || p.sessions.length || p.history?.sessions || p.adventure?.earned || p.difficult.length || Object.keys(p.words).length); }
+export function hasProgress(p: Progress) { return !!(p.active || p.sessions.length || p.history?.sessions || p.adventure?.earned || Object.values(p.adventure?.stageReviews??{}).some(r=>Object.keys(r.items).length) || p.difficult.length || Object.keys(p.words).length); }
 const checked=(p: Progress)=>validateBackup(backup(p)).progress;
 export function validateCache(cache: AccountCache): AccountCache {
   if(cache.version!==1 || !(cache.revision===null || (Number.isSafeInteger(cache.revision)&&cache.revision>=0)) || typeof cache.dirty!=='boolean' || !Number.isSafeInteger(cache.localVersion) || cache.localVersion<0 || !(cache.lastSync===null || (typeof cache.lastSync==='string' && Number.isFinite(Date.parse(cache.lastSync)))))throw new Error('Nie można odczytać lokalnych danych konta. Zapis gościa pozostał bez zmian.');

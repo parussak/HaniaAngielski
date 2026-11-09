@@ -6,7 +6,8 @@ import './theme.css';
 import './adventure.css';
 import {loadJourneys,nextLesson,lessons,stars,unlocked,makeLessonSession,rewardCompletion,purchase,place,type Journey} from './adventure.ts';
 import {journeyView,lessonIntro,houseView} from './adventure-view.ts';
-import {compactHistory,sessionCount,type HistoryPage} from './history.ts';
+import {seedStageReviews,seedReviewArchive,recordStageError,makeStageReviewSession,finishStageReview,settleStageRewards,reviewState,reviewStats,pendingLabel,stageForSession} from './stage-review.ts';
+import {compactHistory,checkPage,sessionCount,type HistoryPage} from './history.ts';
 import {fullBackup,validateFullBackup} from './history-backup.ts';
 import {localHistoryPage,putHistoryPage} from './storage.ts';
 import { loadModules } from './content.ts';
@@ -25,6 +26,9 @@ let journeys:Journey[]=[];
 let introLessonId='';
 let chosenDecoration='pillow';
 let lastReward=0;
+let lastStageReward=0;
+let reviewMigrationTimer:ReturnType<typeof setTimeout>|undefined;
+let reviewMigrationWorking=false;
 let olderSessions:Session[]=[];
 let olderHead:string|null|undefined;
 let viewedHistory='';
@@ -56,13 +60,14 @@ async function deadline<T>(operation:Promise<T>):Promise<T> {
   finally{clearTimeout(timer!);}
 }
 const sync=new ProgressSync({
-  prepare:p=>compactHistory(p,putHistoryPage),
+  prepare:prepareProgress,
   read:uid=>readStored<AccountCache>(`account:${uid}`),
   save:(uid,cache)=>writeStored(`account:${uid}`,cache),
   fetch:async uid=>deadline((await sdk()).fetchProgress(uid)),
   push:async(uid,p,revision)=>deadline((await sdk()).pushProgress(uid,p,revision)),
 },dataChanged=>{
   if(dataChanged && sync.cache){progress=structuredClone(sync.cache.progress);lastSession=null;}
+  if(dataChanged)scheduleReviewMigration();
   if(sync.status==='saved' && !reauthNeeded)accountError='';
   if(!ready || busy)return;
   if(screen==='account' && document.activeElement?.closest('form')){refreshSyncLabel();return;}
@@ -107,6 +112,31 @@ const icon = (name: string) => `<svg viewBox="0 0 24 24" fill="none" stroke="cur
 const button = (action: string, text: string, cls = 'primary') => `<button class="${cls}" data-action="${action}">${text}</button>`;
 function compatible() { return !progress.active || sessionCompatible(modules, progress.active); }
 function stats() { return currentStats(modules,progress); }
+async function prepareProgress(p:Progress){
+  const prepared=await compactHistory(seedStageReviews(p,journeys),putHistoryPage);
+  settleStageRewards(prepared,journeys);return prepared;
+}
+function scheduleReviewMigration(){
+  if(!ready||!progress.adventure?.reviewArchiveHead||reviewMigrationWorking)return;
+  clearTimeout(reviewMigrationTimer);
+  reviewMigrationTimer=setTimeout(async()=>{
+    if(busy){scheduleReviewMigration();return;}
+    const head=progress.adventure?.reviewArchiveHead,owner=user?.uid??'guest';if(!head)return;
+    reviewMigrationWorking=true;let again=false;
+    try{
+      const page=await getHistoryPage(head);
+      if((user?.uid??'guest')!==owner||progress.adventure?.reviewArchiveHead!==head)return;
+      if(busy){again=true;return;}
+      await run(async()=>{
+        const earned=progress.adventure?.earned??0;
+        await mutate(p=>{seedReviewArchive(p,page,journeys);});
+        if((progress.adventure?.earned??0)>earned)notice='Dawne lekcje uwzględnione. Gwiazdki za domknięte etapy są już w portfelu.';
+      });again=true;
+    }catch{
+      if(screen==='map'&&(user?.uid??'guest')===owner){notice='Starsze błędy doliczymy po pobraniu historii. Połącz się z internetem; bieżące ćwiczenia i zapis działają.';render();}
+    }finally{reviewMigrationWorking=false;if(again||(user?.uid??'guest')!==owner||progress.adventure?.reviewArchiveHead!==head)scheduleReviewMigration();}
+  },300);
+}
 function currentJourney(){return journeys.find(j=>j.moduleId===selected?.id)??journeys[0];}
 function decorativeCat(id:string){
   const cat=catCatalog?.cats.find(c=>c.id===id);
@@ -115,13 +145,14 @@ function decorativeCat(id:string){
 function adventureInvite(){
   const j=journeys[0];if(!j)return '';
   const done=lessons(j).filter(l=>progress.adventure?.completed[l.key]).length;
-  return `<section class="adventure-invite"><div><div class="eyebrow">KOCIA MAPA MODUŁÓW</div><h2>Twoja przygoda z Food</h2><p>${done} z ${lessons(j).length} krótkich lekcji · ${stars(progress)} ★ w Twoim portfelu</p><div class="actions"><button class="primary" data-action="map" data-id="${j.moduleId}">Kocia mapa Food →</button><button class="secondary" data-action="house">Urządź domek</button></div></div><img src="./illustrations/word-have-a-picnic.svg" alt="" width="110" height="100"></section>`;
+  const reviews=reviewStats(progress,j);
+  return `<section class="adventure-invite"><div><div class="eyebrow">KOCIA MAPA MODUŁÓW</div><h2>Twoja przygoda z Food</h2><p>${done} z ${lessons(j).length} krótkich lekcji · ${stars(progress)} ★ w Twoim portfelu</p><p class="retention-overview">${reviews.total?`Utrwalenie: ${reviews.percent}% · ${reviews.pending?`do powtórzenia: ${pendingLabel(reviews)}`:'brak zaległych powtórek ✓'}`:'Brak zaległych powtórek ✓'}${progress.adventure?.reviewArchiveHead?' · pobieramy starsze błędy':''}</p><div class="actions"><button class="primary" data-action="map" data-id="${j.moduleId}">Kocia mapa Food →</button><button class="secondary" data-action="house">Urządź domek</button></div></div><img src="./illustrations/word-have-a-picnic.svg" alt="" width="110" height="100"></section>`;
 }
 function mapView(){const j=currentJourney();return j?journeyView(j,progress,decorativeCat):'<h1>Kocia mapa</h1><p>Mapa jest chwilowo niedostępna. Twoje własne ćwiczenia nadal działają.</p>'+button('home','Moja nauka');}
 function introView(){const j=currentJourney(),l=j&&lessons(j).find(l=>l.lesson.id===introLessonId)?.lesson,m=modules.find(m=>m.id===j?.moduleId);return j&&l&&m?lessonIntro(j,l,m,progress):mapView();}
 function homeForCats(){const j=currentJourney(),complete=!!j&&lessons(j).every(l=>progress.adventure?.completed[l.key]);return houseView(progress,chosenDecoration,decorativeCat,complete);}
 async function getHistoryPage(id:string):Promise<HistoryPage>{
-  const local=await localHistoryPage(id);if(local)return local;
+  const local=await localHistoryPage(id);if(local)return checkPage(local);
   if(!user || !navigator.onLine)throw new Error('Ta część historii nie jest jeszcze pobrana. Połącz się z internetem i otwórz ją lub zapisz pełną kopię. Bieżące wyniki są bezpieczne.');
   return deadline((await sdk()).fetchHistoryPage(user.uid,id));
 }
@@ -172,6 +203,7 @@ function study() {
   let card = '';
   card = `<div class="exercise-label">${icon(item.type === 'word' ? 'cards' : q.kind === 'grammar' ? 'book' : 'spark')} ${item.type === 'word' ? 'FISZKA · PODAJ PO ANGIELSKU' : q.kind === 'dialogue' ? 'POROZMAWIAJMY' : q.kind === 'grammar' ? 'MAŁY KROK W GRAMATYCE' : 'SŁÓWKO PO SŁÓWKU'}</div><h2 class="question">${e(q.prompt)}</h2>`;
   if(q.dialogue)card += `<div class="dialogue" aria-label="Dialog do uzupełnienia">${q.dialogue.map((line,i)=>`<div class="dialogue-line ${i%2?'dialogue-reply':''}"><span class="dialogue-speaker">${e(line.speaker)}</span><p>${line.text.split('___').map(e).join('<span class="dialogue-gap" aria-label="luka">…</span>')}</p></div>`).join('')}</div>`;
+  if(s.stageReview){const entry=reviewState(progress,s.stageReview.id)?.items[item.key];card+=`<p class="review-meter">Utrwalenie: <strong>${entry?.correct??0}/3</strong><span>Wynik tej próby zapiszemy po ukończeniu tury.</span></p>`;}
   if (s.phase === 'feedback') {
     const ok = s.lastCorrect;
     card += `<div class="feedback ${ok ? 'correct' : 'incorrect'}" role="status"><div class="feedback-lead"><strong>${ok ? 'Tak jest! Dobra robota ✦' : 'Spokojnie, tak właśnie się uczymy.'}</strong>${catCatalog?catView(responseCat(catCatalog,s)):''}</div>${!ok ? answerComparison(q,s) : ''}<p>${e(q.explanation)}</p>${q.source ? `<p class="source-reference">Źródło: ${e(q.source)}</p>` : ''}${illustrationView(q.illustration,true)}</div><div class="actions">${!ok ? button('retry','Spróbuję jeszcze raz','secondary') : ''}${button('next',`Dalej ${icon('arrow')}`)}</div>`;
@@ -180,17 +212,22 @@ function study() {
     card += s.phase === 'retry' ? '<p class="retry-note">Teraz spróbuj ponownie. Pierwszy wynik pozostanie zapisany osobno.</p>' : '<p>Nie musisz wiedzieć wszystkiego. Po prostu spróbuj.</p>';
     card += inputFor(q,item.input) === 'choice' ? `<div class="answer-options">${optionsFor(q,s).map((o,i) => `<button class="option" data-action="answer" data-answer="${e(o)}"><span aria-hidden="true">${String.fromCharCode(65+i)}</span>${e(o)}</button>`).join('')}</div>` : `<form id="answer-form"><label for="answer" class="sr-only">Twoja odpowiedź</label><input id="answer" name="answer" class="answer-input" placeholder="Wpisz odpowiedź…" autocomplete="off" autocorrect="off" enterkeyhint="done" autocapitalize="off" spellcheck="false" maxlength="500" required><button class="primary" type="submit">Sprawdź ${icon('check')}</button></form>`;
   }
-  return `<button class="back" data-action="home">← Wróć do modułów · sesja zostaje zapisana</button><div class="study-heading"><div><div class="eyebrow">TWÓJ MAŁY KROK</div><h1>${e(s.lesson?.title??labels[s.mode])}</h1></div><span class="tag">${s.index + 1} / ${s.items.length}</span></div><div class="progress-track" role="progressbar" aria-label="Pytanie ${s.index + 1} z ${s.items.length}" aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100"><span style="width:${percent}%"></span></div><section class="study-card">${card}</section><p class="under-card">${icon('check')} ${storageError ? 'Zapis niedostępny — zapisz kopię przed zamknięciem.' : 'Każdy krok zapisuje się na tym urządzeniu.'}</p>`;
+  return `<button class="back" data-action="home">← Wróć do modułów · sesja zostaje zapisana</button><div class="study-heading"><div><div class="eyebrow">TWÓJ MAŁY KROK</div><h1>${e(s.stageReview?.title??s.lesson?.title??labels[s.mode])}</h1></div><span class="tag">${s.index + 1} / ${s.items.length}</span></div><div class="progress-track" role="progressbar" aria-label="Pytanie ${s.index + 1} z ${s.items.length}" aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100"><span style="width:${percent}%"></span></div><section class="study-card">${card}</section><p class="under-card">${icon('check')} ${storageError ? 'Zapis niedostępny — zapisz kopię przed zamknięciem.' : 'Każdy krok zapisuje się na tym urządzeniu.'}</p>`;
+}
+function stageReviewSummary(s:Session){
+  const context=stageForSession(journeys,s);if(!context)return '';
+  const stats=reviewStats(progress,context.journey,context.stage);
+  return `<div class="review-result"><strong>${stats.percent}% utrwalenia</strong><p>${stats.pending?`Do kolejnych tur: ${e(pendingLabel(stats))}.`:'Wszystkie zebrane pozycje osiągnęły 3/3 ✓'}</p>${!stats.pending&&!reviewState(progress,context.key)?.rewardedAt?'<p>Do nagrody 3 ★ pozostało ukończyć lekcje tego etapu.</p>':''}</div>`;
 }
 function summary() {
   const s = lastSession ?? progress.sessions.at(-1);
   if (!s) return home();
   const result = score(s);
-  return `<section class="summary panel"><div class="celebration">${catCatalog?catView(endingCat(catCatalog,s),true):icon('cat')}</div><div class="eyebrow">KOLEJNY MAŁY KROK ZA TOBĄ</div><h1>${user ? user.displayName ? `Dobra robota, ${e(user.displayName)}!` : 'Dobra robota!' : 'Dobra robota, Haniu!'}</h1><p>Każda próba pomaga. Dziś wiesz już trochę więcej.</p>${s.lesson?`<div class="lesson-reward">${lastReward?`+${lastReward} ★`:'Lekcja utrwalona ✓'}<small>${lastReward?'Gwiazdki są już w Twoim portfelu. Poprawki też są nauką.':'Nagroda za pierwsze ukończenie tej lekcji jest już przyznana.'}</small></div>`:lastReward?`<div class="lesson-reward">+${lastReward} ★<small>Dzisiejsza powtórka błędów ukończona.</small></div>`:''}${!s.attempts.length ? `<div class="summary-score">${new Set(s.items.map(i => i.key)).size}<span>przećwiczonych fiszek</span></div>` : `<div class="summary-score">${result.correct}<small> / ${result.total}</small><span>poprawnie za pierwszym razem</span></div><p>Poprawione za drugim razem: <b>${result.corrections}</b>. Ten wynik liczymy osobno.</p>`}<div class="actions journey-summary-actions">${s.lesson?`${button('map','Wróć na mapę')}${button('house','Urządź domek','secondary')}`:`${button('home','Wróć do modułów')}${button('progress','Zobacz postępy','secondary')}`}</div></section>`;
+  return `<section class="summary panel"><div class="celebration">${catCatalog?catView(endingCat(catCatalog,s),true):icon('cat')}</div><div class="eyebrow">KOLEJNY MAŁY KROK ZA TOBĄ</div><h1>${user ? user.displayName ? `Dobra robota, ${e(user.displayName)}!` : 'Dobra robota!' : 'Dobra robota, Haniu!'}</h1><p>Każda próba pomaga. Dziś wiesz już trochę więcej.</p>${s.lesson||s.stageReview?`<div class="lesson-reward">${lastReward?`+${lastReward} ★`:s.stageReview?'Tura zapisana ✓':'Lekcja utrwalona ✓'}<small>${lastReward?`Gwiazdki są już w Twoim portfelu.${lastStageReward?` W tym ${lastStageReward} ★ za ukończony etap i 100% w powtórce.`:''}`:s.stageReview?'Każda samodzielna poprawna odpowiedź przybliża utrwalenie.':'Nagroda za pierwsze ukończenie tej lekcji jest już przyznana.'}</small></div>`:''}${s.stageReview?stageReviewSummary(s):!s.attempts.length ? `<div class="summary-score">${new Set(s.items.map(i => i.key)).size}<span>przećwiczonych fiszek</span></div>` : `<div class="summary-score">${result.correct}<small> / ${result.total}</small><span>poprawnie za pierwszym razem</span></div><p>Poprawione za drugim razem: <b>${result.corrections}</b>. Ten wynik liczymy osobno.</p>`}<div class="actions journey-summary-actions">${s.lesson||s.stageReview?`${button('map','Wróć na mapę')}${button('house','Urządź domek','secondary')}`:`${button('home','Wróć do modułów')}${button('progress','Zobacz postępy','secondary')}`}</div></section>`;
 }
 function historyRow(session:Session){
   const result=score(session),m=modules.find(m=>m.id===session.moduleId);
-  return `<div class="history-row"><div><strong>${e(session.lesson?.title??labels[session.mode])} · ${e(m?.name??'Moduł spoza biblioteczki')}</strong><span>${date(session.completedAt!)}${!m||!sessionCompatible(modules,session)?' · archiwalny materiał':''}</span></div><div class="history-score">${!session.attempts.length?`${new Set(session.items.map(i=>i.key)).size} fiszek`:`${result.correct}/${result.total}`}<small>${!session.attempts.length?'przećwiczonych':`pierwsze próby · ${result.corrections} poprawionych`}</small></div></div>`;
+  return `<div class="history-row"><div><strong>${e(session.stageReview?.title??session.lesson?.title??labels[session.mode])} · ${e(m?.name??'Moduł spoza biblioteczki')}</strong><span>${date(session.completedAt!)}${!m||!sessionCompatible(modules,session)?' · archiwalny materiał':''}</span></div><div class="history-score">${!session.attempts.length?`${new Set(session.items.map(i=>i.key)).size} fiszek`:`${result.correct}/${result.total}`}<small>${!session.attempts.length?'przećwiczonych':`pierwsze próby · ${result.corrections} poprawionych`}</small></div></div>`;
 }
 function progressView() {
   const s=stats();
@@ -227,7 +264,8 @@ function render() {
   const historyContext=`${user?.uid??'guest'}:${progress.history?.head??'none'}`;
   if(viewedHistory!==historyContext){viewedHistory=historyContext;olderSessions=[];olderHead=progress.history?.head;}
   document.body.classList.toggle('studying',screen==='study');
-  document.body.classList.toggle('journey-summary',screen==='summary'&&!!(lastSession??progress.sessions.at(-1))?.lesson);
+  const summarySession=lastSession??progress.sessions.at(-1);
+  document.body.classList.toggle('journey-summary',screen==='summary'&&!!(summarySession?.lesson||summarySession?.stageReview));
   const focused = document.activeElement as HTMLElement | null;
   const focusAction = focused?.dataset.action;
   const focusId = focused?.id;
@@ -255,7 +293,7 @@ async function mutate(change: (p: Progress) => void) {
   let draft = structuredClone(progress);
   change(draft);
   if(user){await sync.save(draft,expectedVersion);draft=structuredClone(sync.cache!.progress);}
-  else {draft=await compactHistory(draft,putHistoryPage);await save(draft);guestProgress=structuredClone(draft);}
+  else {draft=await prepareProgress(draft);await save(draft);guestProgress=structuredClone(draft);}
   progress = draft; storageError = '';scheduleSync();
 }
 async function downloadProgress(value: Progress,suffix='') {
@@ -268,14 +306,22 @@ async function downloadProgress(value: Progress,suffix='') {
 async function exportProgress(){await downloadProgress(progress);}
 async function action(action: string, el: HTMLElement) {
   notice = '';
-  if(action==='map'){selected=modules.find(m=>m.id===el.dataset.id)??selected??modules[0];screen='map';return;}
+  if(action==='map'){selected=modules.find(m=>m.id===el.dataset.id)??selected??modules[0];screen='map';scheduleReviewMigration();return;}
+  if(action==='stage-review'){
+    const j=currentJourney(),stage=j?.stages.find(s=>s.id===el.dataset.id);if(!j||!stage)return;
+    if(progress.active?.stageReview?.id===`${j.moduleId}/${stage.id}`){screen='study';return;}
+    const session=makeStageReviewSession(modules,j,stage,answerMode,progress);
+    if(!session){notice='Brak zaległych powtórek w tym etapie.';return;}
+    if(progress.active&&!window.confirm('Rozpocząć powtórkę zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))return;
+    await mutate(p=>{p.active=session;});lastReward=0;lastStageReward=0;screen='study';return;
+  }
   if(action==='house'){screen='house';return;}
   if(action==='open-lesson'||action==='begin-lesson'){
     const j=currentJourney(),l=j&&lessons(j).find(l=>l.lesson.id===el.dataset.id)?.lesson;
     if(!j||!l||!unlocked(j,l,progress)){notice='Najpierw ukończ wcześniejszą lekcję.';return;}
     if(action==='open-lesson'){introLessonId=l.id;answerMode='mixed';screen='lesson-intro';return;}
     if(progress.active&&!window.confirm('Rozpocząć lekcję zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))return;
-    await mutate(p=>{p.active=makeLessonSession(modules,j,l,answerMode,p);});lastReward=0;screen='study';return;
+    await mutate(p=>{p.active=makeLessonSession(modules,j,l,answerMode,p);});lastReward=0;lastStageReward=0;screen='study';return;
   }
   if(action==='select-decoration'){chosenDecoration=el.dataset.id??'pillow';return;}
   if(action==='buy-decoration'){
@@ -329,9 +375,14 @@ async function action(action: string, el: HTMLElement) {
     const s = progress.active;
     if (!s) return;
     const q = questionFor(modules,s.items[s.index]);
-    await mutate(p => { recordAnswer(p,q,el.dataset.answer ?? ''); });
+    await mutate(p => { const session=p.active!;if(recordAnswer(p,q,el.dataset.answer??'')===false)recordStageError(p,session,session.items[session.index],journeys); });
   } else if (action === 'retry') await mutate(p => { if (p.active?.phase === 'feedback' && p.active.lastCorrect === false) { p.active.phase = 'retry'; p.active.lastCorrect = null; } });
-  else if (action === 'next') { lastReward=0;await mutate(p => { if (p.active?.phase === 'feedback') {const finished=p.active;next(p);if(!p.active)lastReward=rewardCompletion(p,finished);} }); if (!progress.active) { lastSession = progress.sessions.at(-1)!; screen = 'summary'; } }
+  else if (action === 'next') {
+    const earned=progress.adventure?.earned??0,bonuses=Object.values(progress.adventure?.stageReviews??{}).filter(r=>r.rewardedAt).length;
+    lastReward=0;lastStageReward=0;
+    await mutate(p=>{if(p.active?.phase==='feedback'){const finished=p.active;next(p);if(!p.active){finishStageReview(p,finished);rewardCompletion(p,finished);}}});
+    if(!progress.active){lastReward=(progress.adventure?.earned??0)-earned;lastStageReward=(Object.values(progress.adventure?.stageReviews??{}).filter(r=>r.rewardedAt).length-bonuses)*3;lastSession=progress.sessions.at(-1)!;screen='summary';}
+  }
   else if (action === 'export') await exportProgress();
   else if (action === 'cancel-import') pending = null;
   else if (action === 'confirm-import' && pending) { const complete=await validateFullBackup(pending);for(const page of complete.archives??[])await putHistoryPage(page);const imported=complete.progress; await mutate(p=>{delete p.history;delete p.adventure;Object.assign(p,imported);}); pending = null; storageError = ''; notice = 'Kopia została wczytana. Twoje postępy są już na tym urządzeniu.'; }
@@ -419,7 +470,7 @@ async function init() {
       [modules,catCatalog] = await Promise.all([loadModules(),loadCats()]); selected = modules[0];
       journeys=await loadJourneys(modules).catch(()=>{notice='Kocia mapa jest chwilowo niedostępna. Możesz korzystać z własnych ćwiczeń.';return [];});
       const oldGuest=validateBackup(backup(await load())).progress;
-      progress=await compactHistory(oldGuest,putHistoryPage);if(JSON.stringify(progress)!==JSON.stringify(oldGuest))await save(progress);
+      progress=await prepareProgress(oldGuest);if(JSON.stringify(progress)!==JSON.stringify(oldGuest))await save(progress);
       guestProgress=structuredClone(progress);
       const savedAccount=await readStored<AccountUser>('firebase-user');
       if(savedAccount?.uid){
@@ -433,6 +484,7 @@ async function init() {
         })();
       }
       ready = true; render();
+      scheduleReviewMigration();
       startPwa(()=>{if(ready && !busy && screen==='home')render();});
     }
     catch (err) {
@@ -445,4 +497,6 @@ async function init() {
 }
 window.addEventListener('online',()=>{if(sync.cache?.dirty || !progress.active)scheduleSync(0);});
 window.addEventListener('focus',()=>{if(user && !progress.active)scheduleSync(0);});
+window.addEventListener('online',scheduleReviewMigration);
+window.addEventListener('focus',scheduleReviewMigration);
 void init();

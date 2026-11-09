@@ -46,7 +46,7 @@ Po pierwszym pobraniu materiałów aplikacja działa offline i może być instal
 
 ## Kocia przygoda i domek
 
-Na stronie głównej przycisk **Kocia mapa Food** otwiera siedem etapów i 41 krótkich lekcji z wprowadzeniem, przykładami i ćwiczeniami. Pierwsze ukończenie lekcji daje 3 ★, a pierwsza ukończona powtórka błędów danego dnia 1 ★. W zakładce **Domek** można kupić sześć dekoracji i wybierać ich ustawienie. Mapa, saldo i domek działają offline i są częścią zapisu danego konta oraz pliku kopii. Dotychczasowe swobodne ćwiczenia pozostają dostępne.
+Na stronie głównej przycisk **Kocia mapa Food** otwiera siedem etapów i 41 krótkich lekcji z wprowadzeniem, przykładami i ćwiczeniami. Pierwsze ukończenie lekcji daje 3 ★. Każdy etap ma osobną powtórkę błędów do trzech samodzielnych poprawnych odpowiedzi w ukończonych turach; procent utrwalenia i liczba zaległych pozycji są widoczne także na zwiniętej mapie. Dodatkowe 3 ★ przysługują raz za ukończone lekcje i 100% powtórki etapu. Powtórki nie blokują dalszych lekcji. W zakładce **Domek** można kupić sześć dekoracji i wybierać ich ustawienie. Mapa, saldo, powtórki i domek działają offline i są częścią zapisu danego konta oraz pliku kopii. Dotychczasowe swobodne ćwiczenia pozostają dostępne.
 
 **Przed publikacją tej wersji opublikuj aktualny plik `firestore.rules` w Firebase.** Dodaje obsługę osobnych części starszej historii. Instrukcje: [mapa i domek](docs/kocia-przygoda.md), [historia i aktualizacja reguł](docs/historia.md).
 

@@ -43,6 +43,22 @@ async function signIn(page:any,email='parent@example.test'){
   await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
 }
 
+test('licznik powtórki etapu przechodzi między urządzeniami, zapisuje turę po awarii chmury i jest osobny dla kont',async({browser})=>{
+  const cloud=backend(),a=await browser.newContext({baseURL:test.info().project.use.baseURL,viewport:{width:390,height:844}}),b=await browser.newContext({baseURL:test.info().project.use.baseURL,viewport:{width:390,height:844}});
+  try{
+    await cloud.connect(a);await cloud.connect(b);const page=await a.newPage();await page.goto('./');await signIn(page);
+    const p=emptyProgress(),key='unit-2-food@1:word:apple';p.adventure={version:1,earned:0,completed:{},purchases:{},reviewSchema:1,reviewArchiveHead:null,stageReviews:{'unit-2-food/food':{round:3,items:{[key]:{item:{key,moduleId:'unit-2-food',version:1,type:'word',id:'apple',input:'text'},correct:2,due:6}}}}};
+    await page.locator('.sidebar').getByRole('button',{name:'Kopia postępów',exact:true}).click();await page.locator('#import-file').setInputFiles({name:'reviews.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
+    await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).click();await page.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
+    const second=await b.newPage();await second.goto('./');await signIn(second);await second.getByRole('button',{name:'Moja nauka',exact:true}).click();await second.getByRole('button',{name:'Kocia mapa Food →'}).click();await second.locator('.journey-stage').first().locator('.stage-review-step').click();await expect(second.locator('.review-meter')).toContainText('2/3');
+    cloud.setOffline(true);await second.getByRole('button',{name:'apple',exact:true}).click();await second.getByRole('button',{name:/Dalej/}).click();await expect(second.locator('.review-result')).toContainText('100%');
+    await second.reload();await second.getByRole('button',{name:'Kocia mapa Food →'}).click();await expect(second.locator('.journey-stage').first().locator('.stage-retention-text')).toContainText('100%');
+    cloud.setOffline(false);await second.getByRole('button',{name:'Konto i synchronizacja',exact:true}).click();await second.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(second.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
+    expect(cloud.data.get('parent@example.test')!.progress.adventure.stageReviews['unit-2-food/food'].items[key].correct).toBe(3);
+    await page.getByRole('button',{name:'Wyloguj się',exact:true}).click();await signIn(page,'other-review@example.test');await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await page.getByRole('button',{name:'Kocia mapa Food →'}).click();await expect(page.locator('.journey-stage').first().locator('.stage-review-step')).toBeDisabled();
+  }finally{await a.close();await b.close();}
+});
+
 test('domek i gwiazdki synchronizują się na drugie urządzenie i nie przechodzą na inne konto',async({browser})=>{
   const cloud=backend(),a=await browser.newContext({baseURL:test.info().project.use.baseURL,viewport:{width:390,height:844}}),b=await browser.newContext({baseURL:test.info().project.use.baseURL,viewport:{width:390,height:844}});
   try{

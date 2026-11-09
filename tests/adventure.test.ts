@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import {modules} from './materials.ts';
 import {validateJourney,lessons,nextLesson,unlocked,makeLessonSession,rewardCompletion,purchase,place,stars,freshAdventure} from '../src/adventure.ts';
 import {emptyProgress,recordAnswer,questionFor,next,validateBackup,backup,type Progress,type Session} from '../src/core.ts';
+import {settleStageRewards} from '../src/stage-review.ts';
 const j=validateJourney(JSON.parse(readFileSync(new URL('../public/content/02-food/sciezka.json',import.meta.url),'utf8')),modules[0]);
 function finish(p:Progress,wrong=false){const s=p.active!;let first=true;while(p.active){const q=questionFor(modules,s.items[s.index]);recordAnswer(p,q,wrong&&first?'wrong':q.answers[0]);if(wrong&&first){s.phase='retry';recordAnswer(p,q,q.answers[0]);}first=false;next(p);}return s;}
 
@@ -33,17 +34,19 @@ test('zakup, powtórny zakup, zamiana i schowanie przedmiotu zachowują saldo i 
   assert.deepEqual(validateBackup(backup(p)).progress,p);
   const invalid=backup(p);invalid.progress.adventure!.earned=1;assert.throws(()=>validateBackup(invalid));
 });
-test('premia za powtórkę raz dziennie, bez farmienia sesjami ani cofnięcia daty',()=>{
+test('ogólna powtórka nie nalicza już premii dziennej, dawne gwiazdki pozostają',()=>{
   const p=emptyProgress();p.active=makeLessonSession(modules,j,lessons(j)[0].lesson,'text',p);const s=finish(p);
   const review:Session={...s,mode:'review',lesson:undefined};review.completedAt='2026-11-09T12:00:00Z';
-  assert.equal(rewardCompletion(p,review),1);assert.equal(rewardCompletion(p,{...review,id:'again'}),0);
+  p.adventure=freshAdventure();p.adventure.earned=7;p.adventure.reviewDay='2026-11-08';
+  assert.equal(rewardCompletion(p,review),0);assert.equal(rewardCompletion(p,{...review,id:'again'}),0);
   assert.equal(rewardCompletion(p,{...review,completedAt:'2026-11-08T12:00:00Z'}),0);
-  assert.equal(rewardCompletion(p,{...review,completedAt:'2026-11-10T12:00:00Z'}),1);assert.equal(stars(p),2);
+  assert.equal(rewardCompletion(p,{...review,completedAt:'2026-11-10T12:00:00Z'}),0);assert.equal(stars(p),7);
 });
 test('pełna ścieżka Food: wszystkie lekcje, odznaka i stały budżet gwiazdek',()=>{
   const p=emptyProgress();for(const {lesson,key} of lessons(j)){
     assert.ok(unlocked(j,lesson,p));p.active=makeLessonSession(modules,j,lesson,'mixed',p);
     assert.equal(rewardCompletion(p,finish(p)),3);assert.ok(p.adventure?.completed[key]);
+    settleStageRewards(p,[j]);
   }
-  assert.equal(nextLesson(j,p),undefined);assert.equal(stars(p),123);assert.equal(p.sessions.length,41);
+  assert.equal(nextLesson(j,p),undefined);assert.equal(stars(p),144);assert.equal(p.sessions.length,41);
 });

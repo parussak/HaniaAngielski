@@ -16,11 +16,29 @@ Wejście: **Moja nauka → Kocia mapa Food**. Przycisk **Kontynuuj naukę** wybi
 
 - Pierwsze ukończenie każdej lekcji: **3 ★**, również z błędami i poprawkami. Razem 123 gwiazdki za 41 lekcji Food.
 - Ponowne ukończenie tej samej lekcji nie nalicza kolejnych 3 gwiazdek.
-- Ukończenie zwykłej powtórki błędów: **1 ★ raz dziennie**, o ile sesja miała zadania. Kolejna taka sesja tego samego dnia nie daje premii.
+- Domknięcie etapu: **3 ★ raz**, gdy wszystkie jego lekcje są ukończone, a każda pozycja w powtórce osiągnęła 3/3 poprawnych odpowiedzi. Etap bez błędów dostaje tę premię po ostatniej lekcji. Siedem etapów Food to dodatkowe 21 gwiazdek (łącznie 144 z lekcjami).
+- Premia 1 ★ za ogólną powtórkę raz dziennie została wyłączona. Wcześniej zdobyte gwiazdki pozostają w portfelu.
 - Nie odbieramy gwiazdek za błędy i przerwy. Nie ma płatności ani kupowania dostępu do materiałów.
 - Food ukończony na mapie daje także widoczną w domku odznakę kociego kucharza. Ukończenie oznacza przejście lekcji, nie deklarację trwałego zapamiętania wszystkich słów; trudne pozycje pozostają do powtórki.
 
 Nagroda jest częścią tego samego zapisu co ukończona sesja. Sprawdzenie identyfikatora lekcji zapobiega powtórnemu naliczeniu po ponownym kliknięciu czy odświeżeniu. Saldo to zdobyte gwiazdki pomniejszone o zapisane koszty zakupów.
+
+## Powtórka na końcu każdego etapu
+
+Każdy etap ma kafelek **Powtórka**. Zbiera błędy tylko z jego własnych lekcji, również podczas ich ponownego przechodzenia. Etap gramatyczny zbiera zadania, a etap słownikowy słówka. Ta sama pozycja może wymagać niezależnego utrwalenia w dwóch etapach, jeśli błąd wystąpił w obu. Swobodna „Powtórka błędów” pozostaje osobnym treningiem i nie zastępuje tur etapowych.
+
+- 0/3: pozycja jest gotowa do najbliższej tury.
+- Po pierwszej poprawnej odpowiedzi pomija jedną turę, po drugiej dwie.
+- Trzecia samodzielna poprawna odpowiedź oznacza utrwalenie 3/3.
+- Błąd zeruje serię i przywraca pozycję w następnej turze. Natychmiastowa poprawka po wyjaśnieniu oraz kolejna próba tej samej pozycji w tej samej turze nie zwiększają licznika.
+- Postęp zapisujemy dopiero po ukończeniu całej tury, do 10 różnych pozycji. Samo otwarcie, zamknięcie lub porzucenie poprawnie zaczętej tury nie zwiększa licznika. Nowy błąd zapisuje się od razu, żeby nie można było go cofnąć zamknięciem.
+- Jeśli wszystkie pozostałe pozycje czekają na późniejszą turę, aplikacja od razu wybiera najbliższy niepusty zestaw. Można uczyć się kilka razy tego samego dnia; nie ma ograniczeń dniami ani pustych uruchomień.
+
+Na zwiniętym kafelku etapu widać osobno ukończenie lekcji i procent utrwalenia, np. **60% utrwalenia · jeszcze 4 słówka**. Procent to udział pozycji z pełnym 3/3 wśród wszystkich, które trafiły do kolejki, a nie udział poprawnych prób. Brak błędów jest opisany jako **Brak zaległych powtórek**. Na głównym podglądzie Food i nad mapą widać podsumowanie. We wspólnym podsumowaniu powtarzająca się pozycja jest liczona raz; pozostaje zaległa, jeśli choć jeden etap jeszcze jej nie utrwalił.
+
+Powtórka nie blokuje zakończenia etapu ani następnych lekcji. Po ponownym błędzie procent może spaść, ale ukończone lekcje i przyznane gwiazdki pozostają. Premia etapu nigdy nie jest przyznawana drugi raz.
+
+Nowe pola są opcjonalną częścią zapisu `adventure`: `stageReviews`, `reviewSchema` i kursor `reviewArchiveHead`. Stare błędy lekcji z mapy są odtwarzane z ostatnich sesji i, jednorazowo, z archiwum. Brakujące starsze części na drugim urządzeniu wymagają połączenia; nie blokuje to bieżącej nauki. Nagrody etapowe czekają, aż sprawdzenie dawnej historii zostanie zakończone, żeby nie przyznać ich przedwcześnie. Nowszych serii nie zerujemy przy doczytywaniu dawnego błędu. Kolejki, tury i nagrody są objęte zwykłą synchronizacją, ochroną konfliktów, kopią i działaniem offline. Nie trzeba zmieniać reguł Firebase po tej aktualizacji, jeśli reguły dla archiwum zostały już opublikowane.
 
 ## Domek
 

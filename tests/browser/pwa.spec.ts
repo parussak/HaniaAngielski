@@ -36,6 +36,13 @@ test('PWA: manifest, ikony i zimny start bez sieci; fiszki, quiz, gramatyka i wz
   await offline.getByRole('button',{name:'Moja nauka',exact:true}).tap();
   await offline.getByRole('button',{name:'Kocia mapa Food →'}).tap();await expect(offline.locator('.journey-stage')).toHaveCount(7);
   await offline.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await expect(offline.locator('.learn-word')).toHaveCount(5);
+  offline.once('dialog',d=>d.accept());await offline.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await expect(offline.locator('.option').first()).toBeVisible();
+  await offline.locator('.option').filter({hasNotText:'apple'}).first().tap();await expect(offline.locator('.feedback.incorrect')).toBeVisible();
+  await offline.getByRole('button',{name:'Moja nauka',exact:true}).tap();await offline.getByRole('button',{name:'Kocia mapa Food →'}).tap();
+  const review=offline.locator('.journey-stage').first().locator('.stage-review-step');await expect(review).toContainText('1 słówko');
+  offline.once('dialog',d=>d.accept());await review.tap();await expect(offline.locator('.review-meter')).toContainText('0/3');
+  await offline.getByRole('button',{name:'apple',exact:true}).tap();await offline.getByRole('button',{name:/Dalej/}).tap();await expect(offline.locator('.review-result')).toContainText('1 słówko');
+  await offline.reload();await offline.getByRole('button',{name:'Kocia mapa Food →'}).tap();await offline.locator('.journey-stage').first().locator('.stage-review-step').tap();await expect(offline.locator('.review-meter')).toContainText('1/3');
   await offline.getByRole('button',{name:'Domek',exact:true}).tap();await expect(offline.locator('.room-background')).toHaveJSProperty('complete',true);
   expect(await offline.locator('.room-background').evaluate((img:HTMLImageElement)=>img.naturalWidth)).toBeGreaterThan(0);
 });

@@ -3,8 +3,9 @@ import {checkPage,historyPages,type HistoryPage} from './history.ts';
 
 export async function validateFullBackup(input:unknown):Promise<Backup>{
   const b=validateBackup(input);
-  if(!b.progress.history?.head){if(b.archives?.length)throw new Error('Kopia zawiera niepowiązaną historię.');return b;}
+  if(!b.progress.history?.head){if(b.archives?.length||b.progress.adventure?.reviewArchiveHead)throw new Error('Kopia zawiera niepowiązaną historię.');return b;}
   const available=new Map((b.archives??[]).map(page=>[page.id,page]));
+  if(b.progress.adventure?.reviewArchiveHead&&!available.has(b.progress.adventure.reviewArchiveHead))throw new Error('W kopii brakuje części historii potrzebnej do odtworzenia powtórek.');
   const pages=await historyPages(b.progress.history.head,async id=>{const page=available.get(id);if(!page)throw new Error('W kopii brakuje części starszej historii. Pobierz pełną kopię z aplikacji.');return checkPage(page);});
   const sessions=pages.flatMap(page=>page.sessions);
   if(pages.length!==available.size||sessions.length!==b.progress.history.sessions)throw new Error('Niezgodna liczba sesji w kopii historii.');

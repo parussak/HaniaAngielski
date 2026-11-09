@@ -34,12 +34,22 @@ Szczegółowy raport: [raport-poprawek-audyt.md](raport-poprawek-audyt.md). Inst
 
 ## Kocia mapa, domek i części historii
 
-Dodano siedem etapów Food i 41 lekcji, obejmujących wszystkie 97 słówek i zadania gramatyczne/rozmówki. Lekcja zaczyna się od słówek lub przykładów reguł, potem przechodzi do ćwiczeń. Pierwsze ukończenie daje 3 gwiazdki; powtórka błędów daje 1 gwiazdkę raz dziennie. Sześć dekoracji domku można kupować, ustawiać, zamieniać i chować. Postęp i zakupy są częścią zapisu konta i kopii, a własny trening pozostaje dostępny. Szczegóły: [kocia-przygoda.md](kocia-przygoda.md).
+Dodano siedem etapów Food i 41 lekcji, obejmujących wszystkie 97 słówek i zadania gramatyczne/rozmówki. Lekcja zaczyna się od słówek lub przykładów reguł, potem przechodzi do ćwiczeń. Pierwsze ukończenie daje 3 gwiazdki; dodatkowe 3 przysługują za domknięty etap z 100% utrwalenia powtórki. Dawna premia dzienna jest wyłączona, bez odebrania zdobytych wcześniej gwiazdek. Sześć dekoracji domku można kupować, ustawiać, zamieniać i chować. Postęp i zakupy są częścią zapisu konta i kopii, a własny trening pozostaje dostępny. Szczegóły: [kocia-przygoda.md](kocia-przygoda.md).
 
 Starsze pełne sesje są zachowane w niezmiennych częściach lokalnych i chmurowych. Bieżąca migawka przechowuje najwyżej 30 ostatnich sesji, podsumowania oraz początek łańcucha historii. Import/eksport uwzględnia pełne archiwum, a stare kopie pozostają zgodne. Sprawdzono migrację 1500 sesji, błędy zapisu, integralność części, statystyki i kolejność wysyłania. Przy pobraniu starego dużego zapisu konta migracja odbywa się automatycznie. [historia.md](historia.md).
 
 Weryfikacja tej wersji: 65 testów jednostkowych i 41 testów zbudowanej aplikacji przeszło. Sprawdzono zakup po ukończeniu lekcji, brak podwójnej nagrody, ustawienie po odświeżeniu, kopie na drugim urządzeniu, odrębność kont, testową synchronizację domku, naukę i domek offline oraz układ mobilny. Adapter konta w testach jest atrapą; nie tworzono rzeczywistych kont ani nie publikowano reguł. Gotowe pliki strony: 4 138 399 bajtów, wzrost o 55 942 bajty (1,37%) względem poprzedniej wersji. Wszystkie siedem nowych grafik domku to łącznie 3374 bajty SVG.
 
 **Przed publikacją strony użytkowniczka musi opublikować aktualną zawartość `firestore.rules` w konsoli Firebase.** Reguły dodają prywatne części historii; stara reguła bieżącego zapisu jest zachowana. Nie wykonano commita, pushu ani zdalnego wdrożenia reguł.
+
+## Powtórki etapów do 3/3
+
+Każdy etap mapy ma osobny, nieblokujący kafelek „Powtórka”. Zbiera błędy tylko z lekcji tego etapu. Poprawne pierwsze próby w ukończonych turach zwiększają serię do 3/3; po pierwszym sukcesie pozycja pomija jedną turę, po drugim dwie. Jeśli wszystkie czekają, wybierana jest najbliższa niepusta tura. Samo uruchamianie, przerwanie ani natychmiastowa poprawka nie zwiększają serii. Błąd zapisuje się od razu i zeruje serię.
+
+Zwinięte etapy i podstawowy podgląd Food pokazują procent pełnego utrwalenia i liczbę pozostałych słówek/zadań. Wszystkie lekcje ukończone + brak zaległych pozycji daje jednorazowo 3 ★ za etap. Następny etap nie jest blokowany, a nowy błąd nie odbiera gwiazdek ani nie pozwala ponownie zdobyć tej samej premii. Etap bez błędów dostaje premię po ostatniej lekcji.
+
+Starsze błędy lekcji są odtwarzane z ostatnich sesji i jednorazowo ze starszych części historii. Kursor doczytywania jest zapisywany, nauka pozostaje dostępna offline, a premie etapów czekają na kompletne sprawdzenie starej historii. Nie zmieniono reguł ani struktury dokumentów Firebase. Zapis, kopie i rozstrzyganie konfliktów obejmują nowe liczniki.
+
+Weryfikacja aktualizacji: 75 testów jednostkowych i 44 przeglądarkowe przeszły; build i kontrola treści poprawne. Sprawdzono zakres etapu, reset serii, brak podwójnego naliczania, nieblokowanie lekcji, stare kopie/archiwum, mobilny układ, prawdziwy tryb offline PWA oraz synchronizację licznika między dwoma testowymi urządzeniami i rozdzielenie kont. Cała strona ma około 4,148 MB; aktualizacja dodała około 9,9 KB bez nowych grafik. Synchronizacja w testach korzysta z atrapy adaptera, nie zmienia rzeczywistych kont. Zmiany pozostają lokalne, bez commita i pushu.
 
 Dodano osobny tryb Rozmówki: 12 nowych krótkich dialogów z jedną luką, utworzonych w zakresie słownictwa i gramatyki Food, z oznaczeniem adaptacji. Wybór i wpisywanie, porównanie błędnej odpowiedzi, wznowienie, kopie i synchronizacja korzystają z dotychczasowego mechanizmu. Nowy plik treści: `public/content/02-food/rozmowki.json`. Wszystkie ilustracje zastąpiono spójnymi pastelowymi SVG, a zadania gramatyczne mają scenki przedstawiające sytuację zdania zamiast samego emoji. Identyfikatory i rewizje dotychczasowych zadań pozostały bez zmian.

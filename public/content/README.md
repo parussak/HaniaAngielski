@@ -23,6 +23,8 @@ public/content/
 
 `sciezka.json` opisuje etapy i lekcje, niezależnie od kodu. Każda lekcja wskazuje `wordIds`, `exerciseIds` i `ruleIds` z pozostałych plików, więc zmiana słówka lub zadania jest widoczna także w lekcji. `title` i `intro` określają tytuł oraz wprowadzenie. Zachowaj identyfikatory lekcji przy poprawianiu tytułów: według nich przyznawane są jednorazowe nagrody. [Pełna instrukcja mapy i domku](../../docs/kocia-przygoda.md).
 
+Kafelek **Powtórka** na końcu każdego etapu powstaje automatycznie z błędów użytkownika. Nie dopisuj go do tablicy zwykłych lekcji: nie blokuje kolejnego etapu. Zachowaj także identyfikatory etapów — są kluczem ich osobnych kolejek powtórek i nagród. Procent oznacza udział zebranych pozycji, które osiągnęły 3/3 w ukończonych turach, a dodatkowe 3 ★ przysługują raz po ukończeniu wszystkich lekcji i utrwaleniu całej kolejki.
+
 ## Dwa zestawy fiszek
 
 „Fiszki podstawa” obejmują 38 haseł z ramek Vocabulary: Food and drink (1), Food and drink (2) i Containers (podręcznik s. 25, 27 i 29). Tłumaczenia pochodzą z Wordlist. „Fiszki” obejmują wszystkie 97 dotychczasowych haseł.

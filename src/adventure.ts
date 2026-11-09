@@ -1,10 +1,12 @@
 import {inputFor,keyFor,questionFor,type Module,type Progress,type Session,type Item,type AnswerMode} from './core.ts';
+import type {StageReview} from './stage-review.ts';
 export interface Lesson {id:string;title:string;intro:string;wordIds:string[];exerciseIds:string[];ruleIds:string[]}
 export interface Stage {id:string;title:string;cat:string;illustration:string;lessons:Lesson[]}
 export interface Journey {version:1;moduleId:string;title:string;stages:Stage[]}
 export interface Adventure {
   version:1;earned:number;completed:Record<string,{at:string}>;
   purchases:Record<string,{cost:number;slot:string|null}>;reviewDay?:string;
+  reviewSchema?:1;reviewArchiveHead?:string|null;stageReviews?:Record<string,StageReview>;
 }
 export const freshAdventure=():Adventure=>({version:1,earned:0,completed:{},purchases:{}});
 export const slots=[{id:'left',name:'Lewy kącik'},{id:'window',name:'Pod oknem'},{id:'right',name:'Prawy kącik'},{id:'rug',name:'Na dywanie'},{id:'shelf',name:'Na półce'},{id:'front',name:'Z przodu'}];
@@ -23,10 +25,11 @@ export function nextLesson(journey:Journey,p:Progress){return lessons(journey).f
 export function unlocked(journey:Journey,lesson:Lesson,p:Progress){const all=lessons(journey),index=all.findIndex(l=>l.lesson.id===lesson.id);return index>=0&&all.slice(0,index).every(l=>p.adventure?.completed[l.key]);}
 export function validateJourney(value:unknown,m:Module):Journey {
   const j=value as Journey,fail=():never=>{throw new Error('Niepoprawna mapa modułu.');};
-  if(!j || j.version!==1 || j.moduleId!==m.id || typeof j.title!=='string' || !Array.isArray(j.stages)||!j.stages.length)return fail();
-  const ids=new Set<string>();
+  if(!j || j.version!==1 || j.moduleId!==m.id || !/^[a-z0-9-]+$/.test(j.moduleId) || typeof j.title!=='string' || !Array.isArray(j.stages)||!j.stages.length)return fail();
+  const ids=new Set<string>(),stageIds=new Set<string>();
   for(const stage of j.stages){
-    if(!stage || !/^[a-z0-9-]+$/.test(stage.id) || typeof stage.title!=='string'||!['albert','olus','felix','maja','krzywolap'].includes(stage.cat)||!/^illustrations\/[a-z0-9-]+\.svg$/.test(stage.illustration)||!Array.isArray(stage.lessons)||!stage.lessons.length)return fail();
+    if(!stage || !/^[a-z0-9-]+$/.test(stage.id) || stageIds.has(stage.id) || typeof stage.title!=='string'||!['albert','olus','felix','maja','krzywolap'].includes(stage.cat)||!/^illustrations\/[a-z0-9-]+\.svg$/.test(stage.illustration)||!Array.isArray(stage.lessons)||!stage.lessons.length)return fail();
+    stageIds.add(stage.id);
     for(const l of stage.lessons){
       if(!l || !/^[a-z0-9-]+$/.test(l.id)||ids.has(l.id)||typeof l.title!=='string'||typeof l.intro!=='string'||![l.wordIds,l.exerciseIds,l.ruleIds].every(Array.isArray)||l.wordIds.length+l.exerciseIds.length<1||l.wordIds.length+l.exerciseIds.length>8)return fail();
       ids.add(l.id);
@@ -53,10 +56,6 @@ export function rewardCompletion(p:Progress,s:Session){
   const a=p.adventure??freshAdventure();
   let reward=0;
   if(s.lesson && !Object.hasOwn(a.completed,s.lesson.id)){a.completed[s.lesson.id]={at:s.completedAt};reward=3;}
-  if(!s.lesson && s.mode==='review'){
-    const d=new Date(s.completedAt),day=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-    if(!a.reviewDay || a.reviewDay<day){reward=1;a.reviewDay=day;}
-  }
   if(reward){a.earned+=reward;p.adventure=a;}
   return reward;
 }
