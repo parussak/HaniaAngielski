@@ -1,12 +1,12 @@
-import {initializeApp} from 'firebase/app';
-import {getAuth,browserLocalPersistence,setPersistence,signInWithEmailAndPassword,createUserWithEmailAndPassword,sendPasswordResetEmail,signOut,updateProfile,updatePassword,verifyBeforeUpdateEmail,EmailAuthProvider,reauthenticateWithCredential,reload,type User} from 'firebase/auth';
-import {cleanName} from './profile.ts';
-import {getFirestore,doc,getDocFromServer,runTransaction,serverTimestamp} from 'firebase/firestore';
-import {firebaseConfig} from './firebase-config.ts';
-import {backup,validateBackup,type Progress} from './core.ts';
-import {SyncConflict,type RemoteProgress} from './sync.ts';
-import {checkPage,byteSize,publishHistory,type HistoryPage} from './history.ts';
-import {localHistoryPage,putHistoryPage} from './storage.ts';
+import { initializeApp } from 'firebase/app';
+import { browserLocalPersistence,createUserWithEmailAndPassword,EmailAuthProvider,getAuth,reauthenticateWithCredential,reload,sendPasswordResetEmail,setPersistence,signInWithEmailAndPassword,signOut,updatePassword,updateProfile,verifyBeforeUpdateEmail,type User } from 'firebase/auth';
+import { doc,getDocFromServer,getFirestore,runTransaction,serverTimestamp } from 'firebase/firestore';
+import { backup,validateBackup,type Progress } from './core.ts';
+import { firebaseConfig } from './firebase-config.ts';
+import { byteSize,checkPage,publishHistory,type HistoryPage } from './history.ts';
+import { cleanName } from './profile.ts';
+import { localHistoryPage,putHistoryPage } from './storage.ts';
+import { SyncConflict,type RemoteProgress } from './sync.ts';
 
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);auth.languageCode='pl';
@@ -87,4 +87,4 @@ export async function pushProgress(uid:string,progress:Progress,expectedRevision
     return {revision,progress};
   });
 }
-export {firebaseMessage} from './firebase-errors.ts';
+export { firebaseMessage } from './firebase-errors.ts';

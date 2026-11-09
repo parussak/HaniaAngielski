@@ -1,11 +1,10 @@
-import type {Module,Progress} from './core.ts';
-import {lessons,stars,type Journey} from './adventure.ts';
-import {reviewStats,pendingLabel} from './stage-review.ts';
-import {e,icon} from './ui.ts';
-
-function moduleSubtitle(m:Module){return [m.level,`Moduł ${m.order}`,m.cover].filter(Boolean).map(e).join(' · ');}
-export function journeyList(modules:Module[],journeys:Journey[],progress:Progress){
-  return `<button class="back" data-action="home">← Moja nauka</button>
+import { lessons, stars, type Journey } from '../adventure.ts';
+import type { Module, Progress } from '../core.ts';
+import { pendingLabel, reviewStats } from '../stage-review.ts';
+import { e, icon } from '../ui.ts';
+function moduleSubtitle(m: Module) { return [m.level, `Moduł ${m.order}`, m.cover].filter(Boolean).map(e).join(' · '); }
+export function journeyList(modules: Module[], journeys: Journey[], progress: Progress) {
+    return `<button class="back" data-action="home">← Moja nauka</button>
     <div class="journey-top">
     <div>
     <div class="eyebrow">MAŁE KROKI, WIELKIE PRZYGODY</div>
@@ -15,26 +14,27 @@ export function journeyList(modules:Module[],journeys:Journey[],progress:Progres
     </button>
     </div>
     <p class="lead">Wybierz mapę. Ucz się małymi krokami i zdobywaj gwiazdki do kociego domku.</p>
-    <div class="journey-catalog">${journeys.map(j=>{
-    const m=modules.find(m=>m.id===j.moduleId)!;
-    const done=lessons(j).filter(l=>progress.adventure?.completed[l.key]).length,total=lessons(j).length,reviews=reviewStats(progress,j);
-    return `<article class="adventure-invite">
+    <div class="journey-catalog">${journeys.map(j => {
+        const m = modules.find(m => m.id === j.moduleId)!;
+        const done = lessons(j).filter(l => progress.adventure?.completed[l.key]).length, total = lessons(j).length, reviews = reviewStats(progress, j);
+        return `<article class="adventure-invite">
     <div>
     <p class="catalog-subtitle">${moduleSubtitle(m)}</p>
     <h2>${e(j.title)}</h2>
     <p>${done} z ${total} lekcji ukończonych</p>
     <div class="journey-progress" role="progressbar" aria-label="Ukończone lekcje: ${e(j.title)}" aria-valuenow="${done}" aria-valuemin="0" aria-valuemax="${total}">
-    <span style="width:${Math.round(done/total*100)}%">
+    <span style="width:${Math.round(done / total * 100)}%">
     </span>
     </div>
-    <p class="retention-overview">${reviews.total?`Utrwalenie: ${reviews.percent}% · ${reviews.pending?`do powtórzenia: ${pendingLabel(reviews)}`:'brak zaległych powtórek ✓'}`:'Brak zaległych powtórek ✓'}${progress.adventure?.reviewArchiveHead?' · pobieramy starsze błędy':''}</p>
+    <p class="retention-overview">${reviews.total ? `Utrwalenie: ${reviews.percent}% · ${reviews.pending ? `do powtórzenia: ${pendingLabel(reviews)}` : 'brak zaległych powtórek ✓'}` : 'Brak zaległych powtórek ✓'}${progress.adventure?.reviewArchiveHead ? ' · pobieramy starsze błędy' : ''}</p>
     <button class="primary" data-action="map" data-id="${e(j.moduleId)}" aria-label="Otwórz mapę ${e(j.title)}">Otwórz mapę ${icon('arrow')}</button>
     </div>
     <img src="./illustrations/word-have-a-picnic.svg" alt="" width="110" height="100">
     </article>`;
-  }).join('') || '<p class="empty">Nowe przygody pojawią się tutaj, gdy dodamy mapy modułów.</p>'}</div>`;
+    }).join('') || '<p class="empty">Nowe przygody pojawią się tutaj, gdy dodamy mapy modułów.</p>'}</div>`;
 }
-export function moduleList(modules:Module[]){return `<button class="back" data-action="home">← Moja nauka</button>
+export function moduleList(modules: Module[]) {
+    return `<button class="back" data-action="home">← Moja nauka</button>
     <h1>Ćwicz po swojemu</h1>
     <p class="lead">Wybierz moduł, a potem fiszki, quiz, gramatykę, rozmówki lub powtórkę.</p>
     <section class="modules-section">
@@ -48,7 +48,7 @@ export function moduleList(modules:Module[]){return `<button class="back" data-a
     </div>
     <div class="modules-grid">${modules.map(m => `<article class="module-card">
     <div class="module-cover">
-    <span class="module-number">MODUŁ ${m.order.toString().padStart(2,'0')}</span>
+    <span class="module-number">MODUŁ ${m.order.toString().padStart(2, '0')}</span>
     <span class="cover-letters">${e(m.cover)}</span>
     <span class="cover-flower">${icon('cat')}</span>
     <span class="demo-badge">${e(m.label)}</span>
@@ -70,4 +70,5 @@ export function moduleList(modules:Module[]){return `<button class="back" data-a
     <span class="soft-tag">Wkrótce, z Twoich materiałów</span>
     </article>
     </div>
-    </section>`;}
+    </section>`;
+}

@@ -1,0 +1,39 @@
+import type { Journey } from '../adventure.ts';
+import type { CatCatalog } from '../cats.ts';
+import { emptyProgress, type AnswerMode, type Backup, type Mode, type Module, type Progress, type Session } from '../core.ts';
+import type { AccountUser } from '../firebase.ts';
+// Transient application state only. Stored Progress and Backup formats are unchanged.
+export class AppState {
+    modules: Module[] = [];
+    catCatalog: CatCatalog | null = null;
+    progress: Progress = emptyProgress();
+    screen: 'home' | 'setup' | 'study' | 'progress' | 'backup' | 'account' | 'summary' | 'map' | 'lesson-intro' | 'house' | 'journeys' | 'module-list' = 'home';
+    journeys: Journey[] = [];
+    introLessonId = '';
+    chosenDecoration = 'pillow';
+    lastReward = 0;
+    lastStageReward = 0;
+    olderSessions: Session[] = [];
+    olderHead: string | null | undefined;
+    viewedHistory = '';
+    selected!: Module;
+    mode: Mode = 'flashcards-basic';
+    answerMode: AnswerMode = 'mixed';
+    previous = false;
+    pending: Backup | null = null;
+    notice = '';
+    storageError = '';
+    busy = false;
+    ready = false;
+    lastSession: Session | null = null;
+    renderedScreen = '';
+    user: AccountUser | null = null;
+    guestProgress = emptyProgress();
+    accountError = '';
+    accountNotice = '';
+    registerAccount = false;
+    accountSection = 'name';
+    authWorking = false;
+    reauthNeeded = false;
+}
+export type Screen = AppState['screen'];

@@ -1,4 +1,4 @@
-import type {Progress,Session} from './core.ts';
+import type { Progress,Session } from './core.ts';
 
 export interface HistorySummary {
   head:string|null; sessions:number;

@@ -1,4 +1,4 @@
-import { assembleModule, validateModules } from './content-validation.ts';
+import { assembleModule,validateModules } from './content-validation.ts';
 
 async function json(path: string): Promise<any> {
   const response = await fetch(new URL(`content/${path}`, document.baseURI), { cache: 'no-cache' });

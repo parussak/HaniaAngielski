@@ -1,6 +1,6 @@
-import {freshAdventure,lessonKey,type Journey,type Stage} from './adventure.ts';
-import {inputFor,questionFor,resolveItem,type Progress,type Session,type Module,type Item,type AnswerMode} from './core.ts';
-import type {HistoryPage} from './history.ts';
+import { freshAdventure,lessonKey,type Journey,type Stage } from './adventure.ts';
+import { inputFor,questionFor,resolveItem,type AnswerMode,type Item,type Module,type Progress,type Session } from './core.ts';
+import type { HistoryPage } from './history.ts';
 
 export interface ReviewItem {item:Item;correct:number;due:number}
 export interface StageReview {round:number;items:Record<string,ReviewItem>;rewardedAt?:string}

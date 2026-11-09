@@ -1,6 +1,6 @@
-import {decorations,lessons,nextLesson,lessonKey,stars,unlocked,slots,type Journey,type Lesson} from './adventure.ts';
-import type {Module,Progress} from './core.ts';
-import {reviewStats,reviewState,stageKey,pendingLabel} from './stage-review.ts';
+import { decorations,lessonKey,lessons,nextLesson,slots,stars,unlocked,type Journey,type Lesson } from './adventure.ts';
+import type { Module,Progress } from './core.ts';
+import { pendingLabel,reviewState,reviewStats,stageKey } from './stage-review.ts';
 const e=(v:unknown)=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
 const asset=(file:string)=>e(new URL(file,document.baseURI).href);
 function retentionText(stats:ReturnType<typeof reviewStats>){return stats.total?`${stats.percent}% utrwalenia · ${stats.pending?`jeszcze ${pendingLabel(stats)}`:'brak zaległych powtórek ✓'}`:'Brak zaległych powtórek ✓';}

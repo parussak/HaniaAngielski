@@ -95,14 +95,18 @@ Remove-Item Env:HANIA_TEST_BUILD
 
 Testy używają odizolowanych danych. Bez zmiennej `HANIA_TEST_BUILD` uruchamiają wersję deweloperską. Zmienna `HANIA_BASE_URL` służy do sprawdzania innego adresu i ma pierwszeństwo przed lokalnym podglądem.
 
-## Kod strony startowej
+## Struktura kodu
 
-- `src/home-view.ts` — wygląd strony startowej, ramki następnego kroku, pomocy i aktualizacji; otrzymuje dane, nie zapisuje wyników.
+[Mapa plików i zasady rozwijania aplikacji](docs/architektura.md) opisuje ekrany, kontrolery, logikę nauki i zapis. Główny plik uruchamia teraz wydzielone moduły; format wyników i kopii pozostaje zgodny.
+
+### Strona startowa
+
+- `src/views/home.ts` — wygląd strony startowej, ramki następnego kroku, pomocy i aktualizacji; otrzymuje dane, nie zapisuje wyników.
 - `src/next-step.ts` — wybór kolejnej czynności na podstawie istniejących postępów konta; bez nowego formatu zapisu i bez odwołań do przeglądarki.
-- `src/catalog-view.ts` — osobne katalogi map i modułów.
-- `src/hero-art.ts` — dotychczasowy kotek z książką.
+- `src/views/catalog.ts` — osobne katalogi map i modułów.
+- `src/views/hero-art.ts` — dotychczasowy kotek z książką.
 - `src/ui.ts`, `src/learning-labels.ts` — wspólne ikony, przyciski, bezpieczne wyświetlanie tekstu i nazwy trybów.
 - `src/home.css` — układ tych ekranów, także na telefonie.
-- `src/main.ts` — łączy widoki z nawigacją i zapisem, wykonuje czynność wskazaną przez następny krok.
+- `src/main.ts` — uruchamia aplikację i łączy jej części; przejścia i kliknięcia obsługuje `src/app/events.ts`, a czynność następnego kroku wykonuje `src/controllers/learning.ts`.
 
 Nowe mapy dodaje się przez materiały modułu (pole `journeyPath`), a ich kolejność wyznacza `order`. Logika następnego kroku obsługuje wiele modułów; obecny katalog produkcyjny nadal zawiera Food.

@@ -1,7 +1,7 @@
-import {keyFor,resolveItem,sessionCompatible,type Module,type Progress} from './core.ts';
-import {lessons,nextLesson,type Journey} from './adventure.ts';
-import {stageForSession,stageKey,reviewState} from './stage-review.ts';
-import {labels} from './learning-labels.ts';
+import { lessons,nextLesson,type Journey } from './adventure.ts';
+import { keyFor,resolveItem,sessionCompatible,type Module,type Progress } from './core.ts';
+import { labels } from './learning-labels.ts';
+import { reviewState,stageForSession,stageKey } from './stage-review.ts';
 
 interface StepBase {moduleId:string|null;catId:string}
 export type NextStep = StepBase & (

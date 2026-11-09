@@ -1,5 +1,5 @@
-import {inputFor,keyFor,questionFor,type Module,type Progress,type Session,type Item,type AnswerMode} from './core.ts';
-import type {StageReview} from './stage-review.ts';
+import { inputFor,keyFor,questionFor,type AnswerMode,type Item,type Module,type Progress,type Session } from './core.ts';
+import type { StageReview } from './stage-review.ts';
 export interface Lesson {id:string;title:string;intro:string;wordIds:string[];exerciseIds:string[];ruleIds:string[]}
 export interface Stage {id:string;title:string;cat:string;illustration:string;lessons:Lesson[]}
 export interface Journey {version:1;moduleId:string;title:string;stages:Stage[]}

@@ -1,4 +1,4 @@
-import {backup,emptyProgress,validateBackup,type Progress} from './core.ts';
+import { backup,emptyProgress,validateBackup,type Progress } from './core.ts';
 
 export interface RemoteProgress { revision: number; progress: Progress }
 export interface AccountCache {

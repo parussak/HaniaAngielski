@@ -41,7 +41,7 @@ test('I6: obce i dawne klucze nie zawyżają statystyk ani powtórek',()=>{
   assert.equal(s.known,1);assert.equal(s.review,0);
 });
 test('D6/D1/D2/D3: etykiety, wskazówki klawiatury i źródła',()=>{
-  const main=readFileSync(new URL('../src/main.ts',import.meta.url),'utf8');
+  const main=['study','setup'].map(view=>readFileSync(new URL(`../src/views/${view}.ts`,import.meta.url),'utf8')).join('\n');
   assert.ok(main.includes('Poprawione za drugim razem'));assert.ok(main.includes('Trochę wybieram, trochę wpisuję'));
   assert.ok(main.includes('autocorrect="off"'));assert.ok(main.includes('enterkeyhint="done"'));assert.ok(main.includes('aria-hidden="true"'));
   assert.ok(m.grammar.every(r=>!r.source.includes('PXL_')));

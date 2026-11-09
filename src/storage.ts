@@ -1,5 +1,5 @@
-import { emptyProgress,validateBackup,backup,type Progress } from './core.ts';
-import {checkPage,byteSize,type HistoryPage} from './history.ts';
+import { backup,emptyProgress,validateBackup,type Progress } from './core.ts';
+import { byteSize,checkPage,type HistoryPage } from './history.ts';
 let dbPromise: Promise<IDBDatabase> | undefined;
 export const storageNamespace = `hania-language:${typeof location === 'undefined' ? 'test' : new URL('.', location.href).pathname}`;
 function database() {

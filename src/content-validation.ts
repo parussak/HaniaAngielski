@@ -1,5 +1,5 @@
-import type { Module, Word, Exercise } from './core.ts';
 import { normalizeAnswer } from './answers.ts';
+import type { Exercise,Module,Word } from './core.ts';
 
 // Pytania słownikowe wskazują słówka, zamiast dublować ich tekst i odpowiedzi.
 export function assembleModule(metadata: any, words: any, quiz: any, exercises: any, grammar: any, dialogues: any = []) {
