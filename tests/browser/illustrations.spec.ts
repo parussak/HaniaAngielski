@@ -15,7 +15,7 @@ test('gramatyka: nawias wymusza wybór, obrazek od początku, poprawa i wznowien
   await expect(page.locator('.question-illustration figcaption')).toHaveCount(0);
   await page.screenshot({path:'test-results/grammar-illustration-before-mobile.png'});
   await page.getByRole('button',{name:'so',exact:true}).tap();
-  await expect(page.locator('.answer-illustration [role="img"]')).toHaveAccessibleName('sport — sport');
+  await expect(page.locator('.answer-illustration img')).toHaveAccessibleName('Uprawianie sportu i głód — powód oraz skutek.');
   await page.screenshot({path:'test-results/grammar-illustration-mobile.png'});
   const nav=await page.locator('.sidebar nav').boundingBox();
   const next=await page.getByRole('button',{name:'Dalej',exact:false}).boundingBox();

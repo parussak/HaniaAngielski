@@ -22,7 +22,7 @@ test('PWA: manifest, ikony i zimny start bez sieci; fiszki, quiz, gramatyka i wz
   await moduleSetup(offline);await offline.getByText('Wpisuję odpowiedź',{exact:true}).tap();await offline.getByRole('button',{name:'Fiszki podstawa',exact:true}).tap();
   const front=await offline.locator('.question').innerText(),word=modules[0].words.find(w=>w.front===front)!;
   await offline.getByRole('textbox').fill(word.back);await offline.getByRole('button',{name:/Sprawdź/}).tap();await expect(offline.locator('.feedback.correct')).toBeVisible();
-  for(const mode of ['Quiz słownictwa','Gramatyka']){
+  for(const mode of ['Quiz słownictwa','Gramatyka','Rozmówki']){
     await offline.getByRole('button',{name:'Moja nauka',exact:true}).tap();await moduleSetup(offline);await offline.getByText('Wybieram odpowiedź',{exact:true}).tap();
     offline.once('dialog',d=>d.accept());await offline.getByRole('button',{name:mode,exact:true}).tap();await expect(offline.locator('.question-illustration')).toBeVisible();
     await offline.locator('.option').first().tap();await expect(offline.locator('.feedback')).toBeVisible();

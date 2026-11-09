@@ -7,6 +7,7 @@
 - **97 fiszek:** lista Wordlist ze s. 33 (lekcje 2.1–2.6) oraz cztery dodatkowe hasła z Word blog: Food w zeszycie ćwiczeń, s. 21: toast, toaster, frying pan i Enjoy your meal!
 - **97 pytań słownikowych:** po jednym na hasło, z odpowiedziami opartymi na tej samej liście. Pytania wskazują identyfikatory słów, więc tłumaczenia nie są utrzymywane w dwóch miejscach.
 - **59 ćwiczeń:** policzalność (8), a/an/brak (7), some/any (9), there is/are i krótkie odpowiedzi (7), how much/how many (10), a lot of (2), opakowania (7), zamawianie jedzenia (5), so/because (4).
+- **12 rozmówek:** krótkie dialogi z jedną luką, głównie zamawianie jedzenia i napojów oraz pytania o zapasy i ilości. Dodatkowe dialogi są nowymi adaptacjami słownictwa i konstrukcji z s. 27, 29, 30, 32 i 33; nie są transkrypcją nagrań ani cytatami z książki. Zapisano je w osobnym `rozmowki.json`.
 - **9 objaśnień zasad** dostępnych przed sesją w rozwijanej ściądze.
 
 Zadania są adaptacjami do krótkich sesji: nie stanowią wiernej kopii całych stron. Nowe warianty używają zakresu przesłanego modułu. Każda fiszka, reguła i zadanie wskazują źródło.

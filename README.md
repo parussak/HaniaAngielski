@@ -54,6 +54,9 @@ Treści znajdują się w **public/content**, niezależnie od kodu strony w `src`
 - `02-food/quiz.json` — pytania słownikowe wskazujące słowa; poprawka słówka aktualizuje także quiz.
 - `02-food/gramatyka.json` — zasady, objaśnienia i przykłady.
 - `02-food/cwiczenia.json` — zadania, klucze odpowiedzi i wyjaśnienia po błędzie.
+- `02-food/rozmowki.json` — 12 dialogów z lukami w osobnym trybie „Rozmówki”; wybór lub wpisywanie odpowiedzi, polskie wyjaśnienia i powtórka błędów.
+
+Słówka, gramatyka i rozmówki używają lokalnych pastelowych ilustracji SVG pasujących do kotków. Gramatyka przedstawia sytuację ze zdania (np. brak mleka, dwie butelki wody, zamawianie czy powód i skutek). [Edycja ilustracji](public/illustrations/README.md).
 
 [Instrukcja edycji materiałów](public/content/README.md) zawiera przykłady. Po zmianie uruchom `npm.cmd run check:content`. Podczas lokalnej nauki wystarczy zapisać pliki i odświeżyć stronę. Po wysłaniu zmian na `main` GitHub automatycznie sprawdzi, zbuduje i opublikuje aplikację. W zainstalowanej PWA nowa wersja pojawi się jako przycisk „Wczytaj nową wersję”.
 

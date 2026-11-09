@@ -54,5 +54,6 @@
     "a-carton-of-juice",
     "a-jar-of-jam",
     "a-packet-of-biscuits"
-  ]
+  ],
+  "dialoguesFile": "rozmowki.json"
 }

@@ -2,7 +2,7 @@ import type { Module, Word, Exercise } from './core.ts';
 import { normalizeAnswer } from './answers.ts';
 
 // Pytania słownikowe wskazują słówka, zamiast dublować ich tekst i odpowiedzi.
-export function assembleModule(metadata: any, words: any, quiz: any, exercises: any, grammar: any) {
+export function assembleModule(metadata: any, words: any, quiz: any, exercises: any, grammar: any, dialogues: any = []) {
   if (!metadata || typeof metadata !== 'object' || !Array.isArray(words) || !Array.isArray(quiz) || !Array.isArray(exercises) || !Array.isArray(grammar)) throw new Error('Niepoprawne pliki modułu.');
   if (!words.every(w=>w && typeof w.id==='string' && typeof w.front==='string' && typeof w.back==='string')) throw new Error('Niepoprawne słówko w slownictwo.json.');
   const vocabulary = new Map<string, Word>(words.map(w=>[w.id,w]));
@@ -15,7 +15,8 @@ export function assembleModule(metadata: any, words: any, quiz: any, exercises: 
     options.unshift(word.back);
     return { illustration:word.illustration, id:entry.id, wordId:word.id, rev:entry.rev??word.rev??1, kind:'vocabulary', prompt:entry.prompt ?? `Podaj po angielsku: ${word.front}`, answers:word.answers ?? [word.back], options, explanation:entry.explanation ?? `„${word.back}” oznacza „${word.front}”.`, requires:[metadata.id], caseSensitive:false, source:word.source };
   });
-  return {...metadata, words, exercises:[...compiled,...exercises], grammar};
+  if(!Array.isArray(dialogues))throw new Error('Niepoprawny plik rozmówek.');
+  return {...metadata, words, exercises:[...compiled,...exercises,...dialogues], grammar};
 }
 
 export function validateModules(input: unknown): Module[] {
@@ -32,7 +33,9 @@ export function validateModules(input: unknown): Module[] {
     if (!Array.isArray(m.grammar) || !m.grammar.every(r=>obj(r) && text(r.id) && text(r.title) && text(r.explanation) && texts(r.examples) && text(r.source))) return fail(`sprawdź gramatyka.json (${m.id}).`);
     if (!Array.isArray(m.exercises) || !m.exercises.length) return fail(`brak zadań (${m.id}).`);
     for (const q of m.exercises) {
-      if (!obj(q) || !text(q.id) || !['grammar','vocabulary'].includes(q.kind as string) || !text(q.prompt) || !texts(q.answers) || !texts(q.options) || q.options.length<2 || new Set(q.options).size!==q.options.length || !text(q.explanation) || !texts(q.requires) || !q.requires.includes(m.id as string) || typeof q.caseSensitive!=='boolean' || !text(q.source)) return fail(`niepoprawne zadanie (${m.id}/${q?.id ?? '?'}).`);
+      if (!obj(q) || !text(q.id) || !['grammar','vocabulary','dialogue'].includes(q.kind as string) || !text(q.prompt) || !texts(q.answers) || !texts(q.options) || q.options.length<2 || new Set(q.options).size!==q.options.length || !text(q.explanation) || !texts(q.requires) || !q.requires.includes(m.id as string) || typeof q.caseSensitive!=='boolean' || !text(q.source)) return fail(`niepoprawne zadanie (${m.id}/${q?.id ?? '?'}).`);
+      if(q.kind==='dialogue' && (!Array.isArray(q.dialogue) || q.dialogue.length<2 || q.dialogue.length>6 || !q.dialogue.every(line=>obj(line)&&text(line.speaker)&&text(line.text)&&line.speaker.length<=40&&line.text.length<=300) || q.dialogue.reduce((n,line)=>n+(line.text.match(/___/g)?.length??0),0)!==1))return fail(`rozmówka wymaga krótkiego dialogu z jedną luką (${q.id}).`);
+      if(q.dialogue!==undefined && q.kind!=='dialogue')return fail(`dialog jest dozwolony tylko w rozmówkach (${q.id}).`);
       const normalized = (s: string) => normalizeAnswer(s,q.caseSensitive as boolean);
       if (q.options.filter(o=>(q.answers as string[]).some(a=>normalized(a)===normalized(o))).length !== 1) return fail(`zadanie musi mieć dokładnie jeden poprawny wariant wyboru (${q.id}).`);
       if (q.responseType !== undefined && q.responseType !== 'choice') return fail(`niepoprawny sposób odpowiedzi (${q.id}).`);
@@ -41,6 +44,7 @@ export function validateModules(input: unknown): Module[] {
     unique(m.words,`${m.id}/słówka`); unique(m.exercises,`${m.id}/zadania`); unique(m.grammar,`${m.id}/gramatyka`);
     for(const word of m.words)if(word.answers && new Set(word.answers.map((a: string)=>normalizeAnswer(a))).size!==word.answers.length)return fail(`powtórzona odpowiedź: ${word.id}.`);
     for(const element of [...m.words,...m.exercises]){
+      if(element.illustration && element.illustration.scene!==undefined && typeof element.illustration.scene!=='boolean')return fail(`niepoprawny typ scenki ${element.id}.`);
       if(element.illustration!==undefined && (!obj(element.illustration) || !((text(element.illustration.symbol) && element.illustration.symbol.length<=24 && element.illustration.src===undefined) || (text(element.illustration.src) && /^illustrations\/[a-z0-9-]+\.svg$/.test(element.illustration.src) && element.illustration.symbol===undefined)) || !text(element.illustration.caption)))return fail(`niepoprawna ilustracja ${element.id}.`);
     }
     for(const element of [...m.words,...m.exercises])if(element.rev!==undefined && (!Number.isSafeInteger(element.rev)||element.rev<1))return fail(`niepoprawna rewizja ${element.id}.`);

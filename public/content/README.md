@@ -13,6 +13,7 @@ public/content/
     quiz.json                  pytania słownikowe: odwołania do słówek
     gramatyka.json             zasady i przykłady w rozwijanej ściądze
     cwiczenia.json             zadania, odpowiedzi i wyjaśnienia
+    rozmowki.json              krótkie dialogi z jedną luką
 ```
 
 `src` zawiera wygląd i działanie strony. `tests` sprawdza poprawność. Zdjęcia źródłowe są w lokalnym, pomijanym przez Git folderze `.local-materials`; nie są publikowane na stronie.
@@ -66,6 +67,8 @@ Pozycja poprawnej odpowiedzi jest tasowana dla każdej sesji i pytania. Po wznow
 
 - `gramatyka.json`: `title`, `explanation`, `examples` i `source` określają zawartość ściągi.
 - `cwiczenia.json`: `prompt` to polecenie; `answers` to dozwolone odpowiedzi; `options` to przyciski w trybie wyboru; `explanation` to objaśnienie po odpowiedzi; `ruleId` wskazuje zasadę ze ściągi; `requires` wskazuje moduły potrzebne do rozwiązania.
+- `rozmowki.json`: osobny kafelek „Rozmówki”. Zadanie ma `kind: "dialogue"` i tablicę `dialogue`, np. `[{"speaker":"Kelner","text":"What would you like?"},{"speaker":"Gość","text":"I'd ___ a lemonade, please."}]`. W całym dialogu musi być dokładnie jedna luka `___`. `answers`, `options`, `ruleId` i `explanation` działają jak w gramatyce. Nowe dialogi są adaptacjami w zakresie modułu, nie cytatami. Plik włącza pole `dialoguesFile: "rozmowki.json"` w `modul.json`; w module bez tego pola rozmówki są opcjonalne.
+- `illustration.src` wskazuje lokalny rysunek SVG w `public/illustrations`. `scene: true` oznacza szerszą scenkę sytuacyjną, np. zamawianie napoju albo pustą lodówkę; `caption` opisuje ją po odpowiedzi. Obrazek jest widoczny od początku, bez podpisu podpowiadającego tłumaczenie. Nie zamieniaj scenki „nie ma mleka” na ilustrację pełnej szklanki mleka. Styl i źródła rysunków opisuje `public/illustrations/README.md`.
 - `caseSensitive` określa, czy wielkość liter ma znaczenie. Zbędne spacje, prosty i typograficzny apostrof oraz kropki, przecinki, wykrzykniki, pytajniki i wielokropki nie wpływają na ocenę. Nie wpisuj wariantów różniących się tylko takimi znakami do `answers` — wystarczy jeden.
 - Gdy w zadaniu nie potrzeba rodzajnika, dozwolone odpowiedzi obejmują `brak` oraz znaki `—`, `–` i `-`.
 - Poprawienie treści ściągi nie zmienia automatycznie wyjaśnień zadań. Jeśli zmieniasz regułę, sprawdź także zadania wskazujące jej `ruleId`.

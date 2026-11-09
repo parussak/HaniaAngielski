@@ -10,6 +10,8 @@ export async function loadModules() {
   if (catalog.version !== 1 || !Array.isArray(catalog.modules) || !catalog.modules.length || !catalog.modules.every((path: unknown)=>typeof path==='string' && /^[a-z0-9-]+$/.test(path))) throw new Error('Niepoprawny katalog materiałów.');
   return validateModules(await Promise.all(catalog.modules.map(async (path: string) => {
     const [metadata, words, quiz, exercises, grammar] = await Promise.all(['modul.json','slownictwo.json','quiz.json','cwiczenia.json','gramatyka.json'].map(file=>json(`${path}/${file}`)));
-    return assembleModule(metadata, words, quiz, exercises, grammar);
+    if(metadata.dialoguesFile!==undefined && metadata.dialoguesFile!=='rozmowki.json')throw new Error('Niepoprawna nazwa pliku rozmówek.');
+    const dialogues=metadata.dialoguesFile?await json(`${path}/${metadata.dialoguesFile}`):[];
+    return assembleModule(metadata, words, quiz, exercises, grammar, dialogues);
   })));
 }

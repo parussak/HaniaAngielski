@@ -10,8 +10,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍎",
-      "caption": "apple — jabłko"
+      "src": "illustrations/word-apple.svg",
+      "caption": "apple — jabłko",
+      "scene": false
     }
   },
   {
@@ -25,8 +26,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍪",
-      "caption": "biscuit — ciasteczko / herbatnik"
+      "src": "illustrations/word-biscuit.svg",
+      "caption": "biscuit — ciasteczko / herbatnik",
+      "scene": false
     }
   },
   {
@@ -39,8 +41,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍞",
-      "caption": "bread — chleb"
+      "src": "illustrations/word-bread.svg",
+      "caption": "bread — chleb",
+      "scene": false
     }
   },
   {
@@ -53,8 +56,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🥣",
-      "caption": "cereal — płatki śniadaniowe"
+      "src": "illustrations/word-cereal.svg",
+      "caption": "cereal — płatki śniadaniowe",
+      "scene": false
     }
   },
   {
@@ -67,8 +71,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🧀",
-      "caption": "cheese — ser"
+      "src": "illustrations/word-cheese.svg",
+      "caption": "cheese — ser",
+      "scene": false
     }
   },
   {
@@ -81,8 +86,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍗",
-      "caption": "chicken — kurczak (mięso)"
+      "src": "illustrations/word-chicken.svg",
+      "caption": "chicken — kurczak (mięso)",
+      "scene": false
     }
   },
   {
@@ -95,8 +101,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍟",
-      "caption": "chips — frytki"
+      "src": "illustrations/word-chips.svg",
+      "caption": "chips — frytki",
+      "scene": false
     }
   },
   {
@@ -109,8 +116,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🐟",
-      "caption": "fish — ryba"
+      "src": "illustrations/word-fish.svg",
+      "caption": "fish — ryba",
+      "scene": false
     }
   },
   {
@@ -123,8 +131,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍎🍊",
-      "caption": "fruit — owoc / owoce"
+      "src": "illustrations/word-fruit.svg",
+      "caption": "fruit — owoc / owoce",
+      "scene": false
     }
   },
   {
@@ -137,8 +146,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍖",
-      "caption": "ham — szynka"
+      "src": "illustrations/word-ham.svg",
+      "caption": "ham — szynka",
+      "scene": false
     }
   },
   {
@@ -151,8 +161,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🥩",
-      "caption": "meat — mięso"
+      "src": "illustrations/word-meat.svg",
+      "caption": "meat — mięso",
+      "scene": false
     }
   },
   {
@@ -165,8 +176,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍊🧃",
-      "caption": "orange juice — sok pomarańczowy"
+      "src": "illustrations/word-orange-juice.svg",
+      "caption": "orange juice — sok pomarańczowy",
+      "scene": false
     }
   },
   {
@@ -180,8 +192,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🥞",
-      "caption": "pancake — naleśnik"
+      "src": "illustrations/word-pancake.svg",
+      "caption": "pancake — naleśnik",
+      "scene": false
     }
   },
   {
@@ -194,8 +207,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍝",
-      "caption": "pasta — makaron"
+      "src": "illustrations/word-pasta.svg",
+      "caption": "pasta — makaron",
+      "scene": false
     }
   },
   {
@@ -209,8 +223,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🥔",
-      "caption": "potato — ziemniak"
+      "src": "illustrations/word-potato.svg",
+      "caption": "potato — ziemniak",
+      "scene": false
     }
   },
   {
@@ -223,8 +238,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍚",
-      "caption": "rice — ryż"
+      "src": "illustrations/word-rice.svg",
+      "caption": "rice — ryż",
+      "scene": false
     }
   },
   {
@@ -238,8 +254,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🥗",
-      "caption": "salad — sałatka"
+      "src": "illustrations/word-salad.svg",
+      "caption": "salad — sałatka",
+      "scene": false
     }
   },
   {
@@ -253,8 +270,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🥪",
-      "caption": "sandwich — kanapka"
+      "src": "illustrations/word-sandwich.svg",
+      "caption": "sandwich — kanapka",
+      "scene": false
     }
   },
   {
@@ -268,8 +286,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🌭",
-      "caption": "sausage — kiełbaska"
+      "src": "illustrations/word-sausage.svg",
+      "caption": "sausage — kiełbaska",
+      "scene": false
     }
   },
   {
@@ -283,8 +302,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍅",
-      "caption": "tomato — pomidor"
+      "src": "illustrations/word-tomato.svg",
+      "caption": "tomato — pomidor",
+      "scene": false
     }
   },
   {
@@ -297,8 +317,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🐟",
-      "caption": "tuna — tuńczyk"
+      "src": "illustrations/word-tuna.svg",
+      "caption": "tuna — tuńczyk",
+      "scene": false
     }
   },
   {
@@ -312,8 +333,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🥕",
-      "caption": "vegetable — warzywo"
+      "src": "illustrations/word-vegetable.svg",
+      "caption": "vegetable — warzywo",
+      "scene": false
     }
   },
   {
@@ -326,8 +348,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "💧",
-      "caption": "water — woda"
+      "src": "illustrations/word-water.svg",
+      "caption": "water — woda",
+      "scene": false
     }
   },
   {
@@ -341,8 +364,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "src": "illustrations/yoghurt.svg",
-      "caption": "yoghurt — jogurt"
+      "src": "illustrations/word-yoghurt.svg",
+      "caption": "yoghurt — jogurt",
+      "scene": false
     }
   },
   {
@@ -355,8 +379,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🥣",
-      "caption": "breakfast — śniadanie"
+      "src": "illustrations/word-breakfast.svg",
+      "caption": "breakfast — śniadanie",
+      "scene": false
     }
   },
   {
@@ -370,8 +395,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "📓",
-      "caption": "diary — dzienniczek"
+      "src": "illustrations/word-diary.svg",
+      "caption": "diary — dzienniczek",
+      "scene": false
     }
   },
   {
@@ -384,8 +410,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍽️",
-      "caption": "dinner — obiad"
+      "src": "illustrations/word-dinner.svg",
+      "caption": "dinner — obiad",
+      "scene": false
     }
   },
   {
@@ -398,8 +425,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "src": "illustrations/jam-jar.svg",
-      "caption": "jam — dżem"
+      "src": "illustrations/word-jam.svg",
+      "caption": "jam — dżem",
+      "scene": false
     }
   },
   {
@@ -412,8 +440,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🥪",
-      "caption": "lunch — lunch"
+      "src": "illustrations/word-lunch.svg",
+      "caption": "lunch — lunch",
+      "scene": false
     }
   },
   {
@@ -426,8 +455,9 @@
     "group": "Lekcja 2.1",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "👩‍🍳",
-      "caption": "make — robić / przyrządzać"
+      "src": "illustrations/word-make.svg",
+      "caption": "make — robić / przyrządzać",
+      "scene": true
     }
   },
   {
@@ -440,8 +470,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🧈",
-      "caption": "butter — masło"
+      "src": "illustrations/word-butter.svg",
+      "caption": "butter — masło",
+      "scene": false
     }
   },
   {
@@ -454,8 +485,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍫",
-      "caption": "chocolate — czekolada"
+      "src": "illustrations/word-chocolate.svg",
+      "caption": "chocolate — czekolada",
+      "scene": false
     }
   },
   {
@@ -469,8 +501,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🥚",
-      "caption": "egg — jajko"
+      "src": "illustrations/word-egg.svg",
+      "caption": "egg — jajko",
+      "scene": false
     }
   },
   {
@@ -483,8 +516,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "src": "illustrations/flour.svg",
-      "caption": "flour — mąka"
+      "src": "illustrations/word-flour.svg",
+      "caption": "flour — mąka",
+      "scene": false
     }
   },
   {
@@ -498,8 +532,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍋",
-      "caption": "lemon — cytryna"
+      "src": "illustrations/word-lemon.svg",
+      "caption": "lemon — cytryna",
+      "scene": false
     }
   },
   {
@@ -512,8 +547,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🥛",
-      "caption": "milk — mleko"
+      "src": "illustrations/word-milk.svg",
+      "caption": "milk — mleko",
+      "scene": false
     }
   },
   {
@@ -527,8 +563,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍓",
-      "caption": "strawberry — truskawka"
+      "src": "illustrations/word-strawberry.svg",
+      "caption": "strawberry — truskawka",
+      "scene": false
     }
   },
   {
@@ -541,8 +578,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "src": "illustrations/sugar.svg",
-      "caption": "sugar — cukier"
+      "src": "illustrations/word-sugar.svg",
+      "caption": "sugar — cukier",
+      "scene": false
     }
   },
   {
@@ -555,8 +593,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "😎",
-      "caption": "Cool! — Fajnie!"
+      "src": "illustrations/word-cool.svg",
+      "caption": "Cool! — Fajnie!",
+      "scene": false
     }
   },
   {
@@ -569,8 +608,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "💡",
-      "caption": "Good idea! — Świetny pomysł!"
+      "src": "illustrations/word-good-idea.svg",
+      "caption": "Good idea! — Świetny pomysł!",
+      "scene": false
     }
   },
   {
@@ -583,8 +623,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "😱",
-      "caption": "What a disaster! — Ale katastrofa!"
+      "src": "illustrations/word-what-a-disaster.svg",
+      "caption": "What a disaster! — Ale katastrofa!",
+      "scene": false
     }
   },
   {
@@ -598,8 +639,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🎂",
-      "caption": "birthday — urodziny"
+      "src": "illustrations/word-birthday.svg",
+      "caption": "birthday — urodziny",
+      "scene": false
     }
   },
   {
@@ -613,8 +655,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍰",
-      "caption": "chocolate cake — ciasto czekoladowe"
+      "src": "illustrations/word-chocolate-cake.svg",
+      "caption": "chocolate cake — ciasto czekoladowe",
+      "scene": false
     }
   },
   {
@@ -627,8 +670,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🎂✨",
-      "caption": "decorate — dekorować"
+      "src": "illustrations/word-decorate.svg",
+      "caption": "decorate — dekorować",
+      "scene": true
     }
   },
   {
@@ -642,8 +686,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "😖",
-      "caption": "horrible — okropny"
+      "src": "illustrations/word-horrible.svg",
+      "caption": "horrible — okropny",
+      "scene": false
     }
   },
   {
@@ -656,8 +701,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "👀",
-      "caption": "look — patrzeć"
+      "src": "illustrations/word-look.svg",
+      "caption": "look — patrzeć",
+      "scene": false
     }
   },
   {
@@ -670,8 +716,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🤲",
-      "caption": "put — kłaść"
+      "src": "illustrations/word-put.svg",
+      "caption": "put — kłaść",
+      "scene": true
     }
   },
   {
@@ -685,8 +732,9 @@
     "group": "Lekcja 2.2",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "📖",
-      "caption": "recipe — przepis"
+      "src": "illustrations/word-recipe.svg",
+      "caption": "recipe — przepis",
+      "scene": false
     }
   },
   {
@@ -699,8 +747,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍫",
-      "caption": "a bar of chocolate — tabliczka czekolady"
+      "src": "illustrations/word-a-bar-of-chocolate.svg",
+      "caption": "a bar of chocolate — tabliczka czekolady",
+      "scene": false
     }
   },
   {
@@ -713,8 +762,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "src": "illustrations/water-bottle.svg",
-      "caption": "a bottle of water — butelka wody"
+      "src": "illustrations/word-a-bottle-of-water.svg",
+      "caption": "a bottle of water — butelka wody",
+      "scene": false
     }
   },
   {
@@ -727,8 +777,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🥤",
-      "caption": "a can of cola — puszka coli"
+      "src": "illustrations/word-a-can-of-cola.svg",
+      "caption": "a can of cola — puszka coli",
+      "scene": false
     }
   },
   {
@@ -741,8 +792,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🧃",
-      "caption": "a carton of juice — karton soku"
+      "src": "illustrations/word-a-carton-of-juice.svg",
+      "caption": "a carton of juice — karton soku",
+      "scene": false
     }
   },
   {
@@ -755,8 +807,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "src": "illustrations/jam-jar.svg",
-      "caption": "a jar of jam — słoik dżemu"
+      "src": "illustrations/word-a-jar-of-jam.svg",
+      "caption": "a jar of jam — słoik dżemu",
+      "scene": false
     }
   },
   {
@@ -769,8 +822,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍪",
-      "caption": "a packet of biscuits — paczka herbatników"
+      "src": "illustrations/word-a-packet-of-biscuits.svg",
+      "caption": "a packet of biscuits — paczka herbatników",
+      "scene": false
     }
   },
   {
@@ -783,8 +837,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "👨‍👩‍👧‍👦",
-      "caption": "all of — wszystkie / wszyscy"
+      "src": "illustrations/word-all-of.svg",
+      "caption": "all of — wszystkie / wszyscy",
+      "scene": true
     }
   },
   {
@@ -798,8 +853,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🏖️",
-      "caption": "beach — plaża"
+      "src": "illustrations/word-beach.svg",
+      "caption": "beach — plaża",
+      "scene": false
     }
   },
   {
@@ -812,8 +868,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🌸",
-      "caption": "beautiful — piękny"
+      "src": "illustrations/word-beautiful.svg",
+      "caption": "beautiful — piękny",
+      "scene": false
     }
   },
   {
@@ -827,8 +884,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "⏳",
-      "caption": "can't wait — nie móc się doczekać"
+      "src": "illustrations/word-can-t-wait.svg",
+      "caption": "can't wait — nie móc się doczekać",
+      "scene": false
     }
   },
   {
@@ -841,8 +899,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍗",
-      "caption": "chicken legs — kurze udka"
+      "src": "illustrations/word-chicken-legs.svg",
+      "caption": "chicken legs — kurze udka",
+      "scene": false
     }
   },
   {
@@ -855,8 +914,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🏊",
-      "caption": "go for a swim — iść popływać"
+      "src": "illustrations/word-go-for-a-swim.svg",
+      "caption": "go for a swim — iść popływać",
+      "scene": false
     }
   },
   {
@@ -869,8 +929,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🏖️",
-      "caption": "go to the beach — iść na plażę"
+      "src": "illustrations/word-go-to-the-beach.svg",
+      "caption": "go to the beach — iść na plażę",
+      "scene": false
     }
   },
   {
@@ -883,8 +944,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🌳",
-      "caption": "go to the park — iść do parku"
+      "src": "illustrations/word-go-to-the-park.svg",
+      "caption": "go to the park — iść do parku",
+      "scene": false
     }
   },
   {
@@ -897,8 +959,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🧺",
-      "caption": "have a picnic — zorganizować piknik"
+      "src": "illustrations/word-have-a-picnic.svg",
+      "caption": "have a picnic — zorganizować piknik",
+      "scene": true
     }
   },
   {
@@ -911,8 +974,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍎🍎🍎",
-      "caption": "How many — Ile? (liczba rzeczy policzalnych)"
+      "src": "illustrations/word-how-many.svg",
+      "caption": "How many — Ile? (liczba rzeczy policzalnych)",
+      "scene": true
     }
   },
   {
@@ -925,8 +989,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "💧",
-      "caption": "How much — Ile? (ilość czegoś niepoliczalnego)"
+      "src": "illustrations/word-how-much.svg",
+      "caption": "How much — Ile? (ilość czegoś niepoliczalnego)",
+      "scene": true
     }
   },
   {
@@ -939,8 +1004,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "⚡",
-      "caption": "quick — szybki"
+      "src": "illustrations/word-quick.svg",
+      "caption": "quick — szybki",
+      "scene": false
     }
   },
   {
@@ -954,8 +1020,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🐦",
-      "caption": "seagull — mewa"
+      "src": "illustrations/word-seagull.svg",
+      "caption": "seagull — mewa",
+      "scene": false
     }
   },
   {
@@ -969,8 +1036,9 @@
     "group": "Lekcja 2.3",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "😨",
-      "caption": "terrible — straszny"
+      "src": "illustrations/word-terrible.svg",
+      "caption": "terrible — straszny",
+      "scene": false
     }
   },
   {
@@ -983,8 +1051,9 @@
     "group": "Lekcja 2.4",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍽️",
-      "caption": "Anything else? — Coś jeszcze?"
+      "src": "illustrations/word-anything-else.svg",
+      "caption": "Anything else? — Coś jeszcze?",
+      "scene": true
     }
   },
   {
@@ -997,8 +1066,9 @@
     "group": "Lekcja 2.4",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍕",
-      "caption": "Can I have a vegetarian pizza, please? — Czy mogę prosić pizzę wegetariańską?"
+      "src": "illustrations/word-can-i-have-a-vegetarian-pizza-please.svg",
+      "caption": "Can I have a vegetarian pizza, please? — Czy mogę prosić pizzę wegetariańską?",
+      "scene": true
     }
   },
   {
@@ -1012,8 +1082,9 @@
     "group": "Lekcja 2.4",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍋🥤",
-      "caption": "I'd like a lemonade, please. — Poproszę lemoniadę."
+      "src": "illustrations/word-i-d-like-a-lemonade-please.svg",
+      "caption": "I'd like a lemonade, please. — Poproszę lemoniadę.",
+      "scene": true
     }
   },
   {
@@ -1026,8 +1097,9 @@
     "group": "Lekcja 2.4",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍽️",
-      "caption": "What would you like? — Na co masz ochotę?"
+      "src": "illustrations/word-what-would-you-like.svg",
+      "caption": "What would you like? — Na co masz ochotę?",
+      "scene": true
     }
   },
   {
@@ -1040,8 +1112,9 @@
     "group": "Lekcja 2.4",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🥤",
-      "caption": "Would you like anything to drink? — Czy chcesz coś do picia?"
+      "src": "illustrations/word-would-you-like-anything-to-drink.svg",
+      "caption": "Would you like anything to drink? — Czy chcesz coś do picia?",
+      "scene": true
     }
   },
   {
@@ -1055,8 +1128,9 @@
     "group": "Lekcja 2.4",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🥤",
-      "caption": "milkshake — koktajl mleczny"
+      "src": "illustrations/word-milkshake.svg",
+      "caption": "milkshake — koktajl mleczny",
+      "scene": false
     }
   },
   {
@@ -1069,8 +1143,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🌍",
-      "caption": "all over the world — na całym świecie"
+      "src": "illustrations/word-all-over-the-world.svg",
+      "caption": "all over the world — na całym świecie",
+      "scene": false
     }
   },
   {
@@ -1083,8 +1158,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🎨",
-      "caption": "art — sztuka"
+      "src": "illustrations/word-art.svg",
+      "caption": "art — sztuka",
+      "scene": false
     }
   },
   {
@@ -1098,8 +1174,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🌟",
-      "caption": "celebrity — sławna osoba"
+      "src": "illustrations/word-celebrity.svg",
+      "caption": "celebrity — sławna osoba",
+      "scene": true
     }
   },
   {
@@ -1112,8 +1189,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "👩‍🍳",
-      "caption": "cook — gotować"
+      "src": "illustrations/word-cook.svg",
+      "caption": "cook — gotować",
+      "scene": true
     }
   },
   {
@@ -1126,8 +1204,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "src": "illustrations/cottage-cheese.svg",
-      "caption": "cottage cheese — twarożek"
+      "src": "illustrations/word-cottage-cheese.svg",
+      "caption": "cottage cheese — twarożek",
+      "scene": false
     }
   },
   {
@@ -1140,8 +1219,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "src": "illustrations/cream.svg",
-      "caption": "cream — śmietana"
+      "src": "illustrations/word-cream.svg",
+      "caption": "cream — śmietana",
+      "scene": false
     }
   },
   {
@@ -1154,8 +1234,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍀",
-      "caption": "Good luck! — Powodzenia!"
+      "src": "illustrations/word-good-luck.svg",
+      "caption": "Good luck! — Powodzenia!",
+      "scene": false
     }
   },
   {
@@ -1168,8 +1249,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🎉",
-      "caption": "have fun — dobrze się bawić"
+      "src": "illustrations/word-have-fun.svg",
+      "caption": "have fun — dobrze się bawić",
+      "scene": true
     }
   },
   {
@@ -1182,8 +1264,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🎈",
-      "caption": "in the air — w powietrzu"
+      "src": "illustrations/word-in-the-air.svg",
+      "caption": "in the air — w powietrzu",
+      "scene": false
     }
   },
   {
@@ -1197,8 +1280,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🥚",
-      "caption": "ingredient — składnik"
+      "src": "illustrations/word-ingredient.svg",
+      "caption": "ingredient — składnik",
+      "scene": false
     }
   },
   {
@@ -1211,8 +1295,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🔝",
-      "caption": "on top — na górze / na wierzchu"
+      "src": "illustrations/word-on-top.svg",
+      "caption": "on top — na górze / na wierzchu",
+      "scene": true
     }
   },
   {
@@ -1227,8 +1312,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍳",
-      "caption": "pan — rondel / patelnia"
+      "src": "illustrations/word-pan.svg",
+      "caption": "pan — rondel / patelnia",
+      "scene": false
     }
   },
   {
@@ -1241,8 +1327,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "👥",
-      "caption": "popular — popularny"
+      "src": "illustrations/word-popular.svg",
+      "caption": "popular — popularny",
+      "scene": true
     }
   },
   {
@@ -1255,8 +1342,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "⭕",
-      "caption": "round — okrągły"
+      "src": "illustrations/word-round.svg",
+      "caption": "round — okrągły",
+      "scene": false
     }
   },
   {
@@ -1269,8 +1357,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "⭐",
-      "caption": "special — specjalny"
+      "src": "illustrations/word-special.svg",
+      "caption": "special — specjalny",
+      "scene": false
     }
   },
   {
@@ -1283,8 +1372,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🍬",
-      "caption": "sweet — słodki"
+      "src": "illustrations/word-sweet.svg",
+      "caption": "sweet — słodki",
+      "scene": false
     }
   },
   {
@@ -1297,8 +1387,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🤾",
-      "caption": "throw — rzucać"
+      "src": "illustrations/word-throw.svg",
+      "caption": "throw — rzucać",
+      "scene": true
     }
   },
   {
@@ -1311,8 +1402,9 @@
     "group": "Lekcja 2.5",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🛠️",
-      "caption": "use — używać"
+      "src": "illustrations/word-use.svg",
+      "caption": "use — używać",
+      "scene": false
     }
   },
   {
@@ -1325,8 +1417,9 @@
     "group": "Lekcja 2.6",
     "source": "Podręcznik, Wordlist, s. 33",
     "illustration": {
-      "symbol": "🥣",
-      "caption": "have a quick breakfast — zjeść szybkie śniadanie"
+      "src": "illustrations/word-have-a-quick-breakfast.svg",
+      "caption": "have a quick breakfast — zjeść szybkie śniadanie",
+      "scene": true
     }
   },
   {
@@ -1339,8 +1432,9 @@
     "group": "Word blog",
     "source": "Zeszyt ćwiczeń, s. 21",
     "illustration": {
-      "symbol": "🍞",
-      "caption": "toast — tost / grzanka"
+      "src": "illustrations/word-toast.svg",
+      "caption": "toast — tost / grzanka",
+      "scene": false
     }
   },
   {
@@ -1354,8 +1448,9 @@
     "group": "Word blog",
     "source": "Zeszyt ćwiczeń, s. 21",
     "illustration": {
-      "src": "illustrations/toaster.svg",
-      "caption": "toaster — toster"
+      "src": "illustrations/word-toaster.svg",
+      "caption": "toaster — toster",
+      "scene": false
     }
   },
   {
@@ -1369,8 +1464,9 @@
     "group": "Word blog",
     "source": "Zeszyt ćwiczeń, s. 21",
     "illustration": {
-      "symbol": "🍳",
-      "caption": "frying pan — patelnia do smażenia"
+      "src": "illustrations/word-frying-pan.svg",
+      "caption": "frying pan — patelnia do smażenia",
+      "scene": false
     }
   },
   {
@@ -1383,8 +1479,9 @@
     "group": "Word blog",
     "source": "Zeszyt ćwiczeń, s. 21",
     "illustration": {
-      "symbol": "🍽️",
-      "caption": "Enjoy your meal! — Smacznego!"
+      "src": "illustrations/word-enjoy-your-meal.svg",
+      "caption": "Enjoy your meal! — Smacznego!",
+      "scene": true
     }
   }
 ]

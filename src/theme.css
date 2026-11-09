@@ -266,6 +266,13 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
 .feedback-lead{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .feedback-lead>strong{flex:1;min-width:0}
 .cat-mascot{margin:0;flex-shrink:0;width:120px;text-align:center;color:#58416d}
+.dialogue{display:grid;gap:8px;margin:0 0 12px;text-align:left;flex-shrink:0}
+.dialogue-line{padding:10px 14px;background:#f0eafb;border-radius:14px 14px 14px 3px;margin-right:18px}
+.dialogue-reply{margin-right:0;margin-left:18px;background:#eaf2fd;border-radius:14px 14px 3px 14px}
+.dialogue-speaker{font-size:12px;font-weight:600;color:#705488}
+.dialogue-line p{margin:4px 0 0;font-size:17px;line-height:1.45;color:#443458}
+.dialogue-gap{display:inline-block;min-width:48px;padding:0 8px;border-bottom:2px dashed #9476bf;text-align:center;background:#fff9;color:#65468d}
+@media(max-width:600px){.studying:has(.dialogue) .question{font-size:19px!important}.studying:has(.dialogue) .study-card{overflow-y:auto}.studying:has(.dialogue) .question-illustration img{height:85px;width:160px}.dialogue-line{padding:8px 12px}.dialogue-line p{font-size:16px}}
 .cat-mascot .cat-artwork{display:block;width:120px;height:126px;overflow:hidden;border-radius:12px}
 .cat-mascot figcaption{font-size:12px;line-height:1.4;margin-top:3px;font-weight:600}
 .cat-mascot-large{width:min(100%,260px);margin:0 auto}
@@ -316,4 +323,13 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
   .studying .question-illustration{margin:0 auto 10px;padding:4px;width:100%;border:0;background:transparent}
   .studying .question-illustration [role="img"]{font-size:48px;line-height:1.2}
   .studying .question-illustration img{width:100px;height:70px}
+  .studying .question-illustration.context-illustration img{width:220px;height:117px;max-width:100%;object-fit:contain}
+}
+.context-illustration img{width:260px;height:138px;max-width:100%;object-fit:contain}
+@media(max-height:500px){
+  .studying .question-illustration{margin-bottom:4px;padding:0}
+  .studying .question-illustration img{width:60px;height:42px}
+  .studying .question-illustration.context-illustration img{width:140px;height:74px}
+  .studying:has(.dialogue) .study-card:has(.feedback) .question{display:none}
+  .studying:has(.dialogue) .study-card:has(.feedback) .dialogue{max-height:80px;min-height:40px;overflow:auto;flex-shrink:1}
 }

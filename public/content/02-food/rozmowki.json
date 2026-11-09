@@ -1,0 +1,426 @@
+[
+  {
+    "id": "d-what-would",
+    "kind": "dialogue",
+    "prompt": "Uzupełnij jednym słowem lukę w rozmowie.",
+    "dialogue": [
+      {
+        "speaker": "Kelner",
+        "text": "What ___ you like?"
+      },
+      {
+        "speaker": "Gość",
+        "text": "I'd like a vegetarian pizza, please."
+      }
+    ],
+    "answers": [
+      "would"
+    ],
+    "options": [
+      "would",
+      "many",
+      "some"
+    ],
+    "explanation": "What would you like? znaczy „Na co masz ochotę?”. Kelner pyta, co gość chce zamówić.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Nowy dialog ćwiczeniowy na podstawie modułu 2: podręcznik, s. 30; zwroty i słownictwo, s. 33. To adaptacja, nie cytat z podręcznika.",
+    "illustration": {
+      "src": "illustrations/scene-ordering.svg",
+      "caption": "Zamawianie pizzy.",
+      "scene": true
+    }
+  },
+  {
+    "id": "d-can-i-have",
+    "kind": "dialogue",
+    "prompt": "Uzupełnij jednym słowem lukę w rozmowie.",
+    "dialogue": [
+      {
+        "speaker": "Kelner",
+        "text": "What would you like?"
+      },
+      {
+        "speaker": "Gość",
+        "text": "___ I have a sandwich, please?"
+      }
+    ],
+    "answers": [
+      "Can"
+    ],
+    "options": [
+      "Can",
+      "Are",
+      "There"
+    ],
+    "explanation": "Can I have a sandwich, please? to uprzejma prośba: „Czy mogę prosić kanapkę?”.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Nowy dialog ćwiczeniowy na podstawie modułu 2: podręcznik, s. 30; zwroty i słownictwo, s. 33. To adaptacja, nie cytat z podręcznika.",
+    "illustration": {
+      "src": "illustrations/scene-sandwich-request.svg",
+      "caption": "Prośba o kanapkę.",
+      "scene": true
+    }
+  },
+  {
+    "id": "d-id-like",
+    "kind": "dialogue",
+    "prompt": "Uzupełnij jednym słowem lukę w rozmowie.",
+    "dialogue": [
+      {
+        "speaker": "Kelner",
+        "text": "What would you like?"
+      },
+      {
+        "speaker": "Gość",
+        "text": "I'd ___ a lemonade, please."
+      }
+    ],
+    "answers": [
+      "like"
+    ],
+    "options": [
+      "like",
+      "many",
+      "any"
+    ],
+    "explanation": "I'd like a lemonade, please. oznacza „Poproszę lemoniadę”. Po I'd używamy tutaj like.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Nowy dialog ćwiczeniowy na podstawie modułu 2: podręcznik, s. 30; zwroty i słownictwo, s. 33. To adaptacja, nie cytat z podręcznika.",
+    "illustration": {
+      "src": "illustrations/scene-drink-offer.svg",
+      "caption": "Zamawianie lemoniady.",
+      "scene": true
+    }
+  },
+  {
+    "id": "d-anything-else",
+    "kind": "dialogue",
+    "prompt": "Uzupełnij jednym słowem lukę w rozmowie.",
+    "dialogue": [
+      {
+        "speaker": "Gość",
+        "text": "Can I have a sandwich, please?"
+      },
+      {
+        "speaker": "Kelner",
+        "text": "Anything ___?"
+      },
+      {
+        "speaker": "Gość",
+        "text": "I'd like a lemonade, please."
+      }
+    ],
+    "answers": [
+      "else"
+    ],
+    "options": [
+      "else",
+      "much",
+      "are"
+    ],
+    "explanation": "Anything else? to pytanie „Coś jeszcze?”. Gość domawia lemoniadę.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Nowy dialog ćwiczeniowy na podstawie modułu 2: podręcznik, s. 30; zwroty i słownictwo, s. 33. To adaptacja, nie cytat z podręcznika.",
+    "illustration": {
+      "src": "illustrations/scene-ordering.svg",
+      "caption": "Kelner przyjmuje kolejną część zamówienia.",
+      "scene": true
+    }
+  },
+  {
+    "id": "d-to-drink",
+    "kind": "dialogue",
+    "prompt": "Uzupełnij jednym słowem lukę w rozmowie.",
+    "dialogue": [
+      {
+        "speaker": "Kelner",
+        "text": "Would you like anything to ___?"
+      },
+      {
+        "speaker": "Gość",
+        "text": "I'd like a strawberry milkshake, please."
+      }
+    ],
+    "answers": [
+      "drink"
+    ],
+    "options": [
+      "drink",
+      "cook",
+      "decorate"
+    ],
+    "explanation": "Would you like anything to drink? oznacza „Czy chcesz coś do picia?”. Odpowiedź mówi o koktajlu truskawkowym.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Nowy dialog ćwiczeniowy na podstawie modułu 2: podręcznik, s. 30; zwroty i słownictwo, s. 33. To adaptacja, nie cytat z podręcznika.",
+    "illustration": {
+      "src": "illustrations/scene-milkshake-order.svg",
+      "caption": "Propozycja napoju i zamówienie koktajlu.",
+      "scene": true
+    }
+  },
+  {
+    "id": "d-some-chips",
+    "kind": "dialogue",
+    "prompt": "Uzupełnij jednym słowem lukę w rozmowie.",
+    "dialogue": [
+      {
+        "speaker": "Kelner",
+        "text": "What would you like?"
+      },
+      {
+        "speaker": "Gość",
+        "text": "Can I have ___ chips, please?"
+      }
+    ],
+    "answers": [
+      "some"
+    ],
+    "options": [
+      "some",
+      "any",
+      "an"
+    ],
+    "explanation": "W uprzejmej prośbie o jedzenie używamy some. Can I have some chips, please? znaczy „Czy mogę prosić trochę frytek?”.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "some-any",
+    "source": "Nowy dialog ćwiczeniowy na podstawie modułu 2: podręcznik, s. 30; zwroty i słownictwo, s. 33. To adaptacja, nie cytat z podręcznika.",
+    "illustration": {
+      "src": "illustrations/scene-chips-request.svg",
+      "caption": "Prośba o frytki.",
+      "scene": true
+    }
+  },
+  {
+    "id": "d-no-milk",
+    "kind": "dialogue",
+    "prompt": "Uzupełnij jednym słowem lukę w rozmowie.",
+    "dialogue": [
+      {
+        "speaker": "Hania",
+        "text": "Is there any milk?"
+      },
+      {
+        "speaker": "Tata",
+        "text": "No, there isn't ___ milk."
+      }
+    ],
+    "answers": [
+      "any"
+    ],
+    "options": [
+      "any",
+      "some",
+      "an"
+    ],
+    "explanation": "W przeczeniu używamy any: There isn't any milk. Nie ma mleka.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "some-any",
+    "source": "Nowy dialog ćwiczeniowy na podstawie modułu 2: podręcznik, s. 27; zwroty i słownictwo, s. 33. To adaptacja, nie cytat z podręcznika.",
+    "illustration": {
+      "src": "illustrations/scene-milk-missing.svg",
+      "caption": "Pusta lodówka — nie ma mleka.",
+      "scene": true
+    }
+  },
+  {
+    "id": "d-yes-milk",
+    "kind": "dialogue",
+    "prompt": "Uzupełnij jednym słowem lukę w rozmowie.",
+    "dialogue": [
+      {
+        "speaker": "Hania",
+        "text": "Is there any milk?"
+      },
+      {
+        "speaker": "Tata",
+        "text": "Yes, there ___."
+      }
+    ],
+    "answers": [
+      "is"
+    ],
+    "options": [
+      "is",
+      "are",
+      "any"
+    ],
+    "explanation": "Milk jest niepoliczalne, dlatego na Is there any milk? odpowiadamy Yes, there is.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "there",
+    "source": "Nowy dialog ćwiczeniowy na podstawie modułu 2: podręcznik, s. 27; zwroty i słownictwo, s. 33. To adaptacja, nie cytat z podręcznika.",
+    "illustration": {
+      "src": "illustrations/scene-milk-present.svg",
+      "caption": "W lodówce jest mleko.",
+      "scene": true
+    }
+  },
+  {
+    "id": "d-how-many",
+    "kind": "dialogue",
+    "prompt": "Uzupełnij jednym słowem lukę w rozmowie.",
+    "dialogue": [
+      {
+        "speaker": "Hania",
+        "text": "How ___ eggs are there?"
+      },
+      {
+        "speaker": "Tata",
+        "text": "There are two eggs."
+      }
+    ],
+    "answers": [
+      "many"
+    ],
+    "options": [
+      "many",
+      "much",
+      "any"
+    ],
+    "explanation": "Jajka liczymy na sztuki. How many eggs are there? pyta „Ile jest jajek?”.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "much-many",
+    "source": "Nowy dialog ćwiczeniowy na podstawie modułu 2: podręcznik, s. 29; zwroty i słownictwo, s. 33. To adaptacja, nie cytat z podręcznika.",
+    "illustration": {
+      "src": "illustrations/scene-two-eggs.svg",
+      "caption": "Dwa jajka na półce.",
+      "scene": true
+    }
+  },
+  {
+    "id": "d-how-much",
+    "kind": "dialogue",
+    "prompt": "Uzupełnij jednym słowem lukę w rozmowie.",
+    "dialogue": [
+      {
+        "speaker": "Hania",
+        "text": "How ___ milk is there?"
+      },
+      {
+        "speaker": "Tata",
+        "text": "There is a lot of milk."
+      }
+    ],
+    "answers": [
+      "much"
+    ],
+    "options": [
+      "much",
+      "many",
+      "an"
+    ],
+    "explanation": "Milk jest niepoliczalne. Pytamy o ilość mleka: How much milk is there?",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "much-many",
+    "source": "Nowy dialog ćwiczeniowy na podstawie modułu 2: podręcznik, s. 29; zwroty i słownictwo, s. 33. To adaptacja, nie cytat z podręcznika.",
+    "illustration": {
+      "src": "illustrations/scene-milk-lots.svg",
+      "caption": "Dużo mleka w lodówce.",
+      "scene": true
+    }
+  },
+  {
+    "id": "d-two-bottles",
+    "kind": "dialogue",
+    "prompt": "Uzupełnij jednym słowem lukę w rozmowie.",
+    "dialogue": [
+      {
+        "speaker": "Hania",
+        "text": "How many bottles of water are there?"
+      },
+      {
+        "speaker": "Tata",
+        "text": "There are two ___ of water."
+      }
+    ],
+    "answers": [
+      "bottles"
+    ],
+    "options": [
+      "bottles",
+      "bottle",
+      "water"
+    ],
+    "explanation": "Po two nazwa opakowania ma liczbę mnogą: two bottles of water — dwie butelki wody.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "containers",
+    "source": "Nowy dialog ćwiczeniowy na podstawie modułu 2: podręcznik, s. 29; zwroty i słownictwo, s. 33. To adaptacja, nie cytat z podręcznika.",
+    "illustration": {
+      "src": "illustrations/scene-two-bottles.svg",
+      "caption": "Dwie butelki wody.",
+      "scene": true
+    }
+  },
+  {
+    "id": "d-hungry-because",
+    "kind": "dialogue",
+    "prompt": "Uzupełnij jednym słowem lukę w rozmowie.",
+    "dialogue": [
+      {
+        "speaker": "Hania",
+        "text": "I'm always hungry ___ I play a lot of sport."
+      },
+      {
+        "speaker": "Tata",
+        "text": "There are some sandwiches."
+      }
+    ],
+    "answers": [
+      "because"
+    ],
+    "options": [
+      "because",
+      "so",
+      "any"
+    ],
+    "explanation": "Because wprowadza powód: „Jestem zawsze głodna, ponieważ dużo uprawiam sport”. Fragment po luce wyjaśnia głód.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "so-because",
+    "source": "Nowy dialog ćwiczeniowy na podstawie modułu 2: podręcznik, s. 32; zwroty i słownictwo, s. 33. To adaptacja, nie cytat z podręcznika.",
+    "illustration": {
+      "src": "illustrations/scene-sport-hungry.svg",
+      "caption": "Po uprawianiu sportu przychodzi ochota na jedzenie.",
+      "scene": true
+    }
+  }
+]

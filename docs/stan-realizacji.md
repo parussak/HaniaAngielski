@@ -28,6 +28,8 @@ Weryfikacja po aktualizacji: 50 testów jednostkowych, check:content i build pop
 
 Testy domyślnie korzystają z Chromium, Edge jest dostępny przez zmienną środowiskową. Osobny CI sprawdza push i pull request; GitHub Pages publikuje push na main i umożliwia uruchomienie ręczne.
 
-Wcześniejsza wersja działa na GitHub Pages. Tych poprawek nie commitowano, nie wysyłano ani nie publikowano. Nie sprawdzono fizycznego telefonu, czytników ekranu ani Linux/macOS. Nie dodano nowych trybów nauki ani automatycznego importu PDF. PWA wymaga pierwszego pobrania z siecią; fizyczna instalacja na telefonie nie została sprawdzona. Próby kont w przeglądarce korzystają z testowego adaptera sieciowego; użytkowniczka potwierdziła także działający rzeczywisty zapis Firebase po konfiguracji.
+Wcześniejsza wersja działa na GitHub Pages. Tych poprawek nie commitowano, nie wysyłano ani nie publikowano. Nie sprawdzono fizycznego telefonu, czytników ekranu ani Linux/macOS. Nie dodano automatycznego importu PDF. PWA wymaga pierwszego pobrania z siecią; fizyczna instalacja na telefonie nie została sprawdzona. Próby kont w przeglądarce korzystają z testowego adaptera sieciowego; użytkowniczka potwierdziła także działający rzeczywisty zapis Firebase po konfiguracji.
 
 Szczegółowy raport: [raport-poprawek-audyt.md](raport-poprawek-audyt.md). Instrukcja treści: [public/content/README.md](../public/content/README.md).
+
+Dodano osobny tryb Rozmówki: 12 nowych krótkich dialogów z jedną luką, utworzonych w zakresie słownictwa i gramatyki Food, z oznaczeniem adaptacji. Wybór i wpisywanie, porównanie błędnej odpowiedzi, wznowienie, kopie i synchronizacja korzystają z dotychczasowego mechanizmu. Nowy plik treści: `public/content/02-food/rozmowki.json`. Wszystkie ilustracje zastąpiono spójnymi pastelowymi SVG, a zadania gramatyczne mają scenki przedstawiające sytuację zdania zamiast samego emoji. Identyfikatory i rewizje dotychczasowych zadań pozostały bez zmian.

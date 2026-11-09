@@ -18,8 +18,9 @@
     "ruleId": "countable",
     "source": "Podręcznik, s. 27",
     "illustration": {
-      "symbol": "🥚",
-      "caption": "egg — jajko"
+      "src": "illustrations/word-egg.svg",
+      "caption": "egg — jajko",
+      "scene": false
     }
   },
   {
@@ -41,8 +42,9 @@
     "ruleId": "countable",
     "source": "Podręcznik, s. 27",
     "illustration": {
-      "symbol": "🍓",
-      "caption": "strawberry — truskawka"
+      "src": "illustrations/word-strawberry.svg",
+      "caption": "strawberry — truskawka",
+      "scene": false
     }
   },
   {
@@ -64,8 +66,9 @@
     "ruleId": "countable",
     "source": "Podręcznik, s. 27",
     "illustration": {
-      "symbol": "🍎",
-      "caption": "apple — jabłko"
+      "src": "illustrations/word-apple.svg",
+      "caption": "apple — jabłko",
+      "scene": false
     }
   },
   {
@@ -87,8 +90,9 @@
     "ruleId": "countable",
     "source": "Podręcznik, s. 27",
     "illustration": {
-      "symbol": "🥛",
-      "caption": "milk — mleko"
+      "src": "illustrations/word-milk.svg",
+      "caption": "milk — mleko",
+      "scene": false
     }
   },
   {
@@ -110,8 +114,9 @@
     "ruleId": "countable",
     "source": "Podręcznik, s. 27",
     "illustration": {
-      "src": "illustrations/sugar.svg",
-      "caption": "sugar — cukier"
+      "src": "illustrations/word-sugar.svg",
+      "caption": "sugar — cukier",
+      "scene": false
     }
   },
   {
@@ -133,8 +138,9 @@
     "ruleId": "countable",
     "source": "Podręcznik, s. 27",
     "illustration": {
-      "src": "illustrations/flour.svg",
-      "caption": "flour — mąka"
+      "src": "illustrations/word-flour.svg",
+      "caption": "flour — mąka",
+      "scene": false
     }
   },
   {
@@ -156,8 +162,9 @@
     "ruleId": "countable",
     "source": "Podręcznik, s. 27",
     "illustration": {
-      "symbol": "🧈",
-      "caption": "butter — masło"
+      "src": "illustrations/word-butter.svg",
+      "caption": "butter — masło",
+      "scene": false
     }
   },
   {
@@ -179,8 +186,9 @@
     "ruleId": "countable",
     "source": "Podręcznik, s. 27",
     "illustration": {
-      "symbol": "💧",
-      "caption": "water — woda"
+      "src": "illustrations/word-water.svg",
+      "caption": "water — woda",
+      "scene": false
     }
   },
   {
@@ -203,8 +211,9 @@
     "ruleId": "articles",
     "source": "Podręcznik, s. 27; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "illustration": {
-      "symbol": "🥣",
-      "caption": "breakfast — śniadanie"
+      "src": "illustrations/scene-breakfast-egg.svg",
+      "caption": "Śniadanie z jajkiem.",
+      "scene": true
     }
   },
   {
@@ -227,8 +236,9 @@
     "ruleId": "articles",
     "source": "Podręcznik, s. 27; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "illustration": {
-      "symbol": "🍎",
-      "caption": "apple — jabłko"
+      "src": "illustrations/scene-eat-apple.svg",
+      "caption": "Jedno jabłko jako przekąska.",
+      "scene": true
     }
   },
   {
@@ -251,8 +261,9 @@
     "ruleId": "articles",
     "source": "Podręcznik, s. 27; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "illustration": {
-      "symbol": "🥪",
-      "caption": "sandwich — kanapka"
+      "src": "illustrations/scene-sandwich-request.svg",
+      "caption": "Gość prosi o kanapkę.",
+      "scene": true
     }
   },
   {
@@ -275,8 +286,9 @@
     "ruleId": "articles",
     "source": "Podręcznik, s. 27; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "illustration": {
-      "symbol": "🍋",
-      "caption": "lemon — cytryna"
+      "src": "illustrations/scene-lemon-present.svg",
+      "caption": "Cytryna na półce.",
+      "scene": true
     }
   },
   {
@@ -303,8 +315,9 @@
     "source": "Podręcznik, s. 27; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🥣",
-      "caption": "cereal — płatki śniadaniowe"
+      "src": "illustrations/scene-breakfast-milk.svg",
+      "caption": "Mleko do płatków na śniadanie.",
+      "scene": true
     }
   },
   {
@@ -331,8 +344,9 @@
     "source": "Podręcznik, s. 27; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🧈",
-      "caption": "butter — masło"
+      "src": "illustrations/scene-bread-butter.svg",
+      "caption": "Chleb z masłem.",
+      "scene": true
     }
   },
   {
@@ -359,8 +373,9 @@
     "source": "Podręcznik, s. 27; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🍊🧃",
-      "caption": "orange juice — sok pomarańczowy"
+      "src": "illustrations/scene-drinking-juice.svg",
+      "caption": "Picie soku pomarańczowego.",
+      "scene": true
     }
   },
   {
@@ -383,8 +398,9 @@
     "source": "Podręcznik, s. 27 i 30 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🥛",
-      "caption": "milk — mleko"
+      "src": "illustrations/scene-milk-present.svg",
+      "caption": "W lodówce jest mleko.",
+      "scene": true
     }
   },
   {
@@ -407,8 +423,9 @@
     "source": "Podręcznik, s. 27 i 30 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🥚",
-      "caption": "egg — jajko"
+      "src": "illustrations/scene-egg-present.svg",
+      "caption": "Na półce są jajka.",
+      "scene": true
     }
   },
   {
@@ -431,8 +448,9 @@
     "source": "Podręcznik, s. 27 i 30 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🥛",
-      "caption": "milk — mleko"
+      "src": "illustrations/scene-milk-missing.svg",
+      "caption": "Lodówka jest pusta — nie ma mleka.",
+      "scene": true
     }
   },
   {
@@ -455,8 +473,9 @@
     "source": "Podręcznik, s. 27 i 30 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🥚",
-      "caption": "egg — jajko"
+      "src": "illustrations/scene-egg-missing.svg",
+      "caption": "Pusta półka — nie ma jajek.",
+      "scene": true
     }
   },
   {
@@ -479,8 +498,9 @@
     "source": "Podręcznik, s. 27 i 30 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🍓",
-      "caption": "strawberry — truskawka"
+      "src": "illustrations/scene-strawberry-question.svg",
+      "caption": "Sprawdzamy, czy są truskawki.",
+      "scene": true
     }
   },
   {
@@ -503,8 +523,9 @@
     "source": "Podręcznik, s. 27 i 30 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "src": "illustrations/flour.svg",
-      "caption": "flour — mąka"
+      "src": "illustrations/scene-flour-question.svg",
+      "caption": "Sprawdzamy, czy jest mąka.",
+      "scene": true
     }
   },
   {
@@ -527,8 +548,9 @@
     "source": "Podręcznik, s. 27 i 30 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "src": "illustrations/sugar.svg",
-      "caption": "sugar — cukier"
+      "src": "illustrations/scene-sugar-present.svg",
+      "caption": "Na półce jest cukier.",
+      "scene": true
     }
   },
   {
@@ -551,8 +573,9 @@
     "source": "Podręcznik, s. 27 i 30 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🧈",
-      "caption": "butter — masło"
+      "src": "illustrations/scene-butter-missing.svg",
+      "caption": "Na półce nie ma masła.",
+      "scene": true
     }
   },
   {
@@ -575,8 +598,9 @@
     "source": "Podręcznik, s. 27 i 30 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🍟",
-      "caption": "chips — frytki"
+      "src": "illustrations/scene-chips-request.svg",
+      "caption": "Gość prosi o frytki.",
+      "scene": true
     }
   },
   {
@@ -598,8 +622,9 @@
     "ruleId": "there",
     "source": "Podręcznik, s. 27 i 29; notatki (adaptacja)",
     "illustration": {
-      "symbol": "🥛",
-      "caption": "milk — mleko"
+      "src": "illustrations/scene-milk-present.svg",
+      "caption": "W lodówce jest mleko.",
+      "scene": true
     }
   },
   {
@@ -621,8 +646,9 @@
     "ruleId": "there",
     "source": "Podręcznik, s. 27 i 29; notatki (adaptacja)",
     "illustration": {
-      "symbol": "💧",
-      "caption": "water — woda"
+      "src": "illustrations/scene-water-lots.svg",
+      "caption": "Dużo wody w butelkach.",
+      "scene": true
     }
   },
   {
@@ -644,8 +670,9 @@
     "ruleId": "there",
     "source": "Podręcznik, s. 27 i 29; notatki (adaptacja)",
     "illustration": {
-      "symbol": "🍎",
-      "caption": "apple — jabłko"
+      "src": "illustrations/scene-apple-present.svg",
+      "caption": "Na półce są jabłka.",
+      "scene": true
     }
   },
   {
@@ -667,8 +694,9 @@
     "ruleId": "there",
     "source": "Podręcznik, s. 27 i 29; notatki (adaptacja)",
     "illustration": {
-      "symbol": "🥚",
-      "caption": "egg — jajko"
+      "src": "illustrations/scene-single-egg.svg",
+      "caption": "Na półce jest jedno jajko.",
+      "scene": true
     }
   },
   {
@@ -690,8 +718,9 @@
     "ruleId": "there",
     "source": "Podręcznik, s. 27 i 29; notatki (adaptacja)",
     "illustration": {
-      "src": "illustrations/water-bottle.svg",
-      "caption": "a bottle of water — butelka wody"
+      "src": "illustrations/scene-two-bottles.svg",
+      "caption": "Dwie butelki wody.",
+      "scene": true
     }
   },
   {
@@ -714,8 +743,9 @@
     "ruleId": "there",
     "source": "Podręcznik, s. 27 (adaptacja)",
     "illustration": {
-      "symbol": "🥛",
-      "caption": "milk — mleko"
+      "src": "illustrations/scene-milk-present.svg",
+      "caption": "Tak — w lodówce jest mleko.",
+      "scene": true
     }
   },
   {
@@ -739,8 +769,9 @@
     "ruleId": "there",
     "source": "Podręcznik, s. 27 (adaptacja)",
     "illustration": {
-      "symbol": "🥚",
-      "caption": "egg — jajko"
+      "src": "illustrations/scene-egg-missing.svg",
+      "caption": "Nie — na półce nie ma jajek.",
+      "scene": true
     }
   },
   {
@@ -763,8 +794,9 @@
     "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "💧",
-      "caption": "water — woda"
+      "src": "illustrations/scene-water-question.svg",
+      "caption": "Pytamy o ilość lub liczbę produktów na półce.",
+      "scene": true
     }
   },
   {
@@ -787,8 +819,9 @@
     "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🍎",
-      "caption": "apple — jabłko"
+      "src": "illustrations/scene-apple-question.svg",
+      "caption": "Pytamy o ilość lub liczbę produktów na półce.",
+      "scene": true
     }
   },
   {
@@ -811,8 +844,9 @@
     "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🥛",
-      "caption": "milk — mleko"
+      "src": "illustrations/scene-milk-question.svg",
+      "caption": "Pytamy o ilość lub liczbę produktów na półce.",
+      "scene": true
     }
   },
   {
@@ -835,8 +869,9 @@
     "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🥚",
-      "caption": "egg — jajko"
+      "src": "illustrations/scene-egg-question.svg",
+      "caption": "Pytamy o ilość lub liczbę produktów na półce.",
+      "scene": true
     }
   },
   {
@@ -859,8 +894,9 @@
     "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🍫",
-      "caption": "chocolate — czekolada"
+      "src": "illustrations/scene-chocolate-question.svg",
+      "caption": "Pytamy o ilość lub liczbę produktów na półce.",
+      "scene": true
     }
   },
   {
@@ -883,8 +919,9 @@
     "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🍪",
-      "caption": "biscuit — ciasteczko / herbatnik"
+      "src": "illustrations/scene-biscuit-question.svg",
+      "caption": "Pytamy o ilość lub liczbę produktów na półce.",
+      "scene": true
     }
   },
   {
@@ -907,8 +944,9 @@
     "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "src": "illustrations/water-bottle.svg",
-      "caption": "a bottle of water — butelka wody"
+      "src": "illustrations/scene-bottle-question.svg",
+      "caption": "Pytamy o ilość lub liczbę produktów na półce.",
+      "scene": true
     }
   },
   {
@@ -931,8 +969,9 @@
     "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🧃",
-      "caption": "a carton of juice — karton soku"
+      "src": "illustrations/scene-juice-question.svg",
+      "caption": "Pytamy o ilość lub liczbę produktów na półce.",
+      "scene": true
     }
   },
   {
@@ -955,8 +994,9 @@
     "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🧀",
-      "caption": "cheese — ser"
+      "src": "illustrations/scene-cheese-question.svg",
+      "caption": "Pytamy o ilość lub liczbę produktów na półce.",
+      "scene": true
     }
   },
   {
@@ -979,8 +1019,9 @@
     "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "responseType": "choice",
     "illustration": {
-      "src": "illustrations/jam-jar.svg",
-      "caption": "jam — dżem"
+      "src": "illustrations/scene-jam-question.svg",
+      "caption": "Pytamy o ilość lub liczbę produktów na półce.",
+      "scene": true
     }
   },
   {
@@ -1003,8 +1044,9 @@
     "ruleId": "a-lot-of",
     "source": "Podręcznik, s. 29; notatki (adaptacja)",
     "illustration": {
-      "symbol": "💧",
-      "caption": "water — woda"
+      "src": "illustrations/scene-water-lots.svg",
+      "caption": "Dużo wody.",
+      "scene": true
     }
   },
   {
@@ -1027,8 +1069,9 @@
     "ruleId": "a-lot-of",
     "source": "Podręcznik, s. 29; notatki (adaptacja)",
     "illustration": {
-      "symbol": "🍎",
-      "caption": "apple — jabłko"
+      "src": "illustrations/scene-apple-lots.svg",
+      "caption": "Dużo jabłek.",
+      "scene": true
     }
   },
   {
@@ -1051,8 +1094,9 @@
     "ruleId": "containers",
     "source": "Podręcznik, s. 29 i 33; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "illustration": {
-      "symbol": "💧",
-      "caption": "water — woda"
+      "src": "illustrations/word-a-bottle-of-water.svg",
+      "caption": "water — woda",
+      "scene": false
     }
   },
   {
@@ -1075,8 +1119,9 @@
     "ruleId": "containers",
     "source": "Podręcznik, s. 29 i 33; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "illustration": {
-      "symbol": "🍫",
-      "caption": "chocolate — czekolada"
+      "src": "illustrations/word-a-bar-of-chocolate.svg",
+      "caption": "chocolate — czekolada",
+      "scene": false
     }
   },
   {
@@ -1099,8 +1144,9 @@
     "ruleId": "containers",
     "source": "Podręcznik, s. 29 i 33; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "illustration": {
-      "symbol": "🍽️",
-      "caption": "Zamawianie posiłku"
+      "src": "illustrations/word-a-can-of-cola.svg",
+      "caption": "Zamawianie posiłku",
+      "scene": false
     }
   },
   {
@@ -1123,8 +1169,9 @@
     "ruleId": "containers",
     "source": "Podręcznik, s. 29 i 33; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "illustration": {
-      "symbol": "🍽️",
-      "caption": "Zamawianie posiłku"
+      "src": "illustrations/word-a-carton-of-juice.svg",
+      "caption": "Zamawianie posiłku",
+      "scene": false
     }
   },
   {
@@ -1147,8 +1194,9 @@
     "ruleId": "containers",
     "source": "Podręcznik, s. 29 i 33; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "illustration": {
-      "src": "illustrations/jam-jar.svg",
-      "caption": "jam — dżem"
+      "src": "illustrations/word-a-jar-of-jam.svg",
+      "caption": "jam — dżem",
+      "scene": false
     }
   },
   {
@@ -1171,8 +1219,9 @@
     "ruleId": "containers",
     "source": "Podręcznik, s. 29 i 33; zeszyt ćwiczeń, s. 20 (adaptacja)",
     "illustration": {
-      "symbol": "🍪",
-      "caption": "biscuit — ciasteczko / herbatnik"
+      "src": "illustrations/word-a-packet-of-biscuits.svg",
+      "caption": "biscuit — ciasteczko / herbatnik",
+      "scene": false
     }
   },
   {
@@ -1195,8 +1244,9 @@
     "ruleId": "containers",
     "source": "Notatki; podręcznik, s. 29 (adaptacja)",
     "illustration": {
-      "symbol": "💧",
-      "caption": "water — woda"
+      "src": "illustrations/scene-two-bottles.svg",
+      "caption": "Liczymy dwie butelki wody.",
+      "scene": true
     }
   },
   {
@@ -1219,8 +1269,9 @@
     "ruleId": "ordering",
     "source": "Podręcznik, s. 30 i 33 (adaptacja)",
     "illustration": {
-      "symbol": "🍽️",
-      "caption": "Zamawianie posiłku"
+      "src": "illustrations/scene-ordering.svg",
+      "caption": "Kelner pyta gościa, co chce zamówić.",
+      "scene": true
     }
   },
   {
@@ -1243,8 +1294,9 @@
     "ruleId": "ordering",
     "source": "Podręcznik, s. 30 i 33 (adaptacja)",
     "illustration": {
-      "symbol": "🍋🥤",
-      "caption": "lemonade — lemoniada"
+      "src": "illustrations/scene-drink-offer.svg",
+      "caption": "Gość zamawia lemoniadę.",
+      "scene": true
     }
   },
   {
@@ -1267,8 +1319,9 @@
     "ruleId": "ordering",
     "source": "Podręcznik, s. 30 (adaptacja)",
     "illustration": {
-      "symbol": "🍓",
-      "caption": "strawberry — truskawka"
+      "src": "illustrations/scene-milkshake-order.svg",
+      "caption": "Gość zamawia koktajl truskawkowy.",
+      "scene": true
     }
   },
   {
@@ -1291,8 +1344,9 @@
     "ruleId": "ordering",
     "source": "Podręcznik, s. 30 i 33 (adaptacja)",
     "illustration": {
-      "symbol": "🍽️",
-      "caption": "Zamawianie posiłku"
+      "src": "illustrations/scene-ordering.svg",
+      "caption": "Kelner pyta, czy gość chce coś jeszcze.",
+      "scene": true
     }
   },
   {
@@ -1315,8 +1369,9 @@
     "ruleId": "ordering",
     "source": "Podręcznik, s. 30 i 33 (adaptacja)",
     "illustration": {
-      "symbol": "🍽️",
-      "caption": "Zamawianie posiłku"
+      "src": "illustrations/scene-drink-offer.svg",
+      "caption": "Propozycja czegoś do picia.",
+      "scene": true
     }
   },
   {
@@ -1339,8 +1394,9 @@
     "source": "Podręcznik, s. 32",
     "responseType": "choice",
     "illustration": {
-      "symbol": "⚽",
-      "caption": "sport — sport"
+      "src": "illustrations/scene-sport-hungry.svg",
+      "caption": "Uprawianie sportu i głód — powód oraz skutek.",
+      "scene": true
     }
   },
   {
@@ -1363,8 +1419,9 @@
     "source": "Podręcznik, s. 32",
     "responseType": "choice",
     "illustration": {
-      "symbol": "⚽",
-      "caption": "sport — sport"
+      "src": "illustrations/scene-sport-hungry.svg",
+      "caption": "Uprawianie sportu i głód — powód oraz skutek.",
+      "scene": true
     }
   },
   {
@@ -1387,8 +1444,9 @@
     "source": "Podręcznik, s. 32, ćw. 5",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🥚",
-      "caption": "egg — jajko"
+      "src": "illustrations/scene-loves-eggs.svg",
+      "caption": "Tata lubi jajka, dlatego je przyrządza.",
+      "scene": true
     }
   },
   {
@@ -1411,8 +1469,9 @@
     "source": "Podręcznik, s. 32, ćw. 5",
     "responseType": "choice",
     "illustration": {
-      "symbol": "🍽️",
-      "caption": "Zamawianie posiłku"
+      "src": "illustrations/scene-loves-pizza.svg",
+      "caption": "Brat lubi pizzę i wybiera się na nią do pizzerii.",
+      "scene": true
     }
   }
 ]
