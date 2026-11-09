@@ -1,3 +1,8 @@
+import {homeView} from './home-view.ts';
+import {getNextStep} from './next-step.ts';
+import {journeyList as renderJourneyList,moduleList as renderModuleList} from './catalog-view.ts';
+import {labels} from './learning-labels.ts';
+import {e,icon,button} from './ui.ts';
 import {loadCats,responseCat,endingCat,type CatCatalog,type CatReaction} from './cats.ts';
 import {closestAnswer,type AnswerPart} from './answer-comparison.ts';
 import {pwa,startPwa,installPwa,prepareOffline,applyUpdate} from './pwa.ts';
@@ -5,7 +10,7 @@ import './style.css';
 import './theme.css';
 import './adventure.css';
 import './home.css';
-import {loadJourneys,nextLesson,lessons,stars,unlocked,makeLessonSession,rewardCompletion,purchase,place,type Journey} from './adventure.ts';
+import {loadJourneys,lessons,stars,unlocked,makeLessonSession,rewardCompletion,purchase,place,type Journey} from './adventure.ts';
 import {journeyView,lessonIntro,houseView} from './adventure-view.ts';
 import {seedStageReviews,seedReviewArchive,recordStageError,makeStageReviewSession,finishStageReview,settleStageRewards,reviewState,reviewStats,pendingLabel,stageForSession} from './stage-review.ts';
 import {compactHistory,checkPage,sessionCount,type HistoryPage} from './history.ts';
@@ -93,24 +98,7 @@ async function connectAccount(account: AccountUser){
   screen='account';accountSection='name';registerAccount=false;progress=structuredClone(sync.cache!.progress);pending=null;lastSession=null;
   scheduleSync(0);
 }
-const labels: Record<Mode, string> = { 'flashcards-basic': 'Fiszki podstawa', flashcards: 'Fiszki', quiz: 'Quiz słownictwa', grammar: 'Gramatyka', dialogue: 'Rozmówki', review: 'Powtórka błędów', lesson: 'Kocia lekcja' };
-const e = (value: unknown) => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
 const date = (value: string) => new Intl.DateTimeFormat('pl-PL', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(value));
-const icons: Record<string, string> = {
-  cat: '<path d="M4 11V4l5 3a11 11 0 0 1 6 0l5-3v7c2 9-18 9-16 0Z"/><path d="M8 11h.01M16 11h.01m-5 3 1 1 1-1M2 13l5 1m-5 3 5-1m15-3-5 1m5 3-5-1"/>',
-  leaf: '<path d="M19 4C9 3 3 7 5 14c2 6 12 6 14-10Z"/><path d="m6 18 8-9M10 13l-1-4"/>',
-  home: '<path d="m3 10 9-7 9 7v10H3Z"/><path d="M9 20v-7h6v7"/>',
-  chart: '<path d="M5 20V11m7 9V4m7 16v-6"/>',
-  cloud: '<path d="M7 17H6a4 4 0 0 1-1-8 7 7 0 0 1 13-1 5 5 0 0 1 1 9h-2M12 12v9m-3-3 3 3 3-3"/>',
-  cards: '<rect x="7" y="4" width="13" height="16" rx="3"/><path d="M4 7v11a4 4 0 0 0 4 4m3-12h5m-5 4h3"/>',
-  spark: '<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5ZM20 2v4m-2-2h4"/>',
-  book: '<path d="M12 5C8 2 3 4 3 4v15s5-2 9 1c4-3 9-1 9-1V4s-5-2-9 1Zm0 0v15"/>',
-  arrow: '<path d="M5 12h14m-6-6 6 6-6 6"/>',
-  check: '<path d="m5 12 4 4L19 6"/>',
-  repeat: '<path d="M20 8a8 8 0 0 0-14-3L3 8m0-5v5h5m-4 8a8 8 0 0 0 14 3l3-3m0 5v-5h-5"/>',
-};
-const icon = (name: string) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name] ?? icons.spark}</svg>`;
-const button = (action: string, text: string, cls = 'primary') => `<button class="${cls}" data-action="${action}">${text}</button>`;
 function compatible() { return !progress.active || sessionCompatible(modules, progress.active); }
 function stats() { return currentStats(modules,progress); }
 async function prepareProgress(p:Progress){
@@ -143,14 +131,6 @@ function decorativeCat(id:string){
   const cat=catCatalog?.cats.find(c=>c.id===id);
   return cat?catView({cat,mood:'happy',frame:cat.happy}):icon('cat');
 }
-function moduleSubtitle(m:Module){return [m.level,`Moduł ${m.order}`,m.cover].filter(Boolean).map(e).join(' · ');}
-function journeyList(){
-  return `<button class="back" data-action="home">← Moja nauka</button><div class="journey-top"><div><div class="eyebrow">MAŁE KROKI, WIELKIE PRZYGODY</div><h1>Twoje kocie przygody</h1></div><button class="star-wallet" data-action="house" aria-label="Koci domek, ${stars(progress)} gwiazdek">${stars(progress)} <span aria-hidden="true">★</span></button></div><p class="lead">Wybierz mapę. Ucz się małymi krokami i zdobywaj gwiazdki do kociego domku.</p><div class="journey-catalog">${journeys.map(j=>{
-    const m=modules.find(m=>m.id===j.moduleId)!;
-    const done=lessons(j).filter(l=>progress.adventure?.completed[l.key]).length,total=lessons(j).length,reviews=reviewStats(progress,j);
-    return `<article class="adventure-invite"><div><p class="catalog-subtitle">${moduleSubtitle(m)}</p><h2>${e(j.title)}</h2><p>${done} z ${total} lekcji ukończonych</p><div class="journey-progress" role="progressbar" aria-label="Ukończone lekcje: ${e(j.title)}" aria-valuenow="${done}" aria-valuemin="0" aria-valuemax="${total}"><span style="width:${Math.round(done/total*100)}%"></span></div><p class="retention-overview">${reviews.total?`Utrwalenie: ${reviews.percent}% · ${reviews.pending?`do powtórzenia: ${pendingLabel(reviews)}`:'brak zaległych powtórek ✓'}`:'Brak zaległych powtórek ✓'}${progress.adventure?.reviewArchiveHead?' · pobieramy starsze błędy':''}</p><button class="primary" data-action="map" data-id="${e(j.moduleId)}" aria-label="Otwórz mapę ${e(j.title)}">Otwórz mapę ${icon('arrow')}</button></div><img src="./illustrations/word-have-a-picnic.svg" alt="" width="110" height="100"></article>`;
-  }).join('') || '<p class="empty">Nowe przygody pojawią się tutaj, gdy dodamy mapy modułów.</p>'}</div>`;
-}
 function mapView(){const j=currentJourney();return j?journeyView(j,progress,decorativeCat):'<h1>Kocia mapa</h1><p>Mapa jest chwilowo niedostępna. Twoje własne ćwiczenia nadal działają.</p>'+button('home','Moja nauka');}
 function introView(){const j=currentJourney(),l=j&&lessons(j).find(l=>l.lesson.id===introLessonId)?.lesson,m=modules.find(m=>m.id===j?.moduleId);return j&&l&&m?lessonIntro(j,l,m,progress):mapView();}
 function homeForCats(){const j=currentJourney(),complete=!!j&&lessons(j).every(l=>progress.adventure?.completed[l.key]);return houseView(progress,chosenDecoration,decorativeCat,complete);}
@@ -163,24 +143,12 @@ function shell(content: string) {
   const active = screen === 'house' ? 'house' : screen === 'progress' ? 'progress' : screen === 'backup' || screen === 'account' ? 'backup' : 'home';
   return `<aside class="sidebar"><a class="brand" href="#" data-action="home"><span class="brand-icon">${icon('cat')}</span><span>małe kroki<span class="brand-sub">PRZESTRZEŃ DO NAUKI</span></span></a><button type="button" class="profile" data-action="account" aria-label="Ustawienia konta"><span class="avatar">${e(Array.from(user?.displayName||'Hania')[0].toLocaleUpperCase())}</span><span class="profile-details"><strong>${e(user ? user.displayName||'Twoje konto' : 'Hania')}</strong><span>Ustawienia konta →</span></span><span class="tiny-flower" aria-hidden="true">⚙</span></button><span class="nav-label">TWOJA PRZESTRZEŃ</span><nav aria-label="Główna nawigacja">${[['home','home','Moja nauka'],['house','cat','Domek'],['progress','chart','Moje postępy'],['backup','cloud','Kopia postępów']].map(([action,i,label]) => `<button class="nav-item ${active === action ? 'active' : ''}" data-action="${action}" aria-label="${label}" ${active === action ? 'aria-current="page"' : ''}>${icon(i)}<span class="nav-label-full">${label}</span><span class="nav-label-short">${({home:'Nauka',house:'Domek',progress:'Postępy',backup:'Kopia'} as Record<string,string>)[action]}</span>${active === action ? '<span class="nav-dot"></span>' : ''}</button>`).join('')}</nav><div class="sidebar-note"><span>✦</span><strong>Po trochu, każdego dnia.</strong><p>Każda próba to mały krok do przodu.</p></div><div class="local-note">${icon('check')} Postępy na tym urządzeniu<span>${user ? 'Połączono z kontem.' : 'Możesz połączyć z kontem.'}</span></div></aside><main><header class="topbar"><span>NAUKA JĘZYKA / <b>${screen === 'backup' ? 'KOPIA POSTĘPÓW' : screen === 'progress' ? 'POSTĘPY' : 'MOJA NAUKA'}</b></span><button class="local-chip" data-action="account" aria-label="Konto i synchronizacja"><span></span><span data-sync-label>${storageError ? 'Problem z zapisem' : syncLabel()}</span></button></header>${storageError ? `<div class="alert error" role="alert">${e(storageError)}</div>` : ''}${notice ? `<div class="alert" role="status">${e(notice)}</div>` : ''}<div class="content">${content}</div><footer>Stworzone do nauki, bez pośpiechu. <span>Małe kroki, wielkie odkrycia ✦</span></footer></main>`;
 }
-function heroArt() {
-  return `<div class="hero-art cat-art" aria-hidden="true"><svg class="cat-illustration" viewBox="0 0 300 260" fill="none"><circle cx="154" cy="133" r="109" fill="#E6E8FF"/><circle cx="154" cy="133" r="91" stroke="#C4B5EB" stroke-dasharray="4 7"/><path d="M217 204c58 10 58-43 33-37-19 5 13 20-15 23" stroke="#9B83D2" stroke-width="17" stroke-linecap="round"/><ellipse cx="159" cy="196" rx="64" ry="35" fill="#AB91DC"/><path d="M96 100 91 40c0-4 4-6 7-3l39 33c13-3 25-3 38 0l39-33c4-3 8-1 7 4l-5 61c26 73-147 78-120-2Z" fill="#BDA6EB" stroke="#9174C6" stroke-width="2"/><path d="m101 55 4 34 20-12-24-22Zm108 0-25 22 20 11 5-33Z" fill="#F7B6DA"/><path d="M129 107c-5-6-10-6-15 0m65 0c5-6 10-6 15 0" stroke="#554172" stroke-width="4" stroke-linecap="round"/><ellipse cx="110" cy="120" rx="11" ry="6" fill="#EEA2D0"/><ellipse cx="199" cy="120" rx="11" ry="6" fill="#EEA2D0"/><path d="m150 116 5 5 5-5h-10Z" fill="#76508D"/><path d="M155 121c0 10-12 11-13 4m13-4c0 10 12 11 13 4M87 112l21 4m-23 6 21 1m117-11-21 4m23 6-21 1" stroke="#76508D" stroke-width="2" stroke-linecap="round"/><path d="M102 166c17-3 36 1 53 10 17-9 36-13 54-10v64c-20-4-38 0-54 7-17-7-35-11-53-7v-64Z" fill="#FEFCFF" stroke="#8263B7" stroke-width="2"/><path d="M155 176v61m-40-54 27 6m-27 6 27 6m25-12 27-6m-27 18 27-6" stroke="#CCB6E7" stroke-width="3" stroke-linecap="round"/><ellipse cx="100" cy="185" rx="12" ry="18" fill="#BDA6EB" transform="rotate(-18 100 185)"/><ellipse cx="209" cy="185" rx="12" ry="18" fill="#BDA6EB" transform="rotate(18 209 185)"/><path d="m44 66 4 11 11 4-11 4-4 11-4-11-11-4 11-4ZM249 70l3 7 7 3-7 3-3 7-3-7-7-3 7-3Z" fill="#E59CC9"/><circle cx="55" cy="184" r="6" fill="#97C9F3"/><circle cx="239" cy="117" r="4" fill="#97C9F3"/><path d="M144 38c-15-16-26 4 0 17 26-13 15-33 0-17Z" fill="#F1A5D3"/></svg></div>`;
+function home(){
+  const step=getNextStep(modules,journeys,progress);
+  return homeView({name:user?user.displayName:'Haniu',modules,step,pwa,cat:decorativeCat(step.catId)});
 }
-function pwaCard(){
-  const status=pwa.ready?'Materiały gotowe do nauki bez internetu.':pwa.preparing?'Pobieramy materiały do nauki bez internetu…':pwa.failed?'Nie udało się pobrać materiałów. Połącz się z internetem i spróbuj ponownie.':'Otwórz aplikację z internetem, aby przygotować naukę offline.';
-  return `<section class="pwa-card" aria-label="Instalacja i nauka offline"><img src="./icons/cat-192.png" alt="" width="56" height="56"><div><h2>${pwa.installed?'Twoja aplikacja do nauki':'Małe kroki na Twoim telefonie'}</h2><p data-offline-status>${status}${!pwa.online?' Teraz jesteś offline.':''}</p><p>Bez internetu ćwiczenia i zapis wyników działają na urządzeniu. Zalogowane konto wyśle wyniki po połączeniu, gdy aplikacja jest otwarta lub przy kolejnym uruchomieniu.</p>${pwa.canInstall&&!pwa.installed?button('pwa-install','Zainstaluj aplikację'):''}${pwa.failed?button('pwa-prepare','Pobierz materiały ponownie','secondary'):''}${!pwa.installed?'<details><summary>Jak zainstalować na Androidzie?</summary><p>W Chrome otwórz menu ⋮ → Dodaj do ekranu głównego → Zainstaluj. Nazwa opcji może różnić się na telefonie. Jeśli masz już starszy skrót, instaluj z tego samego adresu i przeglądarki — nie czyść danych strony.</p></details>':''}</div></section>`;
-}
-function updateBanner(){return pwa.updateAvailable?`<section class="update-banner" aria-label="Aktualizacja aplikacji"><span class="update-symbol" aria-hidden="true">${icon('spark')}</span><div><strong>Nowa wersja dostępna</strong><p>Nowe odkrycia czekają. Twoje postępy pozostaną zapisane.</p></div>${button('pwa-update','Zaktualizuj','secondary')}</section>`:'';}
-function resumeCard(){
-  const active=progress.active;if(!active)return '';
-  const m=modules.find(m=>m.id===active.moduleId),title=active.stageReview?.title??active.lesson?.title??labels[active.mode];
-  return `<section class="resume home-resume"><div>${icon('repeat')}<div><strong>Wracamy do nauki?</strong><p>${compatible()?`${e(m?.cover??'')} · ${e(title)} · pytanie ${Math.min(active.index+1,active.items.length)} z ${active.items.length}`:'Zapisana sesja wymaga innej wersji materiałów. Historia pozostaje zachowana.'}</p></div></div>${compatible()?button('resume','Kontynuuj naukę →','secondary'):''}</section>`;
-}
-function home() {
-  const name=user?user.displayName:'Haniu';
-  return `<div class="home-start">${updateBanner()}<section class="welcome"><div><h1>Dobrze Cię widzieć${name?`, ${e(name)}`:''}!</h1><p>Na co masz dzisiaj ochotę?</p></div></section>${resumeCard()}<section class="hero home-hero"><div><span class="tag">TWOJA JĘZYKOWA PRZYGODA</span><h2>Wielkie rzeczy zaczynają się od małych kroków.</h2><p>Wybierz przygodę, ucz się małymi krokami i zdobywaj gwiazdki do kociego domku.</p>${button('journeys',`Wybierz przygodę ${icon('arrow')}`)}</div>${heroArt()}</section><section class="practice-entry"><span class="practice-icon" aria-hidden="true">${icon('cards')}</span><div><h2>A może wolisz poćwiczyć po swojemu?</h2><p>Fiszki, quizy, gramatyka, rozmówki i powtórki.</p>${button('module-list',`Przejdź do modułów ${icon('arrow')}`,'secondary')}</div></section><details class="home-help"><summary>${icon('book')} Jak korzystać z aplikacji?</summary><div class="home-help-content">${pwaCard()}<h2>Twoje wyniki i konto</h2><p>Każda odpowiedź zapisuje się na tym urządzeniu. Konto pozwala korzystać z wyników na różnych urządzeniach. Bez konta możesz przenosić postępy za pomocą pliku kopii.</p><div class="help-actions">${button('account','Zarządzaj kontem','text-button')}${button('backup','Zapisz lub wczytaj kopię','text-button')}</div></div></details></div>`;
-}
-function moduleList(){return `<button class="back" data-action="home">← Moja nauka</button><h1>Ćwicz po swojemu</h1><p class="lead">Wybierz moduł, a potem fiszki, quiz, gramatykę, rozmówki lub powtórkę.</p><section class="modules-section"><div class="section-heading"><div><h2>Twoje moduły <span class="count">${modules.length}</span></h2><p>Wybierz mały kawałek świata do odkrycia.</p></div><span class="section-hint">${icon('book')} Biblioteczka wiedzy</span></div><div class="modules-grid">${modules.map(m => `<article class="module-card"><div class="module-cover"><span class="module-number">MODUŁ ${m.order.toString().padStart(2,'0')}</span><span class="cover-letters">${e(m.cover)}</span><span class="cover-flower">${icon('cat')}</span><span class="demo-badge">${e(m.label)}</span></div><div class="module-body"><div class="module-meta">${e(m.language)} <span>•</span> Moduł ${m.order}</div><h3>${e(m.name)}</h3><p>${e(m.subtitle)}</p><div class="topic-tags">${m.topics.map(t => `<span>${e(t)}</span>`).join('')}</div><div class="module-bottom"><span>${m.basicFlashcardIds?.length ?? m.words.length} podstawowych / ${m.words.length} wszystkich fiszek <br>${m.exercises.length} zadań</span><button class="round-button" data-action="module" data-id="${e(m.id)}" aria-label="Otwórz moduł ${e(m.name)}">${icon('arrow')}</button></div></div></article>`).join('')}<article class="coming-card"><span class="coming-icon">${icon('spark')}</span><h3>Miejsce na nowe odkrycia</h3><p>Tu pojawią się kolejne moduły <br>z Twojego podręcznika.</p><span class="soft-tag">Wkrótce, z Twoich materiałów</span></article></div></section>`;}
+function journeyList(){return renderJourneyList(modules,journeys,progress);}
+function moduleList(){return renderModuleList(modules);}
 function setup() {
   const descriptions: Record<Mode,string> = { 'flashcards-basic': `${selected.basicFlashcardIds?.length ?? selected.words.length} haseł z ramek Vocabulary. Dobry zestaw na początek.`, flashcards: `Wszystkie ${selected.words.length} haseł z modułu, także dodatkowe słówka i zwroty.`, quiz: 'Sprawdź słówka w krótkich pytaniach.', grammar: 'Buduj zdania, próbuj i poznawaj zasady.', dialogue: 'Uzupełniaj krótkie dialogi o jedzeniu, napojach i zakupach.', review: 'Wróć do zadań, które sprawiły trudność.', lesson: 'Lekcje na kociej mapie.' };
   return `<button class="back" data-action="module-list">← Twoje moduły</button><div class="eyebrow">MODUŁ ${selected.order} · ${e(selected.label)}</div><h1>${e(selected.name)}</h1><p class="lead">Wybierz sposób odpowiedzi, potem dotknij kafelka i ćwicz.</p><section class="panel"><fieldset><legend>Sposób odpowiadania</legend><div class="segmented">${([['choice','Wybieram odpowiedź'],['text','Wpisuję odpowiedź'],['mixed','Trochę wybieram, trochę wpisuję']] as const).map(([v,l]) => `<label><input type="radio" name="answerMode" value="${v}" ${answerMode === v ? 'checked' : ''}><span>${l}</span></label>`).join('')}</div></fieldset>${progress.active ? `<div class="alert">Masz rozpoczętą sesję.${compatible() ? button('resume','Wróć do rozpoczętej sesji','text-button') : ''}</div>` : ''}<h2>Dotknij i zacznij</h2><div class="mode-grid">${(Object.keys(labels) as Mode[]).filter(m=>m!=='lesson').map(m => `<button data-action="mode" data-mode="${m}" aria-label="${labels[m]}" aria-describedby="mode-description-${m}" class="mode-card"><span class="stat-icon ${isFlashcardMode(m) ? 'peach' : m === 'grammar' ? 'lavender' : 'mint'}">${icon(isFlashcardMode(m) ? 'cards' : m === 'review' ? 'repeat' : m === 'grammar' ? 'book' : 'spark')}</span><strong>${labels[m]} →</strong><span id="mode-description-${m}">${descriptions[m]}</span></button>`).join('')}</div><details class="session-settings"><summary>Zakres sesji i materiały</summary><label class="checkbox"><input id="previous" type="checkbox" ${previous ? 'checked' : ''}> Dołącz powtórkę wcześniejszych modułów</label><p>Do 10 pytań w sesji. Trudniejsze zadania wrócą jeszcze raz.${!modules.some(m => m.order < selected.order) ? ' Nie dodano jeszcze wcześniejszych modułów.' : ''}</p><p>${e(selected.source)}</p></details></section><section class="panel grammar-guide"><h2>Przypomnij sobie zasady</h2><p>Krótka ściąga z tego modułu. Rozwiń temat, który chcesz powtórzyć.</p>${selected.grammar.map(rule => `<details><summary>${e(rule.title)}</summary><p>${e(rule.explanation)}</p><ul>${rule.examples.map(example=>`<li>${e(example)}</li>`).join('')}</ul><p class="source-reference">${e(rule.source)}</p></details>`).join('')}</section>`;
@@ -317,18 +285,40 @@ async function downloadProgress(value: Progress,suffix='') {
   notice = 'Plik kopii został przygotowany do pobrania. Zachowaj go, aby móc odtworzyć postępy.';
 }
 async function exportProgress(){await downloadProgress(progress);}
+async function startStageReview(j:Journey,stage:Journey['stages'][number]){
+  if(progress.active?.stageReview?.id===`${j.moduleId}/${stage.id}`){screen='study';return;}
+  const session=makeStageReviewSession(modules,j,stage,answerMode,progress);
+  if(!session){notice='Brak zaległych powtórek w tym etapie.';return;}
+  if(progress.active&&!window.confirm('Rozpocząć powtórkę zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))return;
+  await mutate(p=>{p.active=session;});lastReward=0;lastStageReward=0;screen='study';
+}
 async function action(action: string, el: HTMLElement) {
   notice = '';
+  if(action==='next-step'){
+    const step=getNextStep(modules,journeys,progress);
+    selected=modules.find(m=>m.id===step.moduleId)??selected??modules[0];
+    switch(step.kind){
+      case 'resume':screen='study';break;
+      case 'lesson':introLessonId=step.lessonId;answerMode='mixed';screen='lesson-intro';break;
+      case 'stage-review':{
+        const j=currentJourney(),stage=j?.stages.find(s=>s.id===step.stageId);
+        if(j&&stage)await startStageReview(j,stage);break;
+      }
+      case 'review':{
+        const session=makeSession(modules,selected,'review','text',false,progress);
+        if(session.items.length){await mutate(p=>{p.active=session;});lastReward=0;lastStageReward=0;screen='study';}break;
+      }
+      case 'practice':screen=step.moduleId?'setup':'module-list';break;
+      case 'unavailable':screen='module-list';break;
+    }
+    return;
+  }
   if(action==='journeys'){screen='journeys';scheduleReviewMigration();return;}
   if(action==='module-list'){screen='module-list';return;}
   if(action==='map'){selected=modules.find(m=>m.id===el.dataset.id)??selected??modules[0];screen='map';scheduleReviewMigration();return;}
   if(action==='stage-review'){
     const j=currentJourney(),stage=j?.stages.find(s=>s.id===el.dataset.id);if(!j||!stage)return;
-    if(progress.active?.stageReview?.id===`${j.moduleId}/${stage.id}`){screen='study';return;}
-    const session=makeStageReviewSession(modules,j,stage,answerMode,progress);
-    if(!session){notice='Brak zaległych powtórek w tym etapie.';return;}
-    if(progress.active&&!window.confirm('Rozpocząć powtórkę zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))return;
-    await mutate(p=>{p.active=session;});lastReward=0;lastStageReward=0;screen='study';return;
+    await startStageReview(j,stage);return;
   }
   if(action==='house'){screen='house';return;}
   if(action==='open-lesson'||action==='begin-lesson'){

@@ -62,5 +62,5 @@ test('treści: lunch doprecyzowany, dinner bez lunch jako dystraktora, neutralne
   const pizza=m.exercises.find(q=>q.id==='g-so-pizza')!;assert.ok(pizza.explanation.includes('W tym zdaniu'));
 });
 test('D14: hasło na stronie głównej zachowuje spację przy zawijaniu tekstu',()=>{
-  const main=readFileSync(new URL('../src/main.ts',import.meta.url),'utf8');assert.ok(main.includes('się od małych kroków.'));
+  const main=readFileSync(new URL('../src/home-view.ts',import.meta.url),'utf8');assert.ok(main.includes('się od małych kroków.'));
 });

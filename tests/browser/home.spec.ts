@@ -8,10 +8,10 @@ for(const width of [320,390])test(`strona startowa ${width}px: dwa wejścia, kot
   await expect(page.getByRole('heading',{name:'Dobrze Cię widzieć, Haniu!'})).toBeVisible();
   await expect(page.locator('.cat-illustration')).toBeVisible();
   await expect(page.locator('.update-banner')).toHaveCount(0);
-  await expect(page.locator('.home-resume')).toHaveCount(0);
+  await expect(page.locator('.next-step-card')).toHaveAttribute('data-step-kind','lesson');
   await expect(page.locator('.stats-grid,.module-card,.adventure-invite')).toHaveCount(0);
   const order=await page.locator('.home-start').evaluate(el=>Array.from(el.children).map(c=>c.className));
-  expect(order).toEqual(['welcome','hero home-hero','practice-entry','home-help']);
+  expect(order).toEqual(['welcome','next-step-card','hero home-hero','practice-entry','home-help']);
   const check=async()=>expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
   await check();
   const hero=await page.locator('.home-hero').boundingBox(),art=await page.locator('.cat-illustration').boundingBox();
@@ -39,7 +39,7 @@ for(const width of [320,390])test(`strona startowa ${width}px: dwa wejścia, kot
   await page.locator('.home-help>summary').tap();
   await expect(page.getByRole('heading',{name:'Twoje wyniki i konto'})).toBeVisible();await check();
   if(width===390){
-    await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.setViewportSize({width:1280,height:900});
+    await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.locator('.home-help>summary').tap();await page.setViewportSize({width:1280,height:900});await page.evaluate(()=>window.scrollTo(0,0));
     await check();await expect(page.locator('.cat-illustration')).toBeVisible();
     await page.screenshot({path:'test-results/home-clean-desktop.png',fullPage:true});
   }
@@ -52,9 +52,9 @@ test('kontynuacja bezpośrednio pod imieniem przywraca zapisaną sesję',async({
   await page.locator('#import-file').setInputFiles({name:'resume.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();
   await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
-  await expect(page.locator('.welcome + .home-resume')).toBeVisible();
-  await expect(page.locator('.home-resume')).toContainText('Food · Gramatyka · pytanie 1 z 10');
-  await page.reload();await expect(page.locator('.welcome + .home-resume')).toBeVisible();
+  await expect(page.locator('.welcome + .next-step-card')).toBeVisible();
+  await expect(page.locator('.next-step-card')).toContainText('Food · Gramatyka · pytanie 1 z 10');
+  await page.reload();await expect(page.locator('.welcome + .next-step-card')).toBeVisible();
   await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
   await expect(page.locator('.question')).toBeVisible();
 });

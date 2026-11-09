@@ -46,7 +46,7 @@ Po pierwszym pobraniu materiałów aplikacja działa offline i może być instal
 
 ## Kocia przygoda i domek
 
-Strona główna pokazuje powitanie, przycisk kontynuowania rozpoczętej sesji i dwa wejścia do nauki. **Wybierz przygodę** otwiera katalog map z nazwą przygody, podtytułem (np. A2 · Moduł 2 · Food), postępem lekcji i utrwalenia. Mapa **Przygotowania do kociego pikniku** zawiera siedem etapów i 41 krótkich lekcji z wprowadzeniem, przykładami i ćwiczeniami. **Przejdź do modułów** prowadzi do osobnego katalogu fiszek, quizów, gramatyki, rozmówek i powtórek. Instrukcje instalacji, nauki offline i zapisu wyników są w rozwijanej pomocy na dole strony startowej. Komunikat o dostępnej aktualizacji pojawia się nad powitaniem. Pierwsze ukończenie lekcji daje 3 ★. Każdy etap ma osobną powtórkę błędów do trzech samodzielnych poprawnych odpowiedzi w ukończonych turach; procent utrwalenia i liczba zaległych pozycji są widoczne także na zwiniętej mapie. Dodatkowe 3 ★ przysługują raz za ukończone lekcje i 100% powtórki etapu. Powtórki nie blokują dalszych lekcji. W obu rodzajach powtórek (ogólnej i etapowej) słówka, luki i dialogi wymagają wpisania odpowiedzi. Jeśli pytanie podaje warianty, także słownie (np. „policzalny czy niepoliczalny”), odpowiedź wybiera się przyciskiem — we wszystkich trybach. Zasada obejmuje też wznawiane starsze sesje. W zakładce **Domek** można kupić sześć dekoracji i wybierać ich ustawienie. Mapa, saldo, powtórki i domek działają offline i są częścią zapisu danego konta oraz pliku kopii. Dotychczasowe swobodne ćwiczenia pozostają dostępne.
+Strona główna pokazuje powitanie, ramkę z kotkiem **Twój następny krok** i dwa wejścia do nauki. Ramka wznawia rozpoczętą sesję (również quiz lub powtórkę), a przy jej braku prowadzi do najbliższej nieukończonej lekcji ostatnio używanego modułu, następnego dostępnego modułu lub zaległej powtórki. Gdy wszystko jest utrwalone, proponuje ćwiczenia po swojemu. Powtórki nie blokują przejścia do kolejnego modułu. **Wybierz przygodę** otwiera katalog map z nazwą przygody, podtytułem (np. A2 · Moduł 2 · Food), postępem lekcji i utrwalenia. Mapa **Przygotowania do kociego pikniku** zawiera siedem etapów i 41 krótkich lekcji z wprowadzeniem, przykładami i ćwiczeniami. **Przejdź do modułów** prowadzi do osobnego katalogu fiszek, quizów, gramatyki, rozmówek i powtórek. Instrukcje instalacji, nauki offline i zapisu wyników są w rozwijanej pomocy na dole strony startowej. Komunikat o dostępnej aktualizacji pojawia się nad powitaniem. Pierwsze ukończenie lekcji daje 3 ★. Każdy etap ma osobną powtórkę błędów do trzech samodzielnych poprawnych odpowiedzi w ukończonych turach; procent utrwalenia i liczba zaległych pozycji są widoczne także na zwiniętej mapie. Dodatkowe 3 ★ przysługują raz za ukończone lekcje i 100% powtórki etapu. Powtórki nie blokują dalszych lekcji. W obu rodzajach powtórek (ogólnej i etapowej) słówka, luki i dialogi wymagają wpisania odpowiedzi. Jeśli pytanie podaje warianty, także słownie (np. „policzalny czy niepoliczalny”), odpowiedź wybiera się przyciskiem — we wszystkich trybach. Zasada obejmuje też wznawiane starsze sesje. W zakładce **Domek** można kupić sześć dekoracji i wybierać ich ustawienie. Mapa, saldo, powtórki i domek działają offline i są częścią zapisu danego konta oraz pliku kopii. Dotychczasowe swobodne ćwiczenia pozostają dostępne.
 
 **Przed publikacją tej wersji opublikuj aktualny plik `firestore.rules` w Firebase.** Dodaje obsługę osobnych części starszej historii. Instrukcje: [mapa i domek](docs/kocia-przygoda.md), [historia i aktualizacja reguł](docs/historia.md).
 
@@ -55,18 +55,17 @@ Strona główna pokazuje powitanie, przycisk kontynuowania rozpoczętej sesji i 
 Treści znajdują się w **public/content**, niezależnie od kodu strony w `src`. Aplikacja pobiera je jako osobne pliki, a nie jako część programu.
 
 - `katalog.json` — lista modułów.
-- `02-food/modul.json` — opis, nazwa, numer i wersja.
+- `02-food/modul.json` — opis, nazwa, numer, wersja i opcjonalny poziom `level` (A1–C2). Pole `journeyPath`, np. `02-food/sciezka.json`, wskazuje mapę modułu.
 - `02-food/slownictwo.json` — fiszki, tłumaczenia i akceptowane odpowiedzi.
 - `02-food/quiz.json` — pytania słownikowe wskazujące słowa; poprawka słówka aktualizuje także quiz.
 - `02-food/gramatyka.json` — zasady, objaśnienia i przykłady.
 - `02-food/cwiczenia.json` — zadania, klucze odpowiedzi i wyjaśnienia po błędzie.
-- `02-food/modul.json` — opis modułu i opcjonalny poziom `level` (A1–C2); tytuł przygody edytuje się w `sciezka.json`.
 - `02-food/rozmowki.json` — 12 dialogów z lukami w osobnym trybie „Rozmówki”; wybór lub wpisywanie odpowiedzi, polskie wyjaśnienia i powtórka błędów.
 - `02-food/sciezka.json` — etapy i lekcje kociej mapy, wskazujące istniejące słówka, zadania i reguły.
 
 Słówka, gramatyka i rozmówki używają lokalnych pastelowych ilustracji SVG pasujących do kotków. Gramatyka przedstawia sytuację ze zdania (np. brak mleka, dwie butelki wody, zamawianie czy powód i skutek). [Edycja ilustracji](public/illustrations/README.md).
 
-[Instrukcja edycji materiałów](public/content/README.md) zawiera przykłady. Po zmianie uruchom `npm.cmd run check:content`. Podczas lokalnej nauki wystarczy zapisać pliki i odświeżyć stronę. Po wysłaniu zmian na `main` GitHub automatycznie sprawdzi, zbuduje i opublikuje aplikację. W zainstalowanej PWA nowa wersja pojawi się jako przycisk „Wczytaj nową wersję”.
+[Instrukcja edycji materiałów](public/content/README.md) zawiera przykłady. Po zmianie uruchom `npm.cmd run check:content`. Podczas lokalnej nauki wystarczy zapisać pliki i odświeżyć stronę. Po wysłaniu zmian na `main` GitHub automatycznie sprawdzi, zbuduje i opublikuje aplikację. W zainstalowanej PWA nowa wersja pojawi się jako przycisk „Zaktualizuj”.
 
 Przy zmianie znaczenia konkretnego słówka lub zadania zwiększ jego opcjonalne `rev` (domyślnie 1). Pozostałe elementy zachowują postępy. Zmiana `version` całego modułu nie resetuje wyników. Dawne kopie formatu 1 z kluczami `@1` pozostają zgodne. Kopia nie zawiera treści modułów. Zdjęcia źródłowe są w pomijanym przez Git folderze `.local-materials`.
 
@@ -95,3 +94,15 @@ Remove-Item Env:HANIA_TEST_BUILD
 ```
 
 Testy używają odizolowanych danych. Bez zmiennej `HANIA_TEST_BUILD` uruchamiają wersję deweloperską. Zmienna `HANIA_BASE_URL` służy do sprawdzania innego adresu i ma pierwszeństwo przed lokalnym podglądem.
+
+## Kod strony startowej
+
+- `src/home-view.ts` — wygląd strony startowej, ramki następnego kroku, pomocy i aktualizacji; otrzymuje dane, nie zapisuje wyników.
+- `src/next-step.ts` — wybór kolejnej czynności na podstawie istniejących postępów konta; bez nowego formatu zapisu i bez odwołań do przeglądarki.
+- `src/catalog-view.ts` — osobne katalogi map i modułów.
+- `src/hero-art.ts` — dotychczasowy kotek z książką.
+- `src/ui.ts`, `src/learning-labels.ts` — wspólne ikony, przyciski, bezpieczne wyświetlanie tekstu i nazwy trybów.
+- `src/home.css` — układ tych ekranów, także na telefonie.
+- `src/main.ts` — łączy widoki z nawigacją i zapisem, wykonuje czynność wskazaną przez następny krok.
+
+Nowe mapy dodaje się przez materiały modułu (pole `journeyPath`), a ich kolejność wyznacza `order`. Logika następnego kroku obsługuje wiele modułów; obecny katalog produkcyjny nadal zawiera Food.

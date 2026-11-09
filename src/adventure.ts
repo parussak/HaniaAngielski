@@ -39,8 +39,8 @@ export function validateJourney(value:unknown,m:Module):Journey {
   return structuredClone(j);
 }
 export async function loadJourneys(modules:Module[]):Promise<Journey[]>{
-  return Promise.all(modules.filter(m=>m.id==='unit-2-food').map(async m=>{
-    const r=await fetch(new URL('content/02-food/sciezka.json',document.baseURI),{cache:'no-cache'});
+  return Promise.all(modules.filter(m=>m.journeyPath || m.id==='unit-2-food').map(async m=>{
+    const r=await fetch(new URL(`content/${m.journeyPath??'02-food/sciezka.json'}`,document.baseURI),{cache:'no-cache'});
     if(!r.ok)throw new Error('Nie można pobrać kociej mapy.');return validateJourney(await r.json(),m);
   }));
 }

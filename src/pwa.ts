@@ -2,7 +2,8 @@ interface InstallPrompt extends Event {
   prompt(): Promise<void>;
   userChoice: Promise<{outcome:'accepted'|'dismissed'}>;
 }
-export const pwa={
+export interface PwaState {ready:boolean;preparing:boolean;failed:boolean;updateAvailable:boolean;installed:boolean;canInstall:boolean;online:boolean}
+export const pwa:PwaState={
   ready:false,preparing:false,failed:false,updateAvailable:false,
   installed:window.matchMedia('(display-mode: standalone)').matches,
   canInstall:false,online:navigator.onLine,
