@@ -22,6 +22,16 @@ Alternatywnie osoba korzystająca z Firebase CLI może wdrożyć same reguły pr
 5. Poczekaj na komunikat **Wyniki zapisane na koncie**. Na drugim urządzeniu zaloguj się na to samo konto — aplikacja pobierze zapis.
 6. Warto również pobrać zwykły plik kopii. Nie zawiera hasła, tokenów logowania ani konfiguracji Firebase.
 
+## Wiele kont i ustawienia użytkownika
+
+- Każda osoba może utworzyć osobne konto z własnym e-mailem i hasłem. Można mieć konto Hani i niezależne konto do testów. Wyniki nie są współdzielone automatycznie.
+- Przy rejestracji podaje się imię. Na istniejącym koncie można je uzupełnić w **Konto i synchronizacja → Ustawienia konta → Imię**. Imię jest zapisywane w profilu Firebase Authentication i używane w powitaniu, podsumowaniu i inicjale awatara. Nie jest częścią pliku kopii wyników.
+- **Wyloguj się** przywraca osobny zapis gościa. **Zmień konto** również wylogowuje i pokazuje formularz logowania. Następnie można zalogować się na inne konto lub utworzyć nowe.
+- **Zmień e-mail** wymaga obecnego hasła i wysyła potwierdzenie na nowy adres. Dopiero otwarcie linku zmienia adres logowania. Potem wybierz **Odśwież dane konta** albo zaloguj się ponownie nowym adresem.
+- **Zmień hasło** wymaga obecnego hasła oraz dwukrotnego wpisania nowego (co najmniej 8 znaków). Inne urządzenia mogą wymagać ponownego logowania po zmianie hasła.
+- Edycja danych wymaga internetu. Imię wcześniej zapamiętanego konta jest widoczne także offline. Pola z hasłami nie są zapisywane w pamięci postępów, plikach kopii ani konfiguracji aplikacji.
+- Postępy są przypisane do stałego UID, a nie do adresu e-mail. Zmiana imienia, e-maila lub hasła nie zmienia ich klucza. Nie wymaga to zmiany reguł Firestore.
+
 ## Zachowanie synchronizacji
 
 - Każda zmiana najpierw trafia do IndexedDB. Zapis gościa zachowuje dotychczasowy klucz `current`; każde konto ma odrębny rekord `account:{uid}` w tej samej bazie. Nazwa bazy i format kopii postępów 1 pozostają zgodne ze starszą aplikacją.

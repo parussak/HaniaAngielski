@@ -20,7 +20,9 @@ Dodano opcjonalne konto Firebase (projekt `male-kroki-nauka`), logowanie e-mail/
 
 Dodano PWA z ikoną kotka, manifestem i pobraniem wszystkich publicznych materiałów, ilustracji i kodu do pracy bez sieci. Aktualizacja czeka na wybór użytkownika i nie usuwa wyników. Po ponownym połączeniu synchronizacja konta działa w otwartej aplikacji lub przy kolejnym uruchomieniu. Szczegóły: [pwa.md](pwa.md). Powiadomienia push i natywny widżet nie są częścią tej zmiany.
 
-Weryfikacja po aktualizacji: 45 testów jednostkowych, check:content i build poprawne; 31 testów zbudowanej aplikacji pod /HaniaAngielski/. Sprawdzono 320×640, 360×740, szerokości 390 i 430 oraz 844×390, wczytanie starej kopii bez zmiany jej danych, oba zestawy i kontrast sprawdzanych tekstów.
+Dodano ustawienia wielu kont: imię przy rejestracji i edycji profilu, spersonalizowane powitanie i podsumowanie, zmianę konta, zmianę hasła po ponownym uwierzytelnieniu oraz zmianę e-maila przez link potwierdzający. Profile i lokalne wyniki są oddzielone według UID. Reguły Firestore pozostają bez zmian. Testy zarządzania kontem korzystają z atrapy SDK, nie wysyłają prawdziwych wiadomości i nie zmieniają rzeczywistych haseł.
+
+Weryfikacja po aktualizacji: 46 testów jednostkowych, check:content i build poprawne; 32 testy zbudowanej aplikacji pod /HaniaAngielski/. Sprawdzono 320×640, 360×740, szerokości 390 i 430 oraz 844×390, wczytanie starej kopii bez zmiany jej danych, oba zestawy i kontrast sprawdzanych tekstów.
 
 Testy domyślnie korzystają z Chromium, Edge jest dostępny przez zmienną środowiskową. Osobny CI sprawdza push i pull request; GitHub Pages publikuje push na main i umożliwia uruchomienie ręczne.
 

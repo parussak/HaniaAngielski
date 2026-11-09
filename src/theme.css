@@ -252,6 +252,12 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
 .account-form .primary{margin-top:8px}
 .account-error{background:#f8edf2;color:#7d3053!important;border:1px solid #dfc0cc;border-radius:9px;padding:12px;overflow-wrap:anywhere}
 .account-email{overflow-wrap:anywhere}
+.profile strong{overflow-wrap:anywhere}
+.welcome h1,.summary h1{overflow-wrap:anywhere}
+.account-settings details{border-top:1px solid #e4d9ee;padding:12px 0}
+.account-settings summary{cursor:pointer;font-size:14px;font-weight:600;color:#58416d;line-height:1.6;min-height:44px;padding:10px 0}
+.account-settings details>p{font-size:13px;line-height:1.7;color:#684e7b}
+.account-settings .account-form{margin:10px 0}
 .account-panel .actions,.account-invite .actions{justify-content:flex-start}
 .sync-versions{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .sync-versions>div{border:1px solid #d8c6e9;border-radius:10px;padding:16px;min-width:0}

@@ -37,7 +37,7 @@ test('PWA: konto po zimnym starcie offline zachowuje odpowiedź i synchronizuje 
   const server=await pwaServer();
   try{
     await page.goto(server.url);await offlineReady(page);
-    await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).tap();await page.getByLabel('E-mail rodzica').fill('offline@example.test');await page.getByLabel('Hasło',{exact:true}).fill('test-password');await page.getByRole('button',{name:'Zaloguj się',exact:true}).tap();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie');
+    await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).tap();await page.getByLabel('E-mail').fill('offline@example.test');await page.getByLabel('Hasło',{exact:true}).fill('test-password');await page.getByRole('button',{name:'Zaloguj się',exact:true}).tap();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie');
     await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await moduleSetup(page);await context.setOffline(true);await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).tap();
     await page.reload();await page.getByRole('button',{name:'Kontynuuj',exact:true}).tap();
     const question=await page.locator('.question').innerText();await page.locator('.option').first().tap();await expect(page.locator('.feedback')).toBeVisible();

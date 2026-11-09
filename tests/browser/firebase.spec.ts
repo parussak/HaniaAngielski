@@ -1,9 +1,15 @@
 import {test,expect,type BrowserContext} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {backup,emptyProgress} from '../../src/core.ts';
-const mockSDK=`
+const mockSDK=String.raw`
 export const restoreUser=async()=>JSON.parse(localStorage.getItem('test-user')??'null');
-export async function login(email,password,register){if(password==='wrongpass'){throw new Error('Nieprawidłowy e-mail lub hasło.');}const user={uid:email,email};localStorage.setItem('test-user',JSON.stringify(user));return user;}
+function accounts(){return JSON.parse(localStorage.getItem('test-accounts')??'{}');}
+function saveAccounts(a){localStorage.setItem('test-accounts',JSON.stringify(a));}
+export async function login(email,password,register,name=''){const a=accounts();if(password==='wrongpass'||(a[email]&&a[email].password!==password))throw new Error('Nieprawidłowy e-mail lub hasło.');if(!a[email])a[email]={uid:email,email,displayName:register?name:null,password};saveAccounts(a);const {password:p,...user}=a[email];localStorage.setItem('test-user',JSON.stringify(user));return user;}
+export async function changeName(name){const user=await restoreUser();user.displayName=name.trim().replace(/\s+/g,' ');const a=accounts();a[user.email].displayName=user.displayName;saveAccounts(a);localStorage.setItem('test-user',JSON.stringify(user));return user;}
+async function check(password){const user=await restoreUser(),a=accounts();if(a[user.email].password!==password)throw new Error('Obecne hasło jest nieprawidłowe.');return {user,a};}
+export async function changePassword(password,next){const {user,a}=await check(password);a[user.email].password=next;saveAccounts(a);}
+export async function changeEmail(email,password){await check(password);localStorage.setItem('test-pending-email',email);}
 export async function logout(){localStorage.removeItem('test-user');}
 export async function resetPassword(email){if(!email.includes('@'))throw new Error('Sprawdź adres e-mail.');}
 export const firebaseMessage=e=>e.message;
@@ -30,7 +36,7 @@ function backend(){
 }
 async function signIn(page:any,email='parent@example.test'){
   await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).click();
-  await page.getByRole('textbox',{name:'E-mail rodzica'}).fill(email);
+  await page.getByRole('textbox',{name:'E-mail'}).fill(email);
   await page.getByLabel('Hasło',{exact:true}).fill('test-password');
   await page.getByRole('button',{name:'Zaloguj się',exact:true}).click();
   await expect(page.getByRole('heading',{name:'Twoje konto',exact:true})).toBeVisible();
@@ -69,9 +75,9 @@ test('konto: migracja gościa, automatyczny zapis, drugie urządzenie i wylogowa
 test('konto: błędne logowanie, odzyskanie hasła i zapis bez sieci zachowany po odświeżeniu',async({page,context})=>{
   const cloud=backend();await cloud.connect(context);await page.goto('./');
   await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).click();
-  await page.getByLabel('E-mail rodzica').fill('parent@example.test');await page.getByLabel('Hasło',{exact:true}).fill('wrongpass');
+  await page.getByLabel('E-mail').fill('parent@example.test');await page.getByLabel('Hasło',{exact:true}).fill('wrongpass');
   await page.getByRole('button',{name:'Zaloguj się',exact:true}).click();await expect(page.locator('.account-error')).toContainText('Nieprawidłowy');
-  await page.getByLabel('E-mail rodzica').fill('parent@example.test');await page.getByRole('button',{name:'Nie pamiętam hasła'}).click();await expect(page.getByRole('status')).toContainText('otrzymasz wiadomość');
+  await page.getByLabel('E-mail').fill('parent@example.test');await page.getByRole('button',{name:'Nie pamiętam hasła'}).click();await expect(page.getByRole('status')).toContainText('otrzymasz wiadomość');
   await signIn(page);cloud.setOffline(true);
   await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).click();
   const first=await page.locator('.question').innerText();await page.locator('.option').first().click();await expect(page.locator('.feedback')).toBeVisible();
@@ -92,4 +98,32 @@ test('konto: konflikt nie nadpisuje drugiego urządzenia i zachowuje kopię po w
   expect(cloud.data.get('parent@example.test')!.progress.active.attempts).toHaveLength(1);
   const downloaded=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię sprzed zmiany',exact:true}).click();
   const path=await(await downloaded).path();expect(JSON.parse(readFileSync(path!,'utf8')).progress).toEqual(other);
+});
+
+test('konto: imię, hasło, potwierdzana zmiana e-maila i osobny profil testowy',async({page,context})=>{
+  const cloud=backend();await cloud.connect(context);await page.setViewportSize({width:390,height:844});await page.goto('./');
+  await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).click();await page.getByRole('button',{name:'Nie mam konta — utwórz konto'}).click();
+  await page.getByLabel('Imię',{exact:true}).fill('Paulina');await page.getByLabel('E-mail',{exact:true}).fill('paulina@example.test');await page.getByLabel('Hasło — co najmniej 8 znaków').fill('first-password');await page.getByRole('button',{name:'Utwórz konto',exact:true}).click();
+  await expect(page.getByRole('heading',{name:'Twoje konto',exact:true})).toBeVisible();await expect(page.getByLabel('Twoje imię')).toHaveValue('Paulina');
+  await page.getByLabel('Twoje imię').fill('Paulina Test');await page.getByRole('button',{name:'Zapisz imię',exact:true}).click();await expect(page.getByText('Imię zostało zapisane.',{exact:true})).toBeVisible();
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await expect(page.getByRole('heading',{name:/^Cześć, Paulina Test/})).toBeVisible();
+  await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).click();await page.locator('.account-settings summary').filter({hasText:'Zmień hasło'}).click();
+  const fillPasswords=async(current:string,next:string,confirm=next)=>{await page.getByLabel('Obecne hasło',{exact:true}).fill(current);await page.getByLabel('Nowe hasło — co najmniej 8 znaków').fill(next);await page.getByLabel('Powtórz nowe hasło').fill(confirm);await page.getByRole('button',{name:'Zmień hasło',exact:true}).click();};
+  await fillPasswords('wrongpass','second-password');await expect(page.locator('.account-error')).toContainText('Obecne hasło jest nieprawidłowe');
+  await fillPasswords('first-password','second-password','third-password');await expect(page.locator('.account-error')).toContainText('Nowe hasła nie są takie same');
+  await fillPasswords('first-password','second-password');await expect(page.getByText('Hasło zostało zmienione.',{exact:false})).toBeVisible();
+  await page.getByRole('button',{name:'Zmień konto',exact:true}).click();
+  await page.getByLabel('E-mail',{exact:true}).fill('paulina@example.test');await page.getByLabel('Hasło',{exact:true}).fill('second-password');await page.getByRole('button',{name:'Zaloguj się',exact:true}).click();await expect(page.getByLabel('Twoje imię')).toHaveValue('Paulina Test');
+  await page.getByText('Zmień e-mail',{exact:true}).click();await page.getByLabel('Nowy e-mail',{exact:true}).fill('paulina-new@example.test');await page.getByLabel('Obecne hasło — potwierdzenie zmiany e-maila').fill('second-password');await page.getByRole('button',{name:'Wyślij potwierdzenie zmiany e-maila'}).click();
+  await expect(page.locator('.account-email')).toHaveText('paulina@example.test');await expect(page.getByText('Wysłaliśmy link na nowy adres.',{exact:false})).toBeVisible();
+  // Symulacja kliknięcia potwierdzenia po stronie Firebase — UID pozostaje stały.
+  await page.evaluate(()=>{
+    const accounts=JSON.parse(localStorage.getItem('test-accounts')!);const old=accounts['paulina@example.test'];delete accounts['paulina@example.test'];accounts['paulina-new@example.test']={...old,email:'paulina-new@example.test'};localStorage.setItem('test-accounts',JSON.stringify(accounts));
+    const {password,...user}=accounts['paulina-new@example.test'];localStorage.setItem('test-user',JSON.stringify(user));
+  });
+  await page.getByRole('button',{name:'Odśwież dane konta'}).click();await expect(page.locator('.account-email')).toHaveText('paulina-new@example.test');await expect(page.getByLabel('Twoje imię')).toHaveValue('Paulina Test');
+  await page.screenshot({path:'test-results/account-settings-mobile.png',fullPage:true});
+  await page.reload();await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).click();await expect(page.locator('.account-email')).toHaveText('paulina-new@example.test');
+  await page.getByRole('button',{name:'Zmień konto',exact:true}).click();await page.getByRole('button',{name:'Nie mam konta — utwórz konto'}).click();await page.getByLabel('Imię',{exact:true}).fill('Tester');await page.getByLabel('E-mail',{exact:true}).fill('tester@example.test');await page.getByLabel('Hasło — co najmniej 8 znaków').fill('tester-password');await page.getByRole('button',{name:'Utwórz konto',exact:true}).click();await expect(page.getByLabel('Twoje imię')).toHaveValue('Tester');
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await expect(page.getByRole('heading',{name:/^Cześć, Tester/})).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
 });

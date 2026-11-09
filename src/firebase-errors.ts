@@ -3,6 +3,10 @@ export function firebaseMessage(error: unknown) {
   const messages: Record<string,string>={
     'auth/invalid-credential':'Nieprawidłowy e-mail lub hasło.',
     'auth/invalid-email':'Sprawdź adres e-mail.',
+    'auth/wrong-password':'Obecne hasło jest nieprawidłowe.',
+    'auth/requires-recent-login':'Potwierdź dostęp obecnym hasłem lub zaloguj się ponownie.',
+    'auth/user-token-expired':'Zaloguj się ponownie, aby kontynuować.',
+    'auth/invalid-new-email':'Sprawdź nowy adres e-mail.',
     'auth/email-already-in-use':'Ten adres ma już konto. Zaloguj się lub użyj odzyskiwania hasła.',
     'auth/weak-password':'Wybierz dłuższe hasło (co najmniej 8 znaków).',
     'auth/too-many-requests':'Za dużo prób. Odczekaj chwilę i spróbuj ponownie.',
