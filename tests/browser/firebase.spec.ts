@@ -118,6 +118,16 @@ test('konto: imię, hasło, potwierdzana zmiana e-maila i osobny profil testowy'
   await expect(page.getByRole('heading',{name:'Twoje konto',exact:true})).toBeVisible();await expect(page.getByLabel('Twoje imię')).toHaveValue('Paulina');
   await page.getByLabel('Twoje imię').fill('Paulina Test');await page.getByRole('button',{name:'Zapisz imię',exact:true}).click();await expect(page.getByText('Imię zostało zapisane.',{exact:true})).toBeVisible();
   await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await expect(page.getByRole('heading',{name:/^Cześć, Paulina Test/})).toBeVisible();
+  await page.reload();
+  await expect(page.locator('[data-sync-label]')).toHaveText('Zapis na koncie');
+  await expect.poll(()=>page.evaluate(()=>new Promise(resolve=>{
+    const request=indexedDB.open(`hania-language:${new URL('.',location.href).pathname}`,1);
+    request.onsuccess=()=>{
+      const db=request.result,tx=db.transaction('progress','readonly'),read=tx.objectStore('progress').get('firebase-user');
+      tx.oncomplete=()=>{db.close();resolve(read.result?.displayName);};
+    };
+  }))).toBe('Paulina Test');
+  await expect(page.getByRole('heading',{name:/^Cześć, Paulina Test/})).toBeVisible();
   await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).click();await page.locator('.account-settings summary').filter({hasText:'Zmień hasło'}).click();
   const fillPasswords=async(current:string,next:string,confirm=next)=>{await page.getByLabel('Obecne hasło',{exact:true}).fill(current);await page.getByLabel('Nowe hasło — co najmniej 8 znaków').fill(next);await page.getByLabel('Powtórz nowe hasło').fill(confirm);await page.getByRole('button',{name:'Zmień hasło',exact:true}).click();};
   await fillPasswords('wrongpass','second-password');await expect(page.locator('.account-error')).toContainText('Obecne hasło jest nieprawidłowe');

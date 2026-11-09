@@ -128,7 +128,7 @@ function catView(reaction:CatReaction,large=false){
   const {cat,frame,mood}=reaction,sheet=catCatalog.sheets[frame.sheet];
   const labels={teacher:'cierpliwy nauczyciel',happy:'zadowolony kotek',celebrating:'świętujący kotek',funny:'zabawna scenka'};
   const clipId=`cat-clip-${cat.id}-${mood}`;
-  return `<figure class="cat-mascot ${large?'cat-mascot-large':''}" data-cat="${cat.id}" data-mood="${mood}"><svg class="cat-artwork" viewBox="${frame.x} ${frame.y} ${frame.width} ${frame.height}" role="img" aria-label="${e(cat.name)} — ${labels[mood]}" preserveAspectRatio="xMidYMid meet"><defs><clipPath id="${clipId}">${frame.clip?`<polygon points="${frame.clip.map(p=>p.join(',')).join(' ')}"/>`:`<rect x="${frame.x}" y="${frame.y}" width="${frame.width}" height="${frame.height}"/>`}</clipPath></defs><image href="${e(new URL(sheet.src,document.baseURI).href)}" width="${sheet.width}" height="${sheet.height}" clip-path="url(#${clipId})"/></svg><figcaption>${e(cat.name)}</figcaption></figure>`;
+  return `<figure class="cat-mascot ${large?'cat-mascot-large':''}" data-cat="${cat.id}" data-mood="${mood}"><svg class="cat-artwork" viewBox="${frame.x} ${frame.y} ${frame.width} ${frame.height}" role="img" aria-label="${e(cat.name)} — ${labels[mood]}" preserveAspectRatio="xMidYMid meet"><defs><clipPath id="${clipId}">${frame.clip?`<polygon points="${frame.clip.map(p=>p.join(',')).join(' ')}"/>`:`<rect x="${frame.x}" y="${frame.y}" width="${frame.width}" height="${frame.height}"/>`}</clipPath></defs><image href="${e(new URL(sheet.src,document.baseURI).href)}" width="${sheet.width}" height="${sheet.height}" clip-path="url(#${clipId})"/></svg>${large?`<figcaption>${e(cat.name)}</figcaption>`:''}</figure>`;
 }
 function study() {
   const s = progress.active;
@@ -355,7 +355,7 @@ async function init() {
         await sync.connect(savedAccount.uid,guestProgress);user=savedAccount;progress=structuredClone(sync.cache!.progress);
         if(navigator.onLine)void (async()=>{
           try{const account=await deadline((await sdk()).restoreUser());
-            if(account?.uid===savedAccount.uid){user={uid:account.uid,email:account.email};scheduleSync(0);}
+            if(account?.uid===savedAccount.uid){await rememberAccount(account);scheduleSync(0);}
             else {reauthNeeded=true;accountError='Zaloguj się ponownie, aby zsynchronizować zapisane wyniki konta.';sync.status='error';}
           }catch(error){accountError='Połączenie z kontem jest niedostępne. Możesz uczyć się z lokalnym zapisem konta.';sync.status='error';}
           if(ready && !busy && (screen==='account'||screen==='home'))render();else refreshSyncLabel();
