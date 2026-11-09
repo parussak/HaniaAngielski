@@ -1,6 +1,6 @@
 # Małe kroki — nauka Hani
 
-Pierwsza wersja aplikacji internetowej: fiszki, quizy, gramatyka i lokalne postępy. Dostępny jest moduł 2 **Food — Fun with food**, opracowany z przesłanych zdjęć podręcznika i zeszytu ćwiczeń: 97 fiszek, 156 zadań i 9 objaśnień zasad. Materiał demonstracyjny został usunięty.
+Aplikacja internetowa: fiszki, quizy, gramatyka, lokalne postępy i opcjonalne konto z synchronizacją przez Firebase. Dostępny jest moduł 2 **Food — Fun with food**, opracowany z przesłanych zdjęć podręcznika i zeszytu ćwiczeń: 97 fiszek, 156 zadań i 9 objaśnień zasad. Materiał demonstracyjny został usunięty.
 
 ## Uruchomienie
 
@@ -33,14 +33,16 @@ Testy automatycznie uruchamiają i zatrzymują własny lokalny serwer na porcie 
 
 1. Wybierz moduł i rodzaj ćwiczeń.
    W module Food dostępne są „Fiszki podstawa” (38 haseł z ramek Vocabulary) oraz „Fiszki” (wszystkie 97 haseł). Oba zestawy współdzielą postępy tych samych słów.
-2. Dla quizów lub gramatyki wybierz odpowiedzi zamknięte, wpisywanie lub tryb mieszany.
+2. Przed dotknięciem kafelka wybierz odpowiedzi zamknięte, wpisywanie lub tryb mieszany. Dotknięcie kafelka od razu zaczyna sesję. Polecenia z wariantami w nawiasie zawsze mają przyciski do wyboru.
 3. Po błędzie przeczytaj wyjaśnienie i spróbuj ponownie. Pierwsza próba jest liczona osobno od poprawek. Trudne zadanie wraca raz na końcu sesji.
 4. Postępy zapisują się po każdej odpowiedzi w IndexedDB. Rozpoczętą sesję można wznowić z ekranu głównego.
 5. W zakładce „Kopia postępów” pobierz plik JSON. Na drugim urządzeniu wczytaj go i potwierdź zastąpienie obecnych danych. Kopie nie są scalane.
 
-Wyniki są przypisane do przeglądarki i adresu strony, nie do konta. Zmiana przeglądarki, portu lub adresu wymaga przeniesienia kopii. Tryb prywatny i czyszczenie danych mogą usunąć postępy. Aplikacja blokuje równoczesny zapis z drugiej karty tej samej przeglądarki. Po zamknięciu pierwszej karty odśwież drugą. Przy błędzie zapisu poprzedni zapis pozostaje, a zmiana nie jest zatwierdzana.
+Bez logowania wyniki są przypisane do przeglądarki i adresu strony. Po zalogowaniu dodatkowo synchronizują się z kontem Firebase. Zmiana przeglądarki, portu lub adresu wymaga przeniesienia kopii. Tryb prywatny i czyszczenie danych mogą usunąć postępy. Aplikacja blokuje równoczesny zapis z drugiej karty tej samej przeglądarki. Po zamknięciu pierwszej karty odśwież drugą. Przy błędzie zapisu poprzedni zapis pozostaje, a zmiana nie jest zatwierdzana.
 
-Nie ma kont, synchronizacji, automatycznego przetwarzania PDF ani gwarantowanego działania offline. Do nauki z gotowych zestawów nie jest potrzebna usługa AI. Czcionki są systemowe i nie są pobierane z Google Fonts. Nie dodano manifestu aplikacji.
+Konto otworzysz wskaźnikiem zapisu u góry albo przez „Kopia postępów”. Przed użyciem włącz logowanie E-mail/hasło i Firestore w projekcie Firebase oraz opublikuj reguły dostępu: [instrukcja Firebase](docs/firebase.md). Pierwsze przeniesienie wyników gościa wymaga decyzji. Zapis konta i gościa jest oddzielny, konflikty dwóch urządzeń wymagają wyboru wersji.
+
+Nie ma automatycznego przetwarzania PDF ani gwarantowanego uruchamiania offline. Do nauki z gotowych zestawów nie jest potrzebna usługa AI. Czcionki są systemowe i nie są pobierane z Google Fonts. Nie dodano manifestu aplikacji.
 
 ## Edytowanie materiałów i dodawanie modułu
 

@@ -3,12 +3,15 @@ import './style.css';
 import './theme.css';
 import { loadModules } from './content.ts';
 import { isFlashcardMode, inputFor, currentStats, optionsFor, backup, emptyProgress, makeSession, questionFor, next, recordAnswer, score, sessionCompatible, validateBackup, type Exercise, type Illustration, type AnswerMode, type Mode, type Module, type Progress, type Session, type Backup } from './core.ts';
-import { load, save, storageNamespace } from './storage.ts';
+import {firebaseMessage} from './firebase-errors.ts';
+import {ProgressSync,hasProgress,type AccountCache} from './sync.ts';
+import type {AccountUser} from './firebase.ts';
+import { load, save, readStored, writeStored, storageNamespace } from './storage.ts';
 
 let modules: Module[] = [];
 const root = document.querySelector<HTMLDivElement>('#app')!;
 let progress: Progress = emptyProgress();
-let screen: 'home' | 'setup' | 'study' | 'progress' | 'backup' | 'summary' = 'home';
+let screen: 'home' | 'setup' | 'study' | 'progress' | 'backup' | 'account' | 'summary' = 'home';
 let selected: Module;
 let mode: Mode = 'flashcards-basic';
 let answerMode: AnswerMode = 'mixed';
@@ -20,6 +23,49 @@ let busy = false;
 let ready = false;
 let lastSession: Session | null = null;
 let renderedScreen = '';
+let user: AccountUser | null=null;
+let guestProgress=emptyProgress();
+let accountError='';
+let accountNotice='';
+let registerAccount=false;
+let authWorking=false;
+let reauthNeeded=false;
+let syncTimer: ReturnType<typeof setTimeout> | undefined;
+let firebaseSDK: Promise<typeof import('./firebase.ts')> | undefined;
+const sdk=()=>firebaseSDK??=import('./firebase.ts').catch(error=>{firebaseSDK=undefined;throw error;});
+async function deadline<T>(operation:Promise<T>):Promise<T> {
+  let timer:ReturnType<typeof setTimeout>;
+  try{return await Promise.race([operation,new Promise<never>((_,reject)=>{timer=setTimeout(()=>reject(new Error('Połączenie trwa zbyt długo. Postępy pozostają na tym urządzeniu.')),12000);})]);}
+  finally{clearTimeout(timer!);}
+}
+const sync=new ProgressSync({
+  read:uid=>readStored<AccountCache>(`account:${uid}`),
+  save:(uid,cache)=>writeStored(`account:${uid}`,cache),
+  fetch:async uid=>deadline((await sdk()).fetchProgress(uid)),
+  push:async(uid,p,revision)=>deadline((await sdk()).pushProgress(uid,p,revision)),
+},dataChanged=>{
+  if(dataChanged && sync.cache){progress=structuredClone(sync.cache.progress);lastSession=null;}
+  if(!ready || busy)return;
+  if(dataChanged || screen==='account')render();else refreshSyncLabel();
+});
+function syncLabel(){return !user?'Zapis lokalny':sync.status==='saved'?'Zapis na koncie':sync.status==='checking'?'Łączenie…':sync.status==='conflict'?'Sprawdź zapis':'Zapis lokalny';}
+function refreshSyncLabel(){root.querySelectorAll('[data-sync-label]').forEach(el=>el.textContent=storageError?'Problem z zapisem':syncLabel());}
+function scheduleSync(delay=1200){
+  clearTimeout(syncTimer);
+  if(!user || sync.conflict || reauthNeeded)return;
+  syncTimer=setTimeout(async()=>{
+    if(busy || authWorking){scheduleSync(500);return;}
+    await sync.sync();
+    if(sync.status==='pending')scheduleSync();
+  },delay);
+}
+async function connectAccount(account: AccountUser){
+  await sync.connect(account.uid,guestProgress);
+  user={uid:account.uid,email:account.email};reauthNeeded=false;
+  await writeStored('firebase-user',user);
+  screen='account';progress=structuredClone(sync.cache!.progress);pending=null;lastSession=null;
+  scheduleSync(0);
+}
 const labels: Record<Mode, string> = { 'flashcards-basic': 'Fiszki podstawa', flashcards: 'Fiszki', quiz: 'Quiz słownictwa', grammar: 'Gramatyka', review: 'Powtórka błędów' };
 const e = (value: unknown) => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
 const date = (value: string) => new Intl.DateTimeFormat('pl-PL', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(value));
@@ -41,8 +87,8 @@ const button = (action: string, text: string, cls = 'primary') => `<button class
 function compatible() { return !progress.active || sessionCompatible(modules, progress.active); }
 function stats() { return currentStats(modules,progress); }
 function shell(content: string) {
-  const active = screen === 'progress' ? 'progress' : screen === 'backup' ? 'backup' : 'home';
-  return `<aside class="sidebar"><a class="brand" href="#" data-action="home"><span class="brand-icon">${icon('cat')}</span><span>małe kroki<span class="brand-sub">PRZESTRZEŃ DO NAUKI</span></span></a><div class="profile"><span class="avatar">H</span><div><strong>Hania</strong><span>Twój własny rytm nauki</span></div><span class="tiny-flower">✳</span></div><span class="nav-label">TWOJA PRZESTRZEŃ</span><nav aria-label="Główna nawigacja">${[['home','home','Moja nauka'],['progress','chart','Moje postępy'],['backup','cloud','Kopia postępów']].map(([action,i,label]) => `<button class="nav-item ${active === action ? 'active' : ''}" data-action="${action}" ${active === action ? 'aria-current="page"' : ''}>${icon(i)}${label}${active === action ? '<span class="nav-dot"></span>' : ''}</button>`).join('')}</nav><div class="sidebar-note"><span>✦</span><strong>Po trochu, każdego dnia.</strong><p>Każda próba to mały krok do przodu.</p></div><div class="local-note">${icon('check')} Postępy na tym urządzeniu<span>Bez konta. W Twojej przeglądarce.</span></div></aside><main><header class="topbar"><span>NAUKA JĘZYKA / <b>${screen === 'backup' ? 'KOPIA POSTĘPÓW' : screen === 'progress' ? 'POSTĘPY' : 'MOJA NAUKA'}</b></span><span class="local-chip"><span></span> ${storageError ? 'Problem z zapisem' : 'Zapis lokalny'}</span></header>${storageError ? `<div class="alert error" role="alert">${e(storageError)}</div>` : ''}${notice ? `<div class="alert" role="status">${e(notice)}</div>` : ''}<div class="content">${content}</div><footer>Stworzone do nauki, bez pośpiechu. <span>Małe kroki, wielkie odkrycia ✦</span></footer></main>`;
+  const active = screen === 'progress' ? 'progress' : screen === 'backup' || screen === 'account' ? 'backup' : 'home';
+  return `<aside class="sidebar"><a class="brand" href="#" data-action="home"><span class="brand-icon">${icon('cat')}</span><span>małe kroki<span class="brand-sub">PRZESTRZEŃ DO NAUKI</span></span></a><div class="profile"><span class="avatar">H</span><div><strong>Hania</strong><span>Twój własny rytm nauki</span></div><span class="tiny-flower">✳</span></div><span class="nav-label">TWOJA PRZESTRZEŃ</span><nav aria-label="Główna nawigacja">${[['home','home','Moja nauka'],['progress','chart','Moje postępy'],['backup','cloud','Kopia postępów']].map(([action,i,label]) => `<button class="nav-item ${active === action ? 'active' : ''}" data-action="${action}" ${active === action ? 'aria-current="page"' : ''}>${icon(i)}${label}${active === action ? '<span class="nav-dot"></span>' : ''}</button>`).join('')}</nav><div class="sidebar-note"><span>✦</span><strong>Po trochu, każdego dnia.</strong><p>Każda próba to mały krok do przodu.</p></div><div class="local-note">${icon('check')} Postępy na tym urządzeniu<span>${user ? 'Połączono z kontem.' : 'Możesz połączyć z kontem.'}</span></div></aside><main><header class="topbar"><span>NAUKA JĘZYKA / <b>${screen === 'backup' ? 'KOPIA POSTĘPÓW' : screen === 'progress' ? 'POSTĘPY' : 'MOJA NAUKA'}</b></span><button class="local-chip" data-action="account" aria-label="Konto i synchronizacja"><span></span><span data-sync-label>${storageError ? 'Problem z zapisem' : syncLabel()}</span></button></header>${storageError ? `<div class="alert error" role="alert">${e(storageError)}</div>` : ''}${notice ? `<div class="alert" role="status">${e(notice)}</div>` : ''}<div class="content">${content}</div><footer>Stworzone do nauki, bez pośpiechu. <span>Małe kroki, wielkie odkrycia ✦</span></footer></main>`;
 }
 function heroArt() {
   return `<div class="hero-art cat-art" aria-hidden="true"><svg class="cat-illustration" viewBox="0 0 300 260" fill="none"><circle cx="154" cy="133" r="109" fill="#E6E8FF"/><circle cx="154" cy="133" r="91" stroke="#C4B5EB" stroke-dasharray="4 7"/><path d="M217 204c58 10 58-43 33-37-19 5 13 20-15 23" stroke="#9B83D2" stroke-width="17" stroke-linecap="round"/><ellipse cx="159" cy="196" rx="64" ry="35" fill="#AB91DC"/><path d="M96 100 91 40c0-4 4-6 7-3l39 33c13-3 25-3 38 0l39-33c4-3 8-1 7 4l-5 61c26 73-147 78-120-2Z" fill="#BDA6EB" stroke="#9174C6" stroke-width="2"/><path d="m101 55 4 34 20-12-24-22Zm108 0-25 22 20 11 5-33Z" fill="#F7B6DA"/><path d="M129 107c-5-6-10-6-15 0m65 0c5-6 10-6 15 0" stroke="#554172" stroke-width="4" stroke-linecap="round"/><ellipse cx="110" cy="120" rx="11" ry="6" fill="#EEA2D0"/><ellipse cx="199" cy="120" rx="11" ry="6" fill="#EEA2D0"/><path d="m150 116 5 5 5-5h-10Z" fill="#76508D"/><path d="M155 121c0 10-12 11-13 4m13-4c0 10 12 11 13 4M87 112l21 4m-23 6 21 1m117-11-21 4m23 6-21 1" stroke="#76508D" stroke-width="2" stroke-linecap="round"/><path d="M102 166c17-3 36 1 53 10 17-9 36-13 54-10v64c-20-4-38 0-54 7-17-7-35-11-53-7v-64Z" fill="#FEFCFF" stroke="#8263B7" stroke-width="2"/><path d="M155 176v61m-40-54 27 6m-27 6 27 6m25-12 27-6m-27 18 27-6" stroke="#CCB6E7" stroke-width="3" stroke-linecap="round"/><ellipse cx="100" cy="185" rx="12" ry="18" fill="#BDA6EB" transform="rotate(-18 100 185)"/><ellipse cx="209" cy="185" rx="12" ry="18" fill="#BDA6EB" transform="rotate(18 209 185)"/><path d="m44 66 4 11 11 4-11 4-4 11-4-11-11-4 11-4ZM249 70l3 7 7 3-7 3-3 7-3-7-7-3 7-3Z" fill="#E59CC9"/><circle cx="55" cy="184" r="6" fill="#97C9F3"/><circle cx="239" cy="117" r="4" fill="#97C9F3"/><path d="M144 38c-15-16-26 4 0 17 26-13 15-33 0-17Z" fill="#F1A5D3"/></svg></div>`;
@@ -96,7 +142,20 @@ function progressView() {
   return `<div class="eyebrow">WSZYSTKIE MAŁE KROKI SIĘ LICZĄ</div><h1>Twoje postępy</h1><p class="lead">Tu zobaczysz, co już potrafisz i do czego warto wrócić.</p><section class="stats-grid"><article><span class="stat-icon peach">${icon('cards')}</span><div><strong>${s.known}</strong><span>Znane fiszki</span></div></article><article><span class="stat-icon lavender">${icon('repeat')}</span><div><strong>${s.review}</strong><span>Rzeczy do powtórki</span></div></article><article><span class="stat-icon mint">${icon('chart')}</span><div><strong>${s.accuracy === null ? '—' : `${s.accuracy}%`}</strong><span>Pierwsze odpowiedzi</span></div></article></section><section class="panel"><h2>Moduł po module</h2>${modules.map(m => { const sessions = progress.sessions.filter(s => s.moduleId === m.id); const all = sessions.flatMap(s => s.attempts); return `<div class="history-row"><div><strong>${e(m.name)}</strong><span>${sessions.length} ukończonych sesji · ${all.length ? `${Math.round(all.filter(a => a.first).length/all.length*100)}% pierwszych odpowiedzi` : 'Jeszcze bez ocenionych odpowiedzi'}</span></div><button class="secondary" data-action="module" data-id="${e(m.id)}">Poćwicz</button></div>`; }).join('')}</section><section class="panel"><h2>Historia nauki</h2>${!progress.sessions.length ? `<div class="empty">${icon('leaf')}<h3>Tu wyrosną Twoje postępy</h3><p>Zacznij pierwszą sesję. Nie trzeba od razu umieć wszystkiego.</p>${button('home','Wybierz moduł')}</div>` : [...progress.sessions].reverse().map(session => { const result = score(session); const m = modules.find(m => m.id === session.moduleId); return `<div class="history-row"><div><strong>${e(labels[session.mode])} · ${e(m?.name ?? 'Moduł spoza biblioteczki')}</strong><span>${date(session.completedAt!)}${!m || !sessionCompatible(modules,session) ? ' · archiwalny materiał' : ''}</span></div><div class="history-score">${!session.attempts.length ? `${new Set(session.items.map(i=>i.key)).size} fiszek` : `${result.correct}/${result.total}`}<small>${!session.attempts.length ? 'przećwiczonych' : `pierwsze próby · ${result.corrections} poprawionych`}</small></div></div>`; }).join('')}</section>`;
 }
 function backupView() {
-  return `<div class="eyebrow">TWOJA NAUKA, BEZPIECZNIE</div><h1>Kopia postępów</h1><p class="lead">Zachowaj swoje małe kroki albo zabierz je na inne urządzenie.</p><div class="backup-grid"><section class="panel"><span class="stat-icon mint">${icon('cloud')}</span><h2>Zapisz kopię</h2><p>Pobierz plik z wynikami, historią, fiszkami i rozpoczętą sesją. Schowaj go w bezpiecznym miejscu.</p>${button('export','Zapisz kopię postępów')}</section><section class="panel"><span class="stat-icon lavender">${icon('repeat')}</span><h2>Wczytaj kopię</h2><p>Wybierz wcześniej zapisany plik. Najpierw go sprawdzimy, a potem poprosimy o potwierdzenie.</p><label class="secondary file-label">Wybierz plik kopii<input type="file" id="import-file" accept=".json,application/json"></label></section></div><section class="panel note-panel"><h2>Warto wiedzieć</h2><p>Postępy są zapisane tylko w tej przeglądarce. Wyczyszczenie danych strony może je usunąć. Przenoszenie na inne urządzenie odbywa się przez plik kopii, bez automatycznej synchronizacji.</p><p>Kopia nie zawiera modułów ani zdjęć książki. Brakujący moduł nie usuwa wyników, ale do dalszej nauki potrzebne są jego materiały.</p></section>${pending ? `<section class="panel import-confirm" role="region" aria-label="Potwierdzenie importu"><h2>Wczytać tę kopię?</h2><p>Kopia z <strong>${date(pending.exportedAt)}</strong>, ukończone sesje: <strong>${pending.progress.sessions.length}</strong>.</p><p>Wczytanie <strong>zastąpi wszystkie obecne postępy</strong>. Pliki nie zostaną połączone.</p>${pending.progress.active && !sessionCompatible(modules,pending.progress.active) ? '<p>Zapisana sesja wymaga brakującego lub zmienionego modułu. Zachowamy ją, ale na razie nie będzie można jej wznowić.</p>' : ''}<div class="actions">${button('export','Najpierw zapisz obecne','secondary')}${button('confirm-import','Zastąp postępy')}${button('cancel-import','Anuluj','text-button')}</div></section>` : ''}`;
+  return `<div class="eyebrow">TWOJA NAUKA, BEZPIECZNIE</div><h1>Kopia postępów</h1><p class="lead">Zachowaj swoje małe kroki albo zabierz je na inne urządzenie.</p><section class="panel account-invite"><h2>Konto i synchronizacja</h2><p>${user ? `Konto: ${e(user.email ?? 'zapisane na urządzeniu')}. Wyniki możesz przenosić automatycznie między urządzeniami.` : 'Zaloguj się, aby zapisywać wyniki na koncie i kontynuować naukę na drugim urządzeniu.'}</p>${button('account',user ? 'Otwórz konto' : 'Zaloguj się lub utwórz konto')}</section><div class="backup-grid"><section class="panel"><span class="stat-icon mint">${icon('cloud')}</span><h2>Zapisz kopię</h2><p>Pobierz plik z wynikami, historią, fiszkami i rozpoczętą sesją. Schowaj go w bezpiecznym miejscu.</p>${button('export','Zapisz kopię postępów')}</section><section class="panel"><span class="stat-icon lavender">${icon('repeat')}</span><h2>Wczytaj kopię</h2><p>Wybierz wcześniej zapisany plik. Najpierw go sprawdzimy, a potem poprosimy o potwierdzenie.</p><label class="secondary file-label">Wybierz plik kopii<input type="file" id="import-file" accept=".json,application/json"></label></section></div><section class="panel note-panel"><h2>Warto wiedzieć</h2><p>Bez logowania postępy są zapisane tylko w tej przeglądarce. Po zalogowaniu aplikacja synchronizuje je z kontem, gdy ma połączenie z internetem. Plik kopii pozwala dodatkowo zachować wyniki lub przenieść je ręcznie.</p><p>Kopia nie zawiera modułów ani zdjęć książki. Brakujący moduł nie usuwa wyników, ale do dalszej nauki potrzebne są jego materiały.</p></section>${pending ? `<section class="panel import-confirm" role="region" aria-label="Potwierdzenie importu"><h2>Wczytać tę kopię?</h2><p>Kopia z <strong>${date(pending.exportedAt)}</strong>, ukończone sesje: <strong>${pending.progress.sessions.length}</strong>.</p><p>Wczytanie <strong>zastąpi wszystkie obecne postępy</strong>. Pliki nie zostaną połączone.</p>${pending.progress.active && !sessionCompatible(modules,pending.progress.active) ? '<p>Zapisana sesja wymaga brakującego lub zmienionego modułu. Zachowamy ją, ale na razie nie będzie można jej wznowić.</p>' : ''}<div class="actions">${button('export','Najpierw zapisz obecne','secondary')}${button('confirm-import','Zastąp postępy')}${button('cancel-import','Anuluj','text-button')}</div></section>` : ''}`;
+}
+function accountView() {
+  const heading='<div class="eyebrow">TWOJE MAŁE KROKI, NA RÓŻNYCH URZĄDZENIACH</div><h1>Konto i synchronizacja</h1>';
+  if(!user || reauthNeeded)return `${heading}<p class="lead">${reauthNeeded?'Zapis konta jest zachowany na urządzeniu. Zaloguj się ponownie, aby połączyć go z chmurą.':'Konto rodzica pozwala zachować postępy Hani i kontynuować naukę na drugim urządzeniu. Bez logowania nadal działa osobny zapis lokalny.'}</p><section class="panel account-panel"><h2>${registerAccount?'Utwórz konto':'Zaloguj się'}</h2>${accountError?`<p class="account-error" role="alert">${e(accountError)}</p>`:''}${accountNotice?`<p role="status">${e(accountNotice)}</p>`:''}<form id="account-form" class="account-form"><label for="account-email">E-mail rodzica</label><input id="account-email" name="email" type="email" autocomplete="username" required maxlength="254"><label for="account-password">Hasło${registerAccount?' — co najmniej 8 znaków':''}</label><input id="account-password" name="password" type="password" autocomplete="${registerAccount?'new-password':'current-password'}" minlength="${registerAccount?8:1}" required maxlength="128"><button class="primary" type="submit">${registerAccount?'Utwórz konto':'Zaloguj się'}</button>${!registerAccount?'<button class="text-button" type="submit" value="reset" formnovalidate>Nie pamiętam hasła</button>':''}</form>${button('auth-toggle',registerAccount?'Mam już konto — zaloguj się':'Nie mam konta — utwórz konto','text-button')}</section>`;
+  const statuses={local:'Wyniki są na tym urządzeniu.',checking:'Sprawdzamy zapis na koncie…',saved:'Wyniki zapisane na koncie.',pending:'Wyniki zapisane na urządzeniu. Czekają na wysłanie.',conflict:'Na koncie i urządzeniu są różne wersje wyników.',error:'Nie udało się zsynchronizować. Wyniki są zachowane na urządzeniu.'};
+  const error=accountError || (sync.error?cloudError(sync.error):'');
+  const description=(p:Progress)=>`${p.sessions.length} ukończonych sesji${p.active?' i rozpoczęta sesja':''}, ${Object.values(p.words).filter(v=>v==='known').length} znanych fiszek`;
+  return `${heading}<section class="panel account-panel"><h2>Twoje konto</h2><p class="account-email">${e(user.email??'Konto zapisane na urządzeniu')}</p><p role="status">${statuses[sync.status]}${sync.cache?.lastSync?`<br>Ostatnie połączenie: ${date(sync.cache.lastSync)}.`:''}</p>${error?`<p class="account-error" role="alert">${e(error)}</p>`:''}${accountNotice?`<p>${e(accountNotice)}</p>`:''}<div class="actions">${button('sync-now','Synchronizuj teraz')}${button('logout','Wyloguj się','secondary')}</div><p>Po wylogowaniu wrócisz do osobnego zapisu bez konta. Wyniki konta pozostają na nim oraz w lokalnej kopii tego konta.</p></section>${sync.offerGuest?`<section class="panel"><h2>Masz wcześniejsze postępy na tym urządzeniu</h2><p>${description(guestProgress)}. Są bezpieczne w zapisie bez konta. Możesz przenieść je na konto lub zachować oddzielnie.</p>${hasProgress(progress)?'<p>Na koncie też są wyniki. Przeniesienie zastąpi bieżący zapis konta; zachowamy jego kopię.</p>':''}<div class="actions">${button('guest-copy','Przenieś postępy na konto')}${button('guest-skip','Zachowaj oddzielnie','secondary')}</div></section>`:''}${sync.conflict?`<section class="panel sync-conflict" aria-label="Różne wersje wyników"><h2>Wybierz zapis, z którym chcesz kontynuować</h2><p>Drugie urządzenie zmieniło wyniki. Nie nadpisujemy ich automatycznie. Wybrana wersja będzie bieżąca; druga pozostanie do pobrania jako kopia sprzed zmiany.</p><div class="sync-versions"><div><h3>Na tym urządzeniu</h3><p>${description(progress)}</p>${button('export','Zapisz kopię z urządzenia','secondary')}${button('resolve-local','Użyj wyników z urządzenia')}</div><div><h3>Na koncie</h3><p>${description(sync.conflict.remote?.progress??emptyProgress())}</p>${button('export-cloud','Zapisz kopię z konta','secondary')}${button('resolve-cloud','Użyj wyników z konta')}</div></div></section>`:''}<section class="panel"><h2>Kopie i zapis lokalny</h2><p>Warto zachować także plik kopii. Nie zawiera hasła ani danych logowania.</p><div class="actions">${button('export','Zapisz kopię postępów','secondary')}${sync.cache?.recovery?button('export-recovery','Zapisz kopię sprzed zmiany','secondary'):''}${button('backup','Kopia postępów','text-button')}</div>${hasProgress(guestProgress)&&!sync.offerGuest?`<details><summary>Wcześniejsze postępy bez konta</summary><p>${description(guestProgress)}. Przeniesienie zastąpi bieżący zapis konta i zachowa jego poprzednią kopię.</p>${button('guest-copy','Przenieś postępy na konto','secondary')}</details>`:''}</section>`;
+}
+function cloudError(error:unknown) {
+  const code=(error as {code?:string})?.code;
+  if(code==='permission-denied')return 'Brak dostępu do zapisu w chmurze. Sprawdź reguły Firestore lub zaloguj się ponownie. Lokalna kopia jest zachowana.';
+  return error instanceof Error && !code?error.message:'Połączenie z kontem jest niedostępne. Spróbuj ponownie później; możesz kontynuować naukę z lokalnym zapisem.';
 }
 function render() {
   document.body.classList.toggle('studying',screen==='study');
@@ -104,7 +163,7 @@ function render() {
   const focusAction = focused?.dataset.action;
   const focusId = focused?.id;
   const changedScreen = renderedScreen !== screen;
-  root.innerHTML = shell(({ home, setup, study, progress: progressView, backup: backupView, summary }[screen])());
+  root.innerHTML = shell(({ home, setup, study, progress: progressView, backup: backupView, account: accountView, summary }[screen])());
   root.setAttribute('aria-busy', String(busy));
   if (!ready || busy) root.querySelectorAll<HTMLButtonElement | HTMLInputElement>('button,input').forEach(el => el.disabled = true);
   if (changedScreen) {
@@ -125,16 +184,35 @@ function render() {
 async function mutate(change: (p: Progress) => void) {
   const draft = structuredClone(progress);
   change(draft);
-  await save(draft);
-  progress = draft; storageError = '';
+  if(user)await sync.save(draft);else {await save(draft);guestProgress=structuredClone(draft);}
+  progress = draft; storageError = '';scheduleSync();
 }
-function exportProgress() {
-  const url = URL.createObjectURL(new Blob([JSON.stringify(backup(progress), null, 2)], { type: 'application/json' }));
-  const a = document.createElement('a'); a.href = url; a.download = `hania-postepy-${new Date().toISOString().slice(0,10)}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+function downloadProgress(value: Progress,suffix='') {
+  const url = URL.createObjectURL(new Blob([JSON.stringify(backup(value), null, 2)], { type: 'application/json' }));
+  const a = document.createElement('a'); a.href = url; a.download = `hania-postepy-${new Date().toISOString().slice(0,10)}${suffix?'-'+suffix:''}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
   notice = 'Plik kopii został przygotowany do pobrania. Zachowaj go, aby móc odtworzyć postępy.';
 }
+function exportProgress(){downloadProgress(progress);}
 async function action(action: string, el: HTMLElement) {
   notice = '';
+  if(action==='account'){screen='account';accountError='';return;}
+  if(action==='auth-toggle'){registerAccount=!registerAccount;accountError='';return;}
+  if(action==='logout'){
+    authWorking=true;
+    try{await (await sdk()).logout();await sync.disconnect();await writeStored('firebase-user',null);user=null;reauthNeeded=false;progress=await load();guestProgress=structuredClone(progress);pending=null;lastSession=null;accountNotice='Wylogowano. Widoczny jest osobny zapis bez konta; wyniki konta pozostały zachowane.';}catch(error){accountError=firebaseMessage(error);}finally{authWorking=false;}return;
+  }
+  if(action==='sync-now'){await sync.sync();return;}
+  if(action==='guest-copy'){
+    if(hasProgress(progress) && !window.confirm('Postępy z tego urządzenia zastąpią bieżące postępy konta. Zachowamy kopię dotychczasowego zapisu. Kontynuować?'))return;
+    await sync.useGuest(guestProgress);scheduleSync(0);return;
+  }
+  if(action==='guest-skip'){sync.dismissGuest();return;}
+  if(action==='resolve-local' || action==='resolve-cloud'){
+    if(!window.confirm('Wybrany zapis stanie się bieżącym. Druga wersja pozostanie do pobrania jako kopia sprzed zmiany. Kontynuować?'))return;
+    await sync.resolve(action==='resolve-local'?'local':'cloud');return;
+  }
+  if(action==='export-cloud'){downloadProgress(sync.conflict?.remote?.progress??emptyProgress(),'konto');return;}
+  if(action==='export-recovery' && sync.cache?.recovery){downloadProgress(sync.cache.recovery,'sprzed-zmiany');return;}
   if (['home','progress','backup'].includes(action)) { screen = action as 'home'|'progress'|'backup'; pending = null; }
   else if (action === 'module' || action === 'quick-start') { selected = modules.find(m => m.id === el.dataset.id) ?? modules[0]; screen = 'setup'; }
   else if (action === 'resume') screen = 'study';
@@ -153,7 +231,7 @@ async function action(action: string, el: HTMLElement) {
   else if (action === 'next') { await mutate(p => { if (p.active?.phase === 'feedback') next(p); }); if (!progress.active) { lastSession = progress.sessions.at(-1)!; screen = 'summary'; } }
   else if (action === 'export') exportProgress();
   else if (action === 'cancel-import') pending = null;
-  else if (action === 'confirm-import' && pending) { const imported = validateBackup(pending).progress; await save(imported); progress = imported; pending = null; storageError = ''; notice = 'Kopia została wczytana. Twoje postępy są już na tym urządzeniu.'; }
+  else if (action === 'confirm-import' && pending) { const imported = validateBackup(pending).progress; await mutate(p=>Object.assign(p,imported)); progress = imported; pending = null; storageError = ''; notice = 'Kopia została wczytana. Twoje postępy są już na tym urządzeniu.'; }
 }
 async function run(task: () => Promise<void>) {
   if (busy || !ready) return;
@@ -170,6 +248,21 @@ root.addEventListener('click', ev => {
   ev.preventDefault(); void run(() => action(el.dataset.action!,el));
 });
 root.addEventListener('submit', ev => {
+  if((ev.target as HTMLElement).id==='account-form'){
+    ev.preventDefault();
+    const form=ev.target as HTMLFormElement,email=(form.elements.namedItem('email') as HTMLInputElement).value.trim(),password=(form.elements.namedItem('password') as HTMLInputElement).value;
+    const reset=(ev as SubmitEvent).submitter?.getAttribute('value')==='reset';
+    void run(async()=>{
+      authWorking=true;accountError='';accountNotice='';
+      try{
+        const firebase=await sdk();
+        if(reset){await deadline(firebase.resetPassword(email));accountNotice='Jeśli dla tego adresu dostępne jest odzyskiwanie hasła, otrzymasz wiadomość. Sprawdź też spam.';}
+        else {const account=await deadline(firebase.login(email,password,registerAccount));await connectAccount(account);accountNotice='Zalogowano. Postępy bez konta są przechowywane osobno.';}
+      }catch(error){accountError=firebaseMessage(error);}
+      finally{authWorking=false;}
+    });return;
+  }
+
   if ((ev.target as HTMLElement).id !== 'answer-form') return;
   ev.preventDefault();
   const input = root.querySelector<HTMLInputElement>('#answer')!;
@@ -200,7 +293,19 @@ async function init() {
     if (!lock) { root.innerHTML = '<div class="loading"><h1>Nauka jest otwarta w innej karcie</h1><p>Zamknij drugą kartę i odśwież tę stronę. Chronimy w ten sposób Twoje postępy.</p><button class="primary" onclick="location.reload()">Spróbuj ponownie</button></div>'; return; }
     try {
       modules = await loadModules(); selected = modules[0];
-      progress = validateBackup(backup(await load())).progress; ready = true; render();
+      progress = validateBackup(backup(await load())).progress;guestProgress=structuredClone(progress);
+      const savedAccount=await readStored<AccountUser>('firebase-user');
+      if(savedAccount?.uid){
+        await sync.connect(savedAccount.uid,guestProgress);user=savedAccount;progress=structuredClone(sync.cache!.progress);
+        void (async()=>{
+          try{const account=await deadline((await sdk()).restoreUser());
+            if(account?.uid===savedAccount.uid){user={uid:account.uid,email:account.email};scheduleSync(0);}
+            else {reauthNeeded=true;accountError='Zaloguj się ponownie, aby zsynchronizować zapisane wyniki konta.';sync.status='error';}
+          }catch(error){accountError='Połączenie z kontem jest niedostępne. Możesz uczyć się z lokalnym zapisem konta.';sync.status='error';}
+          if(ready && !busy && screen==='account')render();else refreshSyncLabel();
+        })();
+      }
+      ready = true; render();
     }
     catch (err) {
       root.innerHTML = `<div class="loading"><h1>Nie możemy wczytać aplikacji</h1><p>Nie zmieniliśmy Twoich postępów. Sprawdź pliki materiałów, połączenie i zgodę przeglądarki na zapis danych, a następnie odśwież stronę.</p><p>${e(err instanceof Error ? err.message : 'Błąd odczytu')}</p></div>`;
@@ -210,4 +315,6 @@ async function init() {
     await new Promise<void>(() => {});
   });
 }
+window.addEventListener('online',()=>{if(sync.cache?.dirty || !progress.active)scheduleSync(0);});
+window.addEventListener('focus',()=>{if(user && !progress.active)scheduleSync(0);});
 void init();

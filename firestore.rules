@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid}/progress/main {
+      function owner() { return request.auth != null && request.auth.uid == uid; }
+      function valid() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['format', 'revision', 'payload', 'updatedAt'])
+          && data.keys().hasOnly(['format', 'revision', 'payload', 'updatedAt'])
+          && data.format == 1 && data.revision is int && data.revision > 0
+          && data.payload is string && data.payload.size() <= 700000
+          && data.updatedAt == request.time;
+      }
+      allow get: if owner();
+      allow create: if owner() && valid() && request.resource.data.revision == 1;
+      allow update: if owner() && valid() && request.resource.data.revision == resource.data.revision + 1;
+    }
+  }
+}
