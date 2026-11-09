@@ -1,0 +1,66 @@
+import {test,expect,type Page} from '@playwright/test';
+import {modules} from '../materials.ts';
+import {pwaServer} from './pwa-server.ts';
+
+test.use({serviceWorkers:'allow',viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+test.skip(process.env.HANIA_TEST_BUILD!=='1' || !!process.env.HANIA_BASE_URL,'PWA sprawdzamy na lokalnej, zbudowanej aplikacji.');
+async function offlineReady(page:Page){
+  await expect(page.locator('[data-offline-status]')).toContainText('Materiały gotowe');
+  await expect.poll(()=>page.evaluate(()=>!!navigator.serviceWorker.controller)).toBeTruthy();
+}
+async function moduleSetup(page:Page){await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();}
+
+test('PWA: manifest, ikony i zimny start bez sieci; fiszki, quiz, gramatyka i wznowienie',async({page,context})=>{
+  await page.goto('./');await offlineReady(page);
+  await page.screenshot({path:'test-results/pwa-home-mobile.png',fullPage:true});
+  const manifest=await page.evaluate(async()=>{const href=document.querySelector<HTMLLinkElement>('link[rel="manifest"]')!.href;return (await fetch(href)).json();});
+  expect(manifest.display).toBe('standalone');expect(manifest.scope).toBe('./');expect(manifest.icons).toHaveLength(3);
+  for(const icon of manifest.icons)expect((await page.request.get(new URL(icon.src,page.url()).href)).ok()).toBeTruthy();
+  await page.close();await context.setOffline(true);const offline=await context.newPage();await offline.goto('./');
+  await expect(offline.getByRole('heading',{name:'Cześć, Haniu'})).toBeVisible();await offlineReady(offline);
+  await expect(offline.locator('[data-offline-status]')).toContainText('Teraz jesteś offline');
+  await moduleSetup(offline);await offline.getByText('Wpisuję odpowiedź',{exact:true}).tap();await offline.getByRole('button',{name:'Fiszki podstawa',exact:true}).tap();
+  const front=await offline.locator('.question').innerText(),word=modules[0].words.find(w=>w.front===front)!;
+  await offline.getByRole('textbox').fill(word.back);await offline.getByRole('button',{name:/Sprawdź/}).tap();await expect(offline.locator('.feedback.correct')).toBeVisible();
+  for(const mode of ['Quiz słownictwa','Gramatyka']){
+    await offline.getByRole('button',{name:'Moja nauka',exact:true}).tap();await moduleSetup(offline);await offline.getByText('Wybieram odpowiedź',{exact:true}).tap();
+    offline.once('dialog',d=>d.accept());await offline.getByRole('button',{name:mode,exact:true}).tap();await expect(offline.locator('.question-illustration')).toBeVisible();
+    await offline.locator('.option').first().tap();await expect(offline.locator('.feedback')).toBeVisible();
+  }
+  const last=await offline.locator('.question').innerText();await offline.reload();await offline.getByRole('button',{name:'Kontynuuj',exact:true}).tap();
+  await expect(offline.locator('.question')).toHaveText(last);await expect(offline.locator('.feedback')).toBeVisible();
+  expect(await offline.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+  await offline.screenshot({path:'test-results/pwa-offline-mobile.png'});
+});
+
+test('PWA: konto po zimnym starcie offline zachowuje odpowiedź i synchronizuje po połączeniu',async({page,context})=>{
+  const server=await pwaServer();
+  try{
+    await page.goto(server.url);await offlineReady(page);
+    await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).tap();await page.getByLabel('E-mail rodzica').fill('offline@example.test');await page.getByLabel('Hasło',{exact:true}).fill('test-password');await page.getByRole('button',{name:'Zaloguj się',exact:true}).tap();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie');
+    await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await moduleSetup(page);await context.setOffline(true);await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).tap();
+    await page.reload();await page.getByRole('button',{name:'Kontynuuj',exact:true}).tap();
+    const question=await page.locator('.question').innerText();await page.locator('.option').first().tap();await expect(page.locator('.feedback')).toBeVisible();
+    await page.reload();await page.getByRole('button',{name:'Kontynuuj',exact:true}).tap();await expect(page.locator('.question')).toHaveText(question);await expect(page.locator('.feedback')).toBeVisible();
+    await context.setOffline(false);await expect.poll(()=>server.remote.get('offline@example.test')?.progress.active?.attempts.length).toBe(1);
+    const cached=await page.evaluate(async()=>{const keys=await caches.keys();return (await Promise.all(keys.map(async key=>(await(await caches.open(key)).keys()).map(r=>r.url)))).flat();});
+    expect(cached.some(url=>url.includes('/__cloud/')||url.includes('googleapis.com'))).toBe(false);
+  }finally{await context.setOffline(false);await server.close();}
+});
+
+test('PWA: aktualizacja czeka na zgodę, zachowuje sesję i nie usuwa cache innych stron',async({page})=>{
+  const server=await pwaServer();
+  try{
+    await page.goto(server.url);await offlineReady(page);
+    await page.evaluate(async()=>{const cache=await caches.open('another-application');await cache.put('unrelated',new Response('keep'));});
+    await moduleSetup(page);await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).tap();const question=await page.locator('.question').innerText();await page.locator('.option').first().tap();await expect(page.locator('.feedback')).toBeVisible();
+    await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();server.setVersion(2);
+    await page.evaluate(async()=>{await(await navigator.serviceWorker.getRegistration())!.update();});
+    await expect(page.getByRole('button',{name:'Wczytaj nową wersję',exact:true})).toBeVisible();
+    await expect(page.getByText('Nowe materiały — test aktualizacji',{exact:true})).toHaveCount(0);
+    const reload=page.waitForEvent('load');page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Wczytaj nową wersję',exact:true}).tap();await reload;
+    await expect(page.getByText('Nowe materiały — test aktualizacji',{exact:true})).toBeVisible();
+    await page.getByRole('button',{name:'Kontynuuj',exact:true}).tap();await expect(page.locator('.question')).toHaveText(question);await expect(page.locator('.feedback')).toBeVisible();
+    const keys=await page.evaluate(()=>caches.keys());expect(keys).toContain('another-application');expect(keys.filter(k=>k.startsWith('male-kroki-offline-'))).toHaveLength(1);
+  }finally{await server.close();}
+});

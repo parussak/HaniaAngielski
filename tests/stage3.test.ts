@@ -4,10 +4,10 @@ import {readFileSync,existsSync} from 'node:fs';
 import {modules} from './materials.ts';
 import {normalizeAnswer} from '../src/answers.ts';
 const read=(path:string)=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
-test('etap 3: systemowe czcionki, favicon, bez manifestu i konfiguracja przenośna',()=>{
+test('etap 3: systemowe czcionki, favicon, manifest PWA i konfiguracja przenośna',()=>{
   assert.ok(!read('src/style.css').includes('fonts.googleapis.com'));
   assert.ok(read('index.html').includes('rel="icon"'));
-  assert.ok(!read('index.html').includes('rel="manifest"'));
+  assert.ok(read('index.html').includes('rel="manifest"'));
   assert.ok(read('playwright.config.ts').includes('HANIA_BROWSER_CHANNEL'));
   assert.ok(read('playwright.config.ts').includes('process.platform'));
 });

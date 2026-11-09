@@ -42,7 +42,7 @@ Bez logowania wyniki są przypisane do przeglądarki i adresu strony. Po zalogow
 
 Konto otworzysz wskaźnikiem zapisu u góry albo przez „Kopia postępów”. Przed użyciem włącz logowanie E-mail/hasło i Firestore w projekcie Firebase oraz opublikuj reguły dostępu: [instrukcja Firebase](docs/firebase.md). Pierwsze przeniesienie wyników gościa wymaga decyzji. Zapis konta i gościa jest oddzielny, konflikty dwóch urządzeń wymagają wyboru wersji.
 
-Nie ma automatycznego przetwarzania PDF ani gwarantowanego uruchamiania offline. Do nauki z gotowych zestawów nie jest potrzebna usługa AI. Czcionki są systemowe i nie są pobierane z Google Fonts. Nie dodano manifestu aplikacji.
+Po pierwszym pobraniu materiałów aplikacja działa offline i może być instalowana jako PWA z ikoną kotka. [Instrukcja instalacji i testu offline](docs/pwa.md). Konto synchronizuje lokalne zmiany po odzyskaniu połączenia w otwartej aplikacji lub przy kolejnym uruchomieniu. Nie ma automatycznego przetwarzania PDF. Do nauki z gotowych zestawów nie jest potrzebna usługa AI. Czcionki są systemowe i nie są pobierane z Google Fonts. Manifest PWA i wersjonowany service worker są częścią aplikacji.
 
 ## Edytowanie materiałów i dodawanie modułu
 
@@ -55,7 +55,7 @@ Treści znajdują się w **public/content**, niezależnie od kodu strony w `src`
 - `02-food/gramatyka.json` — zasady, objaśnienia i przykłady.
 - `02-food/cwiczenia.json` — zadania, klucze odpowiedzi i wyjaśnienia po błędzie.
 
-[Instrukcja edycji materiałów](public/content/README.md) zawiera przykłady. Po zmianie uruchom `npm.cmd run check:content`. Podczas lokalnej nauki wystarczy zapisać pliki i odświeżyć stronę. Po wysłaniu zmian na `main` GitHub automatycznie sprawdzi, zbuduje i opublikuje aplikację.
+[Instrukcja edycji materiałów](public/content/README.md) zawiera przykłady. Po zmianie uruchom `npm.cmd run check:content`. Podczas lokalnej nauki wystarczy zapisać pliki i odświeżyć stronę. Po wysłaniu zmian na `main` GitHub automatycznie sprawdzi, zbuduje i opublikuje aplikację. W zainstalowanej PWA nowa wersja pojawi się jako przycisk „Wczytaj nową wersję”.
 
 Przy zmianie znaczenia konkretnego słówka lub zadania zwiększ jego opcjonalne `rev` (domyślnie 1). Pozostałe elementy zachowują postępy. Zmiana `version` całego modułu nie resetuje wyników. Dawne kopie formatu 1 z kluczami `@1` pozostają zgodne. Kopia nie zawiera treści modułów. Zdjęcia źródłowe są w pomijanym przez Git folderze `.local-materials`.
 
@@ -65,7 +65,7 @@ Przy zmianie znaczenia konkretnego słówka lub zadania zwiększ jego opcjonalne
 
 Konfiguracja Vite używa względnych ścieżek, więc aplikacja obsługuje adres w podkatalogu repozytorium. Workflow `.github/workflows/pages.yml` automatycznie publikuje każdy push na `main`, po poprawnym przejściu testów i budowania. Można go też uruchomić ręcznie przez „Publish Pages → Run workflow”. Osobny workflow `checks.yml` sprawdza push i pull request bez publikowania strony.
 
-Wszystkie opublikowane moduły są publicznymi plikami strony. Wyniki pozostają wyłącznie lokalnie. Baza postępów i blokada karty są oddzielone według ścieżki aplikacji, aby różne repozytoria na GitHub Pages nie współdzieliły danych. Do testów najlepiej używać innego profilu przeglądarki.
+Wszystkie opublikowane moduły są publicznymi plikami strony. Wyniki gościa pozostają lokalnie; wyniki konta są też synchronizowane z Firebase. Baza postępów i blokada karty są oddzielone według ścieżki aplikacji, aby różne repozytoria na GitHub Pages nie współdzieliły danych. Do testów najlepiej używać innego profilu przeglądarki.
 
 ## Dokumenty
 

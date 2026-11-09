@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "npm run check:content && tsc --noEmit && vite build",
+    "build": "npm run check:content && tsc --noEmit && vite build && node scripts/build-sw.mjs",
     "check:content": "node --experimental-strip-types scripts/check-content.mjs",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node --experimental-strip-types --test tests/*.test.ts"
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "icons:generate": "node scripts/generate-icons.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.1",

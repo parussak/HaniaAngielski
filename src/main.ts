@@ -1,4 +1,5 @@
 import {closestAnswer,type AnswerPart} from './answer-comparison.ts';
+import {pwa,startPwa,installPwa,prepareOffline,applyUpdate} from './pwa.ts';
 import './style.css';
 import './theme.css';
 import { loadModules } from './content.ts';
@@ -45,14 +46,16 @@ const sync=new ProgressSync({
   push:async(uid,p,revision)=>deadline((await sdk()).pushProgress(uid,p,revision)),
 },dataChanged=>{
   if(dataChanged && sync.cache){progress=structuredClone(sync.cache.progress);lastSession=null;}
+  if(sync.status==='saved' && !reauthNeeded)accountError='';
   if(!ready || busy)return;
   if(dataChanged || screen==='account')render();else refreshSyncLabel();
 });
-function syncLabel(){return !user?'Zapis lokalny':sync.status==='saved'?'Zapis na koncie':sync.status==='checking'?'Łączenie…':sync.status==='conflict'?'Sprawdź zapis':'Zapis lokalny';}
+function syncLabel(){return !user || !navigator.onLine?'Zapis lokalny':sync.status==='saved'?'Zapis na koncie':sync.status==='checking'?'Łączenie…':sync.status==='conflict'?'Sprawdź zapis':'Zapis lokalny';}
 function refreshSyncLabel(){root.querySelectorAll('[data-sync-label]').forEach(el=>el.textContent=storageError?'Problem z zapisem':syncLabel());}
 function scheduleSync(delay=1200){
   clearTimeout(syncTimer);
   if(!user || sync.conflict || reauthNeeded)return;
+  if(!navigator.onLine){if(sync.cache?.dirty)sync.status='pending';refreshSyncLabel();return;}
   syncTimer=setTimeout(async()=>{
     if(busy || authWorking){scheduleSync(500);return;}
     await sync.sync();
@@ -93,9 +96,13 @@ function shell(content: string) {
 function heroArt() {
   return `<div class="hero-art cat-art" aria-hidden="true"><svg class="cat-illustration" viewBox="0 0 300 260" fill="none"><circle cx="154" cy="133" r="109" fill="#E6E8FF"/><circle cx="154" cy="133" r="91" stroke="#C4B5EB" stroke-dasharray="4 7"/><path d="M217 204c58 10 58-43 33-37-19 5 13 20-15 23" stroke="#9B83D2" stroke-width="17" stroke-linecap="round"/><ellipse cx="159" cy="196" rx="64" ry="35" fill="#AB91DC"/><path d="M96 100 91 40c0-4 4-6 7-3l39 33c13-3 25-3 38 0l39-33c4-3 8-1 7 4l-5 61c26 73-147 78-120-2Z" fill="#BDA6EB" stroke="#9174C6" stroke-width="2"/><path d="m101 55 4 34 20-12-24-22Zm108 0-25 22 20 11 5-33Z" fill="#F7B6DA"/><path d="M129 107c-5-6-10-6-15 0m65 0c5-6 10-6 15 0" stroke="#554172" stroke-width="4" stroke-linecap="round"/><ellipse cx="110" cy="120" rx="11" ry="6" fill="#EEA2D0"/><ellipse cx="199" cy="120" rx="11" ry="6" fill="#EEA2D0"/><path d="m150 116 5 5 5-5h-10Z" fill="#76508D"/><path d="M155 121c0 10-12 11-13 4m13-4c0 10 12 11 13 4M87 112l21 4m-23 6 21 1m117-11-21 4m23 6-21 1" stroke="#76508D" stroke-width="2" stroke-linecap="round"/><path d="M102 166c17-3 36 1 53 10 17-9 36-13 54-10v64c-20-4-38 0-54 7-17-7-35-11-53-7v-64Z" fill="#FEFCFF" stroke="#8263B7" stroke-width="2"/><path d="M155 176v61m-40-54 27 6m-27 6 27 6m25-12 27-6m-27 18 27-6" stroke="#CCB6E7" stroke-width="3" stroke-linecap="round"/><ellipse cx="100" cy="185" rx="12" ry="18" fill="#BDA6EB" transform="rotate(-18 100 185)"/><ellipse cx="209" cy="185" rx="12" ry="18" fill="#BDA6EB" transform="rotate(18 209 185)"/><path d="m44 66 4 11 11 4-11 4-4 11-4-11-11-4 11-4ZM249 70l3 7 7 3-7 3-3 7-3-7-7-3 7-3Z" fill="#E59CC9"/><circle cx="55" cy="184" r="6" fill="#97C9F3"/><circle cx="239" cy="117" r="4" fill="#97C9F3"/><path d="M144 38c-15-16-26 4 0 17 26-13 15-33 0-17Z" fill="#F1A5D3"/></svg></div>`;
 }
+function pwaCard(){
+  const status=pwa.ready?'Materiały gotowe do nauki bez internetu.':pwa.preparing?'Pobieramy materiały do nauki bez internetu…':pwa.failed?'Nie udało się pobrać materiałów. Połącz się z internetem i spróbuj ponownie.':'Otwórz aplikację z internetem, aby przygotować naukę offline.';
+  return `<section class="pwa-card" aria-label="Instalacja i nauka offline"><img src="./icons/cat-192.png" alt="" width="56" height="56"><div><h2>${pwa.installed?'Twoja aplikacja do nauki':'Małe kroki na Twoim telefonie'}</h2><p data-offline-status>${status}${!pwa.online?' Teraz jesteś offline.':''}</p><p>Bez internetu ćwiczenia i zapis wyników działają na urządzeniu. Zalogowane konto wyśle wyniki po połączeniu, gdy aplikacja jest otwarta lub przy kolejnym uruchomieniu.</p>${pwa.canInstall&&!pwa.installed?button('pwa-install','Zainstaluj aplikację'):''}${pwa.failed?button('pwa-prepare','Pobierz materiały ponownie','secondary'):''}${pwa.updateAvailable?`<p>Dostępna jest nowa wersja aplikacji i materiałów. Twoje postępy pozostaną zapisane.</p>${button('pwa-update','Wczytaj nową wersję','secondary')}`:''}${!pwa.installed?'<details><summary>Jak zainstalować na Androidzie?</summary><p>W Chrome otwórz menu ⋮ → Dodaj do ekranu głównego → Zainstaluj. Nazwa opcji może różnić się na telefonie. Jeśli masz już starszy skrót, instaluj z tego samego adresu i przeglądarki — nie czyść danych strony.</p></details>':''}</div></section>`;
+}
 function home() {
   const s = stats();
-  return `<section class="welcome"><div><div class="eyebrow">DOBRZE CIĘ WIDZIEĆ</div><h1>Cześć, Haniu <span class="wave">🐾</span></h1><p>Na co masz dzisiaj ochotę? Zróbmy mały krok do przodu.</p></div><span class="date-pill">Twoja przestrzeń do odkrywania</span></section><section class="hero"><div><span class="tag">TWOJA JĘZYKOWA PRZYGODA</span><h2>Wielkie rzeczy zaczynają się <br>od małych kroków.</h2><p>Kilka słówek, jedno odkrycie i odrobina praktyki. <br>Ucz się po swojemu — bez pośpiechu.</p>${button('quick-start', `Zaczynamy ${icon('arrow')}`)}</div>${heroArt()}</section><section class="stats-grid" aria-label="Twoje statystyki"><article><span class="stat-icon peach">${icon('book')}</span><div><strong>${s.known}<small> / ${modules.reduce((n,m) => n+m.words.length,0)}</small></strong><span>Znane fiszki</span></div></article><article><span class="stat-icon lavender">${icon('check')}</span><div><strong>${progress.sessions.length}</strong><span>Ukończone sesje</span></div></article><article><span class="stat-icon mint">${icon('chart')}</span><div><strong>${s.accuracy === null ? '—' : `${s.accuracy}%`}</strong><span>Poprawnie za pierwszym razem</span></div></article></section>${progress.active ? `<section class="resume"><div>${icon('repeat')}<div><strong>Twoja nauka czeka</strong><p>${compatible() ? `${e(labels[progress.active.mode])} · wróć dokładnie tam, gdzie skończyłaś.` : 'Zapisana sesja wymaga innej wersji materiałów. Historia pozostaje zachowana.'}</p></div></div>${compatible() ? button('resume','Kontynuuj','secondary') : ''}</section>` : ''}<section class="modules-section"><div class="section-heading"><div><h2>Twoje moduły <span class="count">${modules.length}</span></h2><p>Wybierz mały kawałek świata do odkrycia.</p></div><span class="section-hint">${icon('book')} Biblioteczka wiedzy</span></div><div class="modules-grid">${modules.map(m => `<article class="module-card"><div class="module-cover"><span class="module-number">MODUŁ ${m.order.toString().padStart(2,'0')}</span><span class="cover-letters">${e(m.cover)}</span><span class="cover-flower">${icon('cat')}</span><span class="demo-badge">${e(m.label)}</span></div><div class="module-body"><div class="module-meta">${e(m.language)} <span>•</span> Moduł ${m.order}</div><h3>${e(m.name)}</h3><p>${e(m.subtitle)}</p><div class="topic-tags">${m.topics.map(t => `<span>${e(t)}</span>`).join('')}</div><div class="module-bottom"><span>${m.basicFlashcardIds?.length ?? m.words.length} podstawowych / ${m.words.length} wszystkich fiszek <br>${m.exercises.length} zadań</span><button class="round-button" data-action="module" data-id="${e(m.id)}" aria-label="Otwórz moduł ${e(m.name)}">${icon('arrow')}</button></div></div></article>`).join('')}<article class="coming-card"><span class="coming-icon">${icon('spark')}</span><h3>Miejsce na nowe odkrycia</h3><p>Tu pojawią się kolejne moduły <br>z Twojego podręcznika.</p><span class="soft-tag">Wkrótce, z Twoich materiałów</span></article></div></section><div class="demo-note">${icon('book')} Uczysz się z materiałów z Twojego podręcznika. Wybierz moduł i swój sposób nauki.</div>`;
+  return `<section class="welcome"><div><div class="eyebrow">DOBRZE CIĘ WIDZIEĆ</div><h1>Cześć, Haniu <span class="wave">🐾</span></h1><p>Na co masz dzisiaj ochotę? Zróbmy mały krok do przodu.</p></div><span class="date-pill">Twoja przestrzeń do odkrywania</span></section>${pwaCard()}<section class="hero"><div><span class="tag">TWOJA JĘZYKOWA PRZYGODA</span><h2>Wielkie rzeczy zaczynają się <br>od małych kroków.</h2><p>Kilka słówek, jedno odkrycie i odrobina praktyki. <br>Ucz się po swojemu — bez pośpiechu.</p>${button('quick-start', `Zaczynamy ${icon('arrow')}`)}</div>${heroArt()}</section><section class="stats-grid" aria-label="Twoje statystyki"><article><span class="stat-icon peach">${icon('book')}</span><div><strong>${s.known}<small> / ${modules.reduce((n,m) => n+m.words.length,0)}</small></strong><span>Znane fiszki</span></div></article><article><span class="stat-icon lavender">${icon('check')}</span><div><strong>${progress.sessions.length}</strong><span>Ukończone sesje</span></div></article><article><span class="stat-icon mint">${icon('chart')}</span><div><strong>${s.accuracy === null ? '—' : `${s.accuracy}%`}</strong><span>Poprawnie za pierwszym razem</span></div></article></section>${progress.active ? `<section class="resume"><div>${icon('repeat')}<div><strong>Twoja nauka czeka</strong><p>${compatible() ? `${e(labels[progress.active.mode])} · wróć dokładnie tam, gdzie skończyłaś.` : 'Zapisana sesja wymaga innej wersji materiałów. Historia pozostaje zachowana.'}</p></div></div>${compatible() ? button('resume','Kontynuuj','secondary') : ''}</section>` : ''}<section class="modules-section"><div class="section-heading"><div><h2>Twoje moduły <span class="count">${modules.length}</span></h2><p>Wybierz mały kawałek świata do odkrycia.</p></div><span class="section-hint">${icon('book')} Biblioteczka wiedzy</span></div><div class="modules-grid">${modules.map(m => `<article class="module-card"><div class="module-cover"><span class="module-number">MODUŁ ${m.order.toString().padStart(2,'0')}</span><span class="cover-letters">${e(m.cover)}</span><span class="cover-flower">${icon('cat')}</span><span class="demo-badge">${e(m.label)}</span></div><div class="module-body"><div class="module-meta">${e(m.language)} <span>•</span> Moduł ${m.order}</div><h3>${e(m.name)}</h3><p>${e(m.subtitle)}</p><div class="topic-tags">${m.topics.map(t => `<span>${e(t)}</span>`).join('')}</div><div class="module-bottom"><span>${m.basicFlashcardIds?.length ?? m.words.length} podstawowych / ${m.words.length} wszystkich fiszek <br>${m.exercises.length} zadań</span><button class="round-button" data-action="module" data-id="${e(m.id)}" aria-label="Otwórz moduł ${e(m.name)}">${icon('arrow')}</button></div></div></article>`).join('')}<article class="coming-card"><span class="coming-icon">${icon('spark')}</span><h3>Miejsce na nowe odkrycia</h3><p>Tu pojawią się kolejne moduły <br>z Twojego podręcznika.</p><span class="soft-tag">Wkrótce, z Twoich materiałów</span></article></div></section><div class="demo-note">${icon('book')} Uczysz się z materiałów z Twojego podręcznika. Wybierz moduł i swój sposób nauki.</div>`;
 }
 function setup() {
   const descriptions: Record<Mode,string> = { 'flashcards-basic': `${selected.basicFlashcardIds?.length ?? selected.words.length} haseł z ramek Vocabulary. Dobry zestaw na początek.`, flashcards: `Wszystkie ${selected.words.length} haseł z modułu, także dodatkowe słówka i zwroty.`, quiz: 'Sprawdź słówka w krótkich pytaniach.', grammar: 'Buduj zdania, próbuj i poznawaj zasady.', review: 'Wróć do zadań, które sprawiły trudność.' };
@@ -195,6 +202,12 @@ function downloadProgress(value: Progress,suffix='') {
 function exportProgress(){downloadProgress(progress);}
 async function action(action: string, el: HTMLElement) {
   notice = '';
+  if(action==='pwa-install'){await installPwa();return;}
+  if(action==='pwa-prepare'){await prepareOffline();return;}
+  if(action==='pwa-update'){
+    if(progress.active && !window.confirm('Wczytać nową wersję? Strona zostanie odświeżona, a zapisana sesja pozostanie zachowana.'))return;
+    applyUpdate();return;
+  }
   if(action==='account'){screen='account';accountError='';return;}
   if(action==='auth-toggle'){registerAccount=!registerAccount;accountError='';return;}
   if(action==='logout'){
@@ -255,6 +268,7 @@ root.addEventListener('submit', ev => {
     void run(async()=>{
       authWorking=true;accountError='';accountNotice='';
       try{
+        if(!navigator.onLine)throw new Error('Logowanie i odzyskanie hasła wymagają internetu. Możesz wrócić do nauki z lokalnym zapisem.');
         const firebase=await sdk();
         if(reset){await deadline(firebase.resetPassword(email));accountNotice='Jeśli dla tego adresu dostępne jest odzyskiwanie hasła, otrzymasz wiadomość. Sprawdź też spam.';}
         else {const account=await deadline(firebase.login(email,password,registerAccount));await connectAccount(account);accountNotice='Zalogowano. Postępy bez konta są przechowywane osobno.';}
@@ -297,7 +311,7 @@ async function init() {
       const savedAccount=await readStored<AccountUser>('firebase-user');
       if(savedAccount?.uid){
         await sync.connect(savedAccount.uid,guestProgress);user=savedAccount;progress=structuredClone(sync.cache!.progress);
-        void (async()=>{
+        if(navigator.onLine)void (async()=>{
           try{const account=await deadline((await sdk()).restoreUser());
             if(account?.uid===savedAccount.uid){user={uid:account.uid,email:account.email};scheduleSync(0);}
             else {reauthNeeded=true;accountError='Zaloguj się ponownie, aby zsynchronizować zapisane wyniki konta.';sync.status='error';}
@@ -306,6 +320,7 @@ async function init() {
         })();
       }
       ready = true; render();
+      startPwa(()=>{if(ready && !busy && screen==='home')render();});
     }
     catch (err) {
       root.innerHTML = `<div class="loading"><h1>Nie możemy wczytać aplikacji</h1><p>Nie zmieniliśmy Twoich postępów. Sprawdź pliki materiałów, połączenie i zgodę przeglądarki na zapis danych, a następnie odśwież stronę.</p><p>${e(err instanceof Error ? err.message : 'Błąd odczytu')}</p></div>`;

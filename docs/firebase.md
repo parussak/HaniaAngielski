@@ -27,7 +27,7 @@ Alternatywnie osoba korzystająca z Firebase CLI może wdrożyć same reguły pr
 - Każda zmiana najpierw trafia do IndexedDB. Zapis gościa zachowuje dotychczasowy klucz `current`; każde konto ma odrębny rekord `account:{uid}` w tej samej bazie. Nazwa bazy i format kopii postępów 1 pozostają zgodne ze starszą aplikacją.
 - Firebase jest ładowany dopiero przy użyciu konta lub jego przywróceniu. Nauka bez konta nie wymaga połączenia z Firebase.
 - Zmiany są wysyłane około 1,2 s po ostatniej czynności. Aplikacja ponawia zapis po odzyskaniu internetu. Dostępny jest także przycisk **Synchronizuj teraz**. Nie należy traktować zamknięcia karty jako potwierdzenia wysłania — potwierdza je komunikat zapisu na koncie.
-- Przy braku internetu działa lokalny zapis już otwartej aplikacji i pamięć konta. Pełne uruchamianie strony bez internetu nie zostało dodane.
+- Przy braku internetu działa lokalny zapis już otwartej aplikacji i pamięć konta. Po przygotowaniu materiałów PWA umożliwia też ponowne uruchamianie bez internetu: [instrukcja PWA](pwa.md).
 - Na koncie zapisujemy wersjonowany dokument `users/{uid}/progress/main`, zawierający JSON kopii, numer rewizji i czas serwera. Transakcja porównuje numer wersji przed zapisem. Nie opieramy kolejności na zegarze telefonu.
 - Jeżeli dwa urządzenia zmienią zapis niezależnie, automatyczne nadpisanie zostaje zatrzymane. W **Konto i synchronizacja** można pobrać obie wersje i wskazać wersję do dalszej nauki. Nie łączymy automatycznie historii i rozpoczętych sesji.
 - Przegrana wersja pozostaje w lokalnej **kopii sprzed zmiany**. Przechowywana jest jedna taka kopia na konto; kolejny świadomy wybór wersji zastąpi tę kopię. Warto pobrać pliki przed następnym wyborem.
