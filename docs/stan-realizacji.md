@@ -22,7 +22,9 @@ Dodano PWA z ikoną kotka, manifestem i pobraniem wszystkich publicznych materia
 
 Dodano ustawienia wielu kont: imię przy rejestracji i edycji profilu, spersonalizowane powitanie i podsumowanie, zmianę konta, zmianę hasła po ponownym uwierzytelnieniu oraz zmianę e-maila przez link potwierdzający. Profile i lokalne wyniki są oddzielone według UID. Reguły Firestore pozostają bez zmian. Testy zarządzania kontem korzystają z atrapy SDK, nie wysyłają prawdziwych wiadomości i nie zmieniają rzeczywistych haseł.
 
-Weryfikacja po aktualizacji: 46 testów jednostkowych, check:content i build poprawne; 32 testy zbudowanej aplikacji pod /HaniaAngielski/. Sprawdzono 320×640, 360×740, szerokości 390 i 430 oraz 844×390, wczytanie starej kopii bez zmiany jej danych, oba zestawy i kontrast sprawdzanych tekstów.
+Dodano zaakceptowaną kocią ekipę: Albert, Oluś, Felix, Maja i Krzywołap. 25 wariantów jest zapisanych w trzech planszach PNG i katalogu kadrów, niezależnie od kodu strony. Nauczyciele pojawiają się po błędzie, zadowolone lub świętujące kotki po poprawnej odpowiedzi, a dwie zabawne scenki każdej postaci na końcu sesji. Losowanie jest stałe dla danej odpowiedzi i nie powtarza postaci w sąsiednich pytaniach. Ilustracje jedzenia pozostają osobno, a kotki działają offline. Dokumentacja: [public/cats/README.md](../public/cats/README.md).
+
+Weryfikacja po aktualizacji: 50 testów jednostkowych, check:content i build poprawne; 35 testów zbudowanej aplikacji pod /HaniaAngielski/. Sprawdzono 320×640, 360×740, szerokości 390 i 430 oraz 844×390, wczytanie starej kopii bez zmiany jej danych, oba zestawy i kontrast sprawdzanych tekstów.
 
 Testy domyślnie korzystają z Chromium, Edge jest dostępny przez zmienną środowiskową. Osobny CI sprawdza push i pull request; GitHub Pages publikuje push na main i umożliwia uruchomienie ręczne.
 

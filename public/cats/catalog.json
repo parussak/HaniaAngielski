@@ -1,0 +1,469 @@
+{
+  "version": 1,
+  "sheets": {
+    "classic": {
+      "src": "cats/happy-teachers.png",
+      "width": 1536,
+      "height": 1024
+    },
+    "play": {
+      "src": "cats/play-celebrate.png",
+      "width": 1536,
+      "height": 1024
+    },
+    "extra": {
+      "src": "cats/more-fun.png",
+      "width": 1774,
+      "height": 887
+    }
+  },
+  "cats": [
+    {
+      "id": "albert",
+      "name": "Albert",
+      "happy": {
+        "sheet": "classic",
+        "x": 90,
+        "y": 194,
+        "width": 350,
+        "height": 345,
+        "clip": [
+          [
+            205,
+            194
+          ],
+          [
+            440,
+            194
+          ],
+          [
+            440,
+            539
+          ],
+          [
+            90,
+            539
+          ],
+          [
+            90,
+            370
+          ],
+          [
+            205,
+            370
+          ]
+        ]
+      },
+      "teacher": {
+        "sheet": "classic",
+        "x": 90,
+        "y": 550,
+        "width": 340,
+        "height": 405,
+        "clip": [
+          [
+            201,
+            550
+          ],
+          [
+            430,
+            550
+          ],
+          [
+            430,
+            850
+          ],
+          [
+            418,
+            850
+          ],
+          [
+            418,
+            955
+          ],
+          [
+            90,
+            955
+          ],
+          [
+            90,
+            770
+          ],
+          [
+            201,
+            770
+          ]
+        ]
+      },
+      "celebrating": {
+        "sheet": "play",
+        "x": 90,
+        "y": 558,
+        "width": 355,
+        "height": 397,
+        "clip": [
+          [
+            203,
+            558
+          ],
+          [
+            445,
+            558
+          ],
+          [
+            445,
+            955
+          ],
+          [
+            90,
+            955
+          ],
+          [
+            90,
+            775
+          ],
+          [
+            203,
+            775
+          ]
+        ]
+      },
+      "funny": [
+        {
+          "sheet": "play",
+          "x": 72,
+          "y": 202,
+          "width": 338,
+          "height": 336,
+          "clip": [
+            [
+              199,
+              202
+            ],
+            [
+              410,
+              202
+            ],
+            [
+              410,
+              538
+            ],
+            [
+              72,
+              538
+            ],
+            [
+              72,
+              370
+            ],
+            [
+              199,
+              370
+            ]
+          ]
+        },
+        {
+          "sheet": "extra",
+          "x": 10,
+          "y": 278,
+          "width": 375,
+          "height": 490
+        }
+      ]
+    },
+    {
+      "id": "olus",
+      "name": "Oluś",
+      "happy": {
+        "sheet": "classic",
+        "x": 440,
+        "y": 194,
+        "width": 230,
+        "height": 345,
+        "clip": [
+          [
+            455,
+            194
+          ],
+          [
+            670,
+            194
+          ],
+          [
+            670,
+            539
+          ],
+          [
+            440,
+            539
+          ],
+          [
+            440,
+            455
+          ],
+          [
+            455,
+            455
+          ]
+        ]
+      },
+      "teacher": {
+        "sheet": "classic",
+        "x": 425,
+        "y": 550,
+        "width": 290,
+        "height": 405
+      },
+      "celebrating": {
+        "sheet": "play",
+        "x": 450,
+        "y": 558,
+        "width": 215,
+        "height": 397
+      },
+      "funny": [
+        {
+          "sheet": "play",
+          "x": 410,
+          "y": 210,
+          "width": 261,
+          "height": 328
+        },
+        {
+          "sheet": "extra",
+          "x": 418,
+          "y": 324,
+          "width": 307,
+          "height": 450
+        }
+      ]
+    },
+    {
+      "id": "felix",
+      "name": "Felix",
+      "happy": {
+        "sheet": "classic",
+        "x": 677,
+        "y": 192,
+        "width": 248,
+        "height": 347,
+        "clip": [
+          [
+            677,
+            192
+          ],
+          [
+            925,
+            192
+          ],
+          [
+            925,
+            420
+          ],
+          [
+            909,
+            420
+          ],
+          [
+            909,
+            539
+          ],
+          [
+            677,
+            539
+          ]
+        ]
+      },
+      "teacher": {
+        "sheet": "classic",
+        "x": 720,
+        "y": 550,
+        "width": 201,
+        "height": 405,
+        "clip": [
+          [
+            720,
+            550
+          ],
+          [
+            921,
+            550
+          ],
+          [
+            921,
+            790
+          ],
+          [
+            901,
+            790
+          ],
+          [
+            901,
+            955
+          ],
+          [
+            720,
+            955
+          ]
+        ]
+      },
+      "celebrating": {
+        "sheet": "play",
+        "x": 680,
+        "y": 558,
+        "width": 228,
+        "height": 397
+      },
+      "funny": [
+        {
+          "sheet": "play",
+          "x": 677,
+          "y": 209,
+          "width": 245,
+          "height": 329
+        },
+        {
+          "sheet": "extra",
+          "x": 755,
+          "y": 277,
+          "width": 205,
+          "height": 489
+        }
+      ]
+    },
+    {
+      "id": "maja",
+      "name": "Maja",
+      "happy": {
+        "sheet": "classic",
+        "x": 929,
+        "y": 194,
+        "width": 270,
+        "height": 345,
+        "clip": [
+          [
+            929,
+            194
+          ],
+          [
+            1190,
+            194
+          ],
+          [
+            1190,
+            400
+          ],
+          [
+            1199,
+            400
+          ],
+          [
+            1199,
+            539
+          ],
+          [
+            929,
+            539
+          ]
+        ]
+      },
+      "teacher": {
+        "sheet": "classic",
+        "x": 925,
+        "y": 550,
+        "width": 273,
+        "height": 405
+      },
+      "celebrating": {
+        "sheet": "play",
+        "x": 925,
+        "y": 558,
+        "width": 268,
+        "height": 397,
+        "clip": [
+          [
+            925,
+            558
+          ],
+          [
+            1193,
+            558
+          ],
+          [
+            1193,
+            800
+          ],
+          [
+            1185,
+            800
+          ],
+          [
+            1185,
+            955
+          ],
+          [
+            925,
+            955
+          ]
+        ]
+      },
+      "funny": [
+        {
+          "sheet": "play",
+          "x": 926,
+          "y": 203,
+          "width": 280,
+          "height": 335
+        },
+        {
+          "sheet": "extra",
+          "x": 980,
+          "y": 324,
+          "width": 355,
+          "height": 444
+        }
+      ]
+    },
+    {
+      "id": "krzywolap",
+      "name": "Krzywołap",
+      "happy": {
+        "sheet": "classic",
+        "x": 1210,
+        "y": 194,
+        "width": 326,
+        "height": 345
+      },
+      "teacher": {
+        "sheet": "classic",
+        "x": 1204,
+        "y": 550,
+        "width": 332,
+        "height": 405
+      },
+      "celebrating": {
+        "sheet": "play",
+        "x": 1204,
+        "y": 558,
+        "width": 332,
+        "height": 397
+      },
+      "funny": [
+        {
+          "sheet": "play",
+          "x": 1204,
+          "y": 215,
+          "width": 332,
+          "height": 323
+        },
+        {
+          "sheet": "extra",
+          "x": 1344,
+          "y": 300,
+          "width": 430,
+          "height": 468
+        }
+      ]
+    }
+  ]
+}

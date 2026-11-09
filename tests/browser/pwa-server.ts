@@ -47,5 +47,5 @@ export async function pwaServer(){
   });
   await new Promise<void>(resolve=>server.listen(0,'127.0.0.1',resolve));
   const port=(server.address() as {port:number}).port;
-  return {url:`http://127.0.0.1:${port}/HaniaAngielski/`,remote,setVersion:(n:number)=>version=n,close:()=>new Promise<void>(resolve=>server.close(()=>resolve()))};
+  return {url:`http://127.0.0.1:${port}/HaniaAngielski/`,remote,setVersion:(n:number)=>version=n,close:()=>new Promise<void>(resolve=>{server.close(()=>resolve());server.closeAllConnections();})};
 }

@@ -34,7 +34,7 @@ Testy automatycznie uruchamiają i zatrzymują własny lokalny serwer na porcie 
 1. Wybierz moduł i rodzaj ćwiczeń.
    W module Food dostępne są „Fiszki podstawa” (38 haseł z ramek Vocabulary) oraz „Fiszki” (wszystkie 97 haseł). Oba zestawy współdzielą postępy tych samych słów.
 2. Przed dotknięciem kafelka wybierz odpowiedzi zamknięte, wpisywanie lub tryb mieszany. Dotknięcie kafelka od razu zaczyna sesję. Polecenia z wariantami w nawiasie zawsze mają przyciski do wyboru.
-3. Po błędzie przeczytaj wyjaśnienie i spróbuj ponownie. Pierwsza próba jest liczona osobno od poprawek. Trudne zadanie wraca raz na końcu sesji.
+3. Po błędzie towarzyszy Ci kotek nauczyciel, po dobrej odpowiedzi zadowolony lub świętujący kotek, a koniec sesji urozmaica zabawna scenka. Kocia ekipa ma 25 wariantów i działa offline. [Pliki kotków i edycja kadrów](public/cats/README.md). Po błędzie przeczytaj wyjaśnienie i spróbuj ponownie. Pierwsza próba jest liczona osobno od poprawek. Trudne zadanie wraca raz na końcu sesji.
 4. Postępy zapisują się po każdej odpowiedzi w IndexedDB. Rozpoczętą sesję można wznowić z ekranu głównego.
 5. W zakładce „Kopia postępów” pobierz plik JSON. Na drugim urządzeniu wczytaj go i potwierdź zastąpienie obecnych danych. Kopie nie są scalane.
 

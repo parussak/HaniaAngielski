@@ -263,6 +263,29 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
 .account-settings summary{cursor:pointer;font-size:14px;font-weight:600;color:#58416d;line-height:1.6;min-height:44px;padding:10px 0}
 .account-settings details>p{font-size:13px;line-height:1.7;color:#684e7b}
 .account-settings .account-form{margin:10px 0}
+.feedback-lead{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.feedback-lead>strong{flex:1;min-width:0}
+.cat-mascot{margin:0;flex-shrink:0;width:120px;text-align:center;color:#58416d}
+.cat-mascot .cat-artwork{display:block;width:120px;height:126px;overflow:hidden;border-radius:12px}
+.cat-mascot figcaption{font-size:12px;line-height:1.4;margin-top:3px;font-weight:600}
+.cat-mascot-large{width:min(100%,260px);margin:0 auto}
+.cat-mascot-large .cat-artwork{width:100%;height:220px}
+.summary .celebration{margin-bottom:14px}
+@media(max-width:600px){
+  .cat-mascot-large{width:min(100%,210px)}
+  .cat-mascot-large .cat-artwork{height:160px}
+  .summary .summary-score{margin:20px 0}
+}
+@media(max-width:600px),(max-height:500px){
+  .studying .cat-mascot{width:96px}
+  .studying .cat-mascot .cat-artwork{width:96px;height:102px}
+  .studying .feedback-lead{gap:8px}
+}
+@media(max-height:500px){
+  .studying .cat-mascot{width:66px}
+  .studying .cat-mascot .cat-artwork{width:66px;height:66px}
+  .studying .cat-mascot figcaption{display:none}
+}
 .account-panel .actions,.account-invite .actions{justify-content:flex-start}
 .sync-versions{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .sync-versions>div{border:1px solid #d8c6e9;border-radius:10px;padding:16px;min-width:0}

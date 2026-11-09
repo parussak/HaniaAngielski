@@ -29,6 +29,8 @@ test('PWA: manifest, ikony i zimny start bez sieci; fiszki, quiz, gramatyka i wz
   }
   const last=await offline.locator('.question').innerText();await offline.reload();await offline.getByRole('button',{name:'Kontynuuj',exact:true}).tap();
   await expect(offline.locator('.question')).toHaveText(last);await expect(offline.locator('.feedback')).toBeVisible();
+  await expect(offline.locator('.cat-mascot')).toBeVisible();
+  await expect(offline.locator('.cat-mascot image')).toHaveAttribute('href',/\/cats\/(happy-teachers|play-celebrate)\.png$/);
   expect(await offline.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
   await offline.screenshot({path:'test-results/pwa-offline-mobile.png'});
 });
@@ -39,6 +41,7 @@ test('PWA: konto po zimnym starcie offline zachowuje odpowiedź i synchronizuje 
     await page.goto(server.url);await offlineReady(page);
     await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).tap();await page.getByLabel('E-mail').fill('offline@example.test');await page.getByLabel('Hasło',{exact:true}).fill('test-password');await page.getByRole('button',{name:'Zaloguj się',exact:true}).tap();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie');
     await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await moduleSetup(page);await context.setOffline(true);await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).tap();
+    await expect(page.locator('.question')).toBeVisible();
     await page.reload();await page.getByRole('button',{name:'Kontynuuj',exact:true}).tap();
     const question=await page.locator('.question').innerText();await page.locator('.option').first().tap();await expect(page.locator('.feedback')).toBeVisible();
     await page.reload();await page.getByRole('button',{name:'Kontynuuj',exact:true}).tap();await expect(page.locator('.question')).toHaveText(question);await expect(page.locator('.feedback')).toBeVisible();

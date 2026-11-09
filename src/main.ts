@@ -1,3 +1,4 @@
+import {loadCats,responseCat,endingCat,type CatCatalog,type CatReaction} from './cats.ts';
 import {closestAnswer,type AnswerPart} from './answer-comparison.ts';
 import {pwa,startPwa,installPwa,prepareOffline,applyUpdate} from './pwa.ts';
 import './style.css';
@@ -10,6 +11,7 @@ import type {AccountUser} from './firebase.ts';
 import { load, save, readStored, writeStored, storageNamespace } from './storage.ts';
 
 let modules: Module[] = [];
+let catCatalog: CatCatalog|null=null;
 const root = document.querySelector<HTMLDivElement>('#app')!;
 let progress: Progress = emptyProgress();
 let screen: 'home' | 'setup' | 'study' | 'progress' | 'backup' | 'account' | 'summary' = 'home';
@@ -121,6 +123,13 @@ function answerComparison(q: Exercise, session: Session) {
   const parts=(values: AnswerPart[])=>values.map(part=>part.different?`<mark>${e(part.text)}</mark>`:e(part.text)).join('');
   return `<div class="answer-comparison"><div class="given-answer"><span>Twoja odpowiedź</span><p>${answer===undefined ? 'Ostatnia odpowiedź nie jest dostępna w tym starszym zapisie.' : parts(comparison.given)}</p></div><div class="expected-answer"><span>Poprawna odpowiedź</span><p>${parts(comparison.expected)}</p></div><small>Wyróżnione fragmenty pokazują różnice.</small></div>`;
 }
+function catView(reaction:CatReaction,large=false){
+  if(!catCatalog)return '';
+  const {cat,frame,mood}=reaction,sheet=catCatalog.sheets[frame.sheet];
+  const labels={teacher:'cierpliwy nauczyciel',happy:'zadowolony kotek',celebrating:'świętujący kotek',funny:'zabawna scenka'};
+  const clipId=`cat-clip-${cat.id}-${mood}`;
+  return `<figure class="cat-mascot ${large?'cat-mascot-large':''}" data-cat="${cat.id}" data-mood="${mood}"><svg class="cat-artwork" viewBox="${frame.x} ${frame.y} ${frame.width} ${frame.height}" role="img" aria-label="${e(cat.name)} — ${labels[mood]}" preserveAspectRatio="xMidYMid meet"><defs><clipPath id="${clipId}">${frame.clip?`<polygon points="${frame.clip.map(p=>p.join(',')).join(' ')}"/>`:`<rect x="${frame.x}" y="${frame.y}" width="${frame.width}" height="${frame.height}"/>`}</clipPath></defs><image href="${e(new URL(sheet.src,document.baseURI).href)}" width="${sheet.width}" height="${sheet.height}" clip-path="url(#${clipId})"/></svg><figcaption>${e(cat.name)}</figcaption></figure>`;
+}
 function study() {
   const s = progress.active;
   if (!s) return `<h1>Sesja zakończona</h1>${button('home','Wróć do modułów')}`;
@@ -132,7 +141,7 @@ function study() {
   card = `<div class="exercise-label">${icon(item.type === 'word' ? 'cards' : q.kind === 'grammar' ? 'book' : 'spark')} ${item.type === 'word' ? 'FISZKA · PODAJ PO ANGIELSKU' : q.kind === 'grammar' ? 'MAŁY KROK W GRAMATYCE' : 'SŁÓWKO PO SŁÓWKU'}</div><h2 class="question">${e(q.prompt)}</h2>`;
   if (s.phase === 'feedback') {
     const ok = s.lastCorrect;
-    card += `<div class="feedback ${ok ? 'correct' : 'incorrect'}" role="status"><strong>${ok ? 'Tak jest! Dobra robota ✦' : 'Spokojnie, tak właśnie się uczymy.'}</strong>${!ok ? answerComparison(q,s) : ''}<p>${e(q.explanation)}</p>${q.source ? `<p class="source-reference">Źródło: ${e(q.source)}</p>` : ''}${illustrationView(q.illustration,true)}</div><div class="actions">${!ok ? button('retry','Spróbuję jeszcze raz','secondary') : ''}${button('next',`Dalej ${icon('arrow')}`)}</div>`;
+    card += `<div class="feedback ${ok ? 'correct' : 'incorrect'}" role="status"><div class="feedback-lead"><strong>${ok ? 'Tak jest! Dobra robota ✦' : 'Spokojnie, tak właśnie się uczymy.'}</strong>${catCatalog?catView(responseCat(catCatalog,s)):''}</div>${!ok ? answerComparison(q,s) : ''}<p>${e(q.explanation)}</p>${q.source ? `<p class="source-reference">Źródło: ${e(q.source)}</p>` : ''}${illustrationView(q.illustration,true)}</div><div class="actions">${!ok ? button('retry','Spróbuję jeszcze raz','secondary') : ''}${button('next',`Dalej ${icon('arrow')}`)}</div>`;
   } else {
     card += illustrationView(q.illustration,false);
     card += s.phase === 'retry' ? '<p class="retry-note">Teraz spróbuj ponownie. Pierwszy wynik pozostanie zapisany osobno.</p>' : '<p>Nie musisz wiedzieć wszystkiego. Po prostu spróbuj.</p>';
@@ -144,7 +153,7 @@ function summary() {
   const s = lastSession ?? progress.sessions.at(-1);
   if (!s) return home();
   const result = score(s);
-  return `<section class="summary panel"><div class="celebration">${icon('cat')}</div><div class="eyebrow">KOLEJNY MAŁY KROK ZA TOBĄ</div><h1>${user ? user.displayName ? `Dobra robota, ${e(user.displayName)}!` : 'Dobra robota!' : 'Dobra robota, Haniu!'}</h1><p>Każda próba pomaga. Dziś wiesz już trochę więcej.</p>${!s.attempts.length ? `<div class="summary-score">${new Set(s.items.map(i => i.key)).size}<span>przećwiczonych fiszek</span></div>` : `<div class="summary-score">${result.correct}<small> / ${result.total}</small><span>poprawnie za pierwszym razem</span></div><p>Poprawione za drugim razem: <b>${result.corrections}</b>. Ten wynik liczymy osobno.</p>`}<div class="actions">${button('home','Wróć do modułów')}${button('progress','Zobacz postępy','secondary')}</div></section>`;
+  return `<section class="summary panel"><div class="celebration">${catCatalog?catView(endingCat(catCatalog,s),true):icon('cat')}</div><div class="eyebrow">KOLEJNY MAŁY KROK ZA TOBĄ</div><h1>${user ? user.displayName ? `Dobra robota, ${e(user.displayName)}!` : 'Dobra robota!' : 'Dobra robota, Haniu!'}</h1><p>Każda próba pomaga. Dziś wiesz już trochę więcej.</p>${!s.attempts.length ? `<div class="summary-score">${new Set(s.items.map(i => i.key)).size}<span>przećwiczonych fiszek</span></div>` : `<div class="summary-score">${result.correct}<small> / ${result.total}</small><span>poprawnie za pierwszym razem</span></div><p>Poprawione za drugim razem: <b>${result.corrections}</b>. Ten wynik liczymy osobno.</p>`}<div class="actions">${button('home','Wróć do modułów')}${button('progress','Zobacz postępy','secondary')}</div></section>`;
 }
 function progressView() {
   const s = stats();
@@ -339,7 +348,7 @@ async function init() {
   await navigator.locks.request(`${storageNamespace}:writer`, { ifAvailable: true }, async lock => {
     if (!lock) { root.innerHTML = '<div class="loading"><h1>Nauka jest otwarta w innej karcie</h1><p>Zamknij drugą kartę i odśwież tę stronę. Chronimy w ten sposób Twoje postępy.</p><button class="primary" onclick="location.reload()">Spróbuj ponownie</button></div>'; return; }
     try {
-      modules = await loadModules(); selected = modules[0];
+      [modules,catCatalog] = await Promise.all([loadModules(),loadCats()]); selected = modules[0];
       progress = validateBackup(backup(await load())).progress;guestProgress=structuredClone(progress);
       const savedAccount=await readStored<AccountUser>('firebase-user');
       if(savedAccount?.uid){
