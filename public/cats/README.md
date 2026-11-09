@@ -4,14 +4,14 @@ Zaakceptowane postacie: Albert (biało-biszkoptowy ragdoll), Oluś (rosyjski nie
 
 `catalog.json` opisuje 25 wariantów: po jednym nauczycielskim, zadowolonym i świętującym oraz po dwie zabawne scenki każdego kotka. Trzy plansze PNG mają przezroczyste tło, aby postacie pasowały do kart odpowiedzi i podsumowania. Zachowują układ zaakceptowanych ilustracji. Nie przerysowujemy ich przy wyświetlaniu.
 
-- `happy-teachers.png` — zatwierdzona plansza po poprawieniu łapek i ogona Feliksa oraz nazwaniu Krzywołapa.
-- `play-celebrate.png` — zabawne scenki z motylkiem, kulką, pudełkiem, piórkiem i ogonem oraz świętowanie.
-- `more-fun.png` — dodatkowe scenki, z poprawionym Albertem bez motylka i siedzącym Olusiem.
+- `happy-teachers.png` — płaskie pastelowe kotki zadowolone i nauczyciele z książką.
+- `play-celebrate.png` — świętowanie oraz zabawne scenki: motylek, kulka, pudełko, „a kuku” i przytulanie ogona.
+- `more-fun.png` — Albert z sercem, Oluś do góry łapkami, Felix z myszką na głowie, Maja z kokardką i śpiący Krzywołap.
 
 Każdy kadr wskazuje `sheet`, `x`, `y`, `width`, `height`. Opcjonalne `clip` jest listą punktów wielokąta we współrzędnych planszy, pozwalającą ominąć podpis lub fragment sąsiedniej postaci. Aplikacja pokazuje kadr przez SVG, zachowując proporcje ilustracji. Same pliki źródłowe pozostają bez zmian.
 
 Po błędnej odpowiedzi pojawia się `teacher`. Po poprawnej losowane jest `happy` lub `celebrating`. Na końcu sesji pojawia się jeden z wariantów `funny`, również gdy w lekcji były błędy. Losowa kolejność kotków zależy od identyfikatora sesji; pięć kolejnych pytań ma różne postacie. Powrót do tej samej odpowiedzi odtwarza tę samą ilustrację. Nie zmieniamy formatu postępów ani kopii.
 
-Katalog oraz plansze są objęte pobieraniem PWA do nauki offline. Brak dekoracji nie blokuje ćwiczeń. Pierwsze pobranie jest większe o około 5,1 MB — plansze są współdzielone przez wszystkie warianty.
+Katalog oraz plansze są objęte pobieraniem PWA do nauki offline. Brak dekoracji nie blokuje ćwiczeń. Plansze są współdzielone przez wszystkie warianty. Styl odpowiada prostemu kotkowi z aplikacji: płaskie pastelowe kolory, fioletowy kontur i geometryczne kształty.
 
 Tło usunięto wbudowanym narzędziem generowania obrazów. Polecenie: usuń pastelowe tło, cienie podłogi, podpisy i dekoracyjne obramowanie; zachowaj koty, rekwizyty, pozy, pozycje oraz wymiary plansz; zapisz PNG z przezroczystością.
