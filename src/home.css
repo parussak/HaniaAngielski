@@ -1,0 +1,66 @@
+.home-screen .topbar{display:none}
+.home-start{max-width:1040px;margin:0 auto}
+.home-start .welcome{margin:0 0 24px;align-items:flex-start}
+.home-start .welcome h1{font-size:clamp(25px,3.5vw,34px);line-height:1.3;margin:0 0 8px}
+.home-start .welcome p{margin:0;font-size:14px!important}
+.home-resume{margin:0 0 24px;gap:16px;border-color:#d9c8ed;background:#fff}
+.home-resume>div{min-width:0}
+.home-resume p{overflow-wrap:anywhere}
+.home-start .home-hero{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:12px 28px;align-items:center;min-height:0;padding:30px;margin:0 0 22px}
+.home-hero>div:first-child{display:contents}
+.home-hero .tag,.home-hero h2,.home-hero p,.home-hero .primary{grid-column:1;justify-self:start}
+.home-hero h2{margin:0;line-height:1.35;max-width:480px;font-size:clamp(24px,3vw,32px)}
+.home-hero p{margin:0 0 4px;max-width:460px;font-size:14px!important;line-height:1.7}
+.home-hero .primary{font-size:14px!important;min-height:48px}
+.home-hero .hero-art.cat-art{position:static;grid-column:2;grid-row:1/5;width:250px;height:225px;margin:0;transform:none;opacity:1}
+.practice-entry{display:flex;align-items:flex-start;gap:16px;padding:24px;border:1px solid #e1d6ed;border-radius:18px;background:#fff;margin-bottom:32px}
+.practice-icon{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:#eaf2ff;color:#715594;flex-shrink:0}
+.practice-entry>div{min-width:0}
+.practice-entry h2{font-size:21px;line-height:1.4;margin:0 0 8px}
+.practice-entry p{font-size:14px;color:#684e7b;line-height:1.7;margin:0 0 16px}
+.practice-entry .secondary{min-height:48px}
+.home-help{border-top:1px solid #e1d6ed;padding-top:8px;color:#684e7b}
+.home-help>summary{display:flex;align-items:center;gap:10px;cursor:pointer;min-height:52px;font-size:14px;font-weight:600;list-style:none}
+.home-help>summary::-webkit-details-marker{display:none}
+.home-help>summary:after{content:'+';margin-left:auto;font-size:24px}
+.home-help[open]>summary:after{content:'−'}
+.home-help-content{padding:16px 0 8px}
+.home-help-content h2{font-size:18px;line-height:1.4}
+.home-help-content>p{font-size:14px;line-height:1.7}
+.help-actions{display:flex;gap:12px;flex-wrap:wrap}
+.help-actions button{min-height:44px;text-align:left}
+.update-banner{display:flex;align-items:center;gap:14px;padding:16px;border:1px solid #d1b5e9;border-radius:16px;background:#f0e9ff;margin-bottom:24px;color:#523d78}
+.update-symbol{display:grid;place-items:center;flex-shrink:0;width:42px;height:42px;border-radius:50%;background:#fff8fd;color:#9a558a}
+.update-banner>div{flex:1;min-width:0}
+.update-banner strong{font-size:16px}
+.update-banner p{font-size:13px;line-height:1.6;margin:4px 0 0}
+.update-banner button{min-height:44px}
+.journey-catalog{margin-top:24px}
+.journey-catalog .adventure-invite>div{flex:1;min-width:0}
+.journey-catalog .adventure-invite h2{font-size:24px;line-height:1.4;overflow-wrap:anywhere}
+.journey-catalog .catalog-subtitle{font-size:13px;letter-spacing:.3px;margin-top:0}
+.journey-catalog .journey-progress{max-width:420px;margin:12px 0}
+.journey-catalog .primary{min-height:48px}
+@media(max-width:600px){
+  .home-start .welcome{margin-bottom:20px}
+  .home-start .home-hero{grid-template-columns:minmax(0,1fr) clamp(108px,33vw,132px);gap:12px;padding:20px}
+  .home-hero .tag,.home-hero h2,.home-hero .primary{grid-column:1/-1}
+  .home-hero h2{font-size:24px;line-height:1.35;margin:0}
+  .home-hero p{grid-column:1;grid-row:3;font-size:14px!important}
+  .home-hero .hero-art.cat-art{grid-column:2;grid-row:3;width:100%;height:130px;align-self:center}
+  .home-hero .primary{width:100%;justify-content:center}
+  .home-resume{flex-direction:column;align-items:stretch;padding:18px;margin-bottom:20px}
+  .home-resume>.secondary{width:100%}
+  .practice-entry{padding:20px;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+  .practice-entry>div{flex:1;min-width:180px}
+  .practice-entry h2{font-size:20px}
+  .practice-entry .secondary{width:100%}
+  .practice-icon{width:38px;height:38px}
+  .update-banner{flex-wrap:wrap;gap:10px}
+  .update-banner button{width:100%}
+  .journey-catalog .adventure-invite{position:relative;padding:20px}
+  .journey-catalog .adventure-invite>img{position:absolute;top:12px;right:14px;width:48px;height:48px}
+  .journey-catalog .catalog-subtitle{padding-right:48px;min-height:32px}
+  .journey-catalog .primary{width:100%}
+  .journey-top{align-items:flex-start;flex-wrap:wrap}
+}

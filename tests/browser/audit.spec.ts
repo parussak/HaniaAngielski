@@ -1,10 +1,11 @@
+import {openModule} from './navigation.ts';
 import {test,expect} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 const tasks=JSON.parse(readFileSync(new URL('../../public/content/02-food/cwiczenia.json',import.meta.url),'utf8'));
 async function oneQuestion(page:any,id='g-count-milk'){
   await page.route('**/content/02-food/cwiczenia.json',(r:any)=>r.fulfill({json:tasks.filter((q:any)=>q.id===id)}));
   await page.route('**/content/02-food/quiz.json',(r:any)=>r.fulfill({json:[]}));
-  await page.goto('./');await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();
+  await page.goto('./');await openModule(page);
 }
 for(const [width,height] of [[320,640],[360,740],[844,390]])test(`I5: pytanie, opcja i Dalej dostępne nad paskiem ${width}x${height}`,async({page})=>{
   await page.setViewportSize({width,height});await oneQuestion(page);
@@ -40,7 +41,7 @@ test('I7: stara kopia i zmiana wersji modułu zachowują fiszkę i jej status',a
   await page.goto('./');await page.getByRole('button',{name:'Kopia postępów',exact:true}).click();
   await page.locator('#import-file').setInputFiles({name:'old.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(old))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
-  await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await page.getByRole('button',{name:'Kontynuuj',exact:true}).click();
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();
   await expect(page.getByRole('textbox')).toBeVisible();
   await page.getByRole('button',{name:'Kopia postępów',exact:true}).click();
   const downloaded=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).click();
@@ -69,8 +70,8 @@ test('czytelność: funkcjonalny tekst ma 12px i kontrast co najmniej 4,5:1',asy
       return out;
     });expect(failures).toEqual([]);
   };
-  await expect(page.getByRole('heading',{name:'Cześć, Haniu'})).toBeVisible();await check();
-  await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();await check();
+  await expect(page.getByRole('heading',{name:'Dobrze Cię widzieć, Haniu!'})).toBeVisible();await check();
+  await openModule(page);await check();
   await page.getByText('Wybieram odpowiedź',{exact:true}).click();
   await page.getByRole('button',{name:'Gramatyka',exact:true}).click();await expect(page.locator('.option').first()).toBeVisible();await check();
 });

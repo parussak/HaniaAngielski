@@ -1,3 +1,4 @@
+import {openMap} from './navigation.ts';
 import {test,expect,type Page} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {modules} from '../materials.ts';
@@ -14,7 +15,7 @@ async function importProgress(page:Page,p:Progress){
   await page.goto('./');await page.locator('.sidebar').getByRole('button',{name:'Kopia postępów',exact:true}).tap();
   await page.locator('#import-file').setInputFiles({name:'review.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
-  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:'Kocia mapa Food →'}).tap();
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await openMap(page);
 }
 async function openFirstStage(page:Page){const node=page.locator('.journey-stage').first();if(await node.getAttribute('open')===null)await node.locator('summary').tap();return node;}
 async function correct(page:Page){
@@ -32,8 +33,8 @@ test('stare błędy, kafelki każdego etapu, trzy tury, 100% i jednorazowa nagro
   for(let i=0;i<3;i++){
     node=await openFirstStage(page);await node.locator('.stage-review-step').tap();await expect(page.locator('.review-meter')).toContainText(`${i}/3`);
     if(i===0){
-      await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:'Kocia mapa Food →'}).tap();node=await openFirstStage(page);await node.locator('.stage-review-step').tap();await expect(page.locator('.review-meter')).toContainText('0/3');
-      await page.reload();await page.getByRole('button',{name:'Kontynuuj',exact:true}).tap();await expect(page.locator('.review-meter')).toContainText('0/3');
+      await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await openMap(page);node=await openFirstStage(page);await node.locator('.stage-review-step').tap();await expect(page.locator('.review-meter')).toContainText('0/3');
+      await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await expect(page.locator('.review-meter')).toContainText('0/3');
     }
     await correct(page);await expect(page.locator('.review-meter')).toContainText(`${i}/3`);
     await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('.review-result')).toContainText(i===2?'100%':'0%');
@@ -42,8 +43,8 @@ test('stare błędy, kafelki każdego etapu, trzy tury, 100% i jednorazowa nagro
   }
   node=await openFirstStage(page);await expect(node.locator('.stage-review-step')).toBeDisabled();await expect(node.locator('.stage-retention-text')).toContainText('100%');
   await page.screenshot({path:'test-results/stage-review-completed-mobile.png',fullPage:true});
-  await page.reload();await page.getByRole('button',{name:'Kocia mapa Food →'}).tap();await expect(page.locator('.star-wallet')).toContainText('18');
-  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await expect(page.locator('.adventure-invite .retention-overview')).toContainText('100%');
+  await page.reload();await openMap(page);await expect(page.locator('.star-wallet')).toContainText('18');
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:/Wybierz przygodę/}).tap();await expect(page.locator('.adventure-invite .retention-overview')).toContainText('100%');
 });
 test('nowy błąd zeruje serię, poprawki nie zwiększają jej, mobilne przyciski pozostają nad paskiem',async({page})=>{
   const p=oldFixture(),item={key:keyFor(modules[0],'word','apple'),moduleId:j.moduleId,version:1,type:'word' as const,id:'apple',input:'text' as const};

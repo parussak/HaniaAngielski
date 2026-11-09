@@ -1,3 +1,4 @@
+import {openModule} from './navigation.ts';
 import {test,expect} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 const catalog=JSON.parse(readFileSync(new URL('../../public/cats/catalog.json',import.meta.url),'utf8'));
@@ -6,14 +7,14 @@ const tasks=JSON.parse(readFileSync(new URL('../../public/content/02-food/cwicze
 test('kotki reagują na błąd i poprawę, wracają po odświeżeniu i bawią na koniec',async({page})=>{
   await page.setViewportSize({width:390,height:844});
   await page.route('**/content/02-food/cwiczenia.json',r=>r.fulfill({json:tasks.filter((q:any)=>q.id==='g-count-milk')}));
-  await page.goto('./');await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();await page.getByText('Wpisuję odpowiedź',{exact:true}).click();await page.getByRole('button',{name:'Gramatyka',exact:true}).click();
+  await page.goto('./');await openModule(page);await page.getByText('Wpisuję odpowiedź',{exact:true}).click();await page.getByRole('button',{name:'Gramatyka',exact:true}).click();
   await expect(page.locator('.cat-mascot')).toHaveCount(0);
   await expect(page.getByRole('textbox')).toHaveCount(0);await page.getByRole('button',{name:'policzalny',exact:true}).click();
   const mascot=page.locator('.feedback .cat-mascot');await expect(mascot).toHaveAttribute('data-mood','teacher');
   await expect(mascot.locator('figcaption')).toHaveCount(0);
   const cat=await mascot.getAttribute('data-cat'),frame=await mascot.locator('svg').getAttribute('viewBox');
   await page.screenshot({path:'test-results/cat-teacher-mobile.png'});
-  await page.reload();await page.getByRole('button',{name:'Kontynuuj',exact:true}).click();await expect(mascot).toHaveAttribute('data-cat',cat!);await expect(mascot.locator('svg')).toHaveAttribute('viewBox',frame!);
+  await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();await expect(mascot).toHaveAttribute('data-cat',cat!);await expect(mascot.locator('svg')).toHaveAttribute('viewBox',frame!);
   await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).click();await expect(page.locator('.cat-mascot')).toHaveCount(0);
   await page.getByRole('button',{name:'niepoliczalny',exact:true}).click();await expect(mascot).toHaveAttribute('data-mood',/^(happy|celebrating)$/);await expect(mascot).toHaveAttribute('data-cat',cat!);
   await page.screenshot({path:'test-results/cat-success-mobile.png'});

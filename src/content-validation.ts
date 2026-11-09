@@ -28,6 +28,7 @@ export function validateModules(input: unknown): Module[] {
   if (!Array.isArray(input) || !input.length) return fail('katalog modułów jest pusty.');
   for (const m of input) {
     if (!obj(m) || !['id','name','subtitle','language','source','label','cover'].every(k=>text(m[k])) || !Number.isSafeInteger(m.version) || (m.version as number)<1 || !Number.isSafeInteger(m.order) || (m.order as number)<1 || !texts(m.topics)) return fail('niepoprawny opis modułu.');
+    if(m.level!==undefined && !['A1','A2','B1','B2','C1','C2'].includes(m.level as string))return fail('niepoprawny poziom modułu.');
     if (!Array.isArray(m.words) || !m.words.length || !m.words.every(w=>obj(w) && text(w.id) && text(w.front) && text(w.back) && text(w.source) && (w.answers===undefined || texts(w.answers)))) return fail(`sprawdź slownictwo.json (${m.id}).`);
     if(m.basicFlashcardIds!==undefined && (!texts(m.basicFlashcardIds)||new Set(m.basicFlashcardIds).size!==m.basicFlashcardIds.length||!m.basicFlashcardIds.every(id=>(m.words as Word[]).some(w=>w.id===id))))return fail(`sprawdź listę podstawowych fiszek (${m.id}).`);
     if (!Array.isArray(m.grammar) || !m.grammar.every(r=>obj(r) && text(r.id) && text(r.title) && text(r.explanation) && texts(r.examples) && text(r.source))) return fail(`sprawdź gramatyka.json (${m.id}).`);

@@ -1,3 +1,4 @@
+import {openMap} from './navigation.ts';
 import {test,expect,type Page} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {modules} from '../materials.ts';
@@ -21,7 +22,7 @@ async function finishLesson(page:Page,firstWrong=false){
   }
 }
 test('mapa: nauka, nagroda raz, dwa kroki, zakup i ustawienie domku po odświeżeniu',async({page})=>{
-  await page.goto('./');await page.getByRole('button',{name:'Kocia mapa Food →'}).tap();
+  await page.goto('./');await openMap(page);
   await expect(page.locator('.journey-stage')).toHaveCount(7);
   await expect(page.locator('.lesson-step').nth(1)).toBeDisabled();
   await page.screenshot({path:'test-results/journey-map-mobile.png',fullPage:true});
@@ -34,7 +35,7 @@ test('mapa: nauka, nagroda raz, dwa kroki, zakup i ustawienie domku po odśwież
   expect(continueButton!.y+continueButton!.height).toBeLessThanOrEqual(rewardNav!.y);
   await page.screenshot({path:'test-results/journey-reward-mobile.png',fullPage:true});
   await page.getByRole('button',{name:'Wróć na mapę',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('3');
-  await page.reload();await page.getByRole('button',{name:'Kocia mapa Food →'}).tap();
+  await page.reload();await openMap(page);
   await page.locator('.lesson-step').first().tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await finishLesson(page);
   await expect(page.locator('.lesson-reward')).toContainText('Lekcja utrwalona');
   await page.getByRole('button',{name:'Wróć na mapę',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('3');

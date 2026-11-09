@@ -1,3 +1,4 @@
+import {openModule,openMap} from './navigation.ts';
 import {test,expect,type BrowserContext} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {backup,emptyProgress} from '../../src/core.ts';
@@ -35,7 +36,7 @@ function backend(){
   }};
 }
 async function signIn(page:any,email='parent@example.test'){
-  await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).click();
+  await page.getByRole('button',{name:'Ustawienia konta',exact:true}).click();
   await page.getByRole('textbox',{name:'E-mail'}).fill(email);
   await page.getByLabel('Hasło',{exact:true}).fill('test-password');
   await page.getByRole('button',{name:'Zaloguj się',exact:true}).click();
@@ -49,13 +50,13 @@ test('licznik powtórki etapu przechodzi między urządzeniami, zapisuje turę p
     await cloud.connect(a);await cloud.connect(b);const page=await a.newPage();await page.goto('./');await signIn(page);
     const p=emptyProgress(),key='unit-2-food@1:word:apple';p.adventure={version:1,earned:0,completed:{},purchases:{},reviewSchema:1,reviewArchiveHead:null,stageReviews:{'unit-2-food/food':{round:3,items:{[key]:{item:{key,moduleId:'unit-2-food',version:1,type:'word',id:'apple',input:'text'},correct:2,due:6}}}}};
     await page.locator('.sidebar').getByRole('button',{name:'Kopia postępów',exact:true}).click();await page.locator('#import-file').setInputFiles({name:'reviews.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
-    await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).click();await page.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
-    const second=await b.newPage();await second.goto('./');await signIn(second);await second.getByRole('button',{name:'Moja nauka',exact:true}).click();await second.getByRole('button',{name:'Kocia mapa Food →'}).click();await second.locator('.journey-stage').first().locator('.stage-review-step').click();await expect(second.locator('.review-meter')).toContainText('2/3');
+    await page.getByRole('button',{name:'Ustawienia konta',exact:true}).click();await page.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
+    const second=await b.newPage();await second.goto('./');await signIn(second);await second.getByRole('button',{name:'Moja nauka',exact:true}).click();await openMap(second);await second.locator('.journey-stage').first().locator('.stage-review-step').click();await expect(second.locator('.review-meter')).toContainText('2/3');
     cloud.setOffline(true);await second.getByRole('textbox').fill('apple');await second.getByRole('button',{name:/Sprawdź/}).click();await second.getByRole('button',{name:/Dalej/}).click();await expect(second.locator('.review-result')).toContainText('100%');
-    await second.reload();await second.getByRole('button',{name:'Kocia mapa Food →'}).click();await expect(second.locator('.journey-stage').first().locator('.stage-retention-text')).toContainText('100%');
-    cloud.setOffline(false);await second.getByRole('button',{name:'Konto i synchronizacja',exact:true}).click();await second.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(second.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
+    await second.reload();await openMap(second);await expect(second.locator('.journey-stage').first().locator('.stage-retention-text')).toContainText('100%');
+    cloud.setOffline(false);await second.getByRole('button',{name:'Ustawienia konta',exact:true}).click();await second.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(second.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
     expect(cloud.data.get('parent@example.test')!.progress.adventure.stageReviews['unit-2-food/food'].items[key].correct).toBe(3);
-    await page.getByRole('button',{name:'Wyloguj się',exact:true}).click();await signIn(page,'other-review@example.test');await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await page.getByRole('button',{name:'Kocia mapa Food →'}).click();await expect(page.locator('.journey-stage').first().locator('.stage-review-step')).toBeDisabled();
+    await page.getByRole('button',{name:'Wyloguj się',exact:true}).click();await signIn(page,'other-review@example.test');await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await openMap(page);await expect(page.locator('.journey-stage').first().locator('.stage-review-step')).toBeDisabled();
   }finally{await a.close();await b.close();}
 });
 
@@ -66,7 +67,7 @@ test('domek i gwiazdki synchronizują się na drugie urządzenie i nie przechodz
     const fixture={...emptyProgress(),adventure:{version:1 as const,earned:20,completed:{},purchases:{}}};
     await page.locator('.sidebar').getByRole('button',{name:'Kopia postępów',exact:true}).click();await page.locator('#import-file').setInputFiles({name:'profile.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(fixture)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
     await page.getByRole('button',{name:'Domek',exact:true}).click();await page.getByRole('button',{name:'Kup za 6 ★',exact:true}).click();await page.getByRole('button',{name:'Pod oknem',exact:true}).click();
-    await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).click();await page.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
+    await page.getByRole('button',{name:'Ustawienia konta',exact:true}).click();await page.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
     const second=await b.newPage();await second.goto('./');await signIn(second);await second.getByRole('button',{name:'Domek',exact:true}).click();await expect(second.locator('.star-wallet')).toContainText('14');await expect(second.locator('.room-decoration')).toHaveClass(/slot-window/);
     await page.getByRole('button',{name:'Wyloguj się',exact:true}).click();await signIn(page,'other-house@example.test');await page.getByRole('button',{name:'Domek',exact:true}).click();await expect(page.locator('.star-wallet')).toContainText('0');await expect(page.locator('.room-decoration')).toHaveCount(0);
   }finally{await a.close();await b.close();}
@@ -114,21 +115,21 @@ test('konto: migracja gościa, automatyczny zapis, drugie urządzenie i wylogowa
 
 test('konto: błędne logowanie, odzyskanie hasła i zapis bez sieci zachowany po odświeżeniu',async({page,context})=>{
   const cloud=backend();await cloud.connect(context);await page.goto('./');
-  await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).click();
+  await page.getByRole('button',{name:'Ustawienia konta',exact:true}).click();
   await page.getByLabel('E-mail').fill('parent@example.test');await page.getByLabel('Hasło',{exact:true}).fill('wrongpass');
   await page.getByRole('button',{name:'Zaloguj się',exact:true}).click();await expect(page.locator('.account-error')).toContainText('Nieprawidłowy');
   await page.getByLabel('E-mail').fill('parent@example.test');await page.getByRole('button',{name:'Nie pamiętam hasła'}).click();await expect(page.getByRole('status')).toContainText('otrzymasz wiadomość');
   await signIn(page);cloud.setOffline(true);
-  await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).click();
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await openModule(page);await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).click();
   const first=await page.locator('.question').innerText();await page.locator('.option').first().click();await expect(page.locator('.feedback')).toBeVisible();
-  await page.reload();await page.getByRole('button',{name:'Kontynuuj',exact:true}).click();await expect(page.locator('.question')).toHaveText(first);await expect(page.locator('.feedback')).toBeVisible();
+  await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();await expect(page.locator('.question')).toHaveText(first);await expect(page.locator('.feedback')).toBeVisible();
   cloud.setOffline(false);await page.getByRole('button',{name:'Kopia postępów',exact:true}).click();await page.getByRole('button',{name:'Otwórz konto',exact:true}).click();await page.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
   expect(cloud.data.get('parent@example.test')!.progress.active.attempts).toHaveLength(1);
 });
 
 test('konto: konflikt nie nadpisuje drugiego urządzenia i zachowuje kopię po wyborze',async({page,context})=>{
   const cloud=backend();await cloud.connect(context);await page.goto('./');await signIn(page);cloud.setOffline(true);
-  await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).click();
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await openModule(page);await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).click();
   await page.locator('.option').first().click();await expect(page.locator('.feedback')).toBeVisible();
   const other=emptyProgress();other.words['unit-2-food@1:word:apple']='known';cloud.data.set('parent@example.test',{revision:1,progress:other});
   cloud.setOffline(false);await page.getByRole('button',{name:'Kopia postępów',exact:true}).click();await page.getByRole('button',{name:'Otwórz konto',exact:true}).click();await page.getByRole('button',{name:'Synchronizuj teraz'}).click();
@@ -142,11 +143,11 @@ test('konto: konflikt nie nadpisuje drugiego urządzenia i zachowuje kopię po w
 
 test('konto: imię, hasło, potwierdzana zmiana e-maila i osobny profil testowy',async({page,context})=>{
   const cloud=backend();await cloud.connect(context);await page.setViewportSize({width:390,height:844});await page.goto('./');
-  await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).click();await page.getByRole('button',{name:'Nie mam konta — utwórz konto'}).click();
+  await page.getByRole('button',{name:'Ustawienia konta',exact:true}).click();await page.getByRole('button',{name:'Nie mam konta — utwórz konto'}).click();
   await page.getByLabel('Imię',{exact:true}).fill('Paulina');await page.getByLabel('E-mail',{exact:true}).fill('paulina@example.test');await page.getByLabel('Hasło — co najmniej 8 znaków').fill('first-password');await page.getByRole('button',{name:'Utwórz konto',exact:true}).click();
   await expect(page.getByRole('heading',{name:'Twoje konto',exact:true})).toBeVisible();await expect(page.getByLabel('Twoje imię')).toHaveValue('Paulina');
   await page.getByLabel('Twoje imię').fill('Paulina Test');await page.getByRole('button',{name:'Zapisz imię',exact:true}).click();await expect(page.getByText('Imię zostało zapisane.',{exact:true})).toBeVisible();
-  await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await expect(page.getByRole('heading',{name:/^Cześć, Paulina Test/})).toBeVisible();
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await expect(page.getByRole('heading',{name:/^Dobrze Cię widzieć, Paulina Test/})).toBeVisible();
   await page.reload();
   await expect(page.locator('[data-sync-label]')).toHaveText('Zapis na koncie');
   await expect.poll(()=>page.evaluate(()=>new Promise(resolve=>{
@@ -156,8 +157,8 @@ test('konto: imię, hasło, potwierdzana zmiana e-maila i osobny profil testowy'
       tx.oncomplete=()=>{db.close();resolve(read.result?.displayName);};
     };
   }))).toBe('Paulina Test');
-  await expect(page.getByRole('heading',{name:/^Cześć, Paulina Test/})).toBeVisible();
-  await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).click();await page.locator('.account-settings summary').filter({hasText:'Zmień hasło'}).click();
+  await expect(page.getByRole('heading',{name:/^Dobrze Cię widzieć, Paulina Test/})).toBeVisible();
+  await page.getByRole('button',{name:'Ustawienia konta',exact:true}).click();await page.locator('.account-settings summary').filter({hasText:'Zmień hasło'}).click();
   const fillPasswords=async(current:string,next:string,confirm=next)=>{await page.getByLabel('Obecne hasło',{exact:true}).fill(current);await page.getByLabel('Nowe hasło — co najmniej 8 znaków').fill(next);await page.getByLabel('Powtórz nowe hasło').fill(confirm);await page.getByRole('button',{name:'Zmień hasło',exact:true}).click();};
   await fillPasswords('wrongpass','second-password');await expect(page.locator('.account-error')).toContainText('Obecne hasło jest nieprawidłowe');
   await fillPasswords('first-password','second-password','third-password');await expect(page.locator('.account-error')).toContainText('Nowe hasła nie są takie same');
@@ -173,7 +174,7 @@ test('konto: imię, hasło, potwierdzana zmiana e-maila i osobny profil testowy'
   });
   await page.getByRole('button',{name:'Odśwież dane konta'}).click();await expect(page.locator('.account-email')).toHaveText('paulina-new@example.test');await expect(page.getByLabel('Twoje imię')).toHaveValue('Paulina Test');
   await page.screenshot({path:'test-results/account-settings-mobile.png',fullPage:true});
-  await page.reload();await page.getByRole('button',{name:'Konto i synchronizacja',exact:true}).click();await expect(page.locator('.account-email')).toHaveText('paulina-new@example.test');
+  await page.reload();await page.getByRole('button',{name:'Ustawienia konta',exact:true}).click();await expect(page.locator('.account-email')).toHaveText('paulina-new@example.test');
   await page.getByRole('button',{name:'Zmień konto',exact:true}).click();await page.getByRole('button',{name:'Nie mam konta — utwórz konto'}).click();await page.getByLabel('Imię',{exact:true}).fill('Tester');await page.getByLabel('E-mail',{exact:true}).fill('tester@example.test');await page.getByLabel('Hasło — co najmniej 8 znaków').fill('tester-password');await page.getByRole('button',{name:'Utwórz konto',exact:true}).click();await expect(page.getByLabel('Twoje imię')).toHaveValue('Tester');
-  await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await expect(page.getByRole('heading',{name:/^Cześć, Tester/})).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await expect(page.getByRole('heading',{name:/^Dobrze Cię widzieć, Tester/})).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
 });

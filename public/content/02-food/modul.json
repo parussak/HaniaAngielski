@@ -55,5 +55,6 @@
     "a-jar-of-jam",
     "a-packet-of-biscuits"
   ],
-  "dialoguesFile": "rozmowki.json"
+  "dialoguesFile": "rozmowki.json",
+  "level": "A2"
 }

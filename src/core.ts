@@ -5,7 +5,7 @@ export interface Illustration { symbol?: string; src?: string; caption: string; 
 export interface Word { illustration?: Illustration; id: string; front: string; back: string; group?: string; source?: string; answers?: string[]; rev?: number }
 export interface Exercise { dialogue?: {speaker:string;text:string}[]; illustration?: Illustration; responseType?: 'choice'; id: string; wordId?: string; kind: 'vocabulary' | 'grammar' | 'dialogue'; prompt: string; answers: string[]; options: string[]; explanation: string; requires: string[]; caseSensitive: boolean; source?: string; ruleId?: string; rev?: number }
 export interface GrammarRule { id: string; title: string; explanation: string; examples: string[]; source: string }
-export interface Module { id: string; version: number; order: number; name: string; subtitle: string; language: string; source: string; label: string; cover: string; topics: string[]; words: Word[]; exercises: Exercise[]; grammar: GrammarRule[]; basicFlashcardIds?: string[] }
+export interface Module { level?: string; id: string; version: number; order: number; name: string; subtitle: string; language: string; source: string; label: string; cover: string; topics: string[]; words: Word[]; exercises: Exercise[]; grammar: GrammarRule[]; basicFlashcardIds?: string[] }
 export type Mode = 'flashcards' | 'flashcards-basic' | 'quiz' | 'grammar' | 'dialogue' | 'review' | 'lesson';
 export const isFlashcardMode = (mode: Mode) => mode === 'flashcards' || mode === 'flashcards-basic';
 export type AnswerMode = 'choice' | 'text' | 'mixed';

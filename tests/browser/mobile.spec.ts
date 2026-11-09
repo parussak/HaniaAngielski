@@ -1,3 +1,4 @@
+import {openModule} from './navigation.ts';
 import {answerQuestion} from './helpers.ts';
 import { test, expect } from '@playwright/test';
 import { readFileSync } from 'node:fs';
@@ -10,7 +11,7 @@ test.describe('telefon — dotyk i małe ekrany', () => {
     test(`czytelny układ bez poziomego przewijania: ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 844 });
       await page.goto('./');
-      await expect(page.getByRole('heading',{name:'Cześć, Haniu'})).toBeVisible();
+      await expect(page.getByRole('heading',{name:'Dobrze Cię widzieć, Haniu!'})).toBeVisible();
       const checkWidth = async () => expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
       await checkWidth();
       await expect(page.locator('.cat-illustration')).toBeVisible();
@@ -20,7 +21,7 @@ test.describe('telefon — dotyk i małe ekrany', () => {
         expect(rect!.width).toBeGreaterThanOrEqual(44);
       }
       if (width === 390) await page.screenshot({path:'test-results/cat-home-mobile.png',fullPage:true});
-      await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
+      await openModule(page);
       await checkWidth();
       await page.getByText('Wybieram odpowiedź',{exact:true}).tap();
       await page.getByRole('button',{name:/^Quiz słownictwa/}).tap();
@@ -41,7 +42,7 @@ test.describe('telefon — dotyk i małe ekrany', () => {
   test('gramatyka: wpisywanie, błąd, poprawa, obrót telefonu, wznowienie i wynik',async({page})=>{
     await page.setViewportSize({width:390,height:844});
     await page.goto('./');
-    await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
+    await openModule(page);
     await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();
     await page.getByRole('button',{name:/^Gramatyka/}).tap();
     const question = await page.locator('.question').innerText();
@@ -49,7 +50,7 @@ test.describe('telefon — dotyk i małe ekrany', () => {
     await answerQuestion(page,exercise,false);
     await expect(page.getByText('Spokojnie, tak właśnie się uczymy.')).toBeVisible();
     await page.screenshot({path:'test-results/cat-feedback-mobile.png',fullPage:true});
-    await page.reload(); await page.getByRole('button',{name:'Kontynuuj',exact:true}).tap();
+    await page.reload(); await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
     await expect(page.getByText('Spokojnie, tak właśnie się uczymy.')).toBeVisible();
     await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();
     await answerQuestion(page,exercise);

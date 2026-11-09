@@ -1,3 +1,4 @@
+import {openModule} from './navigation.ts';
 import {test,expect} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {modules} from '../materials.ts';
@@ -7,7 +8,7 @@ test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 
 test('gramatyka: nawias wymusza wybór, obrazek od początku, poprawa i wznowienie',async({page})=>{
   await page.route('**/content/02-food/cwiczenia.json',r=>r.fulfill({json:tasks.filter((q:any)=>q.id==='g-because-sport')}));
-  await page.goto('./');await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
+  await page.goto('./');await openModule(page);
   await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();
   await page.getByRole('button',{name:'Gramatyka',exact:true}).tap();
   await expect(page.getByRole('textbox')).toHaveCount(0);
@@ -24,7 +25,7 @@ test('gramatyka: nawias wymusza wybór, obrazek od początku, poprawa i wznowien
   await expect(page.locator('.question-illustration')).toBeVisible();
   await expect(page.locator('.question-illustration figcaption')).toHaveCount(0);
   await page.getByRole('button',{name:'because',exact:true}).tap();
-  await page.reload();await page.getByRole('button',{name:'Kontynuuj',exact:true}).tap();
+  await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
   await expect(page.locator('.answer-illustration')).toBeVisible();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
 });
@@ -33,7 +34,7 @@ test('słówko: ilustracja przed i po wpisaniu; stara tekstowa sesja z nawiasem 
   await page.route('**/content/02-food/modul.json',async route=>{
     const response=await route.fetch();const metadata=await response.json();metadata.basicFlashcardIds=['sugar'];await route.fulfill({json:metadata});
   });
-  await page.goto('./');await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
+  await page.goto('./');await openModule(page);
   await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).tap();
   const front=await page.locator('.question').innerText();const w=modules[0].words.find(w=>w.front===front)!;
   await expect(page.locator('.question-illustration')).toBeVisible();
@@ -51,6 +52,6 @@ test('słówko: ilustracja przed i po wpisaniu; stara tekstowa sesja z nawiasem 
   await page.getByRole('button',{name:'Kopia postępów',exact:true}).tap();
   await page.locator('#import-file').setInputFiles({name:'old.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();
-  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:'Kontynuuj',exact:true}).tap();
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
   await expect(page.getByRole('textbox')).toHaveCount(0);await expect(page.locator('.option')).toHaveCount(2);
 });

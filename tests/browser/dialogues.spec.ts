@@ -1,3 +1,4 @@
+import {openModule} from './navigation.ts';
 import {test,expect} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 const dialogues=JSON.parse(readFileSync(new URL('../../public/content/02-food/rozmowki.json',import.meta.url),'utf8'));
@@ -5,7 +6,7 @@ test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 for(const input of ['choice','text'] as const)test(`rozmówki mobilnie: ${input}, błąd, poprawa i wznowienie`,async({page})=>{
   const q=dialogues.find((q:any)=>q.id==='d-to-drink');
   await page.route('**/content/02-food/rozmowki.json',r=>r.fulfill({json:[q]}));
-  await page.goto('./');await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
+  await page.goto('./');await openModule(page);
   await page.getByText(input==='choice'?'Wybieram odpowiedź':'Wpisuję odpowiedź',{exact:true}).tap();
   await page.getByRole('button',{name:'Rozmówki',exact:true}).tap();
   await expect(page.locator('.dialogue-line')).toHaveCount(2);await expect(page.locator('.dialogue-gap')).toHaveCount(1);
@@ -16,7 +17,7 @@ for(const input of ['choice','text'] as const)test(`rozmówki mobilnie: ${input}
   await answer('cook');await expect(page.locator('.given-answer')).toContainText('cook');await expect(page.locator('.expected-answer')).toContainText('drink');
   const nav=await page.locator('.sidebar nav').boundingBox(),next=await page.getByRole('button',{name:/Dalej/}).boundingBox();
   expect(next!.y+next!.height).toBeLessThanOrEqual(nav!.y);
-  await page.reload();await page.getByRole('button',{name:'Kontynuuj',exact:true}).tap();await expect(page.locator('.given-answer')).toContainText('cook');
+  await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await expect(page.locator('.given-answer')).toContainText('cook');
   await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();await answer('drink');await expect(page.locator('.feedback.correct')).toBeVisible();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
   for(const viewport of [{width:320,height:640},{width:844,height:390}]){

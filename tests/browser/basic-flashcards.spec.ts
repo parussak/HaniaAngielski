@@ -1,9 +1,10 @@
+import {openModule} from './navigation.ts';
 import {test,expect} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {modules} from '../materials.ts';
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 test('telefon: wybór podstawy i pełnych fiszek, zakres zapisany w kopii',async({page})=>{
-  await page.goto('./');await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
+  await page.goto('./');await openModule(page);
   await expect(page.getByRole('button',{name:'Fiszki podstawa',exact:true})).toBeVisible();
   await expect(page.locator('#mode-description-flashcards-basic')).toContainText('38');
   await expect(page.locator('#mode-description-flashcards')).toContainText('97');
@@ -20,7 +21,7 @@ test('telefon: wybór podstawy i pełnych fiszek, zakres zapisany w kopii',async
   expect(session.mode).toBe('flashcards-basic');
   expect(session.items.every((i:any)=>i.type==='word'&&modules[0].basicFlashcardIds!.includes(i.id))).toBeTruthy();
   await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
-  await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
+  await openModule(page);
   page.once('dialog',d=>d.accept());
   await page.getByRole('button',{name:'Fiszki',exact:true}).tap();
   await expect(page.getByRole('heading',{name:'Fiszki',exact:true})).toBeVisible();
@@ -28,7 +29,7 @@ test('telefon: wybór podstawy i pełnych fiszek, zakres zapisany w kopii',async
 });
 
 test('telefon: aktywne fiszki mieszane, błąd, poprawa, wznowienie i wynik',async({page})=>{
-  await page.goto('./');await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).tap();
+  await page.goto('./');await openModule(page);
   await expect(page.getByRole('button',{name:/Rozpocznij naukę/})).toHaveCount(0);
   await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).tap();
   let sawText=false,sawChoice=false;
@@ -44,7 +45,7 @@ test('telefon: aktywne fiszki mieszane, błąd, poprawa, wznowienie i wynik',asy
     }
     if(i===0){
       await expect(page.locator('.feedback.incorrect')).toContainText(word.back);
-      await page.reload();await page.getByRole('button',{name:'Kontynuuj',exact:true}).tap();
+      await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
       await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();
       await page.getByRole('button',{name:word.back,exact:true}).tap();
       await expect(page.locator('.feedback.correct')).toBeVisible();

@@ -5,7 +5,7 @@ test('zmiana plików treści działa bez zmian kodu, zasady pochodzą z JSON',as
     const response=await route.fetch(); const data=await response.json();
     data.name='Food po edycji pliku'; await route.fulfill({json:data});
   });
-  await page.goto('./');
+  await page.goto('./');await page.getByRole('button',{name:/Przejdź do modułów/}).click();
   await expect(page.getByRole('button',{name:'Otwórz moduł Food po edycji pliku'})).toBeVisible();
   await expect(page.getByText('MATERIAŁ PRZYKŁADOWY')).toHaveCount(0);
   await page.getByRole('button',{name:'Otwórz moduł Food po edycji pliku'}).click();
