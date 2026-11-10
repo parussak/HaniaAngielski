@@ -1,0 +1,4 @@
+interface:
+  display_name: "Małe kroki — dokumentacja"
+  short_description: "Sprawdzanie dokumentacji i materiałów aplikacji"
+  default_prompt: "Użyj $male-kroki-dokumentacja, aby sprawdzić zgodność dokumentacji z bieżącymi zmianami i zaktualizować właściwe opisy bez zmieniania działania aplikacji."

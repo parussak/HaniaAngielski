@@ -2,6 +2,8 @@
 
 Ten folder jest oddzielony od kodu aplikacji. Wszystkie treści lekcji są zwykłymi plikami JSON. Można je zmieniać w edytorze tekstu, bez znajomości TypeScript i bez edytowania folderu `src`.
 
+Nowy dział zacznij od [krótkiej instrukcji dodawania modułu](../../docs/dodawanie-modulow.md) i [karty pokrycia materiału](../../docs/szablon-modulu.md). Ten dokument opisuje edytowanie plików, a [utrzymanie dokumentacji](../../docs/utrzymanie-dokumentacji.md) — aktualizowanie opisów po zmianie.
+
 ## Gdzie co jest?
 
 ```text

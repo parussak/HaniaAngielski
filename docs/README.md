@@ -35,6 +35,8 @@ Docelowo moduł ma **1–3 mapy**, każda po kilka lekcji. Food ma **dwie mapy**
 
 ## Jak czytać bez przeglądania wszystkiego
 
+Do bieżącej pracy: [dodawanie modułu](dodawanie-modulow.md), [szablon karty materiałów](szablon-modulu.md) i [utrzymanie dokumentacji](utrzymanie-dokumentacji.md). Towarzyszy im [skill projektu](../.agents/skills/male-kroki-dokumentacja/SKILL.md), który pomaga sprawdzić i aktualizować odpowiedni wycinek dokumentacji bez wczytywania całego projektu. Skrypt `node scripts/check-docs.mjs` kontroluje odnośniki plikowe; zgodność merytoryczna wymaga przeglądu właściwych źródeł.
+
 - Typ zadania: mechanika, właściwy fragment nauki i testy.
 - Podręcznik lub treści: [format plików](format-materialow.md), merytoryka i karta kursu.
 - Trening: nauka, decyzje oraz konsekwencje dla zapisu i testów.
@@ -50,4 +52,4 @@ Nie powielamy list słówek w Markdown ani wspólnych zasad w każdej karcie kur
 - [Firebase](firebase.md), [historia](historia.md), [PWA](pwa.md), [obecna mapa i domek](kocia-przygoda.md), [edycja obecnych materiałów](../public/content/README.md) — instrukcje istniejącej aplikacji, do czytania w odpowiednim kontekście.
 - Dawne wymagania, plany, raporty i podglądy dokumentują historię rozwoju. Nie są specyfikacją wszystkich obecnych lub przyszłych funkcji.
 
-Pierwotne uporządkowanie dokumentacji nie zmieniało aplikacji. Późniejsze wdrożenia i wyniki kontroli opisują raporty etapów 1–4. Historycznego katalogu `stan-obecny/` nie aktualizujemy wstecz. Nie dodano Spec Kit ani skilla.
+Pierwotne uporządkowanie dokumentacji nie zmieniało aplikacji. Późniejsze wdrożenia i wyniki kontroli opisują raporty etapów 1–4. Historycznego katalogu `stan-obecny/` nie aktualizujemy wstecz. Następnie dodano instrukcje pracy i skill utrzymania dokumentacji, bez zmiany zachowania aplikacji. Nie dodano Spec Kit.

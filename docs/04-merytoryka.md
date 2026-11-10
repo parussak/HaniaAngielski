@@ -43,9 +43,9 @@ Poprawność tego uzasadnienia i jego dopasowanie do kontekstu wymagają recenzj
 
 ### Przygotowanie materiału i recenzja
 
-Docelowy opis procesu powinien rozdzielać odczyt źródła, opracowanie treści, kontrolę techniczną i recenzję językową. Niepewny odczyt ma być oznaczony do sprawdzenia, a nie uzupełniany zgadywaniem.
+Proces opisuje [instrukcja dodawania modułu](dodawanie-modulow.md). Rozdziela odczyt źródła, opracowanie treści, kontrolę pokrycia, kontrolę techniczną i recenzję językową. [Karta materiałów](szablon-modulu.md) zapisuje źródła, zakres sprawdzenia, osobę lub AI wykonujące przegląd oraz niepewności. Niepewnego odczytu nie uzupełniamy zgadywaniem.
 
-Na tym etapie nie ustalono jeszcze formatu zapisu recenzji ani sposobu automatyzacji tego procesu. Nie dodajemy AI do każdej sesji użytkownika, żeby rozwiązać problem przygotowania podręcznika.
+To lekka procedura redakcyjna w plikach, nie formularz importu ani automatyczny recenzent w aplikacji. Nie przesądza niezależnego zatwierdzania treści przez nauczyciela ani otwartych zasad odpowiedzi FR/IT. Nie dodajemy AI do każdej sesji użytkownika, żeby rozwiązać problem przygotowania podręcznika.
 
 ## Czego tutaj nie opisujemy
 

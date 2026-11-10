@@ -80,4 +80,4 @@ Te scenariusze **nie są deklaracją istniejącego pokrycia**. Szczegóły oczek
 6. W trakcie pracy uruchamiamy kontrole obszaru i zależności. Przed publikacją zmian aplikacji wykonujemy uzgodniony pełny zestaw i istotne scenariusze przeglądarkowe.
 7. Dla samej zmiany dokumentacyjnej sprawdzamy zgodność opisów, odnośniki i zakres zmienionych plików; nie przedstawiamy dawnych uruchomień jako nowych.
 
-Powiązanie zasad z automatyzacją i ewentualnym skillem nie jest jeszcze wdrożone. Obecne polecenia i CI są opisane w punkcie odniesienia.
+Przegląd dokumentacji wspiera [skill projektu](../.agents/skills/male-kroki-dokumentacja/SKILL.md), zgodnie z [instrukcją utrzymania](utrzymanie-dokumentacji.md). `node scripts/check-docs.mjs` sprawdza lokalne odnośniki plikowe i prostą strukturę tego skilla; `node scripts/check-docs.mjs --self-test` sprawdza wykrywanie brakujących plików, pomijanie przykładów kodu oraz poprawne i niepoprawne opisy skilla. Nie są to testy działania aplikacji ani recenzja językowa. Nie dodano nowego kroku do CI; aktualne workflow pozostają bez zmian.

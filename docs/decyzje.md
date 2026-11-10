@@ -101,6 +101,8 @@ Poniższe punkty nie są zgodą na zmianę aplikacji. Każdy wymaga doprecyzowan
 
 **Podręczniki i recenzja.** Jakie są tytuły/ wydania i pierwsze zakresy FR/IT? Jak oznaczamy niepewny odczyt, potwierdzamy źródła i zatwierdzamy poprawność językową? Które elementy modułu uznajemy za obowiązkowe do pokrycia przez mapy?
 
+Przygotowano [lekką instrukcję opracowania modułu](dodawanie-modulow.md) i [szablon karty materiałów](szablon-modulu.md), z zapisem pokrycia, niepewności i faktycznego zakresu przeglądu. To procedura redakcyjna; nie zamyka wyboru podręczników FR/IT, ich konkretnych zakresów ani kryteriów odpowiedzi i niezależnego zatwierdzania językowego.
+
 ## Osobne propozycje techniczne
 
 [Przegląd gotowości językowej](rozwoj-jezykow.md) zawiera obserwacje J1–J10, m.in. dotyczące izolacji błędu nowej mapy, sprawdzania zasobów, zakresu testów i pobierania offline. To propozycje do oceny przy danej zmianie, nie dodatkowy zaakceptowany zakres bieżącego zadania.
