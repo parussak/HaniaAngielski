@@ -45,6 +45,8 @@ Aktualizacja: 10 listopada 2026 r. Ustalenie docelowe nie oznacza automatycznego
 
 Pozostałe pytania U-01–U-10 są zaparkowane na prośbę użytkowniczki. Wybór algorytmu treningów nadal odłożony. D-10 opisuje poprzedni etap rozmowy: od D-34 można zmieniać kod w zakresie uzgodnionych wymagań. Nie zatwierdzono wdrożenia otwartych rozstrzygnięć. Szczegóły wykonania i sprawdzenia zapisujemy w [raporcie wdrożenia](wdrozenie-nauki.md); historyczny punkt odniesienia pozostaje bez zmian.
 
+Użytkowniczka następnie zatwierdziła etap 2: uporządkowanie kursów i materiałów pod różne języki, z zachowaniem Food, wyglądu i postępów. Techniczny kontrakt opisuje [format materiałów](format-materialow.md), a wykonanie i testy [raport etapu 2](wdrozenie-kursow.md). Nie jest to zgoda na rozstrzyganie pozostałych zaparkowanych zasad.
+
 ## Obszary decyzji i ich status
 
 Poniższe punkty nie są zgodą na zmianę aplikacji. Każdy wymaga doprecyzowania przed implementacją odpowiadającej mu funkcji.
@@ -53,7 +55,7 @@ Poniższe punkty nie są zgodą na zmianę aplikacji. Każdy wymaga doprecyzowan
 
 **Format kursu i powiązań językowych.** Jakie dokładnie dane opisują kurs, język treści, objaśnień, podręcznik i warianty haseł? Jak powiązać je z istniejącymi modułami i wynikami bez zmieniania identyfikatorów dla samego porządku?
 
-**Status: podstawowe założenia produktowe uzgodnione; projekt techniczny pozostaje otwarty.** Zatwierdzono definicję kursu (D-11), osobne języki nauki i objaśnień (D-12), rozróżnianie wydań (D-13), wspólne materiały i indywidualne wyniki kont (D-14), osobne postępy kursów (D-15), hasło jako jedno znaczenie z ilustracją i wariantami językowymi (D-16) oraz podstawowy zestaw informacji o kursie (D-17). Przed implementacją potrzebny będzie techniczny kontrakt danych, w tym reprezentacja wariantów językowych, wyników i rewizji elementów oraz ochrona istniejących identyfikatorów. Akceptowane odpowiedzi konkretnego zadania pozostają osobną kwestią U-06. Nie zatwierdzono schematu JSON ani migracji; decyzje opisują założenia docelowe, nie wdrożone zmiany aplikacji.
+**Status: podstawowe założenia produktowe i kontrakt materiałów są wdrożone w etapie 2.** D-11–D-17 określają kurs jako podręcznik, osobne języki, rozróżnianie wydań, wspólne materiały i osobne wyniki oraz znaczenie z ilustracją i wariantami językowymi. `Course`, rejestr kursów i format znaczeń są opisane w [kontrakcie](format-materialow.md). Wyniki pozostają przy globalnie unikalnych modułach; nie zmieniono historycznych kluczy ani nie wykonano migracji Food. Dalsze rozszerzenia i powiązanie z wyborem kursu pozostają kolejnymi etapami. Kryteria konkretnych odpowiedzi nadal należą do U-06; nie dodano automatycznego przenoszenia postępów między podręcznikami.
 
 ## U-02
 

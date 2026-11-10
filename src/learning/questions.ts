@@ -1,5 +1,6 @@
 import { normalizeAnswer } from '../answers.ts';
-import { sameCourse } from './scope.ts';
+import { compareModules, sameCourse } from './scope.ts';
+import { wordExplanation } from '../materials/presentation.ts';
 import { type Exercise, type Item, type Mode, type Module, type Session, type Word } from './model.ts';
 export function shuffle<T>(input: T[], random = Math.random) {
     const result = [...input];
@@ -29,7 +30,7 @@ export function inputFor(q: Exercise, preferred: Item['input'], mode?: Mode) {
     return requiresChoice(q) ? 'choice' : mode === 'review' ? 'text' : preferred;
 }
 export function eligibleModules(modules: Module[], selected: Module, previous: boolean) {
-    return modules.filter(m => sameCourse(m, selected) && (m.id === selected.id || (previous && m.order < selected.order)));
+    return modules.filter(m => sameCourse(m, selected) && (m.id === selected.id || (previous && compareModules(m, selected) < 0))).sort(compareModules);
 }
 export function resolveItem(modules: Module[], item: Item) {
     const m = modules.find(m => m.id === item.moduleId);
@@ -47,9 +48,15 @@ export function questionFor(modules: Module[], item: Item): Exercise {
     const linked = module.exercises.find(q => q.kind === 'vocabulary' && q.wordId === word.id);
     const answers = word.answers ?? [word.back];
     const options = linked?.options ?? [word.back, ...module.words.filter(w => !answers.some(a => normalizeAnswer(a) === normalizeAnswer(w.back))).map(w => w.back).filter((v, i, a) => a.indexOf(v) === i).slice(0, 2)];
-    return { illustration: word.illustration, id: word.id, kind: 'vocabulary', prompt: word.front, answers, options, explanation: linked?.explanation ?? '„' + word.back + '” oznacza „' + word.front + '”.', requires: [module.id], caseSensitive: false, source: word.source };
+    return { illustration: word.illustration, id: word.id, kind: 'vocabulary', prompt: word.front, answers, options, explanation: linked?.explanation ?? wordExplanation(module,word), requires: [module.id], caseSensitive: false, source: word.source };
 }
-export function sessionCompatible(modules: Module[], s: Session) { return s.items.every(item => !!resolveItem(modules, item)); }
+export function sessionCompatible(modules: Module[], s: Session) {
+    const anchor = modules.find(m => m.id === s.moduleId);
+    return !!anchor && s.items.every(item => {
+        const source = modules.find(m => m.id === item.moduleId);
+        return !!source && sameCourse(source, anchor) && !!resolveItem(modules, item);
+    });
+}
 export function isCorrect(exercise: Exercise, answer: string) {
     return exercise.answers.some(a => normalizeAnswer(a, exercise.caseSensitive) === normalizeAnswer(answer, exercise.caseSensitive));
 }

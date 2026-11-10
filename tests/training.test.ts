@@ -193,7 +193,7 @@ test('kursy izolują trening i wcześniejsze moduły, także dwa podręczniki te
 test('język pytania jest danymi materiału, francuski i włoski zachowują znaki w odpowiedziach', () => {
     for (const [language, languageCode, expected] of [['Francuski', 'fr', 'Podaj po francusku'], ['Włoski', 'it', 'Podaj po włosku']]) {
         const words = [{ ...m.words[0], answers: undefined, back: languageCode === 'fr' ? 'café' : 'caffè' }, m.words[1]];
-        const module = assembleModule({ ...m, language, languageCode }, words, [{ id: 'q', wordId: words[0].id, distractorIds: [words[1].id] }], [], []);
+        const module = assembleModule({ ...m, language, languageCode, instructions: { translationPrompt: expected } }, words, [{ id: 'q', wordId: words[0].id, distractorIds: [words[1].id] }], [], []);
         assert.ok(module.exercises[0].prompt.startsWith(expected));
         assert.equal(module.exercises[0].answers[0], words[0].back);
     }

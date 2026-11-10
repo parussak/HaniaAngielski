@@ -2,7 +2,7 @@ import { deadline, sdk } from '../services/firebase-client.ts';
 import { loadJourneys } from '../adventure.ts';
 import { AppState } from './state.ts';
 import { loadCats } from '../cats.ts';
-import { loadModules } from '../content.ts';
+import { loadLibrary } from '../content.ts';
 import { backup, validateBackup, type Progress } from '../core.ts';
 import type { AccountUser } from '../firebase.ts';
 import { startPwa } from '../pwa.ts';
@@ -32,7 +32,10 @@ export async function startApplication({ root, state, sync, prepareProgress, rem
             return;
         }
         try {
-            [state.modules, state.catCatalog] = await Promise.all([loadModules(), loadCats()]);
+            const [library, cats] = await Promise.all([loadLibrary(), loadCats()]);
+            state.courses = library.courses;
+            state.modules = library.modules;
+            state.catCatalog = cats;
             state.selected = state.modules[0];
             state.journeys = await loadJourneys(state.modules).catch(() => { state.notice = 'Kocia mapa jest chwilowo niedostępna. Możesz korzystać z własnych ćwiczeń.'; return []; });
             const oldGuest = validateBackup(backup(await load())).progress;

@@ -1,10 +1,10 @@
 # Mechanika — obiekty i ich możliwości
 
-Status: docelowy model pojęciowy, częściowo obsługiwany przez obecną aplikację. Nie jest nowym schematem JSON ani poleceniem migracji. [Decyzje i statusy](decyzje.md).
+Status: model pojęciowy i wdrożone podstawy etapu 2. [Format plików kursów i znaczeń](format-materialow.md) opisuje obecny kontrakt; [raport etapu 2](wdrozenie-kursow.md) oddziela wykonane zmiany od dalszych założeń. [Decyzje i statusy](decyzje.md).
 
 ## Stan obecny
 
-Kod ma m.in. `Word`, `Exercise`, `Module`, `Session`, `Journey`, `Stage` i `Lesson`. Nie są one dokładnym odwzorowaniem poniższego modelu: obecnie moduł wskazuje jedną mapę, a `Stage` oznacza etap tej mapy. Nie ma jeszcze odrębnego kursu ani roli lekcji „trening wcześniejszych map”.
+Kod ma `Course`, `Meaning` i `LanguageVariant` w `src/materials/` oraz zgodne typy ćwiczeń `Word`, `Exercise`, `Module`, `Session`, `Journey`, `Stage` i `Lesson`. Moduł może wskazywać do trzech map, a lekcja może mieć rolę treningu. Obecny materiał Food nadal ma jedną mapę z siedmioma etapami. `Word` pozostaje projekcją znaczenia do istniejącego silnika, a nie drugim źródłem treści do ręcznej edycji.
 
 Źródła: [model danych](../src/learning/model.ts), [mapy](../src/adventure.ts). Szczegóły istniejącego formatu: [materiały — stan obecny](stan-obecny/materialy.md).
 
@@ -35,7 +35,7 @@ Uzgodniony zakres D-17 w [rejestrze](decyzje.md):
 - poziom albo zakres poziomów, np. A1–A2;
 - uporządkowana lista modułów.
 
-Odwołania do konkretnych stron i źródeł ćwiczeń pozostają przy materiałach modułu. To opis potrzebnych informacji, nie zatwierdzony techniczny schemat danych. Nie wymaga zmiany bieżących plików materiałów podczas ustalania dokumentacji.
+Odwołania do konkretnych stron i źródeł ćwiczeń pozostają przy materiałach modułu. Reprezentacja tych danych jest wdrożona w rejestrze kursów. Braki identyfikacji książki są jawnym `null`; nie dopisujemy tytułów ani autorów z domysłów. Powiązanie istniejącego Food nie wymaga zmiany jego plików ani kluczy postępów.
 
 ### Definicje i powiązania
 
@@ -60,7 +60,7 @@ Odwołania do konkretnych stron i źródeł ćwiczeń pozostają przy materiała
 
 Wariant językowy znaczenia nie jest tym samym co lista akceptowanych odpowiedzi w zadaniu. Znaczenie, kontekst i forma pytania mogą wymagać węższej odpowiedzi. Nie łączymy automatycznie różnych znaczeń jednego zapisu w jedno hasło; np. budowla i zamek w drzwiach potrzebują rozróżnienia.
 
-Uzgodniona zasada D-16: każde hasło opisuje jedno znaczenie, z własną przypisaną ilustracją i wariantami językowymi. „Zamek — budowla” i „zamek — zapięcie” to dwa hasła, a nie warianty językowe jednego hasła. Techniczny format tych powiązań nie został jeszcze wdrożony.
+Uzgodniona zasada D-16: każde hasło opisuje jedno znaczenie, z własną przypisaną ilustracją i wariantami językowymi. „Zamek — budowla” i „zamek — zapięcie” to dwa hasła, a nie warianty językowe jednego hasła. Techniczny format tych powiązań jest wdrożony dla nowych plików słownictwa; stare Food jest odczytywane przez adapter zgodności.
 
 ## Pytania i sprawdzanie odpowiedzi
 
@@ -93,4 +93,4 @@ Trening może więc zawierać słownictwo i gramatykę oraz korzystać z różny
 
 ## Do ustalenia
 
-Techniczny format kursu i wariantów językowych: [U-01](decyzje.md#u-01). Szczegółowa polityka sprawdzania i swobodnych odpowiedzi: [U-06](decyzje.md#u-06). Istniejące identyfikatory nie są zmieniane przez przyjęcie tego słownika pojęć.
+Format kursu i wariantów językowych jest opisany w [kontrakcie materiałów](format-materialow.md). Dalsze rozszerzenia modelu oraz integracja z wyborem kursu są oddzielone od podstaw etapu 2 — [U-01](decyzje.md#u-01). Szczegółowa polityka sprawdzania i swobodnych odpowiedzi: [U-06](decyzje.md#u-06). Istniejące identyfikatory nie są zmieniane przez przyjęcie tego słownika pojęć.

@@ -2,6 +2,7 @@ import { journeyKey,lessons,nextLesson,type Journey } from './adventure.ts';
 import { keyFor,resolveItem,sessionCompatible,type Module,type Progress } from './core.ts';
 import { labels } from './learning-labels.ts';
 import { reviewState,stageForSession,stageKey } from './stage-review.ts';
+import { compareModules, courseKey, sameCourse } from './learning/scope.ts';
 
 interface StepBase {moduleId:string|null;catId:string;journeyId?:string}
 export type NextStep = StepBase & (
@@ -15,9 +16,9 @@ export type NextStep = StepBase & (
 
 // Derive the destination from the existing account progress. No additional
 // cursor is stored, so imports, offline saves and another device stay consistent.
-export function getNextStep(modules:Module[],journeys:Journey[],p:Progress):NextStep {
+export function getNextStep(modules:Module[],journeys:Journey[],p:Progress,selectedCourseId?:string):NextStep {
   const ordered=journeys.filter(j=>modules.some(m=>m.id===j.moduleId)&&lessons(j).length)
-    .sort((a,b)=>modules.find(m=>m.id===a.moduleId)!.order-modules.find(m=>m.id===b.moduleId)!.order);
+    .sort((a,b)=>compareModules(modules.find(m=>m.id===a.moduleId)!,modules.find(m=>m.id===b.moduleId)!));
   const active=p.active;
   if(active&&!active.completedAt){
     const catId=stageForSession(ordered,active)?.stage.cat??'albert';
@@ -32,8 +33,11 @@ export function getNextStep(modules:Module[],journeys:Journey[],p:Progress):Next
     const completion=p.adventure?.completed[key];if(completion)activity.push({moduleId:j.moduleId,at:Date.parse(completion.at)});
   }
   const recent=activity.filter(a=>Number.isFinite(a.at)).sort((a,b)=>b.at-a.at)[0]?.moduleId;
-  const index=ordered.findIndex(j=>j.moduleId===recent);
-  const candidates=index<0?ordered:[...ordered.slice(index),...ordered.slice(0,index)];
+  const anchor=selectedCourseId?modules.find(m=>courseKey(m)===selectedCourseId):modules.find(m=>m.id===recent)??modules[0];
+  const available=anchor?modules.filter(m=>sameCourse(m,anchor)).sort(compareModules):[];
+  const scoped=ordered.filter(j=>available.some(m=>m.id===j.moduleId));
+  const index=scoped.findIndex(j=>j.moduleId===recent);
+  const candidates=index<0?scoped:[...scoped.slice(index),...scoped.slice(0,index)];
   // Unfinished reviews never block the next lesson or the next module.
   for(const j of candidates){
     const next=nextLesson(j,p);if(!next)continue;
@@ -43,7 +47,6 @@ export function getNextStep(modules:Module[],journeys:Journey[],p:Progress):Next
     const pending=Object.values(reviewState(p,stageKey(j,stage))?.items??{}).filter(item=>item.correct<3);
     if(pending.length&&pending.every(entry=>resolveItem(modules,entry.item)))return {kind:'stage-review',moduleId:j.moduleId,catId:stage.cat,...(j.id?{journeyId:journeyKey(j)}:{}),stageId:stage.id,title:stage.title,pending:pending.length};
   }
-  const available=[...modules].sort((a,b)=>a.order-b.order);
   const preferred=[...available.filter(m=>m.id===recent),...available.filter(m=>m.id!==recent)];
   for(const m of preferred){
     const pending=m.words.filter(w=>p.words[keyFor(m,'word',w.id)]==='review'||p.difficult.includes(keyFor(m,'word',w.id))).length+

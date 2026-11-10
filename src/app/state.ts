@@ -2,8 +2,10 @@ import type { Journey } from '../adventure.ts';
 import type { CatCatalog } from '../cats.ts';
 import { emptyProgress, type AnswerMode, type Backup, type Mode, type Module, type Progress, type Session } from '../core.ts';
 import type { AccountUser } from '../firebase.ts';
+import type { Course } from '../materials/model.ts';
 // Transient application state only. Stored Progress and Backup formats are unchanged.
 export class AppState {
+    courses: Course[] = [];
     modules: Module[] = [];
     catCatalog: CatCatalog | null = null;
     progress: Progress = emptyProgress();

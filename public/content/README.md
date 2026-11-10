@@ -6,7 +6,8 @@ Ten folder jest oddzielony od kodu aplikacji. Wszystkie treści lekcji są zwyk�
 
 ```text
 public/content/
-  katalog.json                 lista dostępnych modułów
+  katalog.json                 foldery modułów i wskazanie rejestru kursów
+  kursy.json                   podręczniki, języki i kolejność modułów
   02-food/
     modul.json                 nazwa, numer, tematy i opis źródła
     slownictwo.json            słówka, tłumaczenia, akceptowane odpowiedzi
@@ -33,7 +34,7 @@ Zwykłe lekcje nowych nazwanych map mają 6–10 zadań. Istniejące krótsze le
 
 Osobnego przycisku **Dodatkowy trening** nie dodajemy do JSON mapy. Jest dobrowolny, korzysta z poznanego zakresu kursu, może być krótszy przy małej puli i daje 1 ★ za ukończoną sesję. Nie zwiększa liczby wymaganych lekcji. Nie ma jeszcze harmonogramu SM-2 ani FSRS.
 
-Nowe podręczniki powinny deklarować osobny `courseId`; moduły różnych kursów muszą mieć różne `id`. Opcjonalny `languageCode` (np. `fr`, `it`) określa język treści i poleceń. To przygotowanie zakresów, nie kompletny model kursu ani jego ekran wyboru. Stare materiały bez `courseId` korzystają z tymczasowego zakresu według języka; nie należy używać go do łączenia nowych podręczników.
+Nowe podręczniki deklarujemy w `kursy.json`: osobny kurs, język nauki, język objaśnień i uporządkowana lista identyfikatorów modułów. Moduły różnych kursów muszą mieć różne `id`. Sam wspólny język nie łączy modułów w jeden podręcznik. Obecny Food pozostaje w dotychczasowym formacie; nowe słownictwo może używać znaczeń z wariantami językowymi (`version: 2`, `entries`). **Pełna instrukcja i przykłady: [format kursów i materiałów](../../docs/format-materialow.md).** Nie przepisuj identyfikatorów Food przy wprowadzaniu tego formatu.
 
 ## Dwa zestawy fiszek
 

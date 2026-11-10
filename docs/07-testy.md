@@ -14,6 +14,12 @@ Obecne workflow GitHub uruchamiają testy Node i budowanie z walidacją treści,
 
 Szczegółowa macierz pokrycia, ograniczenia i dowody: [testy — punkt odniesienia](stan-obecny/testy.md).
 
+## Weryfikacja etapu 2
+
+Po uporządkowaniu kursów: **114/114 testów Node i 61/61 testów Playwright** gotowej aplikacji. `tests/courses.test.ts` obejmuje model i kontrolę materiałów; `tests/fixtures/course-materials.ts` zawiera wspólne syntetyczne dane EN/FR/IT, a `tests/browser/courses.spec.ts` cztery przebiegi mobilne. Dane testowe nie są dodawane do produkcyjnego katalogu. Test porównuje stare i nowe odczytanie wszystkich słów i skompilowanych zadań Food oraz ich kluczy.
+
+Budowanie korzysta bezpośrednio ze wspólnego `readLibrary`, a nie z importu danych przez plik testowy. Walidacja kursów nie zastępuje recenzji wariantów językowych ani podręcznika. [Raport etapu 2](wdrozenie-kursow.md).
+
 ## Docelowy podział odpowiedzialności
 
 | Grupa | Co ma sprawdzać | Czego nie ma zastępować |

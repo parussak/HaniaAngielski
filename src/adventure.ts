@@ -1,5 +1,6 @@
 import { inputFor,keyFor,questionFor,type AnswerMode,type Item,type Module,type Progress,type Session } from './core.ts';
 import type { StageReview } from './stage-review.ts';
+import { compareModules } from './learning/scope.ts';
 export interface Lesson {id:string;title:string;intro:string;wordIds:string[];exerciseIds:string[];ruleIds:string[];role?:'training';targetCount?:number}
 export interface Stage {id:string;title:string;cat:string;illustration:string;lessons:Lesson[]}
 export interface Journey {version:1;moduleId:string;id?:string;title:string;stages:Stage[]}
@@ -21,7 +22,7 @@ export const decorations=[
 export const stars=(p:Progress)=>{const a=p.adventure;return a?a.earned-Object.values(a.purchases).reduce((n,item)=>n+item.cost,0):0;};
 export const journeyKey=(journey:Journey)=>journey.id?`${journey.moduleId}/${journey.id}`:journey.moduleId;
 export const lessonKey=(journey:Journey,lesson:Lesson)=>`${journeyKey(journey)}/${lesson.id}`;
-export function orderedJourneys(modules:Module[],journeys:Journey[]){return journeys.filter(j=>modules.some(m=>m.id===j.moduleId)).slice().sort((a,b)=>modules.find(m=>m.id===a.moduleId)!.order-modules.find(m=>m.id===b.moduleId)!.order);}
+export function orderedJourneys(modules:Module[],journeys:Journey[]){return journeys.filter(j=>modules.some(m=>m.id===j.moduleId)).slice().sort((a,b)=>compareModules(modules.find(m=>m.id===a.moduleId)!,modules.find(m=>m.id===b.moduleId)!));}
 export function lessons(journey:Journey){return journey.stages.flatMap(stage=>stage.lessons.map(lesson=>({stage,lesson,key:lessonKey(journey,lesson)})));}
 export function nextLesson(journey:Journey,p:Progress){return lessons(journey).find(({key})=>!p.adventure?.completed[key]);}
 export function unlocked(journey:Journey,lesson:Lesson,p:Progress){const all=lessons(journey),index=all.findIndex(l=>l.lesson.id===lesson.id);return index>=0&&all.slice(0,index).every(l=>p.adventure?.completed[l.key]);}

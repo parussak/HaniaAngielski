@@ -2,7 +2,7 @@
 
 Aktualizacja układu: **10 listopada 2026 r.** Rozdzielamy stan obecny, uzgodnione założenia docelowe i sprawy do ustalenia. Sam zapis założeń nie wdraża ich w aplikacji.
 
-**Rozpoczęto wdrożenie po D-34.** Pozostałe pytania są zaparkowane. Aktualny zakres kodu i wyniki sprawdzenia opisuje [raport wdrożenia nauki](wdrozenie-nauki.md). Historyczny katalog `stan-obecny/` nadal przedstawia punkt odniesienia sprzed tych zmian.
+**Wdrożono etapy 1 i 2.** Pozostałe pytania są zaparkowane. [Raport nauki](wdrozenie-nauki.md) opisuje etap 1, a [raport kursów](wdrozenie-kursow.md) etap 2. Autorów materiałów obowiązuje [format kursów i znaczeń](format-materialow.md). Historyczny katalog `stan-obecny/` nadal przedstawia punkt odniesienia sprzed tych zmian.
 
 ## Główny podział
 
@@ -31,12 +31,12 @@ Kod i testy pokazują, co działa dziś; nie unieważniają uzgodnionego kierunk
 
 ## Ważna różnica
 
-Docelowo moduł ma **1–3 mapy**, każda po kilka lekcji. Obecny Food nadal ma **jedną mapę z siedmioma etapami**; jej treści, identyfikatory i ukończenia pozostają zachowane. Wdrożono oddzielenie procentu ukończenia lekcji od liczby zaległych ćwiczeń oraz dodatkowy trening poznanego materiału za 1 ★. Kod obsługuje też listę do trzech map i rolę treningu na mapie, sprawdzoną na materiałach testowych; nie dodano takiego treningu do pierwszej mapy Food. Pełny model kursów, globalne fiszki/quiz/gramatyka oraz korekta treści Food pozostają dalszymi etapami — [szczegóły](wdrozenie-nauki.md).
+Docelowo moduł ma **1–3 mapy**, każda po kilka lekcji. Obecny Food nadal ma **jedną mapę z siedmioma etapami**; jej treści, identyfikatory i ukończenia pozostają zachowane. Wdrożono oddzielenie procentu ukończenia lekcji od liczby zaległych ćwiczeń oraz dodatkowy trening poznanego materiału za 1 ★. Kod obsługuje też listę do trzech map i rolę treningu na mapie, sprawdzoną na materiałach testowych; nie dodano takiego treningu do pierwszej mapy Food. Model kursów i znaczeń oraz zgodny odczyt starego Food są wdrożone w etapie 2. Wybór kursu w interfejsie, globalne fiszki/quiz/gramatyka oraz korekta treści Food pozostają dalszymi etapami — [szczegóły](wdrozenie-kursow.md).
 
 ## Jak czytać bez przeglądania wszystkiego
 
 - Typ zadania: mechanika, właściwy fragment nauki i testy.
-- Podręcznik lub treści: merytoryka, karta kursu i istniejący kontrakt materiałów.
+- Podręcznik lub treści: [format plików](format-materialow.md), merytoryka i karta kursu.
 - Trening: nauka, decyzje oraz konsekwencje dla zapisu i testów.
 - Ekran: produkt, architektura i odpowiednie scenariusze interfejsu.
 - Dane: zapis, model i kontrole zgodności.

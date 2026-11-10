@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "courses": [
+    {
+      "id": "angielski-hani",
+      "name": "Angielski — podręcznik Hani",
+      "targetLanguage": "en",
+      "explanationLanguage": "pl",
+      "textbook": {
+        "title": null,
+        "authors": null,
+        "edition": null
+      },
+      "levels": null,
+      "moduleIds": ["unit-2-food"],
+      "instructions": {
+        "translationPrompt": "Podaj po angielsku",
+        "wordExplanationTemplate": "„{answer}” oznacza „{cue}”."
+      }
+    }
+  ]
+}

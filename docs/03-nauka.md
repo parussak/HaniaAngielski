@@ -9,7 +9,7 @@ Status: uzgodnione zasady docelowe z wyraźnymi miejscami wymagającymi decyzji.
 | Organizacja modułu | Food nadal ma jedną mapę z 7 etapami; kod przyjmuje listę do 3 map | 1–3 mapy w module, każda z kilkoma lekcjami |
 | Kolejka błędów | Osobna kolejka etapu obecnej mapy | Lekcja powtórki błędów z lekcji i treningów danej mapy |
 | Trening | Dodatkowy trening poznanego materiału i obsługa roli treningu na nowych mapach; Food pozostaje bez treningów mapowych | Lekcja utrwalająca wcześniejszy materiał, także rozwiązywany bezbłędnie |
-| Ćwiczenia swobodne | Moduł i opcja wcześniejszych modułów według globalnego `order` | Zakres modułowy lub poznany zakres całego wybranego kursu |
+| Ćwiczenia swobodne | Moduł i opcja wcześniejszych modułów tego samego kursu; kolejność według rejestru podręcznika | Zakres modułowy lub poznany zakres całego wybranego kursu |
 | Utrwalenie błędów | 3 zaliczenia w ukończonych turach, odstępy w turach | Zachować rozróżnienie powtórki błędów i treningu; szczegółowy algorytm wymaga decyzji |
 
 Nie przemianowujemy automatycznie obecnych etapów na nowe mapy. Uzgodniono zachowanie obecnej mapy Food i wyników Hani (D-22); szczegóły poprawek oraz ochrony danych są w [U-03](decyzje.md#u-03).

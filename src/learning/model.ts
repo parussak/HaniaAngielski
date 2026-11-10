@@ -1,11 +1,7 @@
 import type { Adventure } from '../adventure.ts';
 import type { HistoryPage, HistorySummary } from '../history.ts';
-export interface Illustration {
-    symbol?: string;
-    src?: string;
-    caption: string;
-    scene?: boolean;
-}
+import type { Illustration, Meaning } from '../materials/model.ts';
+export type { Illustration, Meaning, LanguageVariant, Course, MaterialLibrary } from '../materials/model.ts';
 export interface Word {
     illustration?: Illustration;
     id: string;
@@ -46,6 +42,10 @@ export interface GrammarRule {
 export interface Module {
     courseId?: string;
     languageCode?: string;
+    explanationLanguageCode?: string;
+    courseOrder?: number;
+    instructions?: { translationPrompt: string; wordExplanationTemplate?: string };
+    meanings?: Meaning[];
     journeyPaths?: string[];
     journeyPath?: string;
     level?: string;

@@ -4,7 +4,7 @@ Status: mapa obecnego kodu oraz docelowe granice odpowiedzialności. To nie jest
 
 ## Stan obecny
 
-To mapa obecnego kodu, zweryfikowana w przeglądzie rewizji `24cdeda` (9–10 listopada 2026 r.). Opis zachowania użytkowego, zakres sprawdzonych testów i ograniczenia znajdują się w [spisie dokumentacji](README.md). Planowane zmiany dla innych języków są osobno w [przeglądzie gotowości](rozwoj-jezykow.md).
+Punkt odniesienia pochodzi z przeglądu rewizji `24cdeda` (9–10 listopada 2026 r.). Poniższa mapa jest uzupełniona o [etap 1](wdrozenie-nauki.md) i [etap 2](wdrozenie-kursow.md). Opis zachowania użytkowego, zakres sprawdzonych testów i ograniczenia znajdują się w [spisie dokumentacji](README.md). Planowane zmiany dla innych języków są osobno w [przeglądzie gotowości](rozwoj-jezykow.md).
 
 `src/main.ts` uruchamia aplikację i łączy jej części. Nie zawiera już szablonów ekranów, oceniania odpowiedzi ani formularzy konta.
 
@@ -25,7 +25,10 @@ To mapa obecnego kodu, zweryfikowana w przeglądzie rewizji `24cdeda` (9–10 li
 | Odświeżanie ekranu, fokus i blokada przy zapisie | `src/app/renderer.ts` |
 | Rozruch, odczyt konta i blokada drugiej karty | `src/app/startup.ts` |
 | Stan otwartego interfejsu | `src/app/state.ts` |
-| Typy materiałów i zapisanych wyników | `src/learning/model.ts` |
+| Typy sesji i zapisanych wyników, zgodne typy ćwiczeń | `src/learning/model.ts` |
+| Kurs, znaczenie i wariant językowy | `src/materials/model.ts` |
+| Odczyt, walidacja, przypisania i adapter dawnego formatu materiałów | `src/materials/library.ts`, `validation.ts`, `vocabulary.ts`, `legacy.ts` |
+| Pobieranie plików materiałów | `src/content.ts` |
 | Treść pytania, warianty i ocenianie | `src/learning/questions.ts`, `src/answers.ts` |
 | Przebieg sesji i wynik pierwszej próby | `src/learning/session.ts` |
 | Poznany zakres, dobór treningu i kontrola jego rozmieszczenia | `src/learning/training.ts` |
@@ -41,6 +44,8 @@ To mapa obecnego kodu, zweryfikowana w przeglądzie rewizji `24cdeda` (9–10 li
 ### Przepływ działania
 
 Widok wyświetla dane i przyciski z `data-action`. Obsługa zdarzeń przekazuje działanie do odpowiedniego kontrolera. Kontroler ćwiczeń lub konta korzysta z wydzielonej logiki i usług, a zmiany wyników przechodzą przez `mutate` w kontrolerze postępów. Po zakończeniu operacji renderer odświeża ekran.
+
+Kursy i znaczenia są materiałami, nie stanem konta. `readLibrary` otrzymuje funkcję odczytu pliku i jest wspólny dla przeglądarki, testów i kontroli budowania. Nowe znaczenia są projektowane do zgodnych `Word` i `Exercise`. Dawne identyfikatory nie są przepisywane; silnik sesji i zapis postępów nie wymagają osobnej implementacji dla każdego języka.
 
 Widoki nie zapisują wyników. Moduły z `learning/` nie korzystają z DOM, Firebase ani IndexedDB. Kontrolery otrzymują potrzebne usługi jako argumenty; żaden nie importuje `main.ts`. `AppState` zawiera stan bieżącego interfejsu i nie jest zapisywany jako całość.
 

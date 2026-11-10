@@ -2,9 +2,9 @@
 
 ## Stan obecny
 
-W katalogu jest angielski Food, `unit-2-food`, z polskimi objaśnieniami. Materiały odwołują się do podręcznika s. 24–35, zeszytu ćwiczeń s. 14–21 i notatek. Metadana poziomu ma wartość A2; nie jest niezależną oceną trudności.
+W rejestrze jest kurs `angielski-hani` (`en` / `pl`) z modułem Food, `unit-2-food`. Identyfikacja całego podręcznika jest oznaczona jako nieustalona. Food zachowuje dotychczasowe pliki, pytania i klucze postępów. Materiały odwołują się do podręcznika s. 24–35, zeszytu ćwiczeń s. 14–21 i notatek. Metadana poziomu ma wartość A2; nie jest niezależną oceną trudności.
 
-Źródła: [metadane](../../public/content/02-food/modul.json), [opis opracowania Food](../materialy-food.md), [aktualny format materiałów](../stan-obecny/materialy.md).
+Źródła: [metadane](../../public/content/02-food/modul.json), [opis opracowania Food](../materialy-food.md), [aktualny format materiałów](../format-materialow.md).
 
 ## Uzgodniony kierunek
 

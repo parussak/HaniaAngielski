@@ -40,7 +40,10 @@ test('kolejna mapa z plików treści jest proponowana po Food, pomimo zaległej 
   const id='unit-3-test';Object.assign(files['modul.json'],{id,order:3,name:'Moduł testowy',cover:'Test',journeyPath:'03-test/sciezka.json'});
   files['sciezka.json'].moduleId=id;files['sciezka.json'].title='Następna przygoda testowa';
   for(const file of ['cwiczenia.json','rozmowki.json'])for(const q of files[file])q.requires=[id];
-  await page.route('**/content/katalog.json',r=>r.fulfill({json:{version:1,modules:['02-food','03-test']}}));
+  await page.route('**/content/katalog.json',r=>r.fulfill({json:{version:1,coursesFile:'kursy.json',modules:['02-food','03-test']}}));
+  const courseFile=JSON.parse(readFileSync(new URL('../../public/content/kursy.json',import.meta.url),'utf8'));
+  courseFile.courses[0].moduleIds.push(id);
+  await page.route('**/content/kursy.json',r=>r.fulfill({json:courseFile}));
   await page.route('**/content/03-test/*.json',r=>r.fulfill({json:files[new URL(r.request().url()).pathname.split('/').at(-1)!]}));
   const p=emptyProgress();complete(p);const item={key:keyFor(m,'word','apple'),moduleId:m.id,version:1,type:'word' as const,id:'apple',input:'text' as const};
   p.adventure!.stageReviews={[stageKey(j,j.stages[0])]:{round:0,items:{[item.key]:{item,correct:0,due:1}}}};
