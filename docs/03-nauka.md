@@ -7,7 +7,7 @@ Status: uzgodnione zasady docelowe z wyraźnymi miejscami wymagającymi decyzji.
 | Obszar | Obecna aplikacja | Założenie docelowe |
 | --- | --- | --- |
 | Organizacja modułu | Food ma dwie mapy: zachowaną z 7 etapami i nową z 5 lekcjami; kod przyjmuje do 3 map | 1–3 mapy w module, każda z kilkoma lekcjami |
-| Kolejka błędów | Osobna kolejka etapu obecnej mapy | Lekcja powtórki błędów z lekcji i treningów danej mapy |
+| Kolejka błędów | Osobna kolejka każdego etapu w każdej mapie; druga mapa Food ma jeden etap, pierwsza siedem | Lekcja powtórki błędów z lekcji i treningów danej mapy |
 | Trening | Dodatkowy trening poznanego materiału i obsługa roli treningu na nowych mapach; pierwsza mapa Food pozostaje bez zmian, druga zawiera trening wcześniejszej mapy | Lekcja utrwalająca wcześniejszy materiał, także rozwiązywany bezbłędnie |
 | Ćwiczenia swobodne | Moduł, opcja wcześniejszych modułów i globalne fiszki/quiz/gramatyka z poznanego zakresu wybranego kursu | Zakres modułowy lub poznany zakres całego wybranego kursu |
 | Utrwalenie błędów | 3 zaliczenia w ukończonych turach, odstępy w turach | Zachować rozróżnienie powtórki błędów i treningu; szczegółowy algorytm wymaga decyzji |
@@ -45,7 +45,7 @@ Poprawki i powroty błędów nie wliczają się do początkowej wielkości zwyk�
 
 **Jedna samodzielnie oceniana odpowiedź = jedno zadanie**, bez dodatkowych wag — D-21. Wybór odpowiedzi, wpisanie słówka i uzupełnienie jednej luki w dialogu liczą się po jednym zadaniu. Sama długość tekstu dialogu nie zwiększa liczby zadań.
 
-Przy komponowaniu zestawu o standardowym zakresie 6–10 zadań dobieramy liczbę bliższą 6 dla dłuższych zadań, a 8–10 dla krótkich. Nie znosi to wyjątków: powtórka może zawierać np. dwa elementy, a trening może być krótszy przy małej puli wcześniejszego materiału. Założenia [U-02](decyzje.md#u-02) są rozstrzygnięte. Pierwsze wdrożenie obsługuje wielkość treningu, dotychczasowe krótkie powtórki i kontrolę 6–10 zadań zwykłej lekcji nowych nazwanych map; nie przebudowuje wielkości istniejących lekcji Food.
+Przy komponowaniu zestawu o standardowym zakresie 6–10 zadań dobieramy liczbę bliższą 6 dla dłuższych zadań, a 8–10 dla krótkich. Powtórka może mieć np. dwa elementy, a trening być krótszy przy małej puli. Założenia [U-02](decyzje.md#u-02) są rozstrzygnięte. Walidacja kontroluje 6–10 zadań zwykłej lekcji nowych nazwanych map i poprawionego wydania lekcji. Etap 4 nadał nieukończonym lekcjom etapów 5–7 Food wielkość 6–8; wcześniejsze etapy i oryginalne wersje ukończonych lub rozpoczętych lekcji pozostają krótsze.
 
 ### Rola lekcji
 
@@ -67,7 +67,7 @@ Trening ma **łączyć słownictwo i gramatykę zależnie od dostępnego materia
 
 **Pierwszeństwo doboru jest zatwierdzone (D-29):** trudne i dawno niećwiczone elementy powinny wracać częściej, a bezbłędne rzadziej, ale regularnie. Trening nie może ograniczać się do kolejki błędów ani stale pomijać wcześniej bezbłędnego materiału. Nie ustalono sztywnych udziałów ani wzoru rozstrzygającego między trudnym świeżym elementem a łatwym dawno niećwiczonym.
 
-Trening nie powinien wprowadzać niepoznanego materiału przyszłych map. **Mapę zaczynamy od nowego materiału; pierwszy trening umieszczamy po 2–3 lekcjach nowego materiału, jeśli jest już poznany materiał z wcześniejszych map** (D-30). **Kolejne treningi pojawiają się co 2–3 lekcje nowego materiału**, zależnie od długości mapy i dostępnego materiału. Konkretne pozycje i liczbę treningów ustalamy przy układaniu danej mapy zgodnie z tym rytmem. Nie zaczynamy kolejnej mapy od obowiązkowego treningu wcześniejszego zakresu. Gdy nie ma jeszcze materiału z wcześniejszych map, nie tworzymy pustego treningu. Pozostałe kwestie treningów opisuje [U-05](decyzje.md#u-05); wybór algorytmu i odstępów odłożono na później (D-29). Nie zmieniono obecnej mapy Food.
+Trening nie powinien wprowadzać niepoznanego materiału przyszłych map. **Mapę zaczynamy od nowego materiału; pierwszy trening umieszczamy po 2–3 lekcjach nowego materiału, jeśli jest już poznany materiał z wcześniejszych map** (D-30). **Kolejne treningi pojawiają się co 2–3 lekcje nowego materiału**, zależnie od długości mapy i dostępnego materiału. Konkretne pozycje i liczbę treningów ustalamy przy układaniu danej mapy zgodnie z tym rytmem. Nie zaczynamy kolejnej mapy od obowiązkowego treningu wcześniejszego zakresu. Gdy nie ma jeszcze materiału z wcześniejszych map, nie tworzymy pustego treningu. Pozostałe kwestie treningów opisuje [U-05](decyzje.md#u-05); wybór algorytmu i odstępów odłożono na później (D-29). Pierwsza mapa Food nie ma treningów mapowych; druga ma trening wcześniejszego materiału po trzech lekcjach.
 
 **Dodatkowy trening na żądanie jest zatwierdzony (D-27):** obok treningów na mapie użytkownik może uruchomić go bez czekania na termin, także kilka razy jednego dnia, np. przed sprawdzianem. Nadal obowiązuje dozwolony zakres wcześniej poznanego materiału tego kursu i wielkość z D-20. Funkcja jest wdrożona; nagrodę 1 ★ określa D-34. Nie wybrano jeszcze docelowego algorytmu ani sposobu aktualizowania przyszłego harmonogramu po dodatkowej sesji.
 
@@ -75,7 +75,9 @@ Trening nie powinien wprowadzać niepoznanego materiału przyszłych map. **Map�
 
 Ukończenie mapy wymaga ukończenia wszystkich jej zwykłych lekcji i umieszczonych na niej treningów. W docelowym liczniku ukończenia i pasku postępu trening na mapie liczymy jako lekcję wymaganą; dodatkowy trening na żądanie jest dobrowolny i nie powiększa tego zakresu. Powtórki błędów nie blokują ukończenia mapy ani osiągnięcia 100% postępu lekcji. Zaległe błędy nadal pokazujemy osobno zgodnie z D-23.
 
-Mechanizm wdrożono dla roli treningu na mapie i sprawdzono na drugiej mapie testowej. Nie zmieniono obecnego Food, zapisanych ukończeń i zdobytych gwiazdek. Nagrodę za trening na mapie określa D-33; warunki premii za utrwalenie nowych map pozostają osobną decyzją.
+Mechanizm działa na drugiej produkcyjnej mapie Food: trening po trzech zwykłych lekcjach jest wymagany do jej ukończenia. Pierwsza mapa Food pozostaje bez treningów mapowych, a zapisane ukończenia i zdobyte gwiazdki są zachowane. Nagrodę za trening na mapie określa D-33; warunki premii za utrwalenie nowych map pozostają osobną decyzją.
+
+Mapy można otwierać niezależnie; odblokowanie kolejnej lekcji jest sprawdzane wewnątrz wybranej mapy. Jeśli użytkownik dotrze do treningu drugiej mapy bez żadnych prób materiału pierwszej, aplikacja nie utworzy treningu i poprosi o wcześniejszą naukę. Nie ma jeszcze automatycznej blokady drugiej mapy ani zastępczej ścieżki treningu bez poznanej puli. To ograniczenie obecnego przebiegu, nie dodatkowa uzgodniona zasada produktu.
 
 ### Zakres ćwiczeń swobodnych
 
@@ -98,7 +100,7 @@ Globalne fiszki obejmują także poprawnie znane słówka, podczas gdy modułowe
 
 Po poprawnej i po błędnej odpowiedzi na zadanie gramatyczne wyjaśnienie ma wskazać **dlaczego** dana forma pasuje lub nie pasuje do konkretnego zdania. Odwołuje się do reguły i jej zastosowania w kontekście, zamiast wyświetlać wyłącznie gotową poprawną odpowiedź. Po błędzie użytkownik ma rozumieć, jaka zasada prowadzi do poprawki; po sukcesie również otrzymuje uzasadnienie.
 
-Celem jest rozumienie gramatyki, a nie odtwarzanie zapamiętanych odpowiedzi. Konkretne wyjaśnienia należą do merytoryki kursu i muszą być adekwatne do zdania oraz języka objaśnień. Nie zatwierdzono generowania przez AI analizy każdej dowolnej odpowiedzi podczas nauki; sposób przygotowania i przechowywania wyjaśnień wymaga projektu technicznego.
+Celem jest rozumienie gramatyki, a nie odtwarzanie zapamiętanych odpowiedzi. Konkretne wyjaśnienia należą do merytoryki kursu i muszą być adekwatne do zdania oraz języka objaśnień. Obecnie tekst pochodzi z `explanation` danego zadania i jest wyświetlany po odpowiedzi poprawnej i błędnej; przy `ruleId` dostępne jest rozwijane przypomnienie reguły. Wyjaśnienie jest przygotowane wcześniej, nie generowane dla konkretnej pomyłki. Nie zatwierdzono analizy dowolnej odpowiedzi przez AI podczas nauki.
 
 Zachowujemy rozróżnienie pierwszej próby, poprawki, ukończenia lekcji oraz utrwalenia materiału. Gwiazdki służą motywacji, nie są dowodem znajomości całego modułu.
 
@@ -115,7 +117,7 @@ Liczba zaległości oznacza liczbę elementów, które nie osiągnęły wymagany
 
 Licznik zawsze musi nazywać tę jednostkę, którą faktycznie liczy: np. „sekcje” przy agregacji etapów, „lekcje” przy agregacji technicznych lekcji. Siedem obecnych etapów Food nie jest siedmioma technicznymi lekcjami. Dokładny poziom agregacji na ekranach pozostaje w U-07; procent nie miesza ukończeń z liczbą utrwalonych błędów. Oddzielenie prezentacji ukończenia i zaległości jest już wdrożone. Obecny Food pokazuje liczbę technicznych lekcji i osobne podsumowania etapów; pozostałe poziomy agregacji wymagają dalszego projektu.
 
-**Obecne liczby:** 3 gwiazdki za pierwsze ukończenie lekcji i dodatkowe 3 za ukończone lekcje etapu oraz pełne utrwalenie jego kolejki. Powtórki nie blokują dalszych lekcji. Te reguły nadal opisują działającą aplikację.
+**Obecne liczby:** 3 gwiazdki za pierwsze ukończenie lekcji, również treningu na mapie. Dodatkowe 3 za ukończone lekcje etapu i pełne utrwalenie jego kolejki dotyczą zachowanej pierwszej mapy Food. Nowe nazwane mapy, w tym „Kocia kuchnia”, nie otrzymują tej premii. Powtórki nie blokują dalszych lekcji. Odznaka kociego kucharza pozostaje związana z ukończeniem pierwszej mapy i nie jest odbierana po dodaniu drugiej.
 
 **Nagroda za trening na mapie (D-33):** 3 gwiazdki za pierwsze ukończenie danego treningu. Powtarzanie tego samego treningu nie przynosi kolejnych gwiazdek. Zasada obowiązuje w kontekście konta i kursu; nie zmienia wcześniej zdobytych gwiazdek. **Dodatkowy trening na żądanie (D-34) daje 1 gwiazdkę za ukończenie każdej nowej sesji.** Wznowienie lub ponowne przetworzenie ukończenia tej samej sesji nie daje kolejnej nagrody. Obie reguły są wdrożone; nie należy utożsamiać nowej sesji dodatkowego treningu z powtarzaniem konkretnej lekcji na mapie.
 
@@ -124,6 +126,8 @@ Docelowy sposób prezentacji postępu opisano wyżej (D-23), ale nie zmienia on 
 ## Algorytm treningu — wybór odłożony na później
 
 Na prośbę użytkowniczki wybór konkretnego algorytmu odkładamy (D-29). Uzgodnione są cel i pierwszeństwo doboru: trudne i dawno niećwiczone częściej, bezbłędne rzadziej, ale regularnie. Poniższe rozwiązania pozostają jedynie kandydatami do późniejszej oceny, nie planem wdrożenia.
+
+**Obecny dobór techniczny** w `src/learning/training.ts` wybiera mniej ćwiczone elementy, obniża ich wynik rankingowy przy oznaczeniu trudności, a przy remisie uwzględnia starszą datę próby. Dane z podsumowania archiwum nie mają daty ostatniej próby i są traktowane jak najstarsze. Nie jest to harmonogram terminów ani gwarancja określonych odstępów dla każdej pozycji; docelowa regularność z D-29 pozostaje wymaganiem przyszłego algorytmu.
 
 Oddzielamy trzy decyzje: co wchodzi do puli, kiedy element powinien wrócić i jak z puli powstaje krótka lekcja. Sam algorytm odstępów nie rozwiązuje wszystkich trzech.
 

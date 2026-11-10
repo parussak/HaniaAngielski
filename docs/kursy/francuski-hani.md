@@ -14,6 +14,6 @@ Polskie objaśnienia, materiał podręcznikowy i wspólne mechanizmy aplikacji, 
 
 - Tytuł, wydanie, poziom i zakres pierwszej próbki podręcznika — [U-10](../decyzje.md#u-10).
 - Akcenty, rodzajniki, elizje, dopuszczalne warianty i kierunek odpowiedzi — [U-06](../decyzje.md#u-06).
-- Reprezentacja kursu i powiązanie z wynikami — [U-01](../decyzje.md#u-01).
+- Ewentualne rozszerzenia wspólnego formatu — [U-01](../decyzje.md#u-01). Podstawowa reprezentacja kursu, wybór w interfejsie i oddzielenie wyników są już wdrożone; czekają na rzeczywiste materiały francuskie.
 
 Nie przyjmujemy automatycznego ignorowania akcentów. Nie dopisano przykładowego kursu do aplikacji ani nie zatwierdzono jeszcze jego treści.

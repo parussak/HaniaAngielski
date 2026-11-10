@@ -12,7 +12,7 @@ Jeżeli był już wcześniejszy skrót, nie czyść danych strony. Instalacja ni
 
 ## Co działa offline
 
-Po pełnym przygotowaniu: uruchomienie strony, fiszki podstawowe i pełne, quizy, gramatyka, powtórki, ilustracje, wyjaśnienia, statystyki i lokalny zapis rozpoczętej sesji. Przy kolejnym uruchomieniu bez sieci zachowany zostaje także lokalny zapis wcześniej używanego konta.
+Po pełnym przygotowaniu: uruchomienie strony, obie mapy Food, treningi, fiszki podstawowe i pełne, quizy, gramatyka, rozmówki, powtórki, ilustracje, wyjaśnienia, statystyki i lokalny zapis rozpoczętej sesji. Przy kolejnym uruchomieniu bez sieci zachowany zostaje także lokalny zapis wcześniej używanego konta.
 
 Rejestracja, nowe logowanie i odzyskanie hasła wymagają internetu. Jeśli konto jest już zapisane na urządzeniu, można dalej uczyć się offline. Po odzyskaniu połączenia wyniki są synchronizowane, gdy aplikacja jest otwarta. Jeśli była zamknięta, synchronizacja nastąpi przy kolejnym uruchomieniu z internetem. Nie gwarantujemy wysyłania wyników przy całkowicie zamkniętej aplikacji.
 
@@ -20,7 +20,7 @@ Tryb prywatny, usunięcie danych strony i automatyczne zwolnienie miejsca przez 
 
 ## Aktualizacje
 
-Po publikacji nowej wersji otwórz aplikację z internetem. Pobieranie nowej wersji odbywa się w tle. Dopiero po pobraniu kompletu pojawi się **Wczytaj nową wersję**. Kliknięcie odświeży aplikację, zachowując postępy i zapisaną sesję. W razie rozpoczętej sesji aplikacja poprosi o potwierdzenie.
+Po publikacji nowej wersji otwórz aplikację z internetem. Pobieranie nowej wersji odbywa się w tle. Dopiero po pobraniu kompletu pojawi się komunikat **Nowa wersja dostępna** z przyciskiem **Zaktualizuj**. Kliknięcie odświeży aplikację, zachowując postępy i zapisaną sesję. W razie rozpoczętej sesji aplikacja poprosi o potwierdzenie.
 
 Nie przełączamy automatycznie aplikacji i materiałów podczas ćwiczenia. Aktualizacja nie kasuje IndexedDB, danych logowania ani kopii wyników. Cache jest oddzielony według ścieżki aplikacji na GitHub Pages.
 
@@ -47,4 +47,4 @@ $env:HANIA_BROWSER_CHANNEL='msedge'
 npx.cmd playwright test
 ```
 
-Pozostałe testy blokują service workery, aby izolować testowane zmiany materiałów i adaptery Firebase. Dedykowane testy PWA używają rzeczywistego service workera: sprawdzają uruchomienie od zera bez sieci, wszystkie główne tryby nauki, wznowienie po odświeżeniu, konto offline i późniejszą synchronizację oraz aktualizację ze zmianą treści bez utraty sesji. W teście konta jedynie adapter Firebase jest atrapą; nie tworzymy kont ani nie wysyłamy wyników do rzeczywistego projektu. Fizyczna instalacja WebAPK na telefonie wymaga osobnej próby po publikacji.
+Testy niezwiązane z PWA domyślnie blokują service workery, aby izolować testowane zmiany materiałów i adaptery Firebase. Dedykowane testy PWA używają rzeczywistego service workera: sprawdzają uruchomienie od zera bez sieci, wszystkie główne tryby nauki, wznowienie po odświeżeniu, konto offline i późniejszą synchronizację oraz aktualizację ze zmianą treści bez utraty sesji. W teście konta jedynie adapter Firebase jest atrapą; nie tworzymy kont ani nie wysyłamy wyników do rzeczywistego projektu. Fizyczna instalacja WebAPK na telefonie wymaga osobnej próby po publikacji.

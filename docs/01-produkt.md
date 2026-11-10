@@ -33,7 +33,9 @@ Pod powitaniem użytkownik widzi kurs i przycisk „Wybierz kurs”. Mapy i modu
 
 „Globalny” zakres dotyczy wybranego kursu. Nie oznacza przypadkowego mieszania francuskiego, angielskiego i włoskiego. Reguły zakresu są opisane w [nauce](03-nauka.md), a powiązania obiektów w [mechanice](02-mechanika.md).
 
-Oprócz treningów na mapie użytkownik ma mieć możliwość uruchomienia dodatkowego treningu na żądanie, bez czekania na termin i nawet kilka razy dziennie, z dozwolonego wcześniej poznanego materiału (D-27). Pierwsze wdrożenie udostępnia go na mapie i w ćwiczeniach swobodnych, z nagrodą 1 ★ za ukończoną sesję (D-34). Docelowy układ wyboru kursów i zakresów pozostaje zaparkowany.
+Oprócz treningów na mapie użytkownik może uruchomić dodatkowy trening na żądanie, bez czekania na termin i nawet kilka razy dziennie, z wcześniej poznanego materiału wybranego kursu (D-27). Przycisk jest na mapie i w ćwiczeniach swobodnych; ukończona nowa sesja daje 1 ★ (D-34). Podstawowy wybór kursu i zakresu jest wdrożony; osobne aktywne sesje oraz preferencje odpowiedzi per kurs pozostają zaparkowane w U-08.
+
+Wybór kursu ogranicza katalogi i dobór ćwiczeń. Ekran „Twoje postępy”, historia nauki, bilans gwiazdek i domek obejmują całe konto, a nie tylko aktualnie wybrany kurs.
 
 ### Co oznacza ukończenie
 

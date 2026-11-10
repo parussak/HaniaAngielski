@@ -80,6 +80,12 @@ Przy kolejnej zmianie zacznij od wskazanego obszaru i jego testów. Nie przenoś
 
 Część tego podziału już istnieje po refaktoringu, ale nadal są powiązania z Food i angielskim. [Przegląd gotowości](rozwoj-jezykow.md) wskazuje konkretne miejsca. Nie opisujemy docelowego podziału jako w pełni wdrożonego.
 
+## Znane granice obecnej implementacji
+
+- Wczytywanie map jest wspólne: błąd jednej mapy powoduje pustą listę wszystkich map w interfejsie (`loadJourneys` i obsługa błędu w `startup.ts`). Ćwiczenia modułowe pozostają dostępne, a wyniki nie są kasowane. Izolowanie awarii map jest propozycją do dalszej pracy, nie wdrożoną właściwością.
+- Nadal istnieją szczegóły Food w prezentacji: opisy rozmówek, etykieta podstawowych fiszek i odznaka pierwszej mapy. Przed publikacją kolejnego języka trzeba sprawdzić te teksty na rzeczywistym materiale.
+- Statystyki i historia obejmują konto; tylko katalogi i dobór ćwiczeń są ograniczane wyborem kursu.
+
 ## Do ustalenia
 
-Techniczny format kursów i wariantów: [U-01](decyzje.md#u-01). Przejście z obecnych etapów na mapy: [U-03](decyzje.md#u-03). Stan poznania i treningu: [U-04](decyzje.md#u-04), [U-05](decyzje.md#u-05). Zmiany techniczne wynikną z tych ustaleń i powinny być ograniczone do potrzeb danego etapu.
+Podstawowy format kursów, wybór kursu, poznany zakres i aktualizacje Food są wdrożone — [U-01](decyzje.md#u-01), [U-03](decyzje.md#u-03), [U-04](decyzje.md#u-04). Nie planujemy automatycznego podziału istniejących etapów na nowe mapy. Dalsze rozszerzenia i harmonogram treningu pozostają w [U-05](decyzje.md#u-05).

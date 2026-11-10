@@ -70,6 +70,8 @@ Uzgodniona zasada D-16: każde hasło opisuje jedno znaczenie, z własną przypi
 
 Mechanika potrafi przechować i zastosować kryterium odpowiedzi. Nie rozstrzyga sama, czy francuski rodzajnik albo włoska odmiana są poprawne — konkretne kryteria pochodzą z [merytoryki](04-merytoryka.md).
 
+Obecne porównywanie odpowiedzi w `src/answers.ts` normalizuje Unicode do NFC, ujednolica apostrofy typograficzne, odstępy i wskazane znaki interpunkcyjne (`. , ! ? …`). Domyślnie pomija wielkość liter; zadanie może wymusić jej rozróżnianie przez `caseSensitive`. Nie usuwa akcentów, rodzajników ani brakujących słów i nie stosuje automatycznej tolerancji literówek. Odpowiedź musi odpowiadać jednemu z jawnych wariantów po tej normalizacji. Docelowe kryteria konkretnego języka nadal należą do U-06.
+
 ## Lekcja: trzy niezależne wymiary
 
 | Wymiar | Przykłady |
@@ -93,4 +95,4 @@ Trening może więc zawierać słownictwo i gramatykę oraz korzystać z różny
 
 ## Do ustalenia
 
-Format kursu i wariantów językowych jest opisany w [kontrakcie materiałów](format-materialow.md). Dalsze rozszerzenia modelu oraz integracja z wyborem kursu są oddzielone od podstaw etapu 2 — [U-01](decyzje.md#u-01). Szczegółowa polityka sprawdzania i swobodnych odpowiedzi: [U-06](decyzje.md#u-06). Istniejące identyfikatory nie są zmieniane przez przyjęcie tego słownika pojęć.
+Format kursu i wariantów językowych jest opisany w [kontrakcie materiałów](format-materialow.md), a wybór kursu jest wdrożony w etapie 3. Dalsze rozszerzenia modelu pozostają w [U-01](decyzje.md#u-01). Szczegółowa polityka sprawdzania i swobodnych odpowiedzi: [U-06](decyzje.md#u-06). Istniejące identyfikatory nie są zmieniane przez przyjęcie tego słownika pojęć.

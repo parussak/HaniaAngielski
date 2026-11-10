@@ -47,6 +47,8 @@ Nie powielamy list słówek w Markdown ani wspólnych zasad w każdej karcie kur
 
 ## Punkt odniesienia i wcześniejsze materiały
 
+Przegląd zgodności **10 listopada 2026 r.** objął bieżące opisy produktu, mechaniki, nauki, zapisu, architektury, instrukcji materiałów i PWA. Porównano je z właściwym kodem, odczytanym katalogiem treści, scenariuszami testów i workflow. Poprawiono rozbieżności pozostawione po etapach 1–4; znane ograniczenia są jawnie opisane w [nauce](03-nauka.md) i [architekturze](05-architektura.md). Był to przegląd dokumentacji, bez zmian aplikacji, ponownego uruchamiania pełnych testów, nowej recenzji podręcznika ani weryfikacji opublikowanej strony. Historyczne wyniki testów zachowują swoje pierwotne znaczenie.
+
 - [Stan obecny](stan-obecny/README.md) — opis z przeglądu kodu i testów 9–10 listopada 2026 r., z zakresem wykonanych kontroli.
 - [Gotowość na francuski i włoski](rozwoj-jezykow.md) — diagnoza braków J1–J10 do planowania wybranej zmiany.
 - [Firebase](firebase.md), [historia](historia.md), [PWA](pwa.md), [obecna mapa i domek](kocia-przygoda.md), [edycja obecnych materiałów](../public/content/README.md) — instrukcje istniejącej aplikacji, do czytania w odpowiednim kontekście.

@@ -98,7 +98,7 @@ Pozycja poprawnej odpowiedzi jest tasowana dla każdej sesji i pytania. Po wznow
 - Gdy w zadaniu nie potrzeba rodzajnika, dozwolone odpowiedzi obejmują `brak` oraz znaki `—`, `–` i `-`.
 - Poprawienie treści ściągi nie zmienia automatycznie wyjaśnień zadań. Jeśli zmieniasz regułę, sprawdź także zadania wskazujące jej `ruleId`.
 
-Nie zmieniaj identyfikatorów przy zwykłej korekcie literówki. Gdy zmieniasz sens konkretnego słówka lub zadania, dodaj mu `rev: 2` (lub zwiększ dotychczasowe `rev`). Brak pola oznacza rewizję 1. Słówko przekazuje rewizję także swojemu pytaniu w quizie, chyba że wpis w `quiz.json` ma własne `rev`. Historia starego elementu pozostaje archiwalna, a inne elementy zachowują statusy. Pole `version` w `modul.json` opisuje wydanie całego zestawu i samo nie zmienia kluczy postępu. Dawne kopie formatu 1 z kluczami `@1` działają bez migracji.
+Nie zmieniaj identyfikatorów przy zwykłej korekcie literówki. Istotna zmiana sensu wymaga planu zgodności: samo zwiększenie `rev` powoduje, że zapisane pytanie ze starą rewizją przestaje być rozwiązywalne przez aktualną treść. Historia pozostaje, lecz aktywna sesja lub powtórka może wymagać poprzedniej wersji. Dla opublikowanego Food zachowuj stare zadania i dodawaj nowe identyfikatory, zamiast nadpisywania używanej treści. Słówko przekazuje rewizję pytaniu w quizie, chyba że wpis quizu ma własne `rev`; sprawdź oba odwołania. Pole `version` modułu samo nie zmienia kluczy postępu. [Ochrona wydań i wyników](../../docs/format-materialow.md#aktualizacja-wydanej-lekcji).
 
 ## Sprawdzenie i odświeżenie
 
@@ -125,7 +125,7 @@ npm.cmd run check:content
 
 Sprawdzanie wykrywa m.in. brakujące pola, powtórzone identyfikatory, nieistniejące słówka i pytania z niejednoznacznym kluczem wyboru. Nie zastępuje oceny językowej przez człowieka.
 
-Podczas lokalnej pracy wystarczy zapisać pliki i odświeżyć stronę. Materiały są pobierane z `content/`, a nie zaszyte w kodzie strony. Dla publikacji na GitHub Pages wyślij zmiany na gałąź `main` — publikacja uruchomi się automatycznie po przejściu testów. Przebudowa skopiuje aktualne pliki `public/content` do `dist/content`; nie trzeba zmieniać kodu aplikacji. Zainstalowana PWA pobiera spójne wydanie materiałów w tle; użytkownik wczytuje je przyciskiem „Wczytaj nową wersję”.
+Podczas lokalnej pracy wystarczy zapisać pliki i odświeżyć stronę. Materiały są pobierane z `content/`, a nie zaszyte w kodzie strony. Dla publikacji na GitHub Pages wyślij zmiany na gałąź `main` — publikacja uruchomi się automatycznie po przejściu testów. Przebudowa skopiuje aktualne pliki `public/content` do `dist/content`; nie trzeba zmieniać kodu aplikacji. Zainstalowana PWA pobiera spójne wydanie materiałów w tle; użytkownik wczytuje je przyciskiem „Zaktualizuj”.
 
 ## Kolejny moduł
 

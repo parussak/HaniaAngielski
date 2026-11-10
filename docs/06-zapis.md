@@ -9,7 +9,7 @@ Status: obecne rozwiązanie oraz granice przyszłych zmian. Dokument nie wprowad
 | Postępy gościa | IndexedDB w przestrzeni zależnej od ścieżki strony, osobny klucz `current` |
 | Postępy konta i stan synchronizacji | Lokalny rekord `account:<uid>` oraz dokument konta w Firestore |
 | Imię i dane logowania | Firebase Authentication; lokalne dane do przywrócenia kontekstu konta |
-| Starsza historia | Niezmienne części z podsumowaniami, lokalnie i na koncie |
+| Starsza historia | Pełne sesje w niezmiennych częściach, lokalnie i na koncie; ich podsumowania w bieżącym zapisie |
 | Zewnętrzna kopia | Eksport JSON, format `hania-language`, wersja `1`, z potrzebnymi archiwami |
 | Materiały kursów | Wspólne pliki statyczne i cache PWA, oddzielnie od wyników |
 
@@ -23,7 +23,7 @@ Pełny opis kluczy, limitów, archiwizacji, cache i dowodów: [zapis — punkt o
 
 Sesja treningu ma opcjonalne pole `training` z rolą `map` lub `extra`. Trening na mapie korzysta z istniejącego rejestru ukończeń lekcji; dodatkowy trening zapisuje `rewarded: true` w ukończonej sesji. Znacznik jest zapisywany razem z gwiazdką, nie na osobnej nieograniczonej liście nagród. Sesje nadal podlegają dotychczasowej kompakcji i archiwizacji.
 
-Format kopii pozostaje w wersji 1 i odczytuje stare dane. Kopie zawierające nowy tryb treningu wymagają aktualnej aplikacji. Nie zmieniono kluczy istniejących materiałów, IndexedDB ani reguł Firestore. Sam odczyt postępu lub przygotowanie treningu nie zapisuje migracji i nie zmienia wyników. Nowe nazwane mapy używają kluczy `moduleId/mapId/lessonId`; obecna mapa Food zachowuje `moduleId/lessonId`.
+Format kopii pozostaje w wersji 1 i odczytuje stare dane. Kopie zawierające nowy tryb treningu wymagają aktualnej aplikacji. Nie zmieniono kluczy istniejących materiałów, IndexedDB ani reguł Firestore. Sam dobór pytań treningu i wyliczenie podglądu postępu nie zmieniają wyników. Przy uruchomieniu i zapisie aplikacja może osobno skompaktować historię, odtworzyć starsze kolejki błędów oraz rozliczyć należną, jeszcze nieprzyznaną premię dawnego etapu. To istniejące przygotowanie postępu, nie skutek wyboru kursu lub nowej wersji lekcji. Nowe nazwane mapy używają kluczy `moduleId/mapId/lessonId`; pierwsza mapa Food zachowuje `moduleId/lessonId`.
 
 ## Kursy bez migracji Food — etap 2
 
@@ -43,7 +43,7 @@ Kopia pozostaje w wersji 1 i odczytuje wcześniejsze pliki. Obsługa nowych pól
 
 ## Wersje lekcji Food — etap 4
 
-Dotychczasowe wpisy ukończenia `{ at }` oraz sesje bez znacznika pozostają oryginalną wersją lekcji. Nowa nieukończona lekcja korzysta z opcjonalnego `update` w treściach. Sesja zapisuje `lesson.edition: 2`, a pierwsze ukończenie zachowuje ten znacznik w `adventure.completed[lessonKey]`. Odczyt nie dopisuje migracji ani nagród. Aktywna sesja nadal przechowuje konkretną listę pytań i miejsce odpowiedzi, a stare pytania pozostają dostępne dla jej wznowienia i powtórek. Format kopii pozostaje w wersji 1; aktualna walidacja obsługuje oba warianty. Limity historii i synchronizacji bez zmian. [Pełna ochrona wyników](wdrozenie-food.md#ochrona-wyników-i-nagród).
+Dotychczasowe wpisy ukończenia `{ at }` oraz sesje bez znacznika pozostają oryginalną wersją lekcji. Nowo rozpoczynana nieukończona lekcja korzysta z opcjonalnego `update`, jeśli jej definicja je zawiera. Taka sesja zapisuje `lesson.edition: 2`, a pierwsze ukończenie zachowuje ten znacznik w `adventure.completed[lessonKey]`. Sam wybór wydania nie dopisuje migracji ani nagród. Aktywna sesja nadal przechowuje konkretną listę pytań i miejsce odpowiedzi, a stare pytania pozostają dostępne dla jej wznowienia i powtórek. Nowe lekcje drugiej mapy bez `update` nie potrzebują znacznika wydania 2. Format kopii pozostaje w wersji 1; aktualna walidacja obsługuje oba warianty. Limity historii i synchronizacji bez zmian. [Pełna ochrona wyników](wdrozenie-food.md#ochrona-wyników-i-nagród).
 
 ## Założenia docelowe przy rozwoju
 
@@ -52,7 +52,7 @@ Dotychczasowe wpisy ukończenia `{ at }` oraz sesje bez znacznika pozostają ory
 - Rozwój kursów i map musi zachować dotychczasowe wyniki, pierwsze próby i historię.
 - Przy planowanych poprawkach Food zachowujemy wszystkie zaliczone lekcje, także w sekcjach 5–7, i zdobyte gwiazdki. Zmiany obejmują wyłącznie nieukończone lekcje; brakujący materiał trafia na kolejną mapę, bez otwierania zaliczonych lekcji na nowo (D-24).
 - Materiał, mapa/lekcja, wykonana sesja i stan utrwalenia pozostają rozróżnialnymi pojęciami. Definicja lekcji nie jest tym samym co konkretne podejście użytkownika.
-- Poznanie elementu wynika z pierwszej próby odpowiedzi, także błędnej, w kontekście konta i kursu (D-25). Nie zależy od ukończenia całej lekcji i nie jest równoznaczne z utrwaleniem. Uwzględniamy także wcześniejsze próby ze starszej historii, bez zmiany ocen, ukończeń i gwiazdek (D-26). Pierwsze wdrożenie treningu odczytuje poznanie bez nowego pola: z prób ostatnich sesji, aktywnej sesji i istniejącego podsumowania archiwum. Pełne wspólne API poznanego zakresu dla wszystkich przyszłych trybów pozostaje do rozszerzenia.
+- Poznanie elementu wynika z pierwszej próby odpowiedzi, także błędnej, w kontekście konta i kursu (D-25). Nie zależy od ukończenia lekcji i nie jest równoznaczne z utrwaleniem. Uwzględniamy wcześniejsze próby ze starszej historii, bez zmiany ocen, ukończeń i gwiazdek (D-26). Wspólny odczyt w `known-material.ts` korzysta z prób ostatnich sesji, aktywnej sesji, podsumowania archiwum oraz `Progress.encountered`. Trening i globalne zestawy korzystają z tych danych; nie trzeba pobierać pełnej dawnej historii do samego ustalenia poznanego zakresu.
 - Powiązanie błędu z miejscem jego wystąpienia nie usuwa informacji, z którego materiału pochodzi zadanie. Jest to ważne przy treningu wcześniejszych map.
 - Ewentualny nowy harmonogram treningów musi określić potrzebne dane i sposób ich przechowywania bez nieograniczonego powiększania głównego zapisu.
 - Nie zmieniamy identyfikatorów istniejących modułów, etapów, lekcji i elementów jedynie dla porządku nazewnictwa. Zmiana wymagająca migracji potrzebuje osobnego planu i testów zgodności.

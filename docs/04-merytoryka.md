@@ -39,7 +39,7 @@ Nie zakładamy, że akcenty i rodzajniki można globalnie pomijać. Uzgodnione z
 
 Zgodnie z D-31 w [rejestrze](decyzje.md), informacja zwrotna po odpowiedzi poprawnej i błędnej ma tłumaczyć zastosowanie reguły w konkretnym zdaniu. Samo podanie poprawnej formy lub ogólnego hasła reguły nie wystarcza. Wyjaśnienie powinno pomóc zrozumieć, dlaczego forma jest właściwa oraz na czym polega błąd, jeśli odpowiedź była niepoprawna.
 
-Poprawność tego uzasadnienia i jego dopasowanie do kontekstu wymagają recenzji merytorycznej; sam niepusty tekst w polu wyjaśnienia nie potwierdza jakości. Sposób obsługi poszczególnych rodzajów błędów nie został jeszcze określony technicznie.
+Poprawność tego uzasadnienia i jego dopasowanie do kontekstu wymagają recenzji merytorycznej; sam niepusty tekst w polu wyjaśnienia nie potwierdza jakości. Aplikacja pokazuje zapisaną odpowiedź użytkownika, poprawny wariant z wyróżnieniem różnic oraz wcześniej przygotowane wyjaśnienie zadania. Wyróżnienie znaków nie diagnozuje językowej przyczyny błędu i nie tworzy osobnego objaśnienia dla każdej możliwej pomyłki. Szczególne kryteria odpowiedzi FR/IT nadal wymagają ustalenia w U-06.
 
 ### Przygotowanie materiału i recenzja
 
