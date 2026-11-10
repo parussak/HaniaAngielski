@@ -1,6 +1,10 @@
 # Małe kroki — nauka Hani
 
-Aplikacja internetowa: fiszki, quizy, gramatyka, lokalne postępy i opcjonalne konto z synchronizacją przez Firebase. Dostępny jest moduł 2 **Food — Fun with food**, opracowany z przesłanych zdjęć podręcznika i zeszytu ćwiczeń: 97 fiszek, 156 zadań i 9 objaśnień zasad. Materiał demonstracyjny został usunięty.
+Aplikacja internetowa: fiszki, quizy, gramatyka, lokalne postępy i opcjonalne konto z synchronizacją przez Firebase. Dostępny jest moduł 2 **Food — Fun with food**, opracowany z przesłanych zdjęć podręcznika i zeszytu ćwiczeń: 97 fiszek, 168 zadań (w tym 12 dialogów) i 9 objaśnień zasad. Materiał demonstracyjny został usunięty.
+
+[Dokumentacja po polsku](docs/README.md) rozdziela produkt, mechanikę, naukę, merytorykę, architekturę, zapis i testy oraz oznacza stan obecny, założenia docelowe i sprawy do ustalenia. Oddzielna [lista braków dla francuskiego i włoskiego](docs/rozwoj-jezykow.md) rozróżnia stan obecny od propozycji rozwoju.
+
+Aktualizacja nauki: dodatkowy trening poznanego materiału za 1 ★, osobny procent ukończenia i liczba ćwiczeń do utrwalenia oraz wyjaśnienia gramatyczne z przypomnieniem reguły. Zakres wdrożenia i dalsze etapy: [raport](docs/wdrozenie-nauki.md).
 
 ## Uruchomienie
 
@@ -97,7 +101,7 @@ Testy używają odizolowanych danych. Bez zmiennej `HANIA_TEST_BUILD` uruchamiaj
 
 ## Struktura kodu
 
-[Mapa plików i zasady rozwijania aplikacji](docs/architektura.md) opisuje ekrany, kontrolery, logikę nauki i zapis. Główny plik uruchamia teraz wydzielone moduły; format wyników i kopii pozostaje zgodny.
+[Mapa plików i zasady rozwijania aplikacji](docs/05-architektura.md) opisuje ekrany, kontrolery, logikę nauki i zapis. Główny plik uruchamia teraz wydzielone moduły; format wyników i kopii pozostaje zgodny.
 
 ### Strona startowa
 

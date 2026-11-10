@@ -20,7 +20,7 @@
 }
 .journey-stage summary>span:nth-of-type(2){min-width:0;flex:1}
 .stage-retention{display:block;height:5px;background:#e8dfef;border-radius:10px;margin-top:7px;overflow:hidden;max-width:250px}
-.stage-retention>span{display:block;height:100%;border-radius:10px;background:#8cae9b}
+.stage-retention>span{display:block;height:100%;border-radius:10px;background:#9e80d6}
 .journey-stage .stage-retention-text{color:#654a7b;overflow-wrap:anywhere}
 .stage-review-step{margin-top:14px;border-style:dashed;background:#eef3fc}
 .stage-review-step .lesson-dot{background:#e2eafa;color:#5d4c88}
@@ -30,3 +30,10 @@
 .review-result{margin:16px 0;text-align:center;color:#654a7b}
 .review-result>strong{font-size:28px;line-height:1.3}
 .review-result p{font-size:13px;line-height:1.6;margin:8px 0}
+.retention-overview.has-pending,.journey-stage .stage-retention-text.has-pending{color:#9a570c}
+.retention-overview.is-mastered,.journey-stage .stage-retention-text.is-mastered{color:#2f7050}
+.journey-progress.is-mastered>span,.stage-done .stage-retention>span{background:#65a281}
+.stage-done .stage-number{background:#dcefe2;color:#2f7050}
+.extra-training{border-top:1px solid #e4d8f2;margin-top:24px;padding-top:20px}
+.extra-training p{line-height:1.6}
+.extra-training .secondary{min-height:48px;max-width:100%;white-space:normal}

@@ -1,4 +1,5 @@
-import { lessons, makeLessonSession, place, purchase, rewardCompletion, unlocked, type Journey } from '../adventure.ts';
+import { journeyKey, lessons, makeLessonSession, place, purchase, rewardCompletion, unlocked, type Journey } from '../adventure.ts';
+import { makeTrainingSession } from '../learning/training.ts';
 import { currentJourney } from '../app/selectors.ts';
 import { AppState } from '../app/state.ts';
 import { makeSession, next, questionFor, recordAnswer, type Mode, type Progress } from '../core.ts';
@@ -10,7 +11,7 @@ interface LearningPorts {
 }
 export function createLearningController(state: AppState, { mutate, scheduleReviewMigration }: LearningPorts) {
     async function startStageReview(j: Journey, stage: Journey['stages'][number]) {
-        if (state.progress.active?.stageReview?.id === `${j.moduleId}/${stage.id}`) {
+        if (state.progress.active?.stageReview?.id === `${journeyKey(j)}/${stage.id}`) {
             state.screen = 'study';
             return;
         }
@@ -30,6 +31,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
         if (action === 'next-step') {
             const step = getNextStep(state.modules, state.journeys, state.progress);
             state.selected = state.modules.find(m => m.id === step.moduleId) ?? state.selected ?? state.modules[0];
+            state.selectedJourneyKey = step.journeyId ?? '';
             switch (step.kind) {
                 case 'resume':
                     state.screen = 'study';
@@ -75,6 +77,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
         }
         if (action === 'map') {
             state.selected = state.modules.find(m => m.id === el.dataset.id) ?? state.selected ?? state.modules[0];
+            if (el.dataset.journey !== undefined) state.selectedJourneyKey = el.dataset.journey;
             state.screen = 'map';
             scheduleReviewMigration();
             return true;
@@ -104,7 +107,11 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             }
             if (state.progress.active && !window.confirm('Rozpocząć lekcję zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))
                 return true;
-            await mutate(p => { p.active = makeLessonSession(state.modules, j, l, state.answerMode, p); });
+            const session = l.role === 'training'
+                ? makeTrainingSession(state.modules, state.selected, state.progress, state.answerMode, { journey: j, lesson: l, journeys: state.journeys })
+                : makeLessonSession(state.modules, j, l, state.answerMode, state.progress);
+            if (!session) { state.notice = 'Nie ma jeszcze poznanego materiału z wcześniejszych map do tego treningu.'; return true; }
+            await mutate(p => { p.active = session; });
             state.lastReward = 0;
             state.lastStageReward = 0;
             state.screen = 'study';
@@ -123,6 +130,16 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
         if (action === 'place-decoration') {
             await mutate(p => { place(p, el.dataset.id ?? '', el.dataset.slot || null); });
             state.notice = 'Ustawienie domku zapisane.';
+            return true;
+        }
+        if (action === 'extra-training') {
+            const session = makeTrainingSession(state.modules, state.selected, state.progress, state.answerMode);
+            if (!session) { state.notice = 'Najpierw spróbuj odpowiedzieć na kilka pytań. Trening obejmuje tylko wcześniej poznany materiał.'; return true; }
+            if (state.progress.active && !window.confirm('Rozpocząć trening zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.')) return true;
+            await mutate(p => { p.active = session; });
+            state.lastReward = 0;
+            state.lastStageReward = 0;
+            state.screen = 'study';
             return true;
         }
         if (action === 'mode') {

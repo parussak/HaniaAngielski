@@ -1,4 +1,5 @@
 import { normalizeAnswer } from '../answers.ts';
+import { sameCourse } from './scope.ts';
 import { type Exercise, type Item, type Mode, type Module, type Session, type Word } from './model.ts';
 export function shuffle<T>(input: T[], random = Math.random) {
     const result = [...input];
@@ -28,7 +29,7 @@ export function inputFor(q: Exercise, preferred: Item['input'], mode?: Mode) {
     return requiresChoice(q) ? 'choice' : mode === 'review' ? 'text' : preferred;
 }
 export function eligibleModules(modules: Module[], selected: Module, previous: boolean) {
-    return modules.filter(m => m.id === selected.id || (previous && m.order < selected.order));
+    return modules.filter(m => sameCourse(m, selected) && (m.id === selected.id || (previous && m.order < selected.order)));
 }
 export function resolveItem(modules: Module[], item: Item) {
     const m = modules.find(m => m.id === item.moduleId);

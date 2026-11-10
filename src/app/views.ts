@@ -22,7 +22,7 @@ export function createViews(state: AppState, sync: ProgressSync, syncLabel: () =
     }
     function mapView() { const j = currentJourney(state); return j ? journeyView(j, state.progress, decorativeCat) : '<h1>Kocia mapa</h1><p>Mapa jest chwilowo niedostępna. Twoje własne ćwiczenia nadal działają.</p>' + button('home', 'Moja nauka'); }
     function introView() { const j = currentJourney(state), l = j && lessons(j).find(l => l.lesson.id === state.introLessonId)?.lesson, m = state.modules.find(m => m.id === j?.moduleId); return j && l && m ? lessonIntro(j, l, m, state.progress) : mapView(); }
-    function homeForCats() { const j = currentJourney(state), complete = !!j && lessons(j).every(l => state.progress.adventure?.completed[l.key]); return houseView(state.progress, state.chosenDecoration, decorativeCat, complete); }
+    function homeForCats() { const food = state.journeys.filter(j=>j.moduleId==='unit-2-food'), complete = food.length>0 && food.every(j=>lessons(j).every(l=>state.progress.adventure?.completed[l.key])); return houseView(state.progress, state.chosenDecoration, decorativeCat, complete); }
     function home() {
         const step = getNextStep(state.modules, state.journeys, state.progress);
         return homeView({ name: state.user ? state.user.displayName : 'Haniu', modules: state.modules, step, pwa, cat: decorativeCat(step.catId) });

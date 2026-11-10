@@ -44,6 +44,9 @@ export interface GrammarRule {
     source: string;
 }
 export interface Module {
+    courseId?: string;
+    languageCode?: string;
+    journeyPaths?: string[];
     journeyPath?: string;
     level?: string;
     id: string;
@@ -61,7 +64,7 @@ export interface Module {
     grammar: GrammarRule[];
     basicFlashcardIds?: string[];
 }
-export type Mode = 'flashcards' | 'flashcards-basic' | 'quiz' | 'grammar' | 'dialogue' | 'review' | 'lesson';
+export type Mode = 'flashcards' | 'flashcards-basic' | 'quiz' | 'grammar' | 'dialogue' | 'review' | 'lesson' | 'training';
 export const isFlashcardMode = (mode: Mode) => mode === 'flashcards' || mode === 'flashcards-basic';
 export type AnswerMode = 'choice' | 'text' | 'mixed';
 export interface Item {
@@ -81,6 +84,7 @@ export interface Attempt {
     corrected: boolean;
 }
 export interface Session {
+    training?: { kind: 'map' | 'extra'; rewarded?: boolean };
     stageReview?: {
         id: string;
         title: string;

@@ -26,8 +26,8 @@ async function correct(page:Page){
 }
 test('stare błędy, kafelki każdego etapu, trzy tury, 100% i jednorazowa nagroda 3 ★',async({page})=>{
   await importProgress(page,oldFixture());await expect(page.locator('.stage-review-step')).toHaveCount(7);
-  let node=await openFirstStage(page);await expect(node.locator('.stage-retention-text')).toContainText('0%');await expect(node.locator('.stage-review-step')).toContainText('1 słówko');
-  await expect(page.locator('.star-wallet')).toContainText('15');await expect(page.locator('.retention-overview')).toContainText('1 słówko');
+  let node=await openFirstStage(page);await expect(node.locator('.stage-retention-text')).toContainText('1 ćwiczenie do utrwalenia');await expect(node.locator('.stage-review-step')).toContainText('1 słówko');
+  await expect(page.locator('.star-wallet')).toContainText('15');await expect(page.locator('.retention-overview')).toContainText('1 ćwiczenie do utrwalenia');
   await expect(page.locator('.journey-stage').nth(1).locator('.lesson-step').first()).toBeEnabled();
   await page.screenshot({path:'test-results/stage-review-map-mobile.png',fullPage:true});
   for(let i=0;i<3;i++){
@@ -37,14 +37,14 @@ test('stare błędy, kafelki każdego etapu, trzy tury, 100% i jednorazowa nagro
       await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await expect(page.locator('.review-meter')).toContainText('0/3');
     }
     await correct(page);await expect(page.locator('.review-meter')).toContainText(`${i}/3`);
-    await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('.review-result')).toContainText(i===2?'100%':'0%');
+    await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('.review-result')).toContainText(i===2?'0 ćwiczeń do utrwalenia':'1 ćwiczenie do utrwalenia');
     if(i<2)await expect(page.locator('.lesson-reward')).toContainText('Tura zapisana');else await expect(page.locator('.lesson-reward')).toContainText('+3');
     await page.getByRole('button',{name:'Wróć na mapę',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText(i===2?'18':'15');
   }
-  node=await openFirstStage(page);await expect(node.locator('.stage-review-step')).toBeDisabled();await expect(node.locator('.stage-retention-text')).toContainText('100%');
+  node=await openFirstStage(page);await expect(node.locator('.stage-review-step')).toBeDisabled();await expect(node.locator('.stage-retention-text')).toContainText('0 ćwiczeń do utrwalenia');
   await page.screenshot({path:'test-results/stage-review-completed-mobile.png',fullPage:true});
   await page.reload();await openMap(page);await expect(page.locator('.star-wallet')).toContainText('18');
-  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:/Wybierz przygodę/}).tap();await expect(page.locator('.adventure-invite .retention-overview')).toContainText('100%');
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:/Wybierz przygodę/}).tap();await expect(page.locator('.adventure-invite .retention-overview')).toContainText('0 ćwiczeń do utrwalenia');
 });
 test('nowy błąd zeruje serię, poprawki nie zwiększają jej, mobilne przyciski pozostają nad paskiem',async({page})=>{
   const p=oldFixture(),item={key:keyFor(modules[0],'word','apple'),moduleId:j.moduleId,version:1,type:'word' as const,id:'apple',input:'text' as const};

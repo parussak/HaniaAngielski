@@ -1,5 +1,6 @@
 import { normalizeAnswer } from './answers.ts';
 import type { Exercise,Module,Word } from './core.ts';
+import { sameCourse, translationPrompt } from './learning/scope.ts';
 
 // Pytania słownikowe wskazują słówka, zamiast dublować ich tekst i odpowiedzi.
 export function assembleModule(metadata: any, words: any, quiz: any, exercises: any, grammar: any, dialogues: any = []) {
@@ -13,7 +14,7 @@ export function assembleModule(metadata: any, words: any, quiz: any, exercises: 
     if (!word || distractors.some(w=>!w)) throw new Error(`Quiz ${entry.id}: brak wskazanego słówka.`);
     const options=distractors.map(w=>w!.back);
     options.unshift(word.back);
-    return { illustration:word.illustration, id:entry.id, wordId:word.id, rev:entry.rev??word.rev??1, kind:'vocabulary', prompt:entry.prompt ?? `Podaj po angielsku: ${word.front}`, answers:word.answers ?? [word.back], options, explanation:entry.explanation ?? `„${word.back}” oznacza „${word.front}”.`, requires:[metadata.id], caseSensitive:false, source:word.source };
+    return { illustration:word.illustration, id:entry.id, wordId:word.id, rev:entry.rev??word.rev??1, kind:'vocabulary', prompt:entry.prompt ?? `${translationPrompt(metadata)}: ${word.front}`, answers:word.answers ?? [word.back], options, explanation:entry.explanation ?? `„${word.back}” oznacza „${word.front}”.`, requires:[metadata.id], caseSensitive:false, source:word.source };
   });
   if(!Array.isArray(dialogues))throw new Error('Niepoprawny plik rozmówek.');
   return {...metadata, words, exercises:[...compiled,...exercises,...dialogues], grammar};
@@ -29,6 +30,9 @@ export function validateModules(input: unknown): Module[] {
   for (const m of input) {
     if (!obj(m) || !['id','name','subtitle','language','source','label','cover'].every(k=>text(m[k])) || !Number.isSafeInteger(m.version) || (m.version as number)<1 || !Number.isSafeInteger(m.order) || (m.order as number)<1 || !texts(m.topics)) return fail('niepoprawny opis modułu.');
     if(m.journeyPath!==undefined && (typeof m.journeyPath!=='string'||!/^([a-z0-9-]+)\/sciezka\.json$/.test(m.journeyPath)))return fail('niepoprawna ścieżka mapy modułu.');
+    if(m.courseId!==undefined && (typeof m.courseId!=='string'||!/^[a-z0-9-]+$/.test(m.courseId)))return fail('niepoprawny identyfikator kursu.');
+    if(m.languageCode!==undefined && (typeof m.languageCode!=='string'||!/^[a-z]{2,3}(?:-[A-Z]{2})?$/.test(m.languageCode)))return fail('niepoprawny kod języka.');
+    if(m.journeyPaths!==undefined && (!Array.isArray(m.journeyPaths)||m.journeyPaths.length<1||m.journeyPaths.length>3||new Set(m.journeyPaths).size!==m.journeyPaths.length||!m.journeyPaths.every(path=>typeof path==='string'&&/^[a-z0-9-]+\/[a-z0-9-]+\.json$/.test(path))||m.journeyPath!==undefined))return fail('niepoprawna lista map modułu.');
     if(m.level!==undefined && !['A1','A2','B1','B2','C1','C2'].includes(m.level as string))return fail('niepoprawny poziom modułu.');
     if (!Array.isArray(m.words) || !m.words.length || !m.words.every(w=>obj(w) && text(w.id) && text(w.front) && text(w.back) && text(w.source) && (w.answers===undefined || texts(w.answers)))) return fail(`sprawdź slownictwo.json (${m.id}).`);
     if(m.basicFlashcardIds!==undefined && (!texts(m.basicFlashcardIds)||new Set(m.basicFlashcardIds).size!==m.basicFlashcardIds.length||!m.basicFlashcardIds.every(id=>(m.words as Word[]).some(w=>w.id===id))))return fail(`sprawdź listę podstawowych fiszek (${m.id}).`);
@@ -54,7 +58,7 @@ export function validateModules(input: unknown): Module[] {
   const modules = input as Module[]; unique(modules,'moduły');
   for(const m of modules) for(const q of m.exercises) for(const required of q.requires) {
     const dependency = modules.find(x=>x.id===required);
-    if (!dependency || dependency.order>m.order) fail(`niedostępny lub późniejszy moduł w ${q.id}.`);
+    if (!dependency || !sameCourse(dependency,m) || dependency.order>m.order) fail(`niedostępny, obcy lub późniejszy moduł w ${q.id}.`);
   }
   return structuredClone(modules).sort((a,b)=>a.order-b.order);
 }

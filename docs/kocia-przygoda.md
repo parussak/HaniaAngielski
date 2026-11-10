@@ -34,11 +34,17 @@ Każdy etap ma kafelek **Powtórka**. Zbiera błędy tylko z jego własnych lekc
 - Postęp zapisujemy dopiero po ukończeniu całej tury, do 10 różnych pozycji. Samo otwarcie, zamknięcie lub porzucenie poprawnie zaczętej tury nie zwiększa licznika. Nowy błąd zapisuje się od razu, żeby nie można było go cofnąć zamknięciem.
 - Jeśli wszystkie pozostałe pozycje czekają na późniejszą turę, aplikacja od razu wybiera najbliższy niepusty zestaw. Można uczyć się kilka razy tego samego dnia; nie ma ograniczeń dniami ani pustych uruchomień.
 
-Na zwiniętym kafelku etapu widać osobno ukończenie lekcji i procent utrwalenia, np. **60% utrwalenia · jeszcze 4 słówka**. Procent to udział pozycji z pełnym 3/3 wśród wszystkich, które trafiły do kolejki, a nie udział poprawnych prób. Brak błędów jest opisany jako **Brak zaległych powtórek**. Na głównym podglądzie Food i nad mapą widać podsumowanie. We wspólnym podsumowaniu powtarzająca się pozycja jest liczona raz; pozostaje zaległa, jeśli choć jeden etap jeszcze jej nie utrwalił.
+Na zwiniętym kafelku etapu widać ukończenie lekcji i osobną liczbę zaległości, np. **4 ćwiczenia do utrwalenia**, oznaczoną pomarańczowo. Pasek i procent pokazują ukończenie lekcji i dochodzą do 100% bez czekania na powtórki. Po ukończeniu lekcji i wyzerowaniu zaległości pojawia się zielony stan z gratulacjami. Na głównym podglądzie Food i nad mapą widać podsumowanie. We wspólnym podsumowaniu powtarzająca się pozycja jest liczona raz; pozostaje zaległa, jeśli choć jeden etap jeszcze jej nie utrwalił.
 
-Powtórka nie blokuje zakończenia etapu ani następnych lekcji. Po ponownym błędzie procent może spaść, ale ukończone lekcje i przyznane gwiazdki pozostają. Premia etapu nigdy nie jest przyznawana drugi raz.
+Powtórka nie blokuje zakończenia etapu ani następnych lekcji. Po ponownym błędzie liczba zaległości może wzrosnąć, ale ukończenie lekcji i przyznane gwiazdki pozostają. Premia etapu nigdy nie jest przyznawana drugi raz.
 
 Nowe pola są opcjonalną częścią zapisu `adventure`: `stageReviews`, `reviewSchema` i kursor `reviewArchiveHead`. Stare błędy lekcji z mapy są odtwarzane z ostatnich sesji i, jednorazowo, z archiwum. Brakujące starsze części na drugim urządzeniu wymagają połączenia; nie blokuje to bieżącej nauki. Nagrody etapowe czekają, aż sprawdzenie dawnej historii zostanie zakończone, żeby nie przyznać ich przedwcześnie. Nowszych serii nie zerujemy przy doczytywaniu dawnego błędu. Kolejki, tury i nagrody są objęte zwykłą synchronizacją, ochroną konfliktów, kopią i działaniem offline. Nie trzeba zmieniać reguł Firebase po tej aktualizacji, jeśli reguły dla archiwum zostały już opublikowane.
+
+## Dodatkowy trening
+
+Na mapie i w ćwiczeniach swobodnych jest dobrowolny **Dodatkowy trening**. Powtarza wcześniej poznane słówka i gramatykę z tego kursu, również bezbłędne, zwykle w 8 zadaniach. Przy mniejszej puli może być krótszy. Każda nowa ukończona sesja daje 1 ★; wznowienie i ponowne przetworzenie tej samej sesji nie naliczają gwiazdki ponownie. Nie blokuje mapy i można uruchomić go kilka razy dziennie. Nie ma jeszcze wybranego algorytmu odstępów.
+
+Mechanizm treningu na kolejnych mapach jest osobny: wymagana lekcja po 2–3 lekcjach nowego materiału, materiał wyłącznie wcześniejszych map i nagroda 3 ★ tylko za pierwsze ukończenie. Obecna pierwsza mapa Food pozostaje bez takich lekcji.
 
 ## Domek
 

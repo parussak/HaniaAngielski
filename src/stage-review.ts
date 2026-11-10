@@ -1,10 +1,10 @@
-import { freshAdventure,lessonKey,type Journey,type Stage } from './adventure.ts';
+import { freshAdventure,journeyKey,lessonKey,type Journey,type Stage } from './adventure.ts';
 import { inputFor,questionFor,resolveItem,type AnswerMode,type Item,type Module,type Progress,type Session } from './core.ts';
 import type { HistoryPage } from './history.ts';
 
 export interface ReviewItem {item:Item;correct:number;due:number}
 export interface StageReview {round:number;items:Record<string,ReviewItem>;rewardedAt?:string}
-export const stageKey=(j:Journey,stage:Stage)=>`${j.moduleId}/${stage.id}`;
+export const stageKey=(j:Journey,stage:Stage)=>`${journeyKey(j)}/${stage.id}`;
 export function reviewState(p:Progress,id:string):StageReview|undefined{return p.adventure?.stageReviews?.[id];}
 function ensure(p:Progress,id:string){const a=p.adventure??freshAdventure();a.stageReviews??={};a.stageReviews[id]??={round:0,items:{}};p.adventure=a;return a.stageReviews[id];}
 export function stageForSession(journeys:Journey[],s:Session){
@@ -73,6 +73,9 @@ export function settleStageRewards(p:Progress,journeys:Journey[],at=new Date().t
   if(p.adventure?.reviewArchiveHead)return 0;
   let reward=0;
   for(const j of journeys)for(const stage of j.stages){
+    // Existing stage bonuses are grandfathered. New named maps do not silently
+    // inherit a new retention bonus while that product decision is parked.
+    if(j.id)continue;
     if(!stage.lessons.every(l=>p.adventure?.completed[lessonKey(j,l)]))continue;
     if(reviewStats(p,j,stage).pending || reviewState(p,stageKey(j,stage))?.rewardedAt)continue;
     const state=ensure(p,stageKey(j,stage));state.rewardedAt=at;p.adventure!.earned+=3;reward+=3;

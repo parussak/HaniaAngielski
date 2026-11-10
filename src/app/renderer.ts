@@ -10,7 +10,7 @@ export function createRenderer(root: HTMLDivElement, state: AppState, renderScre
         document.body.classList.toggle('studying', state.screen === 'study');
         document.body.classList.toggle('home-screen', state.screen === 'home');
         const summarySession = state.lastSession ?? state.progress.sessions.at(-1);
-        document.body.classList.toggle('journey-summary', state.screen === 'summary' && !!(summarySession?.lesson || summarySession?.stageReview));
+        document.body.classList.toggle('journey-summary', state.screen === 'summary' && !!(summarySession?.lesson || summarySession?.stageReview || summarySession?.training));
         const focused = document.activeElement as HTMLElement | null;
         const focusAction = focused?.dataset.action;
         const focusId = focused?.id;

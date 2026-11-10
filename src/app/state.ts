@@ -9,6 +9,7 @@ export class AppState {
     progress: Progress = emptyProgress();
     screen: 'home' | 'setup' | 'study' | 'progress' | 'backup' | 'account' | 'summary' | 'map' | 'lesson-intro' | 'house' | 'journeys' | 'module-list' = 'home';
     journeys: Journey[] = [];
+    selectedJourneyKey = '';
     introLessonId = '';
     chosenDecoration = 'pillow';
     lastReward = 0;

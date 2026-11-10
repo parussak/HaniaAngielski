@@ -1,9 +1,9 @@
-import { lessons,nextLesson,type Journey } from './adventure.ts';
+import { journeyKey,lessons,nextLesson,type Journey } from './adventure.ts';
 import { keyFor,resolveItem,sessionCompatible,type Module,type Progress } from './core.ts';
 import { labels } from './learning-labels.ts';
 import { reviewState,stageForSession,stageKey } from './stage-review.ts';
 
-interface StepBase {moduleId:string|null;catId:string}
+interface StepBase {moduleId:string|null;catId:string;journeyId?:string}
 export type NextStep = StepBase & (
   | {kind:'resume';title:string;question:number;total:number}
   | {kind:'lesson';lessonId:string;title:string;stageTitle:string;first:boolean;newModule:boolean}
@@ -22,7 +22,8 @@ export function getNextStep(modules:Module[],journeys:Journey[],p:Progress):Next
   if(active&&!active.completedAt){
     const catId=stageForSession(ordered,active)?.stage.cat??'albert';
     if(!sessionCompatible(modules,active))return {kind:'unavailable',moduleId:active.moduleId,catId};
-    return {kind:'resume',moduleId:active.moduleId,catId,title:active.stageReview?.title??active.lesson?.title??labels[active.mode],question:Math.min(active.index+1,active.items.length),total:active.items.length};
+    const context=stageForSession(ordered,active);
+    return {kind:'resume',moduleId:active.moduleId,catId,...(context?.journey.id?{journeyId:journeyKey(context.journey)}:{}),title:active.stageReview?.title??active.lesson?.title??labels[active.mode],question:Math.min(active.index+1,active.items.length),total:active.items.length};
   }
 
   const activity:{moduleId:string;at:number}[]=[];
@@ -36,11 +37,11 @@ export function getNextStep(modules:Module[],journeys:Journey[],p:Progress):Next
   // Unfinished reviews never block the next lesson or the next module.
   for(const j of candidates){
     const next=nextLesson(j,p);if(!next)continue;
-    return {kind:'lesson',moduleId:j.moduleId,catId:next.stage.cat,lessonId:next.lesson.id,title:next.lesson.title,stageTitle:next.stage.title,first:next.key===lessons(j)[0].key,newModule:!!recent&&recent!==j.moduleId};
+    return {kind:'lesson',moduleId:j.moduleId,catId:next.stage.cat,...(j.id?{journeyId:journeyKey(j)}:{}),lessonId:next.lesson.id,title:next.lesson.title,stageTitle:next.stage.title,first:next.key===lessons(j)[0].key,newModule:!!recent&&recent!==j.moduleId};
   }
   for(const j of candidates)for(const stage of j.stages){
     const pending=Object.values(reviewState(p,stageKey(j,stage))?.items??{}).filter(item=>item.correct<3);
-    if(pending.length&&pending.every(entry=>resolveItem(modules,entry.item)))return {kind:'stage-review',moduleId:j.moduleId,catId:stage.cat,stageId:stage.id,title:stage.title,pending:pending.length};
+    if(pending.length&&pending.every(entry=>resolveItem(modules,entry.item)))return {kind:'stage-review',moduleId:j.moduleId,catId:stage.cat,...(j.id?{journeyId:journeyKey(j)}:{}),stageId:stage.id,title:stage.title,pending:pending.length};
   }
   const available=[...modules].sort((a,b)=>a.order-b.order);
   const preferred=[...available.filter(m=>m.id===recent),...available.filter(m=>m.id!==recent)];

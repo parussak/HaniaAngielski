@@ -64,6 +64,28 @@ test('PWA: konto po zimnym starcie offline zachowuje odpowiedź i synchronizuje 
   }finally{await context.setOffline(false);await server.close();}
 });
 
+test('PWA: dodatkowy trening offline, wznowienie i synchronizacja jednej gwiazdki bez duplikatu',async({page,context})=>{
+  const server=await pwaServer();
+  try{
+    await page.goto(server.url);await offlineReady(page);
+    await page.getByRole('button',{name:'Ustawienia konta',exact:true}).tap();await page.getByLabel('E-mail').fill('training@example.test');await page.getByLabel('Hasło',{exact:true}).fill('test-password');await page.getByRole('button',{name:'Zaloguj się',exact:true}).tap();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie');
+    await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await moduleSetup(page);
+    await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).tap();
+    const prompt=await page.locator('.question').innerText(),word=modules[0].words.find(w=>w.front===prompt)!;
+    await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await expect(page.locator('.feedback.correct')).toBeVisible();
+    await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await moduleSetup(page);await context.setOffline(true);
+    page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Dodatkowy trening →',exact:true}).tap();await expect(page.locator('.study-heading .tag')).toHaveText('1 / 1');
+    await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await expect(page.locator('.question')).toHaveText(prompt);
+    await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('.lesson-reward')).toContainText('+1 ★');
+    await page.reload();await expect(page.getByRole('heading',{name:'Dobrze Cię widzieć!'})).toBeVisible();
+    await context.setOffline(false);await expect.poll(()=>server.remote.get('training@example.test')?.progress.adventure?.earned).toBe(1);
+    const saved=server.remote.get('training@example.test')!.progress;
+    expect(saved.sessions.filter((s:any)=>s.training?.kind==='extra')).toHaveLength(1);
+    expect(saved.sessions.find((s:any)=>s.training?.kind==='extra').training.rewarded).toBe(true);
+    await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('1');
+  }finally{await context.setOffline(false);await server.close();}
+});
+
 test('PWA: aktualizacja czeka na zgodę, zachowuje sesję i nie usuwa cache innych stron',async({page})=>{
   const server=await pwaServer();
   try{

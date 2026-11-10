@@ -23,7 +23,17 @@ public/content/
 
 `sciezka.json` opisuje etapy i lekcje, niezależnie od kodu. Każda lekcja wskazuje `wordIds`, `exerciseIds` i `ruleIds` z pozostałych plików, więc zmiana słówka lub zadania jest widoczna także w lekcji. `title` i `intro` określają tytuł oraz wprowadzenie. Zachowaj identyfikatory lekcji przy poprawianiu tytułów: według nich przyznawane są jednorazowe nagrody. [Pełna instrukcja mapy i domku](../../docs/kocia-przygoda.md).
 
-Kafelek **Powtórka** na końcu każdego etapu powstaje automatycznie z błędów użytkownika. Nie dopisuj go do tablicy zwykłych lekcji: nie blokuje kolejnego etapu. Zachowaj także identyfikatory etapów — są kluczem ich osobnych kolejek powtórek i nagród. Procent oznacza udział zebranych pozycji, które osiągnęły 3/3 w ukończonych turach, a dodatkowe 3 ★ przysługują raz po ukończeniu wszystkich lekcji i utrwaleniu całej kolejki.
+Kafelek **Powtórka** na końcu każdego etapu powstaje automatycznie z błędów użytkownika. Nie dopisuj go do tablicy zwykłych lekcji: nie blokuje kolejnego etapu. Zachowaj także identyfikatory etapów — są kluczem ich osobnych kolejek powtórek i nagród. Procent i pasek pokazują ukończenie lekcji. Zaległości podajemy osobno liczbą ćwiczeń, które nie osiągnęły 3/3 w ukończonych turach. W obecnym Food dodatkowe 3 ★ przysługują raz po ukończeniu wszystkich lekcji etapu i utrwaleniu całej kolejki.
+
+### Kolejne mapy i treningi
+
+Metadane modułu mogą wskazywać `journeyPaths`, uporządkowaną listę 1–3 plików, np. `["02-food/sciezka.json", "02-food/druga-mapa.json"]`. Lista zastępuje pojedyncze `journeyPath`. Nowa mapa ma własne `id`, np. `druga-mapa`, unikalne w module. **Nie dopisuj `id` do istniejącej mapy Food** — zmieniłoby to klucze jej ukończeń. Stare klucze pozostają `moduleId/lessonId`, a nowe `moduleId/mapId/lessonId`.
+
+Zwykłe lekcje nowych nazwanych map mają 6–10 zadań. Istniejące krótsze lekcje Food są nadal obsługiwane. Trening na mapie to lekcja z `role: "training"`, pustymi `wordIds`, `exerciseIds`, `ruleIds` i opcjonalnym `targetCount` 6–10 (domyślnie 8). Dobiera poznany materiał wcześniejszych map tego samego kursu; nie wpisujemy pytań treningowych na stałe. Pierwszy trening umieszczamy po 2–3 lekcjach nowego materiału, kolejne co 2–3. Pierwsza mapa kursu nie ma materiału wcześniejszych map, więc nie dodajemy tam pustych treningów. Treningi są wymagane do ukończenia mapy i dają 3 ★ tylko za pierwsze ukończenie.
+
+Osobnego przycisku **Dodatkowy trening** nie dodajemy do JSON mapy. Jest dobrowolny, korzysta z poznanego zakresu kursu, może być krótszy przy małej puli i daje 1 ★ za ukończoną sesję. Nie zwiększa liczby wymaganych lekcji. Nie ma jeszcze harmonogramu SM-2 ani FSRS.
+
+Nowe podręczniki powinny deklarować osobny `courseId`; moduły różnych kursów muszą mieć różne `id`. Opcjonalny `languageCode` (np. `fr`, `it`) określa język treści i poleceń. To przygotowanie zakresów, nie kompletny model kursu ani jego ekran wyboru. Stare materiały bez `courseId` korzystają z tymczasowego zakresu według języka; nie należy używać go do łączenia nowych podręczników.
 
 ## Dwa zestawy fiszek
 

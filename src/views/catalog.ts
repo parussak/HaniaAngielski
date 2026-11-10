@@ -1,7 +1,8 @@
 import { lessons, stars, type Journey } from '../adventure.ts';
 import type { Module, Progress } from '../core.ts';
-import { pendingLabel, reviewStats } from '../stage-review.ts';
 import { e, icon } from '../ui.ts';
+import { mapProgress,reviewProgressText } from '../learning/map-progress.ts';
+import { journeyKey } from '../adventure.ts';
 function moduleSubtitle(m: Module) { return [m.level, `Moduł ${m.order}`, m.cover].filter(Boolean).map(e).join(' · '); }
 export function journeyList(modules: Module[], journeys: Journey[], progress: Progress) {
     return `<button class="back" data-action="home">← Moja nauka</button>
@@ -16,18 +17,18 @@ export function journeyList(modules: Module[], journeys: Journey[], progress: Pr
     <p class="lead">Wybierz mapę. Ucz się małymi krokami i zdobywaj gwiazdki do kociego domku.</p>
     <div class="journey-catalog">${journeys.map(j => {
         const m = modules.find(m => m.id === j.moduleId)!;
-        const done = lessons(j).filter(l => progress.adventure?.completed[l.key]).length, total = lessons(j).length, reviews = reviewStats(progress, j);
+        const done = lessons(j).filter(l => progress.adventure?.completed[l.key]).length, total = lessons(j).length, reviews = mapProgress(j,progress);
         return `<article class="adventure-invite">
     <div>
     <p class="catalog-subtitle">${moduleSubtitle(m)}</p>
     <h2>${e(j.title)}</h2>
     <p>${done} z ${total} lekcji ukończonych</p>
-    <div class="journey-progress" role="progressbar" aria-label="Ukończone lekcje: ${e(j.title)}" aria-valuenow="${done}" aria-valuemin="0" aria-valuemax="${total}">
-    <span style="width:${Math.round(done / total * 100)}%">
+    <div class="journey-progress ${reviews.mastered?'is-mastered':''}" role="progressbar" aria-label="Ukończone lekcje: ${e(j.title)}" aria-valuenow="${done}" aria-valuemin="0" aria-valuemax="${total}">
+    <span style="width:${reviews.percent}%">
     </span>
     </div>
-    <p class="retention-overview">${reviews.total ? `Utrwalenie: ${reviews.percent}% · ${reviews.pending ? `do powtórzenia: ${pendingLabel(reviews)}` : 'brak zaległych powtórek ✓'}` : 'Brak zaległych powtórek ✓'}${progress.adventure?.reviewArchiveHead ? ' · pobieramy starsze błędy' : ''}</p>
-    <button class="primary" data-action="map" data-id="${e(j.moduleId)}" aria-label="Otwórz mapę ${e(j.title)}">Otwórz mapę ${icon('arrow')}</button>
+    <p class="retention-overview ${reviews.pending?'has-pending':reviews.mastered?'is-mastered':''}">${e(reviewProgressText(reviews))}${progress.adventure?.reviewArchiveHead ? ' · pobieramy starsze błędy' : ''}</p>
+    <button class="primary" data-action="map" data-id="${e(j.moduleId)}" data-journey="${e(journeyKey(j))}" aria-label="Otwórz mapę ${e(j.title)}">Otwórz mapę ${icon('arrow')}</button>
     </div>
     <img src="./illustrations/word-have-a-picnic.svg" alt="" width="110" height="100">
     </article>`;

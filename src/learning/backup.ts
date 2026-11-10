@@ -9,7 +9,11 @@ export function validateBackup(input: unknown): Backup {
     const integer = (v: unknown): v is number => Number.isSafeInteger(v) && (v as number) >= 0;
     const validItem = (i: unknown): boolean => obj(i) && str(i.key) && str(i.moduleId) && integer(i.version) && i.version > 0 && ['word', 'exercise'].includes(i.type as string) && str(i.id) && ['text', 'choice'].includes(i.input as string) && i.key === `${i.moduleId}@${i.version}:${i.type}:${i.id}`;
     const validSession = (v: unknown, completed: boolean): boolean => {
-        if (!obj(v) || !str(v.id) || !str(v.moduleId) || !['flashcards', 'flashcards-basic', 'quiz', 'grammar', 'dialogue', 'review', 'lesson'].includes(v.mode as string) || !['choice', 'text', 'mixed'].includes(v.answerMode as string) || typeof v.previous !== 'boolean' || !date(v.startedAt) || !(completed ? date(v.completedAt) : v.completedAt === null) || !['question', 'revealed', 'feedback', 'retry'].includes(v.phase as string) || !(v.lastCorrect === null || typeof v.lastCorrect === 'boolean'))
+        if (!obj(v) || !str(v.id) || !str(v.moduleId) || !['flashcards', 'flashcards-basic', 'quiz', 'grammar', 'dialogue', 'review', 'lesson', 'training'].includes(v.mode as string) || !['choice', 'text', 'mixed'].includes(v.answerMode as string) || typeof v.previous !== 'boolean' || !date(v.startedAt) || !(completed ? date(v.completedAt) : v.completedAt === null) || !['question', 'revealed', 'feedback', 'retry'].includes(v.phase as string) || !(v.lastCorrect === null || typeof v.lastCorrect === 'boolean'))
+            return false;
+        if (v.training !== undefined && (!obj(v.training) || !['map','extra'].includes(v.training.kind as string) || (v.training.kind === 'map' ? v.mode !== 'lesson' || v.training.rewarded !== undefined : v.mode !== 'training' || v.lesson !== undefined || v.stageReview !== undefined || v.training.rewarded !== undefined && (v.training.rewarded !== true || !completed))))
+            return false;
+        if (v.mode === 'training' && (!obj(v.training) || v.training.kind !== 'extra'))
             return false;
         if (v.lesson !== undefined && (!obj(v.lesson) || !str(v.lesson.id) || !str(v.lesson.title) || v.mode !== 'lesson'))
             return false;
@@ -71,9 +75,9 @@ export function validateBackup(input: unknown): Backup {
             return fail();
         if (a.stageReviews !== undefined) {
             if (!obj(a.stageReviews) || !Object.entries(a.stageReviews).every(([key, state]) => {
-                if (!/^[a-z0-9-]+\/[a-z0-9-]+$/.test(key) || !obj(state) || !integer(state.round) || !obj(state.items) || (state.rewardedAt !== undefined && !date(state.rewardedAt)))
+                if (!/^[a-z0-9-]+\/[a-z0-9-]+(?:\/[a-z0-9-]+)?$/.test(key) || !obj(state) || !integer(state.round) || !obj(state.items) || (state.rewardedAt !== undefined && !date(state.rewardedAt)))
                     return false;
-                return Object.entries(state.items).every(([itemKey, entry]) => obj(entry) && validItem(entry.item) && obj(entry.item) && entry.item.key === itemKey && key.startsWith(`${entry.item.moduleId}/`) && integer(entry.correct) && entry.correct <= 3 && integer(entry.due) && (entry.correct === 3 ? entry.due === 0 : entry.due > 0));
+                return Object.entries(state.items).every(([itemKey, entry]) => obj(entry) && validItem(entry.item) && obj(entry.item) && entry.item.key === itemKey && integer(entry.correct) && entry.correct <= 3 && integer(entry.due) && (entry.correct === 3 ? entry.due === 0 : entry.due > 0));
             }))
                 return fail();
         }
