@@ -34,7 +34,7 @@ export function lessonForProgress(j:Journey,l:Lesson,p:Progress):Lesson {
 }
 export function journeyForProgress(j:Journey,p:Progress):Journey{return {...j,stages:j.stages.map(s=>({...s,lessons:s.lessons.map(l=>lessonForProgress(j,l,p))}))};}
 export function nextLesson(journey:Journey,p:Progress){return lessons(journeyForProgress(journey,p)).find(({key})=>!p.adventure?.completed[key]);}
-export function unlocked(journey:Journey,lesson:Lesson,p:Progress){const all=lessons(journey),index=all.findIndex(l=>l.lesson.id===lesson.id);return index>=0&&all.slice(0,index).every(l=>p.adventure?.completed[l.key]);}
+export function unlocked(journey:Journey,lesson:Lesson,_p:Progress){return lessons(journey).some(l=>l.lesson.id===lesson.id);}
 export function validateJourney(value:unknown,m:Module):Journey {
   const j=value as Journey,fail=():never=>{throw new Error('Niepoprawna mapa modułu.');};
   if(!j || j.version!==1 || j.moduleId!==m.id || !/^[a-z0-9-]+$/.test(j.moduleId) || typeof j.title!=='string' || !Array.isArray(j.stages)||!j.stages.length)return fail();
@@ -84,13 +84,16 @@ export function makeLessonSession(modules:Module[],journey:Journey,lesson:Lesson
   const m=modules.find(m=>m.id===journey.moduleId)!;
   const items:Item[]=[...lesson.wordIds.map(id=>({key:keyFor(m,'word',id),moduleId:m.id,version:m.words.find(w=>w.id===id)?.rev??1,type:'word' as const,id,input:'text' as const})),...lesson.exerciseIds.map(id=>({key:keyFor(m,'exercise',id),moduleId:m.id,version:m.exercises.find(q=>q.id===id)?.rev??1,type:'exercise' as const,id,input:'text' as const}))];
   items.forEach((item,i)=>item.input=inputFor(questionFor(modules,item),answerMode==='mixed'?(i%2?'text':'choice'):answerMode));
-  return {id:crypto.randomUUID(),moduleId:m.id,mode:'lesson',lesson:{id:lessonKey(journey,lesson),title:lesson.title,...(lesson.edition?{edition:lesson.edition}:{})},answerMode,previous:false,startedAt:new Date().toISOString(),completedAt:null,items,index:0,phase:'question',lastCorrect:null,attempts:[],repeatKeys:[]};
+  return {fixedLength:true,id:crypto.randomUUID(),moduleId:m.id,mode:'lesson',lesson:{id:lessonKey(journey,lesson),title:lesson.title,...(lesson.edition?{edition:lesson.edition}:{})},answerMode,previous:false,startedAt:new Date().toISOString(),completedAt:null,items,index:0,phase:'question',lastCorrect:null,attempts:[],repeatKeys:[]};
 }
 export function rewardCompletion(p:Progress,s:Session){
   if(!s.completedAt || !s.items.every(i=>s.attempts.some(a=>a.key===i.key)))return 0;
   const a=p.adventure??freshAdventure();
   let reward=0;
+  const saved=p.sessions.find(session=>session.id===s.id);
   if(s.lesson && !Object.hasOwn(a.completed,s.lesson.id)){a.completed[s.lesson.id]={at:s.completedAt,...(s.lesson.edition?{edition:s.lesson.edition}:{})};reward=3;}
+  else if(s.lesson&&s.fixedLength&&saved&&!saved.lessonRewarded)reward=1;
+  if(s.lesson&&reward){s.lessonRewarded=true;if(saved)saved.lessonRewarded=true;}
   if(s.training?.kind==='extra'){
     const saved=p.sessions.find(session=>session.id===s.id);
     if(saved?.training?.kind==='extra'&&!saved.training.rewarded){saved.training.rewarded=true;s.training.rewarded=true;reward=1;}

@@ -1,3 +1,4 @@
+import {openBackup} from './navigation.ts';
 import { test, expect, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { modules } from '../materials.ts';
@@ -23,7 +24,7 @@ function fixture() {
 }
 async function importProgress(page: Page, p: Progress) {
     await page.goto('./');
-    await page.locator('.sidebar').getByRole('button', { name: 'Kopia postępów', exact: true }).tap();
+    await openBackup(page);
     await page.locator('#import-file').setInputFiles({ name: 'training.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(backup(p))) });
     await page.getByRole('button', { name: 'Zastąp postępy', exact: true }).tap();
     await expect(page.locator('#app')).toHaveAttribute('aria-busy', 'false');

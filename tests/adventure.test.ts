@@ -15,13 +15,13 @@ test('Food ma siedem etapów i obejmuje wszystkie 97 słówek oraz zadania bez p
   for(const q of modules[0].exercises.filter(q=>q.kind!=='vocabulary'&&!q.id.startsWith('food-')))assert.ok(exerciseIds.has(q.id),q.id);
   assert.ok(lessons(j).every(l=>l.lesson.exerciseIds.length+l.lesson.wordIds.length<=8));
 });
-test('lekcja odblokowuje następny krok, nagradza poprawkę i nie daje ponownej nagrody',()=>{
+test('dowolna lekcja jest dostępna; pierwsze ukończenie daje trzy gwiazdki, pełna powtórka jedną',()=>{
   const p=emptyProgress(),l=lessons(j)[0].lesson,second=lessons(j)[1].lesson;
-  assert.equal(unlocked(j,second,p),false);assert.throws(()=>makeLessonSession(modules,j,second,'mixed',p));
+  assert.equal(unlocked(j,second,p),true);assert.ok(makeLessonSession(modules,j,second,'mixed',p));
   p.active=makeLessonSession(modules,j,l,'text',p);assert.equal(rewardCompletion(p,p.active),0);
   const s=finish(p,true);assert.equal(s.attempts[0].first,false);assert.equal(rewardCompletion(p,s),3);assert.equal(stars(p),3);
   assert.equal(rewardCompletion(p,s),0);assert.equal(unlocked(j,second,p),true);assert.equal(nextLesson(j,p)?.lesson.id,second.id);
-  p.active=makeLessonSession(modules,j,l,'choice',p);assert.equal(rewardCompletion(p,finish(p)),0);assert.equal(stars(p),3);
+  p.active=makeLessonSession(modules,j,l,'choice',p);assert.equal(rewardCompletion(p,finish(p)),1);assert.equal(stars(p),4);
   assert.deepEqual(validateBackup(backup(p)).progress,p);
 });
 test('zakup, powtórny zakup, zamiana i schowanie przedmiotu zachowują saldo i własność',()=>{

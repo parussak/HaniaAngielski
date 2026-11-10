@@ -1,3 +1,4 @@
+import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
 import {test,expect} from '@playwright/test';
 import {readFileSync} from 'node:fs';
@@ -15,7 +16,7 @@ test('telefon: wybór podstawy i pełnych fiszek, zakres zapisany w kopii',async
   await expect(page.locator('.option')).toHaveCount(3);
   await page.screenshot({path:'test-results/active-flashcard-mobile.png'});
   await expect(page.getByRole('button',{name:'Pokaż odpowiedź'})).toHaveCount(0);
-  await page.getByRole('button',{name:'Kopia postępów',exact:true}).tap();
+  await openBackup(page);
   const downloaded=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).tap();
   const file=await(await downloaded).path();const session=JSON.parse(readFileSync(file!,'utf8')).progress.active;
   expect(session.mode).toBe('flashcards-basic');
@@ -33,7 +34,7 @@ test('telefon: aktywne fiszki mieszane, błąd, poprawa, wznowienie i wynik',asy
   await expect(page.getByRole('button',{name:/Rozpocznij naukę/})).toHaveCount(0);
   await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).tap();
   let sawText=false,sawChoice=false;
-  for(let i=0;i<11;i++){
+  for(let i=0;i<10;i++){
     const front=await page.locator('.question').innerText();
     const word=modules[0].words.find(w=>w.front===front)!;
     if(await page.getByRole('textbox').isVisible()){

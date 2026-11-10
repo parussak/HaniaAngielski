@@ -1,4 +1,8 @@
 import {type Page} from '@playwright/test';
+export async function openBackup(page:Page){
+  await page.locator('.sidebar nav').getByRole('button',{name:'Konto',exact:true}).click();
+  await page.getByRole('button',{name:'Kopia postępów',exact:true}).click();
+}
 export async function openModule(page:Page){
   await page.getByRole('button',{name:/Przejdź do modułów/}).click();
   await page.getByRole('button',{name:'Otwórz moduł Food — Fun with food'}).click();

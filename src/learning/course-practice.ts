@@ -54,6 +54,6 @@ export function makeCoursePracticeSession(modules: Module[], anchor: Module, p: 
             else item.options = options;
         }
     });
-    return { id: crypto.randomUUID(), moduleId: anchor.id, mode, scope: { kind: 'course', courseId: courseKey(anchor) }, answerMode, previous: true,
+    return { fixedLength:true,id: crypto.randomUUID(), moduleId: anchor.id, mode, scope: { kind: 'course', courseId: courseKey(anchor) }, answerMode, previous: true,
         startedAt: new Date().toISOString(), completedAt: null, items, index: 0, phase: 'question', lastCorrect: null, attempts: [], repeatKeys: [] };
 }

@@ -19,3 +19,11 @@ W sekcjach 5–7 poprawiamy wyłącznie nieukończone lekcje. Wszystkie zaliczon
 ## Do ustalenia
 
 Potwierdzić pełną identyfikację podręcznika i wydania przy dodawaniu dalszych działów. Poprawki trzech sekcji, ochronę wyników i dodatkową mapę wdrożono — [U-03](../decyzje.md#u-03). Dotychczasowe akceptowane odpowiedzi są w materiałach i nie zmieniają się przez edycję tej karty.
+
+## Bieżące zasady a/an w Food — D-37
+
+Wskazane hasła mają jawne dane rodzajnika i polskie objaśnienie. Pominięcie właściwego a/an w odpowiedzi słownikowej jest zaliczane z pomarańczowym przypomnieniem pełnej formy i przyczyny. Zły lub zbędny a/an jest błędem. Nie zmieniamy tak kryteriów ćwiczeń gramatycznych.
+
+Doprecyzowano wskazówki bez zmiany identyfikatorów, rewizji, odpowiedzi źródłowych i starych ocen: `fruit` to owoce ogólnie (nie rodzaje owoców), `fish` to jedzenie, `toast` to pieczywo tostowe, `salad` i `yoghurt` to jedna porcja, a `chocolate cake` jedno całe ciasto. Nazwy posiłków opisują posiłek ogólnie. Odpowiedź `fruits` nie pasuje do pytania o owoce ogólnie; objaśnienie rozróżnia to od rodzajów owoców. Nie tworzymy ogólnej zamienności liczby pojedynczej i mnogiej.
+
+Uzupełniające źródła reguł (nie dodatkowy zakres materiału podręcznika): [Cambridge — a/an/the](https://dictionary.cambridge.org/grammar/british-grammar/a-an-the), [Oxford — yoghurt/yogurt](https://www.oxfordlearnersdictionaries.com/us/definition/english/yogurt), [Oxford — toast](https://www.oxfordlearnersdictionaries.com/definition/english/toast_1). Opracowano wskazówki dla istniejących haseł; nie wykonano przy tej zmianie ponownego audytu wszystkich stron podręcznika.

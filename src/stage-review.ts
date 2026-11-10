@@ -57,7 +57,7 @@ export function makeStageReviewSession(modules:Module[],j:Journey,stage:Stage,_a
   const round=Math.max(state.round+1,Math.min(...remaining.map(e=>e.due)));
   const items=remaining.filter(e=>e.due<=round).sort((a,b)=>a.correct-b.correct||a.due-b.due||a.item.key.localeCompare(b.item.key)).slice(0,10).map(e=>structuredClone(e.item));
   items.forEach(item=>item.input=inputFor(questionFor(modules,item),'text','review'));
-  return {id:crypto.randomUUID(),moduleId:j.moduleId,mode:'review',stageReview:{id:stageKey(j,stage),title:`Powtórka · ${stage.title}`,round},answerMode:'text',previous:false,startedAt:new Date().toISOString(),completedAt:null,items,index:0,phase:'question',lastCorrect:null,attempts:[],repeatKeys:[]};
+  return {fixedLength:true,id:crypto.randomUUID(),moduleId:j.moduleId,mode:'review',stageReview:{id:stageKey(j,stage),title:`Powtórka · ${stage.title}`,round},answerMode:'text',previous:false,startedAt:new Date().toISOString(),completedAt:null,items,index:0,phase:'question',lastCorrect:null,attempts:[],repeatKeys:[]};
 }
 export function finishStageReview(p:Progress,s:Session){
   if(!s.stageReview||!s.completedAt||!s.items.every(i=>s.attempts.some(a=>a.key===i.key)))return false;

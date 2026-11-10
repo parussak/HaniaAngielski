@@ -18,8 +18,7 @@ test('kotki reagują na błąd i poprawę, wracają po odświeżeniu i bawią na
   await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).click();await expect(page.locator('.cat-mascot')).toHaveCount(0);
   await page.getByRole('button',{name:'niepoliczalny',exact:true}).click();await expect(mascot).toHaveAttribute('data-mood',/^(happy|celebrating)$/);await expect(mascot).toHaveAttribute('data-cat',cat!);
   await page.screenshot({path:'test-results/cat-success-mobile.png'});
-  await page.getByRole('button',{name:'Dalej',exact:false}).click();await expect(page.getByRole('button',{name:'niepoliczalny',exact:true})).toBeVisible();
-  await page.getByRole('button',{name:'niepoliczalny',exact:true}).click();await page.getByRole('button',{name:'Dalej',exact:false}).click();
+  await page.getByRole('button',{name:'Dalej',exact:false}).click();
   await expect(page.getByRole('heading',{name:'Dobra robota, Haniu!'})).toBeVisible();await expect(page.locator('.summary .cat-mascot')).toHaveAttribute('data-mood','funny');
   await expect(page.locator('.summary-score')).toContainText('0 / 1');await page.screenshot({path:'test-results/cat-summary-mobile.png'});
 });

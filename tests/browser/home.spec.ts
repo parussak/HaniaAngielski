@@ -1,3 +1,4 @@
+import {openBackup} from './navigation.ts';
 import {test,expect} from '@playwright/test';
 import {modules} from '../materials.ts';
 import {backup,emptyProgress,makeSession} from '../../src/core.ts';
@@ -48,7 +49,7 @@ for(const width of [320,390])test(`strona startowa ${width}px: dwa wejścia, kot
 test('kontynuacja bezpośrednio pod imieniem przywraca zapisaną sesję',async({page})=>{
   await page.setViewportSize({width:390,height:844});
   const p=emptyProgress();p.active=makeSession(modules,modules[0],'grammar','text',false,p);
-  await page.goto('./');await page.getByRole('button',{name:'Kopia postępów',exact:true}).tap();
+  await page.goto('./');await openBackup(page);
   await page.locator('#import-file').setInputFiles({name:'resume.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();
   await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();

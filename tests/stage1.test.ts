@@ -47,7 +47,7 @@ test('I3: co najmniej 30 poprawnych i błędnych zapisów odpowiedzi',()=>{
     ['a bottle of water','bottle water',false],['a jar of jam','a bar of jam',false],
     ['breakfast','dinner',false],['rice','Rice.',true],['strawberry',' strawberry ? ',true],['egg','',false]
   ];
-  for(const [expected,answer,correct] of cases) assert.equal(isCorrect({...m.exercises[0],answers:[expected]},answer),correct,answer);
+  for(const [expected,answer,correct] of cases) assert.equal(isCorrect({...m.exercises[0],article:undefined,answers:[expected]},answer),correct,answer);
 });
 test('I3: pan akceptuje frying pan bez duplikatów, g-lot-apples ma jednoznaczny zakres',()=>{
   const pan=m.words.find(w=>w.id==='pan')!;assert.ok(pan.answers!.includes('frying pan'));

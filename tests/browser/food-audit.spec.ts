@@ -1,3 +1,4 @@
+import {openBackup} from './navigation.ts';
 import {test,expect,type Page} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {modules} from '../materials.ts';
@@ -7,7 +8,7 @@ import {openMap} from './navigation.ts';
 const read=(f:string):Journey=>JSON.parse(readFileSync(new URL(`../../public/content/02-food/${f}.json`,import.meta.url),'utf8'));
 const j=read('sciezka'),second=read('sciezka-praktyka'),at='2026-11-09T12:00:00.000Z';
 function progress(all=false){const p=emptyProgress();p.adventure=freshAdventure();p.adventure.earned=144;p.adventure.reviewSchema=1;p.adventure.stageReviews={};for(const s of j.stages.filter((_,i)=>all||i<4)){p.adventure.stageReviews[`${j.moduleId}/${s.id}`]={round:0,items:{},rewardedAt:at};for(const l of s.lessons)p.adventure.completed[`${j.moduleId}/${l.id}`]={at};}return p;}
-async function restore(page:Page,p:Progress){await page.goto('./');await page.getByRole('button',{name:'Kopia postępów',exact:true}).tap();await page.locator('#import-file').setInputFiles({name:'food.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();}
+async function restore(page:Page,p:Progress){await page.goto('./');await openBackup(page);await page.locator('#import-file').setInputFiles({name:'food.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();}
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 
 test('telefon: ukończona restauracja zachowuje pięć pytań, nieukończona dostaje sześć',async({page})=>{

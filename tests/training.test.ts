@@ -131,7 +131,7 @@ test('pierwsza mapa nie ma puli wcześniejszych map; trening drugiej nie bierze 
     assert.equal(s.training?.kind, 'map');
     assert.ok(s.items.every(it => allowed.has(it.key)));
     assert.equal(s.lesson?.id, `${m.id}/second/training-1`);
-    assert.throws(() => makeTrainingSession(modules, m, emptyProgress(), 'mixed', { journey: j, lesson: training, journeys: [food, j] }));
+    assert.equal(makeTrainingSession(modules, m, emptyProgress(), 'mixed', { journey: j, lesson: training, journeys: [food, j] }),null);
 });
 
 test('3 gwiazdki za trening na mapie tylko raz; trening jest wymagany, błędy nie blokują ukończenia', () => {
@@ -139,7 +139,7 @@ test('3 gwiazdki za trening na mapie tylko raz; trening jest wymagany, błędy n
     const j = secondMap(), [a, b, training, last] = j.stages[0].lessons;
     p.adventure = freshAdventure();
     for (const l of [a, b]) p.adventure.completed[lessonKey(j, l)] = { at: new Date().toISOString() };
-    assert.equal(unlocked(j, last, p), false);
+    assert.equal(unlocked(j, last, p), true);
     assert.equal(mapProgress(j, p).complete, false);
     p.active = makeTrainingSession(modules, m, p, 'mixed', { journey: j, lesson: training, journeys: [food, j] });
     const s = finish(p);

@@ -24,12 +24,12 @@ test('błąd, poprawa, powtórka i podwójne kliknięcie nie zawyżają pierwsze
   const restored = validateBackup(JSON.parse(JSON.stringify(backup(p)))).progress;
   assert.equal(restored.active?.phase,'feedback'); assert.equal(restored.active?.lastCorrect,true);
 });
-test('odkrycie fiszki nie oznacza jej znajomości; trudna fiszka wraca raz', () => {
+test('odkrycie fiszki nie oznacza jej znajomości; trudna fiszka zostaje do osobnej powtórki', () => {
   const p = emptyProgress(); p.active = makeSession(modules,m,'flashcards','mixed',false,p);
-  const key = p.active.items[0].key; p.active.phase = 'revealed';
+  const key = p.active.items[0].key; const initialLength=p.active.items.length; p.active.phase = 'revealed';
   assert.equal(Object.keys(p.words).length,0);
   markWord(p,false); assert.equal(p.words[key],'review');
-  assert.equal(p.active.items.at(-1)?.key,key);
+  assert.equal(p.active.items.length,initialLength);
 });
 test('zakres pomija późniejsze moduły i zadania wymagające niedozwolonych treści', () => {
   const prior = {...m,id:'prior',order:0,exercises:[],words:[]};

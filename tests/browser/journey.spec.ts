@@ -27,9 +27,10 @@ test('telefon: fiszki, quiz mieszany, powtórka błędów i brak błędów zasob
   page.once('dialog',dialog=>dialog.accept());
   await page.getByRole('button',{name:/^Quiz słownictwa/}).tap();
   const all=modules[0].exercises;
-  let sawText=false,sawChoice=false;
+  let sawText=false,sawChoice=false,wrongQuestion='';
   for(let index=0;index<10;index++) {
     const prompt=await page.locator('.question').innerText();
+    if(index===0)wrongQuestion=prompt;
     const word=all.find(w=>w.prompt===prompt)!;
     if(await page.getByRole('textbox').isVisible()) {
       sawText=true; await page.getByRole('textbox').fill(index===0?'wrong':word.answers[0]);
@@ -44,16 +45,12 @@ test('telefon: fiszki, quiz mieszany, powtórka błędów i brak błędów zasob
     await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
   }
   expect(sawText).toBeTruthy();expect(sawChoice).toBeTruthy();
-  // Błędny pierwszy wyraz wraca raz. Drugą próbę pomijamy z błędem, aby sprawdzić powtórkę.
-  const q=await page.locator('.question').innerText();
-  if(await page.getByRole('textbox').isVisible()) { await page.getByRole('textbox').fill('wrong'); await page.getByRole('button',{name:/Sprawdź/}).tap(); }
-  else {const word=all.find(w=>w.prompt===q)!;await page.locator('.option').filter({hasNotText:word.answers[0]}).first().tap();}
-  await page.getByRole('button',{name:'Dalej',exact:false}).tap();
+  // Dziesięć zadań kończy sesję. Błąd pozostaje w osobnej powtórce.
   await expect(page.getByRole('heading',{name:'Dobra robota, Haniu!'})).toBeVisible();
   await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
   await openModule(page);
   await page.getByRole('button',{name:/^Powtórka błędów/}).tap();
   await expect(page.locator('.question')).toBeVisible();
-  expect([q,reviewWord]).toContain(await page.locator('.question').innerText());
+  expect([wrongQuestion,reviewWord]).toContain(await page.locator('.question').innerText());
   expect(failures).toEqual([]);
 });

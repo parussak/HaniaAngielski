@@ -10,6 +10,21 @@ import {earlierMapKeys,makeTrainingSession,validateTrainingPlan} from '../src/le
 import {makeStageReviewSession,recordStageError,reviewStats,settleStageRewards} from '../src/stage-review.ts';
 const read=(name:string)=>JSON.parse(readFileSync(new URL(`../public/content/02-food/${name}.json`,import.meta.url),'utf8'));
 const m=modules[0],j=validateJourney(read('sciezka'),m),second=validateJourney(read('sciezka-praktyka'),m);
+// Only approved cue clarifications and the new article guidance are excluded
+// from the historical checksum; all IDs, revisions and source answers stay protected.
+const originalWords=()=>read('slownictwo').map((w:any)=>{
+ const copy={...w};delete copy.article;
+ const cues:Record<string,[string,string]>={
+  fruit:['owoc / owoce','owoce (ogólnie, nie rodzaje owoców)'],fish:['ryba','ryba (jako jedzenie)'],
+  yoghurt:['jogurt','jogurt (jedna porcja)'],salad:['sałatka','sałatka (jedna porcja)'],
+  'chocolate-cake':['ciasto czekoladowe','ciasto czekoladowe (jedno całe ciasto)'],toast:['tost / grzanka','pieczywo tostowe (ogólnie)']
+ };
+ if(cues[w.id]){assert.equal(w.front,cues[w.id][1]);copy.front=cues[w.id][0];}
+ else if(['breakfast','lunch','dinner'].includes(w.id)){
+  assert.ok(w.front.endsWith(' (nazwa posiłku, ogólnie)'));copy.front=w.front.replace(' (nazwa posiłku, ogólnie)','');
+ }
+ return copy;
+});
 const hash=(v:unknown)=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
 const at='2026-11-09T12:00:00.000Z';
 function unlockedRestaurant(){const p=emptyProgress();p.adventure=freshAdventure();p.adventure.earned=92;for(const e of lessons(j).filter(e=>j.stages.indexOf(e.stage)<4))p.adventure.completed[e.key]={at};return p;}
@@ -24,7 +39,7 @@ test('audyt Food: oryginalne mapy, słówka, pytania i objaśnienia nie są podm
   ['cwiczenia','d66b03a4be6101d8d63e201329abc2a843089ff1399cefa2af14f483b929b759',59],
   ['gramatyka','69c0e2c3fb263b5e2c2e6f0b40554a0d23e773ebf7c921f2aa5bd5d10173728c',9],
   ['rozmowki','67f8ff8812e829a7538b67c22479f177d6e4f79ae1bd8124fd489a0c9db66b2b',12]
- ] as const)assert.equal(hash(read(name).slice(0,count)),expected,name);
+ ] as const)assert.equal(hash((name==='slownictwo'?originalWords():read(name)).slice(0,count)),expected,name);
  assert.ok(j.stages.slice(0,4).every(s=>s.lessons.every(l=>!l.update)));
  assert.ok(j.stages.slice(4).every(s=>s.lessons.every(l=>l.update)));
 });
@@ -55,7 +70,7 @@ test('rozpoczęta dawna lekcja, błędy i backup pozostają obsługiwane po aktu
  assert.equal(restored.adventure!.earned,92);
 });
 
-test('nowa wersja zapisuje wydanie przy ukończeniu, wznawia się i nie przyznaje ponownej nagrody',()=>{
+test('nowa wersja zapisuje wydanie przy ukończeniu, wznawia się i przyznaje jedną gwiazdkę za nową pełną powtórkę',()=>{
  const p=unlockedRestaurant(),l=j.stages[4].lessons[0];p.active=makeLessonSession(modules,j,l,'text',p);
  assert.equal(p.active.lesson!.edition,2);assert.equal(p.active.items.length,6);
  const restored=validateBackup(backup(p)).progress;assert.equal(restored.active!.lesson!.edition,2);
@@ -63,7 +78,7 @@ test('nowa wersja zapisuje wydanie przy ukończeniu, wznawia się i nie przyznaj
  assert.equal(restored.adventure!.earned,95);assert.equal(restored.adventure!.completed[s.lesson!.id].edition,2);
  assert.equal(lessonForProgress(j,l,restored).exerciseIds.length,1);
  restored.active=makeLessonSession(modules,j,l,'choice',restored);assert.equal(restored.active.items.length,6);
- assert.equal(rewardCompletion(restored,finish(restored)),0);assert.equal(restored.adventure!.earned,95);
+ assert.equal(rewardCompletion(restored,finish(restored)),1);assert.equal(restored.adventure!.earned,96);
  assert.deepEqual(validateBackup(backup(restored)).progress,restored);
  const invalid=backup(restored);invalid.progress.adventure!.completed[s.lesson!.id].edition=3 as 2;assert.throws(()=>validateBackup(invalid));
 });

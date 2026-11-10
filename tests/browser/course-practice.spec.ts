@@ -1,3 +1,4 @@
+import {openBackup} from './navigation.ts';
 import { test, expect, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { courseFixture } from '../fixtures/course-materials.ts';
@@ -15,7 +16,7 @@ function seed(all: Module[], items: Item[]) {
     return p;
 }
 async function restore(page: Page, p: Progress) {
-    await page.goto('./');await page.getByRole('button',{name:'Kopia postępów',exact:true}).tap();
+    await page.goto('./');await openBackup(page);
     await page.locator('#import-file').setInputFiles({name:'known.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
     await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
     await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
@@ -25,7 +26,7 @@ async function choose(page: Page, id: string) {
 }
 async function global(page: Page) { await page.getByRole('button',{name:'Ćwicz cały poznany materiał →',exact:true}).tap(); }
 async function downloaded(page: Page) {
-    await page.getByRole('button',{name:'Kopia postępów',exact:true}).tap();const pending=page.waitForEvent('download');
+    await openBackup(page);const pending=page.waitForEvent('download');
     await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).tap();const file=await(await pending).path();return JSON.parse(readFileSync(file!,'utf8')).progress as Progress;
 }
 

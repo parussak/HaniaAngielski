@@ -49,7 +49,7 @@ export function makeSession(modules: Module[], selected: Module, mode: Mode, ans
     for (const item of selectedItems) {
         item.input = inputFor(questionFor(modules, item), answerMode === 'mixed' ? (questionIndex++ % 2 ? 'text' : 'choice') : answerMode, mode);
     }
-    return { id: crypto.randomUUID(), moduleId: selected.id, mode, answerMode: mode === 'review' ? 'text' : answerMode, previous, startedAt: new Date().toISOString(), completedAt: null, items: selectedItems, index: 0, phase: 'question', lastCorrect: null, attempts: [], repeatKeys: [] };
+    return { fixedLength:true,id: crypto.randomUUID(), moduleId: selected.id, mode, answerMode: mode === 'review' ? 'text' : answerMode, previous, startedAt: new Date().toISOString(), completedAt: null, items: selectedItems, index: 0, phase: 'question', lastCorrect: null, attempts: [], repeatKeys: [] };
 }
 export function recordAnswer(p: Progress, exercise: Exercise, answer: string) {
     const s = p.active;
@@ -74,7 +74,6 @@ export function recordAnswer(p: Progress, exercise: Exercise, answer: string) {
             p.difficult.push(item.key);
         if (!s.repeatKeys.includes(item.key)) {
             s.repeatKeys.push(item.key);
-            s.items.push({ ...item });
         }
     }
     else if (firstInSession && !s.repeatKeys.includes(item.key))
@@ -99,7 +98,6 @@ export function markWord(p: Progress, known: boolean) {
         p.difficult = p.difficult.filter(k => k !== item.key);
     if (!known && !s.repeatKeys.includes(item.key)) {
         s.repeatKeys.push(item.key);
-        s.items.push({ ...item });
     }
     next(p);
 }

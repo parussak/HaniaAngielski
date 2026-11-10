@@ -1,3 +1,4 @@
+import {openBackup} from './navigation.ts';
 import {test,expect,type Page} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {modules} from '../materials.ts';
@@ -8,7 +9,7 @@ const m=modules[0],j:Journey=JSON.parse(readFileSync(new URL('../../public/conte
 const practice:Journey=JSON.parse(readFileSync(new URL('../../public/content/02-food/sciezka-praktyka.json',import.meta.url),'utf8'));
 const complete=(p:Progress)=>{p.adventure=freshAdventure();p.adventure.reviewSchema=1;for(const l of [...lessons(j),...lessons(practice)])p.adventure.completed[l.key]={at:'2026-11-09T12:00:00.000Z'};};
 async function restore(page:Page,p:Progress){
-  await page.goto('./');await page.getByRole('button',{name:'Kopia postępów',exact:true}).tap();
+  await page.goto('./');await openBackup(page);
   await page.locator('#import-file').setInputFiles({name:'next-step.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
 }

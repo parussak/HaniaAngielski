@@ -1,3 +1,4 @@
+import {openBackup} from './navigation.ts';
 import {test,expect} from '@playwright/test';
 import {modules} from '../materials.ts';
 import {backup,emptyProgress,makeSession,keyFor} from '../../src/core.ts';
@@ -8,7 +9,7 @@ test('starsza powtórka z wpisywaniem pokazuje wybór, gdy polecenie podaje wari
   const p=emptyProgress(),m=modules[0],id='g-count-milk';
   p.difficult=[keyFor(m,'exercise',id)];p.active=makeSession(modules,m,'review','text',false,p);
   p.active.items[0].input='text';
-  await page.goto('./');await page.getByRole('button',{name:'Kopia postępów',exact:true}).tap();
+  await page.goto('./');await openBackup(page);
   await page.locator('#import-file').setInputFiles({name:'old-review.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();
   await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();

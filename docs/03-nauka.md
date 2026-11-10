@@ -41,7 +41,7 @@ Powtórka błędów zawiera **1–10 zadań początkowych**, zależnie od dostę
 
 Trening wcześniejszego materiału zawiera **6–10 zadań początkowych, najczęściej 8** — D-20. Przy mniejszej puli dostępnego wcześniejszego materiału może być krótszy. Nie sięgamy po niepoznane treści ani nie powielamy pytań wyłącznie dla wypełnienia minimum.
 
-Poprawki i powroty błędów nie wliczają się do początkowej wielkości zwykłej lekcji, powtórki ani treningu, dlatego rzeczywista liczba wystąpień pytań w sesji może być większa.
+Nowe sesje mają stały zestaw zadań. Błąd nie dopisuje pytania na koniec ani nie wymaga poprawnej odpowiedzi przed przejściem dalej. Użytkownik może dobrowolnie spróbować jeszcze raz przy tym samym pytaniu; pierwsza próba nadal określa wynik, a błąd trafia do osobnej powtórki. Dotyczy to także obu powtórek błędów i treningów. Rozpoczęte wcześniej sesje zachowują zapisaną listę, również dawniej dopisane pozycje, ale nie dostają nowych powrotów (D-38).
 
 **Jedna samodzielnie oceniana odpowiedź = jedno zadanie**, bez dodatkowych wag — D-21. Wybór odpowiedzi, wpisanie słówka i uzupełnienie jednej luki w dialogu liczą się po jednym zadaniu. Sama długość tekstu dialogu nie zwiększa liczby zadań.
 
@@ -77,7 +77,7 @@ Ukończenie mapy wymaga ukończenia wszystkich jej zwykłych lekcji i umieszczon
 
 Mechanizm działa na drugiej produkcyjnej mapie Food: trening po trzech zwykłych lekcjach jest wymagany do jej ukończenia. Pierwsza mapa Food pozostaje bez treningów mapowych, a zapisane ukończenia i zdobyte gwiazdki są zachowane. Nagrodę za trening na mapie określa D-33; warunki premii za utrwalenie nowych map pozostają osobną decyzją.
 
-Mapy można otwierać niezależnie; odblokowanie kolejnej lekcji jest sprawdzane wewnątrz wybranej mapy. Przy pustej puli treningu ekran „Przygotuj się do treningu” wskazuje odblokowaną zwykłą lekcję wcześniejszej mapy i pozwala ją otworzyć przyciskiem „Poznaj wcześniejszy materiał”. Po odpowiedziach w tej lekcji można wrócić przez katalog do treningu. Samo wprowadzenie nie daje poznania ani nagrody. Jeśli wcześniejsza mapa jest niedostępna, ekran proponuje ponowienie wczytania i inną mapę, zamiast pustej sesji. Nie wprowadzono automatycznej blokady drugiej mapy ani zastępowania treningu niepoznanym materiałem. [Szczegóły i ochrona wyników](odpornosc-map.md).
+Wszystkie dostępne mapy, ich etapy i lekcje można otwierać niezależnie od wcześniejszych ukończeń. Kolejność i „Kontynuuj naukę” są rekomendacją, nie blokadą (D-39). Przy pustej puli treningu ekran „Przygotuj się do treningu” wskazuje zwykłą lekcję wcześniejszej mapy i pozwala ją otworzyć przyciskiem „Poznaj wcześniejszy materiał”. Po odpowiedziach w tej lekcji można wrócić przez katalog do treningu. Samo wprowadzenie nie daje poznania ani nagrody. Jeśli wcześniejsza mapa jest niedostępna, ekran proponuje ponowienie wczytania i inną mapę, zamiast pustej sesji. Nie wprowadzono automatycznej blokady drugiej mapy ani zastępowania treningu niepoznanym materiałem. [Szczegóły i ochrona wyników](odpornosc-map.md).
 
 ### Zakres ćwiczeń swobodnych
 
@@ -119,7 +119,7 @@ Licznik zawsze musi nazywać tę jednostkę, którą faktycznie liczy: np. „se
 
 **Obecne liczby:** 3 gwiazdki za pierwsze ukończenie lekcji, również treningu na mapie. Dodatkowe 3 za ukończone lekcje etapu i pełne utrwalenie jego kolejki dotyczą zachowanej pierwszej mapy Food. Nowe nazwane mapy, w tym „Kocia kuchnia”, nie otrzymują tej premii. Powtórki nie blokują dalszych lekcji. Odznaka kociego kucharza pozostaje związana z ukończeniem pierwszej mapy i nie jest odbierana po dodaniu drugiej.
 
-**Nagroda za trening na mapie (D-33):** 3 gwiazdki za pierwsze ukończenie danego treningu. Powtarzanie tego samego treningu nie przynosi kolejnych gwiazdek. Zasada obowiązuje w kontekście konta i kursu; nie zmienia wcześniej zdobytych gwiazdek. **Dodatkowy trening na żądanie (D-34) daje 1 gwiazdkę za ukończenie każdej nowej sesji.** Wznowienie lub ponowne przetworzenie ukończenia tej samej sesji nie daje kolejnej nagrody. Obie reguły są wdrożone; nie należy utożsamiać nowej sesji dodatkowego treningu z powtarzaniem konkretnej lekcji na mapie.
+**Nagroda za trening na mapie (D-33):** 3 gwiazdki za pierwsze ukończenie danego treningu. Zasadę braku nagrody za powtarzanie zmienia D-40: każda nowa, w całości ukończona sesja powtórzenia lekcji lub treningu na mapie daje 1 gwiazdkę. Zasada obowiązuje w kontekście konta i kursu; nie zmienia wcześniej zdobytych gwiazdek. **Dodatkowy trening na żądanie (D-34) daje 1 gwiazdkę za ukończenie każdej nowej sesji.** Wznowienie lub ponowne przetworzenie ukończenia tej samej sesji nie daje kolejnej nagrody. Reguły są wdrożone. W obu przypadkach odświeżenie, wznowienie i ponowne przetworzenie tej samej sesji nie daje kolejnej gwiazdki. Pierwsze ukończenie lekcji nadal daje 3, a premia etapu ma dotychczasowe warunki. Przerwanie sesji nie daje nagrody; wcześniejsze ukończenia, oceny i gwiazdki pozostają bez przeliczenia.
 
 Docelowy sposób prezentacji postępu opisano wyżej (D-23), ale nie zmienia on samoczynnie zasad nagród. Nie zakładamy, że stara premia etapu staje się premią każdej nowej mapy ani że sam pasek 100% daje premię utrwalenia — [U-07](decyzje.md#u-07).
 

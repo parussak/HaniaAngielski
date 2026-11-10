@@ -1,3 +1,4 @@
+import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
 import {answerQuestion} from './helpers.ts';
 import { test, expect } from '@playwright/test';
@@ -34,7 +35,7 @@ test.describe('telefon — dotyk i małe ekrany', () => {
       await checkWidth();
       await page.getByRole('button',{name:'Moje postępy',exact:true}).tap();
       await checkWidth();
-      await page.getByRole('button',{name:'Kopia postępów',exact:true}).tap();
+      await openBackup(page);
       await checkWidth();
       await expect(page.getByText('Wybierz plik kopii',{exact:true})).toBeVisible();
     });

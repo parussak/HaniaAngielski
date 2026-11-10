@@ -70,7 +70,7 @@ Uzgodniona zasada D-16: każde hasło opisuje jedno znaczenie, z własną przypi
 
 Mechanika potrafi przechować i zastosować kryterium odpowiedzi. Nie rozstrzyga sama, czy francuski rodzajnik albo włoska odmiana są poprawne — konkretne kryteria pochodzą z [merytoryki](04-merytoryka.md).
 
-Obecne porównywanie odpowiedzi w `src/answers.ts` normalizuje Unicode do NFC, ujednolica apostrofy typograficzne, odstępy i wskazane znaki interpunkcyjne (`. , ! ? …`). Domyślnie pomija wielkość liter; zadanie może wymusić jej rozróżnianie przez `caseSensitive`. Nie usuwa akcentów, rodzajników ani brakujących słów i nie stosuje automatycznej tolerancji literówek. Odpowiedź musi odpowiadać jednemu z jawnych wariantów po tej normalizacji. Docelowe kryteria konkretnego języka nadal należą do U-06.
+Obecne porównywanie odpowiedzi w `src/answers.ts` normalizuje Unicode do NFC, ujednolica apostrofy typograficzne, odstępy i wskazane znaki interpunkcyjne (`. , ! ? …`). Domyślnie pomija wielkość liter; zadanie może wymusić jej rozróżnianie przez `caseSensitive`. Nie usuwa akcentów ani nie stosuje automatycznej tolerancji literówek. Domyślnie wymaga jednego z jawnych wariantów po normalizacji. Wyjątek jest jawnie zadeklarowany w danych słownictwa: opcjonalne `article` określa `a`, `an` albo brak rodzajnika i gotowe wyjaśnienie. Brak wymaganego a/an zalicza słówko z pomarańczową uwagą; błędny lub zbędny rodzajnik oznacza błąd. Gramatyka i hasła bez takich danych zachowują dokładne kryteria. Szczegóły formatu są w [kontrakcie materiałów](format-materialow.md), a polityka językowa w [karcie angielskiego](kursy/angielski-hani.md). Nie rozszerza to tolerancji francuskich ani włoskich odpowiedzi.
 
 ## Lekcja: trzy niezależne wymiary
 

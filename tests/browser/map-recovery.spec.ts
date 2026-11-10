@@ -1,3 +1,4 @@
+import {openBackup} from './navigation.ts';
 import {test,expect,type Page} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {modules} from '../materials.ts';
@@ -7,7 +8,7 @@ const read=(f:string):Journey=>JSON.parse(readFileSync(new URL(`../../public/con
 const first=read('sciezka'),second=read('sciezka-praktyka'),at='2026-11-09T12:00:00.000Z';
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 function fixture(){const p=emptyProgress();p.adventure=freshAdventure();p.adventure.earned=9;p.adventure.reviewSchema=1;for(const e of lessons(second).slice(0,3))p.adventure.completed[e.key]={at};return p;}
-async function restore(page:Page,p:Progress){await page.goto('./');await page.getByRole('button',{name:'Kopia postępów',exact:true}).tap();await page.locator('#import-file').setInputFiles({name:'maps.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();}
+async function restore(page:Page,p:Progress){await page.goto('./');await openBackup(page);await page.locator('#import-file').setInputFiles({name:'maps.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();}
 async function catalog(page:Page){await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:/Wybierz przygodę/}).tap();}
 async function open(page:Page,j:Journey){await catalog(page);await page.getByRole('button',{name:`Otwórz mapę ${j.title}`,exact:true}).tap();}
 async function finish(page:Page,ids:string[],type:'word'|'exercise'){
@@ -46,7 +47,7 @@ test('pusty trening prowadzi do przygotowania, a potem działa i daje trzy gwiaz
   if(await page.getByRole('textbox').isVisible()){await page.getByRole('textbox').fill(value!);await page.getByRole('button',{name:/Sprawdź/}).tap();}else await page.getByRole('button',{name:value,exact:true}).tap();
   await expect(page.locator('.feedback.correct')).toBeVisible();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
  }
- await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('15');
+ await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('16');
 });
 
 test('404 drugiej mapy pozostawia pierwszą, a ponowienie odzyskuje obie bez utraty aktywnej sesji',async({page})=>{

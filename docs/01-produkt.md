@@ -4,7 +4,7 @@ Status: opis obecnego produktu i uzgodnionego kierunku. Ostatnie uporządkowanie
 
 ## Stan obecny
 
-„Małe kroki” to aplikacja internetowa/PWA z polskim interfejsem, kontami, zapisem lokalnym i synchronizacją. Obecny materiał to angielski Food dla Hani. Są dwa wejścia: kocia mapa i ćwiczenia po swojemu. Strona startowa ma też ramkę następnego kroku, a osobna nawigacja prowadzi do domku, wyników i kopii.
+„Małe kroki” to aplikacja internetowa/PWA z polskim interfejsem, kontami, zapisem lokalnym i synchronizacją. Obecny materiał to angielski Food dla Hani. Są dwa wejścia: kocia mapa i ćwiczenia po swojemu. Strona startowa ma też ramkę następnego kroku, a stała nawigacja prowadzi do: Nauki, Map, Domku, Postępów i Konta. Kopia postępów jest w Koncie, również bez logowania. Na telefonie pięć wejść mieści się w dolnym pasku. Mapy dotyczą wybranego kursu.
 
 Szczegółowy punkt odniesienia: [produkt przed zmianami](stan-obecny/produkt.md). Food ma już dwie mapy i trening wcześniejszej mapy. Zakres uzupełnienia oraz ograniczenia względem podręcznika opisuje [raport etapu 4](wdrozenie-food.md). Francuski i włoski nie mają jeszcze produkcyjnych materiałów.
 

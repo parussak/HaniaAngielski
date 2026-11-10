@@ -70,3 +70,9 @@ Nie przesądzamy, że wszystkie obecne pola zostaną zachowane bez rozszerzeń a
 - Poznanie i odczyt wcześniejszych prób są wdrożone zgodnie z D-25/D-26 — [U-04](decyzje.md#u-04). Dane przyszłego algorytmu treningu pozostają w [U-05](decyzje.md#u-05).
 - Czy potrzebne są oddzielne aktywne sesje, preferencje odpowiedzi albo synchronizacja wyboru kursu — [U-08](decyzje.md#u-08). Obecnie jest jedna sesja, wspólny wybór sposobu odpowiadania i lokalna preferencja kursu.
 - Co w przyszłości pozostaje wspólne: gwiazdki, domek i nagrody — [U-07](decyzje.md#u-07).
+
+## Stałe sesje i nagroda za ponowne ukończenie
+
+Nowa sesja ma opcjonalny znacznik `fixedLength: true`. Nagrodzona ukończona sesja lekcji zapisuje `lessonRewarded: true`, co zapobiega ponownemu naliczeniu nagrody za tę samą sesję po odświeżeniu, imporcie lub synchronizacji. Pełne powtórzenie to nowa sesja wszystkich zadań lekcji, z próbą przy każdym zadaniu; nie wymaga bezbłędnego wyniku. Pierwsze ukończenie nadal daje 3 gwiazdki, każde nowe pełne powtórzenie 1.
+
+Stare sesje bez znacznika stałej długości nie dostają wstecz premii za powtórzenie. Dotychczasowe ukończenia, pierwsze próby, kolejki błędów i saldo pozostają. Aktywnej starej sesji nie skracamy ani nie zmieniamy jej zapisanej listy. Nowa sesja powtórzenia może już zdobyć 1 gwiazdkę. Kopia pozostaje w wersji 1 i przyjmuje dawne pliki; nowe pola są opcjonalne, walidowane i przechodzą przez obecny zapis lokalny/chmurowy. Nie zmieniono reguł Firebase ani zasad kompakcji historii.

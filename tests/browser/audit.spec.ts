@@ -1,3 +1,4 @@
+import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
 import {test,expect} from '@playwright/test';
 import {readFileSync} from 'node:fs';
@@ -17,7 +18,7 @@ for(const [width,height] of [[320,640],[360,740],[844,390]])test(`I5: pytanie, o
   expect((await page.locator('.question').boundingBox())!.y).toBeGreaterThanOrEqual(0);
   await page.getByRole('button',{name:'policzalny',exact:true}).click();
   await expect(page.locator('.feedback')).toBeVisible();
-  await expect(page.getByRole('progressbar')).toHaveAttribute('aria-label','Pytanie 1 z 2');
+  await expect(page.getByRole('progressbar')).toHaveAttribute('aria-label','Pytanie 1 z 1');
   const next=await page.getByRole('button',{name:'Dalej',exact:false}).boundingBox();
   expect(next!.y+next!.height).toBeLessThanOrEqual(nav!.y-2);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
@@ -30,7 +31,7 @@ test('K1/D6: po błędzie i poprawce trudność zostaje; retry przenosi fokus do
   await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).click();
   await expect(page.getByRole('textbox')).toBeFocused();
   await page.getByRole('textbox').fill('is');await page.getByRole('button',{name:/Sprawdź/}).click();
-  await page.getByRole('button',{name:'Kopia postępów',exact:true}).click();
+  await openBackup(page);
   const downloaded=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).click();
   const file=await(await downloaded).path();const p=JSON.parse(readFileSync(file!,'utf8')).progress;
   expect(p.difficult).toContain('unit-2-food@1:exercise:g-there-milk');
@@ -38,12 +39,12 @@ test('K1/D6: po błędzie i poprawce trudność zostaje; retry przenosi fokus do
 test('I7: stara kopia i zmiana wersji modułu zachowują fiszkę i jej status',async({page})=>{
   const old=JSON.parse(readFileSync(new URL('../fixtures/backup-v1.json',import.meta.url),'utf8'));
   await page.route('**/content/02-food/modul.json',async route=>{const response=await route.fetch();const m=await response.json();m.version=7;await route.fulfill({json:m});});
-  await page.goto('./');await page.getByRole('button',{name:'Kopia postępów',exact:true}).click();
+  await page.goto('./');await openBackup(page);
   await page.locator('#import-file').setInputFiles({name:'old.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(old))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
   await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();
   await expect(page.getByRole('textbox')).toBeVisible();
-  await page.getByRole('button',{name:'Kopia postępów',exact:true}).click();
+  await openBackup(page);
   const downloaded=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).click();
   const file=await(await downloaded).path();expect(JSON.parse(readFileSync(file!,'utf8')).progress).toEqual(old.progress);
 });

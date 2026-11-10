@@ -13,6 +13,10 @@
       "src": "illustrations/word-apple.svg",
       "caption": "apple — jabłko",
       "scene": false
+    },
+    "article": {
+      "expected": "an",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z an: an przed dźwiękiem samogłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -29,6 +33,10 @@
       "src": "illustrations/word-biscuit.svg",
       "caption": "biscuit — ciasteczko / herbatnik",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -44,6 +52,10 @@
       "src": "illustrations/word-bread.svg",
       "caption": "bread — chleb",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „bread” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -59,6 +71,10 @@
       "src": "illustrations/word-cereal.svg",
       "caption": "cereal — płatki śniadaniowe",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „cereal” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -74,6 +90,10 @@
       "src": "illustrations/word-cheese.svg",
       "caption": "cheese — ser",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „cheese” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -89,6 +109,10 @@
       "src": "illustrations/word-chicken.svg",
       "caption": "chicken — kurczak (mięso)",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „chicken” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -104,11 +128,15 @@
       "src": "illustrations/word-chips.svg",
       "caption": "chips — frytki",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "To liczba mnoga. A/an oznacza jedną sztukę, więc nie stawiamy go przed tą formą."
     }
   },
   {
     "id": "fish",
-    "front": "ryba",
+    "front": "ryba (jako jedzenie)",
     "back": "fish",
     "answers": [
       "fish"
@@ -119,11 +147,15 @@
       "src": "illustrations/word-fish.svg",
       "caption": "fish — ryba",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „fish” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
     "id": "fruit",
-    "front": "owoc / owoce",
+    "front": "owoce (ogólnie, nie rodzaje owoców)",
     "back": "fruit",
     "answers": [
       "fruit"
@@ -134,6 +166,10 @@
       "src": "illustrations/word-fruit.svg",
       "caption": "fruit — owoc / owoce",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "Fruit oznacza tutaj owoce ogólnie i jest niepoliczalne: bez a/an. Fruits może oznaczać różne rodzaje owoców, ale to inne znaczenie niż w tym pytaniu."
     }
   },
   {
@@ -149,6 +185,10 @@
       "src": "illustrations/word-ham.svg",
       "caption": "ham — szynka",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „ham” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -164,6 +204,10 @@
       "src": "illustrations/word-meat.svg",
       "caption": "meat — mięso",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „meat” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -179,6 +223,10 @@
       "src": "illustrations/word-orange-juice.svg",
       "caption": "orange juice — sok pomarańczowy",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „orange juice” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -195,6 +243,10 @@
       "src": "illustrations/word-pancake.svg",
       "caption": "pancake — naleśnik",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -210,6 +262,10 @@
       "src": "illustrations/word-pasta.svg",
       "caption": "pasta — makaron",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „pasta” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -226,6 +282,10 @@
       "src": "illustrations/word-potato.svg",
       "caption": "potato — ziemniak",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -241,11 +301,15 @@
       "src": "illustrations/word-rice.svg",
       "caption": "rice — ryż",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „rice” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
     "id": "salad",
-    "front": "sałatka",
+    "front": "sałatka (jedna porcja)",
     "back": "salad",
     "answers": [
       "salad",
@@ -257,6 +321,10 @@
       "src": "illustrations/word-salad.svg",
       "caption": "salad — sałatka",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -273,6 +341,10 @@
       "src": "illustrations/word-sandwich.svg",
       "caption": "sandwich — kanapka",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -289,6 +361,10 @@
       "src": "illustrations/word-sausage.svg",
       "caption": "sausage — kiełbaska",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -305,6 +381,10 @@
       "src": "illustrations/word-tomato.svg",
       "caption": "tomato — pomidor",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -320,6 +400,10 @@
       "src": "illustrations/word-tuna.svg",
       "caption": "tuna — tuńczyk",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „tuna” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -336,6 +420,10 @@
       "src": "illustrations/word-vegetable.svg",
       "caption": "vegetable — warzywo",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -351,11 +439,15 @@
       "src": "illustrations/word-water.svg",
       "caption": "water — woda",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „water” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
     "id": "yoghurt",
-    "front": "jogurt",
+    "front": "jogurt (jedna porcja)",
     "back": "yoghurt",
     "answers": [
       "yoghurt",
@@ -367,11 +459,15 @@
       "src": "illustrations/word-yoghurt.svg",
       "caption": "yoghurt — jogurt",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
     "id": "breakfast",
-    "front": "śniadanie",
+    "front": "śniadanie (nazwa posiłku, ogólnie)",
     "back": "breakfast",
     "answers": [
       "breakfast"
@@ -382,6 +478,10 @@
       "src": "illustrations/word-breakfast.svg",
       "caption": "breakfast — śniadanie",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "Tutaj uczymy się nazwy posiłku ogólnie, np. for breakfast / for lunch / for dinner, bez a/an. Rodzajnik może pojawić się w innym kontekście konkretnego posiłku."
     }
   },
   {
@@ -398,11 +498,15 @@
       "src": "illustrations/word-diary.svg",
       "caption": "diary — dzienniczek",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
     "id": "dinner",
-    "front": "obiad",
+    "front": "obiad (nazwa posiłku, ogólnie)",
     "back": "dinner",
     "answers": [
       "dinner"
@@ -413,6 +517,10 @@
       "src": "illustrations/word-dinner.svg",
       "caption": "dinner — obiad",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "Tutaj uczymy się nazwy posiłku ogólnie, np. for breakfast / for lunch / for dinner, bez a/an. Rodzajnik może pojawić się w innym kontekście konkretnego posiłku."
     }
   },
   {
@@ -428,11 +536,15 @@
       "src": "illustrations/word-jam.svg",
       "caption": "jam — dżem",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „jam” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
     "id": "lunch",
-    "front": "lunch",
+    "front": "lunch (nazwa posiłku, ogólnie)",
     "back": "lunch",
     "answers": [
       "lunch"
@@ -443,6 +555,10 @@
       "src": "illustrations/word-lunch.svg",
       "caption": "lunch — lunch",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "Tutaj uczymy się nazwy posiłku ogólnie, np. for breakfast / for lunch / for dinner, bez a/an. Rodzajnik może pojawić się w innym kontekście konkretnego posiłku."
     }
   },
   {
@@ -473,6 +589,10 @@
       "src": "illustrations/word-butter.svg",
       "caption": "butter — masło",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „butter” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -488,6 +608,10 @@
       "src": "illustrations/word-chocolate.svg",
       "caption": "chocolate — czekolada",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „chocolate” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -504,6 +628,10 @@
       "src": "illustrations/word-egg.svg",
       "caption": "egg — jajko",
       "scene": false
+    },
+    "article": {
+      "expected": "an",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z an: an przed dźwiękiem samogłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -519,6 +647,10 @@
       "src": "illustrations/word-flour.svg",
       "caption": "flour — mąka",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „flour” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -535,6 +667,10 @@
       "src": "illustrations/word-lemon.svg",
       "caption": "lemon — cytryna",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -550,6 +686,10 @@
       "src": "illustrations/word-milk.svg",
       "caption": "milk — mleko",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „milk” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -566,6 +706,10 @@
       "src": "illustrations/word-strawberry.svg",
       "caption": "strawberry — truskawka",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -581,6 +725,10 @@
       "src": "illustrations/word-sugar.svg",
       "caption": "sugar — cukier",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „sugar” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -642,11 +790,15 @@
       "src": "illustrations/word-birthday.svg",
       "caption": "birthday — urodziny",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
     "id": "chocolate-cake",
-    "front": "ciasto czekoladowe",
+    "front": "ciasto czekoladowe (jedno całe ciasto)",
     "back": "chocolate cake",
     "answers": [
       "chocolate cake",
@@ -658,6 +810,10 @@
       "src": "illustrations/word-chocolate-cake.svg",
       "caption": "chocolate cake — ciasto czekoladowe",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -735,6 +891,10 @@
       "src": "illustrations/word-recipe.svg",
       "caption": "recipe — przepis",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -750,6 +910,10 @@
       "src": "illustrations/word-a-bar-of-chocolate.svg",
       "caption": "a bar of chocolate — tabliczka czekolady",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -765,6 +929,10 @@
       "src": "illustrations/word-a-bottle-of-water.svg",
       "caption": "a bottle of water — butelka wody",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -780,6 +948,10 @@
       "src": "illustrations/word-a-can-of-cola.svg",
       "caption": "a can of cola — puszka coli",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -795,6 +967,10 @@
       "src": "illustrations/word-a-carton-of-juice.svg",
       "caption": "a carton of juice — karton soku",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -810,6 +986,10 @@
       "src": "illustrations/word-a-jar-of-jam.svg",
       "caption": "a jar of jam — słoik dżemu",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -825,6 +1005,10 @@
       "src": "illustrations/word-a-packet-of-biscuits.svg",
       "caption": "a packet of biscuits — paczka herbatników",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -856,6 +1040,10 @@
       "src": "illustrations/word-beach.svg",
       "caption": "beach — plaża",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -902,6 +1090,10 @@
       "src": "illustrations/word-chicken-legs.svg",
       "caption": "chicken legs — kurze udka",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "To liczba mnoga. A/an oznacza jedną sztukę, więc nie stawiamy go przed tą formą."
     }
   },
   {
@@ -1023,6 +1215,10 @@
       "src": "illustrations/word-seagull.svg",
       "caption": "seagull — mewa",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -1131,6 +1327,10 @@
       "src": "illustrations/word-milkshake.svg",
       "caption": "milkshake — koktajl mleczny",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -1161,6 +1361,10 @@
       "src": "illustrations/word-art.svg",
       "caption": "art — sztuka",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „art” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -1177,6 +1381,10 @@
       "src": "illustrations/word-celebrity.svg",
       "caption": "celebrity — sławna osoba",
       "scene": true
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -1207,6 +1415,10 @@
       "src": "illustrations/word-cottage-cheese.svg",
       "caption": "cottage cheese — twarożek",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „cottage cheese” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -1222,6 +1434,10 @@
       "src": "illustrations/word-cream.svg",
       "caption": "cream — śmietana",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „cream” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -1283,6 +1499,10 @@
       "src": "illustrations/word-ingredient.svg",
       "caption": "ingredient — składnik",
       "scene": false
+    },
+    "article": {
+      "expected": "an",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z an: an przed dźwiękiem samogłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -1315,6 +1535,10 @@
       "src": "illustrations/word-pan.svg",
       "caption": "pan — rondel / patelnia",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -1424,7 +1648,7 @@
   },
   {
     "id": "toast",
-    "front": "tost / grzanka",
+    "front": "pieczywo tostowe (ogólnie)",
     "back": "toast",
     "answers": [
       "toast"
@@ -1435,6 +1659,10 @@
       "src": "illustrations/word-toast.svg",
       "caption": "toast — tost / grzanka",
       "scene": false
+    },
+    "article": {
+      "expected": null,
+      "explanation": "W tym znaczeniu „toast” nazywa jedzenie, substancję lub pojęcie ogólnie. Używamy go bez a/an. Rzeczowniki niepoliczalne liczymy przez porcje lub opakowania, np. a bottle of water."
     }
   },
   {
@@ -1451,6 +1679,10 @@
       "src": "illustrations/word-toaster.svg",
       "caption": "toaster — toster",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {
@@ -1467,6 +1699,10 @@
       "src": "illustrations/word-frying-pan.svg",
       "caption": "frying pan — patelnia do smażenia",
       "scene": false
+    },
+    "article": {
+      "expected": "a",
+      "explanation": "W tym haśle chodzi o jedną sztukę lub porcję. W zdaniu przed takim rzeczownikiem policzalnym potrzebny jest rodzajnik albo inne określenie. Uczymy się formy z a: a przed dźwiękiem spółgłoski. Samo słówko też zaliczamy."
     }
   },
   {

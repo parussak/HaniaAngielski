@@ -1,4 +1,4 @@
-import type { Module } from '../learning/model.ts';
+import type { Module,ArticleGuidance } from '../learning/model.ts';
 
 export interface Illustration {
     symbol?: string;
@@ -15,6 +15,7 @@ export interface LanguageVariant {
 
 /** One meaning, not every possible sense of the same spelling. */
 export interface Meaning {
+    articles?: Record<string,ArticleGuidance>;
     id: string;
     variants: Record<string, LanguageVariant>;
     answers?: Record<string, string[]>;

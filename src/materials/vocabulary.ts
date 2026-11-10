@@ -12,6 +12,7 @@ export function compileVocabulary(input: unknown, metadata: { language: string; 
         if (!input.every(w => object(w) && text(w.id) && text(w.front) && text(w.back))) return fail();
         const words = structuredClone(input) as Word[];
         const meanings: Meaning[] = words.map(w => ({ id: w.id, source: w.source ?? '',
+            ...(w.article===undefined?{}:{articles:{[target]:structuredClone(w.article)}}),
             ...(w.group === undefined ? {} : { group: w.group }), ...(w.rev === undefined ? {} : { rev: w.rev }),
             ...(w.illustration === undefined ? {} : { illustration: structuredClone(w.illustration) }),
             variants: { [explanation]: { text: w.front }, [target]: { text: w.back } },
@@ -22,6 +23,10 @@ export function compileVocabulary(input: unknown, metadata: { language: string; 
     if (!object(input) || input.version !== 2 || !Array.isArray(input.entries) || !input.entries.length) return fail();
     const entries = input.entries;
     for (const entry of entries) {
+        if(object(entry)&&entry.articles!==undefined){
+            if(!object(entry.articles))return fail();
+            for(const [language,value] of Object.entries(entry.articles))if(!languageCode(language)||!object(value)||!['a','an',null].includes(value.expected as 'a'|'an'|null)||!text(value.explanation))return fail();
+        }
         if (!object(entry) || !text(entry.id) || !text(entry.source) || !object(entry.variants) || !object(entry.illustration) ||
             entry.rev !== undefined && (!Number.isSafeInteger(entry.rev) || (entry.rev as number) < 1) || entry.group !== undefined && !text(entry.group)) return fail();
         for (const [language, variant] of Object.entries(entry.variants)) {
@@ -42,6 +47,7 @@ export function compileVocabulary(input: unknown, metadata: { language: string; 
     if (new Set(entries.map(e => (e as Meaning).id)).size !== entries.length) return fail();
     const meanings = structuredClone(entries) as unknown as Meaning[];
     const words = meanings.map(entry => ({ id: entry.id, front: entry.variants[explanation].text, back: entry.variants[target].text,
+        ...(entry.articles?.[target]===undefined?{}:{article:entry.articles[target]}),
         source: entry.source, illustration: entry.illustration,
         ...(entry.group === undefined ? {} : { group: entry.group }), ...(entry.rev === undefined ? {} : { rev: entry.rev }),
         ...(entry.answers?.[target] === undefined ? {} : { answers: [...entry.answers[target]] }),

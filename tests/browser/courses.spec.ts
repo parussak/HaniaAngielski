@@ -1,3 +1,4 @@
+import {openBackup} from './navigation.ts';
 import { test, expect, type Page } from '@playwright/test';
 import { courseFixture } from '../fixtures/course-materials.ts';
 import { backup, emptyProgress } from '../../src/core.ts';
@@ -39,7 +40,7 @@ for (const [book, target, incorrect, prompt] of [['french-book','café','cafe','
         await expect(page.locator('.question')).toHaveText(`${prompt}: kawa`);
         await expect(page.locator('.feedback.correct')).toBeVisible();
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
-        await page.getByRole('button', { name: 'Kopia postępów', exact: true }).tap();
+        await openBackup(page);
         const download = page.waitForEvent('download'); await page.getByRole('button', { name: 'Zapisz kopię postępów', exact: true }).tap();
         const file = await (await download).path();
         const { readFileSync } = await import('node:fs');
@@ -56,7 +57,7 @@ test('dwa podręczniki francuskiego nie współdzielą zaliczonych słówek', as
     await materials(page, f); await page.goto('./');
     const p = emptyProgress();
     p.words['fr-unit@1:word:coffee-drink'] = 'known'; p.words['fr-unit@1:word:water-drink'] = 'known';
-    await page.getByRole('button', { name: 'Kopia postępów', exact: true }).tap();
+    await openBackup(page);
     await page.locator('#import-file').setInputFiles({ name: 'courses.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(backup(p))) });
     await page.getByRole('button', { name: 'Zastąp postępy', exact: true }).tap();
     await expect(page.locator('#app')).toHaveAttribute('aria-busy', 'false');

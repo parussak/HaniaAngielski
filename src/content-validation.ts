@@ -22,7 +22,7 @@ export function assembleModule(metadata: any, inputWords: unknown, quiz: any, ex
     if (!word || distractors.some(w=>!w)) throw new Error(`Quiz ${entry.id}: brak wskazanego słówka.`);
     const options=distractors.map(w=>w!.back);
     options.unshift(word.back);
-    return { illustration:word.illustration, id:entry.id, wordId:word.id, rev:entry.rev??word.rev??1, kind:'vocabulary', prompt:entry.prompt ?? `${translationPrompt(metadata)}: ${word.front}`, answers:word.answers ?? [word.back], options, explanation:entry.explanation ?? wordExplanation(metadata,word), requires:[metadata.id], caseSensitive:false, source:word.source };
+    return { article:word.article, illustration:word.illustration, id:entry.id, wordId:word.id, rev:entry.rev??word.rev??1, kind:'vocabulary', prompt:entry.prompt ?? `${translationPrompt(metadata)}: ${word.front}`, answers:word.answers ?? [word.back], options, explanation:entry.explanation ?? wordExplanation(metadata,word), requires:[metadata.id], caseSensitive:false, source:word.source };
   });
   if(!Array.isArray(dialogues))throw new Error('Niepoprawny plik rozmówek.');
   return {...metadata, words, meanings, exercises:[...compiled,...exercises,...dialogues], grammar};
@@ -62,6 +62,7 @@ export function validateModules(input: unknown): Module[] {
     unique(m.words,`${m.id}/słówka`); unique(m.exercises,`${m.id}/zadania`); unique(m.grammar,`${m.id}/gramatyka`);
     for(const word of m.words)if(word.answers && new Set(word.answers.map((a: string)=>normalizeAnswer(a))).size!==word.answers.length)return fail(`powtórzona odpowiedź: ${word.id}.`);
     for(const element of [...m.words,...m.exercises]){
+      if(element.article!==undefined&&(!obj(element.article)||!['a','an',null].includes(element.article.expected as 'a'|'an'|null)||!text(element.article.explanation)||('kind' in element&&element.kind!=='vocabulary')))return fail(`niepoprawne objaśnienie rodzajnika ${element.id}.`);
       if(element.illustration && element.illustration.scene!==undefined && typeof element.illustration.scene!=='boolean')return fail(`niepoprawny typ scenki ${element.id}.`);
       if(element.illustration!==undefined && (!obj(element.illustration) || !((text(element.illustration.symbol) && element.illustration.symbol.length<=24 && element.illustration.src===undefined) || (text(element.illustration.src) && /^illustrations\/[a-z0-9-]+\.svg$/.test(element.illustration.src) && element.illustration.symbol===undefined)) || !text(element.illustration.caption)))return fail(`niepoprawna ilustracja ${element.id}.`);
     }

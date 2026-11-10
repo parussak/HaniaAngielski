@@ -1,3 +1,4 @@
+import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
 import {test,expect} from '@playwright/test';
 import {readFileSync} from 'node:fs';
@@ -49,7 +50,7 @@ test('słówko: ilustracja przed i po wpisaniu; stara tekstowa sesja z nawiasem 
   const p=emptyProgress();p.active=makeSession(modules,modules[0],'grammar','text',false,p);
   const q=modules[0].exercises.find(q=>q.id==='g-because-sport')!;
   p.active.items=[{key:`unit-2-food@1:exercise:${q.id}`,moduleId:'unit-2-food',version:1,type:'exercise',id:q.id,input:'text'}];
-  await page.getByRole('button',{name:'Kopia postępów',exact:true}).tap();
+  await openBackup(page);
   await page.locator('#import-file').setInputFiles({name:'old.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();
   await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();

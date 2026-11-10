@@ -6,6 +6,8 @@ Aktualizacja układu: **10 listopada 2026 r.** Rozdzielamy stan obecny, uzgodnio
 
 Po przeglądzie dokumentacji poprawiono dwa ograniczenia: [przygotowanie do treningu i odporność map](odpornosc-map.md). Pozostałe mapy działają przy błędzie jednej, a trening bez poznanej puli prowadzi do wcześniejszej lekcji. Zapisane wyniki i zasady nagród pozostają zachowane.
 
+Wprowadzono też swobodny wybór lekcji, stałą długość nowych sesji, nowe menu z Mapami, łagodniejszą informację zwrotną, jawne zasady a/an dla słówek oraz 1 ★ za pełne nowe powtórzenie lekcji — [D-36–D-40](decyzje.md). Historyczne raporty zachowują opis poprzedniego działania i dawne wyniki testów.
+
 ## Główny podział
 
 | Dokument | Na jakie pytanie odpowiada? |
@@ -25,7 +27,7 @@ Po przeglądzie dokumentacji poprawiono dwa ograniczenia: [przygotowanie do tren
 ## Statusy i pierwszeństwo
 
 - **Stan obecny** — potwierdzony w kodzie lub testach. [Punkt odniesienia](stan-obecny/README.md) oparto na rewizji 24cdeda.
-- **Uzgodnione założenia docelowe** — kierunek potwierdzony w rozmowie, który może jeszcze nie być wdrożony. Rejestr: D-01–D-35 w [decyzjach](decyzje.md).
+- **Uzgodnione założenia docelowe** — kierunek potwierdzony w rozmowie, który może jeszcze nie być wdrożony. Rejestr: D-01–D-40 w [decyzjach](decyzje.md).
 - **Do ustalenia** — pytanie bez zatwierdzonego rozwiązania. Rejestr U-01–U-10; odwołania w dokumentach nie są konkurencyjnymi decyzjami.
 - **Propozycja techniczna** — kandydat do oceny, nie automatycznie zaakceptowany zakres prac.
 

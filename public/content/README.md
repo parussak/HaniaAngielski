@@ -64,7 +64,7 @@ Otwórz `02-food/slownictwo.json` i znajdź słowo. Przykład:
 }
 ```
 
-Wariant `an apple` pozwala uznać odpowiedź z poprawnym rodzajnikiem. Oba wpisy w `answers` są akceptowane przy wpisywaniu odpowiedzi.
+Wariant `an apple` jest poprawną formą z rodzajnikiem. Jawne pole `article: { "expected": "an", "explanation": "Jedno jabłko jest policzalne. Przed dźwiękiem samogłoski używamy an." }` dodatkowo określa pełną formę i pomarańczowe objaśnienie przy braku rodzajnika. Brak an jest zaliczany, zły a/an jest błędem. `expected: null` oznacza formę bez a/an. Nie zgadujemy policzalności w kodzie; wskazówka `front` ma wskazać konkretne znaczenie, liczbę lub porcję. Bez metadanej zachowujemy dokładne warianty z `answers`. Nie stosujemy tolerancji słownikowej do zadań gramatycznych. [Kontrakt danych](../../docs/format-materialow.md#jawna-wskazówka-aan-dla-słówka).
 
 - `front` — polskie hasło na fiszce i w pytaniu.
 - `back` — angielska odpowiedź wyświetlana na fiszce.

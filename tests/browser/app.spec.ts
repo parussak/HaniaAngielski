@@ -1,3 +1,4 @@
+import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
 import {answerQuestion} from './helpers.ts';
 import { test, expect } from '@playwright/test';
@@ -44,7 +45,7 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   await expect(page.locator('.feedback.correct')).toBeVisible();
   await page.reload(); await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();
   await expect(page.locator('.question')).toHaveText(revealed);
-  await page.getByRole('button',{name:'Kopia postępów',exact:true}).click();
+  await openBackup(page);
   const downloaded=page.waitForEvent('download');
   await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).click();
   const download=await downloaded; const path=(await download.path())!;
@@ -59,14 +60,14 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   await expect(mobile.getByRole('heading',{name:'Dobrze Cię widzieć, Haniu!'})).toBeVisible();
   expect(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
   await mobile.screenshot({path:'test-results/home-mobile.png',fullPage:true});
-  await mobile.getByRole('button',{name:'Kopia postępów',exact:true}).click();
+  await openBackup(mobile);
   await mobile.locator('#import-file').setInputFiles({name:'bad.json',mimeType:'application/json',buffer:Buffer.from('{oops')});
   await expect(mobile.getByRole('status')).toContainText('Nie można odczytać');
   await mobile.locator('#import-file').setInputFiles(path);
   await mobile.getByRole('button',{name:'Anuluj',exact:true}).click();
   await mobile.getByRole('button',{name:'Moje postępy',exact:true}).click();
   await expect(mobile.getByText('Tu wyrosną Twoje postępy')).toBeVisible();
-  await mobile.getByRole('button',{name:'Kopia postępów',exact:true}).click();
+  await openBackup(mobile);
   await mobile.locator('#import-file').setInputFiles(path);
   await mobile.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
   await expect(mobile.getByRole('status')).toContainText('Kopia została wczytana');

@@ -1,3 +1,4 @@
+import {openBackup} from './navigation.ts';
 import {openModule,openMap} from './navigation.ts';
 import {test,expect,type BrowserContext} from '@playwright/test';
 import {readFileSync} from 'node:fs';
@@ -49,7 +50,7 @@ test('licznik powtórki etapu przechodzi między urządzeniami, zapisuje turę p
   try{
     await cloud.connect(a);await cloud.connect(b);const page=await a.newPage();await page.goto('./');await signIn(page);
     const p=emptyProgress(),key='unit-2-food@1:word:apple';p.adventure={version:1,earned:0,completed:{},purchases:{},reviewSchema:1,reviewArchiveHead:null,stageReviews:{'unit-2-food/food':{round:3,items:{[key]:{item:{key,moduleId:'unit-2-food',version:1,type:'word',id:'apple',input:'text'},correct:2,due:6}}}}};
-    await page.locator('.sidebar').getByRole('button',{name:'Kopia postępów',exact:true}).click();await page.locator('#import-file').setInputFiles({name:'reviews.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
+    await openBackup(page);await page.locator('#import-file').setInputFiles({name:'reviews.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
     await page.getByRole('button',{name:'Ustawienia konta',exact:true}).click();await page.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
     const second=await b.newPage();await second.goto('./');await signIn(second);await second.getByRole('button',{name:'Moja nauka',exact:true}).click();await openMap(second);await second.locator('.journey-stage').first().locator('.stage-review-step').click();await expect(second.locator('.review-meter')).toContainText('2/3');
     cloud.setOffline(true);await second.getByRole('textbox').fill('apple');await second.getByRole('button',{name:/Sprawdź/}).click();await second.getByRole('button',{name:/Dalej/}).click();await expect(second.locator('.review-result')).toContainText('0 ćwiczeń do utrwalenia');
@@ -65,7 +66,7 @@ test('domek i gwiazdki synchronizują się na drugie urządzenie i nie przechodz
   try{
     await cloud.connect(a);await cloud.connect(b);const page=await a.newPage();await page.goto('./');await signIn(page);
     const fixture={...emptyProgress(),adventure:{version:1 as const,earned:20,completed:{},purchases:{}}};
-    await page.locator('.sidebar').getByRole('button',{name:'Kopia postępów',exact:true}).click();await page.locator('#import-file').setInputFiles({name:'profile.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(fixture)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
+    await openBackup(page);await page.locator('#import-file').setInputFiles({name:'profile.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(fixture)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
     await page.getByRole('button',{name:'Domek',exact:true}).click();await page.getByRole('button',{name:'Kup za 6 ★',exact:true}).click();await page.getByRole('button',{name:'Pod oknem',exact:true}).click();
     await page.getByRole('button',{name:'Ustawienia konta',exact:true}).click();await page.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
     const second=await b.newPage();await second.goto('./');await signIn(second);await second.getByRole('button',{name:'Domek',exact:true}).click();await expect(second.locator('.star-wallet')).toContainText('14');await expect(second.locator('.room-decoration')).toHaveClass(/slot-window/);
@@ -89,7 +90,7 @@ test('konto: migracja gościa, automatyczny zapis, drugie urządzenie i wylogowa
   try{
     await cloud.connect(a);await cloud.connect(b);const page=await a.newPage();await page.goto('./');
     const guest=emptyProgress();guest.words['unit-2-food@1:word:apple']='known';
-    await page.getByRole('button',{name:'Kopia postępów',exact:true}).click();
+    await openBackup(page);
     await page.locator('#import-file').setInputFiles({name:'guest.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(guest)))});
     await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
     await signIn(page);
@@ -123,7 +124,7 @@ test('konto: błędne logowanie, odzyskanie hasła i zapis bez sieci zachowany p
   await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await openModule(page);await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).click();
   const first=await page.locator('.question').innerText();await page.locator('.option').first().click();await expect(page.locator('.feedback')).toBeVisible();
   await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();await expect(page.locator('.question')).toHaveText(first);await expect(page.locator('.feedback')).toBeVisible();
-  cloud.setOffline(false);await page.getByRole('button',{name:'Kopia postępów',exact:true}).click();await page.getByRole('button',{name:'Otwórz konto',exact:true}).click();await page.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
+  cloud.setOffline(false);await openBackup(page);await page.getByRole('button',{name:'Otwórz konto',exact:true}).click();await page.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
   expect(cloud.data.get('parent@example.test')!.progress.active.attempts).toHaveLength(1);
 });
 
@@ -132,7 +133,7 @@ test('konto: konflikt nie nadpisuje drugiego urządzenia i zachowuje kopię po w
   await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await openModule(page);await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).click();
   await page.locator('.option').first().click();await expect(page.locator('.feedback')).toBeVisible();
   const other=emptyProgress();other.words['unit-2-food@1:word:apple']='known';cloud.data.set('parent@example.test',{revision:1,progress:other});
-  cloud.setOffline(false);await page.getByRole('button',{name:'Kopia postępów',exact:true}).click();await page.getByRole('button',{name:'Otwórz konto',exact:true}).click();await page.getByRole('button',{name:'Synchronizuj teraz'}).click();
+  cloud.setOffline(false);await openBackup(page);await page.getByRole('button',{name:'Otwórz konto',exact:true}).click();await page.getByRole('button',{name:'Synchronizuj teraz'}).click();
   await expect(page.getByRole('region',{name:'Różne wersje wyników'})).toBeVisible();expect(cloud.data.get('parent@example.test')!.progress).toEqual(other);
   page.once('dialog',dialog=>dialog.accept());await page.getByRole('button',{name:'Użyj wyników z urządzenia',exact:true}).click();
   await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie.');

@@ -30,7 +30,8 @@ Punkt odniesienia pochodzi z przeglądu rewizji `24cdeda` (9–10 listopada 2026
 | Kurs, znaczenie i wariant językowy | `src/materials/model.ts` |
 | Odczyt, walidacja, przypisania i adapter dawnego formatu materiałów | `src/materials/library.ts`, `validation.ts`, `vocabulary.ts`, `legacy.ts` |
 | Pobieranie plików materiałów | `src/content.ts` |
-| Treść pytania, warianty i ocenianie | `src/learning/questions.ts`, `src/answers.ts` |
+| Treść pytania, warianty i ocenianie | `src/learning/questions.ts`, `src/answers.ts`; jawna polityka a/an słówek: `src/learning/vocabulary-answer.ts` |
+| Stałe menu i krótkie etykiety mobilne | `src/views/shell.ts`, `src/theme.css` |
 | Przebieg sesji i wynik pierwszej próby | `src/learning/session.ts` |
 | Poznany zakres, dobór treningu i kontrola jego rozmieszczenia | `src/learning/training.ts` |
 | Przygotowanie do treningu bez wcześniejszej puli | `src/views/training-preparation.ts`, `src/learning/training.ts`, `src/controllers/learning.ts` |

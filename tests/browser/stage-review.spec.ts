@@ -1,3 +1,4 @@
+import {openBackup} from './navigation.ts';
 import {openMap} from './navigation.ts';
 import {test,expect,type Page} from '@playwright/test';
 import {readFileSync} from 'node:fs';
@@ -12,7 +13,7 @@ function oldFixture(){
   p.adventure=freshAdventure();p.adventure.earned=15;for(const l of stage.lessons)p.adventure.completed[lessonKey(j,l)]={at:s.completedAt!};return p;
 }
 async function importProgress(page:Page,p:Progress){
-  await page.goto('./');await page.locator('.sidebar').getByRole('button',{name:'Kopia postępów',exact:true}).tap();
+  await page.goto('./');await openBackup(page);
   await page.locator('#import-file').setInputFiles({name:'review.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
   await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await openMap(page);
@@ -52,7 +53,7 @@ test('nowy błąd zeruje serię, poprawki nie zwiększają jej, mobilne przycisk
   await importProgress(page,p);const node=await openFirstStage(page);await node.locator('.stage-review-step').tap();await expect(page.locator('.review-meter')).toContainText('2/3');
   await expect(page.locator('.option')).toHaveCount(0);await page.getByRole('textbox').fill('aple');await page.getByRole('button',{name:/Sprawdź/}).tap();await expect(page.locator('.feedback.incorrect')).toBeVisible();await expect(page.locator('.review-meter')).toContainText('0/3');
   for(const viewport of [{width:320,height:640},{width:844,height:390}]){await page.setViewportSize(viewport);const nav=await page.locator('.sidebar nav').boundingBox(),button=await page.getByRole('button',{name:/Dalej/}).boundingBox();expect(button!.y+button!.height).toBeLessThanOrEqual(nav!.y);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();}
-  await page.setViewportSize({width:390,height:844});await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();await correct(page);await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('.question')).toBeVisible();await correct(page);await page.getByRole('button',{name:/Dalej/}).tap();
+  await page.setViewportSize({width:390,height:844});await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();await correct(page);await page.getByRole('button',{name:/Dalej/}).tap();
   await expect(page.locator('.review-result')).toContainText('1 słówko');await expect(page.locator('.lesson-reward')).toContainText('Tura zapisana');await page.screenshot({path:'test-results/stage-review-result-mobile.png'});
   await page.getByRole('button',{name:'Wróć na mapę',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('15');
 });

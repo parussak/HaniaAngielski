@@ -3,6 +3,7 @@ import type { HistoryPage, HistorySummary } from '../history.ts';
 import type { Illustration, Meaning } from '../materials/model.ts';
 export type { Illustration, Meaning, LanguageVariant, Course, MaterialLibrary } from '../materials/model.ts';
 export interface Word {
+    article?: ArticleGuidance;
     illustration?: Illustration;
     id: string;
     front: string;
@@ -13,6 +14,7 @@ export interface Word {
     rev?: number;
 }
 export interface Exercise {
+    article?: ArticleGuidance;
     dialogue?: {
         speaker: string;
         text: string;
@@ -85,6 +87,8 @@ export interface Attempt {
     corrected: boolean;
 }
 export interface Session {
+    fixedLength?: true;
+    lessonRewarded?: true;
     scope?: { kind: 'course'; courseId: string };
     training?: { kind: 'map' | 'extra'; rewarded?: boolean };
     stageReview?: {
@@ -111,6 +115,7 @@ export interface Session {
     attempts: Attempt[];
     repeatKeys: string[];
 }
+export interface ArticleGuidance {expected:'a'|'an'|null;explanation:string}
 export interface Progress {
     encountered?: string[];
     adventure?: Adventure;

@@ -16,7 +16,7 @@ Alternatywnie osoba korzystająca z Firebase CLI może wdrożyć same reguły pr
 ## Pierwsze użycie po publikacji aplikacji
 
 1. Na telefonie, na którym są postępy Hani, otwórz aplikację.
-2. Kliknij wskaźnik zapisu u góry lub **Kopia postępów → Zaloguj się lub utwórz konto**.
+2. Kliknij **Konto** w nawigacji lub wskaźnik zapisu u góry. **Kopia postępów** jest dostępna w Koncie, również dla gościa.
 3. Utwórz konto rodzica na jego adres e-mail. Hasło wpisuje się wyłącznie w aplikacji, nie w plikach ani wiadomościach. Aplikacja wymaga przy rejestracji co najmniej 8 znaków.
 4. Wybierz **Przenieś postępy na konto**. Bez tej decyzji wyniki gościa nie są wysyłane. Zapis bez konta zostaje zachowany oddzielnie.
 5. Poczekaj na komunikat **Wyniki zapisane na koncie**. Na drugim urządzeniu zaloguj się na to samo konto — aplikacja pobierze zapis.

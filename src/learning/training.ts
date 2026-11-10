@@ -109,7 +109,7 @@ export function makeTrainingSession(modules: Module[], selected: Module, p: Prog
     const items = selectTrainingItems(pool, context?.lesson.targetCount ?? 8);
     if (!items.length) return null;
     items.forEach((item, index) => { item.input = inputFor(questionFor(modules, item), answerMode === 'mixed' ? (index % 2 ? 'text' : 'choice') : answerMode); });
-    return { id: crypto.randomUUID(), moduleId: selected.id, mode: context ? 'lesson' : 'training', training: { kind: context ? 'map' : 'extra' },
+    return { fixedLength:true,id: crypto.randomUUID(), moduleId: selected.id, mode: context ? 'lesson' : 'training', training: { kind: context ? 'map' : 'extra' },
         ...(context ? { lesson: { id: `${journeyKey(context.journey)}/${context.lesson.id}`, title: context.lesson.title } } : {}),
         answerMode, previous: true, startedAt: new Date().toISOString(), completedAt: null, items, index: 0, phase: 'question', lastCorrect: null, attempts: [], repeatKeys: [] };
 }

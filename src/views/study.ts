@@ -1,4 +1,3 @@
-import { closestAnswer, type AnswerPart } from '../answer-comparison.ts';
 import { AppState } from '../app/state.ts';
 import { catView } from './cat.ts';
 import { endingCat, responseCat } from '../cats.ts';
@@ -10,6 +9,7 @@ import { coursePracticeLabels, type CoursePracticeMode } from '../learning/cours
 import { pendingLabel, reviewState, reviewStats, stageForSession } from '../stage-review.ts';
 import { button, e, icon } from '../ui.ts';
 import { answerHint } from '../learning/questions.ts';
+import { vocabularyAssessment,vocabularyFullAnswer } from '../learning/vocabulary-answer.ts';
 function illustrationView(picture: Illustration | undefined, showCaption: boolean) {
     if (!picture)
         return '';
@@ -18,9 +18,7 @@ function illustrationView(picture: Illustration | undefined, showCaption: boolea
 function answerComparison(q: Exercise, session: Session) {
     const attempt = session.attempts.find(a => a.key === session.items[session.index].key);
     const answer = attempt?.lastAnswer ?? (attempt?.corrections === 0 ? attempt.answer : undefined);
-    const comparison = closestAnswer(answer ?? '', q.answers, q.caseSensitive);
-    const parts = (values: AnswerPart[]) => values.map(part => part.different ? `<mark>${e(part.text)}</mark>` : e(part.text)).join('');
-    return `<div class="answer-comparison"><div class="given-answer"><span>Twoja odpowiedź</span><p>${answer === undefined ? 'Ostatnia odpowiedź nie jest dostępna w tym starszym zapisie.' : parts(comparison.given)}</p></div><div class="expected-answer"><span>Poprawna odpowiedź</span><p>${parts(comparison.expected)}</p></div><small>Wyróżnione fragmenty pokazują różnice.</small></div>`;
+    return `<div class="answer-comparison"><div class="given-answer"><span>Twoja odpowiedź</span><p>${answer === undefined ? 'Ostatnia odpowiedź nie jest dostępna w tym starszym zapisie.' : e(answer)}</p></div><div class="expected-answer"><span>Poprawna odpowiedź</span><p>${e(vocabularyFullAnswer(q))}</p></div></div>`;
 }
 function explanationView(q: Exercise, state: Readonly<AppState>, moduleId: string) {
     if (q.kind !== 'grammar') return `<p>${e(q.explanation)}</p>`;
@@ -49,7 +47,10 @@ export function studyView(state: Readonly<AppState>) {
     }
     if (s.phase === 'feedback') {
         const ok = s.lastCorrect;
-        card += `<div class="feedback ${ok ? 'correct' : 'incorrect'}" role="status"><div class="feedback-lead"><strong>${ok ? 'Tak jest! Dobra robota ✦' : 'Spokojnie, tak właśnie się uczymy.'}</strong>${state.catCatalog ? catView(state.catCatalog, responseCat(state.catCatalog, s)) : ''}</div>${!ok ? answerComparison(q, s) : ''}${explanationView(q,state,item.moduleId)}${q.source ? `<p class="source-reference">Źródło: ${e(q.source)}</p>` : ''}${illustrationView(q.illustration, true)}</div><div class="actions">${!ok ? button('retry', 'Spróbuję jeszcze raz', 'secondary') : ''}${button('next', `Dalej ${icon('arrow')}`)}</div>`;
+        const given=s.attempts.find(a=>a.key===item.key)?.lastAnswer;
+        const article=given===undefined?null:vocabularyAssessment(q,given);
+        const articleNote=article?.note?`<aside class="article-note"><strong>${ok?'Warto zapamiętać':'Rodzajnik w tym haśle'}</strong><p>Pełna forma: <b>${e(vocabularyFullAnswer(q))}</b>. ${e(article.note)}</p></aside>`:'';
+        card += `<div class="feedback ${ok ? 'correct' : 'incorrect'}" role="status"><div class="feedback-lead"><strong>${ok ? 'Tak jest! Dobra robota ✦' : 'Spokojnie, tak właśnie się uczymy.'}</strong>${state.catCatalog ? catView(state.catCatalog, responseCat(state.catCatalog, s)) : ''}</div>${!ok ? answerComparison(q, s) : ''}${articleNote}${explanationView(q,state,item.moduleId)}${q.source ? `<p class="source-reference">Źródło: ${e(q.source)}</p>` : ''}${illustrationView(q.illustration, true)}</div><div class="actions">${!ok ? button('retry', 'Spróbuję jeszcze raz', 'secondary') : ''}${button('next', `Dalej ${icon('arrow')}`)}</div>`;
     }
     else {
         card += illustrationView(q.illustration, false);
@@ -70,5 +71,5 @@ export function summaryView(state: Readonly<AppState>, home: () => string) {
     if (!s)
         return home();
     const result = score(s);
-    return `<section class="summary panel"><div class="celebration">${state.catCatalog ? catView(state.catCatalog, endingCat(state.catCatalog, s), true) : icon('cat')}</div><div class="eyebrow">KOLEJNY MAŁY KROK ZA TOBĄ</div><h1>${state.user ? state.user.displayName ? `Dobra robota, ${e(state.user.displayName)}!` : 'Dobra robota!' : 'Dobra robota, Haniu!'}</h1><p>Każda próba pomaga. Dziś wiesz już trochę więcej.</p>${s.lesson || s.stageReview || s.training ? `<div class="lesson-reward">${state.lastReward ? `+${state.lastReward} ★` : s.stageReview ? 'Tura zapisana ✓' : s.training ? 'Trening zapisany ✓' : 'Lekcja utrwalona ✓'}<small>${state.lastReward ? `Gwiazdki są już w Twoim portfelu.${state.lastStageReward ? ` W tym ${state.lastStageReward} ★ za ukończony etap i utrwalone błędy.` : ''}` : s.stageReview ? 'Każda samodzielna poprawna odpowiedź przybliża utrwalenie.' : 'Nagroda za pierwsze ukończenie tej lekcji jest już przyznana.'}</small></div>` : ''}${s.stageReview ? stageReviewSummary(state, s) : !s.attempts.length ? `<div class="summary-score">${new Set(s.items.map(i => i.key)).size}<span>przećwiczonych fiszek</span></div>` : `<div class="summary-score">${result.correct}<small> / ${result.total}</small><span>poprawnie za pierwszym razem</span></div><p>Poprawione za drugim razem: <b>${result.corrections}</b>. Ten wynik liczymy osobno.</p>`}<div class="actions journey-summary-actions">${s.lesson || s.stageReview ? `${button('map', 'Wróć na mapę')}${button('house', 'Urządź domek', 'secondary')}` : `${s.scope?button('course-practice','Wróć do poznanego materiału'):button('home', 'Wróć do modułów')}${button('progress', 'Zobacz postępy', 'secondary')}`}</div></section>`;
+    return `<section class="summary panel"><div class="celebration">${state.catCatalog ? catView(state.catCatalog, endingCat(state.catCatalog, s), true) : icon('cat')}</div><div class="eyebrow">KOLEJNY MAŁY KROK ZA TOBĄ</div><h1>${state.user ? state.user.displayName ? `Dobra robota, ${e(state.user.displayName)}!` : 'Dobra robota!' : 'Dobra robota, Haniu!'}</h1><p>Każda próba pomaga. Dziś wiesz już trochę więcej.</p>${s.lesson || s.stageReview || s.training ? `<div class="lesson-reward">${state.lastReward ? `+${state.lastReward} ★` : s.stageReview ? 'Tura zapisana ✓' : s.training ? 'Trening zapisany ✓' : 'Lekcja utrwalona ✓'}<small>${state.lastReward ? `Gwiazdki są już w Twoim portfelu.${state.lastStageReward ? ` W tym ${state.lastStageReward} ★ za ukończony etap i utrwalone błędy.` : ''}` : s.stageReview ? 'Każda samodzielna poprawna odpowiedź przybliża utrwalenie.' : 'Postęp tej sesji jest zachowany.'}</small></div>` : ''}${s.stageReview ? stageReviewSummary(state, s) : !s.attempts.length ? `<div class="summary-score">${new Set(s.items.map(i => i.key)).size}<span>przećwiczonych fiszek</span></div>` : `<div class="summary-score">${result.correct}<small> / ${result.total}</small><span>poprawnie za pierwszym razem</span></div><p>Poprawione za drugim razem: <b>${result.corrections}</b>. Ten wynik liczymy osobno.</p>`}<div class="actions journey-summary-actions">${s.lesson || s.stageReview ? `${button('map', 'Wróć na mapę')}${button('house', 'Urządź domek', 'secondary')}` : `${s.scope?button('course-practice','Wróć do poznanego materiału'):button('home', 'Wróć do modułów')}${button('progress', 'Zobacz postępy', 'secondary')}`}</div></section>`;
 }
