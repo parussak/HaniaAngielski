@@ -8,6 +8,8 @@ Status: opis obecnego produktu i uzgodnionego kierunku. Ostatnie uporządkowanie
 
 Szczegółowy punkt odniesienia: [produkt przed zmianami](stan-obecny/produkt.md). Food ma już dwie mapy i trening wcześniejszej mapy. Zakres uzupełnienia oraz ograniczenia względem podręcznika opisuje [raport etapu 4](wdrozenie-food.md). Francuski i włoski nie mają jeszcze produkcyjnych materiałów.
 
+Każdy kurs każdego konta ma własny domek i portfel gwiazdek. Dawny dorobek pozostaje w angielskim. Ukończenie map Food udostępnia wyposażenie do kupienia, a obie mapy dają bezpłatnie kuchnię; zaległe błędy nie blokują pokoju. [Pokoje, nagrody i ochrona danych](koci-domek.md).
+
 ## Uzgodnione założenia docelowe
 
 ### Użytkownicy i materiał

@@ -123,6 +123,10 @@ Licznik zawsze musi nazywać tę jednostkę, którą faktycznie liczy: np. „se
 
 Docelowy sposób prezentacji postępu opisano wyżej (D-23), ale nie zmienia on samoczynnie zasad nagród. Nie zakładamy, że stara premia etapu staje się premią każdej nowej mapy ani że sam pasek 100% daje premię utrwalenia — [U-07](decyzje.md#u-07).
 
+## Rozbudowa kociego domku — wdrożona dla Food
+
+Osobny domek i portfel gwiazdek dla każdego konta i kursu. Ukończenie pojedynczej mapy odblokowuje wyposażenie do zakupu za gwiazdki, a ukończenie wszystkich map modułu daje jeden pokój. Powtórki błędów nie blokują ukończenia ani tej nagrody. D-41 i D-42 nie zmieniają liczby gwiazdek za naukę; obecne gwiazdki i zakupy zostają przypisane do angielskiego. Dla Food wdrożono kuchnię i osiem nowych dekoracji. [Pełne wymaganie i wdrożenie Food](koci-domek.md).
+
 ## Algorytm treningu — wybór odłożony na później
 
 Na prośbę użytkowniczki wybór konkretnego algorytmu odkładamy (D-29). Uzgodnione są cel i pierwszeństwo doboru: trudne i dawno niećwiczone częściej, bezbłędne rzadziej, ale regularnie. Poniższe rozwiązania pozostają jedynie kandydatami do późniejszej oceny, nie planem wdrożenia.

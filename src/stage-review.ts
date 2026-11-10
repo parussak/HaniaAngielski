@@ -1,3 +1,4 @@
+import {creditStars,courseForModule} from './house/progress.ts';
 import { freshAdventure,journeyKey,lessonKey,type Journey,type Stage } from './adventure.ts';
 import { inputFor,questionFor,resolveItem,type AnswerMode,type Item,type Module,type Progress,type Session } from './core.ts';
 import type { HistoryPage } from './history.ts';
@@ -69,7 +70,7 @@ export function finishStageReview(p:Progress,s:Session){
   }
   state.round=round;return true;
 }
-export function settleStageRewards(p:Progress,journeys:Journey[],at=new Date().toISOString()){
+export function settleStageRewards(p:Progress,journeys:Journey[],at=new Date().toISOString(),modules:Module[]=[]){
   if(p.adventure?.reviewArchiveHead)return 0;
   let reward=0;
   for(const j of journeys)for(const stage of j.stages){
@@ -78,7 +79,7 @@ export function settleStageRewards(p:Progress,journeys:Journey[],at=new Date().t
     if(j.id)continue;
     if(!stage.lessons.every(l=>p.adventure?.completed[lessonKey(j,l)]))continue;
     if(reviewStats(p,j,stage).pending || reviewState(p,stageKey(j,stage))?.rewardedAt)continue;
-    const state=ensure(p,stageKey(j,stage));state.rewardedAt=at;p.adventure!.earned+=3;reward+=3;
+    const state=ensure(p,stageKey(j,stage));state.rewardedAt=at;creditStars(p,3,courseForModule(modules,j.moduleId));reward+=3;
   }
   return reward;
 }

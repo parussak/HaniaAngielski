@@ -1,3 +1,4 @@
+import {homeFor,settleHouseUnlocks} from '../house/progress.ts';
 import { deadline, sdk } from '../services/firebase-client.ts';
 import { AppState } from '../app/state.ts';
 import { type Progress } from '../core.ts';
@@ -17,7 +18,8 @@ export function createProgressController(state: AppState, { sync, run, render, s
     async function prepareProgress(p: Progress) {
         // Do not finish historical migration or settle bonuses against a partial catalog.
         const prepared = await compactHistory(state.journeyIssues.length?p:seedStageReviews(p, state.journeys), putHistoryPage);
-        if(!state.journeyIssues.length)settleStageRewards(prepared, state.journeys);
+        if(!state.journeyIssues.length)settleStageRewards(prepared, state.journeys,undefined,state.modules);
+        settleHouseUnlocks(prepared,state.modules,state.journeys,state.journeyIssues);
         return prepared;
     }
     function scheduleReviewMigration() {
@@ -43,9 +45,9 @@ export function createProgressController(state: AppState, { sync, run, render, s
                     return;
                 }
                 await run(async () => {
-                    const earned = state.progress.adventure?.earned ?? 0;
+                    const earned = homeFor(state.progress,state.selectedCourseId)?.earned ?? 0;
                     await mutate(p => { seedReviewArchive(p, page, state.journeys); });
-                    if ((state.progress.adventure?.earned ?? 0) > earned)
+                    if ((homeFor(state.progress,state.selectedCourseId)?.earned ?? 0) > earned)
                         state.notice = 'Dawne lekcje uwzględnione. Gwiazdki za domknięte etapy są już w portfelu.';
                 });
                 again = true;

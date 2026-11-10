@@ -117,3 +117,7 @@ Testy używają odizolowanych danych. Bez zmiennej `HANIA_TEST_BUILD` uruchamiaj
 - `src/main.ts` — uruchamia aplikację i łączy jej części; przejścia i kliknięcia obsługuje `src/app/events.ts`, a czynność następnego kroku wykonuje `src/controllers/learning.ts`.
 
 Nowe mapy dodaje się przez materiały modułu (pole `journeyPath`), a ich kolejność wyznacza `order`. Logika następnego kroku obsługuje wiele modułów; obecny katalog produkcyjny nadal zawiera Food.
+
+## Pokoje i wyposażenie za Food
+
+Każdy kurs każdego konta ma osobny domek i portfel gwiazdek. Dotychczasowy pokój, zakupy, ustawienia i saldo pozostają w angielskim. Pierwsza mapa Food odblokowuje miseczki, dzbanek lemoniady, koszyk i koc piknikowy, a druga misę owoców, toster z kocimi uszami, półeczkę z kubkami i stolik. Za obie mapy otrzymujesz bezpłatnie Kocią kuchnię; wyposażenie kupujesz za gwiazdki. Wcześniejsze ukończenia też są uwzględniane. [Wymagania, ceny, edycja i zgodność zapisu](docs/koci-domek.md).

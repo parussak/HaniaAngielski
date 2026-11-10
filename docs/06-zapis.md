@@ -13,7 +13,7 @@ Status: obecne rozwiązanie oraz granice przyszłych zmian. Dokument nie wprowad
 | Zewnętrzna kopia | Eksport JSON, format `hania-language`, wersja `1`, z potrzebnymi archiwami |
 | Materiały kursów | Wspólne pliki statyczne i cache PWA, oddzielnie od wyników |
 
-Jedna aktywna sesja jest zapisywana dla użytkownika, nie osobno dla każdego języka. Wznowienie obejmuje m.in. pytanie, fazę, pierwszą odpowiedź i poprawki. Konto ma wspólny bilans gwiazdek i domek.
+Jedna aktywna sesja jest zapisywana dla użytkownika, nie osobno dla każdego języka. Wznowienie obejmuje m.in. pytanie, fazę, pierwszą odpowiedź i poprawki. Każde konto ma osobny bilans gwiazdek i domek dla każdego kursu.
 
 Zachowano rozdzielenie kont i gościa, kontrolę wersji przy synchronizacji, wybór przy konflikcie i blokadę drugiej karty. Import kopii zastępuje wyniki po potwierdzeniu. Konto wysyła oczekujące zmiany po połączeniu podczas działania aplikacji lub kolejnego uruchomienia, nie jako stała usługa po zamknięciu.
 
@@ -69,10 +69,16 @@ Nie przesądzamy, że wszystkie obecne pola zostaną zachowane bez rozszerzeń a
 - Ochronę wyników, aktywnych sesji i kolejek błędów Food wdrożono w etapie 4 — [U-03](decyzje.md#u-03). Kolejne istotne zmiany treści wymagają zachowania również obecnie wdrożonego wydania 2.
 - Poznanie i odczyt wcześniejszych prób są wdrożone zgodnie z D-25/D-26 — [U-04](decyzje.md#u-04). Dane przyszłego algorytmu treningu pozostają w [U-05](decyzje.md#u-05).
 - Czy potrzebne są oddzielne aktywne sesje, preferencje odpowiedzi albo synchronizacja wyboru kursu — [U-08](decyzje.md#u-08). Obecnie jest jedna sesja, wspólny wybór sposobu odpowiadania i lokalna preferencja kursu.
-- Co w przyszłości pozostaje wspólne: gwiazdki, domek i nagrody — [U-07](decyzje.md#u-07).
+- D-41 i D-42 rozstrzygają docelowo osobne domki i portfele gwiazdek dla każdego konta i kursu. Obecny pokój, zakupy, ustawienia i cały bilans gwiazdek przypisujemy do angielskiego, bez zmiany salda i bez podwójnego przypisania po imporcie lub synchronizacji. Inne kursy zaczynają z zerowym portfelem i bez zakupów. Wdrożone dla Food. [Wymaganie rozbudowy domku i zgodność starszych zapisów](koci-domek.md).
 
 ## Stałe sesje i nagroda za ponowne ukończenie
 
 Nowa sesja ma opcjonalny znacznik `fixedLength: true`. Nagrodzona ukończona sesja lekcji zapisuje `lessonRewarded: true`, co zapobiega ponownemu naliczeniu nagrody za tę samą sesję po odświeżeniu, imporcie lub synchronizacji. Pełne powtórzenie to nowa sesja wszystkich zadań lekcji, z próbą przy każdym zadaniu; nie wymaga bezbłędnego wyniku. Pierwsze ukończenie nadal daje 3 gwiazdki, każde nowe pełne powtórzenie 1.
 
 Stare sesje bez znacznika stałej długości nie dostają wstecz premii za powtórzenie. Dotychczasowe ukończenia, pierwsze próby, kolejki błędów i saldo pozostają. Aktywnej starej sesji nie skracamy ani nie zmieniamy jej zapisanej listy. Nowa sesja powtórzenia może już zdobyć 1 gwiazdkę. Kopia pozostaje w wersji 1 i przyjmuje dawne pliki; nowe pola są opcjonalne, walidowane i przechodzą przez obecny zapis lokalny/chmurowy. Nie zmieniono reguł Firebase ani zasad kompakcji historii.
+
+## Osobne domki i portfele kursów — D-41/D-42
+
+Dotychczasowe `adventure.earned` i `adventure.purchases` zachowują dokładne wartości i reprezentują wyłącznie `angielski-hani`. To zgodny odczyt dawnego formatu, bez podwójnego kopiowania, zwrotu wydatków ani ponownego odliczania ceny. `adventure.courseHomes` jest opcjonalnym słownikiem portfeli i zakupów pozostałych kursów; nie może zawierać drugiego wpisu angielskiego. Nowy kurs ma zero gwiazdek i pusty salonik. Saldo na mapie i w domku oraz nagrody za lekcję, trening i etap odnoszą się do właściwego kursu.
+
+Każdy domek może mieć unikalne listy `rooms` i `unlockedItems`. Zakup ma opcjonalne `room`; brak oznacza salonik. Walidacja sprawdza osobno saldo każdego kursu i zajętość miejsc w każdym pokoju, a także istnienie pokoju wskazanego przy zakupie. Dane pozostają w obecnym dokumencie postępów i kopii wersji 1, z zachowaniem limitów historii. Reguły Firebase bez zmian. Przy imporcie starszego pliku brak nowych pól jest poprawny; ukończone mapy odtwarzają odblokowania. Szczegóły są w [dokumencie domku](koci-domek.md).

@@ -91,3 +91,7 @@ Część tego podziału już istnieje po refaktoringu, ale nadal są powiązania
 ## Do ustalenia
 
 Podstawowy format kursów, wybór kursu, poznany zakres i aktualizacje Food są wdrożone — [U-01](decyzje.md#u-01), [U-03](decyzje.md#u-03), [U-04](decyzje.md#u-04). Nie planujemy automatycznego podziału istniejących etapów na nowe mapy. Dalsze rozszerzenia i harmonogram treningu pozostają w [U-05](decyzje.md#u-05).
+
+## Domek rozdzielony na kursy
+
+`src/house/catalog.ts` to dane dekoracji, cen, pokoi i nagród. `src/house/progress.ts` realizuje portfele, zgodny odczyt angielskiego dorobku, odblokowania i ustawienia. `src/views/house.ts` odpowiada za ekran domku, oddzielony od `adventure-view.ts` z mapami i wprowadzeniami lekcji. Kontroler nauki przekazuje kurs przy zakupach i przypisuje nagrodę według modułu sesji; kontroler zapisu rozlicza odblokowania również dla dawnych ukończeń. [Kontrakt i ograniczenia](koci-domek.md).

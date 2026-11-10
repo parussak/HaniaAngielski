@@ -7,6 +7,7 @@ import {indexedDB} from 'fake-indexeddb';
 import {compactHistory,sessionCount,type HistoryPage} from '../src/history.ts';
 import {modules} from './materials.ts';
 import {makeSession,questionFor,recordAnswer,next} from '../src/core.ts';
+import {creditStars,purchase,stars,homeFor} from '../src/house/progress.ts';
 
 const copy=<T>(value:T)=>structuredClone(value);
 const sample=(name:string)=>({...emptyProgress(),words:{[name]:'known' as const}});
@@ -24,6 +25,16 @@ function server(){
   return {remote,make};
 }
 function deferred<T>(){let resolve!:(value:T)=>void;const promise=new Promise<T>(r=>resolve=r);return {promise,resolve};}
+
+test('osobne portfele i zakupy kursów przechodzą offline na drugie urządzenie i nie przechodzą na inne konto',async()=>{
+ const remote=server(),a=remote.make(),b=remote.make();await a.sync.connect('a',emptyProgress());await a.sync.sync();
+ const p=emptyProgress();creditStars(p,100);creditStars(p,20,'french-book');assert.ok(purchase(p,'pillow'));assert.ok(purchase(p,'yarn','french-book'));
+ await a.sync.save(p);const fetch=a.ports.fetch;a.ports.fetch=async()=>{throw Error('offline');};await a.sync.sync();
+ const resumed=new ProgressSync(a.ports);await resumed.connect('a',emptyProgress());assert.equal(stars(resumed.cache!.progress),94);assert.equal(stars(resumed.cache!.progress,'french-book'),16);
+ a.ports.fetch=fetch;await resumed.sync();await b.sync.connect('a',emptyProgress());await b.sync.sync();
+ assert.deepEqual(b.sync.cache!.progress,p);assert.ok(homeFor(b.sync.cache!.progress,'french-book')!.purchases.yarn);
+ await b.sync.connect('b',emptyProgress());await b.sync.sync();assert.equal(stars(b.sync.cache!.progress),0);assert.equal(stars(b.sync.cache!.progress,'french-book'),0);
+});
 
 test('stary duży zapis z chmury jest migrowany przed kolejnym wysłaniem bez utraty sesji',async()=>{
   const p=emptyProgress();p.active=makeSession(modules,modules[0],'grammar','text',false,p);p.active.items=p.active.items.slice(0,1);recordAnswer(p,questionFor(modules,p.active.items[0]),questionFor(modules,p.active.items[0]).answers[0]);next(p);

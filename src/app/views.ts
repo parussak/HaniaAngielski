@@ -1,5 +1,6 @@
+import {houseView} from '../views/house.ts';
 import { accountView as renderAccountView } from '../views/account.ts';
-import { houseView, journeyView, lessonIntro } from '../adventure-view.ts';
+import { journeyView, lessonIntro } from '../adventure-view.ts';
 import { lessons } from '../adventure.ts';
 import { currentJourney, currentCourse, courseModules, courseJourneys } from './selectors.ts';
 import { AppState } from './state.ts';
@@ -23,19 +24,19 @@ export function createViews(state: AppState, sync: ProgressSync, syncLabel: () =
         const cat = state.catCatalog?.cats.find(c => c.id === id);
         return cat ? catView(state.catCatalog, { cat, mood: 'happy', frame: cat.happy }) : icon('cat');
     }
-    function mapView() { const j = currentJourney(state); return j ? journeyView(j, state.progress, decorativeCat) : '<h1>Kocia mapa</h1><p>Mapa jest chwilowo niedostępna. Twoje własne ćwiczenia nadal działają.</p>' + button('home', 'Moja nauka'); }
+    function mapView() { const j = currentJourney(state); return j ? journeyView(j, state.progress, decorativeCat,currentCourse(state)?.id) : '<h1>Kocia mapa</h1><p>Mapa jest chwilowo niedostępna. Twoje własne ćwiczenia nadal działają.</p>' + button('home', 'Moja nauka'); }
     function introView() {
         const j=currentJourney(state),l=j&&lessons(j).find(l=>l.lesson.id===state.introLessonId)?.lesson,m=state.modules.find(m=>m.id===j?.moduleId);
         if(!j||!l||!m)return mapView();
         if(l.role==='training'&&!mapTrainingPool(state.modules,state.journeys,j,state.progress).length)return trainingPreparationView(state.modules,state.journeys,j,state.progress);
         return lessonIntro(j,l,m,state.progress);
     }
-    function homeForCats() { const food = state.journeys.filter(j=>j.moduleId==='unit-2-food'&&!j.id), complete = food.length>0 && food.every(j=>lessons(j).every(l=>state.progress.adventure?.completed[l.key])); return houseView(state.progress, state.chosenDecoration, decorativeCat, complete); }
+    function homeForCats() { return courseContext(state)+houseView(state.progress,currentCourse(state)!.id,state.chosenRoom,state.chosenDecoration,decorativeCat,state.modules,state.journeys,state.journeyIssues); }
     function home() {
         const step = getNextStep(state.modules, state.journeys, state.progress, currentCourse(state)?.id);
         return homeView({ name: state.user ? state.user.displayName : 'Haniu', modules: state.modules, step, pwa, cat: decorativeCat(step.catId), courseContext: courseContext(state) + unfinishedCourseSession(state, true) });
     }
-    function journeyList() { return courseContext(state) + renderJourneyList(courseModules(state), courseJourneys(state), state.progress,state.journeyIssues); }
+    function journeyList() { return courseContext(state) + renderJourneyList(courseModules(state), courseJourneys(state), state.progress,state.journeyIssues,currentCourse(state)?.id); }
     function moduleList() { return courseContext(state) + renderModuleList(courseModules(state)) + button('course-practice','Ćwicz cały poznany materiał →','secondary'); }
     function setup() { return setupView(state); }
     function study() { return studyView(state); }

@@ -62,6 +62,12 @@ Użytkowniczka zatwierdziła etap 4: porównanie Food z podręcznikiem, poprawki
 
 Pozostałe zaparkowane pytania pozostają otwarte; wdrożenie tych zasad nie rozstrzyga kryteriów FR/IT ani docelowego algorytmu treningu.
 
+## Rozbudowa domku — wymaganie do wdrożenia
+
+**D-41:** Każde konto ma osobny domek dla każdego kursu. Ukończenie wszystkich map modułu odblokowuje jeden pokój, a ukończenie pojedynczej mapy odblokowuje wyposażenie. Pokój jest nagrodą za moduł; wyposażenie jest dostępne do kupienia za gwiazdki. Wdrożono dla Food: kuchnia za obie mapy i osiem przedmiotów w zatwierdzonych cenach. [Pełne wymaganie, wdrożenie i ochrona dorobku](koci-domek.md). Osobne domki nie rozstrzygają podziału portfela gwiazdek.
+
+**D-42:** Gwiazdki są osobne dla każdego kursu i konta. Cały obecny dorobek domku — gwiazdki, zakupy, ustawienia i pokój początkowy — przypisujemy do kursu angielskiego `angielski-hani`, z zachowaniem wydatków i dostępnego salda. Przejście wykonujemy raz, również przy imporcie starszej kopii i synchronizacji. Nowe kursy zaczynają z zerowym portfelem i bez zakupów. Zasada jest wdrożona; zastępuje otwarte pytanie o wspólny portfel przy D-41. Dorobek angielskiego pozostaje w starych polach zapisu, a pozostałe kursy mają osobne portfele; nie trzeba zerować ani kopiować dawnych kwot. [Wymaganie i wdrożenie Food](koci-domek.md).
+
 ## Obszary decyzji i ich status
 
 Poniższe punkty nie są zgodą na zmianę aplikacji. Każdy wymaga doprecyzowania przed implementacją odpowiadającej mu funkcji.

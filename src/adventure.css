@@ -37,3 +37,14 @@
 .extra-training{border-top:1px solid #e4d8f2;margin-top:24px;padding-top:20px}
 .extra-training p{line-height:1.6}
 .extra-training .secondary{min-height:48px;max-width:100%;white-space:normal}
+.house-rooms{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 24px}
+.house-rooms button{white-space:normal;min-height:48px;max-width:100%;line-height:1.5}
+.house-rooms button.is-selected{background:#e9def8;border-color:#9270bc;color:#503865}
+.house-rooms button:disabled{opacity:1;color:#705581;background:#f4f0f7;border-style:dashed}
+.room-award{padding:16px;margin:16px 0;border:1px solid #b8d8c1;border-radius:15px;background:#edf6ef;color:#285b3a;font-weight:600;line-height:1.6}
+.house-shop .decoration-card{min-width:0;overflow-wrap:anywhere}
+.house-shop .decoration-card span{font-size:12px;line-height:1.5}
+.house-shop .locked-decoration{color:#795524}
+.kitchen-room .slot-window{left:43%;top:33%;width:17%;height:24%}
+.kitchen-room .slot-shelf{left:66%;top:33%;width:18%;height:24%}
+.kitchen-room .slot-rug{left:36%;top:58%;width:28%;height:35%}

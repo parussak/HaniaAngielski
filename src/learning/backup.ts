@@ -55,6 +55,17 @@ export function validateBackup(input: unknown): Backup {
     if (new Set(ids).size !== ids.length || (p.active && ids.includes((p.active as Session).id)))
         return fail();
     const safeKey = (key: string) => str(key) && !['__proto__', 'prototype', 'constructor'].includes(key);
+    const identifiers=(v:unknown)=>strings(v)&&new Set(v).size===v.length&&v.every(id=>/^[a-z0-9-]+$/.test(id)&&safeKey(id));
+    const validHome=(h:unknown):boolean=>{
+        if(!obj(h)||!integer(h.earned)||!obj(h.purchases)||h.rooms!==undefined&&!identifiers(h.rooms)||h.unlockedItems!==undefined&&!identifiers(h.unlockedItems))return false;
+        const places:string[]=[];let spent=0;
+        for(const [id,v] of Object.entries(h.purchases)){
+            if(!safeKey(id)||!obj(v)||!integer(v.cost)||!(v.slot===null||['left','window','right','rug','shelf','front'].includes(v.slot as string)))return false;
+            if(v.room!==undefined&&(typeof v.room!=='string'||v.room!=='salon'&&!(Array.isArray(h.rooms)&&h.rooms.includes(v.room))))return false;
+            spent+=v.cost as number;if(v.slot!==null)places.push(`${v.room??'salon'}/${v.slot}`);
+        }
+        return spent<=(h.earned as number)&&new Set(places).size===places.length;
+    };
     const totals = (v: unknown) => obj(v) && integer(v.total) && integer(v.correct) && (v.correct as number) <= (v.total as number);
     if (p.history !== undefined) {
         const h = p.history;
@@ -67,15 +78,10 @@ export function validateBackup(input: unknown): Backup {
             return fail();
     }
     if (p.adventure !== undefined) {
-        const a = p.adventure, slotIds = ['left', 'window', 'right', 'rug', 'shelf', 'front'];
-        if (!obj(a) || a.version !== 1 || !integer(a.earned) || !obj(a.completed) || !Object.entries(a.completed).every(([k, v]) => safeKey(k) && obj(v) && date(v.at) && (v.edition === undefined || v.edition === 2)) || !obj(a.purchases) || !Object.entries(a.purchases).every(([k, v]) => safeKey(k) && obj(v) && integer(v.cost) && (v.slot === null || slotIds.includes(v.slot as string))) || (a.reviewDay !== undefined && !(typeof a.reviewDay === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(a.reviewDay))))
+        const a = p.adventure;
+        if (!obj(a) || a.version !== 1 || !validHome(a) || !obj(a.completed) || !Object.entries(a.completed).every(([k, v]) => safeKey(k) && obj(v) && date(v.at) && (v.edition === undefined || v.edition === 2)) || (a.reviewDay !== undefined && !(typeof a.reviewDay === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(a.reviewDay))))
             return fail();
-        const purchases = Object.values(a.purchases) as {
-            cost: number;
-            slot: string | null;
-        }[];
-        if (purchases.reduce((n, v) => n + v.cost, 0) > (a.earned as number) || new Set(purchases.filter(v => v.slot).map(v => v.slot)).size !== purchases.filter(v => v.slot).length)
-            return fail();
+        if(a.courseHomes!==undefined&&(!obj(a.courseHomes)||!Object.entries(a.courseHomes).every(([id,h])=>safeKey(id)&&/^[a-z0-9-]+$/.test(id)&&id!=='angielski-hani'&&validHome(h))))return fail();
         if (a.reviewSchema !== undefined && a.reviewSchema !== 1)
             return fail();
         if (a.reviewArchiveHead !== undefined && a.reviewArchiveHead !== null && !(typeof a.reviewArchiveHead === 'string' && /^[a-f0-9]{64}$/.test(a.reviewArchiveHead)))

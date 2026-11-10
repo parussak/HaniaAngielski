@@ -4,14 +4,14 @@ import { e, icon } from '../ui.ts';
 import { mapProgress,reviewProgressText } from '../learning/map-progress.ts';
 import { journeyKey } from '../adventure.ts';
 function moduleSubtitle(m: Module) { return [m.level, `Moduł ${m.order}`, m.cover].filter(Boolean).map(e).join(' · '); }
-export function journeyList(modules: Module[], journeys: Journey[], progress: Progress,issues:JourneyIssue[]=[]) {
+export function journeyList(modules: Module[], journeys: Journey[], progress: Progress,issues:JourneyIssue[]=[],courseId?:string) {
     return `<button class="back" data-action="home">← Moja nauka</button>
     <div class="journey-top">
     <div>
     <div class="eyebrow">MAŁE KROKI, WIELKIE PRZYGODY</div>
     <h1>Twoje kocie przygody</h1>
     </div>
-    <button class="star-wallet" data-action="house" aria-label="Koci domek, ${stars(progress)} gwiazdek">${stars(progress)} <span aria-hidden="true">★</span>
+    <button class="star-wallet" data-action="house" aria-label="Koci domek, ${stars(progress,courseId)} gwiazdek">${stars(progress,courseId)} <span aria-hidden="true">★</span>
     </button>
     </div>
     <p class="lead">Wybierz mapę. Ucz się małymi krokami i zdobywaj gwiazdki do kociego domku.</p>

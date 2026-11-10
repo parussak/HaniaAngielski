@@ -1,25 +1,20 @@
+import {creditStars,courseForModule} from './house/progress.ts';
+import type {Home} from './house/progress.ts';
+export {decorations,slots} from './house/catalog.ts';
+export {stars,purchase,place} from './house/progress.ts';
 import { inputFor,keyFor,questionFor,type AnswerMode,type Item,type Module,type Progress,type Session } from './core.ts';
 import type { StageReview } from './stage-review.ts';
 import { compareModules } from './learning/scope.ts';
 export interface Lesson {id:string;title:string;intro:string;wordIds:string[];exerciseIds:string[];ruleIds:string[];role?:'training';targetCount?:number;edition?:2;update?:{edition:2;title:string;intro:string;wordIds:string[];exerciseIds:string[];ruleIds:string[]}}
 export interface Stage {id:string;title:string;cat:string;illustration:string;lessons:Lesson[]}
 export interface Journey {version:1;moduleId:string;id?:string;title:string;stages:Stage[]}
-export interface Adventure {
-  version:1;earned:number;completed:Record<string,{at:string;edition?:2}>;
-  purchases:Record<string,{cost:number;slot:string|null}>;reviewDay?:string;
+export interface Adventure extends Home {
+  courseHomes?:Record<string,Home>;
+  version:1;completed:Record<string,{at:string;edition?:2}>;
+  reviewDay?:string;
   reviewSchema?:1;reviewArchiveHead?:string|null;stageReviews?:Record<string,StageReview>;
 }
 export const freshAdventure=():Adventure=>({version:1,earned:0,completed:{},purchases:{}});
-export const slots=[{id:'left',name:'Lewy kącik'},{id:'window',name:'Pod oknem'},{id:'right',name:'Prawy kącik'},{id:'rug',name:'Na dywanie'},{id:'shelf',name:'Na półce'},{id:'front',name:'Z przodu'}];
-export const decorations=[
- {id:'pillow',name:'Poduszka',price:6,slot:'rug'},
- {id:'yarn',name:'Kłębek',price:4,slot:'front'},
- {id:'scratcher',name:'Drapak',price:12,slot:'left'},
- {id:'plant',name:'Roślinka',price:8,slot:'window'},
- {id:'books',name:'Książeczki',price:10,slot:'shelf'},
- {id:'basket',name:'Koszyk',price:8,slot:'right'},
-] as const;
-export const stars=(p:Progress)=>{const a=p.adventure;return a?a.earned-Object.values(a.purchases).reduce((n,item)=>n+item.cost,0):0;};
 export const journeyKey=(journey:Journey)=>journey.id?`${journey.moduleId}/${journey.id}`:journey.moduleId;
 export const lessonKey=(journey:Journey,lesson:Lesson)=>`${journeyKey(journey)}/${lesson.id}`;
 export function orderedJourneys(modules:Module[],journeys:Journey[]){return journeys.filter(j=>modules.some(m=>m.id===j.moduleId)).slice().sort((a,b)=>compareModules(modules.find(m=>m.id===a.moduleId)!,modules.find(m=>m.id===b.moduleId)!));}
@@ -86,7 +81,7 @@ export function makeLessonSession(modules:Module[],journey:Journey,lesson:Lesson
   items.forEach((item,i)=>item.input=inputFor(questionFor(modules,item),answerMode==='mixed'?(i%2?'text':'choice'):answerMode));
   return {fixedLength:true,id:crypto.randomUUID(),moduleId:m.id,mode:'lesson',lesson:{id:lessonKey(journey,lesson),title:lesson.title,...(lesson.edition?{edition:lesson.edition}:{})},answerMode,previous:false,startedAt:new Date().toISOString(),completedAt:null,items,index:0,phase:'question',lastCorrect:null,attempts:[],repeatKeys:[]};
 }
-export function rewardCompletion(p:Progress,s:Session){
+export function rewardCompletion(p:Progress,s:Session,modules:Module[]=[]){
   if(!s.completedAt || !s.items.every(i=>s.attempts.some(a=>a.key===i.key)))return 0;
   const a=p.adventure??freshAdventure();
   let reward=0;
@@ -98,18 +93,6 @@ export function rewardCompletion(p:Progress,s:Session){
     const saved=p.sessions.find(session=>session.id===s.id);
     if(saved?.training?.kind==='extra'&&!saved.training.rewarded){saved.training.rewarded=true;s.training.rewarded=true;reward=1;}
   }
-  if(reward){a.earned+=reward;p.adventure=a;}
+  if(reward){p.adventure=a;creditStars(p,reward,courseForModule(modules,s.moduleId));}
   return reward;
-}
-export function purchase(p:Progress,id:string){
-  const item=decorations.find(d=>d.id===id);if(!item)throw new Error('Nieznana dekoracja.');
-  const a=p.adventure??freshAdventure();if(Object.hasOwn(a.purchases,id))return false;
-  if(stars(p)<item.price)return false;
-  const occupied=new Set(Object.values(a.purchases).map(v=>v.slot));
-  a.purchases[id]={cost:item.price,slot:occupied.has(item.slot)?null:item.slot};p.adventure=a;return true;
-}
-export function place(p:Progress,id:string,slot:string|null){
-  const a=p.adventure,item=a?.purchases[id];if(!item || (slot!==null&&!slots.some(s=>s.id===slot)))return false;
-  const other=Object.entries(a!.purchases).find(([key,v])=>key!==id&&slot!==null&&v.slot===slot);
-  if(other)other[1].slot=item.slot;item.slot=slot;return true;
 }

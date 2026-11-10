@@ -21,13 +21,14 @@ Wprowadzono też swobodny wybór lekcji, stałą długość nowych sesji, nowe m
 | [07 · Testy](07-testy.md) | Jak kontrolujemy każdą część i kiedy dodajemy lub uruchamiamy testy? |
 | [Decyzje](decyzje.md) | Co ustalono i jakie pytania wymagają rozstrzygnięcia? |
 | [Karty kursów](kursy/README.md) | Co jest właściwe dla angielskiego Hani, francuskiego Hani i włoskiego Pauliny? |
+| [Rozbudowa kociego domku](koci-domek.md) | Wdrożone: osobne domki i portfele kursów, kuchnia za Food i wyposażenie za mapy |
 
 **Mechanika opisuje możliwości, nauka określa ich użycie, a merytoryka dostarcza konkretne treści i kryteria poprawności.** Format materiałów należy do kontraktu mechaniki; reguła francuskiego rodzajnika do merytoryki, a częstotliwość treningu do nauki.
 
 ## Statusy i pierwszeństwo
 
 - **Stan obecny** — potwierdzony w kodzie lub testach. [Punkt odniesienia](stan-obecny/README.md) oparto na rewizji 24cdeda.
-- **Uzgodnione założenia docelowe** — kierunek potwierdzony w rozmowie, który może jeszcze nie być wdrożony. Rejestr: D-01–D-40 w [decyzjach](decyzje.md).
+- **Uzgodnione założenia docelowe** — kierunek potwierdzony w rozmowie, który może jeszcze nie być wdrożony. Rejestr: D-01–D-42 w [decyzjach](decyzje.md).
 - **Do ustalenia** — pytanie bez zatwierdzonego rozwiązania. Rejestr U-01–U-10; odwołania w dokumentach nie są konkurencyjnymi decyzjami.
 - **Propozycja techniczna** — kandydat do oceny, nie automatycznie zaakceptowany zakres prac.
 

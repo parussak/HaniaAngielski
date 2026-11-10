@@ -99,3 +99,11 @@ Weryfikacja 10 listopada 2026 po D-36–D-40: **151/151 testów Node i 82/82 tes
 - `tests/supportive-learning.test.ts`: a/an obecne, pominięte, błędne i zbędne; brak przenoszenia tolerancji na gramatykę/FR; stały zestaw mimo błędów; dowolna lekcja; 3 gwiazdki za pierwszy raz i 1 za nowe pełne powtórzenie, bez podwójnej nagrody po odczycie kopii.
 - `tests/browser/supportive-learning.spec.ts`: mobilne menu z Mapami, kopia w Koncie gościa, zielony sukces z pomarańczową uwagą i różowy błąd bez przekreślenia; pominięcie dobrowolnej poprawki kończy sesję i zachowuje błąd.
 - Dotychczasowe testy mapy, treningów, kont, offline i historii nadal chronią ukończenia, saldo oraz wymianę danych. Zmiana menu wymaga przejścia do kopii przez Konto, nie usunięcia scenariuszy eksportu/importu.
+
+## Pokoje i portfele kursów — D-41/D-42
+
+Weryfikacja 10 listopada 2026: **158/158 testów Node i 86/86 testów Playwright** gotowej aplikacji w Chrome. `npm run build` przeszedł walidację treści, TypeScript, budowanie oraz przygotowanie 206 plików PWA offline. Sprawdzono lokalne odnośniki dokumentacji i zrzuty saloniku/kuchni na telefonie. Dziewięć nowych grafik SVG zajmuje razem 4789 bajtów. To próby na emulowanych ekranach i adapterze synchronizacji, bez zmiany danych prawdziwego konta Hani ani testu na fizycznym telefonie.
+
+- `tests/house.test.ts`: zgodny odczyt starego angielskiego portfela, osobne zakupy i nagrody kursów, obie kolejności ukończenia map, zaległe błędy, brak jednej mapy, trwałe odblokowania, zakupy tylko po odblokowaniu i przenoszenie między pokojami bez kopiowania. Walidacja kopii odrzuca ujemne saldo, drugi portfel angielskiego i nieprawidłowe pokoje/miejsca; sprawdzamy też kompletność lekkich SVG.
+- `tests/sync.test.ts`: portfele i zakupy kilku kursów po błędzie sieci, ponownym uruchomieniu i synchronizacji na drugie urządzenie; inne konto ma osobny zapis. To testowy adapter, bez zmiany prawdziwych kont.
+- `tests/browser/house.spec.ts`: telefon, salonik i kuchnia, częściowe i pełne Food, zakupy, przenoszenie, eksport/import, wybór kursu i zimny start offline. Ostatnia lekcja Food ma odblokować pokój z komunikatem, bez dodatkowych gwiazdek za sam pokój.

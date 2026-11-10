@@ -72,3 +72,7 @@ Moduł jest gotowy do publikacji, gdy nie ma nierozstrzygniętych wątpliwości 
 Nie zmieniaj tożsamości istniejących materiałów dla porządku i nie podbijaj masowo rewizji. Najpierw sprawdź wpływ na ukończenia, rozpoczęte sesje, błędy, gwiazdki i kopie. Zmiana rewizji bez zachowania starego pytania może uniemożliwić jego wznowienie; nie traktuj jej jako bezpiecznego rozwiązania sama w sobie.
 
 Dla Food zachowujemy ukończone lekcje i stare pytania. Wdrożone `update` obsługuje oryginał oraz wydanie 2; nie nadpisuj już opublikowanego wydania 2 istotnie inną treścią. Wybierz nowe zadanie lub lekcję albo przygotuj osobną zmianę obsługi kolejnych wydań. [Zasady zgodności](format-materialow.md#aktualizacja-wydanej-lekcji) i [przykład Food](wdrozenie-food.md).
+
+## Pokój i wyposażenie za nowy moduł
+
+Przy nowym module zaplanuj jeden pokój za ukończenie wszystkich jego map i przedmioty za pojedyncze mapy. W [katalogu domku](../src/house/catalog.ts) dodaj powiązania identyfikatorów modułu i map z pokojem oraz przedmiotami, ceny, zgodne pokoje i domyślne miejsca. Grafiki SVG umieść w `public/game/`; muszą być lekkie i działać offline. Nie wpisuj warunków konkretnego języka do mechanizmu przyznawania nagród. Zachowuj istniejące identyfikatory nagród i zakupów. Sprawdź częściowe i pełne ukończenie modułu, brak mapy, ponowny odczyt, osobne kursy i kopię. [Zasady i przykład Food](koci-domek.md).

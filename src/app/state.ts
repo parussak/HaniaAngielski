@@ -16,6 +16,7 @@ export class AppState {
     selectedJourneyKey = '';
     introLessonId = '';
     chosenDecoration = 'pillow';
+    chosenRoom = 'salon';
     lastReward = 0;
     lastStageReward = 0;
     olderSessions: Session[] = [];

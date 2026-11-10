@@ -1,3 +1,4 @@
+import {homeFor,roomAvailable,settleHouseUnlocks} from '../house/progress.ts';
 import { journeyKey, lessons, makeLessonSession, place, purchase, rewardCompletion, unlocked, type Journey } from '../adventure.ts';
 import { makeTrainingSession, mapTrainingPool, trainingPreparation } from '../learning/training.ts';
 import { currentJourney, currentCourse, courseModules } from '../app/selectors.ts';
@@ -125,6 +126,11 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             await startStageReview(j, stage);
             return true;
         }
+        if(action==='select-room'){
+            const room=el.dataset.id??'salon';
+            if(roomAvailable(state.progress,currentCourse(state)!.id,room)){state.chosenRoom=room;state.chosenDecoration=room==='salon'?'pillow':'cat-toaster';}
+            return true;
+        }
         if (action === 'house') {
             state.screen = 'house';
             return true;
@@ -160,12 +166,12 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
         }
         if (action === 'buy-decoration') {
             let bought = false;
-            await mutate(p => { bought = purchase(p, el.dataset.id ?? ''); });
+            await mutate(p => { bought = purchase(p, el.dataset.id ?? '',currentCourse(state)!.id,state.chosenRoom); });
             state.notice = bought ? 'Nowa dekoracja jest Twoja! Możesz wybrać dla niej miejsce.' : 'Przedmiot jest już Twój albo potrzeba jeszcze kilku gwiazdek.';
             return true;
         }
         if (action === 'place-decoration') {
-            await mutate(p => { place(p, el.dataset.id ?? '', el.dataset.slot || null); });
+            await mutate(p => { place(p, el.dataset.id ?? '', el.dataset.slot || null,currentCourse(state)!.id,state.chosenRoom); });
             state.notice = 'Ustawienie domku zapisane.';
             return true;
         }
@@ -205,19 +211,23 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
                 p.active.lastCorrect = null;
             } });
         else if (action === 'next') {
-            const earned = state.progress.adventure?.earned ?? 0, bonuses = Object.values(state.progress.adventure?.stageReviews ?? {}).filter(r => r.rewardedAt).length;
+            const rewardCourse=currentCourse(state)!.id;
+            const earned = homeFor(state.progress,rewardCourse)?.earned ?? 0, bonuses = Object.values(state.progress.adventure?.stageReviews ?? {}).filter(r => r.rewardedAt).length;
             state.lastReward = 0;
             state.lastStageReward = 0;
+            const unlockedRooms:string[]=[];
             await mutate(p => { if (p.active?.phase === 'feedback') {
                 const finished = p.active;
                 next(p);
                 if (!p.active) {
                     finishStageReview(p, finished);
-                    rewardCompletion(p, finished);
+                    rewardCompletion(p, finished,state.modules);
+                    unlockedRooms.push(...settleHouseUnlocks(p,state.modules,state.journeys,state.journeyIssues));
                 }
             } });
             if (!state.progress.active) {
-                state.lastReward = (state.progress.adventure?.earned ?? 0) - earned;
+                if(unlockedRooms.length)state.notice=`Nowy pokój: ${unlockedRooms.join(', ')}! Otwórz Domek, aby go urządzić.`;
+                state.lastReward = (homeFor(state.progress,rewardCourse)?.earned ?? 0) - earned;
                 state.lastStageReward = (Object.values(state.progress.adventure?.stageReviews ?? {}).filter(r => r.rewardedAt).length - bonuses) * 3;
                 state.lastSession = state.progress.sessions.at(-1)!;
                 state.screen = 'summary';
