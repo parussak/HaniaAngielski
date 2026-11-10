@@ -8,7 +8,7 @@ Przegląd kodu i testów z 9–10 listopada 2026 r., rewizja `24cdeda`. **To lis
 
 Poniższa diagnoza J1–J10 jest historycznym punktem odniesienia rewizji `24cdeda`. Obecny kod ma już kurs, osobne języki, format znaczeń z wariantami, zgodny adapter Food i ograniczenie zakresów do kursu. Polecenia nowego kursu są danymi, a materiały kontroluje wspólny odczyt. Testy obejmują syntetyczne FR/IT i dwa podręczniki tego samego języka. [Raport etapu 2](wdrozenie-kursow.md) i [format materiałów](format-materialow.md) określają aktualny stan.
 
-Nadal potrzebne są rzeczywiste podręczniki i recenzja ich treści (J4/J7/J8), docelowy wybór kursu i globalne tryby, usunięcie pozostałych szczegółów prezentacji Food przed innymi produkcyjnymi mapami (J5), ewentualna izolacja awarii map (J6), pobieranie materiałów kursami (J9) i decyzje dla osoby dorosłej (J10). Nie uznajemy tych problemów za rozwiązane przez samo przejście testów.
+Etap 3 wdraża wybór kursu oraz globalne fiszki/quiz/gramatykę z poznanego materiału — [raport zakresów](wdrozenie-zakresow.md). Nadal potrzebne są rzeczywiste podręczniki i recenzja ich treści (J4/J7/J8), usunięcie pozostałych szczegółów prezentacji Food przed innymi produkcyjnymi mapami (J5), ewentualna izolacja awarii map (J6), pobieranie materiałów kursami (J9) i decyzje dla osoby dorosłej (J10). Nie uznajemy tych problemów za rozwiązane przez samo przejście testów.
 
 ## Kierunek wynikający z ustaleń użytkowniczki
 

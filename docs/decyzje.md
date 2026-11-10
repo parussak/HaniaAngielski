@@ -47,6 +47,8 @@ Pozostałe pytania U-01–U-10 są zaparkowane na prośbę użytkowniczki. Wybó
 
 Użytkowniczka następnie zatwierdziła etap 2: uporządkowanie kursów i materiałów pod różne języki, z zachowaniem Food, wyglądu i postępów. Techniczny kontrakt opisuje [format materiałów](format-materialow.md), a wykonanie i testy [raport etapu 2](wdrozenie-kursow.md). Nie jest to zgoda na rozstrzyganie pozostałych zaparkowanych zasad.
 
+Użytkowniczka zatwierdziła także etap 3: wybór kursu i globalne fiszki, quiz oraz gramatykę z poznanego materiału. Implementację opisuje [raport zakresów](wdrozenie-zakresow.md). Nie rozszerza to zgody na pozostałe zaparkowane pytania.
+
 ## Obszary decyzji i ich status
 
 Poniższe punkty nie są zgodą na zmianę aplikacji. Każdy wymaga doprecyzowania przed implementacją odpowiadającej mu funkcji.
@@ -55,7 +57,7 @@ Poniższe punkty nie są zgodą na zmianę aplikacji. Każdy wymaga doprecyzowan
 
 **Format kursu i powiązań językowych.** Jakie dokładnie dane opisują kurs, język treści, objaśnień, podręcznik i warianty haseł? Jak powiązać je z istniejącymi modułami i wynikami bez zmieniania identyfikatorów dla samego porządku?
 
-**Status: podstawowe założenia produktowe i kontrakt materiałów są wdrożone w etapie 2.** D-11–D-17 określają kurs jako podręcznik, osobne języki, rozróżnianie wydań, wspólne materiały i osobne wyniki oraz znaczenie z ilustracją i wariantami językowymi. `Course`, rejestr kursów i format znaczeń są opisane w [kontrakcie](format-materialow.md). Wyniki pozostają przy globalnie unikalnych modułach; nie zmieniono historycznych kluczy ani nie wykonano migracji Food. Dalsze rozszerzenia i powiązanie z wyborem kursu pozostają kolejnymi etapami. Kryteria konkretnych odpowiedzi nadal należą do U-06; nie dodano automatycznego przenoszenia postępów między podręcznikami.
+**Status: podstawowe założenia produktowe i kontrakt materiałów są wdrożone w etapie 2.** D-11–D-17 określają kurs jako podręcznik, osobne języki, rozróżnianie wydań, wspólne materiały i osobne wyniki oraz znaczenie z ilustracją i wariantami językowymi. `Course`, rejestr kursów i format znaczeń są opisane w [kontrakcie](format-materialow.md). Wyniki pozostają przy globalnie unikalnych modułach; nie zmieniono historycznych kluczy ani nie wykonano migracji Food. Wybór kursu w interfejsie wdrożono w etapie 3; dalsze rozszerzenia pozostają oddzielnym zakresem. Kryteria konkretnych odpowiedzi nadal należą do U-06; nie dodano automatycznego przenoszenia postępów między podręcznikami.
 
 ## U-02
 
@@ -67,7 +69,7 @@ Poniższe punkty nie są zgodą na zmianę aplikacji. Każdy wymaga doprecyzowan
 
 ## U-04
 
-**Co oznacza poznanie materiału. Status: założenia uzgodnione; projekt techniczny pozostaje otwarty.** Zgodnie z D-25 poznanie następuje przy pierwszej próbie odpowiedzi dotyczącej elementu, niezależnie od poprawności i ukończenia lekcji. Samo obejrzenie wprowadzenia nie wystarcza. D-26 nakazuje uwzględnić również wcześniejsze zapisane próby, także ze starszej historii, bez zmiany ocen, ukończeń i gwiazdek. Element może wejść do poznanego zakresu globalnych ćwiczeń; trening nadal respektuje warunek wcześniejszych map. Przed wdrożeniem potrzebny jest techniczny sposób odnotowania poznania i powiązania prób z elementami, także przy odczycie archiwów. Pierwsze wdrożenie odczytuje poznany zakres na potrzeby treningu z istniejących prób i podsumowań historii, bez migracji danych. Rozszerzenie tego mechanizmu na globalne fiszki, quiz i gramatykę pozostaje dalszym etapem.
+**Co oznacza poznanie materiału. Status: wdrożone w etapie 3.** Zgodnie z D-25 poznanie następuje przy pierwszej próbie odpowiedzi dotyczącej elementu, niezależnie od poprawności i ukończenia lekcji. Samo obejrzenie wprowadzenia nie wystarcza. D-26 nakazuje uwzględnić również wcześniejsze zapisane próby, także ze starszej historii, bez zmiany ocen, ukończeń i gwiazdek. Element może wejść do poznanego zakresu globalnych ćwiczeń; trening nadal respektuje warunek wcześniejszych map. Wspólny odczyt prób obejmuje również podsumowania archiwów, a `encountered` zachowuje klucze poznania przy zastąpieniu aktywnej sesji, bez zmiany ocen. Pierwsze wdrożenie odczytuje poznany zakres na potrzeby treningu z istniejących prób i podsumowań historii, bez migracji danych. Mechanizm jest obecnie wykorzystywany także przez globalne fiszki, quiz i gramatykę — [raport etapu 3](wdrozenie-zakresow.md).
 
 ## U-05
 
@@ -83,11 +85,11 @@ Poniższe punkty nie są zgodą na zmianę aplikacji. Każdy wymaga doprecyzowan
 
 ## U-07
 
-**Utrwalenie, procenty i nagrody. Status: prezentacja postępu uzgodniona częściowo wyprzedzająco (D-23); pozostałe zasady otwarte.** Procent/pasek dotyczy ukończenia lekcji i osiąga 100% niezależnie od zaległych powtórek. Zaległości przedstawiamy liczbą ćwiczeń, pomarańczowo, zamiast ogólnego procentu utrwalenia. Element znika po wymaganych trzech zaliczeniach. Ukończone lekcje i zero zaległości oznaczają zielony stan z gratulacjami. Sam brak błędów przed ukończeniem nauki nie zalicza mapy. Do doprecyzowania pozostają zakres i jednostka agregacji na poszczególnych ekranach, pozostałe szczegóły utrwalania, współdzielenie stanu elementu między mapami tego samego kursu i zasady nagród. Nowa prezentacja nie zmienia samoczynnie warunków gwiazdek; nie zatwierdzono jeszcze zmian w kodzie.
+**Utrwalenie, procenty i nagrody. Status: prezentacja postępu uzgodniona częściowo wyprzedzająco (D-23); pozostałe zasady otwarte.** Procent/pasek dotyczy ukończenia lekcji i osiąga 100% niezależnie od zaległych powtórek. Zaległości przedstawiamy liczbą ćwiczeń, pomarańczowo, zamiast ogólnego procentu utrwalenia. Element znika po wymaganych trzech zaliczeniach. Ukończone lekcje i zero zaległości oznaczają zielony stan z gratulacjami. Sam brak błędów przed ukończeniem nauki nie zalicza mapy. Do doprecyzowania pozostają zakres i jednostka agregacji na poszczególnych ekranach, pozostałe szczegóły utrwalania, współdzielenie stanu elementu między mapami tego samego kursu i zasady nagród. Prezentacja jest wdrożona; nie zmienia samoczynnie warunków gwiazdek. Globalne tryby nie przyznają dodatkowych nagród.
 
 ## U-08
 
-**Wybór kursu i zakresu.** Gdzie w interfejsie będą kursy i globalne ćwiczenia? Czy ramka kontynuacji ma respektować wybrany kurs? Czy potrzebne są osobne aktywne sesje i preferencje? Zakres globalny jest uzgodniony, jego konkretne sterowanie w UI jeszcze nie.
+**Wybór kursu i zakresu. Status: podstawowy interfejs wdrożony w etapie 3.** Kurs wybieramy pod powitaniem i przy katalogach, a globalne ćwiczenia przez „Ćwicz cały poznany materiał”. Mapy, moduły i kontynuacja respektują wybrany kurs. Pozostaje jedna aktywna sesja; sesja innego kursu jest zachowana i ma osobny przycisk powrotu. Nowa sesja wymaga potwierdzenia zastąpienia. Wybór kursu jest lokalną preferencją osobną dla konta i gościa, bez synchronizacji. Wiele równoległych sesji i preferencje odpowiadania per kurs pozostają zaparkowane. [Opis działania i zapisu](wdrozenie-zakresow.md).
 
 ## U-09
 

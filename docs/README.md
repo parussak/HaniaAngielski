@@ -2,7 +2,7 @@
 
 Aktualizacja układu: **10 listopada 2026 r.** Rozdzielamy stan obecny, uzgodnione założenia docelowe i sprawy do ustalenia. Sam zapis założeń nie wdraża ich w aplikacji.
 
-**Wdrożono etapy 1 i 2.** Pozostałe pytania są zaparkowane. [Raport nauki](wdrozenie-nauki.md) opisuje etap 1, a [raport kursów](wdrozenie-kursow.md) etap 2. Autorów materiałów obowiązuje [format kursów i znaczeń](format-materialow.md). Historyczny katalog `stan-obecny/` nadal przedstawia punkt odniesienia sprzed tych zmian.
+**Wdrożono etapy 1–3.** Pozostałe pytania są zaparkowane. [Raport nauki](wdrozenie-nauki.md) opisuje etap 1, [raport kursów](wdrozenie-kursow.md) etap 2, a [wybór kursu i globalne ćwiczenia](wdrozenie-zakresow.md) etap 3. Autorów materiałów obowiązuje [format kursów i znaczeń](format-materialow.md). Historyczny katalog `stan-obecny/` nadal przedstawia punkt odniesienia sprzed tych zmian.
 
 ## Główny podział
 
@@ -31,7 +31,7 @@ Kod i testy pokazują, co działa dziś; nie unieważniają uzgodnionego kierunk
 
 ## Ważna różnica
 
-Docelowo moduł ma **1–3 mapy**, każda po kilka lekcji. Obecny Food nadal ma **jedną mapę z siedmioma etapami**; jej treści, identyfikatory i ukończenia pozostają zachowane. Wdrożono oddzielenie procentu ukończenia lekcji od liczby zaległych ćwiczeń oraz dodatkowy trening poznanego materiału za 1 ★. Kod obsługuje też listę do trzech map i rolę treningu na mapie, sprawdzoną na materiałach testowych; nie dodano takiego treningu do pierwszej mapy Food. Model kursów i znaczeń oraz zgodny odczyt starego Food są wdrożone w etapie 2. Wybór kursu w interfejsie, globalne fiszki/quiz/gramatyka oraz korekta treści Food pozostają dalszymi etapami — [szczegóły](wdrozenie-kursow.md).
+Docelowo moduł ma **1–3 mapy**, każda po kilka lekcji. Obecny Food nadal ma **jedną mapę z siedmioma etapami**; jej treści, identyfikatory i ukończenia pozostają zachowane. Wdrożono oddzielenie procentu ukończenia lekcji od liczby zaległych ćwiczeń oraz dodatkowy trening poznanego materiału za 1 ★. Kod obsługuje też listę do trzech map i rolę treningu na mapie, sprawdzoną na materiałach testowych; nie dodano takiego treningu do pierwszej mapy Food. Model kursów i znaczeń oraz zgodny odczyt starego Food są wdrożone w etapie 2. Wybór kursu i globalne fiszki/quiz/gramatyka z poznanego materiału są wdrożone w etapie 3. Audyt i korekta treści Food oraz nowe podręczniki pozostają dalszym zakresem — [szczegóły](wdrozenie-zakresow.md).
 
 ## Jak czytać bez przeglądania wszystkiego
 

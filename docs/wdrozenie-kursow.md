@@ -2,6 +2,8 @@
 
 Status: wdrożone lokalnie 10 listopada 2026 r., na prośbę użytkowniczki. Zasady produktowe D-11–D-17 pozostają podstawą; zaparkowane pytania nie zostały rozstrzygnięte za użytkowniczkę.
 
+Ten raport opisuje etap 2. Wymienione niżej jako dalszy zakres podstawowy wybór kursu i globalne ćwiczenia zostały następnie wdrożone w [etapie 3](wdrozenie-zakresow.md).
+
 ## Wynik
 
 1. Dodano model `Course`: jeden podręcznik, osobne języki nauki i objaśnień, opis książki, poziomy, uporządkowane moduły i polecenia.

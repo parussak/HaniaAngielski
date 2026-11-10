@@ -102,3 +102,21 @@ test('PWA: aktualizacja czeka na zgodę, zachowuje sesję i nie usuwa cache inny
     const keys=await page.evaluate(()=>caches.keys());expect(keys).toContain('another-application');expect(keys.filter(k=>k.startsWith('male-kroki-offline-'))).toHaveLength(1);
   }finally{await server.close();}
 });
+
+test('PWA: globalne fiszki offline zachowują zakres, poznanie i zapis konta po połączeniu',async({page,context})=>{
+  const server=await pwaServer();
+  try{
+    await page.goto(server.url);await offlineReady(page);
+    await page.getByRole('button',{name:'Ustawienia konta',exact:true}).tap();await page.getByLabel('E-mail').fill('global@example.test');await page.getByLabel('Hasło',{exact:true}).fill('test-password');await page.getByRole('button',{name:'Zaloguj się',exact:true}).tap();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie');
+    await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await moduleSetup(page);await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).tap();
+    const prompt=await page.locator('.question').innerText(),word=modules[0].words.find(w=>w.front===prompt)!;
+    await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await expect(page.locator('.feedback.correct')).toBeVisible();
+    await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:'Ćwicz cały poznany materiał →',exact:true}).tap();
+    await context.setOffline(true);page.once('dialog',d=>d.accept());await page.getByRole('button',{name:/Fiszki z poznanego materiału/}).tap();await expect(page.locator('.question')).toHaveText(prompt);
+    await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await expect(page.locator('.question')).toHaveText(prompt);
+    await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.getByRole('button',{name:'Wróć do poznanego materiału',exact:true})).toBeVisible();
+    await page.reload();await page.getByRole('button',{name:'Ćwicz cały poznany materiał →',exact:true}).tap();await expect(page.getByRole('button',{name:/Fiszki z poznanego materiału/})).toContainText('1 poznane hasło');
+    await context.setOffline(false);await expect.poll(()=>server.remote.get('global@example.test')?.progress.sessions.filter((s:any)=>s.scope?.kind==='course').length).toBe(1);
+    const saved=server.remote.get('global@example.test')!.progress;expect(saved.sessions.at(-1).scope).toEqual({kind:'course',courseId:'angielski-hani'});expect(saved.encountered).toContain(`unit-2-food@1:word:${word.id}`);expect(saved.adventure?.earned??0).toBe(0);
+  }finally{await context.setOffline(false);await server.close();}
+});

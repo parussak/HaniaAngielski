@@ -68,6 +68,7 @@ export type Mode = 'flashcards' | 'flashcards-basic' | 'quiz' | 'grammar' | 'dia
 export const isFlashcardMode = (mode: Mode) => mode === 'flashcards' || mode === 'flashcards-basic';
 export type AnswerMode = 'choice' | 'text' | 'mixed';
 export interface Item {
+    options?: string[];
     key: string;
     moduleId: string;
     version: number;
@@ -84,6 +85,7 @@ export interface Attempt {
     corrected: boolean;
 }
 export interface Session {
+    scope?: { kind: 'course'; courseId: string };
     training?: { kind: 'map' | 'extra'; rewarded?: boolean };
     stageReview?: {
         id: string;
@@ -109,6 +111,7 @@ export interface Session {
     repeatKeys: string[];
 }
 export interface Progress {
+    encountered?: string[];
     adventure?: Adventure;
     history?: HistorySummary;
     version: 1;

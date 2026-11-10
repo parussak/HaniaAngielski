@@ -15,6 +15,8 @@ async function materials(page: Page, fixture = courseFixture()) {
     return fixture;
 }
 async function open(page: Page, course = 'french-book') {
+    await page.getByRole('button', { name: 'Wybierz kurs', exact: true }).tap();
+    await page.getByRole('button', { name: `Wybierz kurs Test: ${course}`, exact: true }).tap();
     await page.getByRole('button', { name: /Przejdź do modułów/ }).tap();
     await page.getByRole('button', { name: `Otwórz moduł Moduł ${course}`, exact: true }).tap();
 }

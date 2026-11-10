@@ -1,5 +1,13 @@
 import { isFlashcardMode, keyFor, type AnswerMode, type Exercise, type Item, type Mode, type Module, type Progress, type Session } from './model.ts';
 import { eligibleModules, inputFor, isCorrect, questionFor, shuffle } from './questions.ts';
+function remember(p: Progress, keys: string[]) {
+    if (!keys.length) return;
+    p.encountered = [...new Set([...(p.encountered ?? []), ...keys])];
+}
+export function replaceActive(p: Progress, session: Session) {
+    remember(p, p.active?.attempts.map(a => a.key) ?? []);
+    p.active = session;
+}
 export function makeSession(modules: Module[], selected: Module, mode: Mode, answerMode: AnswerMode, previous: boolean, progress: Progress): Session {
     const available = eligibleModules(modules, selected, previous);
     const allowed = new Set(available.map(m => m.id));
@@ -51,6 +59,7 @@ export function recordAnswer(p: Progress, exercise: Exercise, answer: string) {
     const correct = isCorrect(exercise, answer);
     let attempt = s.attempts.find(a => a.key === item.key);
     const firstInSession = !attempt;
+    remember(p, [item.key]);
     if (!attempt) {
         attempt = { key: item.key, first: correct, answer, corrections: 0, corrected: false };
         s.attempts.push(attempt);

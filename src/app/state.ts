@@ -6,10 +6,11 @@ import type { Course } from '../materials/model.ts';
 // Transient application state only. Stored Progress and Backup formats are unchanged.
 export class AppState {
     courses: Course[] = [];
+    selectedCourseId = '';
     modules: Module[] = [];
     catCatalog: CatCatalog | null = null;
     progress: Progress = emptyProgress();
-    screen: 'home' | 'setup' | 'study' | 'progress' | 'backup' | 'account' | 'summary' | 'map' | 'lesson-intro' | 'house' | 'journeys' | 'module-list' = 'home';
+    screen: 'home' | 'setup' | 'study' | 'progress' | 'backup' | 'account' | 'summary' | 'map' | 'lesson-intro' | 'house' | 'journeys' | 'module-list' | 'courses' | 'course-practice' = 'home';
     journeys: Journey[] = [];
     selectedJourneyKey = '';
     introLessonId = '';

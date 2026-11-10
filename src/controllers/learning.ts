@@ -1,15 +1,19 @@
 import { journeyKey, lessons, makeLessonSession, place, purchase, rewardCompletion, unlocked, type Journey } from '../adventure.ts';
 import { makeTrainingSession } from '../learning/training.ts';
-import { currentJourney } from '../app/selectors.ts';
+import { currentJourney, currentCourse, courseModules } from '../app/selectors.ts';
 import { AppState } from '../app/state.ts';
-import { makeSession, next, questionFor, recordAnswer, type Mode, type Progress } from '../core.ts';
+import { makeSession, next, questionFor, recordAnswer, replaceActive, type Mode, type Progress } from '../core.ts';
 import { getNextStep } from '../next-step.ts';
 import { finishStageReview, makeStageReviewSession, recordStageError } from '../stage-review.ts';
+import { makeCoursePracticeSession, type CoursePracticeMode } from '../learning/course-practice.ts';
+import type { createCourseController } from './courses.ts';
+import { courseKey } from '../learning/scope.ts';
 interface LearningPorts {
+    courses: ReturnType<typeof createCourseController>;
     mutate: (change: (p: Progress) => void) => Promise<void>;
     scheduleReviewMigration: () => void;
 }
-export function createLearningController(state: AppState, { mutate, scheduleReviewMigration }: LearningPorts) {
+export function createLearningController(state: AppState, { mutate, scheduleReviewMigration, courses }: LearningPorts) {
     async function startStageReview(j: Journey, stage: Journey['stages'][number]) {
         if (state.progress.active?.stageReview?.id === `${journeyKey(j)}/${stage.id}`) {
             state.screen = 'study';
@@ -22,14 +26,33 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
         }
         if (state.progress.active && !window.confirm('Rozpocząć powtórkę zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))
             return;
-        await mutate(p => { p.active = session; });
+        await mutate(p => { replaceActive(p, session); });
         state.lastReward = 0;
         state.lastStageReward = 0;
         state.screen = 'study';
     }
     async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
+        if (action === 'courses') { state.screen = 'courses'; return true; }
+        if (action === 'select-course') { if (await courses.select(el.dataset.id ?? '')) state.screen = 'home'; return true; }
+        if (action === 'resume') { await courses.followSession(); state.screen = 'study'; return true; }
+        if (action === 'module' || action === 'quick-start') {
+            const m = state.modules.find(m => m.id === el.dataset.id);
+            if (m) { if (courseKey(m) !== state.selectedCourseId) await courses.select(courseKey(m)); state.selected = m; state.screen = 'setup'; }
+            return true;
+        }
+        if (action === 'course-practice') { state.screen = 'course-practice'; return true; }
+        if (action === 'course-mode') {
+            if (!['flashcards','quiz','grammar'].includes(el.dataset.mode ?? '')) return true;
+            const anchor = courseModules(state)[0]; if (!anchor) return true;
+            const session = makeCoursePracticeSession(state.modules, anchor, state.progress, el.dataset.mode as CoursePracticeMode, state.answerMode);
+            if (!session) { state.notice = 'Nie ma jeszcze poznanego materiału dla tego ćwiczenia. Zacznij od mapy lub modułu.'; return true; }
+            if (state.progress.active && !window.confirm('Nowa sesja zastąpi niedokończoną sesję. Zakończone wyniki pozostaną zachowane. Kontynuować?')) return true;
+            await mutate(p => { replaceActive(p, session); });
+            state.lastReward = 0; state.lastStageReward = 0; state.screen = 'study';
+            return true;
+        }
         if (action === 'next-step') {
-            const step = getNextStep(state.modules, state.journeys, state.progress);
+            const step = getNextStep(state.modules, state.journeys, state.progress, currentCourse(state)?.id);
             state.selected = state.modules.find(m => m.id === step.moduleId) ?? state.selected ?? state.modules[0];
             state.selectedJourneyKey = step.journeyId ?? '';
             switch (step.kind) {
@@ -50,7 +73,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
                 case 'review': {
                     const session = makeSession(state.modules, state.selected, 'review', 'text', false, state.progress);
                     if (session.items.length) {
-                        await mutate(p => { p.active = session; });
+                        await mutate(p => { replaceActive(p, session); });
                         state.lastReward = 0;
                         state.lastStageReward = 0;
                         state.screen = 'study';
@@ -76,7 +99,9 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             return true;
         }
         if (action === 'map') {
-            state.selected = state.modules.find(m => m.id === el.dataset.id) ?? state.selected ?? state.modules[0];
+            const module = state.modules.find(m => m.id === el.dataset.id);
+            if (module) { if (courseKey(module) !== state.selectedCourseId) await courses.select(courseKey(module)); state.selected = module; }
+            state.selected ??= courseModules(state)[0];
             if (el.dataset.journey !== undefined) state.selectedJourneyKey = el.dataset.journey;
             state.screen = 'map';
             scheduleReviewMigration();
@@ -111,7 +136,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
                 ? makeTrainingSession(state.modules, state.selected, state.progress, state.answerMode, { journey: j, lesson: l, journeys: state.journeys })
                 : makeLessonSession(state.modules, j, l, state.answerMode, state.progress);
             if (!session) { state.notice = 'Nie ma jeszcze poznanego materiału z wcześniejszych map do tego treningu.'; return true; }
-            await mutate(p => { p.active = session; });
+            await mutate(p => { replaceActive(p, session); });
             state.lastReward = 0;
             state.lastStageReward = 0;
             state.screen = 'study';
@@ -136,7 +161,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             const session = makeTrainingSession(state.modules, state.selected, state.progress, state.answerMode);
             if (!session) { state.notice = 'Najpierw spróbuj odpowiedzieć na kilka pytań. Trening obejmuje tylko wcześniej poznany materiał.'; return true; }
             if (state.progress.active && !window.confirm('Rozpocząć trening zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.')) return true;
-            await mutate(p => { p.active = session; });
+            await mutate(p => { replaceActive(p, session); });
             state.lastReward = 0;
             state.lastStageReward = 0;
             state.screen = 'study';
@@ -151,7 +176,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             }
             if (state.progress.active && !window.confirm('Rozpoczęcie nowej sesji zastąpi niedokończoną sesję. Zakończona historia i zapisane trudności pozostaną. Kontynuować?'))
                 return true;
-            await mutate(p => { p.active = session; });
+            await mutate(p => { replaceActive(p, session); });
             state.screen = 'study';
         }
         else if (action === 'answer') {

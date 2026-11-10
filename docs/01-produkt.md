@@ -20,6 +20,10 @@ Szczegółowy punkt odniesienia: [produkt przed zmianami](stan-obecny/produkt.md
 - Dodawanie kolejnych materiałów ma zwykle polegać na przygotowaniu treści, a nie dopisywaniu wyjątków w kodzie.
 - Nauka gramatyki ma wspierać rozumienie: po poprawnej i błędnej odpowiedzi użytkownik dostaje uzasadnienie reguły w kontekście konkretnego zdania (D-31).
 
+### Wybór kursu i poznany materiał — wdrożone w etapie 3
+
+Pod powitaniem użytkownik widzi kurs i przycisk „Wybierz kurs”. Mapy i moduły są ograniczone do wybranego podręcznika. Link „Ćwicz cały poznany materiał” otwiera globalne fiszki, quiz i gramatykę; dotychczasowe wejścia modułowe pozostają. Zmiana kursu nie usuwa rozpoczętej sesji. Jeżeli jest z innego kursu, można do niej wrócić osobnym przyciskiem; rozpoczęcie nowej wymaga potwierdzenia zastąpienia. [Pełny opis działania](wdrozenie-zakresow.md).
+
 ### Dwa sposoby korzystania
 
 | Sposób | Doświadczenie użytkownika |
@@ -41,9 +45,9 @@ Zatwierdzono prezentację D-23: postęp lekcji na pasku lub w kółku dochodzi d
 
 ## Do ustalenia
 
-- Gdzie w interfejsie umieścić wybór kursu i ćwiczenia globalne — [U-08](decyzje.md#u-08).
+- Ewentualne osobne aktywne sesje i preferencje sposobu odpowiadania dla kursów — [U-08](decyzje.md#u-08). Sam wybór kursu i globalne ćwiczenia są wdrożone.
 - Czy dla Pauliny potrzebne są inne cele, tempo lub opcje oprawy — [U-09](decyzje.md#u-09).
-- Dokładny zakres liczników na ekranach — [U-07](decyzje.md#u-07). Prezentacja postępu (D-23), moment poznania (D-25) oraz uwzględnienie wcześniejszych prób bez zmiany ocen, ukończeń i gwiazdek (D-26) są zatwierdzone. Techniczna realizacja poznanego zakresu pozostaje do zaprojektowania — [U-04](decyzje.md#u-04).
+- Dokładny zakres liczników na ekranach — [U-07](decyzje.md#u-07). Prezentacja postępu (D-23), moment poznania (D-25) oraz uwzględnienie wcześniejszych prób bez zmiany ocen, ukończeń i gwiazdek (D-26) są zatwierdzone. Poznany zakres jest wdrożony; odczytuje także starszą historię i zachowuje fakt poznania przy zastąpieniu niedokończonej sesji — [U-04](decyzje.md#u-04).
 
 ## Granice dokumentu
 

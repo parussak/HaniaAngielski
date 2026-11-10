@@ -4,7 +4,7 @@ Aplikacja internetowa: fiszki, quizy, gramatyka, lokalne postępy i opcjonalne k
 
 [Dokumentacja po polsku](docs/README.md) rozdziela produkt, mechanikę, naukę, merytorykę, architekturę, zapis i testy oraz oznacza stan obecny, założenia docelowe i sprawy do ustalenia. Oddzielna [lista braków dla francuskiego i włoskiego](docs/rozwoj-jezykow.md) rozróżnia stan obecny od propozycji rozwoju.
 
-Aktualizacja nauki: dodatkowy trening poznanego materiału za 1 ★, osobny procent ukończenia i liczba ćwiczeń do utrwalenia oraz wyjaśnienia gramatyczne z przypomnieniem reguły. Etap 2 dodaje kursy/podręczniki i wspólny format materiałów wielojęzycznych, zachowując wygląd, treści i zapis Food. [Format materiałów](docs/format-materialow.md), [raport etapu 1](docs/wdrozenie-nauki.md), [raport etapu 2](docs/wdrozenie-kursow.md).
+Aktualizacja nauki: dodatkowy trening poznanego materiału za 1 ★, osobny procent ukończenia i liczba ćwiczeń do utrwalenia oraz wyjaśnienia gramatyczne z przypomnieniem reguły. Etap 2 dodaje kursy/podręczniki i wspólny format materiałów wielojęzycznych, zachowując wygląd, treści i zapis Food. [Format materiałów](docs/format-materialow.md), [raport etapu 1](docs/wdrozenie-nauki.md), [raport etapu 2](docs/wdrozenie-kursow.md). Etap 3 dodaje wybór kursu oraz globalne fiszki, quiz i gramatykę wyłącznie z poznanego materiału — [opis i sprawdzenie](docs/wdrozenie-zakresow.md).
 
 ## Uruchomienie
 

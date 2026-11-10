@@ -52,17 +52,19 @@ function nextStepCard(step: NextStep, modules: Module[], cat: string) {
     return `<section class="next-step-card" aria-labelledby="next-step-heading" data-step-kind="${step.kind}"><div class="next-step-copy"><div class="eyebrow">TWÓJ NASTĘPNY KROK</div><h2 id="next-step-heading">${e(title)}</h2><p class="next-step-detail">${e(detail)}</p><p>${e(description)}</p></div><div class="next-step-cat" aria-hidden="true">${cat}</div>${button('next-step', e(label))}</section>`;
 }
 export interface HomeViewProps {
+    courseContext?: string;
     name: string | null | undefined;
     modules: Module[];
     step: NextStep;
     pwa: PwaState;
     cat: string;
 }
-export function homeView({ name, modules, step, pwa, cat }: HomeViewProps) {
+export function homeView({ name, modules, step, pwa, cat, courseContext = '' }: HomeViewProps) {
     return `<div class="home-start">${updateBanner(pwa)}<section class="welcome">
     <div>
     <h1>Dobrze Cię widzieć${name ? `, ${e(name)}` : ''}!</h1>
     <p>Na co masz dzisiaj ochotę?</p>
+    ${courseContext}
     </div>
     </section>${nextStepCard(step, modules, cat)}<section class="hero home-hero">
     <div>
@@ -73,7 +75,7 @@ export function homeView({ name, modules, step, pwa, cat }: HomeViewProps) {
     <span class="practice-icon" aria-hidden="true">${icon('cards')}</span>
     <div>
     <h2>A może wolisz poćwiczyć po swojemu?</h2>
-    <p>Fiszki, quizy, gramatyka, rozmówki i powtórki.</p>${button('module-list', `Przejdź do modułów ${icon('arrow')}`, 'secondary')}</div>
+    <p>Fiszki, quizy, gramatyka, rozmówki i powtórki.</p>${button('module-list', `Przejdź do modułów ${icon('arrow')}`, 'secondary')}${button('course-practice', 'Ćwicz cały poznany materiał →', 'text-button')}</div>
     </section>
     <details class="home-help">
     <summary>${icon('book')} Jak korzystać z aplikacji?</summary>

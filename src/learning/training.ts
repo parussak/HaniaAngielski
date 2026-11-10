@@ -2,30 +2,24 @@ import { journeyKey, lessons, orderedJourneys, unlocked, type Journey, type Less
 import { inputFor, questionFor, resolveItem, shuffle } from './questions.ts';
 import { keyFor, type AnswerMode, type Item, type Module, type Progress, type Session } from './model.ts';
 import { sameCourse } from './scope.ts';
+import { answerHistory } from './known-material.ts';
 
 interface Practice { item: Item; total: number; correct: number; last: number; difficult: boolean }
 
 // Read both current attempts and the compact historical totals. Opening an intro
 // or marking an old passive flashcard "known" is not itself an answer attempt.
 export function practicedItems(modules: Module[], selected: Module, p: Progress): Practice[] {
-    const counts = new Map<string, { total: number; correct: number; last: number }>();
-    for (const [key, value] of Object.entries(p.history?.items ?? {}))
-        counts.set(key, { ...value, last: 0 });
-    for (const session of [...p.sessions, ...(p.active ? [p.active] : [])]) {
-        for (const attempt of session.attempts) {
-            const old = counts.get(attempt.key) ?? { total: 0, correct: 0, last: 0 };
-            counts.set(attempt.key, { total: old.total + 1, correct: old.correct + Number(attempt.first), last: Math.max(old.last, Date.parse(session.completedAt ?? session.startedAt) || 0) });
-        }
-    }
+    const counts = answerHistory(p);
     const result = new Map<string, Practice>();
     const difficult = new Set(p.difficult);
+    const remembered = new Set(p.encountered ?? []);
     for (const m of modules.filter(m => sameCourse(m, selected))) {
         const source: Item[] = [
             ...m.words.map(w => ({ key: keyFor(m, 'word', w.id), moduleId: m.id, version: w.rev ?? 1, type: 'word' as const, id: w.id, input: 'text' as const })),
             ...m.exercises.map(q => ({ key: keyFor(m, 'exercise', q.id), moduleId: m.id, version: q.rev ?? 1, type: 'exercise' as const, id: q.id, input: 'text' as const })),
         ];
         for (const original of source) {
-            const stat = counts.get(original.key);
+            const stat = counts.get(original.key) ?? (remembered.has(original.key) ? { total: 1, correct: 0, last: 0 } : undefined);
             if (!stat?.total || !resolveItem(modules, original)) continue;
             const q = original.type === 'exercise' ? m.exercises.find(q => q.id === original.id) : undefined;
             if (q && !q.requires.every(id => modules.some(other => other.id === id && sameCourse(other, selected)))) continue;

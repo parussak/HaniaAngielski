@@ -7,13 +7,16 @@ export function validateBackup(input: unknown): Backup {
     const date = (v: unknown): boolean => str(v) && Number.isFinite(Date.parse(v));
     const strings = (v: unknown): v is string[] => Array.isArray(v) && v.length <= 100000 && v.every(str);
     const integer = (v: unknown): v is number => Number.isSafeInteger(v) && (v as number) >= 0;
-    const validItem = (i: unknown): boolean => obj(i) && str(i.key) && str(i.moduleId) && integer(i.version) && i.version > 0 && ['word', 'exercise'].includes(i.type as string) && str(i.id) && ['text', 'choice'].includes(i.input as string) && i.key === `${i.moduleId}@${i.version}:${i.type}:${i.id}`;
+    const validItem = (i: unknown): boolean => obj(i) && str(i.key) && str(i.moduleId) && integer(i.version) && i.version > 0 && ['word', 'exercise'].includes(i.type as string) && str(i.id) && ['text', 'choice'].includes(i.input as string) && i.key === `${i.moduleId}@${i.version}:${i.type}:${i.id}` &&
+        (i.options === undefined || Array.isArray(i.options) && i.options.length >= 2 && i.options.length <= 4 && i.options.every(str) && new Set(i.options).size === i.options.length);
     const validSession = (v: unknown, completed: boolean): boolean => {
         if (!obj(v) || !str(v.id) || !str(v.moduleId) || !['flashcards', 'flashcards-basic', 'quiz', 'grammar', 'dialogue', 'review', 'lesson', 'training'].includes(v.mode as string) || !['choice', 'text', 'mixed'].includes(v.answerMode as string) || typeof v.previous !== 'boolean' || !date(v.startedAt) || !(completed ? date(v.completedAt) : v.completedAt === null) || !['question', 'revealed', 'feedback', 'retry'].includes(v.phase as string) || !(v.lastCorrect === null || typeof v.lastCorrect === 'boolean'))
             return false;
         if (v.training !== undefined && (!obj(v.training) || !['map','extra'].includes(v.training.kind as string) || (v.training.kind === 'map' ? v.mode !== 'lesson' || v.training.rewarded !== undefined : v.mode !== 'training' || v.lesson !== undefined || v.stageReview !== undefined || v.training.rewarded !== undefined && (v.training.rewarded !== true || !completed))))
             return false;
         if (v.mode === 'training' && (!obj(v.training) || v.training.kind !== 'extra'))
+            return false;
+        if (v.scope !== undefined && (!obj(v.scope) || v.scope.kind !== 'course' || !str(v.scope.courseId) || !['flashcards','quiz','grammar'].includes(v.mode as string) || v.lesson !== undefined || v.stageReview !== undefined || v.training !== undefined))
             return false;
         if (v.lesson !== undefined && (!obj(v.lesson) || !str(v.lesson.id) || !str(v.lesson.title) || v.mode !== 'lesson'))
             return false;
@@ -25,6 +28,7 @@ export function validateBackup(input: unknown): Backup {
             return false;
         if (!v.items.every(validItem))
             return false;
+        if (!v.scope && v.items.some(i => obj(i) && i.options !== undefined)) return false;
         if (!Array.isArray(v.attempts) || v.attempts.length > v.items.length || !v.attempts.every(a => obj(a) && str(a.key) && typeof a.first === 'boolean' && typeof a.answer === 'string' && a.answer.length <= 2000 && (a.lastAnswer === undefined || (typeof a.lastAnswer === 'string' && a.lastAnswer.length <= 2000)) && integer(a.corrections) && typeof a.corrected === 'boolean' && (v.items as Item[]).some(i => i.key === a.key)))
             return false;
         if (new Set(v.attempts.map(a => a.key)).size !== v.attempts.length)
@@ -43,6 +47,7 @@ export function validateBackup(input: unknown): Backup {
     if (!obj(input) || input.app !== 'hania-language' || input.version !== 1 || !date(input.exportedAt) || !obj(input.progress))
         return fail();
     const p = input.progress;
+    if(p.encountered!==undefined&&(!strings(p.encountered)||new Set(p.encountered).size!==p.encountered.length))return fail();
     if (p.version !== 1 || !Array.isArray(p.sessions) || p.sessions.length > 10000 || !p.sessions.every(s => validSession(s, true)) || !(p.active === null || validSession(p.active, false)) || !obj(p.words) || !Object.entries(p.words).every(([k, v]) => str(k) && ['known', 'review'].includes(v as string)) || !strings(p.difficult))
         return fail();
     const ids = p.sessions.map(s => s.id);
@@ -54,7 +59,8 @@ export function validateBackup(input: unknown): Backup {
         const h = p.history;
         if (!obj(h) || !(h.head === null || typeof h.head === 'string' && /^[a-f0-9]{64}$/.test(h.head)) || !integer(h.sessions) || !obj(h.items) || !obj(h.modules) || !Object.entries(h.items).every(([k, v]) => safeKey(k) && totals(v)) || !Object.entries(h.modules).every(([k, v]) => safeKey(k) && totals(v) && obj(v) && integer(v.sessions)))
             return fail();
-        if ((h.head === null) !== (h.sessions === 0) || Object.values(h.modules).reduce<number>((n, v) => n + (v as {
+        if(h.courses!==undefined&&(!obj(h.courses)||!Object.entries(h.courses).every(([k,v])=>safeKey(k)&&totals(v)&&obj(v)&&integer(v.sessions))))return fail();
+        if ((h.head === null) !== (h.sessions === 0) || [...Object.values(h.modules),...Object.values(h.courses??{})].reduce<number>((n, v) => n + (v as {
             sessions: number;
         }).sessions, 0) !== h.sessions)
             return fail();

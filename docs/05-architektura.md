@@ -4,7 +4,7 @@ Status: mapa obecnego kodu oraz docelowe granice odpowiedzialności. To nie jest
 
 ## Stan obecny
 
-Punkt odniesienia pochodzi z przeglądu rewizji `24cdeda` (9–10 listopada 2026 r.). Poniższa mapa jest uzupełniona o [etap 1](wdrozenie-nauki.md) i [etap 2](wdrozenie-kursow.md). Opis zachowania użytkowego, zakres sprawdzonych testów i ograniczenia znajdują się w [spisie dokumentacji](README.md). Planowane zmiany dla innych języków są osobno w [przeglądzie gotowości](rozwoj-jezykow.md).
+Punkt odniesienia pochodzi z przeglądu rewizji `24cdeda` (9–10 listopada 2026 r.). Poniższa mapa jest uzupełniona o [etap 1](wdrozenie-nauki.md), [etap 2](wdrozenie-kursow.md) i [etap 3](wdrozenie-zakresow.md). Opis zachowania użytkowego, zakres sprawdzonych testów i ograniczenia znajdują się w [spisie dokumentacji](README.md). Planowane zmiany dla innych języków są osobno w [przeglądzie gotowości](rozwoj-jezykow.md).
 
 `src/main.ts` uruchamia aplikację i łączy jej części. Nie zawiera już szablonów ekranów, oceniania odpowiedzi ani formularzy konta.
 
@@ -34,6 +34,9 @@ Punkt odniesienia pochodzi z przeglądu rewizji `24cdeda` (9–10 listopada 2026
 | Poznany zakres, dobór treningu i kontrola jego rozmieszczenia | `src/learning/training.ts` |
 | Procent ukończenia i opis zaległych ćwiczeń | `src/learning/map-progress.ts` |
 | Zakres kursu i język poleceń | `src/learning/scope.ts` |
+| Poznane elementy i globalne zestawy | `src/learning/known-material.ts`, `src/learning/course-practice.ts` |
+| Lokalny wybór kursu i powrót do rozpoczętej sesji | `src/controllers/courses.ts` |
+| Kafelek kontekstu, lista kursów i globalne ćwiczenia | `src/views/courses.ts`, `src/courses.css` |
 | Statystyki oraz walidacja kopii | `src/learning/statistics.ts`, `src/learning/backup.ts` |
 | Synchronizacja, konflikty i rozdzielenie kont | `src/sync.ts` |
 | Firebase i planowanie synchronizacji | `src/firebase.ts`, `src/services/` |
@@ -55,7 +58,7 @@ Widoki nie zapisują wyników. Moduły z `learning/` nie korzystają z DOM, Fire
 - Kopie i zapis postępów nadal mają wersję `1`; zachowano nazwy pól, identyfikatory materiałów i kont, rewizje oraz klucze IndexedDB i Firestore.
 - `mutate` nadal pracuje na kopii wyników, sprawdza wersję zapisu konta i potwierdza zapis przed aktualizacją interfejsu.
 - Zachowano reguły archiwizacji historii, ochronę przed konfliktem dwóch urządzeń i blokadę dwóch otwartych kart.
-- Kolejność stylów pozostaje: `style.css`, `theme.css`, `adventure.css`, `home.css`. Nie należy jej zmieniać przy porządkowaniu importów.
+- Kolejność istniejących stylów pozostaje: `style.css`, `theme.css`, `adventure.css`, `home.css`. Etap 3 dokłada na końcu `courses.css`, z regułami nowych elementów kursu. Nie należy jej zmieniać przy porządkowaniu importów.
 
 Ta reorganizacja nie wymaga migracji wyników, nowych reguł Firebase ani ponownego zakładania kont.
 

@@ -40,12 +40,6 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
             state.screen = action as 'home' | 'progress' | 'backup';
             state.pending = null;
         }
-        else if (action === 'module' || action === 'quick-start') {
-            state.selected = state.modules.find(m => m.id === el.dataset.id) ?? state.modules[0];
-            state.screen = 'setup';
-        }
-        else if (action === 'resume')
-            state.screen = 'study';
     }
     root.addEventListener('click', ev => {
         const el = (ev.target as HTMLElement).closest<HTMLElement>('[data-action]');

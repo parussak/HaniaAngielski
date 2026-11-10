@@ -3,6 +3,7 @@ import { keyFor,resolveItem,sessionCompatible,type Module,type Progress } from '
 import { labels } from './learning-labels.ts';
 import { reviewState,stageForSession,stageKey } from './stage-review.ts';
 import { compareModules, courseKey, sameCourse } from './learning/scope.ts';
+import { coursePracticeLabels, type CoursePracticeMode } from './learning/course-practice.ts';
 
 interface StepBase {moduleId:string|null;catId:string;journeyId?:string}
 export type NextStep = StepBase & (
@@ -20,11 +21,12 @@ export function getNextStep(modules:Module[],journeys:Journey[],p:Progress,selec
   const ordered=journeys.filter(j=>modules.some(m=>m.id===j.moduleId)&&lessons(j).length)
     .sort((a,b)=>compareModules(modules.find(m=>m.id===a.moduleId)!,modules.find(m=>m.id===b.moduleId)!));
   const active=p.active;
-  if(active&&!active.completedAt){
+  const activeModule=modules.find(m=>m.id===active?.moduleId);
+  if(active&&!active.completedAt&&(!selectedCourseId||!activeModule||courseKey(activeModule)===selectedCourseId)){
     const catId=stageForSession(ordered,active)?.stage.cat??'albert';
     if(!sessionCompatible(modules,active))return {kind:'unavailable',moduleId:active.moduleId,catId};
     const context=stageForSession(ordered,active);
-    return {kind:'resume',moduleId:active.moduleId,catId,...(context?.journey.id?{journeyId:journeyKey(context.journey)}:{}),title:active.stageReview?.title??active.lesson?.title??labels[active.mode],question:Math.min(active.index+1,active.items.length),total:active.items.length};
+    return {kind:'resume',moduleId:active.moduleId,catId,...(context?.journey.id?{journeyId:journeyKey(context.journey)}:{}),title:active.scope?coursePracticeLabels[active.mode as CoursePracticeMode]:active.stageReview?.title??active.lesson?.title??labels[active.mode],question:Math.min(active.index+1,active.items.length),total:active.items.length};
   }
 
   const activity:{moduleId:string;at:number}[]=[];

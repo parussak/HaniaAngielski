@@ -19,8 +19,9 @@ interface StartupPorts {
     scheduleReviewMigration: () => void;
     render: () => void;
     refreshSyncLabel: () => void;
+    restoreCourse: () => Promise<void>;
 }
-export async function startApplication({ root, state, sync, prepareProgress, rememberAccount, scheduleSync, scheduleReviewMigration, render, refreshSyncLabel }: StartupPorts) {
+export async function startApplication({ root, state, sync, prepareProgress, rememberAccount, scheduleSync, scheduleReviewMigration, render, refreshSyncLabel, restoreCourse }: StartupPorts) {
     root.innerHTML = '<div class="loading">✳<p>Przygotowujemy Twoją przestrzeń…</p></div>';
     if (!navigator.locks) {
         root.innerHTML = '<div class="loading"><h1>Zaktualizuj przeglądarkę</h1><p>Ta wersja potrzebuje aktualnej przeglądarki Chrome, Edge, Firefox lub Safari, aby bezpiecznie zapisywać postępy.</p></div>';
@@ -72,6 +73,7 @@ export async function startApplication({ root, state, sync, prepareProgress, rem
                             refreshSyncLabel();
                     })();
             }
+            await restoreCourse();
             state.ready = true;
             render();
             scheduleReviewMigration();

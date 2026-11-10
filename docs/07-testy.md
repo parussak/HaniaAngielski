@@ -20,6 +20,12 @@ Po uporządkowaniu kursów: **114/114 testów Node i 61/61 testów Playwright** 
 
 Budowanie korzysta bezpośrednio ze wspólnego `readLibrary`, a nie z importu danych przez plik testowy. Walidacja kursów nie zastępuje recenzji wariantów językowych ani podręcznika. [Raport etapu 2](wdrozenie-kursow.md).
 
+## Weryfikacja etapu 3
+
+**130/130 testów Node i 68/68 testów Playwright** gotowej aplikacji. `tests/course-practice.test.ts` sprawdza poznanie, archiwum, ograniczenie opcji, zgodność kopii, odrębność kursów i preferencje kont. `tests/browser/course-practice.spec.ts` obejmuje sześć scenariuszy mobilnych, a `tests/browser/pwa.spec.ts` dodatkowo globalne ćwiczenie offline i wysłanie jego wyniku po połączeniu.
+
+Sprawdzamy też zachowanie zaliczonych modułowych fiszek Food, brak nowych gwiazdek za globalne tryby, odmowę zastąpienia aktywnej sesji oraz utrzymanie poznania po zastąpieniu starszej niedokończonej sesji. Globalna historia nie jest zaliczana do wyników jednego przypadkowego modułu. [Raport etapu 3](wdrozenie-zakresow.md).
+
 ## Docelowy podział odpowiedzialności
 
 | Grupa | Co ma sprawdzać | Czego nie ma zastępować |

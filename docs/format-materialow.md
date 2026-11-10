@@ -98,4 +98,4 @@ Stary katalog bez `coursesFile` jest nadal obsługiwany przez adapter zgodności
 
 Uruchamiamy `npm run check:content`, `npm test` i `npm run build`. Te kroki wykrywają problemy formatu, odwołań i zakresów; nie potwierdzają poprawności językowej. Materiał sprawdzamy też względem źródeł według [zasad merytoryki](04-merytoryka.md). Nowe zachowanie interfejsu sprawdzamy w testach przeglądarkowych według [zasad testowania](07-testy.md).
 
-Globalne tryby nauki, wybór kursu w interfejsie i nowe treści francuskie/włoskie są dalszymi etapami. Ten format pozwala je dodać bez zmiany silnika oceniania.
+Wybór kursu i globalne fiszki/quiz/gramatyka są wdrożone w etapie 3 — [opis działania](wdrozenie-zakresow.md). Nowe podręcznikowe treści francuskie i włoskie nadal wymagają materiałów i recenzji. Dodanie treści przez ten format nie wymaga osobnego silnika oceniania dla języka.

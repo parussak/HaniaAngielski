@@ -1,5 +1,5 @@
 import { normalizeAnswer } from '../answers.ts';
-import { compareModules, sameCourse } from './scope.ts';
+import { compareModules, courseKey, sameCourse } from './scope.ts';
 import { wordExplanation } from '../materials/presentation.ts';
 import { type Exercise, type Item, type Mode, type Module, type Session, type Word } from './model.ts';
 export function shuffle<T>(input: T[], random = Math.random) {
@@ -42,19 +42,21 @@ export function questionFor(modules: Module[], item: Item): Exercise {
     if (!data)
         throw new Error('Brak materiału do pytania.');
     if (item.type === 'exercise')
-        return data as Exercise;
+        return item.options ? { ...data as Exercise, options: [...item.options] } : data as Exercise;
     const word = data as Word;
     const module = modules.find(m => m.id === item.moduleId)!;
     const linked = module.exercises.find(q => q.kind === 'vocabulary' && q.wordId === word.id);
     const answers = word.answers ?? [word.back];
-    const options = linked?.options ?? [word.back, ...module.words.filter(w => !answers.some(a => normalizeAnswer(a) === normalizeAnswer(w.back))).map(w => w.back).filter((v, i, a) => a.indexOf(v) === i).slice(0, 2)];
+    const options = item.options ?? linked?.options ?? [word.back, ...module.words.filter(w => !answers.some(a => normalizeAnswer(a) === normalizeAnswer(w.back))).map(w => w.back).filter((v, i, a) => a.indexOf(v) === i).slice(0, 2)];
     return { illustration: word.illustration, id: word.id, kind: 'vocabulary', prompt: word.front, answers, options, explanation: linked?.explanation ?? wordExplanation(module,word), requires: [module.id], caseSensitive: false, source: word.source };
 }
 export function sessionCompatible(modules: Module[], s: Session) {
     const anchor = modules.find(m => m.id === s.moduleId);
-    return !!anchor && s.items.every(item => {
+    return !!anchor && (!s.scope || s.scope.courseId === courseKey(anchor)) && s.items.every(item => {
         const source = modules.find(m => m.id === item.moduleId);
-        return !!source && sameCourse(source, anchor) && !!resolveItem(modules, item);
+        if (!source || !sameCourse(source, anchor) || !resolveItem(modules, item)) return false;
+        if (item.options) { const q = questionFor(modules, item); return !!s.scope && q.kind === 'vocabulary' && item.options.filter(o => isCorrect(q, o)).length === 1; }
+        return true;
     });
 }
 export function isCorrect(exercise: Exercise, answer: string) {

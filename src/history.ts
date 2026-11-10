@@ -4,6 +4,7 @@ export interface HistorySummary {
   head:string|null; sessions:number;
   items:Record<string,{total:number;correct:number}>;
   modules:Record<string,{sessions:number;total:number;correct:number}>;
+  courses?:Record<string,{sessions:number;total:number;correct:number}>;
 }
 export interface HistoryPage {id:string;previous:string|null;sessions:Session[]}
 export const sessionCount=(p:Progress)=>p.sessions.length+(p.history?.sessions??0);
@@ -33,9 +34,11 @@ export async function compactHistory(input:Progress,put:(page:HistoryPage)=>Prom
     if(group.length && byteSize([...group,s])>140000)await flush();
     if(byteSize(s)>190000)throw new Error('Pojedyncza sesja jest zbyt duża do archiwizacji. Zachowaj kopię i skontaktuj się z opiekunem aplikacji.');
     group.push(s);summary.sessions++;
-    const mod=summary.modules[s.moduleId]??{sessions:0,total:0,correct:0};mod.sessions++;
+    if(s.scope&&['__proto__','constructor','prototype'].includes(s.scope.courseId))throw new Error('Niepoprawny identyfikator kursu historii.');
+    const records=s.scope?(summary.courses??={}):summary.modules,key=s.scope?.courseId??s.moduleId;
+    const mod=records[key]??{sessions:0,total:0,correct:0};mod.sessions++;
     for(const a of s.attempts){const stat=summary.items[a.key]??{total:0,correct:0};stat.total++;stat.correct+=Number(a.first);summary.items[a.key]=stat;mod.total++;mod.correct+=Number(a.first);}
-    summary.modules[s.moduleId]=mod;
+    records[key]=mod;
   }
   await flush();p.history=summary;p.sessions=p.sessions.slice(removed.length);return p;
 }

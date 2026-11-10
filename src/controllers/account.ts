@@ -10,8 +10,9 @@ interface AccountPorts {
     scheduleSync: (delay?: number) => void;
     downloadProgress: (p: Progress, suffix?: string) => Promise<void>;
     run: (task: () => Promise<void>) => Promise<void>;
+    restoreCourse: () => Promise<void>;
 }
-export function createAccountController(state: AppState, { sync, scheduleSync, downloadProgress, run }: AccountPorts) {
+export function createAccountController(state: AppState, { sync, scheduleSync, downloadProgress, run, restoreCourse }: AccountPorts) {
     async function connectAccount(account: AccountUser) {
         await sync.connect(account.uid, state.guestProgress);
         state.user = { uid: account.uid, email: account.email, displayName: account.displayName ?? null };
@@ -23,6 +24,7 @@ export function createAccountController(state: AppState, { sync, scheduleSync, d
         state.progress = structuredClone(sync.cache!.progress);
         state.pending = null;
         state.lastSession = null;
+        await restoreCourse();
         scheduleSync(0);
     }
     async function rememberAccount(account: AccountUser) {
@@ -71,6 +73,7 @@ export function createAccountController(state: AppState, { sync, scheduleSync, d
                 state.guestProgress = structuredClone(state.progress);
                 state.pending = null;
                 state.lastSession = null;
+                await restoreCourse();
                 state.accountNotice = 'Wylogowano. Widoczny jest osobny zapis bez konta; wyniki konta pozostały zachowane.';
             }
             catch (error) {

@@ -9,7 +9,7 @@ Status: uzgodnione zasady docelowe z wyraźnymi miejscami wymagającymi decyzji.
 | Organizacja modułu | Food nadal ma jedną mapę z 7 etapami; kod przyjmuje listę do 3 map | 1–3 mapy w module, każda z kilkoma lekcjami |
 | Kolejka błędów | Osobna kolejka etapu obecnej mapy | Lekcja powtórki błędów z lekcji i treningów danej mapy |
 | Trening | Dodatkowy trening poznanego materiału i obsługa roli treningu na nowych mapach; Food pozostaje bez treningów mapowych | Lekcja utrwalająca wcześniejszy materiał, także rozwiązywany bezbłędnie |
-| Ćwiczenia swobodne | Moduł i opcja wcześniejszych modułów tego samego kursu; kolejność według rejestru podręcznika | Zakres modułowy lub poznany zakres całego wybranego kursu |
+| Ćwiczenia swobodne | Moduł, opcja wcześniejszych modułów i globalne fiszki/quiz/gramatyka z poznanego zakresu wybranego kursu | Zakres modułowy lub poznany zakres całego wybranego kursu |
 | Utrwalenie błędów | 3 zaliczenia w ukończonych turach, odstępy w turach | Zachować rozróżnienie powtórki błędów i treningu; szczegółowy algorytm wymaga decyzji |
 
 Nie przemianowujemy automatycznie obecnych etapów na nowe mapy. Uzgodniono zachowanie obecnej mapy Food i wyników Hani (D-22); szczegóły poprawek oraz ochrony danych są w [U-03](decyzje.md#u-03).
@@ -88,7 +88,9 @@ Zakres globalny nie obejmuje automatycznie niepoznanych przyszłych treści ani 
 
 Po takiej próbie element może wejść do poznanego zakresu globalnych ćwiczeń. Przy treningu na mapie nadal obowiązuje dodatkowe ograniczenie do materiału wcześniejszych map. Dodatkowy trening uruchamiany poza mapą korzysta z poznanego zakresu kursu; to roboczy zakres pierwszego wdrożenia opisany w raporcie.
 
-Uwzględniamy również **wcześniejsze zapisane próby odpowiedzi, także ze starszej historii**, niezależnie od poprawności (D-26). Użytkownik nie musi od nowa poznawać elementów tylko z powodu wprowadzenia tej zasady. Odtworzenie poznanego zakresu nie zmienia ocen, ukończonych lekcji ani zdobytych gwiazdek. Założenia [U-04](decyzje.md#u-04) są uzgodnione; techniczne odnotowanie i odtworzenie poznania zostanie zaprojektowane przed implementacją. Nie zmieniono jeszcze aplikacji.
+Uwzględniamy również **wcześniejsze zapisane próby odpowiedzi, także ze starszej historii**, niezależnie od poprawności (D-26). Użytkownik nie musi od nowa poznawać elementów tylko z powodu wprowadzenia tej zasady. Odtworzenie poznanego zakresu nie zmienia ocen, ukończonych lekcji ani zdobytych gwiazdek. Poznanie jest wdrożone w etapie 3 przez wspólny odczyt prób i znacznik `encountered`. Nie znika po zastąpieniu niedokończonej sesji i nie zmienia ocen, ukończeń ani gwiazdek — [opis zakresów](wdrozenie-zakresow.md).
+
+Globalne fiszki obejmują także poprawnie znane słówka, podczas gdy modułowe zachowują dotychczasowe pomijanie zaliczonych. Globalny quiz obejmuje pytania o poznane znaczenia i pytania już próbowane; globalna gramatyka tylko konkretne próbowane zadania. Znajomość jednej reguły nie odblokowuje automatycznie niepoznanych zadań. Jawne warianty z pytania pozostają przyciskami; słownikowe opcje globalne korzystają z poznanego zakresu, a przy zbyt małej puli wymagane jest wpisanie. Globalne sesje nie zaliczają map i nie przyznają nowych gwiazdek.
 
 ### Wynik, błędy i nagrody
 

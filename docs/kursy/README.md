@@ -10,7 +10,7 @@ Tutaj zapisujemy informacje właściwe dla danego kursu i podręcznika. Nie kopi
 | [Francuski Hani](francuski-hani.md) | Uzgodniony kierunek, bez wdrożonych materiałów |
 | [Włoski Pauliny](wloski-pauliny.md) | Uzgodniony kierunek A1/A2, bez wdrożonych materiałów |
 
-Imiona w nazwach kart wskazują obecnych odbiorców materiału, nie wyłączność kursu dla jednej osoby. Kurs może być wspólny dla wielu kont, z osobnymi postępami — D-14 w [rejestrze](../decyzje.md). Sposób wyboru i prezentacji dostępnych kursów pozostaje w U-08.
+Imiona w nazwach kart wskazują obecnych odbiorców materiału, nie wyłączność kursu dla jednej osoby. Kurs może być wspólny dla wielu kont, z osobnymi postępami — D-14 w [rejestrze](../decyzje.md). Podstawowy wybór i prezentacja kursów są wdrożone w etapie 3. Ewentualne osobne sesje i dalsze preferencje pozostają w U-08.
 
 Karta kursu zawiera odbiorcę, źródła, zakres, własne ustalenia językowe i sprawy do potwierdzenia. Wdrożony [format plików](../format-materialow.md) określa ich reprezentację w aplikacji; karty pozostają czytelnym opisem kontekstu.
 

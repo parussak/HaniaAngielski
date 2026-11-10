@@ -31,6 +31,16 @@ Format kopii pozostaje w wersji 1 i odczytuje stare dane. Kopie zawierające now
 
 Nie przenosimy istniejącego modułu do innego podręcznika: nowy podręcznik i istotnie zmienione wydanie wymagają nowego kursu oraz nowych identyfikatorów modułów. Kursy i znaczenia są wczytywane do pamięci aplikacji i cache materiałów PWA, a nie dopisywane do `Progress` ani payloadu Firestore. Odczyt Food nie wykonuje migracji. [Szczegóły zgodności](wdrozenie-kursow.md).
 
+## Globalny zakres i preferencja kursu — etap 3
+
+- `Progress.encountered` jest opcjonalną, unikalną listą kluczy elementów po pierwszej próbie. Nie zawiera ocen ani listy zdarzeń; powtarzanie tego samego elementu nie powiększa jej. Stare próby są nadal odczytywane z historii. Przy zastąpieniu starej aktywnej sesji zachowujemy klucze jej prób, bez przepisywania ocen.
+- `Session.scope: { kind: "course", courseId }` oznacza globalną sesję; brak pola zachowuje dotychczasowe tryby. `moduleId` jest kotwicą zgodności kursu, a pytania nadal wskazują własne moduły i rewizje.
+- `Item.options` jest małą opcjonalną migawką 2–4 poznanych opcji dla słownictwa globalnego. Dzięki niej kopia i wznowienie zachowują ten sam zestaw odpowiedzi.
+- `history.courses` agreguje zarchiwizowane sesje globalne osobno od modułowych. Suma sesji kursowych i modułowych musi zgadzać się z liczbą archiwalnych sesji; pełna kopia sprawdza także wartości względem części historii. `history.items` nadal uwzględnia każdą ocenioną próbę raz.
+- `course-selection:guest` i `course-selection:account:<uid>` w IndexedDB zawierają wyłącznie lokalną preferencję kursu. Nie są częścią `Progress`, kopii ani synchronizacji.
+
+Kopia pozostaje w wersji 1 i odczytuje wcześniejsze pliki. Obsługa nowych pól wymaga aktualnej aplikacji. Nie zmieniono reguł Firebase ani nie przeliczono starych ocen. [Raport etapu 3](wdrozenie-zakresow.md).
+
 ## Założenia docelowe przy rozwoju
 
 - Jeden kurs może być wspólny dla wielu kont, ale każde konto ma własne postępy; sesje i wyniki jednego konta nie zmieniają wyników innego — D-14 w [rejestrze](decyzje.md). W etapie 2 definicja kursu wskazuje globalnie unikalne moduły, a zapis nadal używa ich stabilnych identyfikatorów; nie kopiuje materiałów do danych konta.
@@ -49,6 +59,6 @@ Nie przesądzamy, że wszystkie obecne pola zostaną zachowane bez rozszerzeń a
 
 - Podstawowe rozdzielenie wyników kursów jest wdrożone przez przypisanie stabilnych modułów. Dalsze rozszerzenia, np. inne rodzaje współdzielonych jednostek materiału, należą do [U-01](decyzje.md#u-01). Osobne postępy kont (D-14) oraz osobne postępy w różnych kursach jednego konta (D-15) są już zatwierdzone.
 - Techniczna ochrona wyników, aktywnych sesji i kolejek błędów przy poprawkach Food — [U-03](decyzje.md#u-03). Zachowanie mapy zatwierdzono w D-22, a wszystkich ukończonych lekcji i zdobytych gwiazdek w D-24; nie jest to już otwarta decyzja o resetowaniu ukończeń.
-- Techniczna reprezentacja poznania i odczyt wcześniejszych prób zgodnie z rozstrzygniętymi zasadami D-25 i D-26 — [U-04](decyzje.md#u-04); dane przyszłego algorytmu treningu pozostają w [U-05](decyzje.md#u-05).
-- Czy potrzebne są oddzielne aktywne sesje/preferencje kursów — [U-08](decyzje.md#u-08).
+- Poznanie i odczyt wcześniejszych prób są wdrożone zgodnie z D-25/D-26 — [U-04](decyzje.md#u-04). Dane przyszłego algorytmu treningu pozostają w [U-05](decyzje.md#u-05).
+- Czy potrzebne są oddzielne aktywne sesje, preferencje odpowiedzi albo synchronizacja wyboru kursu — [U-08](decyzje.md#u-08). Obecnie jest jedna sesja, wspólny wybór sposobu odpowiadania i lokalna preferencja kursu.
 - Co w przyszłości pozostaje wspólne: gwiazdki, domek i nagrody — [U-07](decyzje.md#u-07).

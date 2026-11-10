@@ -2,6 +2,8 @@
 
 10 listopada 2026. Pozostałe pytania produktowe zostały zaparkowane, a implementacja zatwierdzonych zasad jest dozwolona (D-34). Ten raport oddziela wdrożenie od docelowych wymagań i historycznego punktu odniesienia.
 
+Ten raport opisuje etap 1. Późniejsze wdrożenia opisują [raport kursów — etap 2](wdrozenie-kursow.md) i [globalne zakresy — etap 3](wdrozenie-zakresow.md); lista braków poniżej jest historycznym stanem po etapie 1.
+
 ## Zakres prac
 
 - Czytelny postęp ukończenia lekcji i osobna liczba ćwiczeń do utrwalenia, bez ogólnego procentu utrwalenia.
