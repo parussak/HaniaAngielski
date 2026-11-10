@@ -32,6 +32,12 @@ Sprawdzamy też zachowanie zaliczonych modułowych fiszek Food, brak nowych gwia
 
 Testy kont używają lokalnego modelu Firebase; nie ingerują w prawdziwe wyniki. Przegląd zdjęć i objaśnień opisuje [raport Food](wdrozenie-food.md); testy struktury nie zastępują recenzji pedagogicznej ani próby na fizycznym telefonie Hani.
 
+## Weryfikacja przygotowania treningu i odzyskiwania map
+
+Po poprawkach po etapie 4: **144/144 testów Node i 76/76 testów Playwright** gotowej aplikacji w Chrome, z dotychczasowymi testami PWA i synchronizacji. `npm run build` przechodzi walidację materiałów, TypeScript i budowanie wydania offline.
+
+`tests/map-recovery.test.ts` obejmuje błąd pobrania, JSON i schematu pojedynczej mapy, duplikaty tożsamości, izolację kursów, odzyskanie katalogu, przygotowanie poznanej puli, nagrody bez duplikatów oraz odroczenie migracji i premii przy brakujących mapach. `tests/browser/map-recovery.spec.ts` sprawdza na telefonie przejście od pustej puli przez lekcję do treningu, brak drugiej nagrody, dostępność poprawnej mapy podczas awarii innej i wznowienie zachowanej sesji po naprawie pliku. Sprawdzono zrzut ekranu przygotowania i brak przewijania poziomego przy 320 px. Kontrole nie zmieniają prawdziwego konta Hani. [Zakres i ograniczenia](odpornosc-map.md).
+
 ## Docelowy podział odpowiedzialności
 
 | Grupa | Co ma sprawdzać | Czego nie ma zastępować |

@@ -1,10 +1,10 @@
-import { lessons, stars, type Journey } from '../adventure.ts';
+import { lessons, stars, type Journey, type JourneyIssue } from '../adventure.ts';
 import type { Module, Progress } from '../core.ts';
 import { e, icon } from '../ui.ts';
 import { mapProgress,reviewProgressText } from '../learning/map-progress.ts';
 import { journeyKey } from '../adventure.ts';
 function moduleSubtitle(m: Module) { return [m.level, `Moduł ${m.order}`, m.cover].filter(Boolean).map(e).join(' · '); }
-export function journeyList(modules: Module[], journeys: Journey[], progress: Progress) {
+export function journeyList(modules: Module[], journeys: Journey[], progress: Progress,issues:JourneyIssue[]=[]) {
     return `<button class="back" data-action="home">← Moja nauka</button>
     <div class="journey-top">
     <div>
@@ -15,6 +15,7 @@ export function journeyList(modules: Module[], journeys: Journey[], progress: Pr
     </button>
     </div>
     <p class="lead">Wybierz mapę. Ucz się małymi krokami i zdobywaj gwiazdki do kociego domku.</p>
+    ${modules.filter(m=>issues.some(issue=>issue.moduleId===m.id)).map(m=>`<section class="panel map-load-error" role="status"><h2>Nie wszystkie mapy są dostępne</h2><p>Moduł: ${e(m.name)}. Pozostałe mapy i ćwiczenia możesz nadal otwierać. Zapisane postępy i gwiazdki zostają.</p><button class="secondary" data-action="retry-maps">Spróbuj wczytać mapy ponownie</button></section>`).join('')}
     <div class="journey-catalog">${journeys.map(j => {
         const m = modules.find(m => m.id === j.moduleId)!;
         const done = lessons(j).filter(l => progress.adventure?.completed[l.key]).length, total = lessons(j).length, reviews = mapProgress(j,progress);

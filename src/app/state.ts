@@ -1,4 +1,4 @@
-import type { Journey } from '../adventure.ts';
+import type { Journey, JourneyIssue } from '../adventure.ts';
 import type { CatCatalog } from '../cats.ts';
 import { emptyProgress, type AnswerMode, type Backup, type Mode, type Module, type Progress, type Session } from '../core.ts';
 import type { AccountUser } from '../firebase.ts';
@@ -12,6 +12,7 @@ export class AppState {
     progress: Progress = emptyProgress();
     screen: 'home' | 'setup' | 'study' | 'progress' | 'backup' | 'account' | 'summary' | 'map' | 'lesson-intro' | 'house' | 'journeys' | 'module-list' | 'courses' | 'course-practice' = 'home';
     journeys: Journey[] = [];
+    journeyIssues: JourneyIssue[] = [];
     selectedJourneyKey = '';
     introLessonId = '';
     chosenDecoration = 'pillow';

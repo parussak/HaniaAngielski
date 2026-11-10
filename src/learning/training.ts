@@ -1,4 +1,4 @@
-import { journeyKey, lessons, orderedJourneys, unlocked, type Journey, type Lesson } from '../adventure.ts';
+import { journeyKey, journeyForProgress, lessons, orderedJourneys, unlocked, type Journey, type Lesson } from '../adventure.ts';
 import { inputFor, questionFor, resolveItem, shuffle } from './questions.ts';
 import { keyFor, type AnswerMode, type Item, type Module, type Progress, type Session } from './model.ts';
 import { sameCourse } from './scope.ts';
@@ -81,13 +81,30 @@ export function selectTrainingItems(pool: Practice[], count = 8, random = Math.r
     return selected.map(x => structuredClone(x.item));
 }
 
+export function mapTrainingPool(modules:Module[],journeys:Journey[],journey:Journey,p:Progress){
+    const selected=modules.find(m=>m.id===journey.moduleId);if(!selected)return [];
+    const allowed=earlierMapKeys(modules,journeys,journey);
+    return practicedItems(modules,selected,p).filter(x=>allowed.has(x.item.key));
+}
+
+// A separate earlier lesson introduces material; the training itself never does.
+export function trainingPreparation(modules:Module[],journeys:Journey[],journey:Journey,p:Progress){
+    const selected=modules.find(m=>m.id===journey.moduleId);if(!selected)return;
+    const ordered=orderedJourneys(modules.filter(m=>sameCourse(m,selected)),journeys);
+    const index=ordered.findIndex(j=>journeyKey(j)===journeyKey(journey));
+    for(const original of ordered.slice(0,Math.max(0,index))){
+        const source=journeyForProgress(original,p);
+        const candidates=lessons(source).filter(e=>e.lesson.role!=='training'&&unlocked(source,e.lesson,p));
+        const candidate=candidates.find(e=>!p.adventure?.completed[e.key])??candidates[0];
+        if(candidate)return {journey:source,lesson:candidate.lesson};
+    }
+}
+
 export function makeTrainingSession(modules: Module[], selected: Module, p: Progress, answerMode: AnswerMode, context?: { journey: Journey; lesson: Lesson; journeys: Journey[] }): Session | null {
-    let pool = practicedItems(modules, selected, p);
+    let pool = context?mapTrainingPool(modules,context.journeys,context.journey,p):practicedItems(modules, selected, p);
     if (context) {
         if (context.journey.moduleId !== selected.id || context.lesson.role !== 'training' || !unlocked(context.journey, context.lesson, p))
             throw new Error('Najpierw ukończ wcześniejszą lekcję.');
-        const allowed = earlierMapKeys(modules, context.journeys, context.journey);
-        pool = pool.filter(x => allowed.has(x.item.key));
     }
     const items = selectTrainingItems(pool, context?.lesson.targetCount ?? 8);
     if (!items.length) return null;

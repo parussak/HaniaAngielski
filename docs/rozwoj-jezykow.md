@@ -8,7 +8,7 @@ Przegląd kodu i testów z 9–10 listopada 2026 r., rewizja `24cdeda`. **To lis
 
 Poniższa diagnoza J1–J10 jest historycznym punktem odniesienia rewizji `24cdeda`. Obecny kod ma już kurs, osobne języki, format znaczeń z wariantami, zgodny adapter Food i ograniczenie zakresów do kursu. Polecenia nowego kursu są danymi, a materiały kontroluje wspólny odczyt. Testy obejmują syntetyczne FR/IT i dwa podręczniki tego samego języka. [Raport etapu 2](wdrozenie-kursow.md) i [format materiałów](format-materialow.md) określają aktualny stan.
 
-Etap 3 wdraża wybór kursu oraz globalne fiszki/quiz/gramatykę z poznanego materiału — [raport zakresów](wdrozenie-zakresow.md). Nadal potrzebne są rzeczywiste podręczniki i recenzja ich treści (J4/J7/J8), usunięcie pozostałych szczegółów prezentacji Food przed innymi produkcyjnymi mapami (J5), ewentualna izolacja awarii map (J6), pobieranie materiałów kursami (J9) i decyzje dla osoby dorosłej (J10). Nie uznajemy tych problemów za rozwiązane przez samo przejście testów.
+Etap 3 wdraża wybór kursu oraz globalne fiszki/quiz/gramatykę z poznanego materiału — [raport zakresów](wdrozenie-zakresow.md). Nadal potrzebne są rzeczywiste podręczniki i recenzja ich treści (J4/J7/J8), usunięcie pozostałych szczegółów prezentacji Food przed innymi produkcyjnymi mapami (J5), pobieranie materiałów kursami (J9) i decyzje dla osoby dorosłej (J10). Nie uznajemy tych problemów za rozwiązane przez samo przejście testów.
 
 ## Kierunek wynikający z ustaleń użytkowniczki
 
@@ -69,6 +69,8 @@ Ilustracja słowa jest opcjonalna w typie i walidatorze, ale wprowadzenie do lek
 **Proponowany warunek rozwiązania:** oddzielić oprawę modułu od wspólnych widoków, uzgodnić wymagania ilustracji i zachowanie przy jej braku. Nie przebudowywać samych kotków, jeżeli mają pozostać wspólną oprawą.
 
 ### J6 · P1 · Walidacja i awaria nowej mapy
+
+**Aktualizacja po etapie 4:** izolowanie awarii map jest wdrożone. Poprawne mapy pozostają dostępne, a błędy mają możliwość ponowienia. Kontrola budowania sprawdza zadeklarowane mapy, treningi i pliki ilustracji. Poniższy opis przedstawia historyczny punkt odniesienia; [obecne działanie i ograniczenia](odpornosc-map.md) zastępują tę diagnozę w tym zakresie.
 
 **Stan:** [check-content.mjs](../scripts/check-content.mjs) nie sprawdza wszystkich map ani plików ilustracji. [loadJourneys](../src/adventure.ts) używa `Promise.all`, a [startup](../src/app/startup.ts) przy błędzie zestawu map wraca do pustej listy map.
 

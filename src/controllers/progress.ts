@@ -15,12 +15,13 @@ export function createProgressController(state: AppState, { sync, run, render, s
     let reviewMigrationTimer: ReturnType<typeof setTimeout> | undefined;
     let reviewMigrationWorking = false;
     async function prepareProgress(p: Progress) {
-        const prepared = await compactHistory(seedStageReviews(p, state.journeys), putHistoryPage);
-        settleStageRewards(prepared, state.journeys);
+        // Do not finish historical migration or settle bonuses against a partial catalog.
+        const prepared = await compactHistory(state.journeyIssues.length?p:seedStageReviews(p, state.journeys), putHistoryPage);
+        if(!state.journeyIssues.length)settleStageRewards(prepared, state.journeys);
         return prepared;
     }
     function scheduleReviewMigration() {
-        if (!state.ready || !state.progress.adventure?.reviewArchiveHead || reviewMigrationWorking)
+        if (!state.ready || state.journeyIssues.length || !state.progress.adventure?.reviewArchiveHead || reviewMigrationWorking)
             return;
         clearTimeout(reviewMigrationTimer);
         reviewMigrationTimer = setTimeout(async () => {

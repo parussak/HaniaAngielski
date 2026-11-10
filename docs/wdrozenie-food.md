@@ -2,6 +2,8 @@
 
 Stan na 10 listopada 2026 r. Wdrożenie D-22 i D-24: poprawiamy tylko nieukończone lekcje etapów 5–7, a brak ćwiczenia materiału w kontekście uzupełniamy drugą mapą. Nie przenosimy lekcji między etapami ani nie zerujemy wyników.
 
+Późniejsza aktualizacja: dodano przycisk do lekcji przygotowującej przy pustym treningu i niezależne odzyskiwanie map po błędach. [Bieżąca obsługa tych sytuacji](odpornosc-map.md). Poniższy raport zachowuje zakres i wyniki etapu 4.
+
 ## Porównanie z materiałami
 
 Punktem odniesienia są 27 zdjęć z archiwum użytkowniczki, opisane w [rejestrze źródeł](materialy-food.md). Przejrzano zestaw zdjęć na planszach kontaktowych, a kluczowe strony porównano w powiększeniu: podręcznik 25, 27, 29–33, 35 i zeszyt ćwiczeń 19–20. Tytuł i wydanie książki nadal nie są ustalone. Zdjęć ani skanów nie dodajemy do publicznej aplikacji.

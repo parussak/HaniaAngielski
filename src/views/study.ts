@@ -30,6 +30,8 @@ export function studyView(state: Readonly<AppState>) {
     const s = state.progress.active;
     if (!s)
         return `<h1>Sesja zakończona</h1>${button('home', 'Wróć do modułów')}`;
+    if((s.lesson||s.stageReview)&&state.journeyIssues.some(issue=>issue.moduleId===s.moduleId)&&!stageForSession(state.journeys,s))
+        return `<h1>Wczytaj mapę tej lekcji</h1><p>Ta mapa jest chwilowo niedostępna. Twoja rozpoczęta sesja i odpowiedzi pozostają zapisane. Ponów wczytanie map lub wybierz inną przygodę.</p>${button('retry-maps','Spróbuj wczytać mapy ponownie')}${button('journeys','Wybierz inną mapę','secondary')}`;
     if (!sessionCompatible(state.modules, s))
         return `<h1>Potrzebny jest moduł</h1><p>Ta sesja pochodzi z innej wersji materiału lub brakującego modułu. Jej zapis i Twoja historia są bezpieczne. Możesz zapisać kopię albo rozpocząć nową sesję z dostępnego modułu.</p>${button('backup', 'Kopia postępów')}${button('home', 'Moja nauka', 'secondary')}`;
     const item = s.items[s.index];

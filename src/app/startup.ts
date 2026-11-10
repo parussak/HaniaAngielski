@@ -38,7 +38,10 @@ export async function startApplication({ root, state, sync, prepareProgress, rem
             state.modules = library.modules;
             state.catCatalog = cats;
             state.selected = state.modules[0];
-            state.journeys = await loadJourneys(state.modules).catch(() => { state.notice = 'Kocia mapa jest chwilowo niedostępna. Możesz korzystać z własnych ćwiczeń.'; return []; });
+            const maps = await loadJourneys(state.modules);
+            state.journeys = maps.journeys;
+            state.journeyIssues = maps.issues;
+            if(maps.issues.length)state.notice='Nie wszystkie mapy udało się wczytać. Dostępne mapy i ćwiczenia nadal działają. Możesz ponowić próbę w katalogu przygód.';
             const oldGuest = validateBackup(backup(await load())).progress;
             state.progress = await prepareProgress(oldGuest);
             if (JSON.stringify(state.progress) !== JSON.stringify(oldGuest))

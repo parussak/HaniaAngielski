@@ -1,5 +1,5 @@
 import { journeyKey, lessons, makeLessonSession, place, purchase, rewardCompletion, unlocked, type Journey } from '../adventure.ts';
-import { makeTrainingSession } from '../learning/training.ts';
+import { makeTrainingSession, mapTrainingPool, trainingPreparation } from '../learning/training.ts';
 import { currentJourney, currentCourse, courseModules } from '../app/selectors.ts';
 import { AppState } from '../app/state.ts';
 import { makeSession, next, questionFor, recordAnswer, replaceActive, type Mode, type Progress } from '../core.ts';
@@ -32,6 +32,17 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
         state.screen = 'study';
     }
     async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
+        if(action==='retry-maps'){window.location.reload();return true;}
+        if(action==='prepare-training'){
+            const j=currentJourney(state),l=j&&lessons(j).find(e=>e.lesson.id===state.introLessonId)?.lesson;
+            if(!j||l?.role!=='training'||!unlocked(j,l,state.progress))return true;
+            const source=trainingPreparation(state.modules,state.journeys,j,state.progress);
+            if(!source){state.notice='Wczytaj wcześniejsze mapy, aby przygotować się do treningu.';return true;}
+            state.notice=`Po tej lekcji wróć do treningu na mapie „${j.title}”. Twoje postępy pozostają zapisane.`;
+            state.selected=state.modules.find(m=>m.id===source.journey.moduleId)!;
+            state.selectedJourneyKey=journeyKey(source.journey);
+            state.introLessonId=source.lesson.id;state.answerMode='mixed';state.screen='lesson-intro';return true;
+        }
         if (action === 'courses') { state.screen = 'courses'; return true; }
         if (action === 'select-course') { if (await courses.select(el.dataset.id ?? '')) state.screen = 'home'; return true; }
         if (action === 'resume') { await courses.followSession(); state.screen = 'study'; return true; }
@@ -130,6 +141,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
                 state.screen = 'lesson-intro';
                 return true;
             }
+            if(l.role==='training'&&!mapTrainingPool(state.modules,state.journeys,j,state.progress).length){state.introLessonId=l.id;state.screen='lesson-intro';return true;}
             if (state.progress.active && !window.confirm('Rozpocząć lekcję zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))
                 return true;
             const session = l.role === 'training'

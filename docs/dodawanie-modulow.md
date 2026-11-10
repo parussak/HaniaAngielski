@@ -27,7 +27,7 @@ Według [zasad nauki](03-nauka.md) moduł ma 1–3 mapy, które łącznie wprowa
 - Trening: wcześniejsze mapy tego kursu i faktycznie poznany materiał, również bezbłędny. Pierwszy po 2–3 lekcjach nowej treści, kolejne co 2–3, jeśli jest odpowiednia pula. Zwykle do 8 zadań; może być krótszy, gdy pula jest mała. Nie dodawaj pustego treningu bez wcześniejszego materiału.
 - Powtórka błędów: powstaje ze zdarzeń podczas nauki. Nie wpisuj jej jako zwykłej lekcji w JSON i nie dopełniaj innymi zadaniami do minimum. Nie blokuje ukończenia mapy.
 
-Przed dopisaniem treningu na mapie sprawdź nie tylko istnienie wcześniejszej mapy, ale też możliwość przejścia do treningu bez poznanej puli. Aktualny interfejs nie blokuje otwarcia kolejnej mapy; nie obiecuj odblokowywania między mapami, którego nie wdrożono.
+Przed dopisaniem treningu na mapie sprawdź nie tylko istnienie wcześniejszej mapy, ale też przebieg bez poznanej puli. Ekran przygotowania oferuje odblokowaną zwykłą lekcję wcześniejszej mapy; przy jej niedostępności pozwala ponowić odczyt. Po nauce użytkownik wraca przez katalog do treningu. Aktualny interfejs nie blokuje otwarcia kolejnej mapy; nie obiecuj automatycznego odblokowywania między mapami ani automatycznego powrotu po przygotowaniu. [Opis przebiegu](odpornosc-map.md).
 
 ## 4. Przygotuj pliki treści
 

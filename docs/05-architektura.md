@@ -33,6 +33,7 @@ Punkt odniesienia pochodzi z przeglądu rewizji `24cdeda` (9–10 listopada 2026
 | Treść pytania, warianty i ocenianie | `src/learning/questions.ts`, `src/answers.ts` |
 | Przebieg sesji i wynik pierwszej próby | `src/learning/session.ts` |
 | Poznany zakres, dobór treningu i kontrola jego rozmieszczenia | `src/learning/training.ts` |
+| Przygotowanie do treningu bez wcześniejszej puli | `src/views/training-preparation.ts`, `src/learning/training.ts`, `src/controllers/learning.ts` |
 | Procent ukończenia i opis zaległych ćwiczeń | `src/learning/map-progress.ts` |
 | Zakres kursu i język poleceń | `src/learning/scope.ts` |
 | Poznane elementy i globalne zestawy | `src/learning/known-material.ts`, `src/learning/course-practice.ts` |
@@ -82,7 +83,7 @@ Część tego podziału już istnieje po refaktoringu, ale nadal są powiązania
 
 ## Znane granice obecnej implementacji
 
-- Wczytywanie map jest wspólne: błąd jednej mapy powoduje pustą listę wszystkich map w interfejsie (`loadJourneys` i obsługa błędu w `startup.ts`). Ćwiczenia modułowe pozostają dostępne, a wyniki nie są kasowane. Izolowanie awarii map jest propozycją do dalszej pracy, nie wdrożoną właściwością.
+- Mapy są wczytywane niezależnie przez `readJourneys` / `loadJourneys`: wynik zawiera poprawne mapy i problemy odczytu. Błąd jednej mapy nie usuwa pozostałych; katalog pokazuje ponowienie pobrania. Przy duplikacie tożsamości izolowane są wszystkie konfliktujące definicje. Nie izoluje to błędów samych plików modułu lub rejestru kursów. [Obsługa awarii i zachowanie sesji](odpornosc-map.md).
 - Nadal istnieją szczegóły Food w prezentacji: opisy rozmówek, etykieta podstawowych fiszek i odznaka pierwszej mapy. Przed publikacją kolejnego języka trzeba sprawdzić te teksty na rzeczywistym materiale.
 - Statystyki i historia obejmują konto; tylko katalogi i dobór ćwiczeń są ograniczane wyborem kursu.
 

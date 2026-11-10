@@ -19,6 +19,10 @@ Zachowano rozdzielenie kont i gościa, kontrolę wersji przy synchronizacji, wyb
 
 Pełny opis kluczy, limitów, archiwizacji, cache i dowodów: [zapis — punkt odniesienia](stan-obecny/zapis.md). Mapa implementacji: [architektura](05-architektura.md).
 
+## Niedostępna mapa a zapis wyników
+
+Problemy odczytu map są przejściowym stanem interfejsu, poza `Progress` i kopią. Niepełny katalog wstrzymuje migrację dawnych błędów, przesuwanie jej kursora oraz rozliczanie premii etapowych; po odzyskaniu kompletu te działania są wznawiane. Nagrody za zwykłe ukończenie lekcji działają nadal. Aktywna sesja mapy niedostępnej pozostaje zapisana i czeka na jej odzyskanie, co chroni przypisanie nowych błędów do etapu. Przygotowanie do pustego treningu nie zmienia formatu zapisu ani nie zalicza treningu za użytkownika. [Pełny opis](odpornosc-map.md).
+
 ## Rozszerzenie treningów — wdrożone po D-34
 
 Sesja treningu ma opcjonalne pole `training` z rolą `map` lub `extra`. Trening na mapie korzysta z istniejącego rejestru ukończeń lekcji; dodatkowy trening zapisuje `rewarded: true` w ukończonej sesji. Znacznik jest zapisywany razem z gwiazdką, nie na osobnej nieograniczonej liście nagród. Sesje nadal podlegają dotychczasowej kompakcji i archiwizacji.

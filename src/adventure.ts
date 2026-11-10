@@ -58,14 +58,24 @@ export function validateJourney(value:unknown,m:Module):Journey {
   }
   return structuredClone(j);
 }
-export async function loadJourneys(modules:Module[]):Promise<Journey[]>{
+export interface JourneyIssue {moduleId:string;path:string}
+export async function readJourneys(modules:Module[],read:(path:string)=>Promise<unknown>):Promise<{journeys:Journey[];issues:JourneyIssue[]}>{
   const requests=modules.flatMap(m=>(m.journeyPaths??(m.journeyPath?[m.journeyPath]:m.id==='unit-2-food'?['02-food/sciezka.json']:[])).map(path=>({m,path})));
-  const journeys=await Promise.all(requests.map(async({m,path})=>{
+  const results=await Promise.allSettled(requests.map(async({m,path})=>validateJourney(await read(path),m)));
+  const counts=new Map<string,number>();
+  for(const result of results)if(result.status==='fulfilled'){const key=journeyKey(result.value);counts.set(key,(counts.get(key)??0)+1);}
+  const journeys:Journey[]=[],issues:JourneyIssue[]=[];
+  results.forEach((result,index)=>{
+    if(result.status==='fulfilled'&&counts.get(journeyKey(result.value))===1)journeys.push(result.value);
+    else issues.push({moduleId:requests[index].m.id,path:requests[index].path});
+  });
+  return {journeys,issues};
+}
+export async function loadJourneys(modules:Module[]){
+  return readJourneys(modules,async path=>{
     const r=await fetch(new URL(`content/${path}`,document.baseURI),{cache:'no-cache'});
-    if(!r.ok)throw new Error('Nie można pobrać kociej mapy.');return validateJourney(await r.json(),m);
-  }));
-  if(new Set(journeys.map(journeyKey)).size!==journeys.length)throw new Error('Powtórzony identyfikator mapy.');
-  return journeys;
+    if(!r.ok)throw new Error('Nie można pobrać kociej mapy.');return r.json();
+  });
 }
 export function makeLessonSession(modules:Module[],journey:Journey,lesson:Lesson,answerMode:AnswerMode,p:Progress):Session {
   lesson=lessonForProgress(journey,lesson,p);

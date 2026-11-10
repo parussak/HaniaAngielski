@@ -77,7 +77,7 @@ Ukończenie mapy wymaga ukończenia wszystkich jej zwykłych lekcji i umieszczon
 
 Mechanizm działa na drugiej produkcyjnej mapie Food: trening po trzech zwykłych lekcjach jest wymagany do jej ukończenia. Pierwsza mapa Food pozostaje bez treningów mapowych, a zapisane ukończenia i zdobyte gwiazdki są zachowane. Nagrodę za trening na mapie określa D-33; warunki premii za utrwalenie nowych map pozostają osobną decyzją.
 
-Mapy można otwierać niezależnie; odblokowanie kolejnej lekcji jest sprawdzane wewnątrz wybranej mapy. Jeśli użytkownik dotrze do treningu drugiej mapy bez żadnych prób materiału pierwszej, aplikacja nie utworzy treningu i poprosi o wcześniejszą naukę. Nie ma jeszcze automatycznej blokady drugiej mapy ani zastępczej ścieżki treningu bez poznanej puli. To ograniczenie obecnego przebiegu, nie dodatkowa uzgodniona zasada produktu.
+Mapy można otwierać niezależnie; odblokowanie kolejnej lekcji jest sprawdzane wewnątrz wybranej mapy. Przy pustej puli treningu ekran „Przygotuj się do treningu” wskazuje odblokowaną zwykłą lekcję wcześniejszej mapy i pozwala ją otworzyć przyciskiem „Poznaj wcześniejszy materiał”. Po odpowiedziach w tej lekcji można wrócić przez katalog do treningu. Samo wprowadzenie nie daje poznania ani nagrody. Jeśli wcześniejsza mapa jest niedostępna, ekran proponuje ponowienie wczytania i inną mapę, zamiast pustej sesji. Nie wprowadzono automatycznej blokady drugiej mapy ani zastępowania treningu niepoznanym materiałem. [Szczegóły i ochrona wyników](odpornosc-map.md).
 
 ### Zakres ćwiczeń swobodnych
 
