@@ -57,5 +57,8 @@
   ],
   "dialoguesFile": "rozmowki.json",
   "level": "A2",
-  "journeyPath": "02-food/sciezka.json"
+  "journeyPaths": [
+    "02-food/sciezka.json",
+    "02-food/sciezka-praktyka.json"
+  ]
 }

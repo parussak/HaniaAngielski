@@ -4,7 +4,7 @@ Status: oddzielenie treści od formatu i prowadzenia nauki. [Mechanika](02-mecha
 
 ## Stan obecny
 
-Format kursów i znaczeń jest wdrożony i opisany w [instrukcji materiałów](format-materialow.md). Nowy format rozdziela warianty językowe od jawnych akceptowanych odpowiedzi; walidacja nie jest recenzją tych odpowiedzi. Treści Food są w `public/content/02-food/`. Zawierają słownictwo, gramatykę, dialogi, odpowiedzi, źródła i ilustracje. Obecna walidacja sprawdza strukturę i wybrane zależności; testy chronią także konkretne wcześniejsze poprawki Food.
+Format kursów i znaczeń jest wdrożony i opisany w [instrukcji materiałów](format-materialow.md). Nowy format rozdziela warianty językowe od jawnych akceptowanych odpowiedzi; walidacja nie jest recenzją tych odpowiedzi. [Etap 4](wdrozenie-food.md) dokumentuje porównanie Food ze zdjęciami, uzupełnienie kontekstu na drugiej mapie oraz zakres nieobjęty ćwiczeniami. Treści Food są w `public/content/02-food/`. Zawierają słownictwo, gramatykę, dialogi, odpowiedzi, źródła i ilustracje. Obecna walidacja sprawdza strukturę i wybrane zależności; testy chronią także konkretne wcześniejsze poprawki Food.
 
 Nie ma automatycznej recenzji całego podręcznika, potwierdzonego poziomu każdego zadania ani formularza importu zdjęć/PDF z OCR. Pole `source` jest tekstem, a nie dowodem weryfikacji językowej.
 

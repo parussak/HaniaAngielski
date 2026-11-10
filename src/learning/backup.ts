@@ -18,7 +18,7 @@ export function validateBackup(input: unknown): Backup {
             return false;
         if (v.scope !== undefined && (!obj(v.scope) || v.scope.kind !== 'course' || !str(v.scope.courseId) || !['flashcards','quiz','grammar'].includes(v.mode as string) || v.lesson !== undefined || v.stageReview !== undefined || v.training !== undefined))
             return false;
-        if (v.lesson !== undefined && (!obj(v.lesson) || !str(v.lesson.id) || !str(v.lesson.title) || v.mode !== 'lesson'))
+        if (v.lesson !== undefined && (!obj(v.lesson) || !str(v.lesson.id) || !str(v.lesson.title) || v.mode !== 'lesson' || v.lesson.edition !== undefined && v.lesson.edition !== 2))
             return false;
         if (v.mode === 'lesson' && !v.lesson)
             return false;
@@ -67,7 +67,7 @@ export function validateBackup(input: unknown): Backup {
     }
     if (p.adventure !== undefined) {
         const a = p.adventure, slotIds = ['left', 'window', 'right', 'rug', 'shelf', 'front'];
-        if (!obj(a) || a.version !== 1 || !integer(a.earned) || !obj(a.completed) || !Object.entries(a.completed).every(([k, v]) => safeKey(k) && obj(v) && date(v.at)) || !obj(a.purchases) || !Object.entries(a.purchases).every(([k, v]) => safeKey(k) && obj(v) && integer(v.cost) && (v.slot === null || slotIds.includes(v.slot as string))) || (a.reviewDay !== undefined && !(typeof a.reviewDay === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(a.reviewDay))))
+        if (!obj(a) || a.version !== 1 || !integer(a.earned) || !obj(a.completed) || !Object.entries(a.completed).every(([k, v]) => safeKey(k) && obj(v) && date(v.at) && (v.edition === undefined || v.edition === 2)) || !obj(a.purchases) || !Object.entries(a.purchases).every(([k, v]) => safeKey(k) && obj(v) && integer(v.cost) && (v.slot === null || slotIds.includes(v.slot as string))) || (a.reviewDay !== undefined && !(typeof a.reviewDay === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(a.reviewDay))))
             return fail();
         const purchases = Object.values(a.purchases) as {
             cost: number;

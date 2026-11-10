@@ -1473,5 +1473,828 @@
       "caption": "Brat lubi pizzę i wybiera się na nią do pizzerii.",
       "scene": true
     }
+  },
+  {
+    "id": "food-can-pizza",
+    "kind": "grammar",
+    "prompt": "Uzupełnij prośbę o pizzę: ___ I have a vegetarian pizza, please?",
+    "answers": [
+      "Can"
+    ],
+    "options": [
+      "Can",
+      "Would",
+      "Some"
+    ],
+    "explanation": "Can I have…? to uprzejma prośba o podanie czegoś. Would łączymy tutaj z you like, a nie z I have.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 30; zeszyt ćwiczeń, s. 17, 20. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/scene-ordering.svg",
+      "caption": "Sytuacja związana z posiłkiem.",
+      "scene": true
+    }
+  },
+  {
+    "id": "food-like-milkshake",
+    "kind": "grammar",
+    "prompt": "Uzupełnij zamówienie: I'd ___ a milkshake, please.",
+    "answers": [
+      "like"
+    ],
+    "options": [
+      "like",
+      "have",
+      "drink"
+    ],
+    "explanation": "I'd to skrót I would. W zamówieniu używamy I'd like… — poproszę. Po would potrzebujemy tutaj like.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 30. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-milkshake.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-would-drink",
+    "kind": "grammar",
+    "prompt": "Uzupełnij pytanie kelnera: ___ you like anything to drink?",
+    "answers": [
+      "Would"
+    ],
+    "options": [
+      "Would",
+      "Can",
+      "Any"
+    ],
+    "explanation": "Would you like…? znaczy „Czy chcesz…?”. Can you like nie jest tym zwrotem grzecznościowym.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 30. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/scene-ordering.svg",
+      "caption": "Sytuacja związana z posiłkiem.",
+      "scene": true
+    }
+  },
+  {
+    "id": "food-else",
+    "kind": "grammar",
+    "prompt": "Uzupełnij pytanie kelnera „Coś jeszcze?”: Anything ___?",
+    "answers": [
+      "else"
+    ],
+    "options": [
+      "else",
+      "some",
+      "many"
+    ],
+    "explanation": "Anything else? to pełne pytanie „Coś jeszcze?”. Else oznacza tutaj jeszcze, a nie ilość jedzenia.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 30. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/scene-ordering.svg",
+      "caption": "Sytuacja związana z posiłkiem.",
+      "scene": true
+    }
+  },
+  {
+    "id": "food-thanks",
+    "kind": "grammar",
+    "prompt": "Kelner przyjął zamówienie. Uzupełnij podziękowanie: Great, ___!",
+    "answers": [
+      "thanks"
+    ],
+    "options": [
+      "thanks",
+      "please",
+      "else"
+    ],
+    "explanation": "Thanks to podziękowanie. Please dodajemy do prośby, a tutaj dziękujemy za przyjęcie zamówienia.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 30; zeszyt ćwiczeń, s. 20, ćw. 5. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/scene-ordering.svg",
+      "caption": "Sytuacja związana z posiłkiem.",
+      "scene": true
+    }
+  },
+  {
+    "id": "food-have-lemonade",
+    "kind": "grammar",
+    "prompt": "Uzupełnij jednym słowem: Can I ___ a lemonade, please?",
+    "answers": [
+      "have"
+    ],
+    "options": [
+      "have",
+      "like",
+      "many"
+    ],
+    "explanation": "Can I have…? jest gotową uprzejmą konstrukcją prośby. Po can używamy podstawowej formy have.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 30. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-water.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-because-breakfast",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (so / because): I have a quick breakfast ___ I leave the house early.",
+    "answers": [
+      "because"
+    ],
+    "options": [
+      "because",
+      "so"
+    ],
+    "explanation": "Szybkie śniadanie jest skutkiem, a po luce podano jego powód: wcześnie wychodzę. Dlatego because — ponieważ. So wprowadzałoby skutek, nie ten powód.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "so-because",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 32, blog i ćw. 6; zeszyt ćwiczeń, s. 19. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "responseType": "choice",
+    "illustration": {
+      "src": "illustrations/word-have-a-quick-breakfast.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-so-sugar",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (so / because): This drink has a lot of sugar, ___ I drink water.",
+    "answers": [
+      "so"
+    ],
+    "options": [
+      "so",
+      "because"
+    ],
+    "explanation": "Dużo cukru to przyczyna wyboru wody. Po luce jest wynik tej decyzji, więc użyj so — więc. Because przedstawiałoby powód.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "so-because",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 32, ćw. 5. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "responseType": "choice",
+    "illustration": {
+      "src": "illustrations/word-water.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-so-breakfast",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (so / because): I leave the house early, ___ I have a quick breakfast.",
+    "answers": [
+      "so"
+    ],
+    "options": [
+      "so",
+      "because"
+    ],
+    "explanation": "To odwrócona kolejność: najpierw powód — wczesne wyjście, potem skutek — szybkie śniadanie. Przed skutkiem stawiamy so.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "so-because",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 32, blog i ramka so/because. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "responseType": "choice",
+    "illustration": {
+      "src": "illustrations/word-have-a-quick-breakfast.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-diary-breakfast",
+    "kind": "grammar",
+    "prompt": "Dzienniczek: „I have cereal and milk for breakfast.” Uzupełnij: For breakfast I have cereal and ___.",
+    "answers": [
+      "milk"
+    ],
+    "options": [
+      "milk",
+      "flour",
+      "tuna"
+    ],
+    "explanation": "W zdaniu podano cereal and milk — płatki i mleko. Have … for breakfast opisuje, co jemy na śniadanie.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "meals",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 25, ćw. 6–8; s. 32. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-cereal.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-diary-lunch",
+    "kind": "grammar",
+    "prompt": "Dzienniczek: „For lunch I have a cheese sandwich.” Uzupełnij nazwę posiłku: I have a cheese sandwich for ___.",
+    "answers": [
+      "lunch"
+    ],
+    "options": [
+      "lunch",
+      "breakfast",
+      "dinner"
+    ],
+    "explanation": "Dzienniczek mówi for lunch — na lunch. Odpowiedź wynika z tekstu; sama kanapka nie wyznacza pory posiłku.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "meals",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 25, ćw. 6–8. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-sandwich.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-diary-dinner",
+    "kind": "grammar",
+    "prompt": "Dzienniczek: „For dinner I have fish and rice.” Uzupełnij: For dinner I have fish and ___.",
+    "answers": [
+      "rice"
+    ],
+    "options": [
+      "rice",
+      "jam",
+      "milk"
+    ],
+    "explanation": "W tej notatce obiad to fish and rice — ryba i ryż. Czytamy konkretną notatkę, zamiast zgadywać z obrazka.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "meals",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 25, ćw. 6–8. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-fish.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-diary-never",
+    "kind": "grammar",
+    "prompt": "Uzupełnij znaczenie „nigdy”: I ___ eat fish.",
+    "answers": [
+      "never"
+    ],
+    "options": [
+      "never",
+      "often",
+      "sometimes"
+    ],
+    "explanation": "Never znaczy nigdy i stoi przed eat. Often to często, a sometimes — czasami; zmieniłyby sens polskiej wskazówki.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "meals",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 25, I remember that!. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-fish.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-diary-sometimes",
+    "kind": "grammar",
+    "prompt": "Uzupełnij znaczenie „czasami”: I ___ eat pancakes.",
+    "answers": [
+      "sometimes"
+    ],
+    "options": [
+      "sometimes",
+      "never",
+      "often"
+    ],
+    "explanation": "Sometimes oznacza czasami. Never to nigdy, a often — często. Tutaj określamy, jak często jemy naleśniki.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "meals",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 25, I remember that!. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-pancake.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-diary-often",
+    "kind": "grammar",
+    "prompt": "Uzupełnij znaczenie „często”: I ___ eat vegetables.",
+    "answers": [
+      "often"
+    ],
+    "options": [
+      "often",
+      "never",
+      "sometimes"
+    ],
+    "explanation": "Often oznacza często i w tym zdaniu stawiamy je przed eat. Sometimes mówi o mniejszej częstotliwości.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "meals",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 25, I remember that!. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-vegetable.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-recipe-flour",
+    "kind": "grammar",
+    "prompt": "Przeczytaj notatkę: „For pancakes we need milk, water, flour and eggs.” Wpisz składnik znaczący „mąka”: ___.",
+    "answers": [
+      "flour"
+    ],
+    "options": [
+      "flour",
+      "sugar",
+      "cream"
+    ],
+    "explanation": "Flour to mąka używana do naleśników. Sugar to cukier, a cream to śmietana — to inne składniki.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 31, akapit 4 i Wordlist, s. 33. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-flour.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-recipe-eggs",
+    "kind": "grammar",
+    "prompt": "Notatka o przepisie: „We need milk, water, flour and eggs.” Wpisz po angielsku składnik „jajka”: ___.",
+    "answers": [
+      "eggs"
+    ],
+    "options": [
+      "eggs",
+      "egg",
+      "sugar"
+    ],
+    "explanation": "Eggs to liczba mnoga — jajka. Egg oznacza jedno jajko. W notatce mowa o składnikach w liczbie mnogiej.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "countable",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 31, akapit 4 i s. 27. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-egg.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-recipe-pan",
+    "kind": "grammar",
+    "prompt": "Wskazówka: naleśniki smażymy na patelni. Uzupełnij: Cook the pancakes in a ___.",
+    "answers": [
+      "pan"
+    ],
+    "options": [
+      "pan",
+      "jar",
+      "carton"
+    ],
+    "explanation": "Pan oznacza tutaj patelnię. Jar to słoik, a carton to karton — nie służą do smażenia naleśników.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 31, akapit 4; zeszyt ćwiczeń, s. 21. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-pan.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-recipe-top",
+    "kind": "grammar",
+    "prompt": "Uzupełnij zwrot „na wierzchu”: My pancake has got some fruit on ___.",
+    "answers": [
+      "top"
+    ],
+    "options": [
+      "top",
+      "air",
+      "world"
+    ],
+    "explanation": "On top to zwrot „na wierzchu”. In the air znaczy w powietrzu, a all over the world — na całym świecie.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 31, Fun Spot; Wordlist, s. 33. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-fruit.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-recipe-some",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (some / any): My pancake has got ___ chocolate on top.",
+    "answers": [
+      "some"
+    ],
+    "options": [
+      "some",
+      "any"
+    ],
+    "explanation": "Opisujemy, co jest na naleśniku, w zdaniu twierdzącym. Chocolate jest tu niepoliczalne; używamy some. Any występuje zwykle w pytaniach i przeczeniach.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "some-any",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 31, Fun Spot; s. 27. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "responseType": "choice",
+    "illustration": {
+      "src": "illustrations/word-chocolate.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-recipe-lot",
+    "kind": "grammar",
+    "prompt": "Uzupełnij zwrotem „dużo”: My pancake has got ___ strawberries on top.",
+    "answers": [
+      "a lot of"
+    ],
+    "options": [
+      "a lot of",
+      "a lot",
+      "lot of"
+    ],
+    "explanation": "Pełne wyrażenie przed rzeczownikiem to a lot of. Strawberries można policzyć, ale a lot of działa także z niepoliczalnymi składnikami.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "a-lot-of",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 31, Fun Spot; s. 29. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-strawberry.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-breakfast-on",
+    "kind": "grammar",
+    "prompt": "Uzupełnij opis dnia szkolnego: ___ a school day I have a quick breakfast.",
+    "answers": [
+      "On"
+    ],
+    "options": [
+      "On",
+      "At",
+      "In"
+    ],
+    "explanation": "W tym zwrocie używamy on a school day — w dzień szkolny. At pasuje do innego wyrażenia: at the weekend.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "meals",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 32, Writing Time. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-have-a-quick-breakfast.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-breakfast-at",
+    "kind": "grammar",
+    "prompt": "Uzupełnij w brytyjskim wariancie z podręcznika: ___ the weekend I have eggs and toast.",
+    "answers": [
+      "At"
+    ],
+    "options": [
+      "At",
+      "On",
+      "In"
+    ],
+    "explanation": "W brytyjskim wariancie z podręcznika mówimy at the weekend. On the weekend jest używane w amerykańskim angielskim; tutaj ćwiczymy wersję z książki.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "meals",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 32, Writing Time. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "responseType": "choice",
+    "illustration": {
+      "src": "illustrations/word-toast.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-breakfast-for",
+    "kind": "grammar",
+    "prompt": "Uzupełnij nazwę posiłku w zdaniu: I have milk and cereal ___ breakfast.",
+    "answers": [
+      "for"
+    ],
+    "options": [
+      "for",
+      "at",
+      "on"
+    ],
+    "explanation": "Have … for breakfast znaczy jeść coś na śniadanie. For łączy jedzenie z nazwą posiłku, a on i at służyły do określenia dnia lub weekendu.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "meals",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 25, ćw. 8; s. 32. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-cereal.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-breakfast-quick",
+    "kind": "grammar",
+    "prompt": "Uzupełnij przymiotnik „szybkie”: On a school day I have a ___ breakfast.",
+    "answers": [
+      "quick"
+    ],
+    "options": [
+      "quick",
+      "sweet",
+      "round"
+    ],
+    "explanation": "Quick opisuje rzeczownik breakfast — jakie śniadanie? Szybkie. Sweet oznacza słodkie, a round — okrągłe; nie oddają znaczenia polskiej wskazówki.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "meals",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 32, blog; Wordlist, s. 33. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-have-a-quick-breakfast.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-breakfast-reason",
+    "kind": "grammar",
+    "prompt": "Wybierz (so / because): I have cereal ___ it is quick and easy.",
+    "answers": [
+      "because"
+    ],
+    "options": [
+      "because",
+      "so"
+    ],
+    "explanation": "Po luce jest wyjaśnienie wyboru płatków: są szybkie i łatwe do przygotowania. Because wprowadza powód. So wprowadzałoby skutek.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "so-because",
+    "source": "Adaptacja do samodzielnej nauki: zeszyt ćwiczeń, s. 19, ćw. 4; podręcznik, s. 32. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "responseType": "choice",
+    "illustration": {
+      "src": "illustrations/word-cereal.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-breakfast-result",
+    "kind": "grammar",
+    "prompt": "Wybierz (so / because): I love eggs, ___ I have eggs for breakfast.",
+    "answers": [
+      "so"
+    ],
+    "options": [
+      "so",
+      "because"
+    ],
+    "explanation": "Najpierw jest powód — lubię jajka. Potem skutek — jem je na śniadanie. Łączymy je przez so.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "so-because",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 32, ćw. 5 i Writing Time. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "responseType": "choice",
+    "illustration": {
+      "src": "illustrations/word-egg.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-practice-water",
+    "kind": "grammar",
+    "prompt": "W koszyku jest woda. Uzupełnij (some / any): There is ___ water in the basket.",
+    "answers": [
+      "some"
+    ],
+    "options": [
+      "some",
+      "any"
+    ],
+    "explanation": "To twierdzący opis zapasów. Water jest niepoliczalne, więc używamy there is some water. Any byłoby typowe dla pytania lub przeczenia.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "some-any",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 27–29. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "responseType": "choice",
+    "illustration": {
+      "src": "illustrations/word-water.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-practice-bottles",
+    "kind": "grammar",
+    "prompt": "W koszyku są dwie butelki wody. Uzupełnij: There ___ two bottles of water.",
+    "answers": [
+      "are"
+    ],
+    "options": [
+      "are",
+      "is",
+      "am"
+    ],
+    "explanation": "Two bottles to liczba mnoga, dlatego there are. Liczymy butelki, chociaż sama woda jest niepoliczalna.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "there",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 29. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/word-a-bottle-of-water.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-practice-many",
+    "kind": "grammar",
+    "prompt": "Wybierz (How much / How many): ___ bottles of water are there?",
+    "answers": [
+      "How many"
+    ],
+    "options": [
+      "How many",
+      "How much"
+    ],
+    "explanation": "Pytamy o liczbę butelek, a nie o ilość samej wody. Bottles są policzalne, dlatego how many.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "much-many",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 29, ćw. 7–8. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "responseType": "choice",
+    "illustration": {
+      "src": "illustrations/word-a-bottle-of-water.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-practice-customer",
+    "kind": "grammar",
+    "prompt": "Kelner pyta, co zamówisz. Uzupełnij: I'd ___ a salad, please.",
+    "answers": [
+      "like"
+    ],
+    "options": [
+      "like",
+      "have",
+      "many"
+    ],
+    "explanation": "W konstrukcji I'd like… słowo like dopełnia would. Cały zwrot znaczy „poproszę” i pasuje do zamówienia sałatki.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "ordering",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 30. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "illustration": {
+      "src": "illustrations/scene-ordering.svg",
+      "caption": "Sytuacja związana z posiłkiem.",
+      "scene": true
+    }
+  },
+  {
+    "id": "food-practice-drink",
+    "kind": "grammar",
+    "prompt": "Uzupełnij (some / any) uprzejmą prośbę: Can I have ___ water, please?",
+    "answers": [
+      "some"
+    ],
+    "options": [
+      "some",
+      "any"
+    ],
+    "explanation": "W prośbach o podanie czegoś zwykle używamy some, mimo że zdanie jest pytaniem. To nie neutralne pytanie o istnienie zapasów.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "some-any",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 30; s. 27. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "responseType": "choice",
+    "illustration": {
+      "src": "illustrations/word-water.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
+  },
+  {
+    "id": "food-practice-because",
+    "kind": "grammar",
+    "prompt": "Wybierz (so / because): I drink water ___ this drink has a lot of sugar.",
+    "answers": [
+      "because"
+    ],
+    "options": [
+      "because",
+      "so"
+    ],
+    "explanation": "Wyjaśnienie po luce podaje przyczynę wyboru wody — cukier w drugim napoju. Because znaczy ponieważ; so wprowadzałoby skutek.",
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "ruleId": "so-because",
+    "source": "Adaptacja do samodzielnej nauki: podręcznik, s. 32, ćw. 5. Nowy wariant w zakresie modułu Food; nie cytat ani transkrypcja nagrania.",
+    "responseType": "choice",
+    "illustration": {
+      "src": "illustrations/word-water.svg",
+      "caption": "Słownictwo użyte w zdaniu.",
+      "scene": false
+    }
   }
 ]

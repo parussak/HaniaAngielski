@@ -6,21 +6,21 @@ Status: uzgodnione zasady docelowe z wyraźnymi miejscami wymagającymi decyzji.
 
 | Obszar | Obecna aplikacja | Założenie docelowe |
 | --- | --- | --- |
-| Organizacja modułu | Food nadal ma jedną mapę z 7 etapami; kod przyjmuje listę do 3 map | 1–3 mapy w module, każda z kilkoma lekcjami |
+| Organizacja modułu | Food ma dwie mapy: zachowaną z 7 etapami i nową z 5 lekcjami; kod przyjmuje do 3 map | 1–3 mapy w module, każda z kilkoma lekcjami |
 | Kolejka błędów | Osobna kolejka etapu obecnej mapy | Lekcja powtórki błędów z lekcji i treningów danej mapy |
-| Trening | Dodatkowy trening poznanego materiału i obsługa roli treningu na nowych mapach; Food pozostaje bez treningów mapowych | Lekcja utrwalająca wcześniejszy materiał, także rozwiązywany bezbłędnie |
+| Trening | Dodatkowy trening poznanego materiału i obsługa roli treningu na nowych mapach; pierwsza mapa Food pozostaje bez zmian, druga zawiera trening wcześniejszej mapy | Lekcja utrwalająca wcześniejszy materiał, także rozwiązywany bezbłędnie |
 | Ćwiczenia swobodne | Moduł, opcja wcześniejszych modułów i globalne fiszki/quiz/gramatyka z poznanego zakresu wybranego kursu | Zakres modułowy lub poznany zakres całego wybranego kursu |
 | Utrwalenie błędów | 3 zaliczenia w ukończonych turach, odstępy w turach | Zachować rozróżnienie powtórki błędów i treningu; szczegółowy algorytm wymaga decyzji |
 
 Nie przemianowujemy automatycznie obecnych etapów na nowe mapy. Uzgodniono zachowanie obecnej mapy Food i wyników Hani (D-22); szczegóły poprawek oraz ochrony danych są w [U-03](decyzje.md#u-03).
 
-### Plan dla obecnego Food — bez wdrożenia
+### Food — wdrożenie etapu 4
 
-Zachowujemy istniejącą mapę, zamiast proponowanego wcześniej podziału na trzy. Według relacji użytkowniczki pierwsze cztery części są ukończone i pozostają bez zmian. Poprawki planujemy wyłącznie dla trzech kolejnych sekcji: **„W restauracji”, „Powód i skutek”, „Koci piknik”**. Potoczne „lekcje 5–7” oznacza tu obecne sekcje/etapy, nie trzy pojedyncze techniczne lekcje.
+Zachowujemy istniejącą mapę, zamiast proponowanego wcześniej podziału na trzy. Według relacji użytkowniczki pierwsze cztery części są ukończone i pozostają bez zmian. Poprawione wersje nieukończonych lekcji dotyczą wyłącznie trzech kolejnych sekcji: **„W restauracji”, „Powód i skutek”, „Koci piknik”**. Potoczne „lekcje 5–7” oznacza tu obecne sekcje/etapy, nie trzy pojedyncze techniczne lekcje.
 
-Przed zaprojektowaniem dodatkowej mapy sprawdzimy, jakie najważniejsze materiały podręcznika rzeczywiście nie są pokryte. Dodatkowa mapa ma uzupełniać ustalone braki, a nie powstawać wyłącznie dla osiągnięcia określonej liczby map. Dokładna zawartość i sposób poprawy pozostałych lekcji nie zostały jeszcze zatwierdzone.
+Porównanie wykazało brak ćwiczenia posiłków, przepisu i opisu śniadania w kontekście. Druga mapa „Kocia kuchnia — Food w praktyce” uzupełnia ten zakres, zawiera cztery lekcje po 6 zadań i trening do 8 poznanych pozycji po trzech lekcjach. [Źródła, zakres i ograniczenia](wdrozenie-food.md).
 
-Uzgodniona ochrona wyników D-24: **każda już zaliczona lekcja pozostaje ukończona, również wewnątrz sekcji 5–7, a zdobyte gwiazdki zostają na koncie**. Poprawiamy wyłącznie nieukończone lekcje. Brakujący materiał trafia na kolejną mapę, zamiast wymuszać ponowne ukończenie zaliczonych lekcji. To zasada planowanych poprawek Food; techniczne wykonanie i ochrona aktywnych sesji oraz kolejek błędów wymagają przygotowania przed zmianą aplikacji.
+Uzgodniona ochrona wyników D-24: **każda już zaliczona lekcja pozostaje ukończona, również wewnątrz sekcji 5–7, a zdobyte gwiazdki zostają na koncie**. Poprawiamy wyłącznie nieukończone lekcje. Brakujący materiał trafia na kolejną mapę, zamiast wymuszać ponowne ukończenie zaliczonych lekcji. Ochronę wdrożono przez opcjonalną aktualizację definicji lekcji, zapis jej wydania i zachowanie wszystkich starych pytań. Rozpoczęte sesje zachowują zapisany zestaw zadań; stare ukończenia nie są ponownie otwierane.
 
 ## Uzgodnione założenia docelowe
 

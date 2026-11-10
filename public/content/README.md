@@ -15,10 +15,15 @@ public/content/
     gramatyka.json             zasady i przykłady w rozwijanej ściądze
     cwiczenia.json             zadania, odpowiedzi i wyjaśnienia
     rozmowki.json              krótkie dialogi z jedną luką
-    sciezka.json               siedem etapów Food i kolejność 41 lekcji
+    sciezka.json               siedem etapów Food, 41 lekcji i chronione aktualizacje
+    sciezka-praktyka.json      druga mapa Food: posiłki, przepis i śniadanie
 ```
 
 `src` zawiera wygląd i działanie strony. `tests` sprawdza poprawność. Zdjęcia źródłowe są w lokalnym, pomijanym przez Git folderze `.local-materials`; nie są publikowane na stronie.
+
+## Bezpieczne poprawianie wydanych lekcji
+
+Nie podmieniaj ani nie usuwaj używanych już pytań i identyfikatorów. W etapach 5–7 Food oryginalna definicja lekcji zostaje, a pole `update` zawiera wydanie 2. Silnik stosuje je wyłącznie do nieukończonej nauki oraz wcześniej zapisanych ukończeń wydania 2. Oryginalne ukończenia i aktywne sesje zachowują swoją wersję. Nowe pytania mają nowe identyfikatory; poziom i wersja całego Food nie są podbijane. Nie zmieniaj później opublikowanego `update` wydania 2 w miejscu — kolejne istotne zmiany potrzebują jawnej obsługi dalszych wydań albo nowych lekcji. Szczegóły: [format map](../../docs/format-materialow.md#aktualizacja-wydanej-lekcji) i [audyt Food](../../docs/wdrozenie-food.md).
 
 ## Kocia mapa Food
 

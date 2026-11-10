@@ -41,6 +41,10 @@ Nie przenosimy istniejącego modułu do innego podręcznika: nowy podręcznik i 
 
 Kopia pozostaje w wersji 1 i odczytuje wcześniejsze pliki. Obsługa nowych pól wymaga aktualnej aplikacji. Nie zmieniono reguł Firebase ani nie przeliczono starych ocen. [Raport etapu 3](wdrozenie-zakresow.md).
 
+## Wersje lekcji Food — etap 4
+
+Dotychczasowe wpisy ukończenia `{ at }` oraz sesje bez znacznika pozostają oryginalną wersją lekcji. Nowa nieukończona lekcja korzysta z opcjonalnego `update` w treściach. Sesja zapisuje `lesson.edition: 2`, a pierwsze ukończenie zachowuje ten znacznik w `adventure.completed[lessonKey]`. Odczyt nie dopisuje migracji ani nagród. Aktywna sesja nadal przechowuje konkretną listę pytań i miejsce odpowiedzi, a stare pytania pozostają dostępne dla jej wznowienia i powtórek. Format kopii pozostaje w wersji 1; aktualna walidacja obsługuje oba warianty. Limity historii i synchronizacji bez zmian. [Pełna ochrona wyników](wdrozenie-food.md#ochrona-wyników-i-nagród).
+
 ## Założenia docelowe przy rozwoju
 
 - Jeden kurs może być wspólny dla wielu kont, ale każde konto ma własne postępy; sesje i wyniki jednego konta nie zmieniają wyników innego — D-14 w [rejestrze](decyzje.md). W etapie 2 definicja kursu wskazuje globalnie unikalne moduły, a zapis nadal używa ich stabilnych identyfikatorów; nie kopiuje materiałów do danych konta.
@@ -58,7 +62,7 @@ Nie przesądzamy, że wszystkie obecne pola zostaną zachowane bez rozszerzeń a
 ## Do ustalenia
 
 - Podstawowe rozdzielenie wyników kursów jest wdrożone przez przypisanie stabilnych modułów. Dalsze rozszerzenia, np. inne rodzaje współdzielonych jednostek materiału, należą do [U-01](decyzje.md#u-01). Osobne postępy kont (D-14) oraz osobne postępy w różnych kursach jednego konta (D-15) są już zatwierdzone.
-- Techniczna ochrona wyników, aktywnych sesji i kolejek błędów przy poprawkach Food — [U-03](decyzje.md#u-03). Zachowanie mapy zatwierdzono w D-22, a wszystkich ukończonych lekcji i zdobytych gwiazdek w D-24; nie jest to już otwarta decyzja o resetowaniu ukończeń.
+- Ochronę wyników, aktywnych sesji i kolejek błędów Food wdrożono w etapie 4 — [U-03](decyzje.md#u-03). Kolejne istotne zmiany treści wymagają zachowania również obecnie wdrożonego wydania 2.
 - Poznanie i odczyt wcześniejszych prób są wdrożone zgodnie z D-25/D-26 — [U-04](decyzje.md#u-04). Dane przyszłego algorytmu treningu pozostają w [U-05](decyzje.md#u-05).
 - Czy potrzebne są oddzielne aktywne sesje, preferencje odpowiedzi albo synchronizacja wyboru kursu — [U-08](decyzje.md#u-08). Obecnie jest jedna sesja, wspólny wybór sposobu odpowiadania i lokalna preferencja kursu.
 - Co w przyszłości pozostaje wspólne: gwiazdki, domek i nagrody — [U-07](decyzje.md#u-07).

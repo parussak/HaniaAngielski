@@ -20,7 +20,7 @@ test('Food: ilustracje słówek, quizu i gramatyki są częścią treści',()=>{
 
 test('warianty w nawiasach zawsze do kliknięcia, również w starej sesji tekstowej',()=>{
   const m=modules[0];const closed=m.exercises.filter(q=>q.responseType==='choice');
-  assert.equal(closed.length,26);
+  assert.equal(closed.length,37);
   for(const q of closed)assert.equal(inputFor(q,'text'),'choice');
   const example=m.exercises.find(q=>q.id==='g-because-sport')!;
   assert.ok(requiresChoice({...example,responseType:undefined}));

@@ -2,7 +2,7 @@
 
 Aktualizacja układu: **10 listopada 2026 r.** Rozdzielamy stan obecny, uzgodnione założenia docelowe i sprawy do ustalenia. Sam zapis założeń nie wdraża ich w aplikacji.
 
-**Wdrożono etapy 1–3.** Pozostałe pytania są zaparkowane. [Raport nauki](wdrozenie-nauki.md) opisuje etap 1, [raport kursów](wdrozenie-kursow.md) etap 2, a [wybór kursu i globalne ćwiczenia](wdrozenie-zakresow.md) etap 3. Autorów materiałów obowiązuje [format kursów i znaczeń](format-materialow.md). Historyczny katalog `stan-obecny/` nadal przedstawia punkt odniesienia sprzed tych zmian.
+**Wdrożono etapy 1–4.** Pozostałe pytania są zaparkowane. [Raport nauki](wdrozenie-nauki.md) opisuje etap 1, [raport kursów](wdrozenie-kursow.md) etap 2, a [wybór kursu i globalne ćwiczenia](wdrozenie-zakresow.md) etap 3. [Audyt i uzupełnienie Food](wdrozenie-food.md) opisuje etap 4. Autorów materiałów obowiązuje [format kursów i znaczeń](format-materialow.md). Historyczny katalog `stan-obecny/` nadal przedstawia punkt odniesienia sprzed tych zmian.
 
 ## Główny podział
 
@@ -31,7 +31,7 @@ Kod i testy pokazują, co działa dziś; nie unieważniają uzgodnionego kierunk
 
 ## Ważna różnica
 
-Docelowo moduł ma **1–3 mapy**, każda po kilka lekcji. Obecny Food nadal ma **jedną mapę z siedmioma etapami**; jej treści, identyfikatory i ukończenia pozostają zachowane. Wdrożono oddzielenie procentu ukończenia lekcji od liczby zaległych ćwiczeń oraz dodatkowy trening poznanego materiału za 1 ★. Kod obsługuje też listę do trzech map i rolę treningu na mapie, sprawdzoną na materiałach testowych; nie dodano takiego treningu do pierwszej mapy Food. Model kursów i znaczeń oraz zgodny odczyt starego Food są wdrożone w etapie 2. Wybór kursu i globalne fiszki/quiz/gramatyka z poznanego materiału są wdrożone w etapie 3. Audyt i korekta treści Food oraz nowe podręczniki pozostają dalszym zakresem — [szczegóły](wdrozenie-zakresow.md).
+Docelowo moduł ma **1–3 mapy**, każda po kilka lekcji. Food ma **dwie mapy**: zachowaną mapę z siedmioma etapami i 41 lekcjami oraz „Kocią kuchnię” z pięcioma lekcjami. Poprawione wersje lekcji etapów 5–7 trafiają tylko do nieukończonej nauki; istniejące ukończenia, rozpoczęte sesje i gwiazdki pozostają zachowane. Wdrożono oddzielenie procentu ukończenia lekcji od liczby zaległych ćwiczeń oraz dodatkowy trening poznanego materiału za 1 ★. Druga mapa Food ma trening wcześniejszej mapy; pierwsza pozostaje bez takich lekcji. Model kursów i znaczeń oraz zgodny odczyt starego Food są wdrożone w etapie 2. Wybór kursu i globalne fiszki/quiz/gramatyka z poznanego materiału są wdrożone w etapie 3. Audyt i uzupełnienie Food wdrożono w etapie 4 — [zakres, źródła i ograniczenia](wdrozenie-food.md). Nowe podręczniki pozostają dalszym zakresem.
 
 ## Jak czytać bez przeglądania wszystkiego
 
@@ -50,4 +50,4 @@ Nie powielamy list słówek w Markdown ani wspólnych zasad w każdej karcie kur
 - [Firebase](firebase.md), [historia](historia.md), [PWA](pwa.md), [obecna mapa i domek](kocia-przygoda.md), [edycja obecnych materiałów](../public/content/README.md) — instrukcje istniejącej aplikacji, do czytania w odpowiednim kontekście.
 - Dawne wymagania, plany, raporty i podglądy dokumentują historię rozwoju. Nie są specyfikacją wszystkich obecnych lub przyszłych funkcji.
 
-To porządkowanie nie zmienia kodu, treści ćwiczeń, testów, workflow, działania aplikacji ani postępów. Nie dodano Spec Kit, skilla ani instrukcji automatycznie sterujących agentem. Weryfikacja dotyczy dokumentacji i odnośników; wcześniejsze wyniki testów nie są przedstawiane jako nowe uruchomienia.
+Pierwotne uporządkowanie dokumentacji nie zmieniało aplikacji. Późniejsze wdrożenia i wyniki kontroli opisują raporty etapów 1–4. Historycznego katalogu `stan-obecny/` nie aktualizujemy wstecz. Nie dodano Spec Kit ani skilla.

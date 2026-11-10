@@ -41,6 +41,7 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   const revealed = await page.locator('.question').innerText();
   await page.getByRole('textbox').fill(data.words.find(w=>w.front===revealed)!.back);
   await page.getByRole('button',{name:/Sprawdź/}).click();
+  await expect(page.locator('.feedback.correct')).toBeVisible();
   await page.reload(); await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();
   await expect(page.locator('.question')).toHaveText(revealed);
   await page.getByRole('button',{name:'Kopia postępów',exact:true}).click();

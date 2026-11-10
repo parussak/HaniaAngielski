@@ -93,6 +93,7 @@ export interface Session {
         round: number;
     };
     lesson?: {
+        edition?: 2;
         id: string;
         title: string;
     };

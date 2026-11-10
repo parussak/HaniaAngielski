@@ -21,8 +21,8 @@ for(const width of [320,390])test(`strona startowa ${width}px: dwa wejścia, kot
   await page.screenshot({path:`test-results/home-clean-${width}.png`,fullPage:true});
   await page.getByRole('button',{name:/Wybierz przygodę/}).tap();
   await expect(page.getByRole('heading',{name:'Twoje kocie przygody'})).toBeVisible();
-  await expect(page.locator('.catalog-subtitle')).toHaveText('A2 · Moduł 2 · Food');
-  await expect(page.locator('.adventure-invite h2')).toHaveText('Przygotowania do kociego pikniku');await check();
+  await expect(page.locator('.catalog-subtitle')).toHaveText(['A2 · Moduł 2 · Food','A2 · Moduł 2 · Food']);
+  await expect(page.locator('.adventure-invite h2')).toHaveText(['Przygotowania do kociego pikniku','Kocia kuchnia — Food w praktyce']);await check();
   await page.getByRole('button',{name:'Otwórz mapę Przygotowania do kociego pikniku',exact:true}).tap();
   await expect(page.locator('.journey-stage')).toHaveCount(7);await check();
   await page.getByRole('button',{name:'← Twoje przygody',exact:true}).tap();

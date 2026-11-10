@@ -49,6 +49,8 @@ Użytkowniczka następnie zatwierdziła etap 2: uporządkowanie kursów i materi
 
 Użytkowniczka zatwierdziła także etap 3: wybór kursu i globalne fiszki, quiz oraz gramatykę z poznanego materiału. Implementację opisuje [raport zakresów](wdrozenie-zakresow.md). Nie rozszerza to zgody na pozostałe zaparkowane pytania.
 
+Użytkowniczka zatwierdziła etap 4: porównanie Food z podręcznikiem, poprawki wyłącznie nieukończonych lekcji i nową mapę dla braków. [Raport Food](wdrozenie-food.md) opisuje wykonanie i ochronę wyników. Pozostałe pytania nadal są zaparkowane.
+
 ## Obszary decyzji i ich status
 
 Poniższe punkty nie są zgodą na zmianę aplikacji. Każdy wymaga doprecyzowania przed implementacją odpowiadającej mu funkcji.
@@ -61,11 +63,11 @@ Poniższe punkty nie są zgodą na zmianę aplikacji. Każdy wymaga doprecyzowan
 
 ## U-02
 
-**Wielkość lekcji. Status: założenia rozstrzygnięte.** Zwykłe lekcje mają 6–10 zadań początkowych, najczęściej 8 (D-18). Powtórki błędów mają 1–10 zadań, bez dopełniania kolejki innymi pytaniami (D-19). Treningi mają 6–10 zadań początkowych, najczęściej 8, ale mogą być krótsze przy mniejszej puli wcześniejszego materiału (D-20). Poprawki i powroty błędów nie wliczają się do początkowej wielkości. Jedna samodzielnie oceniana odpowiedź to jedno zadanie, bez wag; w standardowym zakresie przy dłuższych zadaniach bliżej 6, przy krótkich 8–10 (D-21). Pierwsze wdrożenie D-34 obsługuje wielkość treningu i kontroluje 6–10 zadań zwykłej lekcji nowych nazwanych map; obecne krótsze lekcje Food pozostają bez przebudowy.
+**Wielkość lekcji. Status: założenia rozstrzygnięte.** Zwykłe lekcje mają 6–10 zadań początkowych, najczęściej 8 (D-18). Powtórki błędów mają 1–10 zadań, bez dopełniania kolejki innymi pytaniami (D-19). Treningi mają 6–10 zadań początkowych, najczęściej 8, ale mogą być krótsze przy mniejszej puli wcześniejszego materiału (D-20). Poprawki i powroty błędów nie wliczają się do początkowej wielkości. Jedna samodzielnie oceniana odpowiedź to jedno zadanie, bez wag; w standardowym zakresie przy dłuższych zadaniach bliżej 6, przy krótkich 8–10 (D-21). Pierwsze wdrożenie D-34 obsługuje wielkość treningu i kontroluje 6–10 zadań zwykłej lekcji nowych nazwanych map; pierwsze cztery etapy Food i dawne ukończenia pozostają bez przebudowy. W etapie 4 nowe wersje nieukończonych lekcji etapów 5–7 mają po 6–8 zadań.
 
 ## U-03
 
-**Dalszy rozwój obecnego Food. Status: kierunek, zachowanie ukończeń i gwiazdek uzgodnione; szczegółowy plan materiałów i wykonania pozostaje do przygotowania.** Zgodnie z D-22 nie dzielimy obecnej mapy na trzy. Według informacji użytkowniczki Hania ukończyła pierwsze cztery części; pozostawiamy je bez zmian. Poprawki planujemy w sekcjach „W restauracji”, „Powód i skutek” i „Koci piknik”. W tym ustaleniu określenie „lekcje 5–7” oznacza sekcje/etapy mapy, nie pojedyncze obiekty `Lesson` w kodzie. Zgodnie z D-24 także zaliczone pojedyncze lekcje w sekcjach 5–7 pozostają ukończone, zdobyte gwiazdki zostają na koncie, a poprawki obejmują tylko nieukończone lekcje. Dodatkowa mapa ma uzupełnić materiał rzeczywiście brakujący po porównaniu pokrycia z podręcznikiem; nie stwierdzono jeszcze, czego brakuje. Przed wdrożeniem trzeba rozpisać konkretne poprawki, zawartość nowej mapy i techniczną ochronę zapisów, w tym aktywnych sesji i kolejek błędów. Ogólna zasada 1–3 map w module nadal obowiązuje; nie zatwierdzono resetu danych ani zmian aplikacji w trakcie rozmowy.
+**Dalszy rozwój obecnego Food. Status: wdrożone w etapie 4.** Zgodnie z D-22 i D-24 zachowano pierwszą mapę, wszystkie identyfikatory oraz oryginalne treści. Etapy 1–4 nie mają aktualizacji; w etapach 5–7 poprawioną wersję otrzymują wyłącznie nieukończone lekcje. Dawne aktywne sesje zachowują swoje pytania, ukończone lekcje i zdobyte gwiazdki pozostają. Audyt wskazał brak praktyki krótkich notatek o posiłkach, przepisu i opisu śniadania. Uzupełnia je druga mapa „Kocia kuchnia — Food w praktyce”, z treningiem wcześniejszej mapy po trzech lekcjach. [Źródła, zasady wersji, ochrona wyników i granice](wdrozenie-food.md). Nie dodano nagrań ani oceny swobodnego pisania; nie są to umiejętności potwierdzone samym przejściem map. Nie rozstrzygnięto pozostałych zaparkowanych pytań.
 
 ## U-04
 

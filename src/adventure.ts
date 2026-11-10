@@ -1,11 +1,11 @@
 import { inputFor,keyFor,questionFor,type AnswerMode,type Item,type Module,type Progress,type Session } from './core.ts';
 import type { StageReview } from './stage-review.ts';
 import { compareModules } from './learning/scope.ts';
-export interface Lesson {id:string;title:string;intro:string;wordIds:string[];exerciseIds:string[];ruleIds:string[];role?:'training';targetCount?:number}
+export interface Lesson {id:string;title:string;intro:string;wordIds:string[];exerciseIds:string[];ruleIds:string[];role?:'training';targetCount?:number;edition?:2;update?:{edition:2;title:string;intro:string;wordIds:string[];exerciseIds:string[];ruleIds:string[]}}
 export interface Stage {id:string;title:string;cat:string;illustration:string;lessons:Lesson[]}
 export interface Journey {version:1;moduleId:string;id?:string;title:string;stages:Stage[]}
 export interface Adventure {
-  version:1;earned:number;completed:Record<string,{at:string}>;
+  version:1;earned:number;completed:Record<string,{at:string;edition?:2}>;
   purchases:Record<string,{cost:number;slot:string|null}>;reviewDay?:string;
   reviewSchema?:1;reviewArchiveHead?:string|null;stageReviews?:Record<string,StageReview>;
 }
@@ -24,7 +24,16 @@ export const journeyKey=(journey:Journey)=>journey.id?`${journey.moduleId}/${jou
 export const lessonKey=(journey:Journey,lesson:Lesson)=>`${journeyKey(journey)}/${lesson.id}`;
 export function orderedJourneys(modules:Module[],journeys:Journey[]){return journeys.filter(j=>modules.some(m=>m.id===j.moduleId)).slice().sort((a,b)=>compareModules(modules.find(m=>m.id===a.moduleId)!,modules.find(m=>m.id===b.moduleId)!));}
 export function lessons(journey:Journey){return journey.stages.flatMap(stage=>stage.lessons.map(lesson=>({stage,lesson,key:lessonKey(journey,lesson)})));}
-export function nextLesson(journey:Journey,p:Progress){return lessons(journey).find(({key})=>!p.adventure?.completed[key]);}
+// No progress migration: absent edition means the original, already saved lesson.
+export function lessonForProgress(j:Journey,l:Lesson,p:Progress):Lesson {
+  if(!l.update)return l;
+  const key=lessonKey(j,l),completed=p.adventure?.completed[key];
+  const active=p.active?.lesson?.id===key?p.active.lesson:undefined;
+  const edition=completed?completed.edition:active?active.edition:2;
+  return edition===2?{...l,...l.update}:l;
+}
+export function journeyForProgress(j:Journey,p:Progress):Journey{return {...j,stages:j.stages.map(s=>({...s,lessons:s.lessons.map(l=>lessonForProgress(j,l,p))}))};}
+export function nextLesson(journey:Journey,p:Progress){return lessons(journeyForProgress(journey,p)).find(({key})=>!p.adventure?.completed[key]);}
 export function unlocked(journey:Journey,lesson:Lesson,p:Progress){const all=lessons(journey),index=all.findIndex(l=>l.lesson.id===lesson.id);return index>=0&&all.slice(0,index).every(l=>p.adventure?.completed[l.key]);}
 export function validateJourney(value:unknown,m:Module):Journey {
   const j=value as Journey,fail=():never=>{throw new Error('Niepoprawna mapa modułu.');};
@@ -40,6 +49,11 @@ export function validateJourney(value:unknown,m:Module):Journey {
       if(j.id&&l.role!=='training'&&l.wordIds.length+l.exerciseIds.length<6)return fail();
       ids.add(l.id);
       if(new Set([...l.wordIds,...l.exerciseIds]).size!==l.wordIds.length+l.exerciseIds.length || !l.wordIds.every(id=>m.words.some(w=>w.id===id))||!l.exerciseIds.every(id=>m.exercises.some(q=>q.id===id&&q.requires.every(id=>id===m.id)))||!l.ruleIds.every(id=>m.grammar.some(r=>r.id===id)))return fail();
+      if(l.edition!==undefined&&l.edition!==2)return fail();
+      if(l.update!==undefined){
+        if(!l.update||l.update.edition!==2||l.role||'update' in l.update||'id' in l.update||'role' in l.update)return fail();
+        validateJourney({...j,id:j.id??'updated',stages:[{...stage,lessons:[{...l.update,id:l.id}]}]},m);
+      }
     }
   }
   return structuredClone(j);
@@ -54,18 +68,19 @@ export async function loadJourneys(modules:Module[]):Promise<Journey[]>{
   return journeys;
 }
 export function makeLessonSession(modules:Module[],journey:Journey,lesson:Lesson,answerMode:AnswerMode,p:Progress):Session {
+  lesson=lessonForProgress(journey,lesson,p);
   if(lesson.role==='training')throw new Error('Trening wymaga doboru wcześniej poznanego materiału.');
   if(!unlocked(journey,lesson,p))throw new Error('Najpierw ukończ wcześniejszą lekcję.');
   const m=modules.find(m=>m.id===journey.moduleId)!;
   const items:Item[]=[...lesson.wordIds.map(id=>({key:keyFor(m,'word',id),moduleId:m.id,version:m.words.find(w=>w.id===id)?.rev??1,type:'word' as const,id,input:'text' as const})),...lesson.exerciseIds.map(id=>({key:keyFor(m,'exercise',id),moduleId:m.id,version:m.exercises.find(q=>q.id===id)?.rev??1,type:'exercise' as const,id,input:'text' as const}))];
   items.forEach((item,i)=>item.input=inputFor(questionFor(modules,item),answerMode==='mixed'?(i%2?'text':'choice'):answerMode));
-  return {id:crypto.randomUUID(),moduleId:m.id,mode:'lesson',lesson:{id:lessonKey(journey,lesson),title:lesson.title},answerMode,previous:false,startedAt:new Date().toISOString(),completedAt:null,items,index:0,phase:'question',lastCorrect:null,attempts:[],repeatKeys:[]};
+  return {id:crypto.randomUUID(),moduleId:m.id,mode:'lesson',lesson:{id:lessonKey(journey,lesson),title:lesson.title,...(lesson.edition?{edition:lesson.edition}:{})},answerMode,previous:false,startedAt:new Date().toISOString(),completedAt:null,items,index:0,phase:'question',lastCorrect:null,attempts:[],repeatKeys:[]};
 }
 export function rewardCompletion(p:Progress,s:Session){
   if(!s.completedAt || !s.items.every(i=>s.attempts.some(a=>a.key===i.key)))return 0;
   const a=p.adventure??freshAdventure();
   let reward=0;
-  if(s.lesson && !Object.hasOwn(a.completed,s.lesson.id)){a.completed[s.lesson.id]={at:s.completedAt};reward=3;}
+  if(s.lesson && !Object.hasOwn(a.completed,s.lesson.id)){a.completed[s.lesson.id]={at:s.completedAt,...(s.lesson.edition?{edition:s.lesson.edition}:{})};reward=3;}
   if(s.training?.kind==='extra'){
     const saved=p.sessions.find(session=>session.id===s.id);
     if(saved?.training?.kind==='extra'&&!saved.training.rewarded){saved.training.rewarded=true;s.training.rewarded=true;reward=1;}

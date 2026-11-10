@@ -6,7 +6,7 @@ import { assembleModule, validateModules } from '../src/content-validation.ts';
 test('materiały Food mają źródła, komplet słów i wszystkie zagadnienia gramatyczne',()=>{
   assert.equal(modules.length,1); const m=modules[0];
   assert.equal(m.id,'unit-2-food'); assert.equal(m.order,2);
-  assert.equal(m.words.length,97); assert.equal(m.exercises.filter(q=>q.kind!=='dialogue').length,156);
+  assert.equal(m.words.length,97); assert.equal(m.exercises.filter(q=>q.kind!=='dialogue').length,189);
   assert.equal(m.exercises.filter(q=>q.kind==='dialogue').length,12);
   assert.ok(m.words.every(w=>w.source)); assert.ok(m.exercises.every(q=>q.source));
   for(const rule of m.grammar) assert.ok(m.exercises.some(q=>q.ruleId===rule.id));

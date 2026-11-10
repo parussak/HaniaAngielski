@@ -2,7 +2,9 @@
 
 Źródło: archiwum `Photos-1-001.zip` udostępnione przez użytkownika, 27 zdjęć. Nie ustalono tytułu ani wydania podręcznika — nie dopisano ich na podstawie domysłów.
 
-## Co przeniesiono do aplikacji
+Aktualny zakres po etapie 4: 97 haseł, 97 pytań słownikowych, 92 ćwiczenia, 12 dialogów, 10 objaśnień i dwie mapy. [Audyt, uzupełnienia i ochrona wyników](wdrozenie-food.md). Poniższa lista opisuje pierwotną ekstrakcję; nowe zadania są dopisane, nie podmieniają tych materiałów.
+
+## Co pierwotnie przeniesiono do aplikacji
 
 - **97 fiszek:** lista Wordlist ze s. 33 (lekcje 2.1–2.6) oraz cztery dodatkowe hasła z Word blog: Food w zeszycie ćwiczeń, s. 21: toast, toaster, frying pan i Enjoy your meal!
 - **97 pytań słownikowych:** po jednym na hasło, z odpowiedziami opartymi na tej samej liście. Pytania wskazują identyfikatory słów, więc tłumaczenia nie są utrzymywane w dwóch miejscach.

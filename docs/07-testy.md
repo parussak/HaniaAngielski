@@ -26,6 +26,12 @@ Budowanie korzysta bezpośrednio ze wspólnego `readLibrary`, a nie z importu da
 
 Sprawdzamy też zachowanie zaliczonych modułowych fiszek Food, brak nowych gwiazdek za globalne tryby, odmowę zastąpienia aktywnej sesji oraz utrzymanie poznania po zastąpieniu starszej niedokończonej sesji. Globalna historia nie jest zaliczana do wyników jednego przypadkowego modułu. [Raport etapu 3](wdrozenie-zakresow.md).
 
+## Weryfikacja etapu 4
+
+**137/137 testów Node i 72/72 testów Playwright** gotowej aplikacji w Chrome, z testami PWA. `npm run build` przechodzi walidację treści, TypeScript, budowanie i przygotowanie zasobów offline. `tests/food-audit.test.ts` chroni oryginalne treści i mapę, odrębny wybór wersji według ukończeń, stare i nowe aktywne sesje, kopie, brak ponownych gwiazdek oraz trening drugiej mapy. `tests/browser/food-audit.spec.ts` obejmuje dawne ukończenie, rozpoczętą sesję, nową mapę z nagrodą i odznaką oraz zimny start nowej mapy offline. Sprawdzono wygląd zrzutów telefonu i brak przewijania poziomego przy 320 i 390 px.
+
+Testy kont używają lokalnego modelu Firebase; nie ingerują w prawdziwe wyniki. Przegląd zdjęć i objaśnień opisuje [raport Food](wdrozenie-food.md); testy struktury nie zastępują recenzji pedagogicznej ani próby na fizycznym telefonie Hani.
+
 ## Docelowy podział odpowiedzialności
 
 | Grupa | Co ma sprawdzać | Czego nie ma zastępować |

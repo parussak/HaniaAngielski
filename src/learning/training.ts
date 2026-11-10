@@ -41,7 +41,7 @@ export function earlierMapKeys(modules: Module[], journeys: Journey[], current: 
     const keys = new Set<string>();
     for (const j of ordered.slice(0, Math.max(0, index))) {
         const m = modules.find(m => m.id === j.moduleId)!;
-        for (const { lesson } of lessons(j)) {
+        for (const { lesson } of lessons(j).flatMap(entry=>[entry,...(entry.lesson.update?[{...entry,lesson:{...entry.lesson,...entry.lesson.update}}]:[])])) {
             if (lesson.role === 'training') continue;
             for (const id of lesson.wordIds) keys.add(keyFor(m, 'word', id));
             for (const id of lesson.exerciseIds) {

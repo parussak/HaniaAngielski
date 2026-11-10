@@ -4,7 +4,7 @@ Status: mapa obecnego kodu oraz docelowe granice odpowiedzialności. To nie jest
 
 ## Stan obecny
 
-Punkt odniesienia pochodzi z przeglądu rewizji `24cdeda` (9–10 listopada 2026 r.). Poniższa mapa jest uzupełniona o [etap 1](wdrozenie-nauki.md), [etap 2](wdrozenie-kursow.md) i [etap 3](wdrozenie-zakresow.md). Opis zachowania użytkowego, zakres sprawdzonych testów i ograniczenia znajdują się w [spisie dokumentacji](README.md). Planowane zmiany dla innych języków są osobno w [przeglądzie gotowości](rozwoj-jezykow.md).
+Punkt odniesienia pochodzi z przeglądu rewizji `24cdeda` (9–10 listopada 2026 r.). Poniższa mapa jest uzupełniona o [etap 1](wdrozenie-nauki.md), [etap 2](wdrozenie-kursow.md), [etap 3](wdrozenie-zakresow.md) i [etap 4](wdrozenie-food.md). Opis zachowania użytkowego, zakres sprawdzonych testów i ograniczenia znajdują się w [spisie dokumentacji](README.md). Planowane zmiany dla innych języków są osobno w [przeglądzie gotowości](rozwoj-jezykow.md).
 
 `src/main.ts` uruchamia aplikację i łączy jej części. Nie zawiera już szablonów ekranów, oceniania odpowiedzi ani formularzy konta.
 
@@ -12,6 +12,7 @@ Punkt odniesienia pochodzi z przeglądu rewizji `24cdeda` (9–10 listopada 2026
 | --- | --- |
 | Wygląd strony startowej i ramki kontynuacji | `src/views/home.ts`, `src/home.css` |
 | Wybór następnej lekcji lub modułu | `src/next-step.ts` |
+| Dobór wersji lekcji do ukończenia i aktywnej sesji | `src/adventure.ts`: `lessonForProgress`, `journeyForProgress`; `src/app/selectors.ts` |
 | Lista map i modułów | `src/views/catalog.ts` |
 | Ekran ćwiczenia, błąd, poprawka i podsumowanie | `src/views/study.ts` |
 | Ustawienia ćwiczeń i ściąga gramatyczna | `src/views/setup.ts` |

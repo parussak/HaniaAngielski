@@ -99,3 +99,9 @@ Stary katalog bez `coursesFile` jest nadal obsługiwany przez adapter zgodności
 Uruchamiamy `npm run check:content`, `npm test` i `npm run build`. Te kroki wykrywają problemy formatu, odwołań i zakresów; nie potwierdzają poprawności językowej. Materiał sprawdzamy też względem źródeł według [zasad merytoryki](04-merytoryka.md). Nowe zachowanie interfejsu sprawdzamy w testach przeglądarkowych według [zasad testowania](07-testy.md).
 
 Wybór kursu i globalne fiszki/quiz/gramatyka są wdrożone w etapie 3 — [opis działania](wdrozenie-zakresow.md). Nowe podręcznikowe treści francuskie i włoskie nadal wymagają materiałów i recenzji. Dodanie treści przez ten format nie wymaga osobnego silnika oceniania dla języka.
+
+## Aktualizacja wydanej lekcji
+
+Oryginalna lekcja w `sciezka.json` pozostaje bez zmian. Opcjonalne `update` zawiera `edition: 2`, `title`, `intro`, `wordIds`, `exerciseIds` i `ruleIds`. Nie może zmieniać `id`, roli ani zawierać kolejnego `update`. Aktualizacja ma 6–10 zadań i musi wskazywać istniejące materiały. Domyślnie trafia do nieukończonej lekcji; stare ukończenia bez `edition` i stare aktywne sesje zachowują oryginał. Nowa sesja i jej ukończenie zapisują `edition: 2`.
+
+To obecnie obsługa oryginału i jednego poprawionego wydania, nie nieograniczona lista rewizji. Wydania 2 nie wolno później nadpisywać istotną zmianą: trzeba rozbudować jawny rejestr wydań lub dodać nową lekcję, z testami zgodności. Nowe zadania dostają nowe identyfikatory; stare pozostają do wznowień i powtórek. Instrukcja nie zezwala na masową przebudowę ukończonych lekcji. [Przykład Food i ochrona danych](wdrozenie-food.md).

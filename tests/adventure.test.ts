@@ -12,7 +12,7 @@ test('Food ma siedem etapów i obejmuje wszystkie 97 słówek oraz zadania bez p
   assert.equal(j.stages.length,7);assert.equal(lessons(j).length,41);
   const all=lessons(j).flatMap(l=>l.lesson.wordIds);assert.equal(new Set(all).size,97);assert.equal(all.length,97);
   const exerciseIds=new Set(lessons(j).flatMap(l=>l.lesson.exerciseIds));
-  for(const q of modules[0].exercises.filter(q=>q.kind!=='vocabulary'))assert.ok(exerciseIds.has(q.id),q.id);
+  for(const q of modules[0].exercises.filter(q=>q.kind!=='vocabulary'&&!q.id.startsWith('food-')))assert.ok(exerciseIds.has(q.id),q.id);
   assert.ok(lessons(j).every(l=>l.lesson.exerciseIds.length+l.lesson.wordIds.length<=8));
 });
 test('lekcja odblokowuje następny krok, nagradza poprawkę i nie daje ponownej nagrody',()=>{

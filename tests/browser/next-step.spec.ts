@@ -5,7 +5,8 @@ import {emptyProgress,backup,keyFor,type Progress} from '../../src/core.ts';
 import {freshAdventure,lessons,type Journey} from '../../src/adventure.ts';
 import {stageKey} from '../../src/stage-review.ts';
 const m=modules[0],j:Journey=JSON.parse(readFileSync(new URL('../../public/content/02-food/sciezka.json',import.meta.url),'utf8'));
-const complete=(p:Progress)=>{p.adventure=freshAdventure();p.adventure.reviewSchema=1;for(const l of lessons(j))p.adventure.completed[l.key]={at:'2026-11-09T12:00:00.000Z'};};
+const practice:Journey=JSON.parse(readFileSync(new URL('../../public/content/02-food/sciezka-praktyka.json',import.meta.url),'utf8'));
+const complete=(p:Progress)=>{p.adventure=freshAdventure();p.adventure.reviewSchema=1;for(const l of [...lessons(j),...lessons(practice)])p.adventure.completed[l.key]={at:'2026-11-09T12:00:00.000Z'};};
 async function restore(page:Page,p:Progress){
   await page.goto('./');await page.getByRole('button',{name:'Kopia postępów',exact:true}).tap();
   await page.locator('#import-file').setInputFiles({name:'next-step.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
@@ -38,6 +39,7 @@ test('kolejna mapa z plików treści jest proponowana po Food, pomimo zaległej 
   const folder=new URL('../../public/content/02-food/',import.meta.url);
   const files=Object.fromEntries(['modul.json','slownictwo.json','quiz.json','cwiczenia.json','gramatyka.json','rozmowki.json','sciezka.json'].map(file=>[file,JSON.parse(readFileSync(new URL(file,folder),'utf8'))]));
   const id='unit-3-test';Object.assign(files['modul.json'],{id,order:3,name:'Moduł testowy',cover:'Test',journeyPath:'03-test/sciezka.json'});
+  delete files['modul.json'].journeyPaths;
   files['sciezka.json'].moduleId=id;files['sciezka.json'].title='Następna przygoda testowa';
   for(const file of ['cwiczenia.json','rozmowki.json'])for(const q of files[file])q.requires=[id];
   await page.route('**/content/katalog.json',r=>r.fulfill({json:{version:1,coursesFile:'kursy.json',modules:['02-food','03-test']}}));

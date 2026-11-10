@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "moduleId": "unit-2-food",
+  "id": "food-w-praktyce",
+  "title": "Kocia kuchnia — Food w praktyce",
+  "stages": [
+    {
+      "id": "kuchnia",
+      "title": "Od posiłku do przepisu",
+      "cat": "krzywolap",
+      "illustration": "illustrations/word-pancake.svg",
+      "lessons": [
+        {
+          "id": "food-diary",
+          "title": "Dzienniczek posiłków",
+          "intro": "Czytaj krótkie notatki o posiłkach i opowiedz, co jesz nigdy, czasami lub często. W pytaniach o tekst odpowiedź wynika z podanej notatki.",
+          "wordIds": [],
+          "exerciseIds": [
+            "food-diary-breakfast",
+            "food-diary-lunch",
+            "food-diary-dinner",
+            "food-diary-never",
+            "food-diary-sometimes",
+            "food-diary-often"
+          ],
+          "ruleIds": [
+            "meals"
+          ]
+        },
+        {
+          "id": "food-recipe",
+          "title": "Naleśnik krok po kroku",
+          "intro": "Użyj składników i wyrażeń z tekstu The pancake. Ćwiczymy rozumienie krótkich wskazówek i opis dodatków; to adaptacja, nie cały tekst z książki.",
+          "wordIds": [],
+          "exerciseIds": [
+            "food-recipe-flour",
+            "food-recipe-eggs",
+            "food-recipe-pan",
+            "food-recipe-top",
+            "food-recipe-some",
+            "food-recipe-lot"
+          ],
+          "ruleIds": [
+            "some-any",
+            "a-lot-of"
+          ]
+        },
+        {
+          "id": "food-breakfast",
+          "title": "Moje śniadanie",
+          "intro": "Uzupełnij krótki opis śniadania w dzień szkolny i w weekend. Zwróć uwagę na powód oraz skutek. To przygotowanie do własnego tekstu, bez automatycznej oceny wypracowania.",
+          "wordIds": [],
+          "exerciseIds": [
+            "food-breakfast-on",
+            "food-breakfast-at",
+            "food-breakfast-for",
+            "food-breakfast-quick",
+            "food-breakfast-reason",
+            "food-breakfast-result"
+          ],
+          "ruleIds": [
+            "meals",
+            "so-because"
+          ]
+        },
+        {
+          "id": "food-training",
+          "title": "Trening wcześniejszej mapy",
+          "intro": "Przypomnij sobie poznane słówka i gramatykę z przygotowań do kociego pikniku. Wracają także zadania rozwiązane wcześniej bez błędu.",
+          "wordIds": [],
+          "exerciseIds": [],
+          "ruleIds": [],
+          "role": "training",
+          "targetCount": 8
+        },
+        {
+          "id": "food-practice-finale",
+          "title": "Wspólny posiłek",
+          "intro": "Sprawdź zapasy i zamów posiłek. Wyjaśnij, dlaczego wybierasz napój. Każda odpowiedź ma krótkie objaśnienie.",
+          "wordIds": [],
+          "exerciseIds": [
+            "food-practice-water",
+            "food-practice-bottles",
+            "food-practice-many",
+            "food-practice-customer",
+            "food-practice-drink",
+            "food-practice-because"
+          ],
+          "ruleIds": [
+            "some-any",
+            "there",
+            "much-many",
+            "ordering",
+            "so-because"
+          ]
+        }
+      ]
+    }
+  ]
+}

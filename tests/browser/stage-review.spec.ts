@@ -44,7 +44,7 @@ test('stare błędy, kafelki każdego etapu, trzy tury, 100% i jednorazowa nagro
   node=await openFirstStage(page);await expect(node.locator('.stage-review-step')).toBeDisabled();await expect(node.locator('.stage-retention-text')).toContainText('0 ćwiczeń do utrwalenia');
   await page.screenshot({path:'test-results/stage-review-completed-mobile.png',fullPage:true});
   await page.reload();await openMap(page);await expect(page.locator('.star-wallet')).toContainText('18');
-  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:/Wybierz przygodę/}).tap();await expect(page.locator('.adventure-invite .retention-overview')).toContainText('0 ćwiczeń do utrwalenia');
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:/Wybierz przygodę/}).tap();await expect(page.locator('.adventure-invite .retention-overview').first()).toContainText('0 ćwiczeń do utrwalenia');
 });
 test('nowy błąd zeruje serię, poprawki nie zwiększają jej, mobilne przyciski pozostają nad paskiem',async({page})=>{
   const p=oldFixture(),item={key:keyFor(modules[0],'word','apple'),moduleId:j.moduleId,version:1,type:'word' as const,id:'apple',input:'text' as const};

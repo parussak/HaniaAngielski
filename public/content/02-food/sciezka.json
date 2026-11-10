@@ -408,7 +408,25 @@
             "would-you-like-anything-to-drink"
           ],
           "exerciseIds": [],
-          "ruleIds": []
+          "ruleIds": [],
+          "update": {
+            "edition": 2,
+            "title": "Pierwsze zamówienie",
+            "intro": "Krzywołap odwiedza restaurację. Poznaj uprzejme pytania i odpowiedzi, których użyjesz w rozmowie.",
+            "wordIds": [
+              "anything-else",
+              "can-i-have-a-vegetarian-pizza-please",
+              "i-d-like-a-lemonade-please",
+              "what-would-you-like",
+              "would-you-like-anything-to-drink"
+            ],
+            "exerciseIds": [
+              "food-can-pizza"
+            ],
+            "ruleIds": [
+              "ordering"
+            ]
+          }
         },
         {
           "id": "restaurant-words-2",
@@ -419,7 +437,25 @@
             "enjoy-your-meal"
           ],
           "exerciseIds": [],
-          "ruleIds": []
+          "ruleIds": [],
+          "update": {
+            "edition": 2,
+            "title": "Coś do picia?",
+            "intro": "Krzywołap odwiedza restaurację. Poznaj uprzejme pytania i odpowiedzi, których użyjesz w rozmowie.",
+            "wordIds": [
+              "milkshake",
+              "enjoy-your-meal"
+            ],
+            "exerciseIds": [
+              "food-like-milkshake",
+              "food-would-drink",
+              "food-thanks",
+              "food-have-lemonade"
+            ],
+            "ruleIds": [
+              "ordering"
+            ]
+          }
         },
         {
           "id": "restaurant-grammar",
@@ -435,7 +471,24 @@
           ],
           "ruleIds": [
             "ordering"
-          ]
+          ],
+          "update": {
+            "edition": 2,
+            "title": "Uprzejmie zamawiamy",
+            "intro": "Zobacz, jak kelner pyta o zamówienie i jak uprzejmie poprosić o jedzenie.",
+            "wordIds": [],
+            "exerciseIds": [
+              "g-order-would",
+              "g-order-can",
+              "g-order-like",
+              "g-order-else",
+              "g-order-drink",
+              "food-thanks"
+            ],
+            "ruleIds": [
+              "ordering"
+            ]
+          }
         },
         {
           "id": "restaurant-dialogue-1",
@@ -451,7 +504,25 @@
           "ruleIds": [
             "ordering",
             "some-any"
-          ]
+          ],
+          "update": {
+            "edition": 2,
+            "title": "Rozmowa przy stoliku",
+            "intro": "Przeczytaj obie wypowiedzi. Uzupełnij tylko jedno brakujące słowo w każdej rozmowie.",
+            "wordIds": [],
+            "exerciseIds": [
+              "d-what-would",
+              "d-can-i-have",
+              "d-id-like",
+              "d-anything-else",
+              "food-can-pizza",
+              "food-else"
+            ],
+            "ruleIds": [
+              "ordering",
+              "some-any"
+            ]
+          }
         },
         {
           "id": "restaurant-dialogue-2",
@@ -466,7 +537,25 @@
           "ruleIds": [
             "ordering",
             "some-any"
-          ]
+          ],
+          "update": {
+            "edition": 2,
+            "title": "Rozmowa przy stoliku — dalszy krok",
+            "intro": "Przeczytaj obie wypowiedzi. Uzupełnij tylko jedno brakujące słowo w każdej rozmowie.",
+            "wordIds": [],
+            "exerciseIds": [
+              "d-to-drink",
+              "d-some-chips",
+              "d-no-milk",
+              "food-like-milkshake",
+              "food-would-drink",
+              "food-have-lemonade"
+            ],
+            "ruleIds": [
+              "ordering",
+              "some-any"
+            ]
+          }
         }
       ]
     },
@@ -490,7 +579,26 @@
           ],
           "ruleIds": [
             "so-because"
-          ]
+          ],
+          "update": {
+            "edition": 2,
+            "title": "Dlaczego? I co z tego wynika?",
+            "intro": "Albert pomaga odróżnić powód od skutku. Najpierw przeczytaj przykłady z because i so.",
+            "wordIds": [],
+            "exerciseIds": [
+              "g-so-sport",
+              "g-because-sport",
+              "g-because-eggs",
+              "g-so-pizza",
+              "d-hungry-because",
+              "food-because-breakfast",
+              "food-so-sugar",
+              "food-so-breakfast"
+            ],
+            "ruleIds": [
+              "so-because"
+            ]
+          }
         }
       ]
     },
@@ -512,7 +620,25 @@
             "chicken-legs"
           ],
           "exerciseIds": [],
-          "ruleIds": []
+          "ruleIds": [],
+          "update": {
+            "edition": 2,
+            "title": "Pakujemy się na piknik",
+            "intro": "Przed piknikiem poznaj pozostałe słówka i zwroty z modułu Food. Niektóre opisują przygotowania, miejsca i wspólne spędzanie czasu.",
+            "wordIds": [
+              "all-of",
+              "beach",
+              "beautiful",
+              "can-t-wait",
+              "chicken-legs"
+            ],
+            "exerciseIds": [
+              "g-how-bottles"
+            ],
+            "ruleIds": [
+              "much-many"
+            ]
+          }
         },
         {
           "id": "picnic-words-2",
@@ -526,7 +652,25 @@
             "how-many"
           ],
           "exerciseIds": [],
-          "ruleIds": []
+          "ruleIds": [],
+          "update": {
+            "edition": 2,
+            "title": "Idziemy do parku",
+            "intro": "Przed piknikiem poznaj pozostałe słówka i zwroty z modułu Food. Niektóre opisują przygotowania, miejsca i wspólne spędzanie czasu.",
+            "wordIds": [
+              "go-for-a-swim",
+              "go-to-the-beach",
+              "go-to-the-park",
+              "have-a-picnic",
+              "how-many"
+            ],
+            "exerciseIds": [
+              "g-how-apples"
+            ],
+            "ruleIds": [
+              "much-many"
+            ]
+          }
         },
         {
           "id": "picnic-words-3",
@@ -540,7 +684,25 @@
             "all-over-the-world"
           ],
           "exerciseIds": [],
-          "ruleIds": []
+          "ruleIds": [],
+          "update": {
+            "edition": 2,
+            "title": "Co widzimy dookoła?",
+            "intro": "Przed piknikiem poznaj pozostałe słówka i zwroty z modułu Food. Niektóre opisują przygotowania, miejsca i wspólne spędzanie czasu.",
+            "wordIds": [
+              "how-much",
+              "quick",
+              "seagull",
+              "terrible",
+              "all-over-the-world"
+            ],
+            "exerciseIds": [
+              "g-how-water"
+            ],
+            "ruleIds": [
+              "much-many"
+            ]
+          }
         },
         {
           "id": "picnic-words-4",
@@ -554,7 +716,25 @@
             "cream"
           ],
           "exerciseIds": [],
-          "ruleIds": []
+          "ruleIds": [],
+          "update": {
+            "edition": 2,
+            "title": "Smaki i pomysły",
+            "intro": "Przed piknikiem poznaj pozostałe słówka i zwroty z modułu Food. Niektóre opisują przygotowania, miejsca i wspólne spędzanie czasu.",
+            "wordIds": [
+              "art",
+              "celebrity",
+              "cook",
+              "cottage-cheese",
+              "cream"
+            ],
+            "exerciseIds": [
+              "g-count-milk"
+            ],
+            "ruleIds": [
+              "countable"
+            ]
+          }
         },
         {
           "id": "picnic-words-5",
@@ -568,7 +748,25 @@
             "on-top"
           ],
           "exerciseIds": [],
-          "ruleIds": []
+          "ruleIds": [],
+          "update": {
+            "edition": 2,
+            "title": "Gotujemy i bawimy się",
+            "intro": "Przed piknikiem poznaj pozostałe słówka i zwroty z modułu Food. Niektóre opisują przygotowania, miejsca i wspólne spędzanie czasu.",
+            "wordIds": [
+              "good-luck",
+              "have-fun",
+              "in-the-air",
+              "ingredient",
+              "on-top"
+            ],
+            "exerciseIds": [
+              "g-container-jam"
+            ],
+            "ruleIds": [
+              "containers"
+            ]
+          }
         },
         {
           "id": "picnic-words-6",
@@ -582,7 +780,25 @@
             "sweet"
           ],
           "exerciseIds": [],
-          "ruleIds": []
+          "ruleIds": [],
+          "update": {
+            "edition": 2,
+            "title": "Jeszcze kilka odkryć",
+            "intro": "Przed piknikiem poznaj pozostałe słówka i zwroty z modułu Food. Niektóre opisują przygotowania, miejsca i wspólne spędzanie czasu.",
+            "wordIds": [
+              "pan",
+              "popular",
+              "round",
+              "special",
+              "sweet"
+            ],
+            "exerciseIds": [
+              "g-some-sugar-positive"
+            ],
+            "ruleIds": [
+              "some-any"
+            ]
+          }
         },
         {
           "id": "picnic-words-7",
@@ -596,7 +812,25 @@
             "toaster"
           ],
           "exerciseIds": [],
-          "ruleIds": []
+          "ruleIds": [],
+          "update": {
+            "edition": 2,
+            "title": "Gotowi na wspólny posiłek",
+            "intro": "Przed piknikiem poznaj pozostałe słówka i zwroty z modułu Food. Niektóre opisują przygotowania, miejsca i wspólne spędzanie czasu.",
+            "wordIds": [
+              "throw",
+              "use",
+              "have-a-quick-breakfast",
+              "toast",
+              "toaster"
+            ],
+            "exerciseIds": [
+              "g-article-egg"
+            ],
+            "ruleIds": [
+              "articles"
+            ]
+          }
         },
         {
           "id": "picnic-words-8",
@@ -606,7 +840,25 @@
             "frying-pan"
           ],
           "exerciseIds": [],
-          "ruleIds": []
+          "ruleIds": [],
+          "update": {
+            "edition": 2,
+            "title": "Ostatnie przygotowania",
+            "intro": "Poznaj patelnię i przypomnij sobie opakowania potrzebne podczas przygotowań.",
+            "wordIds": [
+              "frying-pan"
+            ],
+            "exerciseIds": [
+              "g-container-water",
+              "g-container-chocolate",
+              "g-container-juice",
+              "g-container-jam",
+              "g-container-biscuits"
+            ],
+            "ruleIds": [
+              "containers"
+            ]
+          }
         },
         {
           "id": "picnic-inventory",
@@ -625,7 +877,27 @@
             "there",
             "much-many",
             "containers"
-          ]
+          ],
+          "update": {
+            "edition": 2,
+            "title": "Misja: sprawdzamy zapasy",
+            "intro": "Sprawdź, co mamy, czego brakuje i ile rzeczy zabierzemy na piknik.",
+            "wordIds": [],
+            "exerciseIds": [
+              "d-no-milk",
+              "d-yes-milk",
+              "d-how-many",
+              "d-how-much",
+              "d-two-bottles",
+              "g-how-cartons"
+            ],
+            "ruleIds": [
+              "some-any",
+              "there",
+              "much-many",
+              "containers"
+            ]
+          }
         },
         {
           "id": "picnic-finale",
@@ -645,7 +917,28 @@
             "a-lot-of",
             "ordering",
             "so-because"
-          ]
+          ],
+          "update": {
+            "edition": 2,
+            "title": "Misja: zapraszamy kotki na piknik",
+            "intro": "Zakończ przygotowania do pikniku. Użyj poznanych zasad i zwrotów. Na kolejnej mapie czeka używanie Food w krótkich tekstach o posiłkach.",
+            "wordIds": [],
+            "exerciseIds": [
+              "g-some-request",
+              "g-container-plural",
+              "g-lot-apples",
+              "d-to-drink",
+              "g-because-sport",
+              "g-there-bottles"
+            ],
+            "ruleIds": [
+              "some-any",
+              "containers",
+              "a-lot-of",
+              "ordering",
+              "so-because"
+            ]
+          }
         }
       ]
     }

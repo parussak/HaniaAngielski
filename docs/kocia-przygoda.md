@@ -1,6 +1,6 @@
 # Kocia mapa i domek
 
-Food ma siedem etapów i 41 krótkich lekcji. Obejmuje wszystkie 97 słówek oraz dotychczasowe zadania gramatyczne i rozmówki. Etap może mieć kilka lekcji; lekcja zawiera maksymalnie osiem pozycji przed powtórkami błędów.
+Food ma dwie mapy. Pierwsza zachowuje siedem etapów i 41 krótkich lekcji. Druga, „Kocia kuchnia — Food w praktyce”, ma cztery lekcje kontekstowe i jeden trening wcześniejszej mapy. [Zakres etapu 4 i ochrona wyników](wdrozenie-food.md). Pierwsza mapa obejmuje wszystkie 97 słówek oraz dotychczasowe zadania gramatyczne i rozmówki. Etap może mieć kilka lekcji; lekcja zawiera maksymalnie osiem pozycji przed powtórkami błędów.
 
 1. Jedzenie i napoje — 5 lekcji.
 2. Śniadanie — 5 lekcji.
@@ -10,13 +10,18 @@ Food ma siedem etapów i 41 krótkich lekcji. Obejmuje wszystkie 97 słówek ora
 6. Powód i skutek — 1 lekcja.
 7. Koci piknik — 10 lekcji, w tym dwie końcowe misje.
 
-Wejście: **Moja nauka → Kocia mapa Food**. Przycisk **Kontynuuj naukę** wybiera pierwszą niedokończoną lekcję. Najpierw pojawiają się słówka z obrazkami albo zasady i przykłady; potem wybiera się sposób odpowiadania i uruchamia ćwiczenia. Sesja wraca po odświeżeniu przez **Kontynuuj** na stronie głównej. Po jej ukończeniu odblokowuje się następna lekcja. Poprzednie lekcje można powtarzać. Dawne wyniki pozostają w postępach; mapa jest nową ścieżką i nie nalicza automatycznie nagród za stare swobodne sesje.
+Wejście: **Moja nauka → Wybierz przygodę → wybrana mapa Food**. Przycisk **Kontynuuj naukę** wybiera pierwszą niedokończoną lekcję. Najpierw pojawiają się słówka z obrazkami albo zasady i przykłady; potem wybiera się sposób odpowiadania i uruchamia ćwiczenia. Sesja wraca po odświeżeniu przez **Kontynuuj** na stronie głównej. Po jej ukończeniu odblokowuje się następna lekcja. Poprzednie lekcje można powtarzać. Dawne wyniki pozostają w postępach; mapa jest nową ścieżką i nie nalicza automatycznie nagród za stare swobodne sesje.
+
+## Wersje lekcji
+
+Etapy 1–4 pozostają bez zmian. Nieukończone lekcje etapów 5–7 mają poprawione wersje po 6–8 zadań. Ukończone stare lekcje zachowują oryginalny zakres, a rozpoczęte sesje swoje pytania. Nowo ukończone wersje zachowują znacznik wydania 2. Nie przeliczamy ukończeń, gwiazdek ani zakupów.
 
 ## Gwiazdki
 
 - Pierwsze ukończenie każdej lekcji: **3 ★**, również z błędami i poprawkami. Razem 123 gwiazdki za 41 lekcji Food.
 - Ponowne ukończenie tej samej lekcji nie nalicza kolejnych 3 gwiazdek.
-- Domknięcie etapu: **3 ★ raz**, gdy wszystkie jego lekcje są ukończone, a każda pozycja w powtórce osiągnęła 3/3 poprawnych odpowiedzi. Etap bez błędów dostaje tę premię po ostatniej lekcji. Siedem etapów Food to dodatkowe 21 gwiazdek (łącznie 144 z lekcjami).
+- Domknięcie etapu: **3 ★ raz**, gdy wszystkie jego lekcje są ukończone, a każda pozycja w powtórce osiągnęła 3/3 poprawnych odpowiedzi. Etap bez błędów dostaje tę premię po ostatniej lekcji. Siedem etapów Food to dodatkowe 21 gwiazdek (łącznie 144 z lekcjami pierwszej mapy).
+- Druga mapa: pięć pierwszych ukończeń po 3 ★, maksymalnie 15 ★. Jej powtórka nie ma nowej dodatkowej premii. Dawna odznaka pierwszej mapy zostaje.
 - Premia 1 ★ za ogólną powtórkę raz dziennie została wyłączona. Wcześniej zdobyte gwiazdki pozostają w portfelu.
 - Nie odbieramy gwiazdek za błędy i przerwy. Nie ma płatności ani kupowania dostępu do materiałów.
 - Food ukończony na mapie daje także widoczną w domku odznakę kociego kucharza. Ukończenie oznacza przejście lekcji, nie deklarację trwałego zapamiętania wszystkich słów; trudne pozycje pozostają do powtórki.
