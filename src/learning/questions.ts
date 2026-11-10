@@ -29,6 +29,10 @@ export function requiresChoice(q: Exercise) {
 export function inputFor(q: Exercise, preferred: Item['input'], mode?: Mode) {
     return requiresChoice(q) ? 'choice' : mode === 'review' ? 'text' : preferred;
 }
+export function answerHint(q:Exercise,input:Item['input']){
+    const gap=q.prompt.includes('___')||q.dialogue?.some(line=>line.text.includes('___'));
+    return input==='text'&&q.kind!=='vocabulary'&&gap?'Wpisz tylko brakujący fragment, bez przepisywania całego zdania.':null;
+}
 export function eligibleModules(modules: Module[], selected: Module, previous: boolean) {
     return modules.filter(m => sameCourse(m, selected) && (m.id === selected.id || (previous && compareModules(m, selected) < 0))).sort(compareModules);
 }

@@ -40,6 +40,7 @@ Aktualizacja: 10 listopada 2026 r. Ustalenie docelowe nie oznacza automatycznego
 | D-32 | Ukończenie mapy wymaga ukończenia zwykłych lekcji i treningów umieszczonych na mapie. Dodatkowe treningi na żądanie są dobrowolne, a powtórki błędów nie blokują ukończenia mapy. Warunki nagród pozostają osobną decyzją. | [Nauka](03-nauka.md), [produkt](01-produkt.md) |
 | D-33 | Pierwsze ukończenie danego treningu na mapie daje 3 gwiazdki. Kolejne ukończenia tego samego treningu nie dają dodatkowych gwiazdek. Nie rozstrzyga to nagród za dodatkowe treningi na żądanie ani premii za utrwalenie. | [Nauka](03-nauka.md) |
 | D-34 | Ukończenie dodatkowego treningu na żądanie daje 1 gwiazdkę. Pozostałe pytania odkładamy; użytkowniczka upoważniła do rozpoczęcia wdrażania uzgodnionych zmian. Nie oznacza to zatwierdzenia otwartych zasad ani resetowania postępów. | [Nauka](03-nauka.md) |
+| D-35 | Forma odpowiedzi gramatycznej wynika z podręcznika i poziomu nauki. Przy luce wymagamy tylko brakującego słowa lub wyrażenia, przy podanych wariantach — wyboru. Całe zdanie wymagane jest wyłącznie wtedy, gdy taki jest cel zadania źródłowego. Ponowna próba i obie powtórki zachowują tę samą jednostkę odpowiedzi; pokazanie pełnego przykładu w wyjaśnieniu nie rozszerza zakresu poprawki. | [Merytoryka](04-merytoryka.md), [dodawanie modułów](dodawanie-modulow.md) |
 
 ## Przerwa w ustalaniu wymagań — 10 listopada 2026
 

@@ -25,7 +25,7 @@ Po przeglądzie dokumentacji poprawiono dwa ograniczenia: [przygotowanie do tren
 ## Statusy i pierwszeństwo
 
 - **Stan obecny** — potwierdzony w kodzie lub testach. [Punkt odniesienia](stan-obecny/README.md) oparto na rewizji 24cdeda.
-- **Uzgodnione założenia docelowe** — kierunek potwierdzony w rozmowie, który może jeszcze nie być wdrożony. Rejestr: D-01–D-34 w [decyzjach](decyzje.md).
+- **Uzgodnione założenia docelowe** — kierunek potwierdzony w rozmowie, który może jeszcze nie być wdrożony. Rejestr: D-01–D-35 w [decyzjach](decyzje.md).
 - **Do ustalenia** — pytanie bez zatwierdzonego rozwiązania. Rejestr U-01–U-10; odwołania w dokumentach nie są konkurencyjnymi decyzjami.
 - **Propozycja techniczna** — kandydat do oceny, nie automatycznie zaakceptowany zakres prac.
 

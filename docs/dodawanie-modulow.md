@@ -46,6 +46,8 @@ Każde zadanie powinno mieć jednoznaczną odpowiedź w podanym kontekście, źr
 
 Dla nowego języka określ w karcie kursu wymagania dotyczące akcentów, rodzajników i wariantów. Nie wprowadzaj globalnej tolerancji w mechanice przy okazji dodawania modułu. Nierozstrzygniętą zasadę oznacz do uzgodnienia.
 
+Zachowaj podręcznikową formę odpowiedzi i poziom wymagań (D-35). Przy luce kluczem jest brakujące słowo lub wyrażenie; nie zamieniaj jej na tłumaczenie albo przepisywanie całego zdania. Pełne zdanie wymagane jest tylko przy takim celu ćwiczenia źródłowego. Ta sama jednostka odpowiedzi pozostaje w poprawce i obu powtórkach. [Szczegóły](04-merytoryka.md#forma-odpowiedzi-a-poziom-nauki--d-35).
+
 ## 5. Sprawdź treść i działanie
 
 Oddziel cztery rodzaje kontroli:

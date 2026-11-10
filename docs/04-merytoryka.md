@@ -27,6 +27,14 @@ Podręcznik wyznacza zakres kursu i działu. Zadania mogą być adaptacjami, ale
 
 Lista wymaganych elementów modułu stanowi podstawę kontroli pokrycia przez mapy. Zdefiniowanie, że dane słowo lub reguła są ważne w podręczniku, jest decyzją merytoryczną; porównanie list odwołań może być kontrolą techniczną.
 
+### Forma odpowiedzi a poziom nauki — D-35
+
+Zachowujemy koncepcję zadań podręcznikowych, ponieważ odpowiada poziomowi ucznia. Jeśli zadanie polega na uzupełnieniu słowa lub wyrażenia w zdaniu, uczeń podaje tylko ten fragment. Jeśli podano warianty, wybiera odpowiedź. Przepisania lub napisania całego zdania wymagamy tylko wtedy, gdy jest to cel zadania źródłowego. Adaptacja do aplikacji nie może niejawnie zwiększać wymagań pisania.
+
+Zasada obowiązuje również po błędzie oraz w powtórce ogólnej i etapowej: zachowujemy kontekst zdania, lukę i jej klucz. Objaśnienie może przedstawiać pełne poprawne zdanie, ale poprawka nadal dotyczy wyłącznie wymaganej części. Wpisywane odpowiedzi do luk mają wskazówkę „Wpisz tylko brakujący fragment, bez przepisywania całego zdania”, także podczas ponownej próby i po wznowieniu sesji. Fiszki i pytania wyboru nie otrzymują tej wskazówki.
+
+Przegląd aktualnych plików Food wykazał 104 zadania gramatyczne i dialogowe z krótkimi odpowiedziami; nie znaleziono kluczy wymagających pisania całych zdań. Nie zmieniono ich identyfikatorów, odpowiedzi ani rewizji. Podstawowe formy ćwiczeń porównano ze zdjęciami podręcznika s. 27 i 29; nie jest to nowa recenzja wszystkich treści językowych modułu.
+
 ### Warianty i znaczenia
 
 Zgodnie z D-16 w [rejestrze](decyzje.md) jedno hasło opisuje jedno konkretne znaczenie, z własną przypisaną ilustracją i wariantami językowymi. Przy opracowywaniu materiału trzeba rozdzielić różne znaczenia tego samego zapisu, zamiast dobierać jeden obrazek i wspólną listę tłumaczeń dla wszystkich.

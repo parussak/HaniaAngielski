@@ -38,6 +38,10 @@ Po poprawkach po etapie 4: **144/144 testów Node i 76/76 testów Playwright** g
 
 `tests/map-recovery.test.ts` obejmuje błąd pobrania, JSON i schematu pojedynczej mapy, duplikaty tożsamości, izolację kursów, odzyskanie katalogu, przygotowanie poznanej puli, nagrody bez duplikatów oraz odroczenie migracji i premii przy brakujących mapach. `tests/browser/map-recovery.spec.ts` sprawdza na telefonie przejście od pustej puli przez lekcję do treningu, brak drugiej nagrody, dostępność poprawnej mapy podczas awarii innej i wznowienie zachowanej sesji po naprawie pliku. Sprawdzono zrzut ekranu przygotowania i brak przewijania poziomego przy 320 px. Kontrole nie zmieniają prawdziwego konta Hani. [Zakres i ograniczenia](odpornosc-map.md).
 
+## Weryfikacja formy odpowiedzi gramatycznej — D-35
+
+Po dodaniu wskazówki do luk: **146/146 testów Node i 79/79 testów Playwright** gotowej aplikacji w Chrome oraz poprawne budowanie. `tests/review-input.test.ts` sprawdza zachowanie krótkiego klucza odpowiedzi i luki w obu powtórkach oraz brak wskazówki przy fiszkach, wyborze i zadaniu bez luki. `tests/browser/grammar-gaps.spec.ts` sprawdza zwykłą gramatykę, powtórkę ogólną i etapową: błędne słowo, porównanie z poprawnym fragmentem, ponowną próbę, wznowienie i poprawną krótką odpowiedź, bez zmiany salda gwiazdek. Nie zmieniono produkcyjnych pytań, ich kluczy ani rewizji. To kontrola formy i przebiegu, nie nowa recenzja językowa całego podręcznika.
+
 ## Docelowy podział odpowiedzialności
 
 | Grupa | Co ma sprawdzać | Czego nie ma zastępować |

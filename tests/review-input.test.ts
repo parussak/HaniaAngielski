@@ -5,7 +5,37 @@ import {modules} from './materials.ts';
 import {requiresChoice,inputFor,emptyProgress,makeSession,questionFor,keyFor,type AnswerMode,type Item} from '../src/core.ts';
 import {validateJourney,makeLessonSession} from '../src/adventure.ts';
 import {recordStageError,makeStageReviewSession} from '../src/stage-review.ts';
+import {answerHint,isCorrect} from '../src/learning/questions.ts';
 const m=modules[0],j=validateJourney(JSON.parse(readFileSync(new URL('../public/content/02-food/sciezka.json',import.meta.url),'utf8')),m);
+
+test('luka wymaga fragmentu zgodnego z zadaniem, nie całego zdania; wskazówka nie zamienia wyboru ani fiszek',()=>{
+  for(const [id,fragment,sentence] of [
+    ['g-container-water','bottle','a bottle of water'],
+    ['g-lot-water','a lot of','There is a lot of water.'],
+    ['d-how-many','many','How many eggs are there?']
+  ]){
+    const q=m.exercises.find(q=>q.id===id)!;
+    assert.ok(isCorrect(q,fragment),id);assert.ok(!isCorrect(q,sentence),id);
+    assert.ok(answerHint(q,'text')?.includes('tylko brakujący fragment'));
+    assert.equal(answerHint(q,'choice'),null);
+  }
+  assert.equal(answerHint({...m.exercises[0],prompt:'Napisz całe zdanie po angielsku.'},'text'),null);
+  assert.equal(answerHint({...m.exercises[0],kind:'vocabulary',prompt:'Hasło ___'},'text'),null);
+});
+
+test('obie powtórki zachowują lukę i klucz krótkiej odpowiedzi, bez konwersji na pełne zdanie',()=>{
+  const p=emptyProgress(),id='g-container-water',key=keyFor(m,'exercise',id);
+  p.difficult=[key];const original=m.exercises.find(q=>q.id===id)!;
+  const general=makeSession(modules,m,'review','choice',false,p);
+  const lesson=makeLessonSession(modules,j,j.stages[0].lessons[0],'text',p);
+  recordStageError(p,lesson,general.items[0],[j]);
+  const stage=makeStageReviewSession(modules,j,j.stages[0],'choice',p)!;
+  for(const s of [general,stage]){
+    const q=questionFor(modules,s.items[0]);assert.equal(s.items[0].input,'text');
+    assert.equal(q.prompt,original.prompt);assert.deepEqual(q.answers,['bottle']);
+    assert.ok(answerHint(q,inputFor(q,s.items[0].input,s.mode)));
+  }
+});
 
 test('podane warianty bez nawiasów wymuszają wybór, również w pytaniach o policzalność',()=>{
   const questions=m.exercises.filter(q=>q.id.startsWith('g-count-'));assert.equal(questions.length,8);
