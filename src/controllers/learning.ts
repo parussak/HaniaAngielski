@@ -1,6 +1,6 @@
 import {rewardStars} from '../learning/rewards.ts';
-import {homeFor,roomAvailable,settleHouseUnlocks} from '../house/progress.ts';
-import { journeyKey, lessons, makeLessonSession, place, purchase, rewardCompletion, unlocked, type Journey } from '../adventure.ts';
+import {homeFor,settleHouseUnlocks} from '../house/progress.ts';
+import { journeyKey, lessons, makeLessonSession, rewardCompletion, unlocked, type Journey } from '../adventure.ts';
 import { makeTrainingSession, mapTrainingPool, trainingPreparation } from '../learning/training.ts';
 import { currentJourney, currentCourse, courseModules } from '../app/selectors.ts';
 import { AppState } from '../app/state.ts';
@@ -127,15 +127,6 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             await startStageReview(j, stage);
             return true;
         }
-        if(action==='select-room'){
-            const room=el.dataset.id??'salon';
-            if(roomAvailable(state.progress,currentCourse(state)!.id,room)){state.chosenRoom=room;state.chosenDecoration=room==='salon'?'pillow':'cat-toaster';}
-            return true;
-        }
-        if (action === 'house') {
-            state.screen = 'house';
-            return true;
-        }
         if (action === 'open-lesson' || action === 'begin-lesson') {
             const j = currentJourney(state), l = j && lessons(j).find(l => l.lesson.id === el.dataset.id)?.lesson;
             if (!j || !l || !unlocked(j, l, state.progress)) {
@@ -159,21 +150,6 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             state.lastReward = 0;
             state.lastStageReward = 0;
             state.screen = 'study';
-            return true;
-        }
-        if (action === 'select-decoration') {
-            state.chosenDecoration = el.dataset.id ?? 'pillow';
-            return true;
-        }
-        if (action === 'buy-decoration') {
-            let bought = false;
-            await mutate(p => { bought = purchase(p, el.dataset.id ?? '',currentCourse(state)!.id,state.chosenRoom); });
-            state.notice = bought ? 'Nowa dekoracja jest Twoja! Możesz wybrać dla niej miejsce.' : 'Przedmiot jest już Twój albo potrzeba jeszcze kilku gwiazdek.';
-            return true;
-        }
-        if (action === 'place-decoration') {
-            await mutate(p => { place(p, el.dataset.id ?? '', el.dataset.slot || null,currentCourse(state)!.id,state.chosenRoom); });
-            state.notice = 'Ustawienie domku zapisane.';
             return true;
         }
         if (action === 'extra-training') {

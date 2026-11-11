@@ -123,3 +123,9 @@ Weryfikacja 11 listopada 2026: **162/162 testy Node i 86/86 testów Playwright**
 166/166 testów Node przeszło na zwykłej i wirtualnie rozszerzonej bibliotece. Pełny przebieg Playwright na testowym wydaniu z dodatkowym modułem EN, kursami FR/IT i Food poza pierwszą pozycją dał 88/88 po objęciu dodatkowych kontekstów przeglądarki jawnym scenariuszem Food. Testy pełnej biblioteki pozostają niezależne od tej fixture. [Zakres, wyniki i ograniczenia](refaktoring-etap-2.md); [instrukcja danych testowych](../tests/README.md).
 
 Końcowy przebieg na standardowym wydaniu również dał **88/88**. Budowanie, kontrola dokumentacji i różnic przeszły; wersja PWA jest identyczna z wersją sprzed tego etapu. Nie zmieniono kodu aplikacji ani jej produkcyjnych materiałów.
+
+## Wydzielenie kontrolera domku — etap 3 refaktoringu
+
+Dodano cztery testy w `tests/house-controller.test.ts`: brak wpływu na aktywną lekcję przy nawigacji, trwałe zakupy i ustawienia w osobnych kursach, brak zmiany postępów i komunikatu sukcesu po błędzie zapisu oraz przekazywanie nieswoich akcji między kontrolerami. Dotychczasowe oczekiwania testów Food i domku pozostają zachowane. Porównanie sekwencji 12 akcji przed/po dało identyczne postępy, stan ekranu i komunikaty. [Zakres etapu](refaktoring-etap-3.md).
+
+Weryfikacja 11 listopada 2026: **170/170 testów Node i 88/88 testów Playwright** gotowej aplikacji w Chrome. Budowanie z walidacją treści, TypeScript i PWA, kontrola odnośników dokumentacji oraz kontrola różnic przeszły. Nie zmieniono dotychczasowych oczekiwań przeglądarkowych ani formatu postępów; nie testowano na fizycznym telefonie i prawdziwych danych Hani.

@@ -1,3 +1,4 @@
+import type {createHouseController} from '../controllers/house.ts';
 import { createAccountController } from '../controllers/account.ts';
 import { AppState } from './state.ts';
 import { createBackupController } from '../controllers/backup.ts';
@@ -6,6 +7,7 @@ import { applyUpdate, installPwa, prepareOffline } from '../pwa.ts';
 import { ProgressSync } from '../sync.ts';
 interface EventPorts {
     accounts: ReturnType<typeof createAccountController>;
+    house: ReturnType<typeof createHouseController>;
     learning: ReturnType<typeof createLearningController>;
     backups: ReturnType<typeof createBackupController>;
     sync: ProgressSync;
@@ -13,9 +15,11 @@ interface EventPorts {
     scheduleReviewMigration: () => void;
     run: (task: () => Promise<void>) => Promise<void>;
 }
-export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts, learning, backups, sync, scheduleSync, scheduleReviewMigration, run }: EventPorts) {
+export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts, learning, house, backups, sync, scheduleSync, scheduleReviewMigration, run }: EventPorts) {
     async function action(action: string, el: HTMLElement) {
         state.notice = '';
+        if (await house.handleAction(action, el))
+            return;
         if (await learning.handleAction(action, el))
             return;
         if (await backups.handleAction(action, el))

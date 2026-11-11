@@ -19,7 +19,8 @@ Punkt odniesienia pochodzi z przeglądu rewizji `24cdeda` (9–10 listopada 2026
 | Konto, logowanie i formularze ustawień | `src/views/account.ts`, `src/controllers/account.ts` |
 | Wygląd postępów i kopii | `src/views/progress.ts`, `src/views/backup.ts` |
 | Import, eksport i pobieranie starszej historii | `src/controllers/backup.ts` |
-| Rozpoczęcie sesji, odpowiedzi, nagrody, domek | `src/controllers/learning.ts` |
+| Rozpoczęcie sesji, odpowiedzi, nagrody i odblokowania po nauce | `src/controllers/learning.ts` |
+| Otwarcie domku, wybór pokoju i dekoracji, zakupy i ustawienia | `src/controllers/house.ts` |
 | Zapis zmiany i odtwarzanie starszych błędów | `src/controllers/progress.ts` |
 | Obsługa kliknięć, formularzy i przejść | `src/app/events.ts` |
 | Rejestr ekranów | `src/app/views.ts` |
@@ -94,7 +95,9 @@ Podstawowy format kursów, wybór kursu, poznany zakres i aktualizacje Food są 
 
 ## Domek rozdzielony na kursy
 
-`src/house/catalog.ts` to dane dekoracji, cen, pokoi i nagród. `src/house/progress.ts` realizuje portfele, zgodny odczyt angielskiego dorobku, odblokowania i ustawienia. `src/views/house.ts` odpowiada za ekran domku, oddzielony od `adventure-view.ts` z mapami i wprowadzeniami lekcji. Kontroler nauki przekazuje kurs przy zakupach i przypisuje nagrodę według modułu sesji; kontroler zapisu rozlicza odblokowania również dla dawnych ukończeń. [Kontrakt i ograniczenia](koci-domek.md).
+`src/house/catalog.ts` to dane dekoracji, cen, pokoi i nagród. `src/house/progress.ts` realizuje portfele, zgodny odczyt angielskiego dorobku, odblokowania i ustawienia. `src/views/house.ts` odpowiada za ekran domku, oddzielony od `adventure-view.ts` z mapami i wprowadzeniami lekcji. Kontroler domku przekazuje kurs przy zakupach i ustawianiu dekoracji. Kontroler nauki przypisuje nagrodę według modułu sesji, a kontroler zapisu rozlicza odblokowania również dla dawnych ukończeń. [Kontrakt i ograniczenia](koci-domek.md).
+
+Po [etapie 3 refaktoringu](refaktoring-etap-3.md) `main.ts` tworzy kontroler domku ze wspólną funkcją `mutate`. `app/events.ts` przekazuje mu akcje domku przed pozostałymi kontrolerami; nierozpoznane akcje przechodzą dalej. Widok i zapis korzystają z tych samych mechanizmów co wcześniej.
 
 ## Wspólne podstawy po refaktoringu etapu 1
 

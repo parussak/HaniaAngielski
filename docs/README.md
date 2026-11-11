@@ -14,6 +14,8 @@ Wprowadzono też swobodny wybór lekcji, stałą długość nowych sesji, nowe m
 
 [Etap 2 refaktoringu](refaktoring-etap-2.md) oddziela syntetyczne testy mechaniki, regresje Food wybieranego po ID i kontrole całej rozbudowywanej biblioteki. Nie zmienia kodu aplikacji ani produkcyjnych treści.
 
+[Etap 3 refaktoringu](refaktoring-etap-3.md) wydziela obsługę przycisków domku do osobnego kontrolera. Rozliczanie ukończenia nauki, wygląd i zapis pozostają bez zmian.
+
 | Dokument | Na jakie pytanie odpowiada? |
 | --- | --- |
 | [01 · Produkt](01-produkt.md) | Dla kogo i po co jest aplikacja? Jak korzystamy z nauki prowadzonej i swobodnej? |

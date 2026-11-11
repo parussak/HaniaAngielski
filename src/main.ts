@@ -1,3 +1,4 @@
+import {createHouseController} from './controllers/house.ts';
 import './style.css';
 import './theme.css';
 import './adventure.css';
@@ -53,6 +54,7 @@ const progressService = createProgressController(state, { sync, run, render, sch
 const backups = createBackupController(state, { mutate, getHistoryPage: id => progressService.getHistoryPage(id), run });
 const courses = createCourseController(state, { read: key => readStored(key), write: writeStored });
 const accounts = createAccountController(state, { sync, scheduleSync, downloadProgress: backups.downloadProgress, run, restoreCourse: courses.restore });
+const house = createHouseController(state, { mutate });
 const learning = createLearningController(state, { mutate, scheduleReviewMigration, courses });
 function scheduleReviewMigration() { progressService.scheduleReviewMigration(); }
 async function prepareProgress(p: Progress) { return progressService.prepareProgress(p); }
@@ -62,5 +64,5 @@ async function run(task: () => Promise<void>) { await renderer.run(task); }
 function syncLabel() { return scheduler.syncLabel(); }
 function refreshSyncLabel() { scheduler.refreshSyncLabel(); }
 function scheduleSync(delay?: number) { scheduler.scheduleSync(delay); }
-bindAppEvents(root, state, { accounts, learning, backups, sync, scheduleSync, scheduleReviewMigration, run });
+bindAppEvents(root, state, { accounts, learning, house, backups, sync, scheduleSync, scheduleReviewMigration, run });
 void startApplication({ root, state, sync, prepareProgress, rememberAccount: accounts.rememberAccount, scheduleSync, scheduleReviewMigration, render, refreshSyncLabel, restoreCourse: courses.restore });

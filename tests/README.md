@@ -4,6 +4,8 @@
 
 Sesje, ocenianie, historia i trwałość zapisu korzystają z `fixtures/engine.ts`: 12 sztucznych słówek, quiz i gramatyka, bez treści Food. `engineModule()` pozwala określić identyfikator, kurs i kolejność. `fixtures/course-materials.ts` służy do przykładów EN/FR/IT i kontroli znaków językowych. Nie publikujemy tych danych w aplikacji.
 
+`house-controller.test.ts` sprawdza interakcje domku ze stanem i transakcyjnym portem zapisu na danych syntetycznych. Mechanizm kupowania i odblokowań ma osobne testy `house.test.ts`, a rzeczywiste przyciski oraz połączenie kontrolerów — `browser/house.spec.ts`. Nie trzeba kopiować pełnych materiałów Food do testów kontrolera.
+
 ## Regresje Food
 
 Importuj `food`, `foodCourse` albo `foodModules` z `materials.ts`. Food jest wybierany po `unit-2-food`, a jego kurs po `angielski-hani`; nie po pozycji w katalogu. `foodModules` celowo zawiera tylko ten moduł. Indeksowanie tego lokalnego scenariusza lub małej, jawnie zbudowanej fixture jest dozwolone. Nie zakładaj, że pełny katalog ma jeden moduł/kurs ani że Food jest pierwszy.
