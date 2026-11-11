@@ -1,0 +1,582 @@
+[
+  {
+    "name": "old-v1",
+    "accepted": true,
+    "sha256": "b07db41d22938649bbefb06248a6f9469e3c658d4c243700f47e2847a4cdc3ed"
+  },
+  {
+    "name": "empty",
+    "accepted": true,
+    "sha256": "e922ea7140d6c6236e1892b8c3de16ff6e3696e82d5fd71944390e4d05989801"
+  },
+  {
+    "name": "active",
+    "accepted": true,
+    "sha256": "bb20c27786585cde3f4219ba49ca440259914c1e64db78c99583924a6aa55efd"
+  },
+  {
+    "name": "completed",
+    "accepted": true,
+    "sha256": "f2e3e06dc7adfec54c0139ddb11d2c8625add8a4d97381eaf486b76e9799870a"
+  },
+  {
+    "name": "homes",
+    "accepted": true,
+    "sha256": "81122012861ccb536a61d4c8afbe48e67b4336b7266d279b20fc022d32f12903"
+  },
+  {
+    "name": "history",
+    "accepted": true,
+    "sha256": "8bbf92bb40927f88ef7c9519dde561c3ee1fc532a3edfa5d5163cbec97cfd8ae"
+  },
+  {
+    "name": "scoped",
+    "accepted": true,
+    "sha256": "67e947582d3752961c75b1027c5abb7565302f97951043b13ceea838188456a6"
+  },
+  {
+    "name": "course-session",
+    "accepted": true,
+    "sha256": "b417b9f1d83f5c0c104594fa4f637283ed44e2db297a667edbb9c9e1377bec44"
+  },
+  {
+    "name": "extra-training",
+    "accepted": true,
+    "sha256": "1d0fb18373866d99b0aeaa193110d87414d997d1e0ed7a8bb7e0816022d9c3d4"
+  },
+  {
+    "name": "lesson-edition-2",
+    "accepted": true,
+    "sha256": "e3db0f84d19d356fb70a2e07ed0e7513d3e26a640a34ac3999422dbe590144f2"
+  },
+  {
+    "name": "course-history",
+    "accepted": true,
+    "sha256": "713893f8898caf20902e72f10d9212dd08e03e2f73a9e6ad547c3aa2fa6414b7"
+  },
+  {
+    "name": "unknown-optional-field",
+    "accepted": true,
+    "sha256": "d8d79cd35a2eb20f9af919cae3069b15397cd08f0db3ba927e4f64d7a864c970"
+  },
+  {
+    "name": "root-null",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "root-[]",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "root-0",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "root-\"text\"",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "root-false",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "root-missing-app",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "root-missing-version",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "root-missing-exportedAt",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "root-missing-progress",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "progress-missing-version",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "progress-missing-sessions",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "progress-missing-active",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "progress-missing-words",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "progress-missing-difficult",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-missing-id",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-missing-moduleId",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-missing-mode",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-missing-answerMode",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-missing-previous",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-missing-startedAt",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-missing-completedAt",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-missing-items",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-missing-index",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-missing-phase",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-missing-lastCorrect",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-missing-attempts",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-missing-repeatKeys",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-mode-0",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-mode-1",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-mode-2",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-index-0",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-index-1",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-index-2",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-completedAt-0",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-completedAt-1",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-phase-0",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-phase-1",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-phase-2",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-phase-3",
+    "accepted": true,
+    "sha256": "950e480a98ba3392692bf805db4d118714b61aa2f2c4564637b6f37d36069b77"
+  },
+  {
+    "name": "session-fixedLength-0",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-fixedLength-1",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-lessonRewarded-0",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-lessonRewarded-1",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-repeatKeys-0",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-repeatKeys-1",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-attempts-0",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-attempts-1",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-items-0",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "session-items-1",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "item-key-0",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "item-key-1",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "item-version-0",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "item-version-1",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "item-version-2",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "item-input-0",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "item-type-0",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "item-options-0",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "item-options-1",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "item-options-2",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "attempt-first",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "attempt-answer",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "attempt-lastAnswer",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "attempt-corrections",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "attempt-corrected",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "attempt-key",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "duplicate-current-session",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "active-id-collides",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "encountered-unique",
+    "accepted": true,
+    "sha256": "3344e5e66664e3cb14b0dc092678d1fe62e19eb92448a240c0a846e1a7a96180"
+  },
+  {
+    "name": "encountered-duplicate",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "home-slot-left",
+    "accepted": true,
+    "sha256": "d44ca92971ebd9b27766ed7034fec39e0f353dcb94ec4b1f0a275e887e82e828"
+  },
+  {
+    "name": "home-slot-window",
+    "accepted": true,
+    "sha256": "0e67997cf311ca2d2edee4167d405449d93a904056c0e839131a4510bda1b033"
+  },
+  {
+    "name": "home-slot-right",
+    "accepted": true,
+    "sha256": "b724b76c79f88347412b5c42d05cd3b181fd3e19be4db913e1e2a5da5c330eba"
+  },
+  {
+    "name": "home-slot-rug",
+    "accepted": true,
+    "sha256": "81122012861ccb536a61d4c8afbe48e67b4336b7266d279b20fc022d32f12903"
+  },
+  {
+    "name": "home-slot-shelf",
+    "accepted": true,
+    "sha256": "bac4a2b147a5b682ad7f5d25922f1bce8e5789743f05609917bd567dbc0634f0"
+  },
+  {
+    "name": "home-slot-front",
+    "accepted": true,
+    "sha256": "f1d632b73d70ac9549327713c7b8493596b8df7ab7953dac3276080935441277"
+  },
+  {
+    "name": "home-slot-null",
+    "accepted": true,
+    "sha256": "5be3d8b238fc7a4e24e0ab0befc8516d8a791df8de473b4f24fbe4db54b1c313"
+  },
+  {
+    "name": "home-slot-outside",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "adventure-earned",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "adventure-rooms",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "adventure-unlockedItems",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "adventure-courseHomes",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "adventure-reviewSchema",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "adventure-reviewArchiveHead",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "adventure-completed",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "adventure-stageReviews",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "home-overdraft",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "foreign-overdraft",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "home-room-missing",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "home-slot-collision",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "history-head",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "history-sessions",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "history-items",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "history-modules",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "history-courses",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "archive-duplicate-page",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "archive-invalid-id",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "archive-invalid-previous",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "archive-empty",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "archive-current-session-collision",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "archive-active-session-collision",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "stage-round-already-completed",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "stage-state-missing",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "stage-item-missing",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  },
+  {
+    "name": "stage-invalid-due",
+    "accepted": false,
+    "error": "Plik nie jest poprawną lub obsługiwaną kopią postępów. Obecne dane pozostają bez zmian."
+  }
+]

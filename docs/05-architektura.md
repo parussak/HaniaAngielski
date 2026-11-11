@@ -41,7 +41,8 @@ Punkt odniesienia pochodzi z przeglądu rewizji `24cdeda` (9–10 listopada 2026
 | Poznane elementy i globalne zestawy | `src/learning/known-material.ts`, `src/learning/course-practice.ts` |
 | Lokalny wybór kursu i powrót do rozpoczętej sesji | `src/controllers/courses.ts` |
 | Kafelek kontekstu, lista kursów i globalne ćwiczenia | `src/views/courses.ts`, `src/courses.css` |
-| Statystyki oraz walidacja kopii | `src/learning/statistics.ts`, `src/learning/backup.ts` |
+| Statystyki | `src/learning/statistics.ts` |
+| Publiczna walidacja/eksport kopii i części walidatora | `src/learning/backup.ts`, `src/learning/backup-validation/` |
 | Synchronizacja, konflikty i rozdzielenie kont | `src/sync.ts` |
 | Firebase i planowanie synchronizacji | `src/firebase.ts`, `src/services/` |
 | IndexedDB i archiwum historii | `src/storage.ts`, `src/history.ts`, `src/history-backup.ts` |
@@ -100,6 +101,8 @@ Podstawowy format kursów, wybór kursu, poznany zakres i aktualizacje Food są 
 Po [etapie 3 refaktoringu](refaktoring-etap-3.md) `main.ts` tworzy kontroler domku ze wspólną funkcją `mutate`. `app/events.ts` przekazuje mu akcje domku przed pozostałymi kontrolerami; nierozpoznane akcje przechodzą dalej. Widok i zapis korzystają z tych samych mechanizmów co wcześniej.
 
 ## Wspólne podstawy po refaktoringu etapu 1
+
+Po [etapie 4](refaktoring-etap-4.md) walidację kopii podzielono na kontrole sesji, domku, stanu przygody, podsumowania historii, stron archiwum i bieżących postępów. `backup.ts` zachowuje dotychczasowy interfejs i składa kontrole, a `history-backup.ts` nadal sprawdza integralność pełnej historii. Nie zmienia to formatu danych ani działania importu.
 
 `src/learning/journey.ts` zawiera typy i stabilne klucze map bez zależności od domku, zapisu i nagród. `adventure.ts` nadal eksportuje te symbole dla zgodności istniejących wywołań. Domek korzysta bezpośrednio z tego małego modułu, usuwając cykl wykonawczy `house/progress.ts` ↔ `adventure.ts`.
 

@@ -1,0 +1,58 @@
+import {readFileSync} from 'node:fs';
+import type {Backup,Session} from '../../src/core.ts';
+const at='2026-11-11T10:00:00.000Z',head='a'.repeat(64);
+export function backupValidationCases(){
+ const empty:Backup={app:'hania-language',version:1,exportedAt:at,progress:{version:1,sessions:[],active:null,words:{},difficult:[]}};
+ const item={key:'engine-unit@1:word:word-0',moduleId:'engine-unit',version:1,type:'word' as const,id:'word-0',input:'text' as const};
+ const session:Session={id:'active',moduleId:item.moduleId,mode:'flashcards',answerMode:'text',previous:false,startedAt:at,completedAt:null,items:[item],index:0,phase:'question',lastCorrect:null,attempts:[],repeatKeys:[]};
+ const active=structuredClone(empty);active.progress.active=structuredClone(session);
+ const completed=structuredClone(active);completed.progress.active=null;
+ completed.progress.sessions=[{...structuredClone(session),id:'completed',completedAt:at,index:1,phase:'question',attempts:[{key:item.key,first:false,answer:'wrong',lastAnswer:'fixed',corrections:1,corrected:true}],repeatKeys:[item.key]}];
+ const homes=structuredClone(completed);homes.progress.adventure={version:1,earned:30,purchases:{pillow:{cost:6,slot:'rug'},bowls:{cost:6,slot:'rug',room:'kitchen'}},completed:{'engine-unit/lesson':{at,edition:2}},rooms:['kitchen'],unlockedItems:['bowls'],courseHomes:{'french-book':{earned:10,purchases:{yarn:{cost:4,slot:'front'}}}}};
+ const history=structuredClone(completed);history.progress.sessions=[];
+ history.progress.history={head,sessions:1,items:{[item.key]:{total:1,correct:0}},modules:{'engine-unit':{sessions:1,total:1,correct:0}}};
+ history.archives=[{id:head,previous:null,sessions:structuredClone(completed.progress.sessions)}];
+ const scoped=structuredClone(active);scoped.progress.active={...scoped.progress.active!,mode:'review',stageReview:{id:'engine-unit/stage',title:'Etap',round:2}};
+ scoped.progress.adventure={version:1,earned:0,completed:{},purchases:{},reviewSchema:1,reviewArchiveHead:head,stageReviews:{'engine-unit/stage':{round:1,items:{[item.key]:{item,correct:1,due:2}}}}};
+ const cases:{name:string;input:unknown}[]=[];
+ const add=(name:string,input:unknown)=>cases.push({name,input:structuredClone(input)});
+ const mutate=(name:string,base:Backup,change:(b:any)=>void)=>{const b=structuredClone(base);change(b);add(name,b);};
+ add('old-v1',JSON.parse(readFileSync(new URL('./backup-v1.json',import.meta.url),'utf8')));
+ for(const [name,b] of Object.entries({empty,active,completed,homes,history,scoped}))add(name,b);
+ mutate('course-session',active,b=>{b.progress.active.mode='quiz';b.progress.active.scope={kind:'course',courseId:'english-book'};b.progress.active.items[0].options=['right','wrong'];});
+ mutate('extra-training',completed,b=>{b.progress.sessions[0].mode='training';b.progress.sessions[0].training={kind:'extra',rewarded:true};});
+ mutate('lesson-edition-2',completed,b=>{b.progress.sessions[0].mode='lesson';b.progress.sessions[0].lesson={id:'engine-unit/lesson',title:'Lekcja',edition:2};b.progress.sessions[0].fixedLength=true;b.progress.sessions[0].lessonRewarded=true;});
+ mutate('course-history',history,b=>{b.archives[0].sessions[0].mode='quiz';b.archives[0].sessions[0].scope={kind:'course',courseId:'english-book'};b.progress.history.modules={};b.progress.history.courses={'english-book':{sessions:1,total:1,correct:0}};});
+ mutate('unknown-optional-field',empty,b=>{b.extra={keep:'unchanged'};});
+ for(const value of [null,[],0,'text',false])add(`root-${JSON.stringify(value)}`,value);
+ for(const field of ['app','version','exportedAt','progress'])mutate(`root-missing-${field}`,empty,b=>delete b[field]);
+ for(const field of ['version','sessions','active','words','difficult'])mutate(`progress-missing-${field}`,active,b=>delete b.progress[field]);
+ for(const field of ['id','moduleId','mode','answerMode','previous','startedAt','completedAt','items','index','phase','lastCorrect','attempts','repeatKeys'])mutate(`session-missing-${field}`,active,b=>delete b.progress.active[field]);
+ for(const [field,values] of Object.entries({mode:['unknown','training','lesson'],index:[-1,1,1.5],completedAt:[at,'invalid'],phase:['unknown','feedback','retry','revealed'],fixedLength:[false,1],lessonRewarded:[true,false],repeatKeys:[['missing'],null],attempts:[null,[{}]],items:[[],null]}))
+  for(const [i,value] of values.entries())mutate(`session-${field}-${i}`,active,b=>b.progress.active[field]=value);
+ for(const [field,values] of Object.entries({key:['bad',''],version:[0,-1,2],input:['unknown'],type:['unknown'],options:[[],['same','same'],['a','b']]}))
+  for(const [i,value] of values.entries())mutate(`item-${field}-${i}`,active,b=>b.progress.active.items[0][field]=value);
+ for(const [field,value] of Object.entries({first:'yes',answer:1,lastAnswer:{html:'bad'},corrections:-1,corrected:null,key:'missing'}))mutate(`attempt-${field}`,completed,b=>b.progress.sessions[0].attempts[0][field]=value);
+ mutate('duplicate-current-session',completed,b=>b.progress.sessions.push(structuredClone(b.progress.sessions[0])));
+ mutate('active-id-collides',completed,b=>{b.progress.active=structuredClone(session);b.progress.active.id='completed';});
+ mutate('encountered-unique',active,b=>b.progress.encountered=[item.key]);
+ mutate('encountered-duplicate',active,b=>b.progress.encountered=[item.key,item.key]);
+ for(const slot of ['left','window','right','rug','shelf','front',null,'outside'])mutate(`home-slot-${slot}`,homes,b=>b.progress.adventure.purchases.pillow.slot=slot);
+ for(const [field,value] of Object.entries({earned:-1,rooms:['kitchen','kitchen'],unlockedItems:['__proto__'],courseHomes:{'angielski-hani':{earned:0,purchases:{}}},reviewSchema:2,reviewArchiveHead:'invalid',completed:{lesson:{at:'invalid'}},stageReviews:[]}))mutate(`adventure-${field}`,homes,b=>b.progress.adventure[field]=value);
+ mutate('home-overdraft',homes,b=>b.progress.adventure.earned=1);
+ mutate('foreign-overdraft',homes,b=>b.progress.adventure.courseHomes['french-book'].earned=1);
+ mutate('home-room-missing',homes,b=>b.progress.adventure.purchases.bowls.room='bathroom');
+ mutate('home-slot-collision',homes,b=>delete b.progress.adventure.purchases.bowls.room);
+ for(const [field,value] of Object.entries({head:null,sessions:2,items:{x:{total:0,correct:1}},modules:{'engine-unit':{sessions:-1,total:1,correct:0}},courses:{'english-book':{sessions:1,total:1,correct:0}}}))mutate(`history-${field}`,history,b=>b.progress.history[field]=value);
+ mutate('archive-duplicate-page',history,b=>b.archives.push(structuredClone(b.archives[0])));
+ mutate('archive-invalid-id',history,b=>b.archives[0].id='invalid');
+ mutate('archive-invalid-previous',history,b=>b.archives[0].previous='invalid');
+ mutate('archive-empty',history,b=>b.archives[0].sessions=[]);
+ mutate('archive-current-session-collision',history,b=>b.progress.sessions=structuredClone(b.archives[0].sessions));
+ mutate('archive-active-session-collision',history,b=>{b.progress.active=structuredClone(session);b.progress.active.id='completed';});
+ mutate('stage-round-already-completed',scoped,b=>b.progress.adventure.stageReviews['engine-unit/stage'].round=2);
+ mutate('stage-state-missing',scoped,b=>delete b.progress.adventure.stageReviews);
+ mutate('stage-item-missing',scoped,b=>b.progress.adventure.stageReviews['engine-unit/stage'].items={});
+ mutate('stage-invalid-due',scoped,b=>b.progress.adventure.stageReviews['engine-unit/stage'].items[item.key].due=0);
+ return cases;
+}

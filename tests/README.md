@@ -6,6 +6,8 @@ Sesje, ocenianie, historia i trwałość zapisu korzystają z `fixtures/engine.t
 
 `house-controller.test.ts` sprawdza interakcje domku ze stanem i transakcyjnym portem zapisu na danych syntetycznych. Mechanizm kupowania i odblokowań ma osobne testy `house.test.ts`, a rzeczywiste przyciski oraz połączenie kontrolerów — `browser/house.spec.ts`. Nie trzeba kopiować pełnych materiałów Food do testów kontrolera.
 
+`backup-validation.test.ts` korzysta z `fixtures/backup-validation-cases.ts` i wyników starego walidatora w `fixtures/backup-validation-results.json`. Zestaw chroni odczyt i odrzucenia 116 wariantów oraz dokładną zawartość kopii. Nie regeneruj wyników odniesienia tylko po to, żeby nowa implementacja przeszła test. Świadoma zmiana kryteriów wymaga osobnej decyzji i przeglądu zgodności; pełne archiwum nadal ma dodatkowe testy integralności historii.
+
 ## Regresje Food
 
 Importuj `food`, `foodCourse` albo `foodModules` z `materials.ts`. Food jest wybierany po `unit-2-food`, a jego kurs po `angielski-hani`; nie po pozycji w katalogu. `foodModules` celowo zawiera tylko ten moduł. Indeksowanie tego lokalnego scenariusza lub małej, jawnie zbudowanej fixture jest dozwolone. Nie zakładaj, że pełny katalog ma jeden moduł/kurs ani że Food jest pierwszy.

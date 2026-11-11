@@ -19,6 +19,12 @@ Zachowano rozdzielenie kont i gościa, kontrolę wersji przy synchronizacji, wyb
 
 Pełny opis kluczy, limitów, archiwizacji, cache i dowodów: [zapis — punkt odniesienia](stan-obecny/zapis.md). Mapa implementacji: [architektura](05-architektura.md).
 
+## Walidacja kopii po refaktoringu etapu 4
+
+Publiczne `validateBackup` i `backup` pozostają w `src/learning/backup.ts`. Wewnętrzne kontrole sesji, domków, przygody, historii i archiwów są rozdzielone w `src/learning/backup-validation/`. Nagłówek i wersja pliku, dopuszczalne dane, limity i komunikat błędu pozostają takie same. Walidacja nie zmienia źródła, zachowuje dodatkowe pola i zwraca niezależną kopię; nie wykonuje migracji. Odrzucenie importowanego pliku nadal nie zastępuje obecnych postępów.
+
+Sprawdzenie kompletności archiwum, skrótów stron i zgodności podsumowania nadal wykonuje `validateFullBackup` w `src/history-backup.ts`, po walidacji strukturalnej. Tego etapu nie należy pomijać przy imporcie pełnej kopii. [Podział odpowiedzialności i zestaw zgodności](refaktoring-etap-4.md).
+
 ## Niedostępna mapa a zapis wyników
 
 Problemy odczytu map są przejściowym stanem interfejsu, poza `Progress` i kopią. Niepełny katalog wstrzymuje migrację dawnych błędów, przesuwanie jej kursora oraz rozliczanie premii etapowych; po odzyskaniu kompletu te działania są wznawiane. Nagrody za zwykłe ukończenie lekcji działają nadal. Aktywna sesja mapy niedostępnej pozostaje zapisana i czeka na jej odzyskanie, co chroni przypisanie nowych błędów do etapu. Przygotowanie do pustego treningu nie zmienia formatu zapisu ani nie zalicza treningu za użytkownika. [Pełny opis](odpornosc-map.md).

@@ -1,0 +1,41 @@
+import type {Item} from '../model.ts';
+import {obj,str,date,strings,integer} from './values.ts';
+
+export const validItem = (i: unknown): boolean => obj(i) && str(i.key) && str(i.moduleId) && integer(i.version) && i.version > 0 && ['word', 'exercise'].includes(i.type as string) && str(i.id) && ['text', 'choice'].includes(i.input as string) && i.key === `${i.moduleId}@${i.version}:${i.type}:${i.id}` &&
+    (i.options === undefined || Array.isArray(i.options) && i.options.length >= 2 && i.options.length <= 4 && i.options.every(str) && new Set(i.options).size === i.options.length);
+export const validSession = (v: unknown, completed: boolean): boolean => {
+    if(obj(v)&&(v.fixedLength!==undefined&&v.fixedLength!==true||v.lessonRewarded!==undefined&&(v.lessonRewarded!==true||!completed||!v.lesson)))return false;
+    if (!obj(v) || !str(v.id) || !str(v.moduleId) || !['flashcards', 'flashcards-basic', 'quiz', 'grammar', 'dialogue', 'review', 'lesson', 'training'].includes(v.mode as string) || !['choice', 'text', 'mixed'].includes(v.answerMode as string) || typeof v.previous !== 'boolean' || !date(v.startedAt) || !(completed ? date(v.completedAt) : v.completedAt === null) || !['question', 'revealed', 'feedback', 'retry'].includes(v.phase as string) || !(v.lastCorrect === null || typeof v.lastCorrect === 'boolean'))
+        return false;
+    if (v.training !== undefined && (!obj(v.training) || !['map','extra'].includes(v.training.kind as string) || (v.training.kind === 'map' ? v.mode !== 'lesson' || v.training.rewarded !== undefined : v.mode !== 'training' || v.lesson !== undefined || v.stageReview !== undefined || v.training.rewarded !== undefined && (v.training.rewarded !== true || !completed))))
+        return false;
+    if (v.mode === 'training' && (!obj(v.training) || v.training.kind !== 'extra'))
+        return false;
+    if (v.scope !== undefined && (!obj(v.scope) || v.scope.kind !== 'course' || !str(v.scope.courseId) || !['flashcards','quiz','grammar'].includes(v.mode as string) || v.lesson !== undefined || v.stageReview !== undefined || v.training !== undefined))
+        return false;
+    if (v.lesson !== undefined && (!obj(v.lesson) || !str(v.lesson.id) || !str(v.lesson.title) || v.mode !== 'lesson' || v.lesson.edition !== undefined && v.lesson.edition !== 2))
+        return false;
+    if (v.mode === 'lesson' && !v.lesson)
+        return false;
+    if (v.stageReview !== undefined && (!obj(v.stageReview) || !str(v.stageReview.id) || !v.stageReview.id.startsWith(`${v.moduleId}/`) || !str(v.stageReview.title) || !integer(v.stageReview.round) || v.stageReview.round < 1 || v.mode !== 'review' || v.lesson !== undefined))
+        return false;
+    if (!Array.isArray(v.items) || !v.items.length || v.items.length > 1000 || !integer(v.index) || (completed ? v.index !== v.items.length : v.index >= v.items.length) || !strings(v.repeatKeys))
+        return false;
+    if (!v.items.every(validItem))
+        return false;
+    if (!v.scope && v.items.some(i => obj(i) && i.options !== undefined)) return false;
+    if (!Array.isArray(v.attempts) || v.attempts.length > v.items.length || !v.attempts.every(a => obj(a) && str(a.key) && typeof a.first === 'boolean' && typeof a.answer === 'string' && a.answer.length <= 2000 && (a.lastAnswer === undefined || (typeof a.lastAnswer === 'string' && a.lastAnswer.length <= 2000)) && integer(a.corrections) && typeof a.corrected === 'boolean' && (v.items as Item[]).some(i => i.key === a.key)))
+        return false;
+    if (new Set(v.attempts.map(a => a.key)).size !== v.attempts.length)
+        return false;
+    if (!(v.repeatKeys as string[]).every(k => (v.items as Item[]).some(i => i.key === k)))
+        return false;
+    if (!completed) {
+        const current = v.items[v.index] as Item;
+        if (v.phase === 'revealed' && current.type !== 'word')
+            return false;
+        if (['feedback', 'retry'].includes(v.phase as string) && !v.attempts.some(a => a.key === current.key))
+            return false;
+    }
+    return true;
+};

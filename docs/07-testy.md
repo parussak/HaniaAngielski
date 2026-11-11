@@ -129,3 +129,9 @@ Końcowy przebieg na standardowym wydaniu również dał **88/88**. Budowanie, k
 Dodano cztery testy w `tests/house-controller.test.ts`: brak wpływu na aktywną lekcję przy nawigacji, trwałe zakupy i ustawienia w osobnych kursach, brak zmiany postępów i komunikatu sukcesu po błędzie zapisu oraz przekazywanie nieswoich akcji między kontrolerami. Dotychczasowe oczekiwania testów Food i domku pozostają zachowane. Porównanie sekwencji 12 akcji przed/po dało identyczne postępy, stan ekranu i komunikaty. [Zakres etapu](refaktoring-etap-3.md).
 
 Weryfikacja 11 listopada 2026: **170/170 testów Node i 88/88 testów Playwright** gotowej aplikacji w Chrome. Budowanie z walidacją treści, TypeScript i PWA, kontrola odnośników dokumentacji oraz kontrola różnic przeszły. Nie zmieniono dotychczasowych oczekiwań przeglądarkowych ani formatu postępów; nie testowano na fizycznym telefonie i prawdziwych danych Hani.
+
+## Podział walidacji kopii — etap 4 refaktoringu
+
+`tests/backup-validation.test.ts` sprawdza publiczny kontrakt względem 116 wyników zapisanych przed podziałem: 21 poprawnych i 95 odrzuconych kopii. Porównuje dokładną zawartość zaakceptowanych danych i treść błędów, a także brak mutacji źródła, niezależność kopii i zachowanie dodatkowych pól. Osobny przypadek chroni rozdzielenie walidacji struktury od kontroli integralności pełnej historii. Dotychczasowe testy kopii, historii, domku, kont, synchronizacji i interfejsu zachowano bez zmiany oczekiwań. [Zakres i dowody zgodności](refaktoring-etap-4.md).
+
+Weryfikacja 11 listopada 2026: **173/173 testy Node** na zwykłej i wirtualnie rozszerzonej bibliotece oraz **88/88 testów Playwright** gotowej aplikacji w Chrome. Budowanie z walidacją materiałów, TypeScript i PWA, kontrola dokumentacji i różnic przeszły. Wyniki 116 przypadków przed/po są identyczne. Nie testowano na fizycznym telefonie ani prawdziwym koncie Hani.

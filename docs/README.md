@@ -16,6 +16,8 @@ Wprowadzono też swobodny wybór lekcji, stałą długość nowych sesji, nowe m
 
 [Etap 3 refaktoringu](refaktoring-etap-3.md) wydziela obsługę przycisków domku do osobnego kontrolera. Rozliczanie ukończenia nauki, wygląd i zapis pozostają bez zmian.
 
+[Etap 4 refaktoringu](refaktoring-etap-4.md) dzieli walidację kopii na mniejsze części. Zachowuje obsługę starych plików, kryteria walidacji i format postępów; zgodność sprawdza zestaw wyników sprzed podziału.
+
 | Dokument | Na jakie pytanie odpowiada? |
 | --- | --- |
 | [01 · Produkt](01-produkt.md) | Dla kogo i po co jest aplikacja? Jak korzystamy z nauki prowadzonej i swobodnej? |
