@@ -1,7 +1,7 @@
 import {openBackup} from './navigation.ts';
-import {test,expect,type Page} from '@playwright/test';
+import {test,expect,type Page} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
-import {modules} from '../materials.ts';
+import {foodModules as modules} from '../materials.ts';
 import {backup,emptyProgress,questionFor,type Progress} from '../../src/core.ts';
 import {freshAdventure,lessons,makeLessonSession,type Journey} from '../../src/adventure.ts';
 import {openMap} from './navigation.ts';

@@ -1,5 +1,5 @@
 import {openModule} from './navigation.ts';
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
 const dialogues=JSON.parse(readFileSync(new URL('../../public/content/02-food/rozmowki.json',import.meta.url),'utf8'));
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});

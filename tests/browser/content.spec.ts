@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.ts';
 
 test('zmiana plików treści działa bez zmian kodu, zasady pochodzą z JSON',async({page})=>{
   await page.route('**/content/02-food/modul.json',async route=>{

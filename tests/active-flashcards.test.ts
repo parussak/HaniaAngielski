@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {modules} from './materials.ts';
+import {engineModules as modules} from './fixtures/engine.ts';
 import {emptyProgress,makeSession,questionFor,recordAnswer,backup,validateBackup,next,currentStats} from '../src/core.ts';
 
 test('aktywne fiszki: wybór, wpisywanie i tryb mieszany korzystają z materiału',()=>{

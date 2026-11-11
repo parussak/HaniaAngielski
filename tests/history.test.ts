@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {indexedDB} from 'fake-indexeddb';
-import {modules} from './materials.ts';
+import {engineModules as modules} from './fixtures/engine.ts';
 import {emptyProgress,makeSession,recordAnswer,questionFor,next,currentStats,backup,validateBackup} from '../src/core.ts';
 import {compactHistory,historyPages,sessionCount,byteSize,publishHistory,type HistoryPage} from '../src/history.ts';
 import {fullBackup,validateFullBackup} from '../src/history-backup.ts';

@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {modules} from './materials.ts';
+import {foodModules as modules} from './materials.ts';
 import {emptyProgress,makeSession,recordAnswer,markWord,isCorrect,backup,validateBackup} from '../src/core.ts';
 const m=modules[0];
 test('K1: poprawka w tej samej sesji nie usuwa trudności, nowa pierwsza próba usuwa',()=>{

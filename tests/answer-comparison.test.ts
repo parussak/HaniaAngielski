@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {compareAnswer,closestAnswer} from '../src/answer-comparison.ts';
-import {modules} from './materials.ts';
+import {engineModules as modules} from './fixtures/engine.ts';
 import {backup,emptyProgress,makeSession,questionFor,recordAnswer,validateBackup} from '../src/core.ts';
 
 test('porównanie wyróżnia brakujące, nadmiarowe i zamienione litery i słowa',()=>{

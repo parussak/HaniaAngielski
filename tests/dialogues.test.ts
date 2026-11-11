@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {modules} from './materials.ts';
+import {foodModules as modules} from './materials.ts';
 import {validateModules} from '../src/content-validation.ts';
 import {emptyProgress,makeSession,questionFor,recordAnswer,backup,validateBackup,next} from '../src/core.ts';
 

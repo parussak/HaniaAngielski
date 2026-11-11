@@ -1,6 +1,6 @@
 import {openModule} from './navigation.ts';
-import {test,expect} from '@playwright/test';
-import {modules} from '../materials.ts';
+import {test,expect} from './fixtures.ts';
+import {foodModules as modules} from '../materials.ts';
 test.use({isMobile:true,hasTouch:true,viewport:{width:390,height:844}});
 test('telefon: fiszki, quiz mieszany, powtórka błędów i brak błędów zasobów',async({page})=>{
   const failures:string[]=[];

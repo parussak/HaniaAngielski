@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {modules} from './materials.ts';
+import {foodModules as modules} from './materials.ts';
 import {emptyProgress,makeSession,backup,validateBackup} from '../src/core.ts';
 const m=modules[0];
 test('dwa zestawy fiszek: 38 z ramek i 97 wszystkich, bez dublowania słówek',()=>{

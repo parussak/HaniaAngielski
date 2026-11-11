@@ -1,6 +1,6 @@
 import {openBackup} from './navigation.ts';
-import {test,expect} from '@playwright/test';
-import {modules} from '../materials.ts';
+import {test,expect} from './fixtures.ts';
+import {foodModules as modules} from '../materials.ts';
 import {backup,emptyProgress,makeSession,keyFor} from '../../src/core.ts';
 
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});

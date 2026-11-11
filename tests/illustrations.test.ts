@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import {existsSync} from 'node:fs';
 import assert from 'node:assert/strict';
-import {modules} from './materials.ts';
+import {foodModules as modules} from './materials.ts';
 import {emptyProgress,makeSession,inputFor,questionFor,requiresChoice} from '../src/core.ts';
 import {validateModules} from '../src/content-validation.ts';
 

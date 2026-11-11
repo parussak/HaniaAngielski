@@ -4,6 +4,8 @@ Status: istniejące kontrole oraz docelowy sposób ich organizacji. Po zatwierdz
 
 ## Stan obecny
 
+**Dobór danych po etapie 2 refaktoringu:** mechanika korzysta z danych syntetycznych, regresje Food wskazują go po ID, a kompletność i rozbudowa całego katalogu mają osobne kontrole. Nie wymagamy jednego modułu lub kursu w aplikacji. [Instrukcja danych testowych](../tests/README.md) i [zakres etapu 2](refaktoring-etap-2.md). Wcześniejsze wyniki poniżej są historią uruchomień, a nie wymaganą liczbą testów.
+
 Są testy Node dla logiki, materiałów, historii i synchronizacji oraz scenariusze Playwright dla aplikacji i PWA. Część testów jest ogólna, część świadomie sprawdza konkretne ustalenia Food; kilka zależy od historycznych nazw i fragmentów kodu.
 
 W przeglądzie 9–10 listopada 2026 r. wykonano 84 testy Node i kontrolę materiałów z powodzeniem. Zebrano 51 testów przeglądarkowych, bez ponownego ich wykonania w zadaniu dokumentacyjnym. Nie są to wyniki nowego uruchomienia przy obecnym porządkowaniu dokumentacji.
@@ -115,3 +117,9 @@ Weryfikacja 10 listopada 2026: **158/158 testów Node i 86/86 testów Playwright
 W `tests/browser/house.spec.ts` scenariusz ostatniej lekcji czeka na pokazanie pytania przed pętlą odpowiedzi, a scenariusz zimnego startu czeka na zapis ustawienia przed zamknięciem strony. Nie zastępujemy tych oczekiwań stałym opóźnieniem i nie zmniejszamy wymagań dotyczących wyniku ani trwałości postępów.
 
 Weryfikacja 11 listopada 2026: **162/162 testy Node i 86/86 testów Playwright** gotowej aplikacji w Chrome. Budowanie z walidacją materiałów, TypeScript i PWA oraz kontrola odnośników dokumentacji przeszły. Pierwszy pełny przebieg przeglądarkowy (84/86) wskazał opisane wyżej brakujące oczekiwania; pełny przebieg po ich doprecyzowaniu przeszedł bez błędów. Nie testowano na fizycznym telefonie ani prawdziwym koncie Hani.
+
+## Testy odporne na nowe moduły i kursy — etap 2 refaktoringu
+
+166/166 testów Node przeszło na zwykłej i wirtualnie rozszerzonej bibliotece. Pełny przebieg Playwright na testowym wydaniu z dodatkowym modułem EN, kursami FR/IT i Food poza pierwszą pozycją dał 88/88 po objęciu dodatkowych kontekstów przeglądarki jawnym scenariuszem Food. Testy pełnej biblioteki pozostają niezależne od tej fixture. [Zakres, wyniki i ograniczenia](refaktoring-etap-2.md); [instrukcja danych testowych](../tests/README.md).
+
+Końcowy przebieg na standardowym wydaniu również dał **88/88**. Budowanie, kontrola dokumentacji i różnic przeszły; wersja PWA jest identyczna z wersją sprzed tego etapu. Nie zmieniono kodu aplikacji ani jej produkcyjnych materiałów.

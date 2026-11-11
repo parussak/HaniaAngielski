@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
-import {modules} from './materials.ts';
+import {foodModules as modules} from './materials.ts';
 import {freshAdventure,journeyForProgress,lessonForProgress,lessons,makeLessonSession,rewardCompletion,validateJourney} from '../src/adventure.ts';
 import {backup,emptyProgress,next,questionFor,recordAnswer,sessionCompatible,validateBackup,type Progress,type Session} from '../src/core.ts';
 import {getNextStep} from '../src/next-step.ts';

@@ -1,8 +1,8 @@
 import {openBackup} from './navigation.ts';
 import {openMap} from './navigation.ts';
-import {test,expect,type Page} from '@playwright/test';
+import {test,expect,type Page} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
-import {modules} from '../materials.ts';
+import {foodModules as modules} from '../materials.ts';
 import {emptyProgress,backup,recordAnswer,questionFor,next,keyFor,type Progress} from '../../src/core.ts';
 import {validateJourney,makeLessonSession,lessonKey,freshAdventure} from '../../src/adventure.ts';
 const j=validateJourney(JSON.parse(readFileSync(new URL('../../public/content/02-food/sciezka.json',import.meta.url),'utf8')),modules[0]),stage=j.stages[0],id=`${j.moduleId}/${stage.id}`;

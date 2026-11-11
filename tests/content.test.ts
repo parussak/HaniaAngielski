@@ -1,10 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { modules } from './materials.ts';
+import { foodModules as modules,library } from './materials.ts';
 import { assembleModule, validateModules } from '../src/content-validation.ts';
 
 test('materiały Food mają źródła, komplet słów i wszystkie zagadnienia gramatyczne',()=>{
-  assert.equal(modules.length,1); const m=modules[0];
+  const m=modules[0];
   assert.equal(m.id,'unit-2-food'); assert.equal(m.order,2);
   assert.equal(m.words.length,97); assert.equal(m.exercises.filter(q=>q.kind!=='dialogue').length,189);
   assert.equal(m.exercises.filter(q=>q.kind==='dialogue').length,12);
@@ -15,6 +15,11 @@ test('materiały Food mają źródła, komplet słów i wszystkie zagadnienia gr
   assert.ok(m.words.every(w=>!['a dog','a cat','a book'].includes(w.back)));
   assert.ok(m.words.find(w=>w.id==='apple')!.answers!.includes('an apple'));
   assert.ok(!m.words.find(w=>w.id==='apple')!.answers!.includes('a apple'));
+});
+
+test('pełna biblioteka produkcyjna jest poprawna niezależnie od liczby modułów i kursów',()=>{
+  assert.deepEqual(validateModules(library.modules),library.modules);
+  for(const m of library.modules)assert.ok(library.courses.some(c=>c.id===m.courseId&&c.moduleIds.includes(m.id)),m.id);
 });
 test('jedna poprawka słówka aktualizuje fiszkę, pytanie i odpowiedź quizu',()=>{
   const m=modules[0]; const words=structuredClone(m.words);

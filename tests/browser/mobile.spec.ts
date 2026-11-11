@@ -1,9 +1,9 @@
 import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
 import {answerQuestion} from './helpers.ts';
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.ts';
 import { readFileSync } from 'node:fs';
-import { modules } from '../materials.ts';
+import { foodModules as modules } from '../materials.ts';
 const module = modules[0];
 
 test.describe('telefon — dotyk i małe ekrany', () => {

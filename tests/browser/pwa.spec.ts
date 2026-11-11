@@ -1,6 +1,6 @@
 import {openModule,openMap} from './navigation.ts';
-import {test,expect,type Page} from '@playwright/test';
-import {modules} from '../materials.ts';
+import {test,expect,type Page} from './fixtures.ts';
+import {foodModules as modules} from '../materials.ts';
 import {pwaServer} from './pwa-server.ts';
 
 test.use({serviceWorkers:'allow',viewport:{width:390,height:844},isMobile:true,hasTouch:true});

@@ -5,7 +5,7 @@ import {ProgressSync,SyncConflict,validateCache,type AccountCache,type RemotePro
 import {readStored,writeStored,load,save} from '../src/storage.ts';
 import {indexedDB} from 'fake-indexeddb';
 import {compactHistory,sessionCount,type HistoryPage} from '../src/history.ts';
-import {modules} from './materials.ts';
+import {engineModules as modules} from './fixtures/engine.ts';
 import {makeSession,questionFor,recordAnswer,next} from '../src/core.ts';
 import {creditStars,purchase,stars,homeFor} from '../src/house/progress.ts';
 

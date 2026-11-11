@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {modules} from './materials.ts';
+import {foodModules as modules} from './materials.ts';
 import {emptyProgress,makeSession,questionFor,recordAnswer,next,isCorrect,backup,validateBackup,type Exercise} from '../src/core.ts';
 import {validateJourney,lessons,makeLessonSession,rewardCompletion,unlocked,stars} from '../src/adventure.ts';
 import {vocabularyAssessment,vocabularyFullAnswer} from '../src/learning/vocabulary-answer.ts';

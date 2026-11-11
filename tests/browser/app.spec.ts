@@ -1,9 +1,9 @@
 import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
 import {answerQuestion} from './helpers.ts';
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.ts';
 import { readFileSync } from 'node:fs';
-import { modules } from '../materials.ts';
+import { foodModules as modules } from '../materials.ts';
 const data = modules[0];
 test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządzeniu', async ({ page, browser }) => {
   const errors: string[] = []; page.on('pageerror',e=>errors.push(e.message));

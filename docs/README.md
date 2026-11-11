@@ -12,6 +12,8 @@ Wprowadzono też swobodny wybór lekcji, stałą długość nowych sesji, nowe m
 
 11 listopada 2026 wykonano [etap 1 refaktoringu: zależności i wspólne stałe](refaktoring-etap-1.md). Usunięto cykl mapy–domek, zachowując działanie, wygląd i format postępów. To osobny etap porządkowania po wcześniejszych etapach rozwoju funkcji 1–4.
 
+[Etap 2 refaktoringu](refaktoring-etap-2.md) oddziela syntetyczne testy mechaniki, regresje Food wybieranego po ID i kontrole całej rozbudowywanej biblioteki. Nie zmienia kodu aplikacji ani produkcyjnych treści.
+
 | Dokument | Na jakie pytanie odpowiada? |
 | --- | --- |
 | [01 · Produkt](01-produkt.md) | Dla kogo i po co jest aplikacja? Jak korzystamy z nauki prowadzonej i swobodnej? |

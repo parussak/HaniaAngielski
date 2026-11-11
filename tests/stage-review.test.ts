@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {modules} from './materials.ts';
+import {foodModules as modules} from './materials.ts';
 import {validateJourney,makeLessonSession,rewardCompletion,lessonKey,unlocked,freshAdventure,stars} from '../src/adventure.ts';
 import {seedStageReviews,seedReviewArchive,recordStageError,stageKey,reviewState,reviewStats,makeStageReviewSession,finishStageReview,settleStageRewards} from '../src/stage-review.ts';
 import {emptyProgress,recordAnswer,questionFor,next,backup,validateBackup,currentStats,keyFor,type Progress,type Session,type Item} from '../src/core.ts';

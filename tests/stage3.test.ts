@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
-import {modules} from './materials.ts';
+import {foodModules as modules} from './materials.ts';
 import {normalizeAnswer} from '../src/answers.ts';
 const read=(path:string)=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
 test('etap 3: systemowe czcionki, favicon, manifest PWA i konfiguracja przenośna',()=>{

@@ -1,5 +1,5 @@
 import {openBackup} from './navigation.ts';
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect, type Page } from './fixtures.ts';
 import { courseFixture } from '../fixtures/course-materials.ts';
 import { backup, emptyProgress } from '../../src/core.ts';
 

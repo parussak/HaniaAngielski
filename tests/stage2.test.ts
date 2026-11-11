@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import * as core from '../src/core.ts';
-import {modules} from './materials.ts';
+import {foodModules as modules} from './materials.ts';
 const m=modules[0];const helpers=core as any;
 test('I1: kolejność odpowiedzi ma stałe ziarno, zmienia się między sesjami',()=>{
   assert.equal(typeof helpers.optionsFor,'function');

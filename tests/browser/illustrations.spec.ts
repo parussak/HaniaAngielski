@@ -1,8 +1,8 @@
 import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
-import {modules} from '../materials.ts';
+import {foodModules as modules} from '../materials.ts';
 import {backup,emptyProgress,makeSession} from '../../src/core.ts';
 const tasks=JSON.parse(readFileSync(new URL('../../public/content/02-food/cwiczenia.json',import.meta.url),'utf8'));
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});

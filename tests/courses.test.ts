@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { readLibrary } from '../src/materials/library.ts';
 import { validateCatalog, validateCourses } from '../src/materials/validation.ts';
 import { courseFixture } from './fixtures/course-materials.ts';
-import { courses, modules } from './materials.ts';
+import { foodCourses as courses, foodModules as modules } from './materials.ts';
 import { assembleModule, validateModules } from '../src/content-validation.ts';
 import { backup, emptyProgress, eligibleModules, isCorrect, keyFor, makeSession, next, questionFor, recordAnswer, sessionCompatible, validateBackup, type Item } from '../src/core.ts';
 import { compareModules, courseKey } from '../src/learning/scope.ts';
@@ -16,9 +16,9 @@ const raw = (file: string) => JSON.parse(readFileSync(new URL(`../public/content
 const item = (m: typeof modules[number], id = 'coffee-drink'): Item => ({ key: keyFor(m, 'word', id), moduleId: m.id, version: 1, type: 'word', id, input: 'text' });
 
 test('Food ma jawny kurs z nieustalonymi danymi podręcznika; materiały i stare klucze są identyczne', () => {
-    assert.equal(courses.length, 1); const c = courses[0], m = modules[0];
+    const c = courses[0], m = modules[0];
     assert.equal(c.id, 'angielski-hani'); assert.equal(c.targetLanguage, 'en'); assert.equal(c.explanationLanguage, 'pl');
-    assert.deepEqual(c.moduleIds, ['unit-2-food']); assert.deepEqual(c.textbook, { title: null, authors: null, edition: null });
+    assert.ok(c.moduleIds.includes('unit-2-food')); assert.deepEqual(c.textbook, { title: null, authors: null, edition: null });
     const legacy = assembleModule(raw('modul.json'), raw('slownictwo.json'), raw('quiz.json'), raw('cwiczenia.json'), raw('gramatyka.json'), raw('rozmowki.json'));
     assert.deepEqual(m.words, legacy.words); assert.deepEqual(m.exercises, legacy.exercises); assert.deepEqual(m.grammar, legacy.grammar);
     assert.deepEqual(m.basicFlashcardIds, legacy.basicFlashcardIds);

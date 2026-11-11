@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {validateCats,responseCat,endingCat} from '../src/cats.ts';
-import {modules} from './materials.ts';
+import {engineModules as modules} from './fixtures/engine.ts';
 import {emptyProgress,makeSession,backup,validateBackup} from '../src/core.ts';
 const raw=JSON.parse(readFileSync(new URL('../public/cats/catalog.json',import.meta.url),'utf8'));
 const catalog=validateCats(raw);

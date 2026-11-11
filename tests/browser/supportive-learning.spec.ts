@@ -1,6 +1,6 @@
-import {test,expect,type Page} from '@playwright/test';
+import {test,expect,type Page} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
-import {modules} from '../materials.ts';
+import {foodModules as modules} from '../materials.ts';
 import {emptyProgress,makeSession,backup,keyFor} from '../../src/core.ts';
 import {openBackup} from './navigation.ts';
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});

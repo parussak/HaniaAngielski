@@ -1,8 +1,8 @@
 import {openBackup} from './navigation.ts';
 import {openMap} from './navigation.ts';
-import {test,expect,type Page} from '@playwright/test';
+import {test,expect,type Page} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
-import {modules} from '../materials.ts';
+import {foodModules as modules} from '../materials.ts';
 import {emptyProgress,makeSession,recordAnswer,questionFor,next,backup} from '../../src/core.ts';
 const journey=JSON.parse(readFileSync(new URL('../../public/content/02-food/sciezka.json',import.meta.url),'utf8'));
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});

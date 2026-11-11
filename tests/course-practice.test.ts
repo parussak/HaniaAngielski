@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { modules, courses } from './materials.ts';
+import { foodModules as modules, foodCourses as courses } from './materials.ts';
 import { AppState } from '../src/app/state.ts';
 import { createCourseController, coursePreferenceKey } from '../src/controllers/courses.ts';
 import { courseModules } from '../src/app/selectors.ts';

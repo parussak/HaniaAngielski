@@ -75,4 +75,6 @@ Dla Food zachowujemy ukończone lekcje i stare pytania. Wdrożone `update` obsł
 
 ## Pokój i wyposażenie za nowy moduł
 
+Przy dodawaniu modułu testy istniejącego Food zachowują swoje oczekiwania dotyczące jego treści. Nie zmieniaj ich liczników słówek/lekcji ani nie podmieniaj Food na pierwszy nowy moduł. Ogólne testy używają danych syntetycznych, a kontrola katalogu obejmuje wszystkie moduły. [Jak dobrać dane i sprawdzić rozbudowę](../tests/README.md).
+
 Przy nowym module zaplanuj jeden pokój za ukończenie wszystkich jego map i przedmioty za pojedyncze mapy. W [katalogu domku](../src/house/catalog.ts) dodaj powiązania identyfikatorów modułu i map z pokojem oraz przedmiotami, ceny, zgodne pokoje i domyślne miejsca. Grafiki SVG umieść w `public/game/`; muszą być lekkie i działać offline. Nie wpisuj warunków konkretnego języka do mechanizmu przyznawania nagród. Zachowuj istniejące identyfikatory nagród i zakupów. Sprawdź częściowe i pełne ukończenie modułu, brak mapy, ponowny odczyt, osobne kursy i kopię. [Zasady i przykład Food](koci-domek.md).

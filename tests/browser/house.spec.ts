@@ -1,9 +1,9 @@
-import {test,expect,type Page} from '@playwright/test';
+import {test,expect,type Page} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
 import {backup,emptyProgress,type Progress} from '../../src/core.ts';
 import {freshAdventure,lessons,type Journey} from '../../src/adventure.ts';
 import {courseFixture} from '../fixtures/course-materials.ts';
-import {modules} from '../materials.ts';
+import {foodModules as modules} from '../materials.ts';
 import {openBackup} from './navigation.ts';
 const maps=['sciezka','sciezka-praktyka'].map(f=>JSON.parse(readFileSync(new URL(`../../public/content/02-food/${f}.json`,import.meta.url),'utf8')) as Journey);
 const at='2026-11-10T12:00:00Z';

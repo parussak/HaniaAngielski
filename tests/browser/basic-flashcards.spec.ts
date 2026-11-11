@@ -1,8 +1,8 @@
 import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
-import {modules} from '../materials.ts';
+import {foodModules as modules} from '../materials.ts';
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 test('telefon: wybór podstawy i pełnych fiszek, zakres zapisany w kopii',async({page})=>{
   await page.goto('./');await openModule(page);

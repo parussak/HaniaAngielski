@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {modules} from './materials.ts';
+import {foodModules as modules} from './materials.ts';
 import {emptyProgress,makeSession,keyFor,backup,validateBackup,type Progress} from '../src/core.ts';
 import {freshAdventure,lessons,type Journey} from '../src/adventure.ts';
 import {getNextStep} from '../src/next-step.ts';

@@ -1,5 +1,5 @@
 import {openModule} from './navigation.ts';
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
 const catalog=JSON.parse(readFileSync(new URL('../../public/cats/catalog.json',import.meta.url),'utf8'));
 const tasks=JSON.parse(readFileSync(new URL('../../public/content/02-food/cwiczenia.json',import.meta.url),'utf8'));

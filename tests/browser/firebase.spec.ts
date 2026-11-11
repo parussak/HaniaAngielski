@@ -1,6 +1,6 @@
 import {openBackup} from './navigation.ts';
 import {openModule,openMap} from './navigation.ts';
-import {test,expect,type BrowserContext} from '@playwright/test';
+import {test,expect,type BrowserContext} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
 import {backup,emptyProgress} from '../../src/core.ts';
 const mockSDK=String.raw`

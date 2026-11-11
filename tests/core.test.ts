@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { modules } from './materials.ts';
+import {engineModules as modules} from './fixtures/engine.ts';
 import { indexedDB } from 'fake-indexeddb';
 import { backup, emptyProgress, eligibleModules, isCorrect, makeSession, markWord, next, recordAnswer, score, sessionCompatible, validateBackup, type Module } from '../src/core.ts';
 import { load, save } from '../src/storage.ts';

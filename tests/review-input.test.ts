@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {modules} from './materials.ts';
+import {foodModules as modules} from './materials.ts';
 import {requiresChoice,inputFor,emptyProgress,makeSession,questionFor,keyFor,type AnswerMode,type Item} from '../src/core.ts';
 import {validateJourney,makeLessonSession} from '../src/adventure.ts';
 import {recordStageError,makeStageReviewSession} from '../src/stage-review.ts';
