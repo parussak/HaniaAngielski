@@ -1,8 +1,9 @@
+import {polishCount} from '../polish-count.ts';
 import { lessons, lessonKey, type Journey, type Stage } from '../adventure.ts';
 import type { Progress } from './model.ts';
 import { reviewStats } from '../stage-review.ts';
 
-export const exerciseCount = (n: number) => `${n} ${n === 1 ? 'ćwiczenie' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'ćwiczenia' : 'ćwiczeń'}`;
+export const exerciseCount = (n:number) => polishCount(n,'ćwiczenie','ćwiczenia','ćwiczeń');
 
 export function mapProgress(j: Journey, p: Progress, stage?: Stage) {
     const keys = stage ? stage.lessons.map(l => lessonKey(j, l)) : lessons(j).map(l => l.key);

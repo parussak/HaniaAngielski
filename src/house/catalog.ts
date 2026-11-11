@@ -1,6 +1,7 @@
 // Editable rewards and decoration data, separate from progression rules.
-export const legacyCourse='angielski-hani';
+export {legacyCourse} from '../materials/identity.ts';
 export const slots=[{id:'left',name:'Lewy kącik'},{id:'window',name:'Pod oknem'},{id:'right',name:'Prawy kącik'},{id:'rug',name:'Na dywanie'},{id:'shelf',name:'Na półce'},{id:'front',name:'Z przodu'}];
+export const slotIds=slots.map(slot=>slot.id);
 export interface Decoration {id:string;name:string;price:number;slot:string;rooms:string[];map?:string}
 export const decorations:Decoration[]=[
  {id:'pillow',name:'Poduszka',price:6,slot:'rug',rooms:['salon']},

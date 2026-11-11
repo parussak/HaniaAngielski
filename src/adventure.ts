@@ -1,13 +1,15 @@
-import {creditStars,courseForModule} from './house/progress.ts';
+import {creditStars} from './house/progress.ts';
+import {courseForModule} from './learning/scope.ts';
+import {rewardStars} from './learning/rewards.ts';
+import {journeyKey,lessonKey,lessons,type Journey,type Lesson,type Stage,type JourneyIssue} from './learning/journey.ts';
+export {journeyKey,lessonKey,lessons} from './learning/journey.ts';
+export type {Journey,Lesson,Stage,JourneyIssue} from './learning/journey.ts';
 import type {Home} from './house/progress.ts';
 export {decorations,slots} from './house/catalog.ts';
 export {stars,purchase,place} from './house/progress.ts';
 import { inputFor,keyFor,questionFor,type AnswerMode,type Item,type Module,type Progress,type Session } from './core.ts';
 import type { StageReview } from './stage-review.ts';
 import { compareModules } from './learning/scope.ts';
-export interface Lesson {id:string;title:string;intro:string;wordIds:string[];exerciseIds:string[];ruleIds:string[];role?:'training';targetCount?:number;edition?:2;update?:{edition:2;title:string;intro:string;wordIds:string[];exerciseIds:string[];ruleIds:string[]}}
-export interface Stage {id:string;title:string;cat:string;illustration:string;lessons:Lesson[]}
-export interface Journey {version:1;moduleId:string;id?:string;title:string;stages:Stage[]}
 export interface Adventure extends Home {
   courseHomes?:Record<string,Home>;
   version:1;completed:Record<string,{at:string;edition?:2}>;
@@ -15,10 +17,7 @@ export interface Adventure extends Home {
   reviewSchema?:1;reviewArchiveHead?:string|null;stageReviews?:Record<string,StageReview>;
 }
 export const freshAdventure=():Adventure=>({version:1,earned:0,completed:{},purchases:{}});
-export const journeyKey=(journey:Journey)=>journey.id?`${journey.moduleId}/${journey.id}`:journey.moduleId;
-export const lessonKey=(journey:Journey,lesson:Lesson)=>`${journeyKey(journey)}/${lesson.id}`;
 export function orderedJourneys(modules:Module[],journeys:Journey[]){return journeys.filter(j=>modules.some(m=>m.id===j.moduleId)).slice().sort((a,b)=>compareModules(modules.find(m=>m.id===a.moduleId)!,modules.find(m=>m.id===b.moduleId)!));}
-export function lessons(journey:Journey){return journey.stages.flatMap(stage=>stage.lessons.map(lesson=>({stage,lesson,key:lessonKey(journey,lesson)})));}
 // No progress migration: absent edition means the original, already saved lesson.
 export function lessonForProgress(j:Journey,l:Lesson,p:Progress):Lesson {
   if(!l.update)return l;
@@ -53,7 +52,6 @@ export function validateJourney(value:unknown,m:Module):Journey {
   }
   return structuredClone(j);
 }
-export interface JourneyIssue {moduleId:string;path:string}
 export async function readJourneys(modules:Module[],read:(path:string)=>Promise<unknown>):Promise<{journeys:Journey[];issues:JourneyIssue[]}>{
   const requests=modules.flatMap(m=>(m.journeyPaths??(m.journeyPath?[m.journeyPath]:m.id==='unit-2-food'?['02-food/sciezka.json']:[])).map(path=>({m,path})));
   const results=await Promise.allSettled(requests.map(async({m,path})=>validateJourney(await read(path),m)));
@@ -86,12 +84,12 @@ export function rewardCompletion(p:Progress,s:Session,modules:Module[]=[]){
   const a=p.adventure??freshAdventure();
   let reward=0;
   const saved=p.sessions.find(session=>session.id===s.id);
-  if(s.lesson && !Object.hasOwn(a.completed,s.lesson.id)){a.completed[s.lesson.id]={at:s.completedAt,...(s.lesson.edition?{edition:s.lesson.edition}:{})};reward=3;}
-  else if(s.lesson&&s.fixedLength&&saved&&!saved.lessonRewarded)reward=1;
+  if(s.lesson && !Object.hasOwn(a.completed,s.lesson.id)){a.completed[s.lesson.id]={at:s.completedAt,...(s.lesson.edition?{edition:s.lesson.edition}:{})};reward=rewardStars.firstLesson;}
+  else if(s.lesson&&s.fixedLength&&saved&&!saved.lessonRewarded)reward=rewardStars.lessonReplay;
   if(s.lesson&&reward){s.lessonRewarded=true;if(saved)saved.lessonRewarded=true;}
   if(s.training?.kind==='extra'){
     const saved=p.sessions.find(session=>session.id===s.id);
-    if(saved?.training?.kind==='extra'&&!saved.training.rewarded){saved.training.rewarded=true;s.training.rewarded=true;reward=1;}
+    if(saved?.training?.kind==='extra'&&!saved.training.rewarded){saved.training.rewarded=true;s.training.rewarded=true;reward=rewardStars.extraTraining;}
   }
   if(reward){p.adventure=a;creditStars(p,reward,courseForModule(modules,s.moduleId));}
   return reward;

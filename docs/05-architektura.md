@@ -95,3 +95,9 @@ Podstawowy format kursów, wybór kursu, poznany zakres i aktualizacje Food są 
 ## Domek rozdzielony na kursy
 
 `src/house/catalog.ts` to dane dekoracji, cen, pokoi i nagród. `src/house/progress.ts` realizuje portfele, zgodny odczyt angielskiego dorobku, odblokowania i ustawienia. `src/views/house.ts` odpowiada za ekran domku, oddzielony od `adventure-view.ts` z mapami i wprowadzeniami lekcji. Kontroler nauki przekazuje kurs przy zakupach i przypisuje nagrodę według modułu sesji; kontroler zapisu rozlicza odblokowania również dla dawnych ukończeń. [Kontrakt i ograniczenia](koci-domek.md).
+
+## Wspólne podstawy po refaktoringu etapu 1
+
+`src/learning/journey.ts` zawiera typy i stabilne klucze map bez zależności od domku, zapisu i nagród. `adventure.ts` nadal eksportuje te symbole dla zgodności istniejących wywołań. Domek korzysta bezpośrednio z tego małego modułu, usuwając cykl wykonawczy `house/progress.ts` ↔ `adventure.ts`.
+
+Wartości gwiazdek są w `src/learning/rewards.ts`, wybór kursu według modułu w `src/learning/scope.ts`, a stały identyfikator dawnego angielskiego kursu w `src/materials/identity.ts`. Lista identyfikatorów miejsc w domku pochodzi z katalogu i służy również walidacji kopii. `src/polish-count.ts` współdzieli odmianę liczebników. [Zakres i dowody zachowania zgodności](refaktoring-etap-1.md).

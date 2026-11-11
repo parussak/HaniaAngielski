@@ -1,6 +1,7 @@
 import type {Progress,Module} from '../learning/model.ts';
 import {courseKey} from '../learning/scope.ts';
-import {journeyKey,lessons,type Journey,type JourneyIssue} from '../adventure.ts';
+export {courseForModule} from '../learning/scope.ts';
+import {journeyKey,lessons,type Journey,type JourneyIssue} from '../learning/journey.ts';
 import {decorations,legacyCourse,roomRewards,slots} from './catalog.ts';
 export interface Home {
  earned:number;
@@ -22,7 +23,6 @@ export function ensureHome(p:Progress,course=legacyCourse):Home {
  if(!Object.hasOwn(p.adventure.courseHomes,course))p.adventure.courseHomes[course]=freshHome();
  return p.adventure.courseHomes[course];
 }
-export function courseForModule(modules:Module[],id:string){const m=modules.find(m=>m.id===id);return m?courseKey(m):legacyCourse;}
 export function stars(p:Progress,course=legacyCourse){const h=homeFor(p,course);return h?h.earned-Object.values(h.purchases).reduce((n,v)=>n+v.cost,0):0;}
 export function creditStars(p:Progress,amount:number,course=legacyCourse){ensureHome(p,course).earned+=amount;}
 export function roomAvailable(p:Progress,course:string,room:string){return room==='salon'||!!homeFor(p,course)?.rooms?.includes(room);}

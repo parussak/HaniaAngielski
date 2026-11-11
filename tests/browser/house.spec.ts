@@ -53,6 +53,7 @@ test('ostatnia lekcja modułu odblokowuje kuchnię i pokazuje zachętę bez doda
  await restore(page,p);await expect(page.getByRole('button',{name:/Kocia kuchnia · ukończ/})).toBeDisabled();
  await page.getByRole('button',{name:'Mapy',exact:true}).tap();await page.getByRole('button',{name:`Otwórz mapę ${maps[1].title}`,exact:true}).tap();
  await page.locator('.lesson-step').filter({hasText:last.lesson.title}).tap();await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();
+ await expect(page.locator('.question')).toBeVisible();
  while(await page.locator('.question').count()){
   const prompt=await page.locator('.question').innerText(),q=modules[0].exercises.find(q=>q.prompt===prompt)!;
   if(await page.getByRole('textbox').isVisible()){await page.getByRole('textbox').fill(q.answers[0]);await page.getByRole('button',{name:/Sprawdź/}).tap();}
@@ -70,6 +71,8 @@ test.describe('domek offline',()=>{
   await page.goto('./');await expect(page.locator('[data-offline-status]')).toContainText('Materiały gotowe');await expect.poll(()=>page.evaluate(()=>!!navigator.serviceWorker.controller)).toBeTruthy();
   await restore(page,fixture());await context.setOffline(true);await page.getByRole('button',{name:'Kocia kuchnia',exact:true}).tap();
   await page.getByRole('button',{name:'Kup za 10 ★',exact:true}).tap();await page.getByRole('button',{name:'Prawy kącik',exact:true}).tap();
+  await expect(page.locator('.room-decoration[data-id="cat-toaster"]')).toHaveClass(/slot-right/);
+  await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
   await page.close();const second=await context.newPage();await second.goto('./');await second.getByRole('button',{name:'Domek',exact:true}).tap();await second.getByRole('button',{name:'Kocia kuchnia',exact:true}).tap();
   await expect(second.locator('.star-wallet')).toHaveText('84 ★');await expect(second.locator('.room-decoration[data-id="cat-toaster"]')).toHaveClass(/slot-right/);
   expect(await second.locator('.kitchen-room img').evaluateAll(images=>images.every(img=>(img as HTMLImageElement).complete&&(img as HTMLImageElement).naturalWidth>0))).toBeTruthy();

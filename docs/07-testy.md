@@ -107,3 +107,11 @@ Weryfikacja 10 listopada 2026: **158/158 testów Node i 86/86 testów Playwright
 - `tests/house.test.ts`: zgodny odczyt starego angielskiego portfela, osobne zakupy i nagrody kursów, obie kolejności ukończenia map, zaległe błędy, brak jednej mapy, trwałe odblokowania, zakupy tylko po odblokowaniu i przenoszenie między pokojami bez kopiowania. Walidacja kopii odrzuca ujemne saldo, drugi portfel angielskiego i nieprawidłowe pokoje/miejsca; sprawdzamy też kompletność lekkich SVG.
 - `tests/sync.test.ts`: portfele i zakupy kilku kursów po błędzie sieci, ponownym uruchomieniu i synchronizacji na drugie urządzenie; inne konto ma osobny zapis. To testowy adapter, bez zmiany prawdziwych kont.
 - `tests/browser/house.spec.ts`: telefon, salonik i kuchnia, częściowe i pełne Food, zakupy, przenoszenie, eksport/import, wybór kursu i zimny start offline. Ostatnia lekcja Food ma odblokować pokój z komunikatem, bez dodatkowych gwiazdek za sam pokój.
+
+## Refaktoring zależności i wspólnych stałych — etap 1
+
+`tests/refactor-boundaries.test.ts` chroni brak wykonawczej zależności domku od modułu map, zgodne eksporty i klucze map, formy polskich liczebników oraz walidację starej kopii i miejsc w domku. Istniejące 158 testów zachowano bez zmieniania ich oczekiwań; dodano cztery przypadki zgodności. Porównanie kontrolne przed/po dało identyczny zapis i decyzje walidacji 13 kopii oraz identyczny HTML sześciu wariantów ekranów. [Szczegółowy zakres](refaktoring-etap-1.md).
+
+W `tests/browser/house.spec.ts` scenariusz ostatniej lekcji czeka na pokazanie pytania przed pętlą odpowiedzi, a scenariusz zimnego startu czeka na zapis ustawienia przed zamknięciem strony. Nie zastępujemy tych oczekiwań stałym opóźnieniem i nie zmniejszamy wymagań dotyczących wyniku ani trwałości postępów.
+
+Weryfikacja 11 listopada 2026: **162/162 testy Node i 86/86 testów Playwright** gotowej aplikacji w Chrome. Budowanie z walidacją materiałów, TypeScript i PWA oraz kontrola odnośników dokumentacji przeszły. Pierwszy pełny przebieg przeglądarkowy (84/86) wskazał opisane wyżej brakujące oczekiwania; pełny przebieg po ich doprecyzowaniu przeszedł bez błędów. Nie testowano na fizycznym telefonie ani prawdziwym koncie Hani.

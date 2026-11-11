@@ -1,3 +1,4 @@
+import {rewardStars} from '../learning/rewards.ts';
 import {homeFor,roomAvailable,settleHouseUnlocks} from '../house/progress.ts';
 import { journeyKey, lessons, makeLessonSession, place, purchase, rewardCompletion, unlocked, type Journey } from '../adventure.ts';
 import { makeTrainingSession, mapTrainingPool, trainingPreparation } from '../learning/training.ts';
@@ -228,7 +229,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             if (!state.progress.active) {
                 if(unlockedRooms.length)state.notice=`Nowy pokój: ${unlockedRooms.join(', ')}! Otwórz Domek, aby go urządzić.`;
                 state.lastReward = (homeFor(state.progress,rewardCourse)?.earned ?? 0) - earned;
-                state.lastStageReward = (Object.values(state.progress.adventure?.stageReviews ?? {}).filter(r => r.rewardedAt).length - bonuses) * 3;
+                state.lastStageReward = (Object.values(state.progress.adventure?.stageReviews ?? {}).filter(r => r.rewardedAt).length - bonuses) * rewardStars.stageMastery;
                 state.lastSession = state.progress.sessions.at(-1)!;
                 state.screen = 'summary';
             }

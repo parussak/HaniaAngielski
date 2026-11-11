@@ -1,4 +1,7 @@
-import {creditStars,courseForModule} from './house/progress.ts';
+import {rewardStars} from './learning/rewards.ts';
+import {polishCount} from './polish-count.ts';
+import {courseForModule} from './learning/scope.ts';
+import {creditStars} from './house/progress.ts';
 import { freshAdventure,journeyKey,lessonKey,type Journey,type Stage } from './adventure.ts';
 import { inputFor,questionFor,resolveItem,type AnswerMode,type Item,type Module,type Progress,type Session } from './core.ts';
 import type { HistoryPage } from './history.ts';
@@ -48,8 +51,7 @@ export function reviewStats(p:Progress,j:Journey,stage?:Stage){
   const entries=[...unique.values()],pending=entries.filter(e=>e.correct<3),mastered=entries.length-pending.length;
   return {total:entries.length,pending:pending.length,mastered,percent:entries.length?Math.floor(mastered/entries.length*100):100,words:pending.filter(e=>e.item.type==='word').length,tasks:pending.filter(e=>e.item.type==='exercise').length};
 }
-const plural=(n:number,one:string,few:string,many:string)=>`${n} ${n===1?one:n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?few:many}`;
-export function pendingLabel(stats:{words:number;tasks:number}){return [stats.words?plural(stats.words,'słówko','słówka','słówek'):'',stats.tasks?plural(stats.tasks,'zadanie','zadania','zadań'):''].filter(Boolean).join(' i ');}
+export function pendingLabel(stats:{words:number;tasks:number}){return [stats.words?polishCount(stats.words,'słówko','słówka','słówek'):'',stats.tasks?polishCount(stats.tasks,'zadanie','zadania','zadań'):''].filter(Boolean).join(' i ');}
 export function makeStageReviewSession(modules:Module[],j:Journey,stage:Stage,_answerMode:AnswerMode,p:Progress):Session|null{
   const state=reviewState(p,stageKey(j,stage));
   const remaining=Object.values(state?.items??{}).filter(e=>e.correct<3);
@@ -79,7 +81,7 @@ export function settleStageRewards(p:Progress,journeys:Journey[],at=new Date().t
     if(j.id)continue;
     if(!stage.lessons.every(l=>p.adventure?.completed[lessonKey(j,l)]))continue;
     if(reviewStats(p,j,stage).pending || reviewState(p,stageKey(j,stage))?.rewardedAt)continue;
-    const state=ensure(p,stageKey(j,stage));state.rewardedAt=at;creditStars(p,3,courseForModule(modules,j.moduleId));reward+=3;
+    const state=ensure(p,stageKey(j,stage));state.rewardedAt=at;creditStars(p,rewardStars.stageMastery,courseForModule(modules,j.moduleId));reward+=rewardStars.stageMastery;
   }
   return reward;
 }
