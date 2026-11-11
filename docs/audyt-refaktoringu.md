@@ -1,5 +1,7 @@
 # Audyt „Małe kroki” pod kątem bezpiecznego refaktoringu i pracy z AI
 
+**Raport historyczny z 10 listopada 2026.** Poniższe ustalenia i wyniki zachowują stan z dnia audytu. Po wykonaniu porządków obowiązuje [aktualny status ustaleń](status-audytu.md), z rozróżnieniem rzeczy zamkniętych, pozostałych i niewymagających zmiany.
+
 Data audytu: 10 listopada 2026. Zakres: kod (`src/`, ok. 3,5 tys. linii TypeScript), testy (`tests/`), dokumentacja (`docs/`, `README.md`, skill `male-kroki-dokumentacja`), workflow GitHub. W ramach audytu niczego nie zmieniano w aplikacji, materiałach ani istniejącej dokumentacji, nie wykonano commita, pushu ani publikacji. Ten plik jest jedynym dodanym.
 
 ## 0. Co sprawdzono, a czego nie

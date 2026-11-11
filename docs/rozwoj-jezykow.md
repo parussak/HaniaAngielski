@@ -1,6 +1,6 @@
 # Gotowość na francuski i włoski — diagnoza implementacji
 
-Status: przegląd braków obecnego kodu. Założenia docelowe są opisane w [mechanice](02-mechanika.md) i [nauce](03-nauka.md), a otwarte decyzje w [rejestrze](decyzje.md). Punkty J1–J10 pozostają diagnozą i propozycjami technicznymi, nie równoległą specyfikacją produktu.
+Status: historyczna diagnoza z 9–10 listopada 2026, uzupełniona poniżej o stan po wdrożeniach i refaktoringu. Założenia docelowe są opisane w [mechanice](02-mechanika.md) i [nauce](03-nauka.md), a otwarte decyzje w [rejestrze](decyzje.md). Punkty J1–J10 zachowują historyczny punkt odniesienia; ich dawne opisy „Stan” nie zastępują aktualizacji i nie stanowią równoległej specyfikacji produktu.
 
 Przegląd kodu i testów z 9–10 listopada 2026 r., rewizja `24cdeda`. **To lista ustaleń i propozycji, nie specyfikacja wdrożonej wielojęzyczności.** Nie zmieniono działania aplikacji ani zapisanych wyników.
 
@@ -9,6 +9,20 @@ Przegląd kodu i testów z 9–10 listopada 2026 r., rewizja `24cdeda`. **To lis
 Poniższa diagnoza J1–J10 jest historycznym punktem odniesienia rewizji `24cdeda`. Obecny kod ma już kurs, osobne języki, format znaczeń z wariantami, zgodny adapter Food i ograniczenie zakresów do kursu. Polecenia nowego kursu są danymi, a materiały kontroluje wspólny odczyt. Testy obejmują syntetyczne FR/IT i dwa podręczniki tego samego języka. [Raport etapu 2](wdrozenie-kursow.md) i [format materiałów](format-materialow.md) określają aktualny stan.
 
 Etap 3 wdraża wybór kursu oraz globalne fiszki/quiz/gramatykę z poznanego materiału — [raport zakresów](wdrozenie-zakresow.md). Nadal potrzebne są rzeczywiste podręczniki i recenzja ich treści (J4/J7/J8), usunięcie pozostałych szczegółów prezentacji Food przed innymi produkcyjnymi mapami (J5), pobieranie materiałów kursami (J9) i decyzje dla osoby dorosłej (J10). Nie uznajemy tych problemów za rozwiązane przez samo przejście testów.
+
+## Aktualne miejsca do sprawdzenia przed produkcyjnym FR/IT — 11 listopada 2026
+
+Najważniejsze porządki techniczne po audycie są wykonane — [status ustaleń](status-audytu.md). Kursy, wybór zakresu, osobne portfele i domki oraz zgodny zapis istnieją; nie trzeba ponownie projektować tych mechanizmów. Nadal brak rzeczywistych materiałów podręcznikowych FR/IT i zatwierdzonych kryteriów ich odpowiedzi.
+
+| Miejsce | Obecne działanie i kontrola przed nowym językiem |
+| --- | --- |
+| [vocabulary-answer.ts](../src/learning/vocabulary-answer.ts) | Tolerancja a/an dotyczy pytań słownikowych z jawną metadaną `article`. Nie stosuje się automatycznie do każdego kursu. Nie kopiować angielskiej metadanej do FR/IT; ustalić własne kryteria na konkretnych hasłach. |
+| [questions.ts](../src/learning/questions.ts), `requiresChoice` | Obsługuje jawne `responseType: choice`, nawiasowe warianty i heurystyki rozpoznające polskie/angielskie alternatywy. Dla nowej formy polecenia użyć jawnych danych i sprawdzić formę odpowiedzi, również w powtórkach. |
+| [presentation.ts](../src/materials/presentation.ts) i [scope.ts](../src/learning/scope.ts) | Polecenia, język nauki i objaśnienia wynikają z kursu; domyślne ustawienia zgodności nadal obsługują stare materiały. Nowy podręcznik dodawać przez jawny rejestr kursów i jego instrukcje. |
+| [Widok katalogu](../src/views/catalog.ts), [ustawienia](../src/views/setup.ts), [domek](../src/views/house.ts) i [katalog nagród](../src/house/catalog.ts) | Pozostają obrazek pikniku, opisy Food i jego konkretne nagrody. Dane nagród są celowo przypisane do modułu, ale prezentację nowego materiału trzeba obejrzeć przed publikacją. |
+| [adventure.ts](../src/adventure.ts), `readJourneys` | Ma już wstrzykiwany odczyt i niezależną walidację map. Domyślna ścieżka Food pozostaje adapterem zgodności; nowe mapy deklarować w danych modułu. |
+
+Powyższa lista nie zatwierdza nowej tolerancji akcentów, rodzajników ani swobodnej wypowiedzi. Najpierw sprawdzamy mały, rzeczywisty zakres z podręcznika; dopiero potrzeba ujawniona w tej próbce uzasadnia rozszerzanie mechaniki.
 
 ## Kierunek wynikający z ustaleń użytkowniczki
 
@@ -104,7 +118,9 @@ Ilustracja słowa jest opcjonalna w typie i walidatorze, ale wprowadzenie do lek
 
 **Do ustalenia:** czy Paulina chce te same mapy i nagrody, wybór tematów, szybsze pomijanie znanego materiału lub dodatkowe sytuacje codzienne. Nie ma podstaw, by automatycznie usuwać kotki lub projektować osobną aplikację. Zadania otwarte, wymowa i AI podczas nauki byłyby odrębnymi funkcjami, nie koniecznym warunkiem pierwszego modułu włoskiego.
 
-## Proponowany następny etap — bez wdrożenia w tym zadaniu
+## Historyczna propozycja następnego etapu — 9–10 listopada 2026
+
+Poniższy plan pochodzi z pierwotnej diagnozy. Podstawowe granice kursów i wybór zakresu zostały już wdrożone. Aktualny dalszy krok to próbka podręcznikowa oraz kryteria FR/IT opisane w aktualizacji powyżej; nie wracamy do projektowania istniejącego modelu kursów.
 
 1. Uzgodnić minimalne granice kursów i zasady FR/IT z punktów J1–J4, chroniąc obecne identyfikatory i kopie.
 2. Przygotować niewielką próbkę z rzeczywistego podręcznika francuskiego: słowa, jedną zasadę i krótki dialog. Oznaczyć źródła i niepewności.

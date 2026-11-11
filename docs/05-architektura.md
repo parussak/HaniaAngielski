@@ -53,6 +53,8 @@ Punkt odniesienia pochodzi z przeglądu rewizji `24cdeda` (9–10 listopada 2026
 
 Widok wyświetla dane i przyciski z `data-action`. Obsługa zdarzeń przekazuje działanie do odpowiedniego kontrolera. Kontroler ćwiczeń lub konta korzysta z wydzielonej logiki i usług, a zmiany wyników przechodzą przez `mutate` w kontrolerze postępów. Po zakończeniu operacji renderer odświeża ekran.
 
+W kontrolerze nauki `confirmReplacement` wspólnie sprawdza, czy jest aktywna sesja i czy użytkownik zgadza się ją zastąpić. Wywołujące akcje zachowują własne komunikaty i kolejność przygotowania sesji. `openSession` zapisuje ją przez `replaceActive` i dopiero po udanym zapisie przełącza ekran na ćwiczenie. Wyzerowanie przejściowej informacji o nagrodzie zachowuje dotychczasowy wyjątek dla modułowego wyboru trybu. Wznowienie sesji nie wymaga potwierdzenia ani ponownego zapisu. Nie zmienia to formatu postępów, historii ani naliczania gwiazdek.
+
 Kursy i znaczenia są materiałami, nie stanem konta. `readLibrary` otrzymuje funkcję odczytu pliku i jest wspólny dla przeglądarki, testów i kontroli budowania. Nowe znaczenia są projektowane do zgodnych `Word` i `Exercise`. Dawne identyfikatory nie są przepisywane; silnik sesji i zapis postępów nie wymagają osobnej implementacji dla każdego języka.
 
 Widoki nie zapisują wyników. Moduły z `learning/` nie korzystają z DOM, Firebase ani IndexedDB. Kontrolery otrzymują potrzebne usługi jako argumenty; żaden nie importuje `main.ts`. `AppState` zawiera stan bieżącego interfejsu i nie jest zapisywany jako całość.
@@ -88,7 +90,7 @@ Część tego podziału już istnieje po refaktoringu, ale nadal są powiązania
 
 - Mapy są wczytywane niezależnie przez `readJourneys` / `loadJourneys`: wynik zawiera poprawne mapy i problemy odczytu. Błąd jednej mapy nie usuwa pozostałych; katalog pokazuje ponowienie pobrania. Przy duplikacie tożsamości izolowane są wszystkie konfliktujące definicje. Nie izoluje to błędów samych plików modułu lub rejestru kursów. [Obsługa awarii i zachowanie sesji](odpornosc-map.md).
 - Nadal istnieją szczegóły Food w prezentacji: opisy rozmówek, etykieta podstawowych fiszek i odznaka pierwszej mapy. Przed publikacją kolejnego języka trzeba sprawdzić te teksty na rzeczywistym materiale.
-- Statystyki i historia obejmują konto; tylko katalogi i dobór ćwiczeń są ograniczane wyborem kursu.
+- Statystyki i historia obejmują konto. Wybór kursu ogranicza katalogi i dobór ćwiczeń oraz wskazuje osobny domek i portfel tego kursu; każda sesja zachowuje swój zakres i pochodzenie.
 
 ## Do ustalenia
 

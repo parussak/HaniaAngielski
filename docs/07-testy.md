@@ -2,11 +2,15 @@
 
 Status: istniejące kontrole oraz docelowy sposób ich organizacji. Po zatwierdzeniu D-34 dodano testy wdrożenia treningów; workflow GitHub pozostaje bez zmian.
 
+## Bieżący punkt odniesienia
+
+Ostatni pełny przebieg po uporządkowaniu testów widoków i potwierdzeń (11 listopada 2026): **192/192 Node na zwykłej i wirtualnie rozszerzonej bibliotece oraz 90/90 Playwright** gotowej aplikacji w Chrome. Budowanie z kontrolą materiałów, TypeScript i zasobami offline przeszło. Wyniki starszych etapów poniżej są historią. [Status audytu](status-audytu.md).
+
 ## Stan obecny
 
 **Dobór danych po etapie 2 refaktoringu:** mechanika korzysta z danych syntetycznych, regresje Food wskazują go po ID, a kompletność i rozbudowa całego katalogu mają osobne kontrole. Nie wymagamy jednego modułu lub kursu w aplikacji. [Instrukcja danych testowych](../tests/README.md) i [zakres etapu 2](refaktoring-etap-2.md). Wcześniejsze wyniki poniżej są historią uruchomień, a nie wymaganą liczbą testów.
 
-Są testy Node dla logiki, materiałów, historii i synchronizacji oraz scenariusze Playwright dla aplikacji i PWA. Część testów jest ogólna, część świadomie sprawdza konkretne ustalenia Food; kilka zależy od historycznych nazw i fragmentów kodu.
+Są testy Node dla logiki, materiałów, historii i synchronizacji oraz scenariusze Playwright dla aplikacji i PWA. Część testów jest ogólna, część świadomie sprawdza konkretne ustalenia Food. Historyczne nazwy `stage1/2/3.test.ts` pozostają; kontrolę tekstu widoków zastąpiono sprawdzaniem wyrenderowanego interfejsu. Statyczne kontrole granic importów i workflow nadal mają uzasadniony zakres.
 
 W przeglądzie 9–10 listopada 2026 r. wykonano 84 testy Node i kontrolę materiałów z powodzeniem. Zebrano 51 testów przeglądarkowych, bez ponownego ich wykonania w zadaniu dokumentacyjnym. Nie są to wyniki nowego uruchomienia przy obecnym porządkowaniu dokumentacji.
 
@@ -135,3 +139,12 @@ Weryfikacja 11 listopada 2026: **170/170 testów Node i 88/88 testów Playwright
 `tests/backup-validation.test.ts` sprawdza publiczny kontrakt względem 116 wyników zapisanych przed podziałem: 21 poprawnych i 95 odrzuconych kopii. Porównuje dokładną zawartość zaakceptowanych danych i treść błędów, a także brak mutacji źródła, niezależność kopii i zachowanie dodatkowych pól. Osobny przypadek chroni rozdzielenie walidacji struktury od kontroli integralności pełnej historii. Dotychczasowe testy kopii, historii, domku, kont, synchronizacji i interfejsu zachowano bez zmiany oczekiwań. [Zakres i dowody zgodności](refaktoring-etap-4.md).
 
 Weryfikacja 11 listopada 2026: **173/173 testy Node** na zwykłej i wirtualnie rozszerzonej bibliotece oraz **88/88 testów Playwright** gotowej aplikacji w Chrome. Budowanie z walidacją materiałów, TypeScript i PWA, kontrola dokumentacji i różnic przeszły. Wyniki 116 przypadków przed/po są identyczne. Nie testowano na fizycznym telefonie ani prawdziwym koncie Hani.
+
+
+## Testy zachowania i wspólne potwierdzenia — uzupełnienie audytu
+
+W `stage1/2/3.test.ts` usunięto sprawdzanie treści widoków, CSS i konfiguracji Playwright przez wyszukiwanie fragmentów źródeł. Ochrona pozostała: `browser/home.spec.ts` sprawdza pełne hasło przy 320 i 390 px; `browser/ui-contracts.spec.ts` kontroluje widoczną etykietę trybu mieszanego, nazwę i ustawienia pola, dekoracyjną ikonę, źródło zadania i wynik po poprawce. Sprawdza też faktyczne pobranie lokalnej ikony i manifestu oraz systemową czcionkę bez żądań do Google Fonts. `runner-config.test.ts` sprawdza wynik importowanej konfiguracji dla uruchomienia lokalnego, zbudowanej aplikacji i zewnętrznego adresu oraz wskazania Chrome. Zachowano dotychczasową kontrolę źródeł reguł gramatycznych i celowe statyczne kontrole workflow i granic importów.
+
+`learning-controller.test.ts` obejmuje 20 kombinacji: pięć wejść (tryb modułu, tryb kursu, lekcja, trening, powtórka etapu), każde ze zgodą, odmową, bez aktywnej sesji i z błędem zapisu. Potwierdza dokładne komunikaty, brak zmiany postępów po odmowie i błędzie, pojedynczy zapis po zgodzie, zachowanie poznania, historii i portfela oraz dotychczasowe reguły przejściowych informacji o nagrodzie. Wspólna obsługa nie zmienia kolejności tworzenia sesji w poszczególnych akcjach.
+
+Weryfikacja 11 listopada 2026: **192/192 Node** w obu wariantach biblioteki, **90/90 Playwright** gotowej aplikacji w Chrome, budowanie i kontrola dokumentacji. Pełne scenariusze obejmują kopie, konta, drugi zapis/urządzenie, mobilny układ i PWA offline. Nie wykonywano prób na fizycznym telefonie ani rzeczywistym koncie Hani; konta i synchronizacja korzystają z adaptera testowego.

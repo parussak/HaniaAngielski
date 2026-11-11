@@ -6,6 +6,10 @@ Sesje, ocenianie, historia i trwałość zapisu korzystają z `fixtures/engine.t
 
 `house-controller.test.ts` sprawdza interakcje domku ze stanem i transakcyjnym portem zapisu na danych syntetycznych. Mechanizm kupowania i odblokowań ma osobne testy `house.test.ts`, a rzeczywiste przyciski oraz połączenie kontrolerów — `browser/house.spec.ts`. Nie trzeba kopiować pełnych materiałów Food do testów kontrolera.
 
+`learning-controller.test.ts` sprawdza pięć wejść do nowej sesji: wybór trybu modułu i kursu, lekcję, dodatkowy trening oraz powtórkę etapu. Kontroluje zgodę, odmowę, brak aktywnej sesji i błąd zapisu, w tym zachowanie historii, błędów, poznanego materiału oraz portfela. Test nie czyta implementacji kontrolera.
+
+Napisy i atrybuty interfejsu sprawdzaj na wyrenderowanej stronie, nie przez wyszukiwanie ciągów w plikach TypeScript. `browser/home.spec.ts` chroni m.in. spację w haśle; `browser/ui-contracts.spec.ts` sprawdza pole odpowiedzi, etykiety, źródło, podsumowanie poprawki i lokalne zasoby. `runner-config.test.ts` importuje konfigurację Playwright i sprawdza jej wynik dla różnych ustawień. Kontrola zależności w `refactor-boundaries.test.ts` oraz tekstu workflow CI pozostaje celowo statyczna: ich przedmiotem jest struktura importów i plik konfiguracyjny, a nie zachowanie widoku.
+
 `backup-validation.test.ts` korzysta z `fixtures/backup-validation-cases.ts` i wyników starego walidatora w `fixtures/backup-validation-results.json`. Zestaw chroni odczyt i odrzucenia 116 wariantów oraz dokładną zawartość kopii. Nie regeneruj wyników odniesienia tylko po to, żeby nowa implementacja przeszła test. Świadoma zmiana kryteriów wymaga osobnej decyzji i przeglądu zgodności; pełne archiwum nadal ma dodatkowe testy integralności historii.
 
 ## Regresje Food

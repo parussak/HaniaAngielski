@@ -40,9 +40,6 @@ test('I6: obce i dawne klucze nie zawyżają statystyk ani powtórek',()=>{
   p.difficult=['unknown@1:exercise:gone'];const s=helpers.currentStats(modules,p);
   assert.equal(s.known,1);assert.equal(s.review,0);
 });
-test('D6/D1/D2/D3: etykiety, wskazówki klawiatury i źródła',()=>{
-  const main=['study','setup'].map(view=>readFileSync(new URL(`../src/views/${view}.ts`,import.meta.url),'utf8')).join('\n');
-  assert.ok(main.includes('Poprawione za drugim razem'));assert.ok(main.includes('Trochę wybieram, trochę wpisuję'));
-  assert.ok(main.includes('autocorrect="off"'));assert.ok(main.includes('enterkeyhint="done"'));assert.ok(main.includes('aria-hidden="true"'));
+test('źródła reguł gramatycznych nie pokazują nazw plików zdjęć',()=>{
   assert.ok(m.grammar.every(r=>!r.source.includes('PXL_')));
 });

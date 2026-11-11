@@ -8,6 +8,7 @@ for(const width of [320,390])test(`strona startowa ${width}px: dwa wejścia, kot
   await page.setViewportSize({width,height:844});await page.goto('./');
   await expect(page.getByRole('heading',{name:'Dobrze Cię widzieć, Haniu!'})).toBeVisible();
   await expect(page.locator('.cat-illustration')).toBeVisible();
+  await expect(page.locator('.home-hero h2')).toHaveText('Wielkie rzeczy zaczynają się od małych kroków.');
   await expect(page.locator('.update-banner')).toHaveCount(0);
   await expect(page.locator('.next-step-card')).toHaveAttribute('data-step-kind','lesson');
   await expect(page.locator('.stats-grid,.module-card,.adventure-invite')).toHaveCount(0);

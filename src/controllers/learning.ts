@@ -4,7 +4,7 @@ import { journeyKey, lessons, makeLessonSession, rewardCompletion, unlocked, typ
 import { makeTrainingSession, mapTrainingPool, trainingPreparation } from '../learning/training.ts';
 import { currentJourney, currentCourse, courseModules } from '../app/selectors.ts';
 import { AppState } from '../app/state.ts';
-import { makeSession, next, questionFor, recordAnswer, replaceActive, type Mode, type Progress } from '../core.ts';
+import { makeSession, next, questionFor, recordAnswer, replaceActive, type Mode, type Progress, type Session } from '../core.ts';
 import { getNextStep } from '../next-step.ts';
 import { finishStageReview, makeStageReviewSession, recordStageError } from '../stage-review.ts';
 import { makeCoursePracticeSession, type CoursePracticeMode } from '../learning/course-practice.ts';
@@ -16,6 +16,17 @@ interface LearningPorts {
     scheduleReviewMigration: () => void;
 }
 export function createLearningController(state: AppState, { mutate, scheduleReviewMigration, courses }: LearningPorts) {
+    function confirmReplacement(message: string): boolean {
+        return !state.progress.active || window.confirm(message);
+    }
+    async function openSession(session: Session, resetRewards = true) {
+        await mutate(p => { replaceActive(p, session); });
+        if (resetRewards) {
+            state.lastReward = 0;
+            state.lastStageReward = 0;
+        }
+        state.screen = 'study';
+    }
     async function startStageReview(j: Journey, stage: Journey['stages'][number]) {
         if (state.progress.active?.stageReview?.id === `${journeyKey(j)}/${stage.id}`) {
             state.screen = 'study';
@@ -26,12 +37,9 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             state.notice = 'Brak zaległych powtórek w tym etapie.';
             return;
         }
-        if (state.progress.active && !window.confirm('Rozpocząć powtórkę zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))
+        if (!confirmReplacement('Rozpocząć powtórkę zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))
             return;
-        await mutate(p => { replaceActive(p, session); });
-        state.lastReward = 0;
-        state.lastStageReward = 0;
-        state.screen = 'study';
+        await openSession(session);
     }
     async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
         if(action==='retry-maps'){window.location.reload();return true;}
@@ -59,9 +67,8 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             const anchor = courseModules(state)[0]; if (!anchor) return true;
             const session = makeCoursePracticeSession(state.modules, anchor, state.progress, el.dataset.mode as CoursePracticeMode, state.answerMode);
             if (!session) { state.notice = 'Nie ma jeszcze poznanego materiału dla tego ćwiczenia. Zacznij od mapy lub modułu.'; return true; }
-            if (state.progress.active && !window.confirm('Nowa sesja zastąpi niedokończoną sesję. Zakończone wyniki pozostaną zachowane. Kontynuować?')) return true;
-            await mutate(p => { replaceActive(p, session); });
-            state.lastReward = 0; state.lastStageReward = 0; state.screen = 'study';
+            if (!confirmReplacement('Nowa sesja zastąpi niedokończoną sesję. Zakończone wyniki pozostaną zachowane. Kontynuować?')) return true;
+            await openSession(session);
             return true;
         }
         if (action === 'next-step') {
@@ -86,10 +93,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
                 case 'review': {
                     const session = makeSession(state.modules, state.selected, 'review', 'text', false, state.progress);
                     if (session.items.length) {
-                        await mutate(p => { replaceActive(p, session); });
-                        state.lastReward = 0;
-                        state.lastStageReward = 0;
-                        state.screen = 'study';
+                        await openSession(session);
                     }
                     break;
                 }
@@ -140,26 +144,20 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
                 return true;
             }
             if(l.role==='training'&&!mapTrainingPool(state.modules,state.journeys,j,state.progress).length){state.introLessonId=l.id;state.screen='lesson-intro';return true;}
-            if (state.progress.active && !window.confirm('Rozpocząć lekcję zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))
+            if (!confirmReplacement('Rozpocząć lekcję zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))
                 return true;
             const session = l.role === 'training'
                 ? makeTrainingSession(state.modules, state.selected, state.progress, state.answerMode, { journey: j, lesson: l, journeys: state.journeys })
                 : makeLessonSession(state.modules, j, l, state.answerMode, state.progress);
             if (!session) { state.notice = 'Nie ma jeszcze poznanego materiału z wcześniejszych map do tego treningu.'; return true; }
-            await mutate(p => { replaceActive(p, session); });
-            state.lastReward = 0;
-            state.lastStageReward = 0;
-            state.screen = 'study';
+            await openSession(session);
             return true;
         }
         if (action === 'extra-training') {
             const session = makeTrainingSession(state.modules, state.selected, state.progress, state.answerMode);
             if (!session) { state.notice = 'Najpierw spróbuj odpowiedzieć na kilka pytań. Trening obejmuje tylko wcześniej poznany materiał.'; return true; }
-            if (state.progress.active && !window.confirm('Rozpocząć trening zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.')) return true;
-            await mutate(p => { replaceActive(p, session); });
-            state.lastReward = 0;
-            state.lastStageReward = 0;
-            state.screen = 'study';
+            if (!confirmReplacement('Rozpocząć trening zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.')) return true;
+            await openSession(session);
             return true;
         }
         if (action === 'mode') {
@@ -169,10 +167,9 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
                 state.notice = 'Nie ma zadań do tej sesji. Znane fiszki pomijamy. Możesz wybrać quiz lub gramatykę.';
                 return true;
             }
-            if (state.progress.active && !window.confirm('Rozpoczęcie nowej sesji zastąpi niedokończoną sesję. Zakończona historia i zapisane trudności pozostaną. Kontynuować?'))
+            if (!confirmReplacement('Rozpoczęcie nowej sesji zastąpi niedokończoną sesję. Zakończona historia i zapisane trudności pozostaną. Kontynuować?'))
                 return true;
-            await mutate(p => { replaceActive(p, session); });
-            state.screen = 'study';
+            await openSession(session, false);
         }
         else if (action === 'answer') {
             const s = state.progress.active;
