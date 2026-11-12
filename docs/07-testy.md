@@ -4,7 +4,7 @@ Status: istniejące kontrole oraz docelowy sposób ich organizacji. Po zatwierdz
 
 ## Bieżący punkt odniesienia
 
-Ostatni pełny przebieg po wdrożeniu siatki domku (12 listopada 2026): **208/208 Node na zwykłej i wirtualnie rozszerzonej bibliotece oraz 94/94 Playwright** gotowej aplikacji w Chrome. Budowanie z kontrolą materiałów, TypeScript i zasobami offline przeszło. Wyniki starszych etapów poniżej są historią. [Kontrakt domku](koci-domek.md).
+Ostatni pełny przebieg po wdrożeniu Kociej rozgrzewki (12 listopada 2026): **212/212 Node na zwykłej i wirtualnie rozszerzonej bibliotece oraz 96/96 Playwright** gotowej aplikacji w Chrome. Budowanie z kontrolą materiałów, TypeScript i zasobami offline przeszło. Wyniki starszych etapów poniżej są historią. [Zasady rozgrzewek](03-nauka.md).
 
 ## Stan obecny
 
@@ -171,3 +171,14 @@ Weryfikacja 12 listopada 2026: **199/199 testów Node** w obu wariantach bibliot
 
 
 Weryfikacja siatki 12 listopada 2026: **208/208 testów Node** w obu wariantach biblioteki i **94/94 Playwright** na końcowym wydaniu w Chrome. Zestaw 116 starych wyników walidacji nadal przechodzi bez zmiany odniesienia. Budowanie z kontrolą materiałów, TypeScript i 206 zasobami PWA oraz kontrola dokumentacji i różnic przeszły. Obejrzano zrzut mobilnego edytora; nie wykonywano prób na fizycznym telefonie ani prawdziwym koncie Hani. Wczesny przebieg ujawnił brak oczekiwania w nowym teście na zakończenie obsługi błędnego upuszczenia przed pomiarem po obrocie/zmianie szerokości; test czeka teraz na obsłużenie odmowy i wyczyszczenie podglądu, bez stałego opóźnienia. Test gestu sprawdza również kolejne dotknięcia przycisków edytora i wyjście do nauki.
+
+
+## Kocia rozgrzewka i trwały sukces mapy — D-46–D-47
+
+Wymagania zapisano przed kodem, następnie zastąpiono treningi rozgrzewkami z zachowaniem roli `training` i identyfikatorów lekcji. `warmup.test.ts` sprawdza pierwszą mapę bez poprzednich map, dobór wyłącznie poznanych wcześniejszych lekcji, pominięcie przyszłych zadań, pierwszeństwo błędów, odrębność kursów i zakres jednego modułu, wymagane ukończenie rozgrzewki mapowej, zgodność kopii i niemutujący odczyt. Wyrenderowana ukończona mapa z błędami i niedoczytanym archiwum ma sukces, bez ostrzeżeń o zaległościach. Dotychczasowe testy nagród i braku resetu ukończeń pozostają.
+
+`browser/warmup.spec.ts` obejmuje dwie ukończone mapy Food z błędami, 100% i gratulacje, brak kafelków i liczników zaległych powtórek, skończoną dodatkową sesję mimo błędów, zachowanie ukończeń, gwiazdkę za nową sesję, wybór zakresu i mobilny układ 320 px. Osobny przypadek wznawia dawną aktywną sesję treningu: pokazuje nową nazwę i daje 1 ★ za pełne powtórzenie, bez ponownego otwierania zaliczonej lekcji. Obejrzano mobilne podglądy mapy i ekranu rozgrzewek.
+
+Regresje `stage-review`, `firebase` i `pwa` nadal sprawdzają trzy zaliczenia, starą premię 3 ★, błąd, poprawkę, wznowienie, konta, drugie urządzenie i offline; wejście jest teraz przez osobną rozgrzewkę, a nie licznik na mapie. Liczbę zaliczeń sprawdzamy w kopii lub testowym zapisie chmury, nie jako obowiązek w interfejsie. `map-recovery` świadomie dopuszcza przygotowanie materiału z bieżącej mapy przy niedostępnej poprzedniej, zgodnie z nowym zakresem D-47. Nie pominięto sprawdzania odzyskania uszkodzonych map.
+
+Weryfikacja 12 listopada 2026: **212/212 Node** w obu wariantach biblioteki oraz **96/96 Playwright**. Budowanie z walidacją treści, TypeScript i 206 publicznymi zasobami PWA oraz kontrola dokumentacji i różnic przeszły. Pierwszy przebieg 93/94 wskazał oczekiwanie starej zasady przygotowania wyłącznie z poprzedniej mapy; dostosowano ten scenariusz do D-47 i dodano dwa scenariusze ochrony ukończonych map. Nie wykonywano prób na prawdziwym koncie ani fizycznym telefonie Hani; synchronizacja korzysta z testowego adaptera.

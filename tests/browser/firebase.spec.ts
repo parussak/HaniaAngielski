@@ -1,3 +1,4 @@
+import {openWarmup,openStageReview} from './navigation.ts';
 import {openBackup} from './navigation.ts';
 import {openModule,openMap} from './navigation.ts';
 import {test,expect,type BrowserContext} from './fixtures.ts';
@@ -52,12 +53,12 @@ test('licznik powtórki etapu przechodzi między urządzeniami, zapisuje turę p
     const p=emptyProgress(),key='unit-2-food@1:word:apple';p.adventure={version:1,earned:0,completed:{},purchases:{},reviewSchema:1,reviewArchiveHead:null,stageReviews:{'unit-2-food/food':{round:3,items:{[key]:{item:{key,moduleId:'unit-2-food',version:1,type:'word',id:'apple',input:'text'},correct:2,due:6}}}}};
     await openBackup(page);await page.locator('#import-file').setInputFiles({name:'reviews.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
     await page.getByRole('button',{name:'Ustawienia konta',exact:true}).click();await page.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
-    const second=await b.newPage();await second.goto('./');await signIn(second);await second.getByRole('button',{name:'Moja nauka',exact:true}).click();await openMap(second);await second.locator('.journey-stage').first().locator('.stage-review-step').click();await expect(second.locator('.review-meter')).toContainText('2/3');
-    cloud.setOffline(true);await second.getByRole('textbox').fill('apple');await second.getByRole('button',{name:/Sprawdź/}).click();await second.getByRole('button',{name:/Dalej/}).click();await expect(second.locator('.review-result')).toContainText('0 ćwiczeń do utrwalenia');
-    await second.reload();await openMap(second);await expect(second.locator('.journey-stage').first().locator('.stage-retention-text')).toContainText('0 ćwiczeń do utrwalenia');
+    const second=await b.newPage();await second.goto('./');await signIn(second);await second.getByRole('button',{name:'Moja nauka',exact:true}).click();await openMap(second);await openStageReview(second);await expect(second.locator('.review-meter')).toHaveCount(0);await expect(second.getByRole('textbox')).toBeVisible();
+    cloud.setOffline(true);await second.getByRole('textbox').fill('apple');await second.getByRole('button',{name:/Sprawdź/}).click();await second.getByRole('button',{name:/Dalej/}).click();await expect(second.getByRole('heading',{name:'Kocia rozgrzewka ukończona!',exact:true})).toBeVisible();
+    await second.reload();await openMap(second);await expect(second.locator('.has-pending,.stage-review-step')).toHaveCount(0);
     cloud.setOffline(false);await second.getByRole('button',{name:'Ustawienia konta',exact:true}).click();await second.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(second.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
     expect(cloud.data.get('parent@example.test')!.progress.adventure.stageReviews['unit-2-food/food'].items[key].correct).toBe(3);
-    await page.getByRole('button',{name:'Wyloguj się',exact:true}).click();await signIn(page,'other-review@example.test');await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await openMap(page);await expect(page.locator('.journey-stage').first().locator('.stage-review-step')).toBeDisabled();
+    await page.getByRole('button',{name:'Wyloguj się',exact:true}).click();await signIn(page,'other-review@example.test');await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await openMap(page);await openWarmup(page);await expect(page.locator('button[data-action="stage-review"]')).toHaveCount(0);
   }finally{await a.close();await b.close();}
 });
 

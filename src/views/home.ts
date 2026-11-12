@@ -25,15 +25,15 @@ function nextStepCard(step: NextStep, modules: Module[], cat: string) {
             label = step.newModule ? 'Zacznij następny moduł →' : step.first ? 'Zacznij pierwszą lekcję →' : 'Zacznij następną lekcję →';
             break;
         case 'stage-review':
-            title = 'Lekcje za Tobą — czas je utrwalić!';
-            detail = `${m?.cover ?? ''} · Powtórka · ${step.title}`;
-            description = `Do utrwalenia: ${step.pending}. Twój koci nauczyciel pomoże Ci poćwiczyć.`;
+            title = 'Masz ochotę na Kocią rozgrzewkę?';
+            detail = `${m?.cover ?? ''} · Kocia rozgrzewka`;
+            description = 'Krótki zestaw na dobry początek. Każda sesja ma wyraźny koniec.';
             label = 'Przejdź do powtórki →';
             break;
         case 'review':
             title = 'Zróbmy małą powtórkę!';
             detail = `${m?.cover ?? ''} · Powtórka błędów`;
-            description = `Do powtórzenia: ${step.pending}. Każda próba pomaga zapamiętać więcej.`;
+            description = 'Poćwicz krótko, kiedy masz ochotę.';
             label = 'Przejdź do powtórki →';
             break;
         case 'unavailable':
@@ -45,8 +45,8 @@ function nextStepCard(step: NextStep, modules: Module[], cat: string) {
         case 'practice':
             title = 'Świetna robota! Co powtórzymy?';
             detail = m ? `${m.cover} · Ćwiczenia po swojemu` : 'Twoja przestrzeń do nauki';
-            description = 'Wybierz fiszki, quiz lub gramatykę i poćwicz znany materiał.';
-            label = 'Wybierz ćwiczenia →';
+            description = 'Twoje ukończenia zostają. Możesz odpocząć albo wybrać krótką Kocią rozgrzewkę.';
+            label = 'Przejdź do rozgrzewki →';
             break;
     }
     return `<section class="next-step-card" aria-labelledby="next-step-heading" data-step-kind="${step.kind}"><div class="next-step-copy"><div class="eyebrow">TWÓJ NASTĘPNY KROK</div><h2 id="next-step-heading">${e(title)}</h2><p class="next-step-detail">${e(detail)}</p><p>${e(description)}</p></div><div class="next-step-cat" aria-hidden="true">${cat}</div>${button('next-step', e(label))}</section>`;
@@ -75,7 +75,7 @@ export function homeView({ name, modules, step, pwa, cat, courseContext = '' }: 
     <span class="practice-icon" aria-hidden="true">${icon('cards')}</span>
     <div>
     <h2>A może wolisz poćwiczyć po swojemu?</h2>
-    <p>Fiszki, quizy, gramatyka, rozmówki i powtórki.</p>${button('module-list', `Przejdź do modułów ${icon('arrow')}`, 'secondary')}${button('course-practice', 'Ćwicz cały poznany materiał →', 'text-button')}</div>
+    <p>Fiszki, quizy, gramatyka, rozmówki i powtórki.</p>${button('module-list', `Przejdź do modułów ${icon('arrow')}`, 'secondary')}${button('course-practice', 'Ćwicz cały poznany materiał →', 'text-button')}${button('warmup','Kocia rozgrzewka →','secondary')}</div>
     </section>
     <details class="home-help">
     <summary>${icon('book')} Jak korzystać z aplikacji?</summary>

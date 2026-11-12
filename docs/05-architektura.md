@@ -119,3 +119,10 @@ Wartości gwiazdek są w `src/learning/rewards.ts`, wybór kursu według modułu
 ### Siatka i gesty domku — D-44–D-45
 
 `house/layout.ts` definiuje siatkę, rozmiary, odczyt starych miejsc, obszary i kolizje. `house/progress.ts` zapisuje ruch, sprawdza pokój i zachowuje dorobek. `views/house-room.ts` renderuje proporcjonalny pokój, siatkę, przedmioty i strzałki. `house/drag.ts` obsługuje Pointer Events, podgląd, anulowanie i kończenie dotyku; `app/events.ts` przekazuje zatwierdzony ruch do kontrolera i transakcji `run`/`mutate`. Nie zapisujemy danych przy każdym ruchu palca. Przed zapisem sprawdzamy aktualność konta, kursu, pokoju i stanu wyników, a zmianę DOM odkładamy do zakończenia cyklu gestu. Przyciski edytora mają obsługę dotykową bez zależności od opóźnionego kliknięcia po przeciąganiu. Walidator kopii używa tej samej siatki i rozmiarów. Nie dodano biblioteki przeciągania, nowych grafik ani serwera. [Kontrakt domku](koci-domek.md).
+
+
+### Kocia rozgrzewka — D-46–D-47
+
+`views/warmup.ts` jest osobnym ekranem dodatkowych rozgrzewek z wyborem kursu, modułu i tematu. `learning/training.ts` pozostaje wspólnym doborem materiału dawnego treningu i jego rozgrzewki: na mapie filtruje poznany materiał wcześniejszych lekcji tej mapy i wcześniejszych map; dodatkowo może ograniczyć zestaw do jednego modułu. `learning-labels.ts` odpowiada za nazwę wyświetlaną. Istniejące role w JSON, tryby sesji i klucze ukończeń nie zmieniły się.
+
+`adventure-view.ts` i `views/catalog.ts` nadają sukces według ukończenia lekcji, bez widocznych kolejek błędów. `next-step.ts` po zakończeniu dostępnych map proponuje dobrowolną rozgrzewkę, zamiast automatycznie wysyłać do kolejki. Rozpoczęta sesja zachowuje pierwszeństwo. `views/study.ts` wyświetla skończone, pozytywne podsumowanie, a `views/progress.ts` pokazuje ukończone sesje zamiast liczby rzeczy do powtórki. Wewnętrzne kolejki i stara premia etapu pozostają w `stage-review.ts`. Nie utożsamiamy braku ostrzeżeń z wyzerowaniem błędów w danych.

@@ -47,12 +47,13 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             const j=currentJourney(state),l=j&&lessons(j).find(e=>e.lesson.id===state.introLessonId)?.lesson;
             if(!j||l?.role!=='training'||!unlocked(j,l,state.progress))return true;
             const source=trainingPreparation(state.modules,state.journeys,j,state.progress);
-            if(!source){state.notice='Wczytaj wcześniejsze mapy, aby przygotować się do treningu.';return true;}
-            state.notice=`Po tej lekcji wróć do treningu na mapie „${j.title}”. Twoje postępy pozostają zapisane.`;
+            if(!source){state.notice='Wczytaj mapy, aby przygotować się do rozgrzewki.';return true;}
+            state.notice=`Po tej lekcji wróć do rozgrzewki na mapie „${j.title}”. Twoje postępy pozostają zapisane.`;
             state.selected=state.modules.find(m=>m.id===source.journey.moduleId)!;
             state.selectedJourneyKey=journeyKey(source.journey);
             state.introLessonId=source.lesson.id;state.answerMode='mixed';state.screen='lesson-intro';return true;
         }
+        if(action==='warmup'){state.screen='warmup';return true;}
         if (action === 'courses') { state.screen = 'courses'; return true; }
         if (action === 'select-course') { if (await courses.select(el.dataset.id ?? '')) state.screen = 'home'; return true; }
         if (action === 'resume') { await courses.followSession(); state.screen = 'study'; return true; }
@@ -98,7 +99,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
                     break;
                 }
                 case 'practice':
-                    state.screen = step.moduleId ? 'setup' : 'module-list';
+                    state.screen = step.moduleId ? 'warmup' : 'module-list';
                     break;
                 case 'unavailable':
                     state.screen = 'module-list';
@@ -125,7 +126,9 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             return true;
         }
         if (action === 'stage-review') {
-            const j = currentJourney(state), stage = j?.stages.find(s => s.id === el.dataset.id);
+            const j = el.dataset.journey?state.journeys.find(j=>journeyKey(j)===el.dataset.journey):currentJourney(state), stage = j?.stages.find(s => s.id === el.dataset.id);
+            if(j&&!courseModules(state).some(m=>m.id===j.moduleId))return true;
+            if(j){state.selected=state.modules.find(m=>m.id===j.moduleId)!;state.selectedJourneyKey=journeyKey(j);}
             if (!j || !stage)
                 return true;
             await startStageReview(j, stage);
@@ -143,24 +146,27 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
                 state.screen = 'lesson-intro';
                 return true;
             }
-            if(l.role==='training'&&!mapTrainingPool(state.modules,state.journeys,j,state.progress).length){state.introLessonId=l.id;state.screen='lesson-intro';return true;}
+            if(l.role==='training'&&!mapTrainingPool(state.modules,state.journeys,j,state.progress,l).length){state.introLessonId=l.id;state.screen='lesson-intro';return true;}
             if (!confirmReplacement('Rozpocząć lekcję zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))
                 return true;
             const session = l.role === 'training'
                 ? makeTrainingSession(state.modules, state.selected, state.progress, state.answerMode, { journey: j, lesson: l, journeys: state.journeys })
                 : makeLessonSession(state.modules, j, l, state.answerMode, state.progress);
-            if (!session) { state.notice = 'Nie ma jeszcze poznanego materiału z wcześniejszych map do tego treningu.'; return true; }
+            if (!session) { state.notice = 'Nie ma jeszcze poznanego materiału z wcześniejszych map do tej rozgrzewki.'; return true; }
             await openSession(session);
             return true;
         }
         if (action === 'extra-training') {
-            const session = makeTrainingSession(state.modules, state.selected, state.progress, state.answerMode);
-            if (!session) { state.notice = 'Najpierw spróbuj odpowiedzieć na kilka pytań. Trening obejmuje tylko wcześniej poznany materiał.'; return true; }
-            if (!confirmReplacement('Rozpocząć trening zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.')) return true;
+            const anchor=el.dataset.module?courseModules(state).find(m=>m.id===el.dataset.module):courseModules(state).find(m=>m.id===state.selected?.id)??courseModules(state)[0];
+            if(!anchor)return true;state.selected=anchor;
+            const session = makeTrainingSession(state.modules, anchor, state.progress, state.answerMode,undefined,!!el.dataset.module);
+            if (!session) { state.notice = 'Najpierw spróbuj odpowiedzieć na kilka pytań. Rozgrzewka obejmuje tylko wcześniej poznany materiał.'; return true; }
+            if (!confirmReplacement('Rozpocząć rozgrzewkę zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.')) return true;
             await openSession(session);
             return true;
         }
         if (action === 'mode') {
+            if(el.dataset.module){const m=courseModules(state).find(m=>m.id===el.dataset.module);if(!m)return true;state.selected=m;}
             state.mode = el.dataset.mode as Mode;
             const session = makeSession(state.modules, state.selected, state.mode, state.answerMode, state.previous, state.progress);
             if (!session.items.length) {

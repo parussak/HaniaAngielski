@@ -45,7 +45,13 @@ Przejście map modułu oznacza przepracowanie jego najważniejszego wymaganego z
 
 Produkt pokazuje te informacje zrozumiale, bez utożsamiania ukończenia mapy, braku błędów i trwałego opanowania całego podręcznika. Szczegółowe kryteria i nagrody należą do [zasad nauki](03-nauka.md).
 
-Zatwierdzono prezentację D-23: postęp lekcji na pasku lub w kółku dochodzi do 100% po wszystkich lekcjach, niezależnie od powtórek. Zaległe błędy pokazujemy pomarańczowo jako liczbę, np. „5 ćwiczeń do utrwalenia”, bez ogólnego procentu utrwalenia. Gdy lekcje są ukończone i zaległości wynoszą zero, całość otrzymuje zielony stan i gratulacje. Szczegóły liczenia i znaczenie trzech zaliczeń są w dokumencie nauki; ta prezentacja jest wdrożona w pierwszym etapie D-34.
+**Wcześniejsza prezentacja — D-23:** postęp lekcji na pasku lub w kółku dochodzi do 100% po wszystkich lekcjach, niezależnie od powtórek. Aplikacja pokazywała pomarańczową liczbę błędów do utrwalenia, a pełny zielony stan zależał od ich wyzerowania. Ten sposób komunikowania sukcesu zastąpiono przez D-46–D-47.
+
+### „Kocia rozgrzewka” — wdrożone D-46–D-47
+
+Ukończona mapa ma pozostać pełnym sukcesem: 100%, gratulacje i zdobyta nagroda, bez pomarańczowych ostrzeżeń o zaległych powtórkach. Dalsze ćwiczenia są osobną, dobrowolną „Kocią rozgrzewką”, a nie niedokończoną częścią mapy.
+
+Rozgrzewka ma krótkie sesje z własnym postępem i wyraźnym, pozytywnym zakończeniem, nawet gdy pozostał materiał do przyszłego ćwiczenia. Można skończyć po jednej sesji albo dobrowolnie wykonać następną, także z wybranego modułu przed sprawdzianem. Błędy pomagają dobierać zadania w tle, zamiast tworzyć widoczny obowiązek odrobienia całej kolejki. Rozgrzewki zastępują treningi: na mapie są wymagane do jej ukończenia, dodatkowe są dobrowolne. Mają do 8 zadań w sesji dodatkowej, z zachowaniem dawnych rozmiarów tematów i lekcji mapowych. Wejście jest na stronie głównej, mapie i w module; zachowano dotychczasowe nagrody treningów i stare ukończenia. Algorytm odstępów pozostaje do ustalenia. [Pełne wymaganie D-46](03-nauka.md).
 
 ## Urządzanie domku — stan obecny
 

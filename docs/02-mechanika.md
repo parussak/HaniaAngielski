@@ -96,3 +96,8 @@ Trening może więc zawierać słownictwo i gramatykę oraz korzystać z różny
 ## Do ustalenia
 
 Format kursu i wariantów językowych jest opisany w [kontrakcie materiałów](format-materialow.md), a wybór kursu jest wdrożony w etapie 3. Dalsze rozszerzenia modelu pozostają w [U-01](decyzje.md#u-01). Szczegółowa polityka sprawdzania i swobodnych odpowiedzi: [U-06](decyzje.md#u-06). Istniejące identyfikatory nie są zmieniane przez przyjęcie tego słownika pojęć.
+
+
+## Rozgrzewka a zapisane role — D-46–D-47
+
+Nazwa produktu „Kocia rozgrzewka” zastępuje trening, nie tworzy drugiego typu wymaganej lekcji. W materiałach zachowano `role: training`, a w sesjach `training.kind: map | extra`. Rozgrzewka na mapie ma ten sam identyfikator lekcji i wpis ukończenia; dodatkowa nie powiększa wymaganej listy. Tematy z wcześniejszymi błędami nadal używają `review` i `stageReview` w zapisie, lecz użytkownik widzi krótką rozgrzewkę bez licznika trzech zaliczeń. To zgodna warstwa prezentacji, bez przepisywania historii i bez nowego formatu kopii. [Zasady doboru i nagród](03-nauka.md).

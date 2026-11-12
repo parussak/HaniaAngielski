@@ -2,13 +2,59 @@
 
 Status: uzgodnione zasady docelowe z wyraźnymi miejscami wymagającymi decyzji. Pierwsze wdrożenie po D-34 opisuje [raport](wdrozenie-nauki.md); historyczne zachowanie sprzed zmian jest w [punkcie odniesienia](stan-obecny/nauka.md).
 
+## „Kocia rozgrzewka” — D-46–D-47, wdrożone
+
+### D-47 — wymagania zapisane przed kodem i wdrożone
+
+- „Kocia rozgrzewka” zastępuje obecne treningi; nie dodajemy obok drugiego, podobnego typu lekcji.
+- Rozgrzewki umieszczone na mapie są wymagane do jej ukończenia i liczą się do postępu lekcji. Dodatkowe rozgrzewki na żądanie są dobrowolne i nie zwiększają wymaganego zakresu mapy.
+- Zachowujemy identyfikatory i istniejące ukończenia treningów. Zmiana nazwy i sposobu prezentacji nie otwiera ponownie zaliczonych lekcji, nie odbiera gwiazdek ani nagród. Rozpoczęte sesje zachowują swój zestaw zadań.
+- Rozgrzewka na mapie pojawia się w miejscu dotychczasowego treningu. Nowe mapy planujemy z rozgrzewką po 2–3 lekcjach nowego materiału. Nie dokładamy nowych wymagań do już opublikowanej pierwszej mapy Food.
+- Dobór obejmuje wyłącznie poznany materiał bieżącej i wcześniejszych map tego samego kursu, z pierwszeństwem trudniejszych pozycji i udziałem wcześniej bezbłędnych. Nie wprowadzamy przyszłego materiału. Dokładny algorytm odstępów pozostaje odłożony.
+- Przy zastąpieniu treningów zachowujemy istniejące nagrody: pierwsze ukończenie rozgrzewki mapowej 3 ★, nowa pełna sesja powtórzenia 1 ★, dodatkowa rozgrzewka 1 ★. Samo wznowienie nie daje kolejnej nagrody. Dawna premia za utrwalenie etapu pozostaje oddzielnym mechanizmem i nie jest warunkiem sukcesu mapy.
+
+**Wdrożono po zapisaniu wymagań.** Zachowano techniczną rolę `training`, klucze lekcji, format sesji i wszystkie stare ukończenia. Nazwa dla użytkownika to „Kocia rozgrzewka”. Nie dopisano nowych obowiązkowych lekcji do obecnych map Food.
+
+**Uzgodnione 12 listopada 2026.** Ukończona mapa pozostaje ukończona, a powtórki są osobną, pozytywnie nazwaną aktywnością z krótkimi sesjami i wyraźnym zakończeniem. Celem jest poczucie sukcesu po przejściu mapy i zachęta do dalszego ćwiczenia, bez poczucia niekończących się zaległości.
+
+### Trwałe ukończenie mapy
+
+- Po wszystkich wymaganych lekcjach i treningach mapa ma 100%, oznaczenie ukończenia, gratulacje i informację o zdobytej nagrodzie. Pozostające lub późniejsze błędy nie cofają tego stanu.
+- Nie uzależniamy pozytywnego wyglądu ukończonej mapy od wyzerowania kolejki błędów. Nie pokazujemy na niej pomarańczowych ostrzeżeń, liczników zaległych błędów ani komunikatów sugerujących niedokończoną pracę.
+- Sukces mapy i ukończenie krótkiej rozgrzewki są dwoma osobnymi osiągnięciami. Dalsza potrzeba utrwalania nie podważa wcześniejszego ukończenia materiału.
+
+### Osobna aktywność „Kocia rozgrzewka”
+
+- Powtórki są przedstawiane jako zaproszenie do krótkiego ćwiczenia, a nie obowiązek spłacenia wszystkich błędów. Przykład tonu: „Poćwiczymy przez chwilę?”, zamiast „Masz zaległości”.
+- Każda sesja ma skończony, krótki zestaw zadań i własny czytelny postęp. Po jego przejściu następuje jednoznaczny komunikat sukcesu i koniec sesji, nawet jeśli w tle pozostał materiał do kolejnych powrotów.
+- Wyniki sesji nie zamieniają jej końca w kolejny komunikat o nieskończonej kolejce. Użytkownik może zakończyć naukę z poczuciem wykonania wybranej aktywności lub dobrowolnie uruchomić następną krótką sesję.
+- Błędy nadal służą do doboru ćwiczeń. Wewnętrzne liczniki utrwalenia nie są prezentowane jako obowiązek trzech poprawnych odpowiedzi do odrobienia. Nie kasujemy zapisanych pomyłek tylko po to, aby pokazać sukces.
+- Dostęp do rozgrzewki ma być spójny i nie powielać ostrzeżeń w wielu miejscach. Ekran rozgrzewek otwiera się ze strony głównej, modułu i mapy; nie dodano szóstego przycisku do dolnej nawigacji. Na ukończonej mapie może być neutralne, dobrowolne zaproszenie do dalszego ćwiczenia.
+- Zachowujemy możliwość ćwiczenia wybranego modułu i kilku krótkich sesji pod rząd, np. przed sprawdzianem. Nie wprowadzamy obowiązku ani ograniczenia do jednej sesji dziennie; komunikat zakończenia nie oznacza wyczyszczenia całego materiału.
+
+### Granice ustalenia i ochrona danych
+
+Pierwsze wdrożenie korzysta z obecnych mechanizmów, bez nowego harmonogramu. Zestaw dodatkowy ma do 8 zadań (krótszy przy małej puli), mapowy zachowuje targetCount obecnego treningu, najczęściej 8, a zestaw wybranego tematu ma 1–10 zadań według zachowanej kolejki błędów. Nie narzucamy jednej sesji dziennie i nie dokładamy błędów na koniec. Wewnętrzna zasada trzech zaliczeń dla tematów pozostaje, bez pokazywania jej jako długu.
+
+Zachowano ukończenia, gwiazdki, nagrody domku, historię, zapisane błędy i postępy. Nagrody dawnych treningów 3/1/1 ★ pozostają zgodnie z D-47. Zachowano też dawną premię 3 ★ za pełne utrwalenie etapu pierwszej mapy Food; nie staje się premią za sam pasek 100%. Dalsza zmiana tej premii wymaga osobnej decyzji.
+
+**Stan obecny:** mapy i etapy pokazują ukończenie i gratulacje niezależnie od błędów. Nie ma na nich kafelków powtórek ani pomarańczowych liczników. Strona główna po ukończeniu map proponuje dobrowolną rozgrzewkę zamiast prowadzić do zaległości. Ekran postępów pokazuje ukończone sesje zamiast licznika rzeczy do powtórki. „Kocia rozgrzewka” ma wybór całego kursu, modułu oraz trudniejszego tematu; wyniki sesji kończą się pozytywnym komunikatem bez pozostałej kolejki.
+
+### Kryteria wdrożenia
+
+1. Mapa z ukończonymi lekcjami i treningami oraz niewyzerowaną kolejką błędów pokazuje 100% i sukces, bez ostrzeżeń o zaległościach.
+2. Po krótkiej rozgrzewce pojawia się wyraźne zakończenie i pozytywny komunikat, również gdy materiał ma jeszcze wrócić w przyszłości.
+3. Kolejna pomyłka lub rozgrzewka nie otwiera ponownie ukończonej mapy i nie odbiera nagród.
+4. Kolejne sesje są dobrowolne; można ćwiczyć wybrany moduł więcej niż raz tego samego dnia.
+5. Zmiana prezentacji nie usuwa zapisanych błędów, historii, ukończeń ani zdobytych gwiazdek.
+
 ## Stan obecny i różnice
 
 | Obszar | Obecna aplikacja | Założenie docelowe |
 | --- | --- | --- |
 | Organizacja modułu | Food ma dwie mapy: zachowaną z 7 etapami i nową z 5 lekcjami; kod przyjmuje do 3 map | 1–3 mapy w module, każda z kilkoma lekcjami |
 | Kolejka błędów | Osobna kolejka każdego etapu w każdej mapie; druga mapa Food ma jeden etap, pierwsza siedem | Lekcja powtórki błędów z lekcji i treningów danej mapy |
-| Trening | Dodatkowy trening poznanego materiału i obsługa roli treningu na nowych mapach; pierwsza mapa Food pozostaje bez zmian, druga zawiera trening wcześniejszej mapy | Lekcja utrwalająca wcześniejszy materiał, także rozwiązywany bezbłędnie |
+| Rozgrzewka (dawny trening) | Obowiązkowa na mapie w miejscu dotychczasowego treningu; dodatkowa dobrowolna. Food zachowuje obecny zestaw lekcji | Utrwalanie poznanego materiału bieżącej i wcześniejszych map, także bezbłędnego |
 | Ćwiczenia swobodne | Moduł, opcja wcześniejszych modułów i globalne fiszki/quiz/gramatyka z poznanego zakresu wybranego kursu | Zakres modułowy lub poznany zakres całego wybranego kursu |
 | Utrwalenie błędów | 3 zaliczenia w ukończonych turach, odstępy w turach | Zachować rozróżnienie powtórki błędów i treningu; szczegółowy algorytm wymaga decyzji |
 
@@ -52,7 +98,7 @@ Przy komponowaniu zestawu o standardowym zakresie 6–10 zadań dobieramy liczb�
 | Rola | Zakres i cel |
 | --- | --- |
 | Poznawanie i ćwiczenie | Wprowadzenie oraz sprawdzenie materiału bieżącej mapy |
-| Trening | Utrwalanie poznanego materiału wcześniejszych map tego samego kursu, także z wcześniejszych modułów |
+| Rozgrzewka na mapie (dawny trening) | Utrwalanie poznanego materiału wcześniejszych lekcji bieżącej mapy oraz wcześniejszych map tego samego kursu |
 | Powtórka błędów | Przepracowanie błędów z lekcji i treningów mapy, w której te działania się odbyły |
 
 Rola nie określa jednego formatu pytania: lekcja może łączyć słownictwo i gramatykę oraz różne sposoby odpowiadania. Odpowiedź otwarta lub zamknięta to osobny wymiar [mechaniki](02-mechanika.md).
@@ -67,17 +113,17 @@ Trening ma **łączyć słownictwo i gramatykę zależnie od dostępnego materia
 
 **Pierwszeństwo doboru jest zatwierdzone (D-29):** trudne i dawno niećwiczone elementy powinny wracać częściej, a bezbłędne rzadziej, ale regularnie. Trening nie może ograniczać się do kolejki błędów ani stale pomijać wcześniej bezbłędnego materiału. Nie ustalono sztywnych udziałów ani wzoru rozstrzygającego między trudnym świeżym elementem a łatwym dawno niećwiczonym.
 
-Trening nie powinien wprowadzać niepoznanego materiału przyszłych map. **Mapę zaczynamy od nowego materiału; pierwszy trening umieszczamy po 2–3 lekcjach nowego materiału, jeśli jest już poznany materiał z wcześniejszych map** (D-30). **Kolejne treningi pojawiają się co 2–3 lekcje nowego materiału**, zależnie od długości mapy i dostępnego materiału. Konkretne pozycje i liczbę treningów ustalamy przy układaniu danej mapy zgodnie z tym rytmem. Nie zaczynamy kolejnej mapy od obowiązkowego treningu wcześniejszego zakresu. Gdy nie ma jeszcze materiału z wcześniejszych map, nie tworzymy pustego treningu. Pozostałe kwestie treningów opisuje [U-05](decyzje.md#u-05); wybór algorytmu i odstępów odłożono na później (D-29). Pierwsza mapa Food nie ma treningów mapowych; druga ma trening wcześniejszego materiału po trzech lekcjach.
+Rozgrzewka nie wprowadza niepoznanego materiału przyszłych lekcji ani map. D-47 rozszerza zakres dawnego treningu także o wcześniejsze lekcje bieżącej mapy. **Mapę zaczynamy od nowego materiału; pierwszy trening umieszczamy po 2–3 lekcjach nowego materiału, jeśli jest już poznany materiał z wcześniejszych lekcji lub map** (D-30). **Kolejne treningi pojawiają się co 2–3 lekcje nowego materiału**, zależnie od długości mapy i dostępnego materiału. Konkretne pozycje i liczbę treningów ustalamy przy układaniu danej mapy zgodnie z tym rytmem. Nie zaczynamy kolejnej mapy od obowiązkowego treningu wcześniejszego zakresu. Gdy nie ma jeszcze materiału z wcześniejszych map, nie tworzymy pustego treningu. Pozostałe kwestie treningów opisuje [U-05](decyzje.md#u-05); wybór algorytmu i odstępów odłożono na później (D-29). Pierwsza mapa Food nie ma treningów mapowych; druga ma trening wcześniejszego materiału po trzech lekcjach.
 
 **Dodatkowy trening na żądanie jest zatwierdzony (D-27):** obok treningów na mapie użytkownik może uruchomić go bez czekania na termin, także kilka razy jednego dnia, np. przed sprawdzianem. Nadal obowiązuje dozwolony zakres wcześniej poznanego materiału tego kursu i wielkość z D-20. Funkcja jest wdrożona; nagrodę 1 ★ określa D-34. Nie wybrano jeszcze docelowego algorytmu ani sposobu aktualizowania przyszłego harmonogramu po dodatkowej sesji.
 
 ### Ukończenie mapy — D-32
 
-Ukończenie mapy wymaga ukończenia wszystkich jej zwykłych lekcji i umieszczonych na niej treningów. W docelowym liczniku ukończenia i pasku postępu trening na mapie liczymy jako lekcję wymaganą; dodatkowy trening na żądanie jest dobrowolny i nie powiększa tego zakresu. Powtórki błędów nie blokują ukończenia mapy ani osiągnięcia 100% postępu lekcji. Zaległe błędy nadal pokazujemy osobno zgodnie z D-23.
+Ukończenie mapy wymaga ukończenia wszystkich jej zwykłych lekcji i umieszczonych na niej treningów. W docelowym liczniku ukończenia i pasku postępu trening na mapie liczymy jako lekcję wymaganą; dodatkowy trening na żądanie jest dobrowolny i nie powiększa tego zakresu. Powtórki błędów nie blokują ukończenia mapy ani osiągnięcia 100% postępu lekcji. D-46–D-47 przenoszą doświadczenie powtórek do „Kociej rozgrzewki” i usuwają ostrzeżenia o zaległościach z ukończonej mapy.
 
 Mechanizm działa na drugiej produkcyjnej mapie Food: trening po trzech zwykłych lekcjach jest wymagany do jej ukończenia. Pierwsza mapa Food pozostaje bez treningów mapowych, a zapisane ukończenia i zdobyte gwiazdki są zachowane. Nagrodę za trening na mapie określa D-33; warunki premii za utrwalenie nowych map pozostają osobną decyzją.
 
-Wszystkie dostępne mapy, ich etapy i lekcje można otwierać niezależnie od wcześniejszych ukończeń. Kolejność i „Kontynuuj naukę” są rekomendacją, nie blokadą (D-39). Przy pustej puli treningu ekran „Przygotuj się do treningu” wskazuje zwykłą lekcję wcześniejszej mapy i pozwala ją otworzyć przyciskiem „Poznaj wcześniejszy materiał”. Po odpowiedziach w tej lekcji można wrócić przez katalog do treningu. Samo wprowadzenie nie daje poznania ani nagrody. Jeśli wcześniejsza mapa jest niedostępna, ekran proponuje ponowienie wczytania i inną mapę, zamiast pustej sesji. Nie wprowadzono automatycznej blokady drugiej mapy ani zastępowania treningu niepoznanym materiałem. [Szczegóły i ochrona wyników](odpornosc-map.md).
+Wszystkie dostępne mapy, ich etapy i lekcje można otwierać niezależnie od wcześniejszych ukończeń. Kolejność i „Kontynuuj naukę” są rekomendacją, nie blokadą (D-39). Przy pustej puli treningu ekran „Przygotuj się do rozgrzewki” wskazuje zwykłą lekcję wcześniejszej mapy lub wcześniejszą lekcję bieżącej mapy i pozwala ją otworzyć przyciskiem „Poznaj wcześniejszy materiał”. Po odpowiedziach w tej lekcji można wrócić przez katalog do treningu. Samo wprowadzenie nie daje poznania ani nagrody. Jeśli wcześniejsza mapa jest niedostępna, można przygotować materiał we wcześniejszej lekcji bieżącej mapy. Jeśli nie ma żadnego źródła, ekran proponuje ponowienie wczytania zamiast pustej sesji. Nie wprowadzono automatycznej blokady drugiej mapy ani zastępowania treningu niepoznanym materiałem. [Szczegóły i ochrona wyników](odpornosc-map.md).
 
 ### Zakres ćwiczeń swobodnych
 
@@ -88,7 +134,7 @@ Wszystkie dostępne mapy, ich etapy i lekcje można otwierać niezależnie od wc
 
 Zakres globalny nie obejmuje automatycznie niepoznanych przyszłych treści ani innych kursów. **Element uznajemy za poznany po pierwszej próbie odpowiedzi na dotyczące go zadanie — również błędnej** (D-25). Nie trzeba ukończyć całej lekcji, ale samo obejrzenie wprowadzenia nie wystarcza. Poznanie jest określane dla danego konta i kursu; nie oznacza poprawności ani utrwalenia.
 
-Po takiej próbie element może wejść do poznanego zakresu globalnych ćwiczeń. Przy treningu na mapie nadal obowiązuje dodatkowe ograniczenie do materiału wcześniejszych map. Dodatkowy trening uruchamiany poza mapą korzysta z poznanego zakresu kursu; to roboczy zakres pierwszego wdrożenia opisany w raporcie.
+Po takiej próbie element może wejść do poznanego zakresu globalnych ćwiczeń. Przy rozgrzewce na mapie zakres ograniczamy do materiału wcześniejszych lekcji bieżącej mapy i wcześniejszych map. Dodatkowy trening uruchamiany poza mapą korzysta z poznanego zakresu kursu; to roboczy zakres pierwszego wdrożenia opisany w raporcie.
 
 Uwzględniamy również **wcześniejsze zapisane próby odpowiedzi, także ze starszej historii**, niezależnie od poprawności (D-26). Użytkownik nie musi od nowa poznawać elementów tylko z powodu wprowadzenia tej zasady. Odtworzenie poznanego zakresu nie zmienia ocen, ukończonych lekcji ani zdobytych gwiazdek. Poznanie jest wdrożone w etapie 3 przez wspólny odczyt prób i znacznik `encountered`. Nie znika po zastąpieniu niedokończonej sesji i nie zmienia ocen, ukończeń ani gwiazdek — [opis zakresów](wdrozenie-zakresow.md).
 
@@ -104,7 +150,9 @@ Celem jest rozumienie gramatyki, a nie odtwarzanie zapamiętanych odpowiedzi. Ko
 
 Zachowujemy rozróżnienie pierwszej próby, poprawki, ukończenia lekcji oraz utrwalenia materiału. Gwiazdki służą motywacji, nie są dowodem znajomości całego modułu.
 
-#### Docelowa prezentacja postępów — D-23
+#### Historia prezentacji postępów — D-23, zastąpiona przez D-46
+
+Poniższa tabela zachowuje wcześniejsze ustalenie. Nie opisuje już obecnego interfejsu: wdrożono D-46–D-47 przedstawione na początku dokumentu. Gratulacje za ukończenie mapy nie wymagają wyzerowania błędów.
 
 | Informacja | Prezentacja |
 | --- | --- |
@@ -115,7 +163,7 @@ Zachowujemy rozróżnienie pierwszej próby, poprawki, ukończenia lekcji oraz u
 
 Liczba zaległości oznacza liczbę elementów, które nie osiągnęły wymaganych trzech zaliczeń, a nie liczbę wszystkich pozostałych odpowiedzi do wpisania. Po jednym zaliczeniu element nadal jest zaległy; znika po osiągnięciu 3/3. Pusty zbiór błędów nie daje automatycznie ukończenia nieprzerobionych lekcji.
 
-Licznik zawsze musi nazywać tę jednostkę, którą faktycznie liczy: np. „sekcje” przy agregacji etapów, „lekcje” przy agregacji technicznych lekcji. Siedem obecnych etapów Food nie jest siedmioma technicznymi lekcjami. Dokładny poziom agregacji na ekranach pozostaje w U-07; procent nie miesza ukończeń z liczbą utrwalonych błędów. Oddzielenie prezentacji ukończenia i zaległości jest już wdrożone. Obecny Food pokazuje liczbę technicznych lekcji i osobne podsumowania etapów; pozostałe poziomy agregacji wymagają dalszego projektu.
+Licznik zawsze musi nazywać tę jednostkę, którą faktycznie liczy: np. „sekcje” przy agregacji etapów, „lekcje” przy agregacji technicznych lekcji. Siedem obecnych etapów Food nie jest siedmioma technicznymi lekcjami. Dokładny poziom agregacji na ekranach pozostaje w U-07; procent nie miesza ukończeń z liczbą utrwalonych błędów. Food pokazuje liczbę technicznych lekcji i ukończenia etapów. D-46–D-47 usuwają osobne zaległości z tych podsumowań.
 
 **Obecne liczby:** 3 gwiazdki za pierwsze ukończenie lekcji, również treningu na mapie. Dodatkowe 3 za ukończone lekcje etapu i pełne utrwalenie jego kolejki dotyczą zachowanej pierwszej mapy Food. Nowe nazwane mapy, w tym „Kocia kuchnia”, nie otrzymują tej premii. Powtórki nie blokują dalszych lekcji. Odznaka kociego kucharza pozostaje związana z ukończeniem pierwszej mapy i nie jest odbierana po dodaniu drugiej.
 

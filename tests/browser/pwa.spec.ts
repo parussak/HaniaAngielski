@@ -1,3 +1,4 @@
+import {openStageReview,openAdditionalWarmup} from './navigation.ts';
 import {openModule,openMap} from './navigation.ts';
 import {test,expect,type Page} from './fixtures.ts';
 import {foodModules as modules} from '../materials.ts';
@@ -40,10 +41,10 @@ test('PWA: manifest, ikony i zimny start bez sieci; fiszki, quiz, gramatyka i wz
   offline.once('dialog',d=>d.accept());await offline.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await expect(offline.locator('.option').first()).toBeVisible();
   await offline.locator('.option').filter({hasNotText:'apple'}).first().tap();await expect(offline.locator('.feedback.incorrect')).toBeVisible();
   await offline.getByRole('button',{name:'Moja nauka',exact:true}).tap();await openMap(offline);
-  const review=offline.locator('.journey-stage').first().locator('.stage-review-step');await expect(review).toContainText('1 słówko');
-  offline.once('dialog',d=>d.accept());await review.tap();await expect(offline.locator('.review-meter')).toContainText('0/3');
-  await expect(offline.locator('.option')).toHaveCount(0);await offline.getByRole('textbox').fill('apple');await offline.getByRole('button',{name:/Sprawdź/}).tap();await offline.getByRole('button',{name:/Dalej/}).tap();await expect(offline.locator('.review-result')).toContainText('1 słówko');
-  await offline.reload();await openMap(offline);await offline.locator('.journey-stage').first().locator('.stage-review-step').tap();await expect(offline.locator('.review-meter')).toContainText('1/3');
+  await expect(offline.locator('.stage-review-step')).toHaveCount(0);
+  offline.once('dialog',d=>d.accept());await openStageReview(offline);await expect(offline.locator('.review-meter')).toHaveCount(0);
+  await expect(offline.locator('.option')).toHaveCount(0);await offline.getByRole('textbox').fill('apple');await offline.getByRole('button',{name:/Sprawdź/}).tap();await offline.getByRole('button',{name:/Dalej/}).tap();await expect(offline.getByRole('heading',{name:'Kocia rozgrzewka ukończona!',exact:true})).toBeVisible();
+  await offline.reload();await openMap(offline);await openStageReview(offline);await expect(offline.getByRole('textbox')).toBeVisible();
   await offline.getByRole('button',{name:'Domek',exact:true}).tap();await expect(offline.locator('.room-background')).toHaveJSProperty('complete',true);
   expect(await offline.locator('.room-background').evaluate((img:HTMLImageElement)=>img.naturalWidth)).toBeGreaterThan(0);
 });
@@ -74,7 +75,7 @@ test('PWA: dodatkowy trening offline, wznowienie i synchronizacja jednej gwiazdk
     const prompt=await page.locator('.question').innerText(),word=modules[0].words.find(w=>w.front===prompt)!;
     await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await expect(page.locator('.feedback.correct')).toBeVisible();
     await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await moduleSetup(page);await context.setOffline(true);
-    page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Dodatkowy trening →',exact:true}).tap();await expect(page.locator('.study-heading .tag')).toHaveText('1 / 1');
+    page.once('dialog',d=>d.accept());await openAdditionalWarmup(page);await expect(page.locator('.study-heading .tag')).toHaveText('1 / 1');
     await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await expect(page.locator('.question')).toHaveText(prompt);
     await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('.lesson-reward')).toContainText('+1 ★');
     await page.reload();await expect(page.getByRole('heading',{name:'Dobrze Cię widzieć!'})).toBeVisible();

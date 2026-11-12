@@ -18,6 +18,7 @@ import { ProgressSync } from '../sync.ts';
 import { button, icon } from '../ui.ts';
 import { coursesView, coursePracticeView, courseContext, unfinishedCourseSession } from '../views/courses.ts';
 import { mapTrainingPool } from '../learning/training.ts';
+import {warmupView} from '../views/warmup.ts';
 import { trainingPreparationView } from '../views/training-preparation.ts';
 export function createViews(state: AppState, sync: ProgressSync, syncLabel: () => string) {
     function decorativeCat(id: string) {
@@ -28,7 +29,7 @@ export function createViews(state: AppState, sync: ProgressSync, syncLabel: () =
     function introView() {
         const j=currentJourney(state),l=j&&lessons(j).find(l=>l.lesson.id===state.introLessonId)?.lesson,m=state.modules.find(m=>m.id===j?.moduleId);
         if(!j||!l||!m)return mapView();
-        if(l.role==='training'&&!mapTrainingPool(state.modules,state.journeys,j,state.progress).length)return trainingPreparationView(state.modules,state.journeys,j,state.progress);
+        if(l.role==='training'&&!mapTrainingPool(state.modules,state.journeys,j,state.progress,l).length)return trainingPreparationView(state.modules,state.journeys,j,state.progress);
         return lessonIntro(j,l,m,state.progress);
     }
     function homeForCats() { return courseContext(state)+houseView(state.progress,currentCourse(state)!.id,state.chosenRoom,state.chosenDecoration,decorativeCat,state.modules,state.journeys,state.journeyIssues,state.houseTab,state.houseEditing); }
@@ -45,6 +46,6 @@ export function createViews(state: AppState, sync: ProgressSync, syncLabel: () =
     function backupView() { return renderBackupView(state); }
     function accountView() { return renderAccountView(state, sync, syncLabel()); }
     function shell(content: string) { return shellView(content, state, syncLabel()); }
-    const views: Record<AppState['screen'], () => string> = { home, journeys: journeyList, 'module-list': moduleList, setup, study, progress: progressView, backup: backupView, account: accountView, summary, map: mapView, 'lesson-intro': introView, house: homeForCats, courses: () => coursesView(state), 'course-practice': () => coursePracticeView(state) };
+    const views: Record<AppState['screen'], () => string> = { home, warmup:()=>courseContext(state)+warmupView(state), journeys: journeyList, 'module-list': moduleList, setup, study, progress: progressView, backup: backupView, account: accountView, summary, map: mapView, 'lesson-intro': introView, house: homeForCats, courses: () => coursesView(state), 'course-practice': () => coursePracticeView(state) };
     return () => shell(views[state.screen]());
 }

@@ -16,9 +16,5 @@ export function mapProgress(j: Journey, p: Progress, stage?: Stage) {
 }
 
 export function reviewProgressText(stats: ReturnType<typeof mapProgress>) {
-    if (stats.pending) return `${exerciseCount(stats.pending)} do utrwalenia`;
-    if (stats.checking) return 'Sprawdzamy starsze błędy';
-    if (stats.mastered) return '0 ćwiczeń do utrwalenia · Gratulacje!';
-    if (stats.reviewed) return '0 ćwiczeń do utrwalenia';
-    return 'Na razie bez zaległych powtórek';
+    return stats.complete?'Ukończone · Gratulacje!':'Każda lekcja to kolejny mały krok.';
 }

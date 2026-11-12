@@ -10,7 +10,7 @@ export class AppState {
     modules: Module[] = [];
     catCatalog: CatCatalog | null = null;
     progress: Progress = emptyProgress();
-    screen: 'home' | 'setup' | 'study' | 'progress' | 'backup' | 'account' | 'summary' | 'map' | 'lesson-intro' | 'house' | 'journeys' | 'module-list' | 'courses' | 'course-practice' = 'home';
+    screen: 'home' | 'setup' | 'study' | 'progress' | 'backup' | 'account' | 'summary' | 'map' | 'lesson-intro' | 'house' | 'journeys' | 'module-list' | 'courses' | 'course-practice' | 'warmup' = 'home';
     journeys: Journey[] = [];
     journeyIssues: JourneyIssue[] = [];
     selectedJourneyKey = '';

@@ -11,7 +11,7 @@ interface Practice { item: Item; total: number; correct: number; last: number; d
 export function practicedItems(modules: Module[], selected: Module, p: Progress): Practice[] {
     const counts = answerHistory(p);
     const result = new Map<string, Practice>();
-    const difficult = new Set(p.difficult);
+    const difficult = new Set([...p.difficult,...Object.values(p.adventure?.stageReviews??{}).flatMap(s=>Object.values(s.items).filter(v=>v.correct<3).map(v=>v.item.key))]);
     const remembered = new Set(p.encountered ?? []);
     for (const m of modules.filter(m => sameCourse(m, selected))) {
         const source: Item[] = [
@@ -56,10 +56,8 @@ export function earlierMapKeys(modules: Module[], journeys: Journey[], current: 
 export function validateTrainingPlan(modules: Module[], journeys: Journey[]) {
     for (const journey of journeys) {
         let introduced = 0;
-        const earlier = earlierMapKeys(modules, journeys, journey);
         for (const { lesson } of lessons(journey)) {
             if (lesson.role !== 'training') { introduced++; continue; }
-            if (!earlier.size) throw new Error(`Trening ${lesson.id}: brak materiału wcześniejszych map.`);
             if (introduced < 2 || introduced > 3) throw new Error(`Trening ${lesson.id}: wymagane 2–3 lekcje nowego materiału przed treningiem.`);
             introduced = 0;
         }
@@ -81,9 +79,15 @@ export function selectTrainingItems(pool: Practice[], count = 8, random = Math.r
     return selected.map(x => structuredClone(x.item));
 }
 
-export function mapTrainingPool(modules:Module[],journeys:Journey[],journey:Journey,p:Progress){
+export function mapTrainingPool(modules:Module[],journeys:Journey[],journey:Journey,p:Progress,lesson?:Lesson){
     const selected=modules.find(m=>m.id===journey.moduleId);if(!selected)return [];
     const allowed=earlierMapKeys(modules,journeys,journey);
+    const entries=lessons(journeyForProgress(journey,p)),boundary=lesson?entries.findIndex(e=>e.lesson.id===lesson.id):entries.findIndex(e=>e.lesson.role==='training');
+    for(const {lesson:prior} of entries.slice(0,Math.max(0,boundary))){
+        if(prior.role==='training')continue;
+        for(const id of prior.wordIds)allowed.add(keyFor(selected,'word',id));
+        for(const id of prior.exerciseIds){const q=selected.exercises.find(q=>q.id===id)!;allowed.add(q.kind==='vocabulary'&&q.wordId?keyFor(selected,'word',q.wordId):keyFor(selected,'exercise',id));}
+    }
     return practicedItems(modules,selected,p).filter(x=>allowed.has(x.item.key));
 }
 
@@ -98,10 +102,14 @@ export function trainingPreparation(modules:Module[],journeys:Journey[],journey:
         const candidate=candidates.find(e=>!p.adventure?.completed[e.key])??candidates[0];
         if(candidate)return {journey:source,lesson:candidate.lesson};
     }
+    const current=journeyForProgress(journey,p),before=lessons(current).slice(0,Math.max(0,lessons(current).findIndex(e=>e.lesson.role==='training')));
+    const candidate=before.find(e=>e.lesson.role!=='training'&&!p.adventure?.completed[e.key])??before.find(e=>e.lesson.role!=='training');
+    if(candidate)return {journey:current,lesson:candidate.lesson};
 }
 
-export function makeTrainingSession(modules: Module[], selected: Module, p: Progress, answerMode: AnswerMode, context?: { journey: Journey; lesson: Lesson; journeys: Journey[] }): Session | null {
-    let pool = context?mapTrainingPool(modules,context.journeys,context.journey,p):practicedItems(modules, selected, p);
+export function makeTrainingSession(modules: Module[], selected: Module, p: Progress, answerMode: AnswerMode, context?: { journey: Journey; lesson: Lesson; journeys: Journey[] },moduleOnly=false): Session | null {
+    let pool = context?mapTrainingPool(modules,context.journeys,context.journey,p,context.lesson):practicedItems(modules, selected, p);
+    if(moduleOnly)pool=pool.filter(x=>x.item.moduleId===selected.id);
     if (context) {
         if (context.journey.moduleId !== selected.id || context.lesson.role !== 'training' || !unlocked(context.journey, context.lesson, p))
             throw new Error('Najpierw ukończ wcześniejszą lekcję.');
@@ -110,6 +118,6 @@ export function makeTrainingSession(modules: Module[], selected: Module, p: Prog
     if (!items.length) return null;
     items.forEach((item, index) => { item.input = inputFor(questionFor(modules, item), answerMode === 'mixed' ? (index % 2 ? 'text' : 'choice') : answerMode); });
     return { fixedLength:true,id: crypto.randomUUID(), moduleId: selected.id, mode: context ? 'lesson' : 'training', training: { kind: context ? 'map' : 'extra' },
-        ...(context ? { lesson: { id: `${journeyKey(context.journey)}/${context.lesson.id}`, title: context.lesson.title } } : {}),
+        ...(context ? { lesson: { id: `${journeyKey(context.journey)}/${context.lesson.id}`, title: 'Kocia rozgrzewka' } } : {}),
         answerMode, previous: true, startedAt: new Date().toISOString(), completedAt: null, items, index: 0, phase: 'question', lastCorrect: null, attempts: [], repeatKeys: [] };
 }

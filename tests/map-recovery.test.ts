@@ -67,9 +67,9 @@ test('dawne ukończenia bez historii można powtórzyć w przygotowaniu, bez now
  const p=emptyProgress();p.adventure=freshAdventure();for(const e of lessons(first))p.adventure.completed[e.key]={at};
  const before=structuredClone(p),source=trainingPreparation(modules,[first,second],second,p)!;
  assert.equal(source.lesson.id,first.stages[0].lessons[0].id);
- assert.equal(trainingPreparation(modules,[second],second,p),undefined);
+ assert.equal(trainingPreparation(modules,[second],second,p)?.journey.moduleId,m.id);
  const other={...m,id:'other-unit',courseId:'other-course'};const otherJourney={...first,moduleId:other.id};
- assert.equal(trainingPreparation([...modules,other],[otherJourney,second],second,p),undefined);
+ assert.equal(trainingPreparation([...modules,other],[otherJourney,second],second,p)?.journey.moduleId,m.id);
  assert.deepEqual(p,before);
 });
 

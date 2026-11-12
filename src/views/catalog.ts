@@ -24,11 +24,11 @@ export function journeyList(modules: Module[], journeys: Journey[], progress: Pr
     <p class="catalog-subtitle">${moduleSubtitle(m)}</p>
     <h2>${e(j.title)}</h2>
     <p>${done} z ${total} lekcji ukończonych</p>
-    <div class="journey-progress ${reviews.mastered?'is-mastered':''}" role="progressbar" aria-label="Ukończone lekcje: ${e(j.title)}" aria-valuenow="${done}" aria-valuemin="0" aria-valuemax="${total}">
+    <div class="journey-progress ${reviews.complete?'is-mastered':''}" role="progressbar" aria-label="Ukończone lekcje: ${e(j.title)}" aria-valuenow="${done}" aria-valuemin="0" aria-valuemax="${total}">
     <span style="width:${reviews.percent}%">
     </span>
     </div>
-    <p class="retention-overview ${reviews.pending?'has-pending':reviews.mastered?'is-mastered':''}">${e(reviewProgressText(reviews))}${progress.adventure?.reviewArchiveHead ? ' · pobieramy starsze błędy' : ''}</p>
+    <p class="retention-overview ${reviews.complete?'is-mastered':''}">${e(reviewProgressText(reviews))}</p>
     <button class="primary" data-action="map" data-id="${e(j.moduleId)}" data-journey="${e(journeyKey(j))}" aria-label="Otwórz mapę ${e(j.title)}">Otwórz mapę ${icon('arrow')}</button>
     </div>
     <img src="./illustrations/word-have-a-picnic.svg" alt="" width="110" height="100">

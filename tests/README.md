@@ -47,3 +47,8 @@ Standardowe budowanie i polecenia Playwright pozostają opisane w [zasadach test
 ## Siatka domku
 
 `house-grid.test.ts` używa małych zakupów i syntetycznej aktywnej lekcji. Nie wiążemy rozmiaru dekoracji z miejscem w CSS. Dane rozmiarów i obszarów są w `house/layout.ts`; kolejne dekoracje powinny mieć własny zdefiniowany rozmiar i test granic. Stare miejsca pozostają kontrolą odczytu, nie wymogiem przenoszenia zakupów między pokojami. `browser/house-grid.spec.ts` sprawdza ruchy myszy i dotyku, strzałki, odtworzenie i offline. Przy pomiarach po błędnym upuszczeniu poczekaj na obsłużenie odmowy i wyczyszczenie podglądu gestu, a nie tylko na niezmienioną wartość współrzędnej.
+
+
+## Rozgrzewka i dawne treningi
+
+`warmup.test.ts` korzysta z małej syntetycznej mapy z rozgrzewką po dwóch lekcjach i przyszłymi zadaniami. `browser/warmup.spec.ts` celowo sprawdza Food i stare ukończenia. Nazwy `training`, `stage-review` i `review` w plikach testów są nazwami mechanizmów zapisu, nie obowiązującą etykietą interfejsu. W interfejsie szukaj Kociej rozgrzewki przez `openWarmup`, `openAdditionalWarmup`, `openStageReview` lub `openGeneralReview` z `browser/navigation.ts`. Nie odtwarzaj usuniętych kafelków etapowych ani licznika 3/3 tylko po to, aby stary test przeszedł; utrwalenie i stare nagrody sprawdzaj przez wyniki, kopię i chmurę. Nie usuwaj ochrony niezmienionych ukończeń, sesji i gwiazdek przy zmianie etykiet.

@@ -46,11 +46,11 @@ test('kontynuujemy ostatnio używany moduł, a po jego końcu wracamy też do po
   let step=getNextStep([m,m2],[j,j2],p);assert.equal(step.moduleId,m2.id);if(step.kind==='lesson')assert.equal(step.lessonId,lessons(j2)[1].lesson.id);
   complete(p,j2);step=getNextStep([m,m2],[j,j2],p);assert.equal(step.kind,'lesson');assert.equal(step.moduleId,m.id);
 });
-test('po wszystkich lekcjach proponujemy powtórkę etapową, ogólną lub ćwiczenia bez pustej sesji',()=>{
+test('po wszystkich lekcjach proponujemy dobrowolną rozgrzewkę, bez komunikatu o zaległościach',()=>{
   const p=emptyProgress();complete(p,j);pending(p);
-  let step=getNextStep([m],[j],p);assert.equal(step.kind,'stage-review');if(step.kind==='stage-review')assert.equal(step.stageId,j.stages[0].id);
+  let step=getNextStep([m],[j],p);assert.equal(step.kind,'practice');
   Object.values(p.adventure!.stageReviews![stageKey(j,j.stages[0])].items)[0].correct=3;
-  p.words[keyFor(m,'word','apple')]='review';step=getNextStep([m],[j],p);assert.equal(step.kind,'review');
+  p.words[keyFor(m,'word','apple')]='review';step=getNextStep([m],[j],p);assert.equal(step.kind,'practice');
   p.words={};p.difficult=['removed@1:word:apple'];assert.equal(getNextStep([m],[j],p).kind,'practice');
   assert.equal(getNextStep([],[],emptyProgress()).moduleId,null);
 });

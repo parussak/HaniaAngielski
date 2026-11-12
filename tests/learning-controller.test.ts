@@ -13,7 +13,7 @@ const entries = [
  {action:'mode',data:{mode:'grammar'},message:'Rozpoczęcie nowej sesji zastąpi niedokończoną sesję. Zakończona historia i zapisane trudności pozostaną. Kontynuować?'},
  {action:'course-mode',data:{mode:'quiz'},message:'Nowa sesja zastąpi niedokończoną sesję. Zakończone wyniki pozostaną zachowane. Kontynuować?'},
  {action:'begin-lesson',data:{id:'lesson'},message:'Rozpocząć lekcję zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'},
- {action:'extra-training',data:{},message:'Rozpocząć trening zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'},
+ {action:'extra-training',data:{},message:'Rozpocząć rozgrzewkę zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'},
  {action:'stage-review',data:{id:'stage'},message:'Rozpocząć powtórkę zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'},
 ];
 function setup() {

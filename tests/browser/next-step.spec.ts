@@ -1,3 +1,4 @@
+import {openGeneralReview,openStageReview} from './navigation.ts';
 import {openBackup} from './navigation.ts';
 import {test,expect,type Page} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
@@ -62,9 +63,9 @@ test('kolejna mapa z plików treści jest proponowana po Food, pomimo zaległej 
 test('po wszystkich lekcjach ramka prowadzi do zaległej powtórki etapu lub ogólnej',async({page})=>{
   const p=emptyProgress();complete(p);const item={key:keyFor(m,'word','apple'),moduleId:m.id,version:1,type:'word' as const,id:'apple',input:'text' as const};
   p.adventure!.stageReviews={[stageKey(j,j.stages[0])]:{round:0,items:{[item.key]:{item,correct:0,due:1}}}};
-  await restore(page,p);await expect(page.locator('.next-step-card')).toHaveAttribute('data-step-kind','stage-review');
-  await page.locator('.next-step-card button').tap();await expect(page.locator('.review-meter')).toContainText('0/3');await expect(page.getByRole('textbox')).toBeVisible();
+  await restore(page,p);await expect(page.locator('.next-step-card')).toHaveAttribute('data-step-kind','practice');
+  await page.locator('.next-step-card button').tap();await expect(page.getByRole('heading',{name:'Kocia rozgrzewka',exact:true})).toBeVisible();await openStageReview(page);await expect(page.locator('.review-meter')).toHaveCount(0);await expect(page.getByRole('textbox')).toBeVisible();
   p.adventure!.stageReviews={};p.words[item.key]='review';await restore(page,p);
-  await expect(page.locator('.next-step-card')).toHaveAttribute('data-step-kind','review');
-  await page.locator('.next-step-card button').tap();await expect(page.getByRole('textbox')).toBeVisible();await expect(page.locator('.question')).toHaveText('jabłko');
+  await expect(page.locator('.next-step-card')).toHaveAttribute('data-step-kind','practice');
+  await page.locator('.next-step-card button').tap();await openGeneralReview(page);await expect(page.getByRole('textbox')).toBeVisible();await expect(page.locator('.question')).toHaveText('jabłko');
 });

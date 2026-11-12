@@ -102,3 +102,10 @@ Nowe ustawienia przechodzą przez tę samą transakcję `mutate`, walidację, In
 Zakup może mieć opcjonalne `position: { x, y }`, z całkowitymi współrzędnymi siatki 24 × 15. Przy współrzędnych `slot` jest `null`; samo `slot: null` bez `position` nadal oznacza schowek. Wielkość i orientacja wynikają z katalogu układu, a nie z zapisu użytkownika. Nie dodano rejestru własności ani nowego portfela. Brak `room` nadal oznacza salonik; nowe zakupy mają jeden pokój, a istniejące zachowują dotychczasowe przypisanie.
 
 Stare nazwane miejsca wyświetlamy przez funkcję odczytu bez migracji danych. Pierwszy ruch zapisuje współrzędne tylko przesuwanego przedmiotu. Walidator kontroluje całkowitość współrzędnych, zmieszczenie rozmiaru w pokoju, brak jednoczesnego starego miejsca oraz duplikaty pozycji tej samej warstwy. Nowe współrzędne podlegają transakcji zapisu, lokalnemu cache, synchronizacji i kopiom wersji 1. Wymagają aktualnej aplikacji; stary klient nie obsługuje edycji siatki. Nie zmieniono identyfikatorów ukończeń, nagród, kosztów zakupów ani archiwizacji historii.
+
+
+## Kocia rozgrzewka — zgodność D-46–D-47
+
+Nie zmieniono formatu kopii, kluczy map i lekcji ani zapisanych ukończeń. Rozgrzewki mapowe nadal mają `training.kind: map` i `lesson.id` istniejącego treningu; dodatkowe `training.kind: extra` i ten sam znacznik jednorazowego rozliczenia sesji. Stare aktywne sesje zachowują pytania, indeks, odpowiedzi i nagrody, a użytkownik widzi nową nazwę. Oryginalnych tytułów w historycznych sesjach nie przepisujemy.
+
+Kolejki `stageReviews`, statusy słówek i błędy nie są usuwane. Tematy ćwiczone osobno nadal aktualizują trzy zaliczenia i starą premię etapu, bez wyświetlania tego jako zaległości. Rozgrzewki mieszane korzystają ze wspólnej historii poznania i trudności; nie zmieniono ich w nowy algorytm odstępów. Zielone ukończenie mapy opisuje wymagane lekcje i nie oznacza wyczyszczenia danych utrwalania. Nie nadano gwiazdek ponownie za stare ukończenia ani nie dodano wymagań do pierwszej mapy Food.

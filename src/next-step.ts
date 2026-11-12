@@ -1,7 +1,7 @@
 import { journeyKey,lessons,nextLesson,type Journey } from './adventure.ts';
-import { keyFor,resolveItem,sessionCompatible,type Module,type Progress } from './core.ts';
-import { labels } from './learning-labels.ts';
-import { reviewState,stageForSession,stageKey } from './stage-review.ts';
+import { sessionCompatible,type Module,type Progress } from './core.ts';
+import { labels,lessonTitle } from './learning-labels.ts';
+import { stageForSession } from './stage-review.ts';
 import { compareModules, courseKey, sameCourse } from './learning/scope.ts';
 import { coursePracticeLabels, type CoursePracticeMode } from './learning/course-practice.ts';
 
@@ -26,7 +26,7 @@ export function getNextStep(modules:Module[],journeys:Journey[],p:Progress,selec
     const catId=stageForSession(ordered,active)?.stage.cat??'albert';
     if(!sessionCompatible(modules,active))return {kind:'unavailable',moduleId:active.moduleId,catId};
     const context=stageForSession(ordered,active);
-    return {kind:'resume',moduleId:active.moduleId,catId,...(context?.journey.id?{journeyId:journeyKey(context.journey)}:{}),title:active.scope?coursePracticeLabels[active.mode as CoursePracticeMode]:active.stageReview?.title??active.lesson?.title??labels[active.mode],question:Math.min(active.index+1,active.items.length),total:active.items.length};
+    return {kind:'resume',moduleId:active.moduleId,catId,...(context?.journey.id?{journeyId:journeyKey(context.journey)}:{}),title:active.scope?coursePracticeLabels[active.mode as CoursePracticeMode]:(active.training||active.stageReview||active.mode==='review'?labels.training:active.lesson?.title??labels[active.mode]),question:Math.min(active.index+1,active.items.length),total:active.items.length};
   }
 
   const activity:{moduleId:string;at:number}[]=[];
@@ -43,17 +43,8 @@ export function getNextStep(modules:Module[],journeys:Journey[],p:Progress,selec
   // Unfinished reviews never block the next lesson or the next module.
   for(const j of candidates){
     const next=nextLesson(j,p);if(!next)continue;
-    return {kind:'lesson',moduleId:j.moduleId,catId:next.stage.cat,...(j.id?{journeyId:journeyKey(j)}:{}),lessonId:next.lesson.id,title:next.lesson.title,stageTitle:next.stage.title,first:next.key===lessons(j)[0].key,newModule:!!recent&&recent!==j.moduleId};
-  }
-  for(const j of candidates)for(const stage of j.stages){
-    const pending=Object.values(reviewState(p,stageKey(j,stage))?.items??{}).filter(item=>item.correct<3);
-    if(pending.length&&pending.every(entry=>resolveItem(modules,entry.item)))return {kind:'stage-review',moduleId:j.moduleId,catId:stage.cat,...(j.id?{journeyId:journeyKey(j)}:{}),stageId:stage.id,title:stage.title,pending:pending.length};
+    return {kind:'lesson',moduleId:j.moduleId,catId:next.stage.cat,...(j.id?{journeyId:journeyKey(j)}:{}),lessonId:next.lesson.id,title:lessonTitle(next.lesson),stageTitle:next.stage.title,first:next.key===lessons(j)[0].key,newModule:!!recent&&recent!==j.moduleId};
   }
   const preferred=[...available.filter(m=>m.id===recent),...available.filter(m=>m.id!==recent)];
-  for(const m of preferred){
-    const pending=m.words.filter(w=>p.words[keyFor(m,'word',w.id)]==='review'||p.difficult.includes(keyFor(m,'word',w.id))).length+
-      m.exercises.filter(q=>q.requires.every(id=>id===m.id)&&p.difficult.includes(keyFor(m,'exercise',q.id))).length;
-    if(pending)return {kind:'review',moduleId:m.id,catId:'albert',pending};
-  }
   return {kind:'practice',moduleId:preferred[0]?.id??null,catId:'albert'};
 }

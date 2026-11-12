@@ -22,7 +22,7 @@ async function finish(page:Page,ids:string[],type:'word'|'exercise'){
 
 test('pusty trening prowadzi do przygotowania, a potem działa i daje trzy gwiazdki tylko raz',async({page})=>{
  await restore(page,fixture());await open(page,second);await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
- await expect(page.getByRole('heading',{name:'Przygotuj się do treningu',exact:true})).toBeVisible();
+ await expect(page.getByRole('heading',{name:'Przygotuj się do rozgrzewki',exact:true})).toBeVisible();
  await page.setViewportSize({width:320,height:640});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
  await page.screenshot({path:'test-results/training-preparation-mobile.png',fullPage:true});
  await page.getByRole('button',{name:'Poznaj wcześniejszy materiał →',exact:true}).tap();
@@ -30,7 +30,7 @@ test('pusty trening prowadzi do przygotowania, a potem działa i daje trzy gwiaz
  await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →',exact:true}).tap();
  await finish(page,first.stages[0].lessons[0].wordIds,'word');await expect(page.locator('.lesson-reward')).toContainText('+3 ★');
  await open(page,second);await expect(page.locator('.lead')).toContainText('3 z 5');await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
- await expect(page.getByRole('heading',{name:'Trening wcześniejszej mapy',exact:true})).toBeVisible();
+ await expect(page.getByRole('heading',{name:'Kocia rozgrzewka',exact:true})).toBeVisible();
  await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →',exact:true}).tap();
  await expect(page.locator('.question')).toBeVisible();
  // Selection order may be shuffled, but every answer comes from the earlier lesson.
@@ -40,7 +40,7 @@ test('pusty trening prowadzi do przygotowania, a potem działa i daje trzy gwiaz
   await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await expect(page.locator('.feedback.correct')).toBeVisible();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
  }
  await expect(page.locator('.lesson-reward')).toContainText('+3 ★');await open(page,second);
- await page.getByRole('button',{name:/Trening wcześniejszej mapy Ukończona/}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →',exact:true}).tap();
+ await page.getByRole('button',{name:/Kocia rozgrzewka Ukończona/}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →',exact:true}).tap();
  await expect(page.locator('.question')).toBeVisible();
  while(await page.locator('.question').count()){
   const prompt=await page.locator('.question').innerText(),value=modules[0].words.find(w=>w.front===prompt)?.back;
@@ -63,13 +63,12 @@ test('404 drugiej mapy pozostawia pierwszą, a ponowienie odzyskuje obie bez utr
  await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('9');
 });
 
-test('niepoprawna pierwsza mapa nie ukrywa drugiej; przygotowanie proponuje naprawę pobrania',async({page})=>{
+test('niepoprawna pierwsza mapa nie ukrywa drugiej; rozgrzewka może przygotować materiał bieżącej mapy',async({page})=>{
  await page.route('**/content/02-food/sciezka.json',r=>r.fulfill({contentType:'application/json',body:'{broken'}));
  await restore(page,fixture());await open(page,second);await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
- await expect(page.locator('.training-preparation')).toContainText('Wcześniejsza mapa jest chwilowo niedostępna');
- await expect(page.getByRole('button',{name:'Spróbuj wczytać mapy ponownie',exact:true})).toBeVisible();
- await expect(page.getByRole('button',{name:'Poznaj wcześniejszy materiał →',exact:true})).toHaveCount(0);
- await page.unroute('**/content/02-food/sciezka.json');await page.getByRole('button',{name:'Spróbuj wczytać mapy ponownie',exact:true}).tap();
+ await expect(page.locator('.training-preparation')).toContainText('Dzienniczek posiłków');
+ await expect(page.getByRole('button',{name:'Poznaj wcześniejszy materiał →',exact:true})).toBeVisible();
+ await page.unroute('**/content/02-food/sciezka.json');await catalog(page);await page.getByRole('button',{name:'Spróbuj wczytać mapy ponownie',exact:true}).tap();
  await open(page,second);await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await expect(page.getByRole('button',{name:'Poznaj wcześniejszy materiał →',exact:true})).toBeVisible();
 });
 

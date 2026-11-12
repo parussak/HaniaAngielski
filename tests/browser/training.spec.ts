@@ -1,3 +1,4 @@
+import {openWarmup,openAdditionalWarmup} from './navigation.ts';
 import {openBackup} from './navigation.ts';
 import { test, expect, type Page } from './fixtures.ts';
 import { readFileSync } from 'node:fs';
@@ -51,8 +52,8 @@ async function finish(page: Page) {
 test('telefon: dodatkowy trening, wznowienie po odświeżeniu i jedna gwiazdka za każde ukończenie', async ({ page }) => {
     await importProgress(page, fixture()); await openModule(page);
     await page.getByText('Wpisuję odpowiedź', { exact: true }).tap();
-    await page.getByRole('button', { name: 'Dodatkowy trening →', exact: true }).tap();
-    await expect(page.locator('.study-heading h1')).toHaveText('Dodatkowy trening');
+    await openAdditionalWarmup(page);
+    await expect(page.locator('.study-heading h1')).toHaveText('Kocia rozgrzewka');
     await expect(page.locator('.study-heading .tag')).toHaveText('1 / 3');
     await answer(page); const prompt = await page.locator('.question').innerText();
     await page.reload(); await page.getByRole('button', { name: 'Kontynuuj naukę →', exact: true }).tap();
@@ -62,7 +63,7 @@ test('telefon: dodatkowy trening, wznowienie po odświeżeniu i jedna gwiazdka z
     await page.getByRole('button', { name: 'Moja nauka', exact: true }).tap();
     await page.getByRole('button', { name: 'Domek', exact: true }).tap();
     await expect(page.locator('.star-wallet')).toContainText('18');
-    await page.reload(); await openModule(page); await page.getByRole('button', { name: 'Dodatkowy trening →', exact: true }).tap();
+    await page.reload(); await openModule(page); await openAdditionalWarmup(page);
     await finish(page); await expect(page.locator('.lesson-reward')).toContainText('+1 ★');
     await page.getByRole('button', { name: 'Moja nauka', exact: true }).tap();
     await page.getByRole('button', { name: 'Domek', exact: true }).tap();
@@ -73,19 +74,19 @@ test('telefon: dodatkowy trening, wznowienie po odświeżeniu i jedna gwiazdka z
 test('brak poznanych pytań: trening nie tworzy pustej sesji; mały ekran mieści przycisk', async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 640 });
     await page.goto('./'); await openModule(page);
-    await expect(page.getByRole('button', { name: 'Dodatkowy trening →', exact: true })).toBeDisabled();
-    await expect(page.locator('.extra-training')).toContainText('po pierwszych próbach');
+    await openWarmup(page);await expect(page.getByRole('button', { name: 'Zacznij rozgrzewkę →', exact: true })).toBeDisabled();
+    await expect(page.locator('.content')).toContainText('Najpierw spróbuj kilku zadań');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
 });
 
-test('100% ukończenia z pomarańczową zaległością, a po utrwaleniu zielone gratulacje', async ({ page }) => {
+test('100% ukończenia i gratulacje mimo błędów; utrwalenie nie zmienia sukcesu mapy', async ({ page }) => {
     const p = fixture();
     for (const { key } of lessons(food)) p.adventure!.completed[key] = { at: '2026-11-08T12:00:00Z' };
     const session = { ...p.sessions[0], mode: 'lesson' as const, lesson: { id: lessonKey(food, food.stages[0].lessons[0]), title: 'Pierwsze smaki' } };
     recordStageError(p, session, word('apple'), [food]);
     await importProgress(page, p); await openMap(page);
     await expect(page.locator('.lead')).toContainText('100% ukończenia');
-    await expect(page.locator('.retention-overview.has-pending')).toHaveText('1 ćwiczenie do utrwalenia');
+    await expect(page.locator('.retention-overview.is-mastered')).toContainText('Gratulacje');await expect(page.locator('.has-pending,.stage-review-step')).toHaveCount(0);
     await expect(page.locator('.stage-retention').first()).toHaveAttribute('aria-valuenow', '100');
     await expect(page.locator('.retention-overview')).not.toContainText('% utrwalenia');
     await page.screenshot({ path: 'test-results/progress-pending-mobile.png', fullPage: true });
@@ -133,7 +134,7 @@ test('druga mapa: osobna nawigacja, wymagany trening i jednorazowe 3 gwiazdki', 
     await page.getByRole('button', { name: 'Otwórz mapę Druga kocia przygoda', exact: true }).tap();
     await expect(page.locator('.lead')).toContainText('2 z 3');
     await page.getByRole('button', { name: 'Kontynuuj naukę →', exact: true }).tap();
-    await expect(page.getByRole('heading', { name: 'Wracamy do pierwszej mapy', exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Kocia rozgrzewka', exact: true })).toBeVisible();
     await page.getByRole('button', { name: 'Zaczynam ćwiczenia →', exact: true }).tap();
     await finish(page); await expect(page.locator('.lesson-reward')).toContainText('+3 ★');
     await page.getByRole('button', { name: 'Wróć na mapę', exact: true }).tap();

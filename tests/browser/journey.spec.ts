@@ -1,3 +1,4 @@
+import {openGeneralReview} from './navigation.ts';
 import {openModule} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
 import {foodModules as modules} from '../materials.ts';
@@ -49,7 +50,7 @@ test('telefon: fiszki, quiz mieszany, powtórka błędów i brak błędów zasob
   await expect(page.getByRole('heading',{name:'Dobra robota, Haniu!'})).toBeVisible();
   await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
   await openModule(page);
-  await page.getByRole('button',{name:/^Powtórka błędów/}).tap();
+  await openGeneralReview(page);
   await expect(page.locator('.question')).toBeVisible();
   expect([wrongQuestion,reviewWord]).toContain(await page.locator('.question').innerText());
   expect(failures).toEqual([]);
