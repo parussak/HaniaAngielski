@@ -48,3 +48,34 @@
 .kitchen-room .slot-window{left:43%;top:33%;width:17%;height:24%}
 .kitchen-room .slot-shelf{left:66%;top:33%;width:18%;height:24%}
 .kitchen-room .slot-rug{left:36%;top:58%;width:28%;height:35%}
+/* House layers and extra places: coordinates stay local, no additional images. */
+.room-decoration.layer-textiles{z-index:1}
+.room-decoration.layer-furniture{z-index:2}
+.room-decoration.layer-objects{z-index:3}
+.house-cat{z-index:4}
+.slot-floor-cover{left:37%;top:66%;width:33%;height:29%}
+.slot-floor-cushion{left:13%;top:70%;width:18%;height:25%}
+.slot-shelf-left{left:45%;top:7%;width:12%;height:23%}
+.slot-shelf-right{left:78%;top:7%;width:12%;height:23%}
+.slot-table-left{left:42%;top:60%;width:9%;height:18%}
+.slot-table-right{left:51%;top:60%;width:9%;height:18%}
+.slot-counter{left:72%;top:27%;width:14%;height:23%}
+.kitchen-room .slot-shelf-left{left:48%;top:12%}
+.kitchen-room .slot-shelf-right{left:76%;top:12%}
+.kitchen-room .cat-olus{left:12%;top:62%}
+.kitchen-room .cat-maja{left:71%;top:63%}
+.house-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 16px}
+.house-tabs button{min-height:48px;flex:1}
+.house-tabs [aria-pressed="true"]{background:#ede3fa;border:2px solid #9770bd}
+#house-placement{scroll-margin-top:20px;margin:16px 0 20px;padding:20px}
+#house-placement h2{font-size:22px;margin:0}
+.house-layer-label,.owned-location{font-weight:650}
+#house-placement .placement-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+#house-placement .placement-buttons button{min-height:64px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:5px;text-align:left;overflow-wrap:anywhere}
+.placement-buttons small{font-size:12px;line-height:1.4;color:#705581;font-weight:400}
+.placement-buttons button:disabled{opacity:.65;cursor:default}
+.house-hide{min-height:48px;margin-top:12px}
+.house-shop>p{line-height:1.6}
+@media(max-width:600px){#house-placement{padding:18px 12px}#house-placement .placement-buttons{grid-template-columns:repeat(2,minmax(0,1fr))}.house-tabs{gap:8px}.house-tabs button{font-size:14px;padding:10px}.decoration-card{min-height:120px}}
+.slot-floor-side{left:3%;top:76%;width:14%;height:20%}
+.house-wardrobe{display:flex;flex-direction:column}.house-wardrobe.show-storage .house-shop{order:-1}

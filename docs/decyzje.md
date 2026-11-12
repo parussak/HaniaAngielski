@@ -68,6 +68,8 @@ Pozostałe zaparkowane pytania pozostają otwarte; wdrożenie tych zasad nie roz
 
 **D-42:** Gwiazdki są osobne dla każdego kursu i konta. Cały obecny dorobek domku — gwiazdki, zakupy, ustawienia i pokój początkowy — przypisujemy do kursu angielskiego `angielski-hani`, z zachowaniem wydatków i dostępnego salda. Przejście wykonujemy raz, również przy imporcie starszej kopii i synchronizacji. Nowe kursy zaczynają z zerowym portfelem i bez zakupów. Zasada jest wdrożona; zastępuje otwarte pytanie o wspólny portfel przy D-41. Dorobek angielskiego pozostaje w starych polach zapisu, a pozostałe kursy mają osobne portfele; nie trzeba zerować ani kopiować dawnych kwot. [Wymaganie i wdrożenie Food](koci-domek.md).
 
+**D-43 · 12 listopada 2026:** Rozbudowujemy domek o dodatkowe miejsca i osobne warstwy tekstyliów, mebli oraz drobiazgów. Dodajemy „Moje rzeczy” z położeniem każdego zakupu i schowkiem, obsługiwane na telefonie przez wybór przedmiotu i przyciski miejsc, bez precyzyjnego przeciągania. Zastąpiona dekoracja wraca do schowka; przed ustawieniem pokazujemy, co zostanie schowane. Zachowujemy stare zakupy i ustawienia, gwiazdki oraz postępy, osobno dla kont i kursów. **Status: wdrożone.** Szczegółowe rozmieszczenie, zachowanie stolika i zgodność kopii opisuje [kontrakt domku](koci-domek.md).
+
 ## Obszary decyzji i ich status
 
 Poniższe punkty nie są zgodą na zmianę aplikacji. Każdy wymaga doprecyzowania przed implementacją odpowiadającej mu funkcji.

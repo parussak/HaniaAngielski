@@ -1,6 +1,6 @@
 # Koci domek — rozbudowa za postępy w nauce
 
-Status: **wdrożone dla Food**. Ustalenia D-41 i D-42 w [decyzjach](decyzje.md). Użytkowniczka zatwierdziła kuchnię, osiem przedmiotów i ceny opisane poniżej. Kolejne pokoje wymagają własnych danych i grafiki.
+Status: **wdrożone dla Food**, z rozbudową miejsc, warstw i schowkiem „Moje rzeczy” z 12 listopada 2026 (D-43). Ustalenia D-41 i D-42 w [decyzjach](decyzje.md). Użytkowniczka zatwierdziła kuchnię, osiem przedmiotów i ceny opisane poniżej. Kolejne pokoje wymagają własnych danych i grafiki.
 
 ## Cel
 
@@ -97,6 +97,22 @@ Wyposażenie pierwszej mapy można wykorzystać w saloniku jeszcze przed zdobyci
 - [Mechanizm domku](../src/house/progress.ts) obsługuje portfele, odblokowania, zakupy i ustawienia. [Widok](../src/views/house.ts) i [style](../src/adventure.css) odpowiadają za prezentację; [grafiki SVG](../public/game/kitchen.svg) są lekkimi plikami lokalnymi objętymi cache PWA.
 - Salonik jest dostępny od początku. Kuchnia pojawia się po obu mapach, bez wymagania wyzerowania błędów. Przedmioty do jeszcze zablokowanej kuchni mają informację o docelowym pokoju; część nagród pasuje również do saloniku.
 - Zgodność jest realizowana bez przenoszenia i zerowania starego portfela: pola `adventure.earned` i `adventure.purchases` oznaczają odtąd wyłącznie angielski. Inne kursy korzystają z `adventure.courseHomes[courseId]`. Dlatego ponowny odczyt starszej kopii nie dubluje dorobku ani wydatków.
-- `rooms` i `unlockedItems` przechowują odblokowania, a opcjonalne `room` przy zakupie określa pokój; brak `room` oznacza salonik. Miejsca są osobne dla pokoi. Przeniesienie do zajętego miejsca innego pokoju chowa zastany przedmiot; w tym samym pokoju zamienia miejscami.
+- `rooms` i `unlockedItems` przechowują odblokowania, a opcjonalne `room` przy zakupie określa pokój; brak `room` oznacza salonik. Miejsca są osobne dla pokoi. Od D-43 przeniesienie do zajętego miejsca zawsze chowa zastany przedmiot, także w tym samym pokoju. Nie zamienia dekoracji miejscami i nie usuwa zakupu.
 - Odblokowania zapisujemy wraz z przygotowaniem postępów, również po imporcie i przy synchronizacji. Błąd jednej mapy nie daje fałszywej nagrody za cały moduł i nie odbiera zdobytego pokoju. Nie zmieniono identyfikatorów kursów, materiałów, ukończeń ani ocen, wersji kopii i reguł Firebase.
 - Powiadomienie o nowym pokoju po ukończeniu ostatniej lekcji prowadzi użytkownika do pozycji Domek w stałej nawigacji. Wybrany aktualnie pokój jest stanem ekranu; po ponownym uruchomieniu zaczynamy od saloniku, z zachowaniem ustawień obu pokoi.
+
+
+## Więcej miejsc, warstwy i „Moje rzeczy” — D-43
+
+**Stan obecny, 12 listopada 2026.** Salonik ma 11 miejsc, kuchnia 14; wcześniej było po 6. Dawne identyfikatory i ustawienia pozostają bez zmian. Dodatkowe miejsca obejmują koc pod meblami, poduszkę przy dywanie, dwie strony półki oraz podłogę z boku. Kuchnia ma też blat i dwie strony stolika. Całe obecne wyposażenie saloniku można rozstawić jednocześnie. Nie ma obowiązku wystawienia wszystkich zakupów.
+
+- **Tekstylia** (poduszka, koc) są rysowane pod meblami. **Meble i koszyki** tworzą środkową warstwę, a **drobiazgi** są nad nią. Warstwy wynikają z katalogu dekoracji; nie są nową kopią zakupów w zapisie.
+- Nowe miejsca są dopasowane do warstwy i pokoju. Dawne sześć miejsc zachowuje dotychczasową swobodę ustawiania, również dla nietypowych starych aranżacji. Niczego automatycznie nie przestawiamy przy odczycie.
+- Drobiazgi na stoliku wymagają posiadanego stolika ustawionego w kuchni na miejscu „Na dywanie”. Przeniesienie stolika z tego miejsca lub jego schowanie przenosi drobiazgi do schowka. Nie odbiera własności i nie pobiera gwiazdek. Blat i półki są częścią pokoju i nie wymagają dodatkowego mebla.
+- Sekcja **„Moje rzeczy”** pokazuje wszystkie znane aplikacji zakupione dekoracje tego kursu, z informacją „W saloniku”, „W kuchni” lub „W schowku”. Nie jest osobnym magazynem danych. **„Sklep”** pokazuje katalog bieżącego pokoju, ceny i warunki odblokowania.
+- Dotknięcie przedmiotu w kolekcji lub w pokoju przenosi do panelu ustawiania. W razie potrzeby wybiera pasujący posiadany pokój. Wybór miejsca odbywa się przyciskiem, bez przeciągania; przyciski mają co najmniej 44 px wysokości i na telefonie dwie kolumny.
+- Przed ustawieniem w zajętym miejscu przycisk pokazuje, co trafi do schowka. Zastępowany przedmiot pozostaje własnością użytkownika. Przy wypieraniu stolika ostrzeżenie obejmuje też jego drobiazgi.
+- Schowanie używa dotychczasowego `slot: null`. Po ponownym ustawieniu nie płacimy drugi raz. Jedno miejsce w jednym pokoju mieści jeden przedmiot; oddzielne warstwy korzystają z oddzielnych miejsc, które mogą wizualnie nakładać się na siebie.
+- Nowe miejsca korzystają z tego samego zapisu lokalnego, synchronizacji i kopii wersji 1. Starsze kopie są czytane bez migracji; kopia zawierająca nowe miejsca wymaga aktualnej wersji aplikacji. Nie zmieniono zakupów, kosztów, salda, ukończeń, ocen ani aktywnej lekcji.
+
+**Do dalszego ustalenia:** swobodne przesuwanie przedmiotów i nowe pokoje pozostają poza tym wdrożeniem. Nie dodano nowych nagród ani cen.

@@ -4,7 +4,7 @@ Status: istniejące kontrole oraz docelowy sposób ich organizacji. Po zatwierdz
 
 ## Bieżący punkt odniesienia
 
-Ostatni pełny przebieg po uporządkowaniu testów widoków i potwierdzeń (11 listopada 2026): **192/192 Node na zwykłej i wirtualnie rozszerzonej bibliotece oraz 90/90 Playwright** gotowej aplikacji w Chrome. Budowanie z kontrolą materiałów, TypeScript i zasobami offline przeszło. Wyniki starszych etapów poniżej są historią. [Status audytu](status-audytu.md).
+Ostatni pełny przebieg po rozbudowie domku (12 listopada 2026): **199/199 Node na zwykłej i wirtualnie rozszerzonej bibliotece oraz 91/91 Playwright** gotowej aplikacji w Chrome. Budowanie z kontrolą materiałów, TypeScript i zasobami offline przeszło. Wyniki starszych etapów poniżej są historią. [Kontrakt domku](koci-domek.md).
 
 ## Stan obecny
 
@@ -148,3 +148,14 @@ W `stage1/2/3.test.ts` usunięto sprawdzanie treści widoków, CSS i konfiguracj
 `learning-controller.test.ts` obejmuje 20 kombinacji: pięć wejść (tryb modułu, tryb kursu, lekcja, trening, powtórka etapu), każde ze zgodą, odmową, bez aktywnej sesji i z błędem zapisu. Potwierdza dokładne komunikaty, brak zmiany postępów po odmowie i błędzie, pojedynczy zapis po zgodzie, zachowanie poznania, historii i portfela oraz dotychczasowe reguły przejściowych informacji o nagrodzie. Wspólna obsługa nie zmienia kolejności tworzenia sesji w poszczególnych akcjach.
 
 Weryfikacja 11 listopada 2026: **192/192 Node** w obu wariantach biblioteki, **90/90 Playwright** gotowej aplikacji w Chrome, budowanie i kontrola dokumentacji. Pełne scenariusze obejmują kopie, konta, drugi zapis/urządzenie, mobilny układ i PWA offline. Nie wykonywano prób na fizycznym telefonie ani rzeczywistym koncie Hani; konta i synchronizacja korzystają z adaptera testowego.
+
+
+## Miejsca, warstwy i „Moje rzeczy” — D-43
+
+`tests/house-layers.test.ts` sprawdza jednoczesne rozstawienie wszystkich 11 dekoracji saloniku Food, warstwy i zgodność nowych miejsc z pokojem, podporę stolika i schowanie drobiazgów przy jego przeniesieniu, zachowanie starych nietypowych ustawień, odrzucenie duplikatów miejsc i zachowanie kosztów, salda, aktywnej sesji oraz drugiego kursu. Nowe ustawienia przechodzą przez eksport/import wersji 1. Historyczny zestaw 116 wyników walidatora pozostał bez zmian i nadal przechodzi; nie regenerowano odniesienia.
+
+Dwa dodatkowe przypadki kontrolera sprawdzają zakładki bez zmiany wyników, prawdziwy komunikat po nieudanym ustawieniu i informację o schowaniu przedmiotu. Nowy przypadek `sync.test.ts` wysyła nowe miejsca i schowek po offline na drugi zapis urządzenia, z zachowaniem salda i izolacji kont. Testy dotychczasowej zamiany miejsc świadomie zmieniono na oczekiwanie schowania zastanego przedmiotu, zgodnie z D-43.
+
+`browser/house.spec.ts` sprawdza 14 zakupów Food w kolekcji, stary wystrój, 11 jednocześnie wystawionych przedmiotów saloniku, opisy położenia, zapowiedź zastąpienia, schowanie i ponowne ustawienie, przejście do kuchni, warstwy stolika i drobiazgu, zachowanie ukończeń i salda po kopii. Telefon 320/390 px nie przewija się poziomo, a przyciski wyboru miejsc mają co najmniej 44 px. Scenariusz zimnego startu offline ustawia toster na nowym blacie i sprawdza odtworzenie tego miejsca. Obejrzano zrzuty kolekcji, saloniku i kuchni na telefonie.
+
+Weryfikacja 12 listopada 2026: **199/199 testów Node** w obu wariantach biblioteki oraz **91/91 Playwright** gotowego wydania w Chrome. Wcześniejszy celowany przebieg domku dał 5/5. Budowanie, walidacja materiałów i TypeScript przeszły. Nadal jest 206 publicznych plików offline: nie dodano obrazków ani zależności. Kontrola dokumentacji i różnic przeszła. Nie wykonywano prób na fizycznym telefonie ani na prawdziwym koncie Hani; synchronizacja korzysta z testowego adaptera.

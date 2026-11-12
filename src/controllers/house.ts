@@ -1,6 +1,7 @@
 import type {AppState} from '../app/state.ts';
 import {currentCourse} from '../app/selectors.ts';
-import {purchase,place,roomAvailable} from '../house/progress.ts';
+import {purchase,place,roomAvailable,homeFor} from '../house/progress.ts';
+import {decorations} from '../house/catalog.ts';
 import type {Progress} from '../core.ts';
 
 interface HousePorts {
@@ -19,8 +20,17 @@ export function createHouseController(state:AppState,{mutate}:HousePorts){
             state.screen='house';
             return true;
         }
+        if(action==='house-tab'){
+            if(el.dataset.tab==='shop'||el.dataset.tab==='storage')state.houseTab=el.dataset.tab;
+            return true;
+        }
         if(action==='select-decoration'){
             state.chosenDecoration=el.dataset.id??'pillow';
+            const d=decorations.find(d=>d.id===state.chosenDecoration),course=currentCourse(state)!.id;
+            if(d&&!d.rooms.includes(state.chosenRoom)){
+                const ownRoom=homeFor(state.progress,course)?.purchases[d.id]?.room??'salon';
+                state.chosenRoom=d.rooms.includes(ownRoom)&&roomAvailable(state.progress,course,ownRoom)?ownRoom:d.rooms.find(r=>roomAvailable(state.progress,course,r))??state.chosenRoom;
+            }
             return true;
         }
         if(action==='buy-decoration'){
@@ -30,8 +40,13 @@ export function createHouseController(state:AppState,{mutate}:HousePorts){
             return true;
         }
         if(action==='place-decoration'){
-            await mutate(p=>{place(p,el.dataset.id??'',el.dataset.slot||null,currentCourse(state)!.id,state.chosenRoom);});
-            state.notice='Ustawienie domku zapisane.';
+            let placed=false;const hidden:string[]=[];
+            await mutate(p=>{
+                const course=currentCourse(state)!.id,before=structuredClone(homeFor(p,course)?.purchases??{});
+                placed=place(p,el.dataset.id??'',el.dataset.slot||null,course,state.chosenRoom);
+                if(placed)for(const [id,v] of Object.entries(homeFor(p,course)!.purchases))if(before[id]?.slot&&!v.slot)hidden.push(decorations.find(d=>d.id===id)?.name??id);
+            });
+            state.notice=placed?`Ustawienie domku zapisane.${hidden.length?` W schowku: ${hidden.join(', ')}.`:''}`:'Nie można ustawić tutaj tego przedmiotu. Wybierz dostępne miejsce.';
             return true;
         }
         return false;

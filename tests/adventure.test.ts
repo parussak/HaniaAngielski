@@ -24,11 +24,11 @@ test('dowolna lekcja jest dostępna; pierwsze ukończenie daje trzy gwiazdki, pe
   p.active=makeLessonSession(modules,j,l,'choice',p);assert.equal(rewardCompletion(p,finish(p)),1);assert.equal(stars(p),4);
   assert.deepEqual(validateBackup(backup(p)).progress,p);
 });
-test('zakup, powtórny zakup, zamiana i schowanie przedmiotu zachowują saldo i własność',()=>{
+test('zakup, powtórny zakup, zastąpienie i schowanie przedmiotu zachowują saldo i własność',()=>{
   const p=emptyProgress();assert.equal(purchase(p,'pillow'),false);p.adventure=freshAdventure();p.adventure.earned=20;
   assert.equal(purchase(p,'pillow'),true);assert.equal(stars(p),14);assert.equal(purchase(p,'pillow'),false);assert.equal(stars(p),14);
   assert.equal(purchase(p,'yarn'),true);assert.equal(stars(p),10);
-  assert.equal(place(p,'pillow','front'),true);assert.equal(p.adventure.purchases.pillow.slot,'front');assert.equal(p.adventure.purchases.yarn.slot,'rug');
+  assert.equal(place(p,'pillow','front'),true);assert.equal(p.adventure.purchases.pillow.slot,'front');assert.equal(p.adventure.purchases.yarn.slot,null);
   assert.equal(place(p,'pillow',null),true);assert.ok(p.adventure.purchases.pillow);assert.equal(stars(p),10);
   assert.equal(place(p,'scratcher','left'),false);assert.equal(purchase(p,'scratcher'),false);
   assert.deepEqual(validateBackup(backup(p)).progress,p);

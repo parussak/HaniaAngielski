@@ -21,7 +21,7 @@ Pełny opis kluczy, limitów, archiwizacji, cache i dowodów: [zapis — punkt o
 
 ## Walidacja kopii po refaktoringu etapu 4
 
-Publiczne `validateBackup` i `backup` pozostają w `src/learning/backup.ts`. Wewnętrzne kontrole sesji, domków, przygody, historii i archiwów są rozdzielone w `src/learning/backup-validation/`. Nagłówek i wersja pliku, dopuszczalne dane, limity i komunikat błędu pozostają takie same. Walidacja nie zmienia źródła, zachowuje dodatkowe pola i zwraca niezależną kopię; nie wykonuje migracji. Odrzucenie importowanego pliku nadal nie zastępuje obecnych postępów.
+Publiczne `validateBackup` i `backup` pozostają w `src/learning/backup.ts`. Wewnętrzne kontrole sesji, domków, przygody, historii i archiwów są rozdzielone w `src/learning/backup-validation/`. Sam podział walidatora zachował nagłówek i wersję pliku, dopuszczalne dane, limity i komunikat błędu. Walidacja nie zmienia źródła, zachowuje dodatkowe pola i zwraca niezależną kopię; nie wykonuje migracji. Odrzucenie importowanego pliku nadal nie zastępuje obecnych postępów.
 
 Sprawdzenie kompletności archiwum, skrótów stron i zgodności podsumowania nadal wykonuje `validateFullBackup` w `src/history-backup.ts`, po walidacji strukturalnej. Tego etapu nie należy pomijać przy imporcie pełnej kopii. [Podział odpowiedzialności i zestaw zgodności](refaktoring-etap-4.md).
 
@@ -88,3 +88,10 @@ Stare sesje bez znacznika stałej długości nie dostają wstecz premii za powt�
 Dotychczasowe `adventure.earned` i `adventure.purchases` zachowują dokładne wartości i reprezentują wyłącznie `angielski-hani`. To zgodny odczyt dawnego formatu, bez podwójnego kopiowania, zwrotu wydatków ani ponownego odliczania ceny. `adventure.courseHomes` jest opcjonalnym słownikiem portfeli i zakupów pozostałych kursów; nie może zawierać drugiego wpisu angielskiego. Nowy kurs ma zero gwiazdek i pusty salonik. Saldo na mapie i w domku oraz nagrody za lekcję, trening i etap odnoszą się do właściwego kursu.
 
 Każdy domek może mieć unikalne listy `rooms` i `unlockedItems`. Zakup ma opcjonalne `room`; brak oznacza salonik. Walidacja sprawdza osobno saldo każdego kursu i zajętość miejsc w każdym pokoju, a także istnienie pokoju wskazanego przy zakupie. Dane pozostają w obecnym dokumencie postępów i kopii wersji 1, z zachowaniem limitów historii. Reguły Firebase bez zmian. Przy imporcie starszego pliku brak nowych pól jest poprawny; ukończone mapy odtwarzają odblokowania. Szczegóły są w [dokumencie domku](koci-domek.md).
+
+
+## Miejsca i schowek domku — 12 listopada 2026
+
+D-43 rozszerza katalog do 14 identyfikatorów miejsc (11 dostępnych w saloniku, 14 w kuchni). Walidacja odczytuje wspólną listę z katalogu. Nie przenosi dawnych ustawień i zachowuje dotychczasowy kształt zakupu `{ cost, slot, room? }`: `slot: null` oznacza schowek, brak `room` — salonik. Warstwa rysowania wynika z katalogu, a „Moje rzeczy” jest widokiem zakupów, bez drugiego rejestru własności. Wybór zakładki sklepu/schowka to tylko stan interfejsu.
+
+Nowe ustawienia przechodzą przez tę samą transakcję `mutate`, walidację, IndexedDB, synchronizację i kopię wersji 1. Starsze kopie pozostają poprawne i nie zmieniają kosztów ani salda; odczyt nowego miejsca w starej wersji aplikacji nie jest obsługiwany — należy ją zaktualizować. Strukturalna walidacja nadal nie wymaga zgodności rodzaju mebla z miejscem; umożliwia to zachowanie starych aranżacji. Ograniczenia nowych miejsc i podpory stolika sprawdzane są podczas ustawiania. [Pełne zasady](koci-domek.md).

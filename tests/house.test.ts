@@ -66,7 +66,7 @@ test('kupowanie wymaga odblokowania, zgodnego pokoju i salda; przeniesienie nie 
  assert.ok(place(p,'bowls','front','angielski-hani','kitchen'));assert.equal(homeFor(p)!.purchases.bowls.room,'kitchen');
  assert.equal(stars(p),84);assert.equal(purchase(p,'bowls','angielski-hani','kitchen'),false);
  assert.equal(place(p,'cat-toaster','front','angielski-hani','salon'),false);
- assert.ok(place(p,'bowls','window','angielski-hani','kitchen'));assert.equal(homeFor(p)!.purchases['cat-toaster'].slot,'front');
+ assert.ok(place(p,'bowls','window','angielski-hani','kitchen'));assert.equal(homeFor(p)!.purchases['cat-toaster'].slot,null);
  assert.ok(place(p,'bowls',null));assert.equal(homeFor(p)!.purchases.bowls.room,undefined);
  assert.deepEqual(validateBackup(backup(p)).progress,p);
  creditStars(p,5,'french-book');assert.equal(purchase(p,'pillow','french-book'),false);assert.equal(stars(p),84);

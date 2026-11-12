@@ -10,6 +10,8 @@ Po przeglądzie dokumentacji poprawiono dwa ograniczenia: [przygotowanie do tren
 
 Wprowadzono też swobodny wybór lekcji, stałą długość nowych sesji, nowe menu z Mapami, łagodniejszą informację zwrotną, jawne zasady a/an dla słówek oraz 1 ★ za pełne nowe powtórzenie lekcji — [D-36–D-40](decyzje.md). Historyczne raporty zachowują opis poprzedniego działania i dawne wyniki testów.
 
+12 listopada rozbudowano [koci domek](koci-domek.md) o dodatkowe miejsca, osobne warstwy i kolekcję „Moje rzeczy”. Stare zakupy, ustawienia, gwiazdki i postępy pozostają zachowane; nowe miejsca działają także offline i w kopiach.
+
 ## Główny podział
 
 11 listopada 2026 wykonano [etap 1 refaktoringu: zależności i wspólne stałe](refaktoring-etap-1.md). Usunięto cykl mapy–domek, zachowując działanie, wygląd i format postępów. To osobny etap porządkowania po wcześniejszych etapach rozwoju funkcji 1–4.

@@ -17,6 +17,7 @@ export class AppState {
     introLessonId = '';
     chosenDecoration = 'pillow';
     chosenRoom = 'salon';
+    houseTab: 'shop' | 'storage' = 'shop';
     lastReward = 0;
     lastStageReward = 0;
     olderSessions: Session[] = [];

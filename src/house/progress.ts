@@ -2,7 +2,7 @@ import type {Progress,Module} from '../learning/model.ts';
 import {courseKey} from '../learning/scope.ts';
 export {courseForModule} from '../learning/scope.ts';
 import {journeyKey,lessons,type Journey,type JourneyIssue} from '../learning/journey.ts';
-import {decorations,legacyCourse,roomRewards,slots} from './catalog.ts';
+import {decorations,legacyCourse,roomRewards,slots,canUseSlot} from './catalog.ts';
 export interface Home {
  earned:number;
  purchases:Record<string,{cost:number;slot:string|null;room?:string}>;
@@ -51,10 +51,17 @@ export function purchase(p:Progress,id:string,course=legacyCourse,room='salon'){
  const h=ensureHome(p,course),occupied=Object.values(h.purchases).some(v=>(v.room??'salon')===room&&v.slot===d.slot);
  h.purchases[id]={cost:d.price,slot:occupied?null:d.slot,...(room==='salon'?{}:{room})};return true;
 }
+export function slotReady(h:Home|undefined,slot:string,room:string){
+ const support=slots.find(s=>s.id===slot)?.support;
+ return !support||!!h?.purchases[support]&&h.purchases[support].slot==='rug'&&(h.purchases[support].room??'salon')===room;
+}
 export function place(p:Progress,id:string,slot:string|null,course=legacyCourse,room='salon'){
  const h=homeFor(p,course),item=h?.purchases[id],d=decorations.find(d=>d.id===id);
- if(!h||!item||!d||!roomAvailable(p,course,room)||!d.rooms.includes(room)||(slot!==null&&!slots.some(s=>s.id===slot)))return false;
- const oldRoom=item.room??'salon',other=Object.entries(h.purchases).find(([key,v])=>key!==id&&slot!==null&&(v.room??'salon')===room&&v.slot===slot);
- if(other){if(oldRoom===room)other[1].slot=item.slot;else other[1].slot=null;}
- item.slot=slot;if(room==='salon')delete item.room;else item.room=room;return true;
+ if(!h||!item||!d||!roomAvailable(p,course,room)||!d.rooms.includes(room)||(slot!==null&&(!canUseSlot(id,slot,room)||!slotReady(h,slot,room))))return false;
+ const other=Object.entries(h.purchases).find(([key,v])=>key!==id&&slot!==null&&(v.room??'salon')===room&&v.slot===slot);
+ if(other)other[1].slot=null;
+ item.slot=slot;if(room==='salon')delete item.room;else item.room=room;
+ // Moving the table never leaves objects floating above an empty floor.
+ for(const v of Object.values(h.purchases))if(v.slot&&!slotReady(h,v.slot,v.room??'salon'))v.slot=null;
+ return true;
 }

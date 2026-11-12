@@ -58,3 +58,24 @@ test('kontrolery przekazują nieswoje akcje dalej bez modyfikowania stanu',async
  for(const action of ['house','select-room','select-decoration','buy-decoration','place-decoration'])assert.equal(await learning.handleAction(action,element({id:'pillow'})),false);
  assert.equal(JSON.stringify(f.state.progress),before);assert.equal(f.saves(),0);
 });
+
+test('Moje rzeczy i sklep są lokalną nawigacją, a niewłaściwe ustawienie nie ogłasza sukcesu',async()=>{
+ const f=setup(),before=structuredClone(f.state.progress);
+ await f.controller.handleAction('house-tab',element({tab:'storage'}));assert.equal(f.state.houseTab,'storage');
+ await f.controller.handleAction('house-tab',element({tab:'invalid'}));assert.equal(f.state.houseTab,'storage');
+ await f.controller.handleAction('house-tab',element({tab:'shop'}));assert.equal(f.state.houseTab,'shop');
+ assert.deepEqual(f.state.progress,before);assert.equal(f.saves(),0);
+ await f.controller.handleAction('buy-decoration',element({id:'pillow'}));
+ const purchased=structuredClone(f.state.progress);
+ await f.controller.handleAction('place-decoration',element({id:'pillow',slot:'counter'}));
+ assert.deepEqual(f.state.progress,purchased);assert.match(f.state.notice,/Nie można ustawić/);
+});
+
+test('schowanie na nowym miejscu podaje nazwę i zachowuje aktywną lekcję',async()=>{
+ const f=setup();await f.controller.handleAction('buy-decoration',element({id:'pillow'}));
+ await f.controller.handleAction('place-decoration',element({id:'pillow',slot:'floor-cushion'}));
+ const active=structuredClone(f.state.progress.active),balance=stars(f.state.progress);
+ await f.controller.handleAction('place-decoration',element({id:'pillow',slot:''}));
+ assert.match(f.state.notice,/W schowku: Poduszka/);assert.equal(stars(f.state.progress),balance);
+ assert.deepEqual(f.state.progress.active,active);
+});

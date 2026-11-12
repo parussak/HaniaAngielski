@@ -7,7 +7,7 @@ import {indexedDB} from 'fake-indexeddb';
 import {compactHistory,sessionCount,type HistoryPage} from '../src/history.ts';
 import {engineModules as modules} from './fixtures/engine.ts';
 import {makeSession,questionFor,recordAnswer,next} from '../src/core.ts';
-import {creditStars,purchase,stars,homeFor} from '../src/house/progress.ts';
+import {creditStars,purchase,place,stars,homeFor} from '../src/house/progress.ts';
 
 const copy=<T>(value:T)=>structuredClone(value);
 const sample=(name:string)=>({...emptyProgress(),words:{[name]:'known' as const}});
@@ -117,4 +117,17 @@ test('konta i gość mają oddzielne lokalne rekordy, nie zmienia się stary for
   await writeStored('account:a',cache);assert.deepEqual(await load(),sample('guest'));
   assert.equal(await readStored('account:b'),undefined);assert.deepEqual(validateCache((await readStored<AccountCache>('account:a'))!),cache);
   assert.throws(()=>validateCache({...cache,revision:-1}));
+});
+
+test('nowe miejsca i schowek synchronizują się po offline bez zmiany gwiazdek i innych kont',async()=>{
+ const s=server(),a=s.make();await a.sync.connect('a',emptyProgress());await a.sync.sync();
+ const p=emptyProgress();creditStars(p,30);purchase(p,'pillow');purchase(p,'plant');place(p,'pillow','floor-cushion');place(p,'plant','shelf-right');
+ const balance=stars(p);await a.sync.save(p);
+ const fetch=a.ports.fetch;a.ports.fetch=async()=>{throw Error('offline');};await a.sync.sync();
+ const resumed=new ProgressSync(a.ports);await resumed.connect('a',emptyProgress());
+ assert.deepEqual(resumed.cache!.progress,p);a.ports.fetch=fetch;await resumed.sync();
+ const b=s.make();await b.sync.connect('a',emptyProgress());await b.sync.sync();assert.deepEqual(b.sync.cache!.progress,p);
+ const changed=copy(b.sync.cache!.progress);place(changed,'plant',null);await b.sync.save(changed);await b.sync.sync();await resumed.sync();
+ assert.equal(homeFor(resumed.cache!.progress)!.purchases.plant.slot,null);assert.equal(stars(resumed.cache!.progress),balance);
+ const other=s.make();await other.sync.connect('b',emptyProgress());await other.sync.sync();assert.equal(homeFor(other.sync.cache!.progress),undefined);
 });

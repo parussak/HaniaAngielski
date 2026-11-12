@@ -37,7 +37,7 @@ Pod powitaniem użytkownik widzi kurs i przycisk „Wybierz kurs”. Mapy i modu
 
 Oprócz treningów na mapie użytkownik może uruchomić dodatkowy trening na żądanie, bez czekania na termin i nawet kilka razy dziennie, z wcześniej poznanego materiału wybranego kursu (D-27). Przycisk jest na mapie i w ćwiczeniach swobodnych; ukończona nowa sesja daje 1 ★ (D-34). Podstawowy wybór kursu i zakresu jest wdrożony; osobne aktywne sesje oraz preferencje odpowiedzi per kurs pozostają zaparkowane w U-08.
 
-Wybór kursu ogranicza katalogi i dobór ćwiczeń. Ekran „Twoje postępy”, historia nauki, bilans gwiazdek i domek obejmują całe konto, a nie tylko aktualnie wybrany kurs.
+Wybór kursu ogranicza katalogi i dobór ćwiczeń. Ekran „Twoje postępy” i historia nauki obejmują całe konto. Bilans gwiazdek i domek są osobne dla każdego kursu.
 
 ### Co oznacza ukończenie
 
@@ -46,6 +46,10 @@ Przejście map modułu oznacza przepracowanie jego najważniejszego wymaganego z
 Produkt pokazuje te informacje zrozumiale, bez utożsamiania ukończenia mapy, braku błędów i trwałego opanowania całego podręcznika. Szczegółowe kryteria i nagrody należą do [zasad nauki](03-nauka.md).
 
 Zatwierdzono prezentację D-23: postęp lekcji na pasku lub w kółku dochodzi do 100% po wszystkich lekcjach, niezależnie od powtórek. Zaległe błędy pokazujemy pomarańczowo jako liczbę, np. „5 ćwiczeń do utrwalenia”, bez ogólnego procentu utrwalenia. Gdy lekcje są ukończone i zaległości wynoszą zero, całość otrzymuje zielony stan i gratulacje. Szczegóły liczenia i znaczenie trzech zaliczeń są w dokumencie nauki; ta prezentacja jest wdrożona w pierwszym etapie D-34.
+
+## Urządzanie domku — stan obecny
+
+Zakładki „Sklep” i „Moje rzeczy” oddzielają wybieranie zakupów od przeglądania własnej kolekcji. Przy zakupie widać jego pokój lub schowek. Dodatkowe miejsca i warstwy pozwalają łączyć tekstylia, meble i drobiazgi w jednym wnętrzu. Na telefonie wybieramy przedmiot i miejsce przyciskiem; własność i ceny pozostają zachowane. [Kontrakt domku](koci-domek.md).
 
 ## Do ustalenia
 

@@ -109,3 +109,8 @@ Po [etapie 4](refaktoring-etap-4.md) walidację kopii podzielono na kontrole ses
 `src/learning/journey.ts` zawiera typy i stabilne klucze map bez zależności od domku, zapisu i nagród. `adventure.ts` nadal eksportuje te symbole dla zgodności istniejących wywołań. Domek korzysta bezpośrednio z tego małego modułu, usuwając cykl wykonawczy `house/progress.ts` ↔ `adventure.ts`.
 
 Wartości gwiazdek są w `src/learning/rewards.ts`, wybór kursu według modułu w `src/learning/scope.ts`, a stały identyfikator dawnego angielskiego kursu w `src/materials/identity.ts`. Lista identyfikatorów miejsc w domku pochodzi z katalogu i służy również walidacji kopii. `src/polish-count.ts` współdzieli odmianę liczebników. [Zakres i dowody zachowania zgodności](refaktoring-etap-1.md).
+
+
+### Rozmieszczanie i kolekcja domku — D-43
+
+`house/catalog.ts` zawiera miejsca, ich warstwy i dostępność dla pokoi. `house/progress.ts` sprawdza możliwość ustawienia, zajętość i podporę stolika. `views/house-placement.ts` prezentuje położenie zakupu, panel wyboru miejsca i zapowiedź schowania zastanego przedmiotu; główny `views/house.ts` składa pokój, sklep i kolekcję. Kontroler domku odpowiada za wybór zakładki i przejście do pasującego pokoju; zapis nadal przechodzi przez `mutate`. Renderer po wyborze dekoracji przewija i przenosi fokus do panelu ustawiania. Nie dodano osobnego modelu schowka ani nowych obrazków. [Zasady i zgodność](koci-domek.md).

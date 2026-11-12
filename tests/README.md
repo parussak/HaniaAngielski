@@ -37,3 +37,8 @@ Testy regresji interfejsu Food importują `test` i `expect` z `browser/fixtures.
 Testy pełnego katalogu importują Playwright bezpośrednio z `@playwright/test`. `browser/library-growth.spec.ts` ma dwa scenariusze: każdy rzeczywisty kurs pokazuje właściwą liczbę modułów wynikającą z katalogu; wirtualnie rozbudowana biblioteka pozwala wybrać Food, francuski i włoski. Nie wyłączaj tych kontroli na rzecz izolowanego Food.
 
 Standardowe budowanie i polecenia Playwright pozostają opisane w [zasadach testów](../docs/07-testy.md). Po zmianie testowych danych uruchamiaj również właściwe scenariusze przeglądarkowe, szczególnie import kopii, drugie urządzenie i PWA.
+
+
+## Miejsca domku i zgodność starego wystroju
+
+`house-layers.test.ts` chroni dodatkowe miejsca i warstwy na rzeczywistym katalogu wyposażenia Food, bez obejmowania nagród przyszłych modułów. `house-controller.test.ts` sprawdza zakładki i nieudane ustawienie na danych syntetycznych. Przy rozbudowie katalogu zachowuj sześć dawnych identyfikatorów miejsc i nie normalizuj zapisanych zakupów. Nowe miejsca muszą przechodzić przez wspólny katalog walidatora, a zmiany podpór wymagają testu schowania drobiazgów. Nie aktualizuj złotego zestawu walidacji tylko po to, aby usunąć błąd — stare pliki mają zachować wynik; nowe miejsca mają osobne przypadki.
