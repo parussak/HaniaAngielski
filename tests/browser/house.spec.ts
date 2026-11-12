@@ -1,3 +1,4 @@
+import {finishCurrent} from './helpers.ts';
 import {test,expect,type Page} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
 import {backup,emptyProgress,type Progress} from '../../src/core.ts';
@@ -94,14 +95,9 @@ test('ostatnia lekcja modułu odblokowuje kuchnię i pokazuje zachętę bez doda
  const p=fixture(),last=lessons(maps[1]).at(-1)!;delete p.adventure!.completed[last.key];
  await restore(page,p);await expect(page.getByRole('button',{name:/Kocia kuchnia · ukończ/})).toBeDisabled();
  await page.getByRole('button',{name:'Mapy',exact:true}).tap();await page.getByRole('button',{name:`Otwórz mapę ${maps[1].title}`,exact:true}).tap();
- await page.locator('.lesson-step').filter({hasText:last.lesson.title}).tap();await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();
+ await page.locator('.lesson-step').filter({hasText:last.lesson.title}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();
  await expect(page.locator('.question')).toBeVisible();
- while(await page.locator('.question').count()){
-  const prompt=await page.locator('.question').innerText(),q=modules[0].exercises.find(q=>q.prompt===prompt)!;
-  if(await page.getByRole('textbox').isVisible()){await page.getByRole('textbox').fill(q.answers[0]);await page.getByRole('button',{name:/Sprawdź/}).tap();}
-  else await page.getByRole('button',{name:q.answers[0],exact:true}).tap();
-  await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
- }
+ await finishCurrent(page,modules);
  await expect(page.locator('.lesson-reward')).toContainText('+3');await expect(page.getByRole('status')).toContainText('Nowy pokój: Kocia kuchnia');
  await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.getByRole('button',{name:'Kocia kuchnia',exact:true})).toBeEnabled();await expect(page.locator('.star-wallet')).toHaveText('97 ★');
 });

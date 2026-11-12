@@ -5,6 +5,7 @@ import {creditStars} from './house/progress.ts';
 import { freshAdventure,journeyKey,lessonKey,journeyForProgress,type Journey,type Stage } from './adventure.ts';
 import { inputFor,questionFor,resolveItem,type AnswerMode,type Item,type Module,type Progress,type Session } from './core.ts';
 import type { HistoryPage } from './history.ts';
+import {plainItem} from './learning/model.ts';
 
 export interface ReviewItem {item:Item;correct:number;due:number}
 export interface StageReview {round:number;items:Record<string,ReviewItem>;rewardedAt?:string}
@@ -19,7 +20,7 @@ export function stageForSession(journeys:Journey[],s:Session){
 }
 function collect(p:Progress,id:string,item:Item,reset:boolean){
   const state=ensure(p,id),old=state.items[item.key];
-  if(reset||!old)state.items[item.key]={item:structuredClone(item),correct:0,due:state.round+1};
+  if(reset||!old)state.items[item.key]={item:plainItem(item),correct:0,due:state.round+1};
 }
 export function recordStageError(p:Progress,s:Session,item:Item,journeys:Journey[]){const context=stageForSession(journeys,s);if(context)collect(p,context.key,item,true);}
 function seedSessions(p:Progress,sessions:Session[],journeys:Journey[]){

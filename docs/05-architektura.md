@@ -1,5 +1,11 @@
 # Architektura — realizacja techniczna
 
+## Zróżnicowanie lekcji i kontynuacja — D-50
+
+Fabryka `legendarySession` w `learning/lesson-flow.ts` kopiuje zakres ukończonej sesji i usuwa jej odpowiedzi oraz znaczniki rozliczenia. Dawne automatyczne powroty tego samego klucza usuwa wyłącznie z nowej powtórki. Dalsze urozmaicenie zmienia oprawę, bez ponownego dobierania zakresu. Oryginalny zapis pozostaje bez zmian.
+
+`learning/lesson-variety.ts` przygotowuje wyłącznie nowe sesje mapowe: zachowuje bazowe zadania, dodaje najwyżej dwa poznane zadania uzupełniające z wcześniejszego zakresu i limituje zestaw do 10. Odpowiada za przeplatanie oraz oznaczenie planszy par i banku propozycji. `learning/lesson-flow.ts` szuka kontekstu i następnej lekcji w tym kursie, także pomiędzy mapami. `views/lesson-activities.ts` i `views/lesson-summary-actions.ts` oddzielają interakcje ćwiczeń i trzy akcje końcowe od głównego widoku. Kontroler zapisuje wybór przez dotychczasowe `mutate`, ocenia każdą parę zwykłym `recordAnswer`, a powtórkę legendarną rozlicza istniejącą nagrodą za ponowne ukończenie. Materiały podręcznika pozostają poza tymi mechanizmami.
+
 ## Sekcje adaptacyjne i zaproszenia — D-48–D-49
 
 `learning/section-plan.ts` wybiera i projektuje dwa stabilne przystanki sekcji 7 + 2. Warstwa domku używa jego czystej projekcji, bez zależności od nagród w `adventure.ts`. `learning/recall.ts` dobiera wcześniejsze błędy, zastępstwo z poznanego materiału i dobrowolne otwarcie/finał. `learning/retention.ts` odpowiada za wspólny licznik elementu oraz jednokrotne rozliczenie ukończonej sesji; stary mechanizm tur tematycznych pozostaje w `stage-review.ts`. Żaden z tych mechanizmów nie zna reguł konkretnego języka ani treści Food.

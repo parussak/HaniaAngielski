@@ -1,4 +1,4 @@
 import type { Mode,Session } from './core.ts';
 export const labels: Record<Mode, string> = { 'flashcards-basic': 'Fiszki podstawa', flashcards: 'Fiszki', quiz: 'Quiz słownictwa', grammar: 'Gramatyka', dialogue: 'Rozmówki', review: 'Kocia rozgrzewka', lesson: 'Kocia lekcja', training: 'Kocia rozgrzewka' };
 export const lessonTitle=(lesson:{role?:string;title:string})=>lesson.role==='training'?'Koci trening':lesson.role==='recall'?'Kocia powtórka':lesson.title;
-export const sessionTitle=(s:Session)=>s.ritual==='opening'?'Kocia rozgrzewka':s.ritual==='finale'?'Misja Kociego Mistrza':s.recall?'Kocia powtórka':s.training?.kind==='map'?'Koci trening':s.training||s.stageReview||s.mode==='review'?labels.training:s.lesson?.title??labels[s.mode];
+export const sessionTitle=(s:Session):string=>s.legendary?`Poziom legendarny · ${sessionTitle({...s,legendary:undefined})}`:s.ritual==='opening'?'Kocia rozgrzewka':s.ritual==='finale'?'Misja Kociego Mistrza':s.recall?'Kocia powtórka':s.training?.kind==='map'?'Koci trening':s.training||s.stageReview||s.mode==='review'?labels.training:s.lesson?.title??labels[s.mode];

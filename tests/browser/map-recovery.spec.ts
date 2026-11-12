@@ -1,3 +1,4 @@
+import {finishCurrent,answerCurrent} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {test,expect,type Page} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
@@ -11,14 +12,7 @@ function fixture(){const p=emptyProgress();p.adventure=freshAdventure();p.advent
 async function restore(page:Page,p:Progress){await page.goto('./');await openBackup(page);await page.locator('#import-file').setInputFiles({name:'maps.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();}
 async function catalog(page:Page){await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:/Wybierz przygodę/}).tap();}
 async function open(page:Page,j:Journey){await catalog(page);await page.getByRole('button',{name:`Otwórz mapę ${j.title}`,exact:true}).tap();}
-async function finish(page:Page,ids:string[],type:'word'|'exercise'){
- for(const id of ids){const q=type==='word'?modules[0].words.find(w=>w.id===id)!:modules[0].exercises.find(q=>q.id===id)!;const value='back' in q?q.back:q.answers[0];
-  await expect(page.locator('.question')).toHaveText('front' in q?q.front:q.prompt);
-  if(await page.getByRole('textbox').isVisible()){await page.getByRole('textbox').fill(value);await page.getByRole('button',{name:/Sprawdź/}).tap();}
-  else await page.getByRole('button',{name:value,exact:true}).tap();
-  await expect(page.locator('.feedback.correct')).toBeVisible();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
- }
-}
+const finish=(page:Page,_ids:string[],_type:string)=>finishCurrent(page,modules);
 
 test('pusty trening prowadzi do przygotowania, a potem działa i daje trzy gwiazdki tylko raz',async({page})=>{
  await restore(page,fixture());await open(page,second);await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
@@ -27,24 +21,24 @@ test('pusty trening prowadzi do przygotowania, a potem działa i daje trzy gwiaz
  await page.screenshot({path:'test-results/training-preparation-mobile.png',fullPage:true});
  await page.getByRole('button',{name:'Poznaj wcześniejszy materiał →',exact:true}).tap();
  await expect(page.getByRole('heading',{name:first.stages[0].lessons[0].title,exact:true})).toBeVisible();
- await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →',exact:true}).tap();
+ await page.getByRole('button',{name:'Zaczynam ćwiczenia →',exact:true}).tap();
  await finish(page,first.stages[0].lessons[0].wordIds,'word');await expect(page.locator('.lesson-reward')).toContainText('+3 ★');
  await open(page,second);await expect(page.locator('.lead')).toContainText('3 z 5');await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
  await expect(page.getByRole('heading',{name:'Koci trening',exact:true})).toBeVisible();
- await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →',exact:true}).tap();
+ await page.getByRole('button',{name:'Zaczynam ćwiczenia →',exact:true}).tap();
  await expect(page.locator('.question')).toBeVisible();
  // Selection order may be shuffled, but every answer comes from the earlier lesson.
  while(await page.locator('.question').count()){
   const prompt=await page.locator('.question').innerText(),word=modules[0].words.find(w=>w.front===prompt)!;
   expect(first.stages[0].lessons[0].wordIds).toContain(word.id);
-  await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await expect(page.locator('.feedback.correct')).toBeVisible();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
+  await answerCurrent(page,modules);await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
  }
  await expect(page.locator('.lesson-reward')).toContainText('+3 ★');await open(page,second);
  await page.getByRole('button',{name:/Koci trening Ukończona/}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →',exact:true}).tap();
  await expect(page.locator('.question')).toBeVisible();
  while(await page.locator('.question').count()){
   const prompt=await page.locator('.question').innerText(),value=modules[0].words.find(w=>w.front===prompt)?.back;
-  if(await page.getByRole('textbox').isVisible()){await page.getByRole('textbox').fill(value!);await page.getByRole('button',{name:/Sprawdź/}).tap();}else await page.getByRole('button',{name:value,exact:true}).tap();
+  await answerCurrent(page,modules);
   await expect(page.locator('.feedback.correct')).toBeVisible();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
  }
  await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('16');

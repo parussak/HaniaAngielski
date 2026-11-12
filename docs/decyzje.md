@@ -1,5 +1,7 @@
 # Ustalenia i rzeczy do rozstrzygnięcia
 
+**D-50 · 12 listopada 2026 — wdrożone, wymagania zapisane przed kodem:** Dla nowych modułów preferujemy jedną mapę, ale Food zachowuje obie mapy i cały dorobek. Po lekcji są trzy przyciski: Kolejna lekcja, Poziom legendarny (dobrowolna pełna powtórka, dotychczasowe +1 ★), Wróć do mapy. Lekcje mapowe automatycznie mieszają wpisywanie i wybór, bez pytania o preferencję. Przeplatamy słownictwo i gramatykę w dostępnym zakresie oraz dodajemy dobieranie par i bank odpowiedzi do luk, z zachowaniem źródłowych dialogów i poziomu nauki. Nie zmieniamy rozpoczętych sesji, ukończeń, gwiazdek ani materiałów podręcznika. [Pełne wymagania i stan wdrożenia](03-nauka.md).
+
 Aktualizacja: 10 listopada 2026 r. Ustalenie docelowe nie oznacza automatycznego wdrożenia. Stan działającej aplikacji opisuje [punkt odniesienia](stan-obecny/README.md).
 
 ## Uzgodnione założenia docelowe

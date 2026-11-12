@@ -1,3 +1,4 @@
+import {finishCurrent} from './helpers.ts';
 import {openGeneralReview,openStageReview} from './navigation.ts';
 import {openBackup} from './navigation.ts';
 import {test,expect,type Page} from './fixtures.ts';
@@ -23,14 +24,7 @@ test('ramka rozpoczyna lekcję, wznawia ją po odświeżeniu i wskazuje następn
   const first=await page.locator('.question').innerText();await page.reload();
   await expect(page.locator('.next-step-card')).toHaveAttribute('data-step-kind','resume');
   await page.locator('.next-step-card button').tap();await expect(page.locator('.question')).toHaveText(first);
-  for(let index=0;index<j.stages[0].lessons[0].wordIds.length;index++){
-    await expect(page.locator('#answer,.option').first()).toBeVisible();
-    const text=await page.locator('.question').innerText(),answer=m.words.find(w=>w.front===text)!.back;
-    if(await page.getByRole('textbox').isVisible()){
-      await page.getByRole('textbox').fill(answer);await page.getByRole('button',{name:/Sprawdź/}).tap();
-    }else await page.getByRole('button',{name:answer,exact:true}).tap();
-    await expect(page.locator('.feedback.correct')).toBeVisible();await page.getByRole('button',{name:/Dalej/}).tap();
-  }
+  await finishCurrent(page,modules);
   await expect(page.locator('.summary')).toBeVisible();await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
   await expect(page.locator('.next-step-card')).toHaveAttribute('data-step-kind','lesson');
   await expect(page.locator('.next-step-detail')).toContainText(lessons(j)[1].lesson.title);

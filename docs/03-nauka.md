@@ -1,5 +1,21 @@
 # Nauka — prowadzenie i utrwalanie
 
+## D-50 — dalsza lekcja, poziom legendarny i urozmaicenie — wdrożone
+
+Wymagania zapisano przed zmianą kodu. Wdrożenie zachowuje obie mapy Food i źródłowe treści. Nowe formy dotyczą nowo rozpoczynanych lekcji, w tym pełnych powtórek; zapisane wcześniej sesje nie są przebudowywane.
+
+- Kierunek dla nowych materiałów: jedna mapa na moduł. **Food zachowuje obie obecne mapy**, ich sekcje, identyfikatory, ukończenia, gwiazdki i zakupy. Nie łączymy map ani nie otwieramy ukończonych lekcji.
+- Po każdej lekcji mapowej są trzy główne przyciski: **Kolejna lekcja**, **Poziom legendarny**, **Wróć do mapy**. Kolejna lekcja prowadzi do dalszej nauki w tym kursie, także na następnej mapie. Gdy cały dostępny zakres jest ukończony, przycisk jest nieaktywny z wyjaśnieniem.
+- Poziom legendarny jest dobrowolną nową sesją pełnej powtórki ukończonej lekcji. Nie jest powtórką samych błędów, nie blokuje mapy i zachowuje obecną nagrodę 1 ★ za pełne ponowne ukończenie. Sama nazwa nie wprowadza progu bezbłędności, nowych odznak ani dodatkowej premii.
+- Przed lekcją mapową nie pytamy o sposób odpowiadania. Silnik miesza wpisywanie i wybór, z zachowaniem jawnych wariantów w pytaniu oraz wpisywania w powtórkach błędów. Uzupełnienie luki wymaga brakującego fragmentu, nie całego zdania. Klasyczne ćwiczenia poza mapą zachowują ustawienia.
+- Nowe sesje przeplatają słownictwo i gramatykę, gdy dostępny jest odpowiedni materiał. Zachowujemy bazowe zadania lekcji; można dodać maksymalnie dwa poznane zadania uzupełniające z wcześniejszego zakresu, do limitu 10. Nie wymuszamy nowej gramatyki w pierwszych lekcjach słownictwa ani nie zmieniamy rozpoczętych sesji.
+- Nowe prezentacje: dobieranie polskich haseł do tłumaczeń (każda oceniana para jest osobnym zadaniem), istniejące źródłowe dialogi z lukami do wpisania oraz luki uzupełniane propozycją z banku odpowiedzi. Nie dopisujemy wymyślonych dialogów do podręcznika. Gramatyka nadal ma objaśnienie po polsku.
+- Nowy wybór pary lub propozycji jest zapisywany lokalnie i na koncie razem z sesją; ćwiczenia działają offline. Nowe pola są opcjonalne w kopiach v1. Dawne sesje i kopie zachowują dotychczasową formę.
+
+Poziom legendarny zachowuje cały zestaw ukończonej sesji (także lekcji dynamicznej), z nowym identyfikatorem sesji i pustymi odpowiedziami. Nie dobiera nowego zakresu w miejsce poprzedniego i nie kopiuje znacznika wypłaconej nagrody. Oprawa zadań może być przeplatana ponownie. Plansze dobierania par pokazują pełne formy z wymaganym rodzajnikiem, według tych samych zasad odpowiedzi co pozostałe ćwiczenia.
+
+Jeżeli dawna sesja zawierała automatyczne powroty tego samego zadania po błędzie, nowa powtórka legendarna bierze każdy element raz. Zachowuje wszystkie różne zadania; nie przywraca dawnego wydłużania sesji.
+
 Status: uzgodnione zasady docelowe z wyraźnymi miejscami wymagającymi decyzji. Pierwsze wdrożenie po D-34 opisuje [raport](wdrozenie-nauki.md); historyczne zachowanie sprzed zmian jest w [punkcie odniesienia](stan-obecny/nauka.md).
 
 ## Sekcja 7 + 2 i kocie zaproszenia — D-48–D-49, wdrożenie

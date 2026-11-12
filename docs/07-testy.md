@@ -1,5 +1,15 @@
 # Testy — podział i zasady
 
+## D-50 — koniec lekcji, poziom legendarny i nowe prezentacje
+
+`lesson-variety.test.ts` sprawdza zachowanie bazowych zadań, dobór wyłącznie wcześniej poznanego zakresu, limit sesji, pary i wpisywanie, zapis banku, odrzucanie uszkodzonych grup/wyborów, przenoszenie błędu z planszy do powtórki z wpisywaniem, kontynuację pomiędzy mapami i koniec dostępnego zakresu. Sprawdza też zachowanie ukończeń, jednokrotną nagrodę 1 ★ i utworzenie pełnej legendarnej powtórki bez kopiowania ocen i nagród poprzedniej sesji.
+
+`browser/lesson-flow.spec.ts` obejmuje brak selektora przed lekcją, wybór dowolnego hasła na planszy, wznowienie wyboru, ocenianie każdej pary osobno, trzy akcje końcowe, pełny poziom legendarny i przejście do następnej lekcji. Dialog z bankiem zachowuje wybraną propozycję po odświeżeniu i pozwala ją zmienić po błędzie. Osobny scenariusz zamyka aplikację i kończy planszę oraz lekcję offline. Wspólny pomocnik testów odpowiada przez widoczne kontrolki: wpisuje, dobiera parę albo wybiera propozycję i zatwierdza bank, zamiast zakładać jeden formularz dla całej lekcji.
+
+Poprzednie scenariusze Food nadal kontrolują dawne i nowe wydanie lekcji, zachowanie aktywnych sesji, ukończenia, gwiazdki, domek, konta, synchronizację i kopie. Pliki treści i obu map Food nie są zmieniane przez D-50. Starsze wyniki pozostają historyczne.
+
+Weryfikacja D-50, 12 listopada 2026: **226/226 Node w obu wariantach biblioteki**, **102/102 w pełnym przebiegu Playwright**. Po końcowej ochronie starych automatycznych powrotów i dopracowaniu widoku wybranego hasła wykonano ponownie testy fabryki i **9/9 scenariuszy mobilnych, offline, map i starych kopii** na końcowym wydaniu. Budowanie z walidacją treści, TypeScript i 206 publicznymi zasobami PWA przeszło; kontrola odnośników dokumentacji i różnic także. Obejrzano mobilne pary, dialog i trzy przyciski po lekcji. Zachowano zestaw 116 dawnych wyników walidacji. Nie testowano na fizycznym telefonie ani prawdziwym koncie Hani; synchronizacja korzysta z testowego adaptera.
+
 Status: istniejące kontrole oraz docelowy sposób ich organizacji. Po zatwierdzeniu D-34 dodano testy wdrożenia treningów; workflow GitHub pozostaje bez zmian.
 
 ## Sekcje 7 + 2 i kocie zaproszenia — D-48–D-49
@@ -12,7 +22,7 @@ Weryfikacja 12 listopada 2026: **219/219 Node w obu wariantach biblioteki**. Pe�
 
 ## Bieżący punkt odniesienia
 
-Ostatni pełny przebieg po wdrożeniu Kociej rozgrzewki (12 listopada 2026): **212/212 Node na zwykłej i wirtualnie rozszerzonej bibliotece oraz 96/96 Playwright** gotowej aplikacji w Chrome. Budowanie z kontrolą materiałów, TypeScript i zasobami offline przeszło. Wyniki starszych etapów poniżej są historią. [Zasady rozgrzewek](03-nauka.md).
+Aktualnym punktem odniesienia jest D-50 powyżej: **226 testów Node w obu bibliotekach i 102 scenariusze Playwright**, z dodatkową kontrolą końcowych poprawek. Wyniki starszych etapów poniżej są historią. [Zasady nauki](03-nauka.md).
 
 ## Stan obecny
 

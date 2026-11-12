@@ -104,3 +104,19 @@
 .cat-call{border-radius:1.3rem 1.3rem 1.3rem .5rem;min-height:48px;max-width:100%;white-space:normal}
 .cat-call:disabled{opacity:.65;cursor:default}
 @media(max-width:480px){.cat-invitation{gap:.75rem;padding:1rem;align-items:flex-start}.invitation-cat{flex-basis:64px;width:64px}.cat-invitation h2{font-size:1.1rem}.cat-call{width:100%}}
+.pair-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin:18px 0}
+.pair-columns>div{display:flex;flex-direction:column;gap:10px;min-width:0}
+.pair-columns button{width:100%;min-height:60px;padding:12px 8px;white-space:normal;overflow-wrap:anywhere;text-align:center;border:1px solid #d8c6ed;border-radius:14px;background:#faf6ff;color:#503865}
+.pair-source.is-selected,.bank-token.is-selected{border:2px solid #7851b3;background:#ede5fb}
+.pair-source:disabled{opacity:.8}
+.pair-source.pair-correct{background:#e6f2e9;color:#326847}
+.pair-source.pair-wrong{background:#f9e9f1;color:#80556f}
+.bank-options{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:18px 0}
+.bank-options .bank-token{width:auto;min-height:48px;padding:12px 16px}
+.bank-gap{padding:14px;border:2px dashed #b8a2d4;border-radius:12px;background:#faf7ff}
+.answer-bank>.primary{width:100%;min-height:48px}
+.lesson-finish-actions{flex-direction:column;align-items:stretch;width:100%;gap:10px}
+.lesson-finish-actions>button{width:100%;min-height:48px}
+.journey-summary .lesson-finish-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.lesson-finish-actions>button:first-child{grid-column:1/-1}
+.lesson-finish-note{font-size:13px;line-height:1.6;color:#684e7b}

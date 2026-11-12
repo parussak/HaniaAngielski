@@ -1,5 +1,7 @@
 # Dokumentacja aplikacji „Małe kroki”
 
+**D-50 — wdrożone:** po lekcji mapowej: Kolejna lekcja, Poziom legendarny (+1 ★ za pełną powtórkę), Wróć do mapy. Nowe sesje automatycznie mieszają formy odpowiedzi i poznany materiał; są plansze par oraz bank propozycji do luk. Obie mapy Food, stare sesje i dorobek pozostają. [Reguły nauki](03-nauka.md), [interfejs](01-produkt.md), [zapis](06-zapis.md).
+
 Aktualizacja układu: **10 listopada 2026 r.** Rozdzielamy stan obecny, uzgodnione założenia docelowe i sprawy do ustalenia. Sam zapis założeń nie wdraża ich w aplikacji.
 
 **Status po audycie — 11 listopada 2026:** najważniejsze porządki wykonano w czterech etapach refaktoringu. [Co jest zamknięte, co zostało i co sprawdzono](status-audytu.md). Pozostałe propozycje nie są automatycznie planem kolejnej przebudowy.

@@ -13,6 +13,8 @@ import {needsSectionPlans,prepareSectionPlans} from '../learning/section-plan.ts
 import { makeCoursePracticeSession, type CoursePracticeMode } from '../learning/course-practice.ts';
 import type { createCourseController } from './courses.ts';
 import { courseKey } from '../learning/scope.ts';
+import {followingLesson,lessonContext,legendarySession} from '../learning/lesson-flow.ts';
+import {varyLesson} from '../learning/lesson-variety.ts';
 interface LearningPorts {
     courses: ReturnType<typeof createCourseController>;
     mutate: (change: (p: Progress) => void) => Promise<void>;
@@ -51,6 +53,26 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
         await openSession(session);
     }
     async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
+        if(action==='following-lesson'||action==='legendary'){
+            const finished=state.lastSession??state.progress.sessions.at(-1);
+            if(!finished?.lesson||!courseModules(state).some(m=>m.id===finished.moduleId))return true;
+            const target=action==='legendary'?lessonContext(state.journeys,state.progress,finished):followingLesson(state.modules,state.journeys,state.progress,finished);
+            if(!target){state.notice='Wszystkie dostępne lekcje ukończone. Gratulacje!';return true;}
+            state.selected=state.modules.find(m=>m.id===target.journey.moduleId)!;state.selectedJourneyKey=journeyKey(target.journey);state.introLessonId=target.lesson.id;state.answerMode='mixed';
+            if(action==='following-lesson'){state.screen='lesson-intro';return true;}
+            const session=legendarySession(state.modules,finished);
+            if(!session){state.notice='Ta starsza lekcja wymaga dostępnej wersji materiału. Wyniki pozostają zachowane.';return true;}
+            if(!confirmReplacement('Rozpocząć poziom legendarny zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))return true;
+            varyLesson(session,state.modules,state.journeys,target.journey,target.lesson,state.progress,false);
+            await openSession(session);return true;
+        }
+        if(action==='pair-select'||action==='bank-select'){
+            await mutate(p=>{const s=p.active;if(!s||!['question','retry'].includes(s.phase))return;
+                const current=s.items[s.index];
+                if(action==='pair-select'&&s.phase==='question'&&current.pairGroup&&s.items.slice(s.index).some(i=>i.key===el.dataset.key&&i.pairGroup===current.pairGroup))s.pairSelection=el.dataset.key;
+                if(action==='bank-select'&&current.presentation==='bank'&&questionFor(state.modules,current).options.includes(el.dataset.answer??''))s.draftAnswer=el.dataset.answer;
+            });return true;
+        }
         if(action==='retry-maps'){window.location.reload();return true;}
         if(action==='prepare-training'){
             const j=currentJourney(state),l=j&&lessons(j).find(e=>e.lesson.id===state.introLessonId)?.lesson;
@@ -173,10 +195,11 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             if (!confirmReplacement('Rozpocząć lekcję zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))
                 return true;
             const session = l.role === 'training'
-                ? makeTrainingSession(state.modules, state.selected, state.progress, state.answerMode, { journey: j, lesson: l, journeys: state.journeys })
+                ? makeTrainingSession(state.modules, state.selected, state.progress, 'mixed', { journey: j, lesson: l, journeys: state.journeys })
                 : l.role==='recall'?makeRecallSession(state.modules,state.journeys,j,l,state.progress)
-                : makeLessonSession(state.modules, j, l, state.answerMode, state.progress);
+                : makeLessonSession(state.modules, j, l, 'mixed', state.progress);
             if (!session) { state.notice = l.role==='recall'?'Najpierw spróbuj kilku wcześniejszych lekcji. Ta powtórka korzysta wyłącznie z poznanego materiału.':'Nie ma jeszcze poznanego materiału z wcześniejszych map do tego treningu.'; return true; }
+            varyLesson(session,state.modules,state.journeys,j,l,state.progress);
             await openSession(session);
             return true;
         }
@@ -201,12 +224,18 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
                 return true;
             await openSession(session, false);
         }
-        else if (action === 'answer') {
+        else if (action === 'answer'||action==='pair-answer') {
             const s = state.progress.active;
             if (!s)
                 return true;
-            const q = questionFor(state.modules, s.items[s.index]);
-            await mutate(p => { const session = p.active!; if (recordAnswer(p, q, el.dataset.answer ?? '') === false){
+            await mutate(p => { const session = p.active!;
+                if(action==='pair-answer'){
+                    const group=session.items[session.index].pairGroup;if(!group||!['question','retry'].includes(session.phase))return;
+                    const index=session.phase==='retry'?session.index:session.items.findIndex((i,index)=>index>=session.index&&i.key===(session.pairSelection??session.items[session.index].key)&&i.pairGroup===group);
+                    if(index<0)return;[session.items[session.index],session.items[index]]=[session.items[index],session.items[session.index]];
+                }
+                const q=questionFor(state.modules,session.items[session.index]);
+                if (recordAnswer(p, q, el.dataset.answer ?? '') === false){
                 rememberError(p,session.items[session.index]);
                 recordStageError(p, session, session.items[session.index], state.journeys);
             } });
@@ -224,6 +253,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             const unlockedRooms:string[]=[];
             await mutate(p => { if (p.active?.phase === 'feedback') {
                 const finished = p.active;
+                delete finished.pairSelection;delete finished.draftAnswer;
                 next(p);
                 if (!p.active) {
                     finishRetention(p, finished);

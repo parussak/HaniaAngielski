@@ -1,5 +1,11 @@
 # Produkt — dla kogo i po co
 
+## Po lekcji i w lekcji — D-50
+
+Food zachowuje dwie mapy i zapisany dorobek. Nowe moduły planujemy domyślnie z jedną mapą. Po lekcji mapowej są trzy główne akcje: **Kolejna lekcja**, **Poziom legendarny**, **Wróć do mapy**. Pierwsza prowadzi do wprowadzenia kolejnej nieukończonej lekcji w kursie; po końcu dostępnego zakresu jest nieaktywna. Poziom legendarny rozpoczyna nową, dobrowolną pełną powtórkę (+1 ★), bez nowego warunku ukończenia mapy. Domek pozostaje w nawigacji.
+
+Nie wybieramy sposobu odpowiedzi przed lekcją mapową. Wpisywanie i wybór przeplatają się, a poznany materiał uzupełnia bazowe zadania. Dobieranie par pokazuje dwie kolumny i pozwala wybrać dowolne polskie hasło, potem tłumaczenie. Odpowiedzi są oceniane osobno; nie trzeba ponownie rozwiązywać całej planszy po błędzie. Bank propozycji pozwala wybrać fragment luki i świadomie nacisnąć „Sprawdź”. Przyciskami da się sterować także bez przeciągania, na telefonie i klawiaturą. Dialogi zachowują swoje teksty źródłowe i uzupełnianie tylko brakującego fragmentu. [Dokładne reguły i ochrona zapisów](03-nauka.md).
+
 Status: opis obecnego produktu i uzgodnionego kierunku. Ostatnie uporządkowanie: 10 listopada 2026 r. [Jak czytać dokumentację](README.md).
 
 ## Stan obecny

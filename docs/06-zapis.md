@@ -4,6 +4,10 @@ Status: obecne rozwiązanie oraz granice przyszłych zmian. Dokument nie wprowad
 
 ## Stan obecny
 
+### Nowe prezentacje i poziom legendarny — D-50
+
+Nowa sesja może zawierać `legendary: true`, wybór `pairSelection` lub `draftAnswer`; element ma opcjonalny `pairGroup` albo `presentation: bank`. Pola są walidowane w kopii v1 i zapisywane w istniejącym rekordzie lokalnym/konta. Plansza ma 2–3 kolejne elementy, każdy ze swoim dotychczasowym kluczem i oceną. Wybranie innego hasła przestawia tylko nierozwiązane elementy tej planszy, bez zmiany ocen wcześniejszych odpowiedzi. Bank zapisuje propozycję przed oceną; nowy krok usuwa robocze wybory. Kolejki błędów przechowują zwykły element bez oprawy planszy, aby powtórka z wpisywaniem nie wymagała odtworzenia innych par. Brak nowych pól zachowuje stary przebieg; nie przebudowujemy rozpoczętych sesji. Kopia, synchronizacja, kompakcja i nagroda za ponowną pełną lekcję korzystają z dotychczasowego mechanizmu.
+
 ### Plany sekcji i wspólne utrwalenie — D-48–D-49
 
 Opcjonalne `adventure.sectionPlans` przechowuje jeden plan na sekcję: siedem identyfikatorów bazowych i dwa miejsca `after`. Losujemy go przy wejściu w naukę mapową, zapisując przez istniejącą transakcję lokalną/konta. Sam start aplikacji, import ani wznowienie starej sesji nie dopisują planu. Rozpoczęte sekcje bez planu zachowują stary zakres. Plan jest częścią kopii v1 i synchronizacji; istniejące rozstrzyganie konfliktów chroni równoległe urządzenia. Nie scalamy losowo dwóch różnych planów.

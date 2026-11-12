@@ -1,3 +1,4 @@
+import {answerCurrent} from './helpers.ts';
 import {openWarmup,openAdditionalWarmup} from './navigation.ts';
 import {openBackup} from './navigation.ts';
 import { test, expect, type Page } from './fixtures.ts';
@@ -31,15 +32,7 @@ async function importProgress(page: Page, p: Progress) {
     await expect(page.locator('#app')).toHaveAttribute('aria-busy', 'false');
     await page.getByRole('button', { name: 'Moja nauka', exact: true }).tap();
 }
-async function answer(page: Page) {
-    const prompt = await page.locator('.question').innerText();
-    const q = m.exercises.find(q => q.prompt === prompt), w = m.words.find(w => w.front === prompt);
-    const value = w?.back ?? q!.answers[0];
-    if (await page.getByRole('textbox').isVisible()) {
-        await page.getByRole('textbox').fill(value); await page.getByRole('button', { name: /Sprawdź/ }).tap();
-    } else await page.getByRole('button', { name: value, exact: true }).tap();
-    await expect(page.locator('.feedback.correct')).toBeVisible();
-}
+const answer=(page:Page)=>answerCurrent(page,modules);
 async function finish(page: Page) {
     await expect(page.locator('.question')).toBeVisible();
     while (await page.locator('.question').count()) {
@@ -137,7 +130,7 @@ test('druga mapa: osobna nawigacja, wymagany trening i jednorazowe 3 gwiazdki', 
     await expect(page.getByRole('heading', { name: 'Koci trening', exact: true })).toBeVisible();
     await page.getByRole('button', { name: 'Zaczynam ćwiczenia →', exact: true }).tap();
     await finish(page); await expect(page.locator('.lesson-reward')).toContainText('+3 ★');
-    await page.getByRole('button', { name: 'Wróć na mapę', exact: true }).tap();
+    await page.getByRole('button', { name: 'Wróć do mapy', exact: true }).tap();
     await expect(page.getByRole('heading', { name: 'Druga kocia przygoda', exact: true })).toBeVisible();
     await expect(page.locator('.lead')).toContainText('100% ukończenia');
     await expect(page.locator('.star-wallet')).toContainText('20');

@@ -1,8 +1,8 @@
-import {keyFor,type Item,type Module,type Progress,type Session} from './model.ts';
+import {keyFor,plainItem,type Item,type Module,type Progress,type Session} from './model.ts';
 import {resolveItem} from './questions.ts';
 import {finishStageReview} from '../stage-review.ts';
 
-const cleanItem=(item:Item)=>{const copy={...item};delete copy.options;return copy;};
+const cleanItem=plainItem;
 export function memoryFor(p:Progress,key:string){
  if(p.adventure?.memory?.[key])return p.adventure.memory[key];
  const entries=Object.values(p.adventure?.stageReviews??{}).flatMap(s=>Object.values(s.items)).filter(e=>e.item.key===key);

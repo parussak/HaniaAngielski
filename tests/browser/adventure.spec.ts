@@ -1,3 +1,4 @@
+import {finishCurrent} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {openMap} from './navigation.ts';
 import {test,expect,type Page} from './fixtures.ts';
@@ -6,42 +7,28 @@ import {foodModules as modules} from '../materials.ts';
 import {emptyProgress,makeSession,recordAnswer,questionFor,next,backup} from '../../src/core.ts';
 const journey=JSON.parse(readFileSync(new URL('../../public/content/02-food/sciezka.json',import.meta.url),'utf8'));
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
-async function finishLesson(page:Page,firstWrong=false){
-  await expect(page.locator('.question')).toBeVisible();
-  let first=true;
-  while(await page.locator('.question').count()){
-    const prompt=await page.locator('.question').innerText(),m=modules[0],word=m.words.find(w=>w.front===prompt),q=m.exercises.find(q=>q.prompt===prompt);
-    const answer=word?.back??q!.answers[0];
-    const submit=async(value:string)=>{if(await page.getByRole('textbox').isVisible()){await page.getByRole('textbox').fill(value);await page.getByRole('button',{name:/Sprawdź/}).tap();}else await page.getByRole('button',{name:value,exact:true}).tap();};
-    if(first&&firstWrong){
-      const wrong=await page.locator('.option').filter({hasText:/./}).allTextContents();
-      if(await page.getByRole('textbox').isVisible())await submit('wrong');
-      else {const button=page.locator('.option').filter({hasNotText:answer}).first();expect(wrong.length).toBeGreaterThan(1);await button.tap();}
-      await expect(page.locator('.feedback.incorrect')).toBeVisible();await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
-    }
-    first=false;await submit(answer);await expect(page.locator('.feedback.correct')).toBeVisible();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
-  }
-}
+const finishLesson=(page:Page,firstWrong=false)=>finishCurrent(page,modules,firstWrong);
+
 test('mapa: nauka, nagroda raz, dwa kroki, zakup i ustawienie domku po odświeżeniu',async({page})=>{
   await page.goto('./');await openMap(page);
   await expect(page.locator('.journey-stage')).toHaveCount(7);
   await expect(page.locator('.lesson-step').nth(1)).toBeEnabled();
   await page.screenshot({path:'test-results/journey-map-mobile.png',fullPage:true});
   await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
-  await expect(page.locator('.learn-word')).toHaveCount(5);await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();
+  await expect(page.locator('.learn-word')).toHaveCount(5);
   await page.screenshot({path:'test-results/journey-learn-mobile.png',fullPage:true});
   await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await finishLesson(page,true);
   await expect(page.locator('.lesson-reward')).toContainText('+3');
-  const rewardNav=await page.locator('.sidebar nav').boundingBox(),continueButton=await page.getByRole('button',{name:'Wróć na mapę',exact:true}).boundingBox();
+  const rewardNav=await page.locator('.sidebar nav').boundingBox(),continueButton=await page.getByRole('button',{name:'Wróć do mapy',exact:true}).boundingBox();
   expect(continueButton!.y+continueButton!.height).toBeLessThanOrEqual(rewardNav!.y);
   await page.screenshot({path:'test-results/journey-reward-mobile.png',fullPage:true});
-  await page.getByRole('button',{name:'Wróć na mapę',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('3');
+  await page.getByRole('button',{name:'Wróć do mapy',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('3');
   await page.reload();await openMap(page);
   await page.locator('.lesson-step').first().tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await finishLesson(page);
   await expect(page.locator('.lesson-reward')).toContainText('+1');
-  await page.getByRole('button',{name:'Wróć na mapę',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('4');
+  await page.getByRole('button',{name:'Wróć do mapy',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('4');
   await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await finishLesson(page);
-  await page.getByRole('button',{name:'Urządź domek',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('7');
+  await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('7');
   await page.getByRole('button',{name:'Kup za 6 ★',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('1');
   await page.getByRole('button',{name:'Prawy kącik',exact:true}).tap();await expect(page.locator('.room-decoration')).toHaveClass(/slot-right/);
   await page.screenshot({path:'test-results/cat-house-mobile.png',fullPage:true});
