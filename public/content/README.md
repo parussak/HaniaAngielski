@@ -6,6 +6,8 @@ Nowy dział zacznij od [krótkiej instrukcji dodawania modułu](../../docs/dodaw
 
 ## Gdzie co jest?
 
+Opcjonalny układ sekcji **7 lekcji bazowych + 2 dynamiczne powtórki** włącza pole `adaptiveReviews: true` na sekcji z dokładnie siedmioma lekcjami. Nie dopisuj przystanków ręcznie do listy. W Food pole ma „Ilości i opakowania”; rozpoczęte sekcje zachowują dotychczasowy zakres. [Kontrakt i zasady ochrony zapisów](../../docs/format-materialow.md).
+
 ```text
 public/content/
   katalog.json                 foldery modułów i wskazanie rejestru kursów

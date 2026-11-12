@@ -2,6 +2,7 @@ import type {Progress,Module} from '../learning/model.ts';
 import {courseKey} from '../learning/scope.ts';
 export {courseForModule} from '../learning/scope.ts';
 import {journeyKey,lessons,type Journey,type JourneyIssue} from '../learning/journey.ts';
+import {plannedJourney} from '../learning/section-plan.ts';
 import {decorations,legacyCourse,roomRewards,slots,canUseSlot} from './catalog.ts';
 import {placementError,itemRoom,supportingItem,boxFor,type Position} from './layout.ts';
 export interface Home {
@@ -30,7 +31,7 @@ export function roomAvailable(p:Progress,course:string,room:string){return room=
 export function itemAvailable(p:Progress,course:string,id:string){const d=decorations.find(d=>d.id===id);return !!d&&(!d.map||!!homeFor(p,course)?.unlockedItems?.includes(id));}
 export function settleHouseUnlocks(p:Progress,modules:Module[],journeys:Journey[],issues:JourneyIssue[]=[]){
  const unlocked:string[]=[];
- const complete=(key:string)=>{const j=journeys.find(j=>journeyKey(j)===key);return !!j&&lessons(j).every(l=>p.adventure?.completed[l.key]);};
+ const complete=(key:string)=>{const j=journeys.find(j=>journeyKey(j)===key);return !!j&&lessons(plannedJourney(j,p)).every(l=>p.adventure?.completed[l.key]);};
  for(const m of modules){
   const course=courseKey(m);
   const maps=journeys.filter(j=>j.moduleId===m.id);

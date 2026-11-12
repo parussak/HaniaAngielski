@@ -1,6 +1,6 @@
 import {test,expect,type Page} from './fixtures.ts';
 import {openBackup,openWarmup,openAdditionalWarmup} from './navigation.ts';
-import {backup,emptyProgress,keyFor,type Progress} from '../../src/core.ts';
+import {backup,emptyProgress,keyFor,questionFor,isCorrect,type Progress} from '../../src/core.ts';
 import {freshAdventure,lessons,lessonKey,type Journey} from '../../src/adventure.ts';
 import {makeTrainingSession} from '../../src/learning/training.ts';
 import {foodModules as modules} from '../materials.ts';
@@ -18,7 +18,13 @@ async function finishWrong(page:Page){
  await expect(page.locator('.question')).toBeVisible();let count=0;
  while(await page.locator('.question').count()){
   expect(++count).toBeLessThanOrEqual(8);
-  if(await page.getByRole('textbox').isVisible()){await page.getByRole('textbox').fill('wrong');await page.getByRole('button',{name:/Sprawdź/}).click();}else await page.locator('.option').first().click();
+  if(await page.getByRole('textbox').isVisible()){await page.getByRole('textbox').fill('wrong');await page.getByRole('button',{name:/Sprawdź/}).click();}else {
+   const prompt=await page.locator('.question').innerText(),word=m.words.find(w=>w.front===prompt);
+   const q=word?questionFor(modules,{key:keyFor(m,'word',word.id),moduleId:m.id,version:word.rev??1,type:'word',id:word.id,input:'choice'}):m.exercises.find(q=>q.prompt===prompt)!;
+   const options=page.locator('.option');await expect(options.first()).toBeVisible();
+   const values=await options.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.answer!));
+   await options.nth(values.findIndex(text=>!isCorrect(q,text))).click();
+  }
   await page.getByRole('button',{name:/Dalej/}).click();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
  }
 }
@@ -37,6 +43,6 @@ test('ukończone mapy pozostają sukcesem; dodatkowa rozgrzewka ma koniec mimo b
 test('dawny trening w rozpoczętej sesji jest rozgrzewką i nie otwiera ukończonej mapy',async({page})=>{
  const p=completed(),j=maps[1],l=lessons(j).find(e=>e.lesson.role==='training')!.lesson;
  p.active=makeTrainingSession(modules,m,p,'text',{journey:j,lesson:l,journeys:maps});p.active!.lesson!.title='Dawny trening';const key=lessonKey(j,l),old=p.adventure!.completed[key];
- await restore(page,p);await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();await expect(page.locator('.study-heading h1')).toHaveText('Kocia rozgrzewka');await finishWrong(page);
+ await restore(page,p);await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();await expect(page.locator('.study-heading h1')).toHaveText('Koci trening');await finishWrong(page);
  await expect(page.locator('.lesson-reward')).toContainText('+1 ★');const saved=await exported(page);expect(saved.adventure!.completed[key]).toEqual(old);expect(saved.adventure!.completed).toEqual(p.adventure!.completed);
 });

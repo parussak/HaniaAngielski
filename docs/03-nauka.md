@@ -2,7 +2,44 @@
 
 Status: uzgodnione zasady docelowe z wyraźnymi miejscami wymagającymi decyzji. Pierwsze wdrożenie po D-34 opisuje [raport](wdrozenie-nauki.md); historyczne zachowanie sprzed zmian jest w [punkcie odniesienia](stan-obecny/nauka.md).
 
-## „Kocia rozgrzewka” — D-46–D-47, wdrożone
+## Sekcja 7 + 2 i kocie zaproszenia — D-48–D-49, wdrożenie
+
+**Wdrożono 12 listopada 2026 po zleceniu implementacji.** Rozwiązania techniczne poniżej konkretyzują wcześniejszy projekt. Ochrona ukończonych map i krótki koniec sesji z D-46 pozostają.
+
+### Dziewięć lekcji, bez przebudowy rozpoczętej nauki
+
+- Sekcja oznaczona w materiale `adaptiveReviews: true` ma **7 lekcji bazowych + 2 Kocie powtórki = 9 wymaganych lekcji**. Ewentualny stały Koci trening mieści się w siedmiu bazowych, nie tworzy dziesiątej lekcji. Nie skracamy innych sekcji i nie usuwamy z nich treści, żeby sztucznie uzyskać dziewięć.
+- W Food oznaczono sekcję **„Ilości i opakowania”**, która ma siedem lekcji bazowych. Pozostałe sekcje i mapy zachowują swój zakres. Sekcja rozpoczęta przed przydzieleniem planu (ukończona lekcja, zapisana sesja lub aktywna lekcja) zostaje przy starych siedmiu lekcjach. Nie cofamy postępów ani gwiazdek i nie otwieramy ukończonych map.
+- Dwa miejsca losujemy raz przy wejściu do map, katalogu przygód lub kontynuacji nauki. Powtórki trafiają po lekcjach bazowych 2–6, z co najmniej dwiema lekcjami bazowymi między nimi. Zapis planu jest częścią postępów konta i kopii; odświeżenie oraz synchronizacja zachowują układ. Ostatnią lekcją pozostaje siódma bazowa.
+- Każda Kocia powtórka ma **1–5 zadań**, bez dokładania do minimum i bez wydłużania po błędzie. Dobór następuje dopiero przy rozpoczęciu sesji. Rozpoczęty zestaw, odpowiedzi i indeks są zapisywane.
+- Pierwszeństwo mają wcześniejsze błędy z wcześniejszych sekcji, map i modułów **tego samego kursu**. Mniej utrwalone elementy wracają przed bardziej utrwalonymi; remis jest losowy. Element z trzema zaliczeniami wypada z puli błędów, ale nadal może wracać w zwykłym treningu. To prosta polityka doboru, nie nowy algorytm kalendarzowy FSRS/SM-2.
+- Gdy wcześniejszych błędów nie ma, przystanek bierze poznany materiał wcześniejszych lekcji bieżącej i wcześniejszych map. Nigdy nie tworzy nowego materiału. Przy zupełnie pustej puli prosi o próbę wcześniejszych lekcji, zamiast otwierać pustą sesję.
+- W powtórce wpisujemy odpowiedzi; pytanie z jawnymi wariantami zachowuje przyciski. Forma uzupełniania luk pozostaje zgodna z materiałem. Pierwsze ukończenie przystanku daje 3 ★, pełna nowa sesja powtórzenia 1 ★, wznowienie nie daje dodatkowej nagrody.
+
+### Wspólny licznik utrwalenia
+
+Przydzielenie nowych planów jest odłożone, gdy trwa aktywna sesja lub katalog map danego modułu jest niepełny. Samo wznowienie nie zmienia danych towarzyszących staremu zapisowi.
+
+Błąd zapisuje element z licznikiem 0. Pierwsza poprawna próba w **ukończonej** sesji zwiększa licznik o 1, maksymalnie do 3, także w lekcji, treningu albo dobrowolnej rozgrzewce. Poprawka w tej samej sesji nie zwiększa licznika; błąd zeruje go. Zakończenie tej samej sesji nie liczy się ponownie. Licznik dotyczy dokładnego klucza elementu, w tym wersji materiału, na danym koncie; elementy różnych modułów/kursów nie łączą się przez takie samo brzmienie.
+
+Odczyt korzysta także ze starych kolejek błędów. Nowe rozliczenie aktualizuje wspólny zapis i istniejące wpisy tego samego klucza w kolejkach etapów. Nie przeliczamy dawnych ukończonych sesji i nagród wstecz. Liczniki działają w tle, bez ostrzeżeń na ukończonych mapach. Dawne odstępy między turami tematycznej rozgrzewki i jednorazowa premia etapu pozostają; dynamiczna powtórka nie musi czekać na ich termin.
+
+### Zaproszenia na ścieżce modułu
+
+| Miejsce | Aktywność i warunki |
+| --- | --- |
+| Początek pierwszej mapy | **Kocia rozgrzewka**: dobrowolnie do 5 poznanych pytań z wcześniejszych modułów kursu. Przy pierwszym module komunikat zachęca do nowych lekcji. |
+| Pomiędzy lekcjami | **Koci trening**: istniejąca wymagana lekcja technicznie oznaczona `training`. Jej ukończenie i stary identyfikator pozostają. Dodatkowy trening z zaproszenia jest dobrowolny. |
+| Dwa wylosowane miejsca | **Kocia powtórka**: krótkie powroty do trudności według reguł powyżej. |
+| Koniec ostatniej mapy | **Misja Kociego Mistrza**: dobrowolnie do 8 poznanych pytań bieżącego modułu, po ukończeniu wszystkich jego map. Brak mapy lub niepełne wczytanie nie otwiera finału. |
+
+Początek i finał są również dostępne w ekranie modułu. Pozostaje osobny ekran dodatkowych rozgrzewek z wyborem kursu, modułu i tematu. Dobrowolne otwarcie/finał mają dotychczasową nagrodę dodatkowego treningu: 1 ★ za nową pełną sesję; nie zwiększają wymaganego zakresu mapy. Finał jest krótkim celebrującym zestawem, nie certyfikatem opanowania całego podręcznika.
+
+Zaproszenia używają obecnych lokalnych kotków, pastelowych ramek i dużych przycisków z łapką; nie dodano nowych ciężkich grafik ani biblioteki. [Wygląd](01-produkt.md). Specjalne nowe pozy kotów i bardziej rozbudowany algorytm powtórek pozostają możliwością na później.
+
+## „Kocia rozgrzewka” — D-46–D-47, podstawa wdrożenia
+
+Nazewnictwo aktywności mapowej zostało następnie rozwinięte do „Koci trening” przez D-49 powyżej. Dawny opis nie oznacza braku nowych, opcjonalnie przydzielanych planów D-48.
 
 ### D-47 — wymagania zapisane przed kodem i wdrożone
 

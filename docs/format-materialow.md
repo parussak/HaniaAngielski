@@ -1,5 +1,11 @@
 # Kursy i materiały — format plików
 
+## Sekcja 7 + 2 — opcjonalny plan
+
+Sekcja mapy może mieć `adaptiveReviews: true`, jeżeli zawiera **dokładnie siedem bazowych lekcji**. Wtedy silnik dodaje dwa dynamiczne przystanki dla kont, które jeszcze nie rozpoczęły tej sekcji. Nie dopisuj ich ręcznie do JSON ani nie używaj w treści roli `recall`: jest generowana z zapisanego planu. Identyfikatory `${stage.id}-recall-1` i `${stage.id}-recall-2` są zarezerwowane. Istniejący trening z rolą `training`, jeżeli jest planowany w takiej sekcji, wchodzi do siedmiu bazowych; nie dodajemy dziesiątej lekcji.
+
+W Food pole ma tylko „Ilości i opakowania”. Nie zmienia ono siedmiu istniejących lekcji ani wyników. Nie zmieniaj kolejności i identyfikatorów bazowych opublikowanego planu, aby zachować układ kont. Materialna zmiana wymaga osobnego wydania i oceny zgodności. [Warunki losowania, doboru i ochrona rozpoczętych sekcji](03-nauka.md).
+
 Status: **wdrożony format etapu 2**. To instrukcja edycji dla człowieka. Typy i kontrole są w `src/materials/`; zasady językowe i odpowiedzi nadal pochodzą z podręcznika, nie z walidatora.
 
 ## Co gdzie zapisujemy

@@ -32,6 +32,9 @@ function finish(p:Progress){const s=p.active!;while(p.active){recordAnswer(p,que
 
 test('audyt Food: oryginalne mapy, słówka, pytania i objaśnienia nie są podmienione',()=>{
  const base=structuredClone(j);for(const {lesson} of lessons(base))delete lesson.update;
+ assert.equal(base.stages.find(s=>s.id==='quantities')?.adaptiveReviews,true);
+ // Only the approved optional section plan is new; original source lessons stay protected.
+ for(const stage of base.stages)delete stage.adaptiveReviews;
  assert.equal(hash(base),'c863da9654cb74aa8ee08460192ea1002e24e58df4b51fba6cf9d7dac455bdfa');
  for(const [name,expected,count] of [
   ['slownictwo','d1d1acf441ed69ceec80b77fca4db467e855f193197fc2d91d6d8aa9e25aaed1',97],

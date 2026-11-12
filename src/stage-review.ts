@@ -2,7 +2,7 @@ import {rewardStars} from './learning/rewards.ts';
 import {polishCount} from './polish-count.ts';
 import {courseForModule} from './learning/scope.ts';
 import {creditStars} from './house/progress.ts';
-import { freshAdventure,journeyKey,lessonKey,type Journey,type Stage } from './adventure.ts';
+import { freshAdventure,journeyKey,lessonKey,journeyForProgress,type Journey,type Stage } from './adventure.ts';
 import { inputFor,questionFor,resolveItem,type AnswerMode,type Item,type Module,type Progress,type Session } from './core.ts';
 import type { HistoryPage } from './history.ts';
 
@@ -14,7 +14,7 @@ function ensure(p:Progress,id:string){const a=p.adventure??freshAdventure();a.st
 export function stageForSession(journeys:Journey[],s:Session){
   for(const journey of journeys)for(const stage of journey.stages){
     const key=stageKey(journey,stage);
-    if(s.stageReview?.id===key || s.lesson&&stage.lessons.some(l=>lessonKey(journey,l)===s.lesson!.id))return {journey,stage,key};
+    if(s.recall?.stageId===key||s.stageReview?.id===key || s.lesson&&stage.lessons.some(l=>lessonKey(journey,l)===s.lesson!.id))return {journey,stage,key};
   }
 }
 function collect(p:Progress,id:string,item:Item,reset:boolean){
@@ -75,7 +75,7 @@ export function finishStageReview(p:Progress,s:Session){
 export function settleStageRewards(p:Progress,journeys:Journey[],at=new Date().toISOString(),modules:Module[]=[]){
   if(p.adventure?.reviewArchiveHead)return 0;
   let reward=0;
-  for(const j of journeys)for(const stage of j.stages){
+  for(const j of journeys)for(const stage of journeyForProgress(j,p).stages){
     // Existing stage bonuses are grandfathered. New named maps do not silently
     // inherit a new retention bonus while that product decision is parked.
     if(j.id)continue;

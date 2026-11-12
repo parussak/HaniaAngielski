@@ -78,7 +78,13 @@ Pozostałe zaparkowane pytania pozostają otwarte; wdrożenie tych zasad nie roz
 
 **D-47 · 12 listopada 2026 — wdrożone:** „Kocia rozgrzewka” zastępuje obecne treningi. Na mapie jest wymaganą lekcją do jej ukończenia, poza mapą jest dobrowolna. Zachowujemy identyfikatory i ukończenia obecnych treningów, rozpoczęte sesje, gwiazdki i nagrody; nie otwieramy zaliczonych lekcji ponownie. Rozgrzewka utrwala poznany materiał bieżącej i wcześniejszych map, także wcześniej bezbłędny, bez wprowadzania nowych treści. Dotychczasowe reguły nagród treningów zostają, a D-46 określa niezależny sukces mapy i krótkie zakończenie rozgrzewki. Wymaganie zapisano przed zmianą kodu. Wdrożono bez zmiany technicznych ról i kluczy zapisanych sesji; pierwsza mapa Food nie dostała nowych obowiązkowych lekcji. [Szczegóły i ochrona dorobku](03-nauka.md).
 
+**D-48 · 12 listopada 2026 — wdrożone po zleceniu implementacji:** Sekcja łącznie 9 lekcji: 7 bazowych i 2 dynamiczne Kocie powtórki. Wdrożenie zapisuje raz wylosowane miejsca, dobiera wcześniejsze błędy tego kursu, przy braku błędów poznany materiał, oraz rozlicza wspólny licznik trzech pierwszych poprawnych prób w osobnych ukończonych sesjach. Techniczne doprecyzowania i nagrody opisuje [nauka](03-nauka.md). Opt-in obejmuje nie rozpoczęte „Ilości i opakowania”; nie przebudowuje rozpoczętych lub ukończonych sekcji. Koci trening pozostaje, a w przyszłej sekcji 7 + 2 mieści się w siedmiu bazowych, bez dziesiątej lekcji.
+
+**D-49 · 12 listopada 2026 — pierwsza wersja wdrożona:** Kocia rozgrzewka na początku modułu, Koci trening pomiędzy lekcjami i „Misja Kociego Mistrza” na końcu. Zaproszenia mają obecne kotki, pastelowe ramki i duży przycisk z łapką; nowe specjalne rysunki pozostają na później. Otwarcie i finał są dobrowolne, zachowują nagrodę dodatkowego treningu, nie otwierają ukończonych lekcji ponownie. [Warunki i limity](03-nauka.md), [wygląd](01-produkt.md).
+
 ## Obszary decyzji i ich status
+
+
 
 
 

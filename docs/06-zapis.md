@@ -4,6 +4,14 @@ Status: obecne rozwiązanie oraz granice przyszłych zmian. Dokument nie wprowad
 
 ## Stan obecny
 
+### Plany sekcji i wspólne utrwalenie — D-48–D-49
+
+Opcjonalne `adventure.sectionPlans` przechowuje jeden plan na sekcję: siedem identyfikatorów bazowych i dwa miejsca `after`. Losujemy go przy wejściu w naukę mapową, zapisując przez istniejącą transakcję lokalną/konta. Sam start aplikacji, import ani wznowienie starej sesji nie dopisują planu. Rozpoczęte sekcje bez planu zachowują stary zakres. Plan jest częścią kopii v1 i synchronizacji; istniejące rozstrzyganie konfliktów chroni równoległe urządzenia. Nie scalamy losowo dwóch różnych planów.
+
+`adventure.memory` ma jeden wpis na dokładny klucz elementu i wersji, z licznikiem 0–3 oraz odwołaniem do materiału. Rozliczenie ukończonej sesji ma znacznik `retentionCounted: true`; nie powstaje osobna lista wszystkich naliczeń. Współpracuje ze starymi `stageReviews` bez kasowania historii. Sesje nadal podlegają kompakcji, a przyrost pamięci zależy od liczby różnych ćwiczonych elementów, nie liczby odpowiedzi.
+
+Dynamiczna sesja jest zwykłą lekcją z `recall.stageId` i stabilnym kluczem zakończonym `-recall-1` lub `-recall-2`. Korzysta ze zwykłych nagród i ukończeń. Dobrowolny początek/finał zachowuje `training.kind: extra` i dodaje tylko `ritual: opening | finale`. Brak nowych pól oznacza dotychczasowy zapis. Walidacja weryfikuje plan, zakresy liczników, powiązanie kluczy i dozwolone kombinacje sesji. Nie zmieniono wersji kopii ani zapisanych identyfikatorów, ukończeń, gwiazdek, zakupów i sesji aktywnych. [Reguły nauki](03-nauka.md).
+
 | Dane | Miejsce i zakres |
 | --- | --- |
 | Postępy gościa | IndexedDB w przestrzeni zależnej od ścieżki strony, osobny klucz `current` |

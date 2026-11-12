@@ -87,6 +87,9 @@ export interface Attempt {
     corrected: boolean;
 }
 export interface Session {
+    retentionCounted?:true;
+    recall?:{stageId:string};
+    ritual?:'opening'|'finale';
     fixedLength?: true;
     lessonRewarded?: true;
     scope?: { kind: 'course'; courseId: string };

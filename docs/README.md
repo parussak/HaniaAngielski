@@ -16,6 +16,8 @@ Wprowadzono też swobodny wybór lekcji, stałą długość nowych sesji, nowe m
 
 ## Główny podział
 
+**Wdrożono D-48–D-49:** stabilna sekcja 7 + 2 dla nie rozpoczętych „Ilości i opakowania”, krótkie powtórki wcześniejszych błędów ze wspólnym licznikiem, kocie zaproszenia do rozgrzewki, treningu i Misji Kociego Mistrza. Rozpoczęte sekcje, ukończenia i dorobek pozostają. [Zasady i zakres](03-nauka.md), [wygląd zaproszeń](01-produkt.md).
+
 **Wdrożono D-46–D-47:** „Kocia rozgrzewka” zastępuje treningi — na mapie jest wymagana, dodatkowa dobrowolna. Ukończone mapy i etapy pokazują sukces bez liczników zaległych błędów, a krótkie sesje mają wyraźne zakończenie. Stare ukończenia, gwiazdki i rozpoczęte sesje zostają. [Zasady, zakres i ochrona wyników](03-nauka.md).
 
 11 listopada 2026 wykonano [etap 1 refaktoringu: zależności i wspólne stałe](refaktoring-etap-1.md). Usunięto cykl mapy–domek, zachowując działanie, wygląd i format postępów. To osobny etap porządkowania po wcześniejszych etapach rozwoju funkcji 1–4.

@@ -53,6 +53,14 @@ Ukończona mapa ma pozostać pełnym sukcesem: 100%, gratulacje i zdobyta nagrod
 
 Rozgrzewka ma krótkie sesje z własnym postępem i wyraźnym, pozytywnym zakończeniem, nawet gdy pozostał materiał do przyszłego ćwiczenia. Można skończyć po jednej sesji albo dobrowolnie wykonać następną, także z wybranego modułu przed sprawdzianem. Błędy pomagają dobierać zadania w tle, zamiast tworzyć widoczny obowiązek odrobienia całej kolejki. Rozgrzewki zastępują treningi: na mapie są wymagane do jej ukończenia, dodatkowe są dobrowolne. Mają do 8 zadań w sesji dodatkowej, z zachowaniem dawnych rozmiarów tematów i lekcji mapowych. Wejście jest na stronie głównej, mapie i w module; zachowano dotychczasowe nagrody treningów i stare ukończenia. Algorytm odstępów pozostaje do ustalenia. [Pełne wymaganie D-46](03-nauka.md).
 
+## Kocie zaproszenia i ścieżka modułu — wdrożone D-48–D-49
+
+Kocia rozgrzewka otwiera moduł, Koci trening pozostaje pomiędzy lekcjami, a dobrowolna **Misja Kociego Mistrza** zamyka ukończony moduł. Dwie Kocie powtórki są osobnymi lekcjami sekcji 7 + 2. W Food ten układ dotyczy wyłącznie nie rozpoczętej sekcji „Ilości i opakowania”; rozpoczęta lub ukończona sekcja zachowuje dawny zakres. [Zasady, limity i nagrody](03-nauka.md).
+
+Zaproszenie zawiera obecnego kotka, krótki tekst i duży przycisk z łapką o miękkim kształcie. Pastelowe ramki mają spójny wygląd i układ na telefonie; wykorzystują istniejące grafiki, bez zwiększania paczki ilustracji. Początek jest nad lekcjami pierwszej mapy, trening pod ścieżką, a finał na końcu ostatniej mapy oraz w ekranie modułu. Finał czeka na ukończenie wszystkich map. Pierwszy moduł bez wcześniejszego materiału zachęca do rozpoczęcia nowych lekcji.
+
+Nie przywracamy liczników zaległości na ukończonych mapach. Nowe pozy kotów (np. przeciąganie, zabawa kłębkiem i pelerynka) pozostają pomysłem graficznym na później; pierwsza wersja używa już dostępnych kotków.
+
 ## Urządzanie domku — stan obecny
 
 Zakładki „Sklep” i „Moje rzeczy” oddzielają wybieranie zakupów od przeglądania własnej kolekcji. Przy zakupie widać jego pokój lub schowek. Dodatkowe miejsca i warstwy pozwalają łączyć tekstylia, meble i drobiazgi w jednym wnętrzu. Każdy pokój ma własne wyposażenie. „Urządź pokój” pozwala przeciągać rzeczy po siatce albo przesuwać je strzałkami. Rozmiary są stałe i nie ma obracania; własność i ceny pozostają zachowane. [Kontrakt domku](koci-domek.md).

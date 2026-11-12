@@ -286,6 +286,7 @@
     },
     {
       "id": "quantities",
+      "adaptiveReviews": true,
       "title": "Ilości i opakowania",
       "cat": "felix",
       "illustration": "illustrations/word-a-bottle-of-water.svg",

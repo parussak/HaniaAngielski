@@ -2,8 +2,10 @@ import {legacyCourse} from '../../materials/identity.ts';
 import {obj,integer,safeKey,date} from './values.ts';
 import {validHome} from './home.ts';
 import {validItem} from './session.ts';
+import {validAdaptiveState} from './adaptive.ts';
 
 export function validAdventure(a:unknown):boolean {
+    if(!validAdaptiveState(a))return false;
     if (!obj(a) || a.version !== 1 || !validHome(a) || !obj(a.completed) || !Object.entries(a.completed).every(([k, v]) => safeKey(k) && obj(v) && date(v.at) && (v.edition === undefined || v.edition === 2)) || (a.reviewDay !== undefined && !(typeof a.reviewDay === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(a.reviewDay))))
         return false;
     if(a.courseHomes!==undefined&&(!obj(a.courseHomes)||!Object.entries(a.courseHomes).every(([id,h])=>safeKey(id)&&/^[a-z0-9-]+$/.test(id)&&id!==legacyCourse&&validHome(h))))return false;

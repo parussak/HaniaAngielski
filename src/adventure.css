@@ -93,3 +93,14 @@
 .grid-directions button{min-width:48px;min-height:48px;font-size:22px}
 .house-edit{min-height:48px}.house-edit-hint,.grid-message{font-size:14px;line-height:1.6;color:#684e7b}
 .grid-message:empty{display:none}
+.cat-invitation{display:flex;align-items:center;gap:1.25rem;padding:1.5rem;margin:1.5rem 0;border:1px solid #d9c6f4;border-radius:2rem 2rem 2rem .75rem;background:linear-gradient(125deg,#fae9f5,#e9efff);color:var(--text)}
+.cat-invitation-finale{background:linear-gradient(125deg,#fff0d9,#f5e7fb)}
+.cat-invitation h2{margin:0 0 .5rem;font-size:1.3rem}
+.cat-invitation p{margin:.5rem 0 1rem}
+.invitation-cat{flex:0 0 110px;width:110px}
+.invitation-cat .cat-mascot{width:100%;margin:0}
+.invitation-cat .cat-artwork{display:block;width:100%;height:auto;aspect-ratio:1/1.08;max-width:100%}
+.cat-invitation>div:last-child{flex:1;min-width:0}
+.cat-call{border-radius:1.3rem 1.3rem 1.3rem .5rem;min-height:48px;max-width:100%;white-space:normal}
+.cat-call:disabled{opacity:.65;cursor:default}
+@media(max-width:480px){.cat-invitation{gap:.75rem;padding:1rem;align-items:flex-start}.invitation-cat{flex-basis:64px;width:64px}.cat-invitation h2{font-size:1.1rem}.cat-call{width:100%}}

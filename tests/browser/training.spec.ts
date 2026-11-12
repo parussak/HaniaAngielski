@@ -134,7 +134,7 @@ test('druga mapa: osobna nawigacja, wymagany trening i jednorazowe 3 gwiazdki', 
     await page.getByRole('button', { name: 'Otwórz mapę Druga kocia przygoda', exact: true }).tap();
     await expect(page.locator('.lead')).toContainText('2 z 3');
     await page.getByRole('button', { name: 'Kontynuuj naukę →', exact: true }).tap();
-    await expect(page.getByRole('heading', { name: 'Kocia rozgrzewka', exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Koci trening', exact: true })).toBeVisible();
     await page.getByRole('button', { name: 'Zaczynam ćwiczenia →', exact: true }).tap();
     await finish(page); await expect(page.locator('.lesson-reward')).toContainText('+3 ★');
     await page.getByRole('button', { name: 'Wróć na mapę', exact: true }).tap();

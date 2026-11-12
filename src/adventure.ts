@@ -10,11 +10,14 @@ export {stars,purchase,place} from './house/progress.ts';
 import { inputFor,keyFor,questionFor,type AnswerMode,type Item,type Module,type Progress,type Session } from './core.ts';
 import type { StageReview } from './stage-review.ts';
 import { compareModules } from './learning/scope.ts';
+import {plannedStage,type SectionPlan} from './learning/section-plan.ts';
 export interface Adventure extends Home {
   courseHomes?:Record<string,Home>;
   version:1;completed:Record<string,{at:string;edition?:2}>;
   reviewDay?:string;
   reviewSchema?:1;reviewArchiveHead?:string|null;stageReviews?:Record<string,StageReview>;
+  sectionPlans?:Record<string,SectionPlan>;
+  memory?:Record<string,{item:Item;correct:number}>;
 }
 export const freshAdventure=():Adventure=>({version:1,earned:0,completed:{},purchases:{}});
 export function orderedJourneys(modules:Module[],journeys:Journey[]){return journeys.filter(j=>modules.some(m=>m.id===j.moduleId)).slice().sort((a,b)=>compareModules(modules.find(m=>m.id===a.moduleId)!,modules.find(m=>m.id===b.moduleId)!));}
@@ -26,7 +29,7 @@ export function lessonForProgress(j:Journey,l:Lesson,p:Progress):Lesson {
   const edition=completed?completed.edition:active?active.edition:2;
   return edition===2?{...l,...l.update}:l;
 }
-export function journeyForProgress(j:Journey,p:Progress):Journey{return {...j,stages:j.stages.map(s=>({...s,lessons:s.lessons.map(l=>lessonForProgress(j,l,p))}))};}
+export function journeyForProgress(j:Journey,p:Progress):Journey{return {...j,stages:j.stages.map(s=>{const planned=plannedStage(j,s,p);return {...planned,lessons:planned.lessons.map(l=>lessonForProgress(j,l,p))};})};}
 export function nextLesson(journey:Journey,p:Progress){return lessons(journeyForProgress(journey,p)).find(({key})=>!p.adventure?.completed[key]);}
 export function unlocked(journey:Journey,lesson:Lesson,_p:Progress){return lessons(journey).some(l=>l.lesson.id===lesson.id);}
 export function validateJourney(value:unknown,m:Module):Journey {
@@ -37,6 +40,7 @@ export function validateJourney(value:unknown,m:Module):Journey {
   for(const stage of j.stages){
     if(!stage || !/^[a-z0-9-]+$/.test(stage.id) || stageIds.has(stage.id) || typeof stage.title!=='string'||!['albert','olus','felix','maja','krzywolap'].includes(stage.cat)||!/^illustrations\/[a-z0-9-]+\.svg$/.test(stage.illustration)||!Array.isArray(stage.lessons)||!stage.lessons.length)return fail();
     stageIds.add(stage.id);
+    if(stage.adaptiveReviews!==undefined&&(stage.adaptiveReviews!==true||stage.lessons.length!==7||stage.lessons.some(l=>l.id.startsWith(`${stage.id}-recall-`))))return fail();
     for(const l of stage.lessons){
       if(!l || !/^[a-z0-9-]+$/.test(l.id)||ids.has(l.id)||typeof l.title!=='string'||typeof l.intro!=='string'||![l.wordIds,l.exerciseIds,l.ruleIds].every(Array.isArray)||l.wordIds.length+l.exerciseIds.length<(l.role==='training'?0:1)||l.wordIds.length+l.exerciseIds.length>10)return fail();
       if(l.role!==undefined&&l.role!=='training'||l.targetCount!==undefined&&(!Number.isInteger(l.targetCount)||l.targetCount<6||l.targetCount>10)||l.role==='training'&&(l.wordIds.length+l.exerciseIds.length+l.ruleIds.length>0))return fail();
@@ -46,7 +50,7 @@ export function validateJourney(value:unknown,m:Module):Journey {
       if(l.edition!==undefined&&l.edition!==2)return fail();
       if(l.update!==undefined){
         if(!l.update||l.update.edition!==2||l.role||'update' in l.update||'id' in l.update||'role' in l.update)return fail();
-        validateJourney({...j,id:j.id??'updated',stages:[{...stage,lessons:[{...l.update,id:l.id}]}]},m);
+        validateJourney({...j,id:j.id??'updated',stages:[{...stage,adaptiveReviews:undefined,lessons:[{...l.update,id:l.id}]}]},m);
       }
     }
   }
@@ -72,7 +76,7 @@ export async function loadJourneys(modules:Module[]){
 }
 export function makeLessonSession(modules:Module[],journey:Journey,lesson:Lesson,answerMode:AnswerMode,p:Progress):Session {
   lesson=lessonForProgress(journey,lesson,p);
-  if(lesson.role==='training')throw new Error('Trening wymaga doboru wcześniej poznanego materiału.');
+  if(lesson.role)throw new Error('Trening i powtórka wymagają doboru wcześniej poznanego materiału.');
   if(!unlocked(journey,lesson,p))throw new Error('Najpierw ukończ wcześniejszą lekcję.');
   const m=modules.find(m=>m.id===journey.moduleId)!;
   const items:Item[]=[...lesson.wordIds.map(id=>({key:keyFor(m,'word',id),moduleId:m.id,version:m.words.find(w=>w.id===id)?.rev??1,type:'word' as const,id,input:'text' as const})),...lesson.exerciseIds.map(id=>({key:keyFor(m,'exercise',id),moduleId:m.id,version:m.exercises.find(q=>q.id===id)?.rev??1,type:'exercise' as const,id,input:'text' as const}))];

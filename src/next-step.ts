@@ -1,6 +1,6 @@
 import { journeyKey,lessons,nextLesson,type Journey } from './adventure.ts';
 import { sessionCompatible,type Module,type Progress } from './core.ts';
-import { labels,lessonTitle } from './learning-labels.ts';
+import { labels,lessonTitle,sessionTitle } from './learning-labels.ts';
 import { stageForSession } from './stage-review.ts';
 import { compareModules, courseKey, sameCourse } from './learning/scope.ts';
 import { coursePracticeLabels, type CoursePracticeMode } from './learning/course-practice.ts';
@@ -26,7 +26,7 @@ export function getNextStep(modules:Module[],journeys:Journey[],p:Progress,selec
     const catId=stageForSession(ordered,active)?.stage.cat??'albert';
     if(!sessionCompatible(modules,active))return {kind:'unavailable',moduleId:active.moduleId,catId};
     const context=stageForSession(ordered,active);
-    return {kind:'resume',moduleId:active.moduleId,catId,...(context?.journey.id?{journeyId:journeyKey(context.journey)}:{}),title:active.scope?coursePracticeLabels[active.mode as CoursePracticeMode]:(active.training||active.stageReview||active.mode==='review'?labels.training:active.lesson?.title??labels[active.mode]),question:Math.min(active.index+1,active.items.length),total:active.items.length};
+    return {kind:'resume',moduleId:active.moduleId,catId,...(context?.journey.id?{journeyId:journeyKey(context.journey)}:{}),title:active.scope?coursePracticeLabels[active.mode as CoursePracticeMode]:sessionTitle(active),question:Math.min(active.index+1,active.items.length),total:active.items.length};
   }
 
   const activity:{moduleId:string;at:number}[]=[];

@@ -1,5 +1,11 @@
 # Architektura — realizacja techniczna
 
+## Sekcje adaptacyjne i zaproszenia — D-48–D-49
+
+`learning/section-plan.ts` wybiera i projektuje dwa stabilne przystanki sekcji 7 + 2. Warstwa domku używa jego czystej projekcji, bez zależności od nagród w `adventure.ts`. `learning/recall.ts` dobiera wcześniejsze błędy, zastępstwo z poznanego materiału i dobrowolne otwarcie/finał. `learning/retention.ts` odpowiada za wspólny licznik elementu oraz jednokrotne rozliczenie ukończonej sesji; stary mechanizm tur tematycznych pozostaje w `stage-review.ts`. Żaden z tych mechanizmów nie zna reguł konkretnego języka ani treści Food.
+
+`controllers/learning.ts` zapisuje plan i sesję przez istniejące `mutate`; odczyt i renderer nie losują ani nie zapisują. `views/cat-invitation.ts` buduje wspólną ramkę, a `app/views.ts` umieszcza początek na pierwszej mapie i finał na ostatniej, również w ekranie modułu. `learning-labels.ts` rozdziela nazwy widoczne od historycznych tytułów. `learning/backup-validation/adaptive.ts` sprawdza nowe opcjonalne dane kopii v1. [Reguły](03-nauka.md), [zapis](06-zapis.md).
+
 Status: mapa obecnego kodu oraz docelowe granice odpowiedzialności. To nie jest plan ponownego refaktoringu całej aplikacji.
 
 ## Stan obecny

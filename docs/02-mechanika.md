@@ -4,6 +4,8 @@ Status: model pojęciowy i wdrożone podstawy etapu 2. [Format plików kursów i
 
 ## Stan obecny
 
+Sekcja może deklarować opcjonalny plan 7 + 2: siedem lekcji bazowych i dwa generowane przystanki z rolą `recall`. Zapisany plan zawiera identyfikatory bazowe i miejsca wstawienia; pytania powstają z historii przy uruchomieniu sesji, nie przez edycję treści lekcji. Sesja otwarcia/finału ma opcjonalną rolę `ritual`, bez tworzenia nowego rodzaju pytania. [Format](format-materialow.md), [dobór, wymagalność i nagrody](03-nauka.md), [zapis i zgodność](06-zapis.md).
+
 Kod ma `Course`, `Meaning` i `LanguageVariant` w `src/materials/` oraz zgodne typy ćwiczeń `Word`, `Exercise`, `Module`, `Session`, `Journey`, `Stage` i `Lesson`. Moduł może wskazywać do trzech map, a lekcja może mieć rolę treningu. Food ma dwie mapy: starą z siedmioma etapami i drugą z pięcioma lekcjami, w tym treningiem wcześniejszego zakresu. Opcjonalna aktualizacja lekcji zachowuje jej identyfikator i obie wersje treści; zapisane `edition` rozróżnia nową wersję od dawnej. [Ochrona postępów](wdrozenie-food.md#ochrona-wyników-i-nagród). `Word` pozostaje projekcją znaczenia do istniejącego silnika, a nie drugim źródłem treści do ręcznej edycji.
 
 Źródła: [model danych](../src/learning/model.ts), [mapy](../src/adventure.ts). Szczegóły istniejącego formatu: [materiały — stan obecny](stan-obecny/materialy.md).

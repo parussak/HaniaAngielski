@@ -26,7 +26,7 @@ test('rozgrzewka pierwszej mapy korzysta z poznanych wcześniejszych lekcji, bez
  assert.deepEqual(new Set(pool.map(v=>v.item.id)),new Set(m.words.slice(0,2).map(w=>w.id)));
  assert.equal(pool.find(v=>v.item.id===m.words[0].id)!.difficult,true);
  const s=makeTrainingSession([m],m,p,'text',{journey:j,journeys:[j],lesson:j.stages[0].lessons[2]})!;
- assert.equal(s.lesson!.id,`${m.id}/${j.id}/warm`);assert.equal(s.lesson!.title,'Kocia rozgrzewka');assert.equal(s.fixedLength,true);
+ assert.equal(s.lesson!.id,`${m.id}/${j.id}/warm`);assert.equal(s.lesson!.title,'Koci trening');assert.equal(s.fixedLength,true);
  assert.equal(s.items.length,2);assert.deepEqual(p,before);
 });
 test('rozgrzewka jest wymagana na mapie, ale nowe błędy nie cofają jej zaliczenia ani sukcesu',()=>{

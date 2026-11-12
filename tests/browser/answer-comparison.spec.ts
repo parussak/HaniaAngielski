@@ -23,6 +23,7 @@ for(const [mode,input] of [['flashcards-basic','text'],['flashcards','choice'],[
       given=type==='word'?'aple':'botle';await page.getByRole('textbox').fill(given);await page.getByRole('button',{name:/Sprawdź/}).tap();
     }else{
       const options=page.locator('.option');
+      await expect(options.first()).toBeVisible();
       for(const option of await options.all())if(await option.getAttribute('data-answer')!==correct){given=(await option.getAttribute('data-answer'))!;await option.tap();break;}
     }
     await expect(page.locator('.given-answer p')).toHaveText(given);

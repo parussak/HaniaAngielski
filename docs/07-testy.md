@@ -2,6 +2,14 @@
 
 Status: istniejące kontrole oraz docelowy sposób ich organizacji. Po zatwierdzeniu D-34 dodano testy wdrożenia treningów; workflow GitHub pozostaje bez zmian.
 
+## Sekcje 7 + 2 i kocie zaproszenia — D-48–D-49
+
+Nowy zestaw `adaptive-recall.test.ts` obejmuje stały układ dwóch powtórek, kopię v1, brak dopisywania lekcji do rozpoczętej sekcji, 9 wymaganych przystanków i nagrody, granice wcześniejszego materiału/kursu, zastępstwo przy braku błędów, trzy samodzielne zaliczenia, poprawkę, reset, jednokrotne rozliczenie i synchronizację ze starymi kolejkami. Sprawdza też początek z poprzedniego modułu, finał po wszystkich mapach i odrzucanie uszkodzonych danych. Oryginalna suma kontrolna materiałów Food pozostaje: w porównaniu wyłączamy wyłącznie zatwierdzoną flagę planu sekcji, z osobnym sprawdzeniem jej położenia.
+
+`browser/adaptive-recall.spec.ts` sprawdza 320 px, brak nachodzenia kota na tekst, 9 kafelków, odpowiedź z wpisywaniem, wznowienie, wspólny licznik i nagrodę, tę samą kolejność po kopii na drugim urządzeniu oraz zimny start powtórki offline. Dodatkowo uruchamia zaproszenie początku pierwszego modułu i dobrowolny finał z nagrodą, bez zmiany wcześniejszych ukończeń. Istniejące scenariusze kont, konfliktów, synchronizacji, domku i dawnych kopii pozostają. Testy wyboru odpowiedzi czekają na pojawienie się przycisków; błędny wariant wybierają według oceny odpowiedzi, również z rodzajnikiem a/an, zamiast zakładać, że pierwszy przycisk oznacza błąd.
+
+Weryfikacja 12 listopada 2026: **219/219 Node w obu wariantach biblioteki**. Pełny końcowy przebieg przeglądarkowy: **98/98**; następnie dodano scenariusz otwarcia/finału i wykonano cały plik nowych scenariuszy: **3/3** (łącznie 99 różnych sprawdzonych scenariuszy). Budowanie z walidacją treści, TypeScript i 206 publicznymi zasobami PWA przeszło. Obejrzano mobilną mapę i poprawioną ramkę zaproszenia. Zachowano dotychczasowy zestaw 116 wyników walidacji kopii. Nie testowano na fizycznym telefonie ani prawdziwym koncie Hani; konta i sieć są sprawdzane przy użyciu testowego adaptera.
+
 ## Bieżący punkt odniesienia
 
 Ostatni pełny przebieg po wdrożeniu Kociej rozgrzewki (12 listopada 2026): **212/212 Node na zwykłej i wirtualnie rozszerzonej bibliotece oraz 96/96 Playwright** gotowej aplikacji w Chrome. Budowanie z kontrolą materiałów, TypeScript i zasobami offline przeszło. Wyniki starszych etapów poniżej są historią. [Zasady rozgrzewek](03-nauka.md).

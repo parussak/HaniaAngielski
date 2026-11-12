@@ -2,12 +2,12 @@ import { stats } from '../app/selectors.ts';
 import { AppState } from '../app/state.ts';
 import { score, sessionCompatible, type Session } from '../core.ts';
 import { sessionCount } from '../history.ts';
-import { labels } from '../learning-labels.ts';
+import { labels,sessionTitle } from '../learning-labels.ts';
 import { coursePracticeLabels, type CoursePracticeMode } from '../learning/course-practice.ts';
 import { button, date, e, icon } from '../ui.ts';
 function historyRow(state: Readonly<AppState>, session: Session) {
     const result = score(session), m = state.modules.find(m => m.id === session.moduleId);
-    return `<div class="history-row"><div><strong>${e(session.scope ? coursePracticeLabels[session.mode as CoursePracticeMode] : (session.training||session.stageReview||session.mode==='review'?labels.training:session.lesson?.title??labels[session.mode]))} · ${e(session.scope ? state.courses.find(c=>c.id===session.scope!.courseId)?.name ?? 'Kurs spoza biblioteczki' : m?.name ?? 'Moduł spoza biblioteczki')}</strong><span>${date(session.completedAt!)}${!m || !sessionCompatible(state.modules, session) ? ' · archiwalny materiał' : ''}</span></div><div class="history-score">${!session.attempts.length ? `${new Set(session.items.map(i => i.key)).size} fiszek` : `${result.correct}/${result.total}`}<small>${!session.attempts.length ? 'przećwiczonych' : `pierwsze próby · ${result.corrections} poprawionych`}</small></div></div>`;
+    return `<div class="history-row"><div><strong>${e(session.scope ? coursePracticeLabels[session.mode as CoursePracticeMode] : sessionTitle(session))} · ${e(session.scope ? state.courses.find(c=>c.id===session.scope!.courseId)?.name ?? 'Kurs spoza biblioteczki' : m?.name ?? 'Moduł spoza biblioteczki')}</strong><span>${date(session.completedAt!)}${!m || !sessionCompatible(state.modules, session) ? ' · archiwalny materiał' : ''}</span></div><div class="history-score">${!session.attempts.length ? `${new Set(session.items.map(i => i.key)).size} fiszek` : `${result.correct}/${result.total}`}<small>${!session.attempts.length ? 'przećwiczonych' : `pierwsze próby · ${result.corrections} poprawionych`}</small></div></div>`;
 }
 export function progressView(state: Readonly<AppState>) {
     const s = stats(state);

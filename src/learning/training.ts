@@ -11,7 +11,7 @@ interface Practice { item: Item; total: number; correct: number; last: number; d
 export function practicedItems(modules: Module[], selected: Module, p: Progress): Practice[] {
     const counts = answerHistory(p);
     const result = new Map<string, Practice>();
-    const difficult = new Set([...p.difficult,...Object.values(p.adventure?.stageReviews??{}).flatMap(s=>Object.values(s.items).filter(v=>v.correct<3).map(v=>v.item.key))]);
+    const difficult = new Set([...p.difficult,...Object.values(p.adventure?.stageReviews??{}).flatMap(s=>Object.values(s.items).filter(v=>v.correct<3).map(v=>v.item.key)),...Object.entries(p.adventure?.memory??{}).filter(([,v])=>v.correct<3).map(([key])=>key)]);
     const remembered = new Set(p.encountered ?? []);
     for (const m of modules.filter(m => sameCourse(m, selected))) {
         const source: Item[] = [
@@ -118,6 +118,6 @@ export function makeTrainingSession(modules: Module[], selected: Module, p: Prog
     if (!items.length) return null;
     items.forEach((item, index) => { item.input = inputFor(questionFor(modules, item), answerMode === 'mixed' ? (index % 2 ? 'text' : 'choice') : answerMode); });
     return { fixedLength:true,id: crypto.randomUUID(), moduleId: selected.id, mode: context ? 'lesson' : 'training', training: { kind: context ? 'map' : 'extra' },
-        ...(context ? { lesson: { id: `${journeyKey(context.journey)}/${context.lesson.id}`, title: 'Kocia rozgrzewka' } } : {}),
+        ...(context ? { lesson: { id: `${journeyKey(context.journey)}/${context.lesson.id}`, title: 'Koci trening' } } : {}),
         answerMode, previous: true, startedAt: new Date().toISOString(), completedAt: null, items, index: 0, phase: 'question', lastCorrect: null, attempts: [], repeatKeys: [] };
 }

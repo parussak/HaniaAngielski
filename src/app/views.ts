@@ -1,7 +1,7 @@
 import {houseView} from '../views/house.ts';
 import { accountView as renderAccountView } from '../views/account.ts';
 import { journeyView, lessonIntro } from '../adventure-view.ts';
-import { lessons } from '../adventure.ts';
+import { lessons,journeyKey } from '../adventure.ts';
 import { currentJourney, currentCourse, courseModules, courseJourneys } from './selectors.ts';
 import { AppState } from './state.ts';
 import { backupView as renderBackupView } from '../views/backup.ts';
@@ -20,12 +20,27 @@ import { coursesView, coursePracticeView, courseContext, unfinishedCourseSession
 import { mapTrainingPool } from '../learning/training.ts';
 import {warmupView} from '../views/warmup.ts';
 import { trainingPreparationView } from '../views/training-preparation.ts';
+import {catInvitation} from '../views/cat-invitation.ts';
+import {moduleFinished} from '../learning/recall.ts';
 export function createViews(state: AppState, sync: ProgressSync, syncLabel: () => string) {
     function decorativeCat(id: string) {
         const cat = state.catCatalog?.cats.find(c => c.id === id);
         return cat ? catView(state.catCatalog, { cat, mood: 'happy', frame: cat.happy }) : icon('cat');
     }
-    function mapView() { const j = currentJourney(state); return j ? journeyView(j, state.progress, decorativeCat,currentCourse(state)?.id) : '<h1>Kocia mapa</h1><p>Mapa jest chwilowo niedostępna. Twoje własne ćwiczenia nadal działają.</p>' + button('home', 'Moja nauka'); }
+    function invitations(moduleId:string){
+        const m=state.modules.find(m=>m.id===moduleId)!;
+        const ready=!state.journeyIssues.some(issue=>issue.moduleId===moduleId)&&moduleFinished(state.modules,state.journeys,m,state.progress);
+        return {
+            opening:catInvitation(decorativeCat('albert'),'Kocia rozgrzewka','Zanim ruszysz dalej: do 5 pytań z wcześniejszych modułów. To pierwszy moduł? Zacznij od nowych rzeczy!','module-ritual','Rozgrzej łapki',`data-kind="opening" data-module="${moduleId}"`),
+            finale:catInvitation(decorativeCat('krzywolap'),'Misja Kociego Mistrza',ready?'Wszystkie mapy za Tobą! Do 8 poznanych pytań, jeden mały finał i +1 ★.':'Dobrowolny finał otworzy się po ukończeniu wszystkich map tego modułu.','module-ritual',ready?'Podejmuję misję!':'Najpierw poznaj moduł',`data-kind="finale" data-module="${moduleId}" ${ready?'':'disabled'}`,'finale'),
+        };
+    }
+    function mapView() {
+        const j=currentJourney(state);
+        if(!j)return '<h1>Kocia mapa</h1><p>Mapa jest chwilowo niedostępna. Twoje własne ćwiczenia nadal działają.</p>'+button('home','Moja nauka');
+        const maps=courseJourneys(state).filter(v=>v.moduleId===j.moduleId),cards=invitations(j.moduleId);
+        return journeyView(j,state.progress,decorativeCat,currentCourse(state)?.id,{...(journeyKey(maps[0])===journeyKey(j)?{opening:cards.opening}:{}),...(journeyKey(maps.at(-1)!)===journeyKey(j)?{finale:cards.finale}:{})});
+    }
     function introView() {
         const j=currentJourney(state),l=j&&lessons(j).find(l=>l.lesson.id===state.introLessonId)?.lesson,m=state.modules.find(m=>m.id===j?.moduleId);
         if(!j||!l||!m)return mapView();
@@ -39,7 +54,7 @@ export function createViews(state: AppState, sync: ProgressSync, syncLabel: () =
     }
     function journeyList() { return courseContext(state) + renderJourneyList(courseModules(state), courseJourneys(state), state.progress,state.journeyIssues,currentCourse(state)?.id); }
     function moduleList() { return courseContext(state) + renderModuleList(courseModules(state)) + button('course-practice','Ćwicz cały poznany materiał →','secondary'); }
-    function setup() { return setupView(state); }
+    function setup() { const cards=invitations(state.selected.id);return setupView(state,cards.opening+cards.finale); }
     function study() { return studyView(state); }
     function summary() { return summaryView(state, home); }
     function progressView() { return renderProgressView(state); }

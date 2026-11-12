@@ -30,7 +30,7 @@ test('pusty trening prowadzi do przygotowania, a potem działa i daje trzy gwiaz
  await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →',exact:true}).tap();
  await finish(page,first.stages[0].lessons[0].wordIds,'word');await expect(page.locator('.lesson-reward')).toContainText('+3 ★');
  await open(page,second);await expect(page.locator('.lead')).toContainText('3 z 5');await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
- await expect(page.getByRole('heading',{name:'Kocia rozgrzewka',exact:true})).toBeVisible();
+ await expect(page.getByRole('heading',{name:'Koci trening',exact:true})).toBeVisible();
  await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →',exact:true}).tap();
  await expect(page.locator('.question')).toBeVisible();
  // Selection order may be shuffled, but every answer comes from the earlier lesson.
@@ -40,7 +40,7 @@ test('pusty trening prowadzi do przygotowania, a potem działa i daje trzy gwiaz
   await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await expect(page.locator('.feedback.correct')).toBeVisible();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
  }
  await expect(page.locator('.lesson-reward')).toContainText('+3 ★');await open(page,second);
- await page.getByRole('button',{name:/Kocia rozgrzewka Ukończona/}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →',exact:true}).tap();
+ await page.getByRole('button',{name:/Koci trening Ukończona/}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →',exact:true}).tap();
  await expect(page.locator('.question')).toBeVisible();
  while(await page.locator('.question').count()){
   const prompt=await page.locator('.question').innerText(),value=modules[0].words.find(w=>w.front===prompt)?.back;

@@ -4,6 +4,15 @@ import {obj,str,date,strings,integer} from './values.ts';
 export const validItem = (i: unknown): boolean => obj(i) && str(i.key) && str(i.moduleId) && integer(i.version) && i.version > 0 && ['word', 'exercise'].includes(i.type as string) && str(i.id) && ['text', 'choice'].includes(i.input as string) && i.key === `${i.moduleId}@${i.version}:${i.type}:${i.id}` &&
     (i.options === undefined || Array.isArray(i.options) && i.options.length >= 2 && i.options.length <= 4 && i.options.every(str) && new Set(i.options).size === i.options.length);
 export const validSession = (v: unknown, completed: boolean): boolean => {
+    if(obj(v)){
+        if(v.retentionCounted!==undefined&&(v.retentionCounted!==true||!completed))return false;
+        if(v.ritual!==undefined&&(!['opening','finale'].includes(v.ritual as string)||v.mode!=='training'||!obj(v.training)||v.training.kind!=='extra'))return false;
+        if(v.recall!==undefined&&(!obj(v.recall)||!str(v.recall.stageId)||!v.recall.stageId.startsWith(`${v.moduleId}/`)||v.mode!=='lesson'||!obj(v.lesson)||!str(v.lesson.id)||!v.lesson.id.startsWith(`${v.moduleId}/`)||v.training!==undefined||v.stageReview!==undefined||v.scope!==undefined||v.ritual!==undefined||v.fixedLength!==true))return false;
+        if(obj(v.recall)&&typeof v.recall.stageId==='string'&&obj(v.lesson)){
+            const id=v.recall.stageId;
+            if(!/^[a-z0-9-]+\/[a-z0-9-]+(?:\/[a-z0-9-]+)?$/.test(id)||![`${id}-recall-1`,`${id}-recall-2`].includes(v.lesson.id as string))return false;
+        }
+    }
     if(obj(v)&&(v.fixedLength!==undefined&&v.fixedLength!==true||v.lessonRewarded!==undefined&&(v.lessonRewarded!==true||!completed||!v.lesson)))return false;
     if (!obj(v) || !str(v.id) || !str(v.moduleId) || !['flashcards', 'flashcards-basic', 'quiz', 'grammar', 'dialogue', 'review', 'lesson', 'training'].includes(v.mode as string) || !['choice', 'text', 'mixed'].includes(v.answerMode as string) || typeof v.previous !== 'boolean' || !date(v.startedAt) || !(completed ? date(v.completedAt) : v.completedAt === null) || !['question', 'revealed', 'feedback', 'retry'].includes(v.phase as string) || !(v.lastCorrect === null || typeof v.lastCorrect === 'boolean'))
         return false;
