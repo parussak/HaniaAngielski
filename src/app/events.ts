@@ -5,6 +5,9 @@ import { createBackupController } from '../controllers/backup.ts';
 import { createLearningController } from '../controllers/learning.ts';
 import { applyUpdate, installPwa, prepareOffline } from '../pwa.ts';
 import { ProgressSync } from '../sync.ts';
+import {bindHouseDrag} from '../house/drag.ts';
+import {homeFor} from '../house/progress.ts';
+import {currentCourse} from './selectors.ts';
 interface EventPorts {
     accounts: ReturnType<typeof createAccountController>;
     house: ReturnType<typeof createHouseController>;
@@ -45,7 +48,12 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
             state.pending = null;
         }
     }
+    const drag=bindHouseDrag(root,()=>({h:homeFor(state.progress,currentCourse(state)?.id),room:state.chosenRoom,course:currentCourse(state)?.id??'',owner:state.user?.uid??'guest',editing:state.screen==='house'&&state.houseEditing,busy:state.busy,epoch:state.progress}), (id,position,scope)=>{
+        const proxy=document.createElement('button');Object.assign(proxy.dataset,{id,x:String(position.x),y:String(position.y),room:scope.room,course:scope.course,owner:scope.owner});
+        void run(()=>action('grid-move',proxy));
+    });
     root.addEventListener('click', ev => {
+        if(drag.consumeClick(ev)){ev.preventDefault();return;}
         const el = (ev.target as HTMLElement).closest<HTMLElement>('[data-action]');
         if (!el)
             return;

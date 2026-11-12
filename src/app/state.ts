@@ -18,6 +18,7 @@ export class AppState {
     chosenDecoration = 'pillow';
     chosenRoom = 'salon';
     houseTab: 'shop' | 'storage' = 'shop';
+    houseEditing = false;
     lastReward = 0;
     lastStageReward = 0;
     olderSessions: Session[] = [];

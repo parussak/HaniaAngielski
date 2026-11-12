@@ -1,16 +1,59 @@
 # Koci domek — rozbudowa za postępy w nauce
 
-Status: **wdrożone dla Food**, z rozbudową miejsc, warstw i schowkiem „Moje rzeczy” z 12 listopada 2026 (D-43). Ustalenia D-41 i D-42 w [decyzjach](decyzje.md). Użytkowniczka zatwierdziła kuchnię, osiem przedmiotów i ceny opisane poniżej. Kolejne pokoje wymagają własnych danych i grafiki.
+Status: **wdrożone D-44–D-45: własne wyposażenie pokojów, siatka i stałe rozmiary**, 12 listopada 2026. Zakupy i postępy pozostają zachowane. Niżej oddzielono obecne zasady od wcześniejszego wariantu D-41–D-43.
 
 ## Cel
 
-Domek rozwija się wraz z nauką. Ukończenie pojedynczej mapy poszerza dostępne wyposażenie, a przejście wszystkich map modułu pozwala zdobyć nowy pokój. Gwiazdki służą do urządzania zdobytych pomieszczeń.
+Domek ma przede wszystkim motywować do nauki i pokazywać jej efekty. Ukończenie pojedynczej mapy poszerza dostępne wyposażenie do kupienia za gwiazdki, a przejście wszystkich map modułu pozwala zdobyć nowy pokój. Urządzanie wspiera ten mechanizm; samo przenoszenie wcześniejszych zakupów nie ma zastępować nagród za kolejny materiał.
 
-## Stan obecny
+## Stan obecny — siatka i własne wyposażenie, D-44–D-45
+
+### Nagrody i przypisanie wyposażenia
+
+- Każdy pokój ma własne wyposażenie. Nowy zakup trafia do pierwszego pokoju wskazanego w katalogu dekoracji. Jedenaście obecnych dekoracji saloniku pozostaje wyposażeniem tego pokoju; toster, kubki i stolik należą do dotychczasowej kuchni.
+- Zakupione wcześniej rzeczy zachowują swój zapisany pokój, nawet jeśli stara wersja pozwoliła umieścić je gdzie indziej. Brak pokoju w starym zapisie nadal oznacza salonik. Niczego nie odbieramy ani nie duplikujemy.
+- Nie można teraz przenosić wyposażenia między pokojami. Wybranie rzeczy z kolekcji przełącza do pokoju, do którego należy; nie przenosi zakupu.
+- Food zachowuje dotychczasowy charakter pokoju i grafiki. Nie dodano nowego pomieszczenia ani nie usunięto istniejącej, zdobytej kuchni. Zachowano dotychczasowe odblokowania map, pokoi i wyposażenia, ceny oraz nagrody za naukę. Dane nagród kolejnych modułów trzeba nadal zdefiniować osobno.
+- Mapa odblokowuje wyposażenie do zakupu, wszystkie mapy modułu odblokowują przypisany pokój, a gwiazdki z nauki służą do kupowania. Urządzanie samo nie daje gwiazdek ani nowych nagród.
+
+### Siatka i wygląd
+
+- Pokój ma **24 kolumny i 15 rzędów**. Współrzędne są całkowite, liczone od lewego górnego rogu przedmiotu. Jest to wybrany wariant pierwszego wdrożenia, a nie wcześniejsza decyzja użytkowniczki o konkretnej liczbie kolumn.
+- Każdy przedmiot ma stałą szerokość i wysokość w siatce, określoną w danych układu. Miejsce nie zmienia jego rozmiaru. Cały pokój skaluje się proporcjonalnie do ekranu; grafiki zachowują proporcje. Nie ma sterowania rozmiarem ani obrotem.
+- Tekstylia są pod meblami, a drobiazgi nad nimi. W siatce przedmioty różnych warstw mogą się nakładać; prostokąty dwóch przedmiotów tej samej warstwy nie mogą się przecinać. Samo stykanie krawędzi jest dozwolone.
+- Meble i tekstylia stoją na podłodze. Drobiazgi mogą stać na podłodze, półce, pod oknem, a w kuchni także na blacie lub stoliku. Obszar określa dolna krawędź i środek przedmiotu; cały jego prostokąt musi mieścić się w pokoju.
+- Po ustawieniu drobiazgu na powierzchni stolika przesunięcie lub schowanie tego stolika odkłada drobiazg do schowka. Nie usuwa własności ani nie pobiera gwiazdek. Przedmiot nie wędruje sam razem ze stolikiem.
+
+### Obsługa na telefonie i komputerze
+
+1. **„Urządź pokój”** włącza siatkę i przeciąganie. Poza tym trybem pokój służy do oglądania i wyboru dekoracji; można normalnie przewijać stronę.
+2. Wybrany przedmiot przeciąga się myszą lub palcem. Podgląd przyciąga się do pól siatki; niedozwolona pozycja jest zaznaczona i ma wyjaśnienie.
+3. Poprawne upuszczenie od razu zapisuje pozycję. Błędne upuszczenie, anulowanie gestu, utrata wskaźnika lub zmiana ekranu/rozmiaru okna nie zatwierdzają ruchu. Poprzedni zapis pozostaje.
+4. Strzałki bezpośrednio pod pokojem przesuwają wybraną rzecz o jedno pole. Mają stałe identyfikatory do zachowania fokusu i co najmniej 48 px do dotykania. Obok jest przycisk schowania rzeczy.
+5. Rzecz ze schowka ma w edycji półprzezroczysty podgląd. Trzeba go przeciągnąć lub użyć przycisku ustawienia; sam wybór rzeczy nie zapisuje pozycji.
+6. **„Gotowe — zakończ urządzanie”** wyłącza tryb edycji. Nie jest dodatkowym zatwierdzeniem wszystkich ruchów; każdy poprawny ruch zapisano już osobno.
+
+Dotychczasowe nazwane miejsca pozostają jako skróty przy ustawianiu. Zachowują wcześniejszą zasadę odkładania zastanej dekoracji do schowka, ale używają już stałych wymiarów przedmiotów. Swobodne przeciąganie po siatce nie zastępuje innych rzeczy: przy kolizji odmawia ruchu.
+
+### Zapis i zgodność
+
+- Stare zakupy i nazwane miejsca odczytujemy bez przepisywania danych. Ich położenie jest wyliczane na potrzeby podglądu; od początku mają stałe rozmiary. Pierwszy zatwierdzony ruch zapisuje współrzędne przesuwanego przedmiotu; związane z nim drobiazgi mogą przy ruchu stolika wrócić do schowka.
+- Zakup ma opcjonalne pole `position: { x, y }`. Przy współrzędnych `slot` wynosi `null`; brak współrzędnych i `slot: null` oznaczają schowek. Koszt i pokój pozostają w dotychczasowych polach.
+- Współrzędne przechodzą przez ten sam zapis transakcyjny, walidację kopii, IndexedDB i synchronizację. Nie zmieniają aktywnej sesji, historii, ukończeń, salda ani portfeli innych kursów.
+- Nie przyjmujemy niecałkowitych lub wychodzących poza pokój współrzędnych. Format kopii pozostaje w wersji 1; odczyt nowych współrzędnych wymaga aktualnej aplikacji. Dawny zestaw 116 przypadków walidatora pozostaje punktem odniesienia bez regeneracji.
+- Gest rozpoczęty na innym koncie, kursie lub pokoju, bądź przed zmianą stanu wyników, nie może zapisać pozycji w nowym kontekście. Błąd zapisu zachowuje poprzednie dane.
+
+### Dalsze decyzje
+
+Dokładne wyposażenie i obszary nowych pokoi, nowe nagrody, swobodne skalowanie lub obracanie oraz bardziej zaawansowane kolizje nie są częścią tego wdrożenia. Nie zmieniono mechaniki nauki ani cen.
+
+## Wcześniejsze wdrożenie nagród Food — zachowane
 
 Każdy kurs każdego konta ma osobny salonik, zakupy i portfel. Obecny dorobek pozostaje w angielskim. Food odblokowuje cztery przedmioty za każdą z dwóch map, a po obu mapach kuchnię. Przedmioty kupuje się za gwiazdki; kuchnia i jej podstawowe tło są bezpłatne. Dotychczasowa odznaka kucharza za pierwszą mapę pozostaje zachowana. Mechanizm opisuje [logika domku](../src/house/progress.ts), a sposób zapisu [zapis](06-zapis.md).
 
-## Uzgodnione zasady docelowe
+## Wcześniejsze zasady i obecne wdrożenie — D-41–D-43
+
+Poniższe części zachowują opis wariantu sprzed siatki. W kwestii przypisania wyposażenia do pokoju, rozmiarów i przesuwania obowiązuje wdrożone D-44–D-45 opisane powyżej; dawne opisy przenoszenia między pokojami są historyczne.
 
 ### Własność domku
 
@@ -59,7 +102,7 @@ Food ma dwie mapy. Ukończenie jednej z nich odblokowuje przypisane jej przedmio
 - Na telefonie przełączanie pokoi i urządzanie ma być wygodne bez konieczności precyzyjnego przeciągania. Zachowujemy pastelowy styl, kotki i lekkie grafiki dostępne offline.
 - Powiązania moduł–pokój i mapa–wyposażenie mają być danymi, aby dodanie nagród do kolejnego modułu nie wymagało wyjątków w mechanice nauki.
 
-## Zatwierdzony i wdrożony wariant Food
+## Wcześniej zatwierdzony wariant nagród Food — D-41–D-43
 
 Food daje **jeden nowy pokój: Kocią kuchnię**, po ukończeniu obu map. Obecny pokój początkowy nazywamy **Kocim salonikiem**. Kuchnia ma bezpłatne tło z oknem, prostym blatem i szafkami, dzięki czemu od razu wygląda jak pokój; ruchome dekoracje kupujemy osobno. Paleta: krem, róż, błękit i fiolet, z kotkami w obecnym stylu aplikacji.
 
@@ -102,7 +145,7 @@ Wyposażenie pierwszej mapy można wykorzystać w saloniku jeszcze przed zdobyci
 - Powiadomienie o nowym pokoju po ukończeniu ostatniej lekcji prowadzi użytkownika do pozycji Domek w stałej nawigacji. Wybrany aktualnie pokój jest stanem ekranu; po ponownym uruchomieniu zaczynamy od saloniku, z zachowaniem ustawień obu pokoi.
 
 
-## Więcej miejsc, warstwy i „Moje rzeczy” — D-43
+## Historia: więcej miejsc, warstwy i „Moje rzeczy” — D-43
 
 **Stan obecny, 12 listopada 2026.** Salonik ma 11 miejsc, kuchnia 14; wcześniej było po 6. Dawne identyfikatory i ustawienia pozostają bez zmian. Dodatkowe miejsca obejmują koc pod meblami, poduszkę przy dywanie, dwie strony półki oraz podłogę z boku. Kuchnia ma też blat i dwie strony stolika. Całe obecne wyposażenie saloniku można rozstawić jednocześnie. Nie ma obowiązku wystawienia wszystkich zakupów.
 
@@ -115,4 +158,4 @@ Wyposażenie pierwszej mapy można wykorzystać w saloniku jeszcze przed zdobyci
 - Schowanie używa dotychczasowego `slot: null`. Po ponownym ustawieniu nie płacimy drugi raz. Jedno miejsce w jednym pokoju mieści jeden przedmiot; oddzielne warstwy korzystają z oddzielnych miejsc, które mogą wizualnie nakładać się na siebie.
 - Nowe miejsca korzystają z tego samego zapisu lokalnego, synchronizacji i kopii wersji 1. Starsze kopie są czytane bez migracji; kopia zawierająca nowe miejsca wymaga aktualnej wersji aplikacji. Nie zmieniono zakupów, kosztów, salda, ukończeń, ocen ani aktywnej lekcji.
 
-**Do dalszego ustalenia:** swobodne przesuwanie przedmiotów i nowe pokoje pozostają poza tym wdrożeniem. Nie dodano nowych nagród ani cen.
+**Zakres tego wdrożenia D-43:** nie obejmował przesuwania po siatce ani nowych pokoi. Późniejsze wdrożenie siatki D-45 opisano na początku dokumentu. Nie dodano nowych nagród ani cen.

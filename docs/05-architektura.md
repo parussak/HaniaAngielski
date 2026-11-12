@@ -114,3 +114,8 @@ Wartości gwiazdek są w `src/learning/rewards.ts`, wybór kursu według modułu
 ### Rozmieszczanie i kolekcja domku — D-43
 
 `house/catalog.ts` zawiera miejsca, ich warstwy i dostępność dla pokoi. `house/progress.ts` sprawdza możliwość ustawienia, zajętość i podporę stolika. `views/house-placement.ts` prezentuje położenie zakupu, panel wyboru miejsca i zapowiedź schowania zastanego przedmiotu; główny `views/house.ts` składa pokój, sklep i kolekcję. Kontroler domku odpowiada za wybór zakładki i przejście do pasującego pokoju; zapis nadal przechodzi przez `mutate`. Renderer po wyborze dekoracji przewija i przenosi fokus do panelu ustawiania. Nie dodano osobnego modelu schowka ani nowych obrazków. [Zasady i zgodność](koci-domek.md).
+
+
+### Siatka i gesty domku — D-44–D-45
+
+`house/layout.ts` definiuje siatkę, rozmiary, odczyt starych miejsc, obszary i kolizje. `house/progress.ts` zapisuje ruch, sprawdza pokój i zachowuje dorobek. `views/house-room.ts` renderuje proporcjonalny pokój, siatkę, przedmioty i strzałki. `house/drag.ts` obsługuje Pointer Events, podgląd, anulowanie i kończenie dotyku; `app/events.ts` przekazuje zatwierdzony ruch do kontrolera i transakcji `run`/`mutate`. Nie zapisujemy danych przy każdym ruchu palca. Przed zapisem sprawdzamy aktualność konta, kursu, pokoju i stanu wyników, a zmianę DOM odkładamy do zakończenia cyklu gestu. Przyciski edytora mają obsługę dotykową bez zależności od opóźnionego kliknięcia po przeciąganiu. Walidator kopii używa tej samej siatki i rozmiarów. Nie dodano biblioteki przeciągania, nowych grafik ani serwera. [Kontrakt domku](koci-domek.md).

@@ -42,3 +42,8 @@ Standardowe budowanie i polecenia Playwright pozostają opisane w [zasadach test
 ## Miejsca domku i zgodność starego wystroju
 
 `house-layers.test.ts` chroni dodatkowe miejsca i warstwy na rzeczywistym katalogu wyposażenia Food, bez obejmowania nagród przyszłych modułów. `house-controller.test.ts` sprawdza zakładki i nieudane ustawienie na danych syntetycznych. Przy rozbudowie katalogu zachowuj sześć dawnych identyfikatorów miejsc i nie normalizuj zapisanych zakupów. Nowe miejsca muszą przechodzić przez wspólny katalog walidatora, a zmiany podpór wymagają testu schowania drobiazgów. Nie aktualizuj złotego zestawu walidacji tylko po to, aby usunąć błąd — stare pliki mają zachować wynik; nowe miejsca mają osobne przypadki.
+
+
+## Siatka domku
+
+`house-grid.test.ts` używa małych zakupów i syntetycznej aktywnej lekcji. Nie wiążemy rozmiaru dekoracji z miejscem w CSS. Dane rozmiarów i obszarów są w `house/layout.ts`; kolejne dekoracje powinny mieć własny zdefiniowany rozmiar i test granic. Stare miejsca pozostają kontrolą odczytu, nie wymogiem przenoszenia zakupów między pokojami. `browser/house-grid.spec.ts` sprawdza ruchy myszy i dotyku, strzałki, odtworzenie i offline. Przy pomiarach po błędnym upuszczeniu poczekaj na obsłużenie odmowy i wyczyszczenie podglądu gestu, a nie tylko na niezmienioną wartość współrzędnej.

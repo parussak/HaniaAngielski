@@ -48,10 +48,10 @@ test('więcej miejsc, warstwy i Moje rzeczy: telefon, schowanie, odtworzenie i z
  await page.locator('.decoration-card[data-id="table"]').tap();
  await expect(page.locator('.kitchen-room')).toBeVisible();
  await page.getByRole('button',{name:'Na dywanie',exact:true}).tap();
- await page.locator('.decoration-card[data-id="fruit-bowl"]').tap();
+ await page.locator('.decoration-card[data-id="mugs"]').tap();
  await page.getByRole('button',{name:'Lewa strona stolika',exact:true}).tap();
  await expect(page.locator('.room-decoration[data-id="table"]')).toHaveClass(/layer-furniture/);
- await expect(page.locator('.room-decoration[data-id="fruit-bowl"]')).toHaveClass(/layer-objects/);
+ await expect(page.locator('.room-decoration[data-id="mugs"]')).toHaveClass(/layer-objects/);
  await page.screenshot({path:'test-results/house-layered-kitchen-mobile.png',fullPage:true});
 });
 
@@ -63,7 +63,7 @@ test('Food: jedna mapa daje wyposażenie, obie kuchnię; przenoszenie i kopia za
  await page.getByRole('button',{name:'Kocia kuchnia',exact:true}).tap();
  await expect(page.locator('.kitchen-room')).toBeVisible();await expect(page.getByRole('button',{name:'Kup za 10 ★',exact:true})).toBeEnabled();
  await page.getByRole('button',{name:'Kup za 10 ★',exact:true}).tap();await expect(page.locator('.star-wallet')).toHaveText('84 ★');
- await page.locator('.decoration-card[data-id="bowls"]').tap();await page.getByRole('button',{name:'Kup za 6 ★',exact:true}).tap();
+ await page.getByRole('button',{name:'Koci salonik',exact:true}).tap();await page.locator('.decoration-card[data-id="bowls"]').tap();await page.getByRole('button',{name:'Kup za 6 ★',exact:true}).tap();
  await page.getByRole('button',{name:'Koci salonik',exact:true}).tap();await page.locator('.decoration-card[data-id="bowls"]').tap();
  await page.getByRole('button',{name:'Lewy kącik',exact:true}).tap();await expect(page.locator('.room-decoration[data-id="bowls"]')).toHaveClass(/slot-left/);
  await expect(page.locator('.star-wallet')).toHaveText('78 ★');

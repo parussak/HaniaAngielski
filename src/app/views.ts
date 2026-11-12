@@ -31,7 +31,7 @@ export function createViews(state: AppState, sync: ProgressSync, syncLabel: () =
         if(l.role==='training'&&!mapTrainingPool(state.modules,state.journeys,j,state.progress).length)return trainingPreparationView(state.modules,state.journeys,j,state.progress);
         return lessonIntro(j,l,m,state.progress);
     }
-    function homeForCats() { return courseContext(state)+houseView(state.progress,currentCourse(state)!.id,state.chosenRoom,state.chosenDecoration,decorativeCat,state.modules,state.journeys,state.journeyIssues,state.houseTab); }
+    function homeForCats() { return courseContext(state)+houseView(state.progress,currentCourse(state)!.id,state.chosenRoom,state.chosenDecoration,decorativeCat,state.modules,state.journeys,state.journeyIssues,state.houseTab,state.houseEditing); }
     function home() {
         const step = getNextStep(state.modules, state.journeys, state.progress, currentCourse(state)?.id);
         return homeView({ name: state.user ? state.user.displayName : 'Haniu', modules: state.modules, step, pwa, cat: decorativeCat(step.catId), courseContext: courseContext(state) + unfinishedCourseSession(state, true) });

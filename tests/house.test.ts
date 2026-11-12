@@ -58,16 +58,19 @@ test('brak mapy lub błąd wczytania nie daje pokoju; zdobytego pokoju aktualiza
  settleHouseUnlocks(p,modules,[],[{moduleId:'unit-2-food',path:'bad'}]);assert.deepEqual(p,saved);
 });
 
-test('kupowanie wymaga odblokowania, zgodnego pokoju i salda; przeniesienie nie kopiuje i nie pobiera opłaty',()=>{
+test('zakupy wymagają odblokowania i własnego pokoju; stare zakupy w kuchni zachowują własność',()=>{
  const p=emptyProgress();creditStars(p,100);assert.equal(purchase(p,'bowls'),false);assert.equal(purchase(p,'cat-toaster','angielski-hani','kitchen'),false);
  complete(p);settleHouseUnlocks(p,modules,maps);assert.ok(purchase(p,'bowls'));assert.equal(stars(p),94);
  assert.equal(place(p,'bowls','front','angielski-hani','kitchen'),false);
  complete(p,maps[1]);settleHouseUnlocks(p,modules,maps);assert.ok(purchase(p,'cat-toaster','angielski-hani','kitchen'));
+ assert.equal(place(p,'bowls','front','angielski-hani','kitchen'),false);
+ // Read an old layout that already assigned the bowls to the kitchen.
+ homeFor(p)!.purchases.bowls.room='kitchen';assert.deepEqual(validateBackup(backup(p)).progress,p);
  assert.ok(place(p,'bowls','front','angielski-hani','kitchen'));assert.equal(homeFor(p)!.purchases.bowls.room,'kitchen');
  assert.equal(stars(p),84);assert.equal(purchase(p,'bowls','angielski-hani','kitchen'),false);
  assert.equal(place(p,'cat-toaster','front','angielski-hani','salon'),false);
  assert.ok(place(p,'bowls','window','angielski-hani','kitchen'));assert.equal(homeFor(p)!.purchases['cat-toaster'].slot,null);
- assert.ok(place(p,'bowls',null));assert.equal(homeFor(p)!.purchases.bowls.room,undefined);
+ assert.equal(place(p,'bowls',null),false);assert.ok(place(p,'bowls',null,'angielski-hani','kitchen'));assert.equal(homeFor(p)!.purchases.bowls.room,'kitchen');
  assert.deepEqual(validateBackup(backup(p)).progress,p);
  creditStars(p,5,'french-book');assert.equal(purchase(p,'pillow','french-book'),false);assert.equal(stars(p),84);
 });

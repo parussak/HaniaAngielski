@@ -95,3 +95,10 @@ Każdy domek może mieć unikalne listy `rooms` i `unlockedItems`. Zakup ma opcj
 D-43 rozszerza katalog do 14 identyfikatorów miejsc (11 dostępnych w saloniku, 14 w kuchni). Walidacja odczytuje wspólną listę z katalogu. Nie przenosi dawnych ustawień i zachowuje dotychczasowy kształt zakupu `{ cost, slot, room? }`: `slot: null` oznacza schowek, brak `room` — salonik. Warstwa rysowania wynika z katalogu, a „Moje rzeczy” jest widokiem zakupów, bez drugiego rejestru własności. Wybór zakładki sklepu/schowka to tylko stan interfejsu.
 
 Nowe ustawienia przechodzą przez tę samą transakcję `mutate`, walidację, IndexedDB, synchronizację i kopię wersji 1. Starsze kopie pozostają poprawne i nie zmieniają kosztów ani salda; odczyt nowego miejsca w starej wersji aplikacji nie jest obsługiwany — należy ją zaktualizować. Strukturalna walidacja nadal nie wymaga zgodności rodzaju mebla z miejscem; umożliwia to zachowanie starych aranżacji. Ograniczenia nowych miejsc i podpory stolika sprawdzane są podczas ustawiania. [Pełne zasady](koci-domek.md).
+
+
+## Współrzędne domku — D-44–D-45
+
+Zakup może mieć opcjonalne `position: { x, y }`, z całkowitymi współrzędnymi siatki 24 × 15. Przy współrzędnych `slot` jest `null`; samo `slot: null` bez `position` nadal oznacza schowek. Wielkość i orientacja wynikają z katalogu układu, a nie z zapisu użytkownika. Nie dodano rejestru własności ani nowego portfela. Brak `room` nadal oznacza salonik; nowe zakupy mają jeden pokój, a istniejące zachowują dotychczasowe przypisanie.
+
+Stare nazwane miejsca wyświetlamy przez funkcję odczytu bez migracji danych. Pierwszy ruch zapisuje współrzędne tylko przesuwanego przedmiotu. Walidator kontroluje całkowitość współrzędnych, zmieszczenie rozmiaru w pokoju, brak jednoczesnego starego miejsca oraz duplikaty pozycji tej samej warstwy. Nowe współrzędne podlegają transakcji zapisu, lokalnemu cache, synchronizacji i kopiom wersji 1. Wymagają aktualnej aplikacji; stary klient nie obsługuje edycji siatki. Nie zmieniono identyfikatorów ukończeń, nagród, kosztów zakupów ani archiwizacji historii.

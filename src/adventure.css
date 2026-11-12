@@ -79,3 +79,17 @@
 @media(max-width:600px){#house-placement{padding:18px 12px}#house-placement .placement-buttons{grid-template-columns:repeat(2,minmax(0,1fr))}.house-tabs{gap:8px}.house-tabs button{font-size:14px;padding:10px}.decoration-card{min-height:120px}}
 .slot-floor-side{left:3%;top:76%;width:14%;height:20%}
 .house-wardrobe{display:flex;flex-direction:column}.house-wardrobe.show-storage .house-shop{order:-1}
+/* The same item box is used in every position and on every device. */
+.grid-item img{pointer-events:none;user-select:none;-webkit-user-drag:none}
+.cat-house[data-editing="true"]{touch-action:none;isolation:isolate}
+.cat-house[data-editing="true"] .grid-item{touch-action:none;cursor:grab}
+.cat-house[data-editing="true"] .grid-item.is-selected{outline:2px solid #7752b8;outline-offset:-2px}
+.room-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right,#7752b833 1px,transparent 1px),linear-gradient(to bottom,#7752b833 1px,transparent 1px);background-size:calc(100% / 24) calc(100% / 15);z-index:0}
+.room-floor-area{position:absolute;left:0;right:0;bottom:0;height:27%;background:#7dcb9d1c;pointer-events:none}
+.grid-item.dragging{z-index:8;cursor:grabbing;background:#c8ecd477;outline:2px solid #38815b}
+.grid-item.dragging.invalid{background:#f5bdd777;outline-color:#bd547f}
+.grid-item.unplaced{opacity:.6;border:2px dashed #7752b8}
+.grid-directions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.grid-directions button{min-width:48px;min-height:48px;font-size:22px}
+.house-edit{min-height:48px}.house-edit-hint,.grid-message{font-size:14px;line-height:1.6;color:#684e7b}
+.grid-message:empty{display:none}

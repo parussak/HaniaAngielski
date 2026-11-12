@@ -79,3 +79,21 @@ test('schowanie na nowym miejscu podaje nazwę i zachowuje aktywną lekcję',asy
  assert.match(f.state.notice,/W schowku: Poduszka/);assert.equal(stars(f.state.progress),balance);
  assert.deepEqual(f.state.progress.active,active);
 });
+
+test('ruch siatki wymaga edycji, właściwego konta i pokoju; odmowa nie zapisuje postępów',async()=>{
+ const f=setup();await f.controller.handleAction('buy-decoration',element({id:'pillow'}));
+ const before=structuredClone(f.state.progress),count=f.saves();
+ await f.controller.handleAction('grid-move',element({id:'pillow',x:'5',y:'12'}));assert.deepEqual(f.state.progress,before);
+ await f.controller.handleAction('house-edit',element());assert.equal(f.state.houseEditing,true);
+ for(const extra of [{course:'other'},{room:'kitchen'},{owner:'other-account'},{x:'NaN'}])await f.controller.handleAction('grid-move',element({id:'pillow',x:'5',y:'12',...extra}));
+ assert.deepEqual(f.state.progress,before);assert.equal(f.saves(),count);
+ await f.controller.handleAction('grid-move',element({id:'pillow',x:'5',y:'12'}));
+ assert.deepEqual(homeFor(f.state.progress)!.purchases.pillow.position,{x:5,y:12});assert.equal(f.saves(),count+1);
+});
+
+test('błąd zapisu współrzędnych nie przesuwa przedmiotu ani nie ogłasza sukcesu',async()=>{
+ const f=setup();await f.controller.handleAction('buy-decoration',element({id:'pillow'}));f.state.houseEditing=true;
+ const before=structuredClone(f.state.progress);f.state.notice='Przed zapisem';f.fail();
+ await assert.rejects(f.controller.handleAction('grid-move',element({id:'pillow',x:'5',y:'12'})),/Zapis niedostępny/);
+ assert.deepEqual(f.state.progress,before);assert.equal(f.state.notice,'Przed zapisem');
+});

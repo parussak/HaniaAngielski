@@ -41,8 +41,8 @@ export function createRenderer(root: HTMLDivElement, state: AppState, renderScre
                 feedback.focus({ preventScroll: true });
             }
         }
-        else if (state.screen === 'house' && focusAction === 'select-decoration') {
-            const controls=root.querySelector<HTMLElement>('#house-placement');
+        else if (state.screen === 'house' && (focusAction === 'select-decoration'||focusAction==='house-edit')) {
+            const controls=root.querySelector<HTMLElement>((state.houseEditing||focusAction==='house-edit')?'.cat-house':'#house-placement');
             controls?.scrollIntoView({block:'start'});
             controls?.focus({preventScroll:true});
         }

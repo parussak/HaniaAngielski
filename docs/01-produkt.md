@@ -49,7 +49,7 @@ Zatwierdzono prezentację D-23: postęp lekcji na pasku lub w kółku dochodzi d
 
 ## Urządzanie domku — stan obecny
 
-Zakładki „Sklep” i „Moje rzeczy” oddzielają wybieranie zakupów od przeglądania własnej kolekcji. Przy zakupie widać jego pokój lub schowek. Dodatkowe miejsca i warstwy pozwalają łączyć tekstylia, meble i drobiazgi w jednym wnętrzu. Na telefonie wybieramy przedmiot i miejsce przyciskiem; własność i ceny pozostają zachowane. [Kontrakt domku](koci-domek.md).
+Zakładki „Sklep” i „Moje rzeczy” oddzielają wybieranie zakupów od przeglądania własnej kolekcji. Przy zakupie widać jego pokój lub schowek. Dodatkowe miejsca i warstwy pozwalają łączyć tekstylia, meble i drobiazgi w jednym wnętrzu. Każdy pokój ma własne wyposażenie. „Urządź pokój” pozwala przeciągać rzeczy po siatce albo przesuwać je strzałkami. Rozmiary są stałe i nie ma obracania; własność i ceny pozostają zachowane. [Kontrakt domku](koci-domek.md).
 
 ## Do ustalenia
 

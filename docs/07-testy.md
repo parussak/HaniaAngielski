@@ -4,7 +4,7 @@ Status: istniejące kontrole oraz docelowy sposób ich organizacji. Po zatwierdz
 
 ## Bieżący punkt odniesienia
 
-Ostatni pełny przebieg po rozbudowie domku (12 listopada 2026): **199/199 Node na zwykłej i wirtualnie rozszerzonej bibliotece oraz 91/91 Playwright** gotowej aplikacji w Chrome. Budowanie z kontrolą materiałów, TypeScript i zasobami offline przeszło. Wyniki starszych etapów poniżej są historią. [Kontrakt domku](koci-domek.md).
+Ostatni pełny przebieg po wdrożeniu siatki domku (12 listopada 2026): **208/208 Node na zwykłej i wirtualnie rozszerzonej bibliotece oraz 94/94 Playwright** gotowej aplikacji w Chrome. Budowanie z kontrolą materiałów, TypeScript i zasobami offline przeszło. Wyniki starszych etapów poniżej są historią. [Kontrakt domku](koci-domek.md).
 
 ## Stan obecny
 
@@ -159,3 +159,15 @@ Dwa dodatkowe przypadki kontrolera sprawdzają zakładki bez zmiany wyników, pr
 `browser/house.spec.ts` sprawdza 14 zakupów Food w kolekcji, stary wystrój, 11 jednocześnie wystawionych przedmiotów saloniku, opisy położenia, zapowiedź zastąpienia, schowanie i ponowne ustawienie, przejście do kuchni, warstwy stolika i drobiazgu, zachowanie ukończeń i salda po kopii. Telefon 320/390 px nie przewija się poziomo, a przyciski wyboru miejsc mają co najmniej 44 px. Scenariusz zimnego startu offline ustawia toster na nowym blacie i sprawdza odtworzenie tego miejsca. Obejrzano zrzuty kolekcji, saloniku i kuchni na telefonie.
 
 Weryfikacja 12 listopada 2026: **199/199 testów Node** w obu wariantach biblioteki oraz **91/91 Playwright** gotowego wydania w Chrome. Wcześniejszy celowany przebieg domku dał 5/5. Budowanie, walidacja materiałów i TypeScript przeszły. Nadal jest 206 publicznych plików offline: nie dodano obrazków ani zależności. Kontrola dokumentacji i różnic przeszła. Nie wykonywano prób na fizycznym telefonie ani na prawdziwym koncie Hani; synchronizacja korzysta z testowego adaptera.
+
+
+## Siatka, stały rozmiar i pokoje — D-44–D-45
+
+`house-grid.test.ts` sprawdza stały rozmiar niezależny od starego miejsca, niemutujący odczyt, współrzędne, granice i obszary, kolizje tej samej warstwy i nakładanie różnych warstw, kopię wersji 1, saldo, aktywną sesję oraz przypisanie do pokoju. Obejmuje schowanie drobiazgów po przesunięciu lub schowaniu stolika i brak schowania przy ruchu do tej samej pozycji. Walidator odrzuca nieprawidłowe współrzędne, duplikaty i wyjście całego przedmiotu poza pokój. Zestaw 116 historycznych wyników walidacji nie był regenerowany.
+
+`house-controller.test.ts` dodatkowo sprawdza odmowę ruchu poza edycją, z obcego konta, kursu lub pokoju, bez zapisu po odmowie, oraz zachowanie poprzedniej pozycji i komunikatu po błędzie zapisu. `sync.test.ts` wysyła współrzędne siatki po offline na drugie urządzenie, bez zmiany salda i bez przekazywania ich innemu kontu.
+
+`browser/house-grid.spec.ts` obejmuje: rzeczywisty ruch myszy, proporcje 320/390 px, niedozwolone upuszczenie i odczekanie zakończenia obsługi, strzałki, kopię z aktywną lekcją, ponowne wczytanie, rzeczywiste zdarzenia dotykowe i anulowanie gestu, schowek, powrót do podglądu i nawigacji oraz zimny start offline z nowymi współrzędnymi. Gesty dotykowe są wysyłane do Chrome przez CDP; nie zastępuje to próby na fizycznym telefonie. Regresje domku świadomie zmieniono tak, by nie wymagały przenoszenia miseczek i owoców między pokojami; stare zakupy w innym pokoju nadal mają osobną kontrolę odczytu.
+
+
+Weryfikacja siatki 12 listopada 2026: **208/208 testów Node** w obu wariantach biblioteki i **94/94 Playwright** na końcowym wydaniu w Chrome. Zestaw 116 starych wyników walidacji nadal przechodzi bez zmiany odniesienia. Budowanie z kontrolą materiałów, TypeScript i 206 zasobami PWA oraz kontrola dokumentacji i różnic przeszły. Obejrzano zrzut mobilnego edytora; nie wykonywano prób na fizycznym telefonie ani prawdziwym koncie Hani. Wczesny przebieg ujawnił brak oczekiwania w nowym teście na zakończenie obsługi błędnego upuszczenia przed pomiarem po obrocie/zmianie szerokości; test czeka teraz na obsłużenie odmowy i wyczyszczenie podglądu, bez stałego opóźnienia. Test gestu sprawdza również kolejne dotknięcia przycisków edytora i wyjście do nauki.

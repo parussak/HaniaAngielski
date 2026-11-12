@@ -7,7 +7,7 @@ import {indexedDB} from 'fake-indexeddb';
 import {compactHistory,sessionCount,type HistoryPage} from '../src/history.ts';
 import {engineModules as modules} from './fixtures/engine.ts';
 import {makeSession,questionFor,recordAnswer,next} from '../src/core.ts';
-import {creditStars,purchase,place,stars,homeFor} from '../src/house/progress.ts';
+import {creditStars,purchase,place,moveOnGrid,stars,homeFor} from '../src/house/progress.ts';
 
 const copy=<T>(value:T)=>structuredClone(value);
 const sample=(name:string)=>({...emptyProgress(),words:{[name]:'known' as const}});
@@ -121,7 +121,7 @@ test('konta i gość mają oddzielne lokalne rekordy, nie zmienia się stary for
 
 test('nowe miejsca i schowek synchronizują się po offline bez zmiany gwiazdek i innych kont',async()=>{
  const s=server(),a=s.make();await a.sync.connect('a',emptyProgress());await a.sync.sync();
- const p=emptyProgress();creditStars(p,30);purchase(p,'pillow');purchase(p,'plant');place(p,'pillow','floor-cushion');place(p,'plant','shelf-right');
+ const p=emptyProgress();creditStars(p,30);purchase(p,'pillow');purchase(p,'plant');moveOnGrid(p,'pillow',{x:2,y:12});place(p,'plant','shelf-right');
  const balance=stars(p);await a.sync.save(p);
  const fetch=a.ports.fetch;a.ports.fetch=async()=>{throw Error('offline');};await a.sync.sync();
  const resumed=new ProgressSync(a.ports);await resumed.connect('a',emptyProgress());

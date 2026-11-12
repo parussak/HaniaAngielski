@@ -26,6 +26,8 @@ test('całe wyposażenie saloniku mieści się na osobnych warstwach bez chowani
 
 test('drobiazgi na stoliku nie wypierają mebla; przeniesienie podpory chowa je bez utraty',()=>{
  const p=furnished(),h=homeFor(p)!,balance=stars(p);
+ // Earlier versions allowed these purchases in the kitchen. Preserve that ownership.
+ h.purchases['fruit-bowl'].room='kitchen';h.purchases.lemonade.room='kitchen';
  assert.ok(place(p,'table','rug',course,'kitchen'));
  assert.ok(place(p,'fruit-bowl','table-left',course,'kitchen'));
  assert.ok(place(p,'lemonade','table-right',course,'kitchen'));

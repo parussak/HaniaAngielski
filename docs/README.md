@@ -12,6 +12,8 @@ Wprowadzono też swobodny wybór lekcji, stałą długość nowych sesji, nowe m
 
 12 listopada rozbudowano [koci domek](koci-domek.md) o dodatkowe miejsca, osobne warstwy i kolekcję „Moje rzeczy”. Stare zakupy, ustawienia, gwiazdki i postępy pozostają zachowane; nowe miejsca działają także offline i w kopiach.
 
+**Wdrożono D-44–D-45:** domek ma przesuwanie po siatce 24 × 15, stałe rozmiary wyposażenia i własne kolekcje pokojów. Jest przeciąganie myszą/dotykiem i strzałki pod podglądem. Stare zakupy i ustawienia pozostają czytelne bez przymusowej migracji. [Specyfikacja domku](koci-domek.md).
+
 ## Główny podział
 
 11 listopada 2026 wykonano [etap 1 refaktoringu: zależności i wspólne stałe](refaktoring-etap-1.md). Usunięto cykl mapy–domek, zachowując działanie, wygląd i format postępów. To osobny etap porządkowania po wcześniejszych etapach rozwoju funkcji 1–4.
