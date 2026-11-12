@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {test,expect,type Page} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
@@ -7,7 +8,7 @@ import {freshAdventure,makeLessonSession,type Journey} from '../../src/adventure
 import {makeStageReviewSession,recordStageError} from '../../src/stage-review.ts';
 const m=modules[0],j:Journey=JSON.parse(readFileSync(new URL('../../public/content/02-food/sciezka.json',import.meta.url),'utf8'));
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
-async function restore(page:Page,p:Progress){await page.goto('./');await openBackup(page);await page.locator('#import-file').setInputFiles({name:'gaps.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.locator('.next-step-card button').tap();}
+async function restore(page:Page,p:Progress){await page.goto('./');await openBackup(page);await page.locator('#import-file').setInputFiles({name:'gaps.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await resumeStudy(page);}
 for(const mode of ['grammar','general-review','stage-review'] as const)test(`${mode}: jedno słowo do luki także po błędzie, wznowieniu i poprawce`,async({page})=>{
  const p=emptyProgress(),item:Item={key:keyFor(m,'exercise','g-container-water'),moduleId:m.id,version:1,type:'exercise',id:'g-container-water',input:'text'};
  p.adventure=freshAdventure();p.adventure.earned=11;p.adventure.reviewSchema=1;
@@ -24,7 +25,7 @@ for(const mode of ['grammar','general-review','stage-review'] as const)test(`${m
  await page.getByRole('textbox').fill('jar');await page.getByRole('button',{name:/Sprawdź/}).tap();await expect(page.locator('.feedback.incorrect')).toBeVisible();
  await expect(page.locator('.expected-answer p')).toHaveText('bottle');
  await page.getByRole('button',{name:'Spróbuję jeszcze raz',exact:true}).tap();await expect(page.locator('#answer-hint')).toBeVisible();
- await page.reload();await page.locator('.next-step-card button').tap();await expect(page.locator('#answer-hint')).toBeVisible();
+ await page.reload();await resumeStudy(page);await expect(page.locator('#answer-hint')).toBeVisible();
  await page.getByRole('textbox').fill('bottle');await page.getByRole('button',{name:/Sprawdź/}).tap();await expect(page.locator('.feedback.correct')).toBeVisible();
  await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('11');
 });

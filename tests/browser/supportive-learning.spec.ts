@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {test,expect,type Page} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
 import {foodModules as modules} from '../materials.ts';
@@ -11,7 +12,7 @@ async function start(page:Page,id:string){
   await page.locator('#import-file').setInputFiles({name:'word.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();
   await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
-  await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
+  await resumeStudy(page);
 }
 async function answer(page:Page,value:string){await page.getByRole('textbox').fill(value);await page.getByRole('button',{name:/Sprawdź/}).tap();}
 

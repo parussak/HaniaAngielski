@@ -120,3 +120,13 @@
 .journey-summary .lesson-finish-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .lesson-finish-actions>button:first-child{grid-column:1/-1}
 .lesson-finish-note{font-size:13px;line-height:1.6;color:#684e7b}
+.gap-target{display:inline-block;min-width:80px;min-height:44px;margin:4px;padding:7px 12px;border:2px dashed #a68bc9;border-radius:12px;background:#f1eaff;color:#503865;vertical-align:middle;white-space:normal;overflow-wrap:anywhere}
+.gap-sentence{padding:10px 12px;margin:10px 0;border:1px solid #decfea;border-radius:16px;background:#fff}
+.gap-sentence p{line-height:2;margin:4px 0}
+.gap-correct{background:#e4f4e8;border-style:solid;border-color:#8fbc9c}
+.bank-token{touch-action:none;cursor:grab}
+.gap-drag-ghost{position:fixed;z-index:10000;pointer-events:none;transform:translate(-50%,-50%);padding:12px 20px;border-radius:12px;background:#7650ae;color:#fff;box-shadow:0 4px 14px #50386544}
+@keyframes wrong-match{0%,65%{background:#f6b7bd;border-color:#c44254;color:#6f2430}100%{background:revert-layer}}
+.match-flash{animation:wrong-match .5s ease-out}
+.board-summary li{margin:12px 0;line-height:1.6}
+.lesson-resume-actions{display:grid;gap:12px}.lesson-resume-actions button{min-height:48px;width:100%}

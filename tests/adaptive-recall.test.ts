@@ -56,7 +56,7 @@ test('wspólny licznik wymaga trzech osobnych sesji, poprawki nie liczą się, b
 test('otwarcie bierze poprzedni moduł, finał czeka na wszystkie mapy i nie miesza kursów',()=>{
  const {raw,j,p}=planned();assert.equal(makeRitualSession([m],[raw],m,p,'opening','text'),null);
  const earlier=engineModule('earlier',m.courseId,1),foreign=engineModule('foreign','foreign-course',1);p.encountered=[keyFor(earlier,'word',earlier.words[0].id),keyFor(foreign,'word',foreign.words[0].id),keyFor(m,'word',m.words[0].id)];
- const opening=makeRitualSession([m,earlier,foreign],[raw],m,p,'opening','text')!;assert.deepEqual(opening.items.map(i=>i.moduleId),[earlier.id]);p.active=opening;assert.doesNotThrow(()=>validateBackup(backup(p)));p.active=null;
+ const opening=makeRitualSession([m,earlier,foreign],[raw],m,p,'opening','text')!;assert.deepEqual(new Set(opening.items.map(i=>i.moduleId)),new Set([earlier.id,m.id]));p.active=opening;assert.doesNotThrow(()=>validateBackup(backup(p)));p.active=null;
  assert.equal(makeRitualSession([m],[raw],m,p,'finale','text'),null);for(const {key} of lessons(j))p.adventure!.completed[key]={at};
  assert.ok(moduleFinished([m],[raw],m,p));const final=makeRitualSession([m],[raw],m,p,'finale','text')!;assert.ok(final.items.every(i=>i.moduleId===m.id));completed(p,final);assert.equal(rewardCompletion(p,final,[m]),1);assert.equal(rewardCompletion(p,final,[m]),0);
  assert.equal(moduleFinished([m],[raw],{...m,journeyPaths:['one','two']},p),false);

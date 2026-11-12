@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
@@ -42,7 +43,7 @@ test('I7: stara kopia i zmiana wersji modułu zachowują fiszkę i jej status',a
   await page.goto('./');await openBackup(page);
   await page.locator('#import-file').setInputFiles({name:'old.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(old))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
-  await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await resumeStudy(page);
   await expect(page.getByRole('textbox')).toBeVisible();
   await openBackup(page);
   const downloaded=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).click();

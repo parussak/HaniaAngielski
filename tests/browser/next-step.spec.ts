@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {finishCurrent} from './helpers.ts';
 import {openGeneralReview,openStageReview} from './navigation.ts';
 import {openBackup} from './navigation.ts';
@@ -18,17 +19,17 @@ async function restore(page:Page,p:Progress){
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 
 test('ramka rozpoczyna lekcję, wznawia ją po odświeżeniu i wskazuje następną po ukończeniu',async({page})=>{
-  await page.goto('./');await page.locator('.next-step-card button').tap();
+  await page.goto('./');await resumeStudy(page);
   await expect(page.getByRole('heading',{name:j.stages[0].lessons[0].title,exact:true})).toBeVisible();
   await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();
   const first=await page.locator('.question').innerText();await page.reload();
   await expect(page.locator('.next-step-card')).toHaveAttribute('data-step-kind','resume');
-  await page.locator('.next-step-card button').tap();await expect(page.locator('.question')).toHaveText(first);
+  await resumeStudy(page);await expect(page.locator('.question')).toHaveText(first);
   await finishCurrent(page,modules);
   await expect(page.locator('.summary')).toBeVisible();await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
   await expect(page.locator('.next-step-card')).toHaveAttribute('data-step-kind','lesson');
   await expect(page.locator('.next-step-detail')).toContainText(lessons(j)[1].lesson.title);
-  await page.locator('.next-step-card button').tap();await expect(page.getByRole('heading',{name:lessons(j)[1].lesson.title,exact:true})).toBeVisible();
+  await resumeStudy(page);await expect(page.getByRole('heading',{name:lessons(j)[1].lesson.title,exact:true})).toBeVisible();
 });
 
 test('kolejna mapa z plików treści jest proponowana po Food, pomimo zaległej powtórki',async({page})=>{
@@ -58,8 +59,8 @@ test('po wszystkich lekcjach ramka prowadzi do zaległej powtórki etapu lub og�
   const p=emptyProgress();complete(p);const item={key:keyFor(m,'word','apple'),moduleId:m.id,version:1,type:'word' as const,id:'apple',input:'text' as const};
   p.adventure!.stageReviews={[stageKey(j,j.stages[0])]:{round:0,items:{[item.key]:{item,correct:0,due:1}}}};
   await restore(page,p);await expect(page.locator('.next-step-card')).toHaveAttribute('data-step-kind','practice');
-  await page.locator('.next-step-card button').tap();await expect(page.getByRole('heading',{name:'Kocia rozgrzewka',exact:true})).toBeVisible();await openStageReview(page);await expect(page.locator('.review-meter')).toHaveCount(0);await expect(page.getByRole('textbox')).toBeVisible();
+  await resumeStudy(page);await expect(page.getByRole('heading',{name:'Kocia rozgrzewka',exact:true})).toBeVisible();await openStageReview(page);await expect(page.locator('.review-meter')).toHaveCount(0);await expect(page.getByRole('textbox')).toBeVisible();
   p.adventure!.stageReviews={};p.words[item.key]='review';await restore(page,p);
   await expect(page.locator('.next-step-card')).toHaveAttribute('data-step-kind','practice');
-  await page.locator('.next-step-card button').tap();await openGeneralReview(page);await expect(page.getByRole('textbox')).toBeVisible();await expect(page.locator('.question')).toHaveText('jabłko');
+  await resumeStudy(page);await openGeneralReview(page);await expect(page.getByRole('textbox')).toBeVisible();await expect(page.locator('.question')).toHaveText('jabłko');
 });

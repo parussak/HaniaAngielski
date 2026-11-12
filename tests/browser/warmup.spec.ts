@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {test,expect,type Page} from './fixtures.ts';
 import {openBackup,openWarmup,openAdditionalWarmup} from './navigation.ts';
 import {backup,emptyProgress,keyFor,questionFor,isCorrect,type Progress} from '../../src/core.ts';
@@ -43,6 +44,6 @@ test('ukończone mapy pozostają sukcesem; dodatkowa rozgrzewka ma koniec mimo b
 test('dawny trening w rozpoczętej sesji jest rozgrzewką i nie otwiera ukończonej mapy',async({page})=>{
  const p=completed(),j=maps[1],l=lessons(j).find(e=>e.lesson.role==='training')!.lesson;
  p.active=makeTrainingSession(modules,m,p,'text',{journey:j,lesson:l,journeys:maps});p.active!.lesson!.title='Dawny trening';const key=lessonKey(j,l),old=p.adventure!.completed[key];
- await restore(page,p);await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();await expect(page.locator('.study-heading h1')).toHaveText('Koci trening');await finishWrong(page);
+ await restore(page,p);await resumeStudy(page);await expect(page.locator('.study-heading h1')).toHaveText('Koci trening');await finishWrong(page);
  await expect(page.locator('.lesson-reward')).toContainText('+1 ★');const saved=await exported(page);expect(saved.adventure!.completed[key]).toEqual(old);expect(saved.adventure!.completed).toEqual(p.adventure!.completed);
 });

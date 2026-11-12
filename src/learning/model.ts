@@ -70,6 +70,7 @@ export type Mode = 'flashcards' | 'flashcards-basic' | 'quiz' | 'grammar' | 'dia
 export const isFlashcardMode = (mode: Mode) => mode === 'flashcards' || mode === 'flashcards-basic';
 export type AnswerMode = 'choice' | 'text' | 'mixed';
 export interface Item {
+    gapGroup?: string;
     pairGroup?: string;
     presentation?: 'bank';
     options?: string[];
@@ -88,8 +89,11 @@ export interface Attempt {
     corrections: number;
     corrected: boolean;
 }
-export function plainItem(item:Item):Item{const {pairGroup,presentation,options,...plain}=item;return plain;}
+export function plainItem(item:Item):Item{const {pairGroup,gapGroup,presentation,options,...plain}=item;return plain;}
 export interface Session {
+    boardSummary?: true;
+    gapSelection?: string;
+    gapPlacements?: Record<string,string>;
     legendary?: true;
     pairSelection?: string;
     draftAnswer?: string;

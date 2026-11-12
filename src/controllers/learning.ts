@@ -15,12 +15,18 @@ import type { createCourseController } from './courses.ts';
 import { courseKey } from '../learning/scope.ts';
 import {followingLesson,lessonContext,legendarySession} from '../learning/lesson-flow.ts';
 import {varyLesson} from '../learning/lesson-variety.ts';
+import {answerOnBoard,boardItems,gapTokens,solved} from '../learning/boards.ts';
 interface LearningPorts {
     courses: ReturnType<typeof createCourseController>;
     mutate: (change: (p: Progress) => void) => Promise<void>;
     scheduleReviewMigration: () => void;
 }
 export function createLearningController(state: AppState, { mutate, scheduleReviewMigration, courses }: LearningPorts) {
+    function showResume(){
+        const active=state.progress.active,context=active?.lesson&&lessonContext(state.journeys,state.progress,active);
+        if(context){state.selected=state.modules.find(m=>m.id===context.journey.moduleId)!;state.selectedJourneyKey=journeyKey(context.journey);state.introLessonId=context.lesson.id;state.screen='lesson-intro';}
+        else state.screen='study';
+    }
     async function preparePlans(){
         // Resuming an old session must not change its accompanying saved progress.
         if(state.progress.active)return;
@@ -53,6 +59,37 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
         await openSession(session);
     }
     async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
+        state.boardError=undefined;
+        if(action==='pair-answer'){
+            const active=state.progress.active;if(!active?.items[active.index].pairGroup)return true;
+            const key=active.pairSelection??active.items[active.index].key,answer=el.dataset.answer??'';
+            let ok:boolean|undefined;await mutate(p=>{ok=answerOnBoard(p,state.modules,state.journeys,key,answer);});
+            if(ok===false)state.boardError={key,answer};return true;
+        }
+        if(action==='gap-place'){
+            await mutate(p=>{const s=p.active;if(!s||!['question','retry'].includes(s.phase)||s.items[s.index].presentation!=='bank')return;
+                const key=el.dataset.key??'',answer=el.dataset.answer??s.gapSelection??s.draftAnswer;
+                if(!boardItems(s).some(i=>i.key===key)||solved(s,key))return;
+                const placements=s.gapPlacements??={};
+                if(answer===undefined){delete placements[key];return;}
+                if(!gapTokens(state.modules,s).includes(answer)||boardItems(s).some(i=>solved(s,i.key)&&placements[i.key]===answer))return;
+                for(const [other,value] of Object.entries(placements))if(value===answer&&other!==key)delete placements[other];
+                placements[key]=answer;delete s.gapSelection;delete s.draftAnswer;
+            });return true;
+        }
+        if(action==='gap-check'){
+            const wrong:string[]=[];
+            await mutate(p=>{const s=p.active;if(!s||!['question','retry'].includes(s.phase)||s.items[s.index].presentation!=='bank')return;
+                const remaining=boardItems(s).filter(i=>!solved(s,i.key));if(remaining.some(i=>!s.gapPlacements?.[i.key]))return;
+                for(const item of remaining){const answer=s.gapPlacements![item.key];if(answerOnBoard(p,state.modules,state.journeys,item.key,answer)===false){wrong.push(item.key);delete s.gapPlacements![item.key];}}
+            });
+            if(wrong.length)state.boardError={key:wrong[0],keys:wrong,answer:''};return true;
+        }
+        if(action==='continue-lesson'){
+            const active=state.progress.active,j=currentJourney(state);
+            if(active?.lesson&&j&&active.lesson.id===`${journeyKey(j)}/${state.introLessonId}`)state.screen='study';
+            return true;
+        }
         if(action==='following-lesson'||action==='legendary'){
             const finished=state.lastSession??state.progress.sessions.at(-1);
             if(!finished?.lesson||!courseModules(state).some(m=>m.id===finished.moduleId))return true;
@@ -70,7 +107,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             await mutate(p=>{const s=p.active;if(!s||!['question','retry'].includes(s.phase))return;
                 const current=s.items[s.index];
                 if(action==='pair-select'&&s.phase==='question'&&current.pairGroup&&s.items.slice(s.index).some(i=>i.key===el.dataset.key&&i.pairGroup===current.pairGroup))s.pairSelection=el.dataset.key;
-                if(action==='bank-select'&&current.presentation==='bank'&&questionFor(state.modules,current).options.includes(el.dataset.answer??''))s.draftAnswer=el.dataset.answer;
+                if(action==='bank-select'&&current.presentation==='bank'&&gapTokens(state.modules,s).includes(el.dataset.answer??''))s.gapSelection=el.dataset.answer;
             });return true;
         }
         if(action==='retry-maps'){window.location.reload();return true;}
@@ -90,14 +127,15 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             if(!m||(kind!=='opening'&&kind!=='finale'))return true;
             await preparePlans();
             if(kind==='finale'&&state.journeyIssues.some(issue=>issue.moduleId===m.id)){state.notice='Wczytaj wszystkie mapy modułu przed misją finałową.';return true;}
-            const session=makeRitualSession(state.modules,state.journeys,m,state.progress,kind,state.answerMode);
+            const map=state.journeys.find(j=>j.moduleId===m.id&&journeyKey(j)===el.dataset.journey);
+            const session=makeRitualSession(state.modules,state.journeys,m,state.progress,kind,state.answerMode,map);
             if(!session){state.notice=kind==='opening'?'To początek przygody! Zacznij od pierwszej lekcji — nie ma jeszcze materiału z wcześniejszych modułów.':'Najpierw poznaj materiał i ukończ mapy tego modułu. Misja będzie wtedy gotowa.';return true;}
             if(!confirmReplacement('Rozpocząć kocie ćwiczenia zamiast niedokończonej sesji? Wyniki pozostaną zachowane.'))return true;
             state.selected=m;await openSession(session);return true;
         }
         if (action === 'courses') { state.screen = 'courses'; return true; }
         if (action === 'select-course') { if (await courses.select(el.dataset.id ?? '')) state.screen = 'home'; return true; }
-        if (action === 'resume') { await courses.followSession(); state.screen = 'study'; return true; }
+        if (action === 'resume') { await courses.followSession(); showResume(); return true; }
         if (action === 'module' || action === 'quick-start') {
             const m = state.modules.find(m => m.id === el.dataset.id);
             if (m) { if (courseKey(m) !== state.selectedCourseId) await courses.select(courseKey(m)); state.selected = m; state.screen = 'setup'; }
@@ -120,7 +158,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             state.selectedJourneyKey = step.journeyId ?? '';
             switch (step.kind) {
                 case 'resume':
-                    state.screen = 'study';
+                    showResume();
                     break;
                 case 'lesson':
                     state.introLessonId = step.lessonId;
@@ -192,7 +230,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
                 return true;
             }
             if(l.role==='training'&&!mapTrainingPool(state.modules,state.journeys,j,state.progress,l).length){state.introLessonId=l.id;state.screen='lesson-intro';return true;}
-            if (!confirmReplacement('Rozpocząć lekcję zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))
+            if (!(el.dataset.restart==='true'&&state.progress.active?.lesson?.id===`${journeyKey(j)}/${l.id}`)&&!confirmReplacement('Rozpocząć lekcję zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))
                 return true;
             const session = l.role === 'training'
                 ? makeTrainingSession(state.modules, state.selected, state.progress, 'mixed', { journey: j, lesson: l, journeys: state.journeys })
@@ -224,16 +262,11 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
                 return true;
             await openSession(session, false);
         }
-        else if (action === 'answer'||action==='pair-answer') {
+        else if (action === 'answer') {
             const s = state.progress.active;
             if (!s)
                 return true;
             await mutate(p => { const session = p.active!;
-                if(action==='pair-answer'){
-                    const group=session.items[session.index].pairGroup;if(!group||!['question','retry'].includes(session.phase))return;
-                    const index=session.phase==='retry'?session.index:session.items.findIndex((i,index)=>index>=session.index&&i.key===(session.pairSelection??session.items[session.index].key)&&i.pairGroup===group);
-                    if(index<0)return;[session.items[session.index],session.items[index]]=[session.items[index],session.items[session.index]];
-                }
                 const q=questionFor(state.modules,session.items[session.index]);
                 if (recordAnswer(p, q, el.dataset.answer ?? '') === false){
                 rememberError(p,session.items[session.index]);
@@ -254,6 +287,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             await mutate(p => { if (p.active?.phase === 'feedback') {
                 const finished = p.active;
                 delete finished.pairSelection;delete finished.draftAnswer;
+                delete finished.boardSummary;delete finished.gapSelection;delete finished.gapPlacements;
                 next(p);
                 if (!p.active) {
                     finishRetention(p, finished);

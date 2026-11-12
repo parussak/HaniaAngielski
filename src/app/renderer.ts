@@ -1,6 +1,8 @@
 import { AppState } from './state.ts';
+import {saveNavigation,restoreViewContext} from './navigation.ts';
 export function createRenderer(root: HTMLDivElement, state: AppState, renderScreen: () => string) {
     function render() {
+        saveNavigation(state);
         const historyContext = `${state.user?.uid ?? 'guest'}:${state.progress.history?.head ?? 'none'}`;
         if (state.viewedHistory !== historyContext) {
             state.viewedHistory = historyContext;
@@ -51,6 +53,7 @@ export function createRenderer(root: HTMLDivElement, state: AppState, renderScre
             target?.focus({ preventScroll: true });
         }
         state.renderedScreen = state.screen;
+        restoreViewContext(root);
     }
     async function run(task: () => Promise<void>) {
         if (state.busy || !state.ready)

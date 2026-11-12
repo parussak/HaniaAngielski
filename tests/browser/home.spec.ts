@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
 import {foodModules as modules} from '../materials.ts';
@@ -57,6 +58,6 @@ test('kontynuacja bezpośrednio pod imieniem przywraca zapisaną sesję',async({
   await expect(page.locator('.welcome + .next-step-card')).toBeVisible();
   await expect(page.locator('.next-step-card')).toContainText('Food · Gramatyka · pytanie 1 z 10');
   await page.reload();await expect(page.locator('.welcome + .next-step-card')).toBeVisible();
-  await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
+  await resumeStudy(page);
   await expect(page.locator('.question')).toBeVisible();
 });

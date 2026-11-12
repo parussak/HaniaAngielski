@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {finishCurrent} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {openMap} from './navigation.ts';
@@ -14,7 +15,7 @@ test('mapa: nauka, nagroda raz, dwa kroki, zakup i ustawienie domku po odśwież
   await expect(page.locator('.journey-stage')).toHaveCount(7);
   await expect(page.locator('.lesson-step').nth(1)).toBeEnabled();
   await page.screenshot({path:'test-results/journey-map-mobile.png',fullPage:true});
-  await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
+  await resumeStudy(page);
   await expect(page.locator('.learn-word')).toHaveCount(5);
   await page.screenshot({path:'test-results/journey-learn-mobile.png',fullPage:true});
   await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await finishLesson(page,true);
@@ -27,7 +28,7 @@ test('mapa: nauka, nagroda raz, dwa kroki, zakup i ustawienie domku po odśwież
   await page.locator('.lesson-step').first().tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await finishLesson(page);
   await expect(page.locator('.lesson-reward')).toContainText('+1');
   await page.getByRole('button',{name:'Wróć do mapy',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('4');
-  await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await finishLesson(page);
+  await resumeStudy(page);await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await finishLesson(page);
   await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('7');
   await page.getByRole('button',{name:'Kup za 6 ★',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('1');
   await page.getByRole('button',{name:'Prawy kącik',exact:true}).tap();await expect(page.locator('.room-decoration')).toHaveClass(/slot-right/);

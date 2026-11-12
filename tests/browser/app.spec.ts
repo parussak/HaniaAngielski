@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
 import {answerQuestion} from './helpers.ts';
@@ -18,7 +19,7 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   await answerQuestion(page,q,false);
   await expect(page.getByText('Spokojnie, tak właśnie się uczymy.')).toBeVisible();
   await page.reload();
-  await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();
+  await resumeStudy(page);
   await expect(page.getByText('Spokojnie, tak właśnie się uczymy.')).toBeVisible();
   await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).click();
   await answerQuestion(page,q);
@@ -43,7 +44,7 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   await page.getByRole('textbox').fill(data.words.find(w=>w.front===revealed)!.back);
   await page.getByRole('button',{name:/Sprawdź/}).click();
   await expect(page.locator('.feedback.correct')).toBeVisible();
-  await page.reload(); await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();
+  await page.reload(); await resumeStudy(page);
   await expect(page.locator('.question')).toHaveText(revealed);
   await openBackup(page);
   const downloaded=page.waitForEvent('download');
@@ -89,6 +90,6 @@ test('nieudany zapis nie udaje sukcesu i nie zmienia poprzednich wyników',async
   await page.getByRole('button',{name:/Sprawdź/}).click();
   await expect(page.getByRole('alert')).toContainText('Nie udało się zapisać zmiany');
   await expect(page.getByRole('textbox')).toBeVisible();
-  await page.reload(); await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();
+  await page.reload(); await resumeStudy(page);
   await expect(page.getByRole('textbox')).toBeVisible();
 });

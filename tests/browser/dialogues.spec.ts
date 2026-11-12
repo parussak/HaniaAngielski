@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {openModule} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
@@ -17,7 +18,7 @@ for(const input of ['choice','text'] as const)test(`rozmówki mobilnie: ${input}
   await answer('cook');await expect(page.locator('.given-answer')).toContainText('cook');await expect(page.locator('.expected-answer')).toContainText('drink');
   const nav=await page.locator('.sidebar nav').boundingBox(),next=await page.getByRole('button',{name:/Dalej/}).boundingBox();
   expect(next!.y+next!.height).toBeLessThanOrEqual(nav!.y);
-  await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await expect(page.locator('.given-answer')).toContainText('cook');
+  await page.reload();await resumeStudy(page);await expect(page.locator('.given-answer')).toContainText('cook');
   await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();await answer('drink');await expect(page.locator('.feedback.correct')).toBeVisible();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
   for(const viewport of [{width:320,height:640},{width:844,height:390}]){

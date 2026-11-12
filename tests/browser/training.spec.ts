@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {answerCurrent} from './helpers.ts';
 import {openWarmup,openAdditionalWarmup} from './navigation.ts';
 import {openBackup} from './navigation.ts';
@@ -49,7 +50,7 @@ test('telefon: dodatkowy trening, wznowienie po odświeżeniu i jedna gwiazdka z
     await expect(page.locator('.study-heading h1')).toHaveText('Kocia rozgrzewka');
     await expect(page.locator('.study-heading .tag')).toHaveText('1 / 3');
     await answer(page); const prompt = await page.locator('.question').innerText();
-    await page.reload(); await page.getByRole('button', { name: 'Kontynuuj naukę →', exact: true }).tap();
+    await page.reload(); await resumeStudy(page);
     await expect(page.locator('.question')).toHaveText(prompt);
     await expect(page.locator('.feedback.correct')).toBeVisible();
     await finish(page); await expect(page.locator('.lesson-reward')).toContainText('+1 ★');
@@ -94,7 +95,7 @@ test('100% ukończenia i gratulacje mimo błędów; utrwalenie nie zmienia sukce
 test('gramatyka wyjaśnia odpowiedź po błędzie i sukcesie, z dostępną regułą', async ({ page }) => {
     const p = fixture(); p.active = makeSession(modules, m, 'grammar', 'text', false, p);
     p.active.items = [{ key: keyFor(m, 'exercise', 'g-so-sport'), moduleId: m.id, id: 'g-so-sport', type: 'exercise', version: 1, input: 'choice' }];
-    await importProgress(page, p); await page.getByRole('button', { name: 'Kontynuuj naukę →', exact: true }).tap();
+    await importProgress(page, p); await resumeStudy(page);
     await page.getByRole('button', { name: 'because', exact: true }).tap();
     await expect(page.locator('.feedback.incorrect .grammar-explanation')).toContainText('Dlaczego tak?');
     await expect(page.locator('.grammar-explanation')).toContainText(m.exercises.find(q => q.id === 'g-so-sport')!.explanation);
@@ -126,7 +127,7 @@ test('druga mapa: osobna nawigacja, wymagany trening i jednorazowe 3 gwiazdki', 
     await page.getByRole('button', { name: /Wybierz przygodę/ }).tap();
     await page.getByRole('button', { name: 'Otwórz mapę Druga kocia przygoda', exact: true }).tap();
     await expect(page.locator('.lead')).toContainText('2 z 3');
-    await page.getByRole('button', { name: 'Kontynuuj naukę →', exact: true }).tap();
+    await resumeStudy(page);
     await expect(page.getByRole('heading', { name: 'Koci trening', exact: true })).toBeVisible();
     await page.getByRole('button', { name: 'Zaczynam ćwiczenia →', exact: true }).tap();
     await finish(page); await expect(page.locator('.lesson-reward')).toContainText('+3 ★');

@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {openModule} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
@@ -14,7 +15,7 @@ test('kotki reagują na błąd i poprawę, wracają po odświeżeniu i bawią na
   await expect(mascot.locator('figcaption')).toHaveCount(0);
   const cat=await mascot.getAttribute('data-cat'),frame=await mascot.locator('svg').getAttribute('viewBox');
   await page.screenshot({path:'test-results/cat-teacher-mobile.png'});
-  await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();await expect(mascot).toHaveAttribute('data-cat',cat!);await expect(mascot.locator('svg')).toHaveAttribute('viewBox',frame!);
+  await page.reload();await resumeStudy(page);await expect(mascot).toHaveAttribute('data-cat',cat!);await expect(mascot.locator('svg')).toHaveAttribute('viewBox',frame!);
   await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).click();await expect(page.locator('.cat-mascot')).toHaveCount(0);
   await page.getByRole('button',{name:'niepoliczalny',exact:true}).click();await expect(mascot).toHaveAttribute('data-mood',/^(happy|celebrating)$/);await expect(mascot).toHaveAttribute('data-cat',cat!);
   await page.screenshot({path:'test-results/cat-success-mobile.png'});

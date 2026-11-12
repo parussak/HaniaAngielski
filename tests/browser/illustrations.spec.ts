@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
@@ -26,7 +27,7 @@ test('gramatyka: nawias wymusza wybór, obrazek od początku, poprawa i wznowien
   await expect(page.locator('.question-illustration')).toBeVisible();
   await expect(page.locator('.question-illustration figcaption')).toHaveCount(0);
   await page.getByRole('button',{name:'because',exact:true}).tap();
-  await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
+  await page.reload();await resumeStudy(page);
   await expect(page.locator('.answer-illustration')).toBeVisible();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
 });
@@ -53,6 +54,6 @@ test('słówko: ilustracja przed i po wpisaniu; stara tekstowa sesja z nawiasem 
   await openBackup(page);
   await page.locator('#import-file').setInputFiles({name:'old.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();
-  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await resumeStudy(page);
   await expect(page.getByRole('textbox')).toHaveCount(0);await expect(page.locator('.option')).toHaveCount(2);
 });

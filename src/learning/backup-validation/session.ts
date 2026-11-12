@@ -3,10 +3,14 @@ import {obj,str,date,strings,integer} from './values.ts';
 
 export const validItem = (i: unknown): boolean => obj(i) && str(i.key) && str(i.moduleId) && integer(i.version) && i.version > 0 && ['word', 'exercise'].includes(i.type as string) && str(i.id) && ['text', 'choice'].includes(i.input as string) && i.key === `${i.moduleId}@${i.version}:${i.type}:${i.id}` &&
     (i.pairGroup===undefined||str(i.pairGroup)&&i.type==='word'&&i.input==='choice'&&i.presentation===undefined)&&
+    (i.gapGroup===undefined||str(i.gapGroup)&&i.type==='exercise'&&i.input==='choice'&&i.presentation==='bank'&&i.pairGroup===undefined)&&
     (i.presentation===undefined||i.presentation==='bank'&&i.type==='exercise'&&i.input==='choice')&&
     (i.options === undefined || Array.isArray(i.options) && i.options.length >= 2 && i.options.length <= 4 && i.options.every(str) && new Set(i.options).size === i.options.length);
 export const validSession = (v: unknown, completed: boolean): boolean => {
     if(obj(v)){
+        if(v.boardSummary!==undefined&&(v.boardSummary!==true||completed||v.phase!=='feedback'||v.lastCorrect!==true))return false;
+        if(v.gapSelection!==undefined&&(!str(v.gapSelection)||completed||!Array.isArray(v.items)||!integer(v.index)||!obj(v.items[v.index])||v.items[v.index].presentation!=='bank'))return false;
+        if(v.gapPlacements!==undefined&&(!obj(v.gapPlacements)||completed||!Array.isArray(v.items)||!integer(v.index)||!obj(v.items[v.index])||v.items[v.index].presentation!=='bank'||!Object.entries(v.gapPlacements).every(([key,value])=>str(value)&&(v.items as Item[]).some(i=>i.key===key&&(i.gapGroup?(v.items as Item[])[v.index as number].gapGroup===i.gapGroup:i.key===(v.items as Item[])[v.index as number].key)))))return false;
         if(v.legendary!==undefined&&(v.legendary!==true||v.mode!=='lesson'||!obj(v.lesson)))return false;
         if(v.pairSelection!==undefined&&(!str(v.pairSelection)||completed||!Array.isArray(v.items)||!integer(v.index)||!obj(v.items[v.index])||!v.items[v.index].pairGroup||!v.items.slice(v.index).some(i=>obj(i)&&i.key===v.pairSelection&&i.pairGroup===(v.items as Item[])[v.index as number].pairGroup)))return false;
         if(v.draftAnswer!==undefined&&(typeof v.draftAnswer!=='string'||v.draftAnswer.length>2000||completed||!Array.isArray(v.items)||!integer(v.index)||!obj(v.items[v.index])||v.items[v.index].presentation!=='bank'))return false;
@@ -39,6 +43,8 @@ export const validSession = (v: unknown, completed: boolean): boolean => {
         return false;
     const groups=new Set((v.items as Item[]).flatMap(i=>i.pairGroup?[i.pairGroup]:[]));
     for(const key of groups){const indices=(v.items as Item[]).flatMap((i,index)=>i.pairGroup===key?[index]:[]);if(indices.length<2||indices.length>3||indices.at(-1)!-indices[0]!==indices.length-1||!(v.items as Item[]).some(i=>i.key===key&&i.pairGroup===key))return false;}
+    const gapGroups=new Set((v.items as Item[]).flatMap(i=>i.gapGroup?[i.gapGroup]:[]));
+    for(const key of gapGroups){const indices=(v.items as Item[]).flatMap((i,index)=>i.gapGroup===key?[index]:[]);if(indices.length!==2||indices[1]!==indices[0]+1||!(v.items as Item[]).some(i=>i.key===key&&i.gapGroup===key))return false;}
     if (!v.scope && v.items.some(i => obj(i) && i.options !== undefined)) return false;
     if (!Array.isArray(v.attempts) || v.attempts.length > v.items.length || !v.attempts.every(a => obj(a) && str(a.key) && typeof a.first === 'boolean' && typeof a.answer === 'string' && a.answer.length <= 2000 && (a.lastAnswer === undefined || (typeof a.lastAnswer === 'string' && a.lastAnswer.length <= 2000)) && integer(a.corrections) && typeof a.corrected === 'boolean' && (v.items as Item[]).some(i => i.key === a.key)))
         return false;

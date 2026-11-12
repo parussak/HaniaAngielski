@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {openStageReview,openAdditionalWarmup} from './navigation.ts';
 import {openModule,openMap} from './navigation.ts';
 import {test,expect,type Page} from './fixtures.ts';
@@ -29,7 +30,7 @@ test('PWA: manifest, ikony i zimny start bez sieci; fiszki, quiz, gramatyka i wz
     offline.once('dialog',d=>d.accept());await offline.getByRole('button',{name:mode,exact:true}).tap();await expect(offline.locator('.question-illustration')).toBeVisible();
     await offline.locator('.option').first().tap();await expect(offline.locator('.feedback')).toBeVisible();
   }
-  const last=await offline.locator('.question').innerText();await offline.reload();await offline.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
+  const last=await offline.locator('.question').innerText();await offline.reload();await resumeStudy(offline);
   await expect(offline.locator('.question')).toHaveText(last);await expect(offline.locator('.feedback')).toBeVisible();
   await expect(offline.locator('.cat-mascot')).toBeVisible();
   await expect(offline.locator('.cat-mascot image')).toHaveAttribute('href',/\/cats\/(happy-teachers|play-celebrate)\.png$/);
@@ -37,7 +38,7 @@ test('PWA: manifest, ikony i zimny start bez sieci; fiszki, quiz, gramatyka i wz
   await offline.screenshot({path:'test-results/pwa-offline-mobile.png'});
   await offline.getByRole('button',{name:'Moja nauka',exact:true}).tap();
   await openMap(offline);await expect(offline.locator('.journey-stage')).toHaveCount(7);
-  await offline.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await expect(offline.locator('.learn-word')).toHaveCount(5);
+  await resumeStudy(offline);await expect(offline.locator('.learn-word')).toHaveCount(5);
   offline.once('dialog',d=>d.accept());await offline.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await expect(offline.locator('.option').first()).toBeVisible();
   await offline.locator('.option').filter({hasNotText:'apple'}).first().tap();await expect(offline.locator('.feedback.incorrect')).toBeVisible();
   await offline.getByRole('button',{name:'Moja nauka',exact:true}).tap();await openMap(offline);
@@ -56,9 +57,9 @@ test('PWA: konto po zimnym starcie offline zachowuje odpowiedź i synchronizuje 
     await page.getByRole('button',{name:'Ustawienia konta',exact:true}).tap();await page.getByLabel('E-mail').fill('offline@example.test');await page.getByLabel('Hasło',{exact:true}).fill('test-password');await page.getByRole('button',{name:'Zaloguj się',exact:true}).tap();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie');
     await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await moduleSetup(page);await context.setOffline(true);await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).tap();
     await expect(page.locator('.question')).toBeVisible();
-    await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
+    await page.reload();await resumeStudy(page);
     const question=await page.locator('.question').innerText();await page.locator('.option').first().tap();await expect(page.locator('.feedback')).toBeVisible();
-    await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await expect(page.locator('.question')).toHaveText(question);await expect(page.locator('.feedback')).toBeVisible();
+    await page.reload();await resumeStudy(page);await expect(page.locator('.question')).toHaveText(question);await expect(page.locator('.feedback')).toBeVisible();
     await context.setOffline(false);await expect.poll(()=>server.remote.get('offline@example.test')?.progress.active?.attempts.length).toBe(1);
     const cached=await page.evaluate(async()=>{const keys=await caches.keys();return (await Promise.all(keys.map(async key=>(await(await caches.open(key)).keys()).map(r=>r.url)))).flat();});
     expect(cached.some(url=>url.includes('/__cloud/')||url.includes('googleapis.com'))).toBe(false);
@@ -76,7 +77,7 @@ test('PWA: dodatkowy trening offline, wznowienie i synchronizacja jednej gwiazdk
     await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await expect(page.locator('.feedback.correct')).toBeVisible();
     await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await moduleSetup(page);await context.setOffline(true);
     page.once('dialog',d=>d.accept());await openAdditionalWarmup(page);await expect(page.locator('.study-heading .tag')).toHaveText('1 / 1');
-    await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await expect(page.locator('.question')).toHaveText(prompt);
+    await page.reload();await resumeStudy(page);await expect(page.locator('.question')).toHaveText(prompt);
     await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('.lesson-reward')).toContainText('+1 ★');
     await page.reload();await expect(page.getByRole('heading',{name:'Dobrze Cię widzieć!'})).toBeVisible();
     await context.setOffline(false);await expect.poll(()=>server.remote.get('training@example.test')?.progress.adventure?.earned).toBe(1);
@@ -99,7 +100,7 @@ test('PWA: aktualizacja czeka na zgodę, zachowuje sesję i nie usuwa cache inny
     await expect(page.getByText('Nowe materiały — test aktualizacji',{exact:true})).toHaveCount(0);
     const reload=page.waitForEvent('load');page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Zaktualizuj',exact:true}).tap();await reload;
     await page.getByRole('button',{name:/Przejdź do modułów/}).tap();await expect(page.getByText('Nowe materiały — test aktualizacji',{exact:true})).toBeVisible();await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
-    await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await expect(page.locator('.question')).toHaveText(question);await expect(page.locator('.feedback')).toBeVisible();
+    await resumeStudy(page);await expect(page.locator('.question')).toHaveText(question);await expect(page.locator('.feedback')).toBeVisible();
     const keys=await page.evaluate(()=>caches.keys());expect(keys).toContain('another-application');expect(keys.filter(k=>k.startsWith('male-kroki-offline-'))).toHaveLength(1);
   }finally{await server.close();}
 });
@@ -114,7 +115,7 @@ test('PWA: globalne fiszki offline zachowują zakres, poznanie i zapis konta po 
     await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await expect(page.locator('.feedback.correct')).toBeVisible();
     await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:'Ćwicz cały poznany materiał →',exact:true}).tap();
     await context.setOffline(true);page.once('dialog',d=>d.accept());await page.getByRole('button',{name:/Fiszki z poznanego materiału/}).tap();await expect(page.locator('.question')).toHaveText(prompt);
-    await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();await expect(page.locator('.question')).toHaveText(prompt);
+    await page.reload();await resumeStudy(page);await expect(page.locator('.question')).toHaveText(prompt);
     await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.getByRole('button',{name:'Wróć do poznanego materiału',exact:true})).toBeVisible();
     await page.reload();await page.getByRole('button',{name:'Ćwicz cały poznany materiał →',exact:true}).tap();await expect(page.getByRole('button',{name:/Fiszki z poznanego materiału/})).toContainText('1 poznane hasło');
     await context.setOffline(false);await expect.poll(()=>server.remote.get('global@example.test')?.progress.sessions.filter((s:any)=>s.scope?.kind==='course').length).toBe(1);

@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import { test, expect, type Page } from './fixtures.ts';
 import { readFileSync } from 'node:fs';
@@ -66,7 +67,7 @@ test('globalny quiz zachowuje opcje, błąd i poprawę po odświeżeniu',async({
     await page.getByRole('button',{name:/Quiz z poznanego materiału/}).tap();await expect(page.locator('.option')).toHaveCount(2);
     const prompt=await page.locator('.question').innerText(),q=m.exercises.find(q=>q.prompt===prompt)!;
     await page.getByRole('button',{name:q.answers[0]==='apple'?'bread':'apple',exact:true}).tap();await expect(page.locator('.feedback.incorrect')).toBeVisible();
-    await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
+    await page.reload();await resumeStudy(page);
     await expect(page.locator('.question')).toHaveText(prompt);await expect(page.locator('.feedback.incorrect')).toBeVisible();
     await page.getByRole('button',{name:'Spróbuję jeszcze raz',exact:true}).tap();await expect(page.locator('.option')).toHaveCount(2);
     await page.getByRole('button',{name:q.answers[0],exact:true}).tap();await expect(page.locator('.feedback.correct')).toBeVisible();

@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {openWarmup,openStageReview} from './navigation.ts';
 import {openBackup} from './navigation.ts';
 import {openModule,openMap} from './navigation.ts';
@@ -124,7 +125,7 @@ test('konto: błędne logowanie, odzyskanie hasła i zapis bez sieci zachowany p
   await signIn(page);cloud.setOffline(true);
   await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await openModule(page);await page.getByRole('button',{name:'Fiszki podstawa',exact:true}).click();
   const first=await page.locator('.question').innerText();await page.locator('.option').first().click();await expect(page.locator('.feedback')).toBeVisible();
-  await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();await expect(page.locator('.question')).toHaveText(first);await expect(page.locator('.feedback')).toBeVisible();
+  await page.reload();await resumeStudy(page);await expect(page.locator('.question')).toHaveText(first);await expect(page.locator('.feedback')).toBeVisible();
   cloud.setOffline(false);await openBackup(page);await page.getByRole('button',{name:'Otwórz konto',exact:true}).click();await page.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
   expect(cloud.data.get('parent@example.test')!.progress.active.attempts).toHaveLength(1);
 });

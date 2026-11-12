@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
 import {foodModules as modules} from '../materials.ts';
@@ -12,12 +13,12 @@ test('starsza powtórka z wpisywaniem pokazuje wybór, gdy polecenie podaje wari
   await page.goto('./');await openBackup(page);
   await page.locator('#import-file').setInputFiles({name:'old-review.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();
-  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
+  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await resumeStudy(page);
   await expect(page.getByRole('textbox')).toHaveCount(0);
   await expect(page.locator('.option')).toHaveCount(2);
   await page.getByRole('button',{name:'policzalny',exact:true}).tap();
   await expect(page.locator('.given-answer p')).toHaveText('policzalny');
-  await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
+  await page.reload();await resumeStudy(page);
   await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();
   await expect(page.getByRole('textbox')).toHaveCount(0);
   await page.getByRole('button',{name:'niepoliczalny',exact:true}).tap();

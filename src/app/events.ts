@@ -8,6 +8,8 @@ import { ProgressSync } from '../sync.ts';
 import {bindHouseDrag} from '../house/drag.ts';
 import {homeFor} from '../house/progress.ts';
 import {currentCourse} from './selectors.ts';
+import {bindNavigation} from './navigation.ts';
+import {bindGapDrag} from './gap-drag.ts';
 interface EventPorts {
     accounts: ReturnType<typeof createAccountController>;
     house: ReturnType<typeof createHouseController>;
@@ -19,6 +21,7 @@ interface EventPorts {
     run: (task: () => Promise<void>) => Promise<void>;
 }
 export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts, learning, house, backups, sync, scheduleSync, scheduleReviewMigration, run }: EventPorts) {
+    bindNavigation(state,run);
     async function action(action: string, el: HTMLElement) {
         state.notice = '';
         if (await house.handleAction(action, el))
@@ -52,8 +55,9 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
         const proxy=document.createElement('button');Object.assign(proxy.dataset,{id,x:String(position.x),y:String(position.y),room:scope.room,course:scope.course,owner:scope.owner});
         void run(()=>action('grid-move',proxy));
     });
+    const gaps=bindGapDrag(root,(key,answer)=>{const proxy=document.createElement('button');Object.assign(proxy.dataset,{key,answer});void run(()=>action('gap-place',proxy));});
     root.addEventListener('click', ev => {
-        if(drag.consumeClick(ev)){ev.preventDefault();return;}
+        if(gaps.consumeClick()||drag.consumeClick(ev)){ev.preventDefault();return;}
         const el = (ev.target as HTMLElement).closest<HTMLElement>('[data-action]');
         if (!el)
             return;

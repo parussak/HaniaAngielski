@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {test,expect} from './fixtures.ts';
 import {openBackup,openModule} from './navigation.ts';
 import {foodModules as modules} from '../materials.ts';
@@ -30,7 +31,7 @@ test('ustawienia, pole odpowiedzi, źródło i podsumowanie poprawki są dostęp
  await page.locator('#import-file').setInputFiles({name:'ui.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
  await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
  await page.getByRole('button',{name:'Moja nauka',exact:true}).click();
- await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();
+ await resumeStudy(page);
  const answer=page.getByRole('textbox',{name:'Twoja odpowiedź',exact:true});
  await expect(answer).toHaveAttribute('autocorrect','off');await expect(answer).toHaveAttribute('enterkeyhint','done');
  await expect(answer).toHaveAttribute('autocapitalize','off');await expect(answer).toHaveAttribute('spellcheck','false');

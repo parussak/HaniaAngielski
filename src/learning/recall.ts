@@ -3,7 +3,7 @@ import {keyFor,type Module,type Progress,type Session,type AnswerMode} from './m
 import {inputFor,questionFor,shuffle} from './questions.ts';
 import {sameCourse,compareModules} from './scope.ts';
 import {errorItems,memoryFor} from './retention.ts';
-import {mapTrainingPool,practicedItems,selectTrainingItems} from './training.ts';
+import {mapTrainingPool,practicedItems,selectTrainingItems,earlierMapKeys} from './training.ts';
 
 export function earlierSectionKeys(modules:Module[],journeys:Journey[],j:Journey,l:Lesson,p:Progress){
  const m=modules.find(m=>m.id===j.moduleId);if(!m)return new Set<string>();
@@ -32,9 +32,10 @@ export function moduleFinished(modules:Module[],journeys:Journey[],m:Module,p:Pr
  const maps=journeys.filter(j=>j.moduleId===m.id),expected=m.journeyPaths?.length??(m.journeyPath?1:maps.length);
  return maps.length>0&&maps.length===expected&&maps.every(j=>lessons(journeyForProgress(j,p)).every(l=>p.adventure?.completed[l.key]));
 }
-export function makeRitualSession(modules:Module[],journeys:Journey[],m:Module,p:Progress,kind:'opening'|'finale',answerMode:AnswerMode):Session|null{
+export function makeRitualSession(modules:Module[],journeys:Journey[],m:Module,p:Progress,kind:'opening'|'finale',answerMode:AnswerMode,map?:Journey):Session|null{
  if(kind==='finale'&&!moduleFinished(modules,journeys,m,p))return null;
- const pool=practicedItems(modules,m,p).filter(v=>kind==='finale'?v.item.moduleId===m.id:modules.some(source=>source.id===v.item.moduleId&&sameCourse(source,m)&&compareModules(source,m)<0));
+ const prior=map?earlierMapKeys(modules,journeys,map):new Set<string>();
+ const pool=practicedItems(modules,m,p).filter(v=>kind==='finale'?v.item.moduleId===m.id:modules.some(source=>source.id===v.item.moduleId&&sameCourse(source,m)&&compareModules(source,m)<=0)&&(prior.size===0||prior.has(v.item.key)));
  const items=selectTrainingItems(pool,kind==='opening'?5:8);if(!items.length)return null;
  items.forEach((item,i)=>item.input=inputFor(questionFor(modules,item),answerMode==='mixed'?(i%2?'text':'choice'):answerMode));
  return {fixedLength:true,id:crypto.randomUUID(),moduleId:m.id,mode:'training',training:{kind:'extra'},ritual:kind,answerMode,previous:true,items,index:0,phase:'question',startedAt:new Date().toISOString(),completedAt:null,lastCorrect:null,attempts:[],repeatKeys:[]};

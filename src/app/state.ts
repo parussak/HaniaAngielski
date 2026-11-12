@@ -5,6 +5,7 @@ import type { AccountUser } from '../firebase.ts';
 import type { Course } from '../materials/model.ts';
 // Transient application state only. Stored Progress and Backup formats are unchanged.
 export class AppState {
+    boardError?: {key:string;answer:string;keys?:string[]};
     courses: Course[] = [];
     selectedCourseId = '';
     modules: Module[] = [];

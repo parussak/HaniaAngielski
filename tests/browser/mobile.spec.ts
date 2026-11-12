@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
 import {answerQuestion} from './helpers.ts';
@@ -51,7 +52,7 @@ test.describe('telefon — dotyk i małe ekrany', () => {
     await answerQuestion(page,exercise,false);
     await expect(page.getByText('Spokojnie, tak właśnie się uczymy.')).toBeVisible();
     await page.screenshot({path:'test-results/cat-feedback-mobile.png',fullPage:true});
-    await page.reload(); await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
+    await page.reload(); await resumeStudy(page);
     await expect(page.getByText('Spokojnie, tak właśnie się uczymy.')).toBeVisible();
     await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();
     await answerQuestion(page,exercise);

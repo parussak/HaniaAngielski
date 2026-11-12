@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import { test, expect, type Page } from './fixtures.ts';
 import { courseFixture } from '../fixtures/course-materials.ts';
@@ -36,7 +37,7 @@ for (const [book, target, incorrect, prompt] of [['french-book','café','cafe','
         await page.getByRole('button', { name: 'Spróbuję jeszcze raz', exact: true }).tap();
         await page.getByRole('textbox').fill(target); await page.getByRole('button', { name: /Sprawdź/ }).tap();
         await expect(page.locator('.feedback.correct')).toBeVisible();
-        await page.reload(); await page.getByRole('button', { name: 'Kontynuuj naukę →', exact: true }).tap();
+        await page.reload(); await resumeStudy(page);
         await expect(page.locator('.question')).toHaveText(`${prompt}: kawa`);
         await expect(page.locator('.feedback.correct')).toBeVisible();
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();

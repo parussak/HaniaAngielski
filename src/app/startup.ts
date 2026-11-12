@@ -9,6 +9,9 @@ import { startPwa } from '../pwa.ts';
 import { load, readStored, save, storageNamespace } from '../storage.ts';
 import { ProgressSync } from '../sync.ts';
 import { e } from '../ui.ts';
+import {restoreNavigation} from './navigation.ts';
+import {updateBanner} from '../views/home.ts';
+import {pwa} from '../pwa.ts';
 interface StartupPorts {
     root: HTMLDivElement;
     state: AppState;
@@ -77,11 +80,14 @@ export async function startApplication({ root, state, sync, prepareProgress, rem
                     })();
             }
             await restoreCourse();
+            restoreNavigation(state);
             state.ready = true;
             render();
             scheduleReviewMigration();
-            startPwa(() => { if (state.ready && !state.busy && state.screen === 'home')
-                render(); });
+            startPwa(() => { if (state.ready && !state.busy && state.screen !== 'study'){
+                if(state.screen==='home')render();
+                else {const banner=root.querySelector('[data-update-banner]');if(banner)banner.outerHTML=updateBanner(pwa);}
+            } });
         }
         catch (err) {
             root.innerHTML = `<div class="loading"><h1>Nie możemy wczytać aplikacji</h1><p>Nie zmieniliśmy Twoich postępów. Sprawdź pliki materiałów, połączenie i zgodę przeglądarki na zapis danych, a następnie odśwież stronę.</p><p>${e(err instanceof Error ? err.message : 'Błąd odczytu')}</p></div>`;

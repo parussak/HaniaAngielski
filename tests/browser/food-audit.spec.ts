@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {finishCurrent,answerCurrent} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {test,expect,type Page} from './fixtures.ts';
@@ -27,7 +28,7 @@ test('telefon: ukończona restauracja zachowuje pięć pytań, nieukończona dos
 test('telefon: dawna rozpoczęta sesja wznawia te same pytania i nie zmienia salda',async({page})=>{
  const p=progress(),l=structuredClone(j.stages[4].lessons[0]);delete l.update;p.active=makeLessonSession(modules,j,l,'text',p);
  const prompt=questionFor(modules,p.active.items[0]).prompt;
- await restore(page,p);await page.reload();await page.locator('.next-step-card button').tap();
+ await restore(page,p);await page.reload();await resumeStudy(page);
  await expect(page.locator('.question')).toHaveText(prompt);await expect(page.locator('.study-heading .tag')).toHaveText('1 / 5');
  await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('144');
 });
@@ -35,7 +36,7 @@ test('telefon: dawna rozpoczęta sesja wznawia te same pytania i nie zmienia sal
 test('telefon: po starej mapie kontynuacja otwiera nową, przyznaje trzy gwiazdki i zachowuje odznakę',async({page})=>{
  await restore(page,progress(true));await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.module-award')).toContainText('Odznaka kociego kucharza');
  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await expect(page.locator('.next-step-detail')).toContainText('Dzienniczek posiłków');
- await page.locator('.next-step-card button').tap();await expect(page.getByRole('heading',{name:'Dzienniczek posiłków',exact:true})).toBeVisible();
+ await resumeStudy(page);await expect(page.getByRole('heading',{name:'Dzienniczek posiłków',exact:true})).toBeVisible();
  await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();
  await finishCurrent(page,modules);
  await expect(page.locator('.lesson-reward')).toContainText('+3 ★');await page.reload();
@@ -52,10 +53,10 @@ test.describe('PWA Food',()=>{
   await restore(page,progress(true));await expect(page.locator('[data-offline-status]')).toContainText('Materiały gotowe');
   await expect.poll(()=>page.evaluate(()=>!!navigator.serviceWorker.controller)).toBeTruthy();
   await page.close();await context.setOffline(true);const offline=await context.newPage();await offline.goto('./');
-  await offline.locator('.next-step-card button').tap();await expect(offline.getByRole('heading',{name:'Dzienniczek posiłków',exact:true})).toBeVisible();
+  await resumeStudy(offline);await expect(offline.getByRole('heading',{name:'Dzienniczek posiłków',exact:true})).toBeVisible();
   await offline.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();
   await answerCurrent(offline,modules);
-  await offline.reload();await offline.locator('.next-step-card button').tap();await expect(offline.locator('.feedback.correct')).toBeVisible();await expect(offline.locator('.study-heading .tag')).toHaveText('1 / 6');
+  await offline.reload();await resumeStudy(offline);await expect(offline.locator('.feedback.correct')).toBeVisible();await expect(offline.locator('.study-heading .tag')).toHaveText('1 / 6');
   await offline.getByRole('button',{name:/Dalej/}).tap();await expect(offline.locator('.question')).toContainText('Dzienniczek:');await expect(offline.locator('.study-heading .tag')).toHaveText('2 / 6');
  });
 });

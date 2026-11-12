@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {openWarmup,openStageReview} from './navigation.ts';
 import {openBackup} from './navigation.ts';
 import {openMap} from './navigation.ts';
@@ -35,7 +36,7 @@ test('osobne krótkie rozgrzewki zachowują stare błędy, trzy zaliczenia i jed
  await expect(page.locator('.star-wallet')).toContainText('15');
  for(let i=0;i<3;i++){
   await openStageReview(page);await expect(page.locator('.review-meter')).toHaveCount(0);
-  if(i===0){await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();await expect(page.getByRole('textbox')).toBeVisible();}
+  if(i===0){await page.reload();await resumeStudy(page);await expect(page.getByRole('textbox')).toBeVisible();}
   await correct(page);await page.getByRole('button',{name:/Dalej/}).click();
   await expect(page.getByRole('heading',{name:'Kocia rozgrzewka ukończona!',exact:true})).toBeVisible();
   await expect(page.locator('.summary')).not.toContainText(/do utrwalenia|3\/3|zaległo/);

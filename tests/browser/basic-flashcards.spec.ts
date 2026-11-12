@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
@@ -46,7 +47,7 @@ test('telefon: aktywne fiszki mieszane, błąd, poprawa, wznowienie i wynik',asy
     }
     if(i===0){
       await expect(page.locator('.feedback.incorrect')).toContainText(word.back);
-      await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
+      await page.reload();await resumeStudy(page);
       await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();
       await page.getByRole('button',{name:word.back,exact:true}).tap();
       await expect(page.locator('.feedback.correct')).toBeVisible();

@@ -1,5 +1,18 @@
 # Nauka — prowadzenie i utrwalanie
 
+## D-51 — poprawki plansz i nawigacji, wymagania przed kodem
+
+1. Luki: kilka zdań i odpowiadające im słowa na jednej planszy. Wypełnianie przez klik słowa i luki albo przeciągnięcie; bez osobnego „W luce”. Materiał źródłowy i ocena każdego zadania pozostają.
+2. Pary: bez wyjaśnienia i „Dalej” po każdym wyborze. Błąd krótko świeci na czerwono i znika, można próbować ponownie; błędna pierwsza próba nadal zapisuje trudność. Podsumowanie dopiero po całej planszy.
+3. Kontynuacja lekcji mapowej prowadzi do widoku tej lekcji z „Zacznij od nowa” i „Kontynuuj”; rozpoczęty zestaw zachowuje odpowiedzi.
+4. Rozgrzewka działa na poznanym materiale także bieżącego modułu i jest przed każdą mapą, również drugą. Bez materiału daje jasny komunikat, nie pustą sesję.
+5. Cofanie telefonu działa według historii ekranów aplikacji, bez zapisywania odpowiedzi do historii przeglądarki.
+6. Odświeżenie przywraca bieżący ekran i kontekst na tym urządzeniu, z oddzieleniem kont i kursów. Wyniki nadal pochodzą z dotychczasowego bezpiecznego zapisu.
+7. Ramka „Twój kurs” jest tylko na stronie startowej; wybór kursu pozostaje dostępny stamtąd.
+8. Ramka aktualizacji pojawia się na wszystkich ekranach poza rozwiązywaniem ćwiczeń, również w widoku lekcji i podsumowaniu.
+
+Obie mapy Food, ich identyfikatory, ukończenia, zakupy i gwiazdki zostają. Nowe pola sesji są opcjonalne; stare kopie i rozpoczęte sesje nie są usuwane.
+
 ## D-50 — dalsza lekcja, poziom legendarny i urozmaicenie — wdrożone
 
 Wymagania zapisano przed zmianą kodu. Wdrożenie zachowuje obie mapy Food i źródłowe treści. Nowe formy dotyczą nowo rozpoczynanych lekcji, w tym pełnych powtórek; zapisane wcześniej sesje nie są przebudowywane.

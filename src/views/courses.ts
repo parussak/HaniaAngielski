@@ -9,6 +9,7 @@ function knownCount(n: number, words: boolean) {
 }
 
 export function courseContext(state: Readonly<AppState>) {
+    if(state.screen!=='home')return '';
     const course = currentCourse(state);
     return course ? `<div class="course-context"><div><span>TWÓJ KURS</span><strong>${e(course.name)}</strong></div>${button('courses', 'Wybierz kurs', 'text-button')}</div>` : '';
 }

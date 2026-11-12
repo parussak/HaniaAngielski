@@ -1,3 +1,4 @@
+import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
 import {foodModules as modules} from '../materials.ts';
@@ -17,7 +18,7 @@ for(const [mode,input] of [['flashcards-basic','text'],['flashcards','choice'],[
     await openBackup(page);
     await page.locator('#import-file').setInputFiles({name:'session.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
     await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();
-    await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
+    await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await resumeStudy(page);
     let given='';
     if(input==='text'||mode==='review'){
       given=type==='word'?'aple':'botle';await page.getByRole('textbox').fill(given);await page.getByRole('button',{name:/Sprawdź/}).tap();
@@ -29,7 +30,7 @@ for(const [mode,input] of [['flashcards-basic','text'],['flashcards','choice'],[
     await expect(page.locator('.given-answer p')).toHaveText(given);
     await expect(page.locator('.expected-answer p')).toHaveText(displayed);
     await expect(page.locator('.answer-comparison mark')).toHaveCount(0);
-    await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
+    await page.reload();await resumeStudy(page);
     await expect(page.locator('.given-answer p')).toHaveText(given);
     if(mode==='grammar'){
       await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();
@@ -37,7 +38,7 @@ for(const [mode,input] of [['flashcards-basic','text'],['flashcards','choice'],[
       await page.getByRole('textbox').fill(second);await page.getByRole('button',{name:/Sprawdź/}).tap();
       await expect(page.locator('.given-answer p')).toHaveText(second);
       await expect(page.locator('.given-answer img')).toHaveCount(0);
-      await page.reload();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).tap();
+      await page.reload();await resumeStudy(page);
       await expect(page.locator('.given-answer p')).toHaveText(second);
       await page.screenshot({path:'test-results/answer-comparison-mobile.png'});
     }
