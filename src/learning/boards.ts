@@ -7,6 +7,18 @@ import type {Module,Progress,Session} from './model.ts';
 export function boardItems(s:Session){const current=s.items[s.index];return current.pairGroup?s.items.filter(i=>i.pairGroup===current.pairGroup):current.gapGroup?s.items.filter(i=>i.gapGroup===current.gapGroup):[current];}
 export function solved(s:Session,key:string){return s.attempts.some(a=>a.key===key&&(a.first||a.corrected));}
 export function settled(s:Session,key:string){return solved(s,key)||s.items.findIndex(i=>i.key===key)<s.index;}
+export function boardError(s:Session,key:string){return s.attempts.some(a=>a.key===key&&!a.first&&!a.corrected);}
+/** Leave a finite board even with mistakes. Unanswered tasks remain visible in results as unanswered. */
+export function closeBoard(p:Progress,modules:Module[],journeys:Journey[]){
+ const s=p.active;if(!s||!['question','retry'].includes(s.phase)||!s.items[s.index].pairGroup&&s.items[s.index].presentation!=='bank')return;
+ const group=boardItems(s);
+ for(const item of group){
+  if(s.attempts.some(a=>a.key===item.key))continue;
+  s.index=s.items.indexOf(item);s.phase='question';
+  if(recordAnswer(p,questionFor(modules,item),s.gapPlacements?.[item.key]??'')===false){rememberError(p,item);recordStageError(p,s,item,journeys);}
+ }
+ s.index=Math.max(...group.map(i=>s.items.indexOf(i)));s.phase='feedback';s.lastCorrect=true;
+}
 export function gapTokens(modules:Module[],s:Session){return s.items[s.index].gapGroup?boardItems(s).slice().sort((a,b)=>a.key.localeCompare(b.key)).map(i=>questionFor(modules,i).answers[0]):questionFor(modules,s.items[s.index]).options;}
 /** Placing checks once. Wrong tokens stay put and can be moved or returned without another attempt. */
 export function placeGap(p:Progress,modules:Module[],journeys:Journey[],key:string,answer?:string){

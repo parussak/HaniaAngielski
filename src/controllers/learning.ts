@@ -15,7 +15,7 @@ import type { createCourseController } from './courses.ts';
 import { courseKey } from '../learning/scope.ts';
 import {followingLesson,lessonContext,legendarySession} from '../learning/lesson-flow.ts';
 import {varyLesson} from '../learning/lesson-variety.ts';
-import {answerOnBoard,gapTokens,placeGap} from '../learning/boards.ts';
+import {answerOnBoard,gapTokens,placeGap,closeBoard} from '../learning/boards.ts';
 import {continueScene} from '../learning/scenes.ts';
 interface LearningPorts {
     courses: ReturnType<typeof createCourseController>;
@@ -273,7 +273,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             state.lastReward = 0;
             state.lastStageReward = 0;
             const unlockedRooms:string[]=[];
-            await mutate(p => { if (p.active?.phase === 'feedback') {
+            await mutate(p => { closeBoard(p,state.modules,state.journeys);if (p.active?.phase === 'feedback') {
                 const finished = p.active;
                 delete finished.pairSelection;delete finished.draftAnswer;
                 delete finished.boardSummary;delete finished.gapSelection;delete finished.gapPlacements;

@@ -5,13 +5,23 @@ import {courseFixture} from './fixtures/course-materials.ts';
 import {emptyProgress,questionFor,recordAnswer,next,backup,validateBackup} from '../src/core.ts';
 import {makeLessonSession,type Journey} from '../src/adventure.ts';
 import {varyLesson} from '../src/learning/lesson-variety.ts';
-import {answerOnBoard,boardItems,placeGap,gapTokens} from '../src/learning/boards.ts';
+import {answerOnBoard,boardItems,placeGap,gapTokens,closeBoard,boardError} from '../src/learning/boards.ts';
 import {AppState} from '../src/app/state.ts';
 import {restoreNavigation,saveNavigation} from '../src/app/navigation.ts';
 import {courseContext} from '../src/views/courses.ts';
 const course=courseFixture().courses[0],m=engineModule('board-unit',course.id);
 const j:Journey={version:1,moduleId:m.id,title:'Mapa',stages:[{id:'stage',title:'Etap',cat:'albert',illustration:'illustrations/test.svg',lessons:[{id:'words',title:'Słowa',intro:'',wordIds:m.words.slice(0,5).map(w=>w.id),exerciseIds:[],ruleIds:[]},{id:'gaps',title:'Luki',intro:'',wordIds:[],exerciseIds:m.exercises.filter(q=>q.kind==='grammar').slice(0,6).map(q=>q.id),ruleIds:[]}]}]};
 function active(index=0){const p=emptyProgress(),l=j.stages[0].lessons[index];p.active=varyLesson(makeLessonSession([m],j,l,'mixed',p),[m],[j],j,l,p);return p;}
+
+test('Dalej zamyka całą planszę mimo błędów i pustych luk, bez ponownego oceniania i zmiany gwiazdek',()=>{
+ const p=active(1),s=p.active!,group=boardItems(s);p.adventure={version:1,earned:27,purchases:{},completed:{}};
+ placeGap(p,[m],[j],group[0].key,questionFor([m],group[1]).answers[0]);assert.equal(boardError(s,group[0].key),true);
+ const attempt=structuredClone(s.attempts[0]);closeBoard(p,[m],[j]);
+ assert.equal(s.index,Math.max(...group.map(i=>s.items.indexOf(i))));assert.equal(s.phase,'feedback');assert.equal(p.adventure!.earned,27);
+ assert.deepEqual(s.attempts.find(a=>a.key===attempt.key),attempt);assert.equal(s.attempts.length,group.length);assert.ok(s.attempts.every(a=>!a.first));
+ assert.deepEqual(validateBackup(backup(p)).progress,p);
+ delete s.gapPlacements;delete s.gapSelection;next(p);assert.ok(!p.active||!group.includes(p.active.items[p.active.index]));
+});
 
 test('luka ocenia przy wstawieniu, zostawia błąd i pozwala przenieść lub odłożyć słowo bez dodatkowych prób',()=>{
  const p=active(1),s=p.active!,group=boardItems(s),[a,b]=group,answer=questionFor([m],b).answers[0],tokens=gapTokens([m],s);

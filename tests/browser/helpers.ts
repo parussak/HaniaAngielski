@@ -43,7 +43,7 @@ export async function finishCurrent(page:Page,modules:Module[],firstWrong=false)
  while(await page.locator('.study-heading').count()){
   expect(++count).toBeLessThanOrEqual(14);await idle(page);if(!await page.locator('.study-heading').count())break;
   if(!await page.locator('.feedback').count()){
-   if(firstWrong&&count===1){const board=await page.locator('.pair-board,.answer-bank').count();await answerCurrent(page,modules,false);if(!board)await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).click();}
+   if(firstWrong&&count===1){const board=await page.locator('.pair-board,.answer-bank').count();await answerCurrent(page,modules,false);if(!board)await page.getByRole('button',{name:/Spróbuję jeszcze raz|Popraw tę linijkę/}).click();}
    await answerCurrent(page,modules);
    // Inside a scene the next gap is already on screen; there is nothing to confirm.
    if(await page.locator('.scene').count()&&!await page.locator('.feedback').count())continue;

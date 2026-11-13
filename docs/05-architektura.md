@@ -1,5 +1,9 @@
 # Architektura — realizacja techniczna
 
+## D-56 — zakończenie planszy i oprawa dialogu
+
+`learning/boards.ts:closeBoard` przygotowuje przejście poza całą grupę bez wymogu bezbłędności; zapisuje tylko brakujące próby i używa dotychczasowych mechanizmów błędów. Kontroler wywołuje je w tej samej mutacji co istniejące `next` i rozliczenie nagrody. `boardError` odtwarza trwały kolor z próby, bez nowego pola sesji. `views/lesson-activities.ts` zachowuje planszę, a `bankExplanationView` dodaje wyjaśnienia dopiero po wypełnieniu wszystkich luk. `sceneScriptView` umieszcza kociego rozmówcę przy każdej kwestii i wywołuje istniejącą akcję `retry` z przycisku w bieżącej linijce. Format materiałów i mechanika oceniania scen pozostają wspólne.
+
 ## D-55 — opcje słownikowe i interakcje luk
 
 `learning/questions.ts` wzbogaca opcje słownikowe o rodzajniki z metadanych poszczególnych haseł tego kursu, bez modyfikowania materiału i zapisanej sesji. `learning/boards.ts:placeGap` przenosi lub odkłada token i wywołuje istniejące `answerOnBoard` przy nowym wstawieniu. Błędna odpowiedź pozostaje w `gapPlacements`; zaznaczanie i odkładanie nie dopisuje prób. `views/lesson-activities.ts` pokazuje stabilną kolejność i puste miejsca po tokenach; `app/gap-drag.ts` kieruje gesty z banku i z luk przez tę samą akcję kontrolera. Brak nowych pól kopii i drugiego oceniania.

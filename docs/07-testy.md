@@ -1,5 +1,13 @@
 # Testy — podział i zasady
 
+## D-56 — wyjście z planszy, trwałe błędy i kocie dymki
+
+Weryfikacja 13 listopada 2026: **257/257 testów Node**, również na rozszerzonej bibliotece; **119/119 scenariuszy Chrome** na zbudowanej aplikacji; budowanie z walidacją materiałów i 206 zasobami PWA przeszły. Po końcowej korekcie przewijania ponowiono **17/17 scenariuszy plansz i historyjek**, w tym kontrolę `overflow-y`, dojścia do ostatniego wyjaśnienia, przycisku „Dalej”, kopii i offline. Obejrzano mobilne zrzuty wyjaśnień pod zachowanymi lukami oraz dialogu z portretami przy każdej kwestii na 320 px. Kontrola dokumentacji przeszła. Nie testowano na fizycznym telefonie ani rzeczywistym koncie Firebase.
+
+`boards-navigation.test.ts` sprawdza zamknięcie całej grupy mimo błędnej i pustej luki, zachowanie już ocenionej próby, zapis brakującej, brak zmiany gwiazdek i zgodność kopii. Nowe scenariusze w `browser/eight-points.spec.ts` sprawdzają „Dalej” z częściowo pustej planszy, zachowane 23 gwiazdki, trwały kolor po animacji i odświeżeniu, wyjaśnienia dopiero po wypełnieniu całej planszy, niezmienione zdania i luki oraz zmianę czerwonego na zielony dopiero po poprawie. Podsumowania plansz nie wymagają już statystyki pierwszych trafień.
+
+`browser/scenes.spec.ts` sprawdza poprawę bieżącej linijki po odświeżeniu i offline przez przycisk w tej linijce. Liczba portretów odpowiada teraz liczbie widocznych kwestii: kolejne role mają różne kotki, powracająca rola tę samą postać, również w całym podsumowaniu. Zachowano kontrole klawiatury, 320 px, nagrody za pierwszą i ponowną lekcję oraz wyników zapisanych osobno dla każdej luki. Pozostają testy „Dalej” po błędzie bez poprawiania i skończonej długości historyjki.
+
 ## D-55 — rodzajniki i układanie słów w luki
 
 Weryfikacja 13 listopada 2026: **256/256 testów Node** na zwykłej i rozszerzonej bibliotece, budowanie z 206 zasobami PWA oraz kontrola dokumentacji przeszły. Pełny przebieg Chrome dał 115/117: starszy scenariusz quizu szukał opcji bez a/an, a scenariusz PWA zakładał informację zwrotną po każdej poprawnej luce historyjki (sceny przechodzą wtedy od razu dalej). Po poprawieniu tych oczekiwań oraz końcowej korekcie czytelności etykiet banku ponowiono **28/28 scenariuszy dotyczących zmian**, w tym oba wcześniejsze niepowodzenia, dotyk, przenoszenie z luki do banku, odświeżenie, kopię i offline. Obejrzano mobilny zrzut pustych miejsc w banku. Pozostałych 89 scenariuszy nie powtarzano po korekcie stylu etykiety; fizycznego telefonu nie testowano.

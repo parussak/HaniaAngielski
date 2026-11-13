@@ -1,5 +1,13 @@
 # Nauka — prowadzenie i utrwalanie
 
+## D-56 — plansze bez blokowania i dialogi jak rozmowa — wdrożone
+
+Przycisk „Dalej” jest dostępny na planszach luk i par również bez poprawienia błędów. Kończy bieżącą planszę i prowadzi do kolejnego zadania albo podsumowania lekcji, bez dokładania zadań. Zachowujemy już ocenione próby; niewypełnione pozycje zapisujemy jako bez odpowiedzi (niepoprawne), aby wynik nie udawał rozwiązania. Nie blokuje to ukończenia ani dotychczasowych nagród.
+
+Błędna luka pozostaje różowo-czerwona do poprawnego uzupełnienia, także po odłożeniu tokenu i odświeżeniu. Po wypełnieniu całej planszy pod oryginalnymi zdaniami i lukami pojawiają się poprawne odpowiedzi oraz widoczne wyjaśnienia. Przy błędach nadal można poprawiać lub wybrać „Dalej”. Po poprawnym rozwiązaniu zachowujemy tę samą ramkę, zdania, wstawione słowa i ilustrację, a poniżej pozytywne potwierdzenie z objaśnieniami. W podsumowaniu planszy i historyjki nie pokazujemy „0/2 poprawnie za pierwszym razem”; statystyki całej lekcji i zapis wyników pozostają.
+
+W historyjce po błędzie poprawna odpowiedź i wyjaśnienie nadal są widoczne. Przycisk „Popraw tę linijkę” przy bieżącej wypowiedzi wraca do tej samej luki, bez rozpoczynania dialogu od nowa; „Dalej” pozwala ją pozostawić. Każda kwestia ma mały okrągły portret właściwego kotka przy dymku, jak w rozmowie SMS. Obsada pozostaje stała po odświeżeniu i w podsumowaniu. D-56 zastępuje chwilowy kolor błędu i samodzielny nagłówek z parą portretów z D-54–D-55.
+
 ## D-55 — rodzajniki w wyborze i natychmiastowe sprawdzanie luk — wdrożone
 
 Przy słówkach każda opcja wyboru pokazuje własne wymagane a/an zgodnie z jawnymi danymi hasła, także w quizie i globalnej nauce. Nie stosujemy rodzajnika pytanego hasła do błędnych opcji ani nie zgadujemy reguły z pisowni. Zasady oceniania wpisanej odpowiedzi pozostają: brak wymaganego a/an jest zaliczany z uwagą, błędny rodzajnik jest błędem. Dane materiałów i zapisanych opcji pozostają niezmienione; pełna forma powstaje przy odczycie pytania.

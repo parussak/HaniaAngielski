@@ -44,7 +44,7 @@ test.describe('telefon',()=>{
   await expect(page.locator('.study-heading .tag')).toHaveText('5 / 7');await noScroll(page);
   // Refresh in the middle of the scene: the same gap, the same mistake, earlier answers kept.
   await page.reload();await resumeStudy(page);await expect(page.locator('.feedback.incorrect')).toContainText('Wyjaśnienie drugiej luki.');await expect(scene(page)).toHaveAttribute('data-key',key('two'));await expect(scene(page).locator('.scene-filled')).toHaveText(['uno']);
-  await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();await page.getByRole('textbox').fill('duo');await page.getByRole('button',{name:/Sprawdź/}).tap();
+  await page.getByRole('button',{name:'Popraw tę linijkę'}).tap();await page.getByRole('textbox').fill('duo');await page.getByRole('button',{name:/Sprawdź/}).tap();
   await expect(scene(page)).toHaveAttribute('data-key',key('three'));await expect(scene(page).locator('.scene-filled')).toHaveText(['uno','duo']);await expect(scene(page).locator('.dialogue-line')).toHaveCount(2);
   await page.reload();await resumeStudy(page);await expect(scene(page)).toHaveAttribute('data-key',key('three'));await expect(scene(page).locator('.scene-filled')).toHaveText(['uno','duo']);
   await page.setViewportSize({width:320,height:640});await noScroll(page);await page.screenshot({path:'test-results/scene-middle-320.png',fullPage:true});await page.setViewportSize({width:390,height:844});
@@ -54,7 +54,7 @@ test.describe('telefon',()=>{
   await page.screenshot({path:'test-results/scene-last-gap-mobile.png',fullPage:true});
   await page.getByRole('textbox').fill('quattro');await page.getByRole('button',{name:/Sprawdź/}).tap();
   // One summary for the whole conversation.
-  await expect(page.locator('.scene-summary')).toContainText('Rozmowa ukończona!');await expect(page.locator('.scene-summary')).toContainText('2 / 4');await expect(page.locator('.scene-summary .dialogue-line')).toHaveCount(4);
+  await expect(page.locator('.scene-summary')).toContainText('Rozmowa ukończona!');await expect(page.locator('.scene-summary')).not.toContainText('poprawnie za pierwszym razem');await expect(page.locator('.scene-summary .dialogue-line')).toHaveCount(4);
   await expect(page.locator('.scene-summary .scene-filled')).toHaveText(['uno','duo','trio','quattro']);await expect(page.locator('.scene-summary li')).toHaveCount(4);await noScroll(page);
   await page.screenshot({path:'test-results/scene-summary-mobile.png',fullPage:true});
   await page.reload();await resumeStudy(page);await expect(page.locator('.scene-summary')).toContainText('Rozmowa ukończona!');
@@ -78,7 +78,7 @@ test('klawiatura: scena w trybie Rozmówki — Enter wybiera z banku i zatwierdz
  await expect(scene(page)).toHaveAttribute('data-key',key('two'));await expect(page.locator('#answer')).toBeFocused();await page.keyboard.type('duo');await page.keyboard.press('Enter');
  await expect(scene(page)).toHaveAttribute('data-key',key('three'));await page.locator('.option[data-answer="trio"]').focus();await page.keyboard.press('Space');
  await expect(scene(page)).toHaveAttribute('data-key',key('four'));await expect(page.locator('#answer')).toBeFocused();await page.keyboard.type('4');await page.keyboard.press('Enter');
- await expect(page.locator('.scene-summary')).toContainText('4 / 4');await page.getByRole('button',{name:/Dalej/}).focus();await page.keyboard.press('Enter');
+ await expect(page.locator('.scene-summary')).toContainText('Rozmowa ukończona!');await page.getByRole('button',{name:/Dalej/}).focus();await page.keyboard.press('Enter');
  await expect(page.locator('.scene-summary')).toHaveCount(0);
 });
 
@@ -111,16 +111,16 @@ test.describe('Food',()=>{
  test('telefon: „Zamówienie w restauracji” zamyka lekcję Rozmowa przy stoliku i daje +3 ★',async({page})=>{
   await page.goto('./');await openDialogueLesson(page);await untilScene(page);
   await expect(page.locator('.exercise-label')).toContainText('ZAMÓWIENIE W RESTAURACJI');await expect(scene(page).locator('.dialogue-line')).toHaveCount(1);await expect(scene(page)).toContainText('What');
-  const actors=scene(page).locator('.scene-cast .cat-mascot');await expect(actors).toHaveCount(2);const cast=await actors.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.cat));expect(new Set(cast).size).toBe(2);
+  const actors=scene(page).locator('.scene-line-avatar .cat-mascot');await expect(actors).toHaveCount(1);const firstCat=await actors.first().getAttribute('data-cat');
   await expect(page.locator('.question-illustration img')).toHaveAttribute('src',/scene-ordering\.svg$/);
   await page.locator('.option[data-answer="would"]').tap();await expect(scene(page)).toHaveAttribute('data-position','2');await expect(page.locator('.question-illustration')).toHaveCount(0);
-  expect(await actors.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.cat))).toEqual(cast);await page.reload();await resumeStudy(page);expect(await actors.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.cat))).toEqual(cast);
+  await expect(actors).toHaveCount(2);const cast=await actors.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.cat));expect(new Set(cast).size).toBe(2);expect(cast[0]).toBe(firstCat);await page.reload();await resumeStudy(page);expect(await actors.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.cat))).toEqual(cast);
   await page.setViewportSize({width:320,height:640});await noScroll(page);
   for(const portrait of await actors.all()){const box=(await portrait.locator('svg').boundingBox())!,member=(await portrait.locator('..').boundingBox())!;expect(box.x+box.width).toBeLessThanOrEqual(member.x+member.width+1);}
   await page.screenshot({path:'test-results/scene-food-320.png',fullPage:true});await page.setViewportSize({width:390,height:844});
   for(let gap=2;gap<=5;gap++){await expect(scene(page)).toHaveAttribute('data-position',String(gap));await answerCurrent(page,real);}
-  await expect(page.locator('.scene-summary .dialogue-line')).toHaveCount(7);await expect(page.locator('.scene-summary')).toContainText('5 / 5');await expect(page.locator('.scene-summary')).toContainText('Enjoy your meal!');
-  expect(await page.locator('.scene-summary .scene-cast .cat-mascot').evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.cat))).toEqual(cast);
+  await expect(page.locator('.scene-summary .dialogue-line')).toHaveCount(7);await expect(page.locator('.scene-summary')).toContainText('Rozmowa ukończona!');await expect(page.locator('.scene-summary')).toContainText('Enjoy your meal!');
+  const rows=page.locator('.scene-summary .scene-message');await expect(rows).toHaveCount(7);const assigned=await rows.evaluateAll(els=>els.map(el=>({role:(el as HTMLElement).dataset.speaker,cat:(el.querySelector('.cat-mascot') as HTMLElement).dataset.cat})));const roles=new Map(assigned.slice(0,2).map(r=>[r.role,r.cat]));expect([...roles.values()]).toEqual(cast);expect(assigned.every(r=>roles.get(r.role)===r.cat)).toBe(true);
   await page.screenshot({path:'test-results/scene-food-summary-mobile.png',fullPage:true});
   // A long conversation scrolls inside the card: the last line and the last explanation can be reached.
   for(const part of ['.scene-summary .dialogue-line','.scene-summary li']){await page.locator(part).last().scrollIntoViewIfNeeded();await expect(page.locator(part).last()).toBeInViewport({ratio:0.9});}
@@ -136,9 +136,9 @@ test.describe('Food',()=>{
    await answerCurrent(page,real);await expect(scene(page)).toHaveAttribute('data-position','2');await answerCurrent(page,real,false);await expect(page.locator('.feedback.incorrect')).toContainText('Can I have');
    await page.close();const offline=await context.newPage();await offline.goto('./');await resumeStudy(offline);
    await expect(offline.locator('.feedback.incorrect')).toContainText('Can I have');await expect(scene(offline)).toHaveAttribute('data-position','2');await expect(scene(offline).locator('.scene-filled')).toHaveText(['would']);
-   await offline.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();
+   await offline.getByRole('button',{name:'Popraw tę linijkę'}).tap();
    for(let gap=2;gap<=5;gap++){await expect(scene(offline)).toHaveAttribute('data-position',String(gap));await answerCurrent(offline,real);}
-   await expect(offline.locator('.scene-summary')).toContainText('4 / 5');await offline.getByRole('button',{name:/Dalej/}).tap();await expect(offline.locator('.lesson-reward')).toContainText('+3 ★');
+   await expect(offline.locator('.scene-summary')).toContainText('Rozmowa ukończona!');await offline.getByRole('button',{name:/Dalej/}).tap();await expect(offline.locator('.lesson-reward')).toContainText('+3 ★');
   });
  });
 });

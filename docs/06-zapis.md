@@ -1,5 +1,7 @@
 # Zapis — co, gdzie i z jaką zgodnością
 
+**D-56:** kolor błędnej luki jest odtwarzany z `attempts`, więc nie wymaga nowych danych ani migracji. Wyjście „Dalej” z planszy zachowuje istniejące próby i zapisuje brakujące jako puste odpowiedzi; ustawia indeks za całą grupą przez obecny mechanizm przechodzenia. Czyszczenie roboczego rozmieszczenia i naliczenie nagród nadal odbywają się w jednej mutacji. Poprawa linijki dialogu korzysta z dotychczasowego `retry`; pierwsza próba pozostaje osobno od poprawki. Portrety przy każdej kwestii nadal wynikają z tego samego ID sesji i sceny. Stare kopie, ukończenia, zakupy i gwiazdki pozostają zgodne.
+
 **D-55:** natychmiastowe sprawdzanie plansz wykorzystuje istniejące `gapPlacements`, `gapSelection` i próby. Błędny token pozostaje zapisany; odłożenie lub zaznaczenie nie dopisuje próby. Starsza kopia z nieocenionym rozmieszczeniem nadal się wczytuje — nie oceniamy jej automatycznie podczas odczytu. Nowa interakcja sprawdza nowe wstawienie. Rodzajniki w wariantach wyboru są dodawane przy odczycie pytania, bez zmiany `items[].options` w kopii. Ukończenia, gwiazdki i format v1 pozostają bez zmian.
 
 **D-54:** koci rozmówcy nie dodają nowych pól do wyników ani kopii — obsada wynika z istniejącego identyfikatora sesji i sceny. Zmiana czterech lekcji Food na same historyjki dotyczy nowych sesji. Rozpoczęte sesje mają swoje zapisane zadania i są wznawiane bez skracania, zaś ukończenia i nagrody pozostają zgodne z D-52.

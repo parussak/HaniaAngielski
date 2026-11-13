@@ -12,8 +12,8 @@ function gaps(){const p=emptyProgress(),qs=m.exercises.filter(q=>q.kind==='gramm
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 test('pary: czerwony błysk zamiast przerwy, zapis błędu i jedno podsumowanie całej planszy',async({page})=>{
  await page.goto('./');await openMap(page);await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).click();
- await answerCurrent(page,modules,false);await expect(page.locator('.pair-board')).toBeVisible();await expect(page.locator('.feedback,.grammar-explanation')).toHaveCount(0);await expect(page.getByRole('button',{name:/Dalej/})).toHaveCount(0);await expect.poll(()=>page.locator('.match-flash').first().evaluate(el=>getComputedStyle(el).backgroundColor)).not.toBe('rgb(246, 183, 189)');
- await answerCurrent(page,modules);await expect(page.locator('.board-summary')).toContainText('Plansza ukończona');await expect(page.locator('.board-summary')).toContainText('2 / 3');await page.getByRole('button',{name:/Dalej/}).click();await finishCurrent(page,modules);
+ await answerCurrent(page,modules,false);await expect(page.locator('.pair-board')).toBeVisible();await expect(page.locator('.feedback,.grammar-explanation')).toHaveCount(0);await expect(page.getByRole('button',{name:/Dalej/})).toHaveCount(1);await expect.poll(()=>page.locator('.match-flash').first().evaluate(el=>getComputedStyle(el).backgroundColor)).not.toBe('rgb(246, 183, 189)');
+ await answerCurrent(page,modules);await expect(page.locator('.board-summary')).toContainText('Plansza ukończona');await expect(page.locator('.board-summary')).not.toContainText('poprawnie za pierwszym razem');await page.getByRole('button',{name:/Dalej/}).click();await finishCurrent(page,modules);
  const p=await exported(page);expect(p.sessions.at(-1)!.attempts.some(a=>!a.first&&a.corrected)).toBeTruthy();expect(p.sessions.at(-1)!.items).toHaveLength(5);
 });
 test('dwa zdania i dwa słowa: klik słowa i luki, odświeżenie i sprawdzenie planszy',async({page})=>{
@@ -24,6 +24,25 @@ test('dwa zdania i dwa słowa: klik słowa i luki, odświeżenie i sprawdzenie p
 test('rzeczywisty gest dotykowy przenosi słowo w lukę',async({page,context})=>{
  const p=gaps();await restore(page,p);const q=questionFor(modules,p.active!.items[0]);const token=page.getByRole('button',{name:q.answers[0],exact:true}),target=page.locator('.gap-target').first();await token.scrollIntoViewIfNeeded();const a=(await token.boundingBox())!,b=(await target.boundingBox())!,cdp=await context.newCDPSession(page);
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:a.x+a.width/2,y:a.y+a.height/2,id:1}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:b.x+b.width/2,y:b.y+b.height/2,id:1}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await expect(target).toContainText(q.answers[0]);await expect(page.locator('.gap-drag-ghost')).toHaveCount(0);
+});
+
+test('Dalej po błędzie i pustej luce kończy planszę bez blokady i bez odebrania gwiazdek',async({page})=>{
+ const p=gaps(),[a,b]=p.active!.items,qb=questionFor(modules,b);p.adventure={version:1,earned:23,purchases:{},completed:{}};await restore(page,p);
+ const gap=page.locator(`.gap-target[data-key=${JSON.stringify(a.key)}]`);await page.getByRole('button',{name:qb.answers[0],exact:true}).click();await gap.click();
+ await expect(gap).toHaveClass(/gap-incorrect/);await expect.poll(()=>gap.evaluate(el=>getComputedStyle(el).backgroundColor)).toBe('rgb(252, 226, 232)');await page.reload();await expect(gap).toHaveClass(/gap-incorrect/);
+ await page.getByRole('button',{name:/Dalej/}).click();await expect(page.locator('.summary')).toBeVisible();const saved=await exported(page);expect(saved.active).toBeNull();expect(saved.sessions.at(-1)!.attempts).toHaveLength(2);expect(saved.adventure!.earned).toBe(23);
+});
+
+test('wyjaśnienia po całej planszy zachowują zdania i luki, a czerwony znika po poprawie',async({page})=>{
+ const p=gaps(),[a,b]=p.active!.items,qa=questionFor(modules,a),qb=questionFor(modules,b);await restore(page,p);
+ const gapA=page.locator(`.gap-target[data-key=${JSON.stringify(a.key)}]`),gapB=page.locator(`.gap-target[data-key=${JSON.stringify(b.key)}]`);
+ await page.getByRole('button',{name:qb.answers[0],exact:true}).click();await gapA.click();await expect(page.locator('.board-explanation')).toHaveCount(0);
+ await page.getByRole('button',{name:qa.answers[0],exact:true}).click();await gapB.click();await expect(page.locator('.gap-explanation')).toHaveCount(2);await expect(page.locator('.gap-sentence')).toHaveCount(2);await expect(page.locator('.gap-incorrect')).toHaveCount(2);
+ await expect(page.locator('.board-explanation')).not.toContainText('poprawnie za pierwszym razem');await page.screenshot({path:'test-results/gaps-wrong-explanation-mobile.png',fullPage:true});
+ await gapB.click();await gapA.click();await expect(gapA).toHaveClass(/gap-correct/);await expect(gapA).not.toHaveClass(/gap-incorrect/);await expect(gapB).toHaveClass(/gap-incorrect/);
+ await page.getByRole('button',{name:qb.answers[0],exact:true}).click();await gapB.click();await expect(page.locator('.board-summary .answer-bank')).toBeVisible();await expect(page.locator('.gap-correct')).toHaveCount(2);await expect(page.locator('.board-explanation')).toContainText('Tak jest!');await page.screenshot({path:'test-results/gaps-correct-explanation-mobile.png',fullPage:true});
+ expect(await page.locator('.study-card').evaluate(el=>getComputedStyle(el).overflowY)).toBe('auto');await page.locator('.gap-explanation').last().scrollIntoViewIfNeeded();await expect(page.locator('.gap-explanation').last()).toBeInViewport();await page.screenshot({path:'test-results/gaps-explanation-scrolled-mobile.png',fullPage:true});
+ await page.getByRole('button',{name:/Dalej/}).click();await expect(page.locator('.summary')).toBeVisible();
 });
 
 test('błędne słowo można przenieść między lukami i odłożyć; bank zostawia puste miejsce',async({page})=>{
