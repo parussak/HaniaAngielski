@@ -23,3 +23,11 @@ function cloudError(error: unknown) {
         return 'Brak dostępu do zapisu w chmurze. Sprawdź reguły Firestore lub zaloguj się ponownie. Lokalna kopia jest zachowana.';
     return error instanceof Error && !code ? error.message : 'Połączenie z kontem jest niedostępne. Spróbuj ponownie później; możesz kontynuować naukę z lokalnym zapisem.';
 }
+import { speaker } from '../speech.ts';
+import type { Module } from '../core.ts';
+/** D-58: the listening switch lives on the device, outside the saved progress. */
+export function listeningSettingsView(modules: Module[]) {
+    const speech = speaker(), sample = modules.find(m => m.languageCode && m.words.length), language = sample?.languageCode, on = speech.enabled(), ready = speech.available(language);
+    const status = !on ? 'Słuchanie jest wyłączone. Zadania mają zwykłą formę.' : ready ? 'To urządzenie ma głos dla języka tego kursu.' : 'To urządzenie nie ma teraz głosu dla języka tego kursu. Zadania mają zwykłą formę — nic nie trzeba robić.';
+    return `<section class="panel listening-settings"><h2>Ćwiczenia ze słuchu</h2><p>W lekcjach można posłuchać słówek i rozmów. Bez dźwięku te same zadania pokazują się w zwykłej formie.</p><label for="listening"><input type="checkbox" id="listening" ${on ? 'checked' : ''}> Włącz ćwiczenia ze słuchu</label><p class="listening-status" aria-live="polite">${status}</p>${ready && sample ? `<button class="secondary" data-action="listen" data-say="${e(sample.words[0].back)}" data-lang="${e(language!)}">Sprawdź dźwięk</button>` : ''}</section>`;
+}

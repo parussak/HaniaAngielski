@@ -17,21 +17,23 @@ export function bankView(modules:Module[],s:Session,error?:ErrorFlash){
 }
 type SceneOnScreen=NonNullable<ReturnType<typeof sceneView>>;
 /** D-53: the conversation so far. Earlier lines stay, later lines wait for their gap. */
-export function sceneScriptView(modules:Module[],{scene,items,position}:SceneOnScreen,whole=false,actor?:SceneActor,session?:Session){
+export function sceneScriptView(modules:Module[],{scene,items,position}:SceneOnScreen,whole=false,actor?:SceneActor,session?:Session,say?:(text:string)=>string){
  let gap=0;const lines:string[]=[],speakers=[...new Set(scene.lines.map(line=>line.speaker))];
  for(const [index,line] of scene.lines.entries()){
   const first=gap,parts=line.text.split('___');
   const text=parts.map(e).reduce((html,part)=>{const g=gap++;return html+(whole||g<position?`<b class="scene-filled">${e(questionFor(modules,items[g]).answers[0])}</b>`:`<span class="dialogue-gap ${g===position?'scene-current':''}" ${g===position?'aria-label="luka do uzupełnienia"':'aria-hidden="true"'}>…</span>`)+part;});
   const now=!whole&&parts.length>1&&first<=position&&position<gap;
+  // D-58: a line can be heard once none of its gaps is open; an open gap would give the answer away.
+  let spoken=first;const complete=whole||gap<=position,heard=complete&&say?say(line.text.replace(/___/g,()=>questionFor(modules,items[spoken++]).answers[0])):'';
   const retry=now&&session?.phase==='feedback'&&session.lastCorrect===false?'<button class="secondary scene-line-retry" data-action="retry">Popraw tę linijkę</button>':'';
-  lines.push(`<div class="scene-message ${speakers.indexOf(line.speaker)%2?'scene-message-reply':''}" data-speaker="${e(line.speaker)}">${actor?`<div class="scene-line-avatar">${actor(line.speaker,index,whole)}</div>`:''}<div class="dialogue-line ${speakers.indexOf(line.speaker)%2?'dialogue-reply':''} ${now?'scene-now':''}"><span class="dialogue-speaker">${e(line.speaker)}</span><p>${text}</p>${retry}</div></div>`);
+  lines.push(`<div class="scene-message ${speakers.indexOf(line.speaker)%2?'scene-message-reply':''}" data-speaker="${e(line.speaker)}">${actor?`<div class="scene-line-avatar">${actor(line.speaker,index,whole)}</div>`:''}<div class="dialogue-line ${speakers.indexOf(line.speaker)%2?'dialogue-reply':''} ${now?'scene-now':''}"><span class="dialogue-speaker">${e(line.speaker)}</span><p>${text}</p>${heard}${retry}</div></div>`);
   // Lines after the current gap wait for their turn.
   if(!whole&&gap>position)break;
  }
  return `<div class="scene" data-key="${e(items[position].key)}" data-position="${position+1}" role="group" aria-label="Rozmowa: ${e(scene.title)}">${lines.join('')}</div>`;
 }
-export function sceneSummaryView(modules:Module[],s:Session,view:SceneOnScreen,actor?:SceneActor){
- return `<div class="feedback correct board-summary scene-summary" role="status"><h2>Rozmowa ukończona!</h2><p>Dobra robota! Przeczytaj rozmowę i wyjaśnienia.</p>${sceneScriptView(modules,view,true,actor)}<ul>${view.items.map(i=>{const q=questionFor(modules,i);return `<li><strong>${e(q.answers[0])}</strong> — ${e(q.explanation)}</li>`;}).join('')}</ul></div><button class="primary" data-action="next">Dalej →</button>`;
+export function sceneSummaryView(modules:Module[],s:Session,view:SceneOnScreen,actor?:SceneActor,say?:(text:string)=>string){
+ return `<div class="feedback correct board-summary scene-summary" role="status"><h2>Rozmowa ukończona!</h2><p>Dobra robota! Przeczytaj rozmowę i wyjaśnienia.</p>${sceneScriptView(modules,view,true,actor,undefined,say)}<ul>${view.items.map(i=>{const q=questionFor(modules,i);return `<li><strong>${e(q.answers[0])}</strong> — ${e(q.explanation)}</li>`;}).join('')}</ul></div><button class="primary" data-action="next">Dalej →</button>`;
 }
 export function bankExplanationView(modules:Module[],s:Session){
  const group=boardItems(s).slice().sort((a,b)=>a.key.localeCompare(b.key));

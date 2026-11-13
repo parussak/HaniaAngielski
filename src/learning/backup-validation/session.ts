@@ -5,6 +5,7 @@ export const validItem = (i: unknown): boolean => obj(i) && str(i.key) && str(i.
     (i.pairGroup===undefined||str(i.pairGroup)&&i.type==='word'&&i.input==='choice'&&i.presentation===undefined)&&
     (i.gapGroup===undefined||str(i.gapGroup)&&i.type==='exercise'&&i.input==='choice'&&i.presentation==='bank'&&i.pairGroup===undefined)&&
     (i.presentation===undefined||i.presentation==='bank'&&i.type==='exercise'&&i.input==='choice')&&
+    (i.listen===undefined||i.listen===true&&i.type==='word'&&i.pairGroup===undefined&&i.gapGroup===undefined&&i.sceneGroup===undefined&&i.presentation===undefined&&i.options===undefined)&&
     (i.sceneGroup===undefined||str(i.sceneGroup)&&i.type==='exercise'&&i.pairGroup===undefined&&i.gapGroup===undefined&&i.presentation===undefined)&&
     (i.options === undefined || Array.isArray(i.options) && i.options.length >= 2 && i.options.length <= 4 && i.options.every(str) && new Set(i.options).size === i.options.length);
 export const validSession = (v: unknown, completed: boolean): boolean => {

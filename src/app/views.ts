@@ -1,5 +1,5 @@
 import {houseView} from '../views/house.ts';
-import { accountView as renderAccountView } from '../views/account.ts';
+import { accountView as renderAccountView, listeningSettingsView } from '../views/account.ts';
 import { journeyView, lessonIntro } from '../adventure-view.ts';
 import { lessons,journeyKey } from '../adventure.ts';
 import { currentJourney, currentCourse, courseModules, courseJourneys } from './selectors.ts';
@@ -59,7 +59,7 @@ export function createViews(state: AppState, sync: ProgressSync, syncLabel: () =
     function summary() { return summaryView(state, home); }
     function progressView() { return renderProgressView(state); }
     function backupView() { return renderBackupView(state); }
-    function accountView() { return renderAccountView(state, sync, syncLabel()); }
+    function accountView() { return renderAccountView(state, sync, syncLabel()) + listeningSettingsView(courseModules(state)); }
     function shell(content: string) { return shellView(content, state, syncLabel()); }
     const views: Record<AppState['screen'], () => string> = { home, warmup:()=>courseContext(state)+warmupView(state), journeys: journeyList, 'module-list': moduleList, setup, study, progress: progressView, backup: backupView, account: accountView, summary, map: mapView, 'lesson-intro': introView, house: homeForCats, courses: () => coursesView(state), 'course-practice': () => coursePracticeView(state) };
     return () => shell((state.screen!=='home'&&state.screen!=='study'?updateBanner(pwa):'')+views[state.screen]());

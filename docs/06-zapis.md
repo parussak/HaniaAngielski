@@ -75,6 +75,13 @@ Kopia pozostaje w wersji 1 i odczytuje wcześniejsze pliki. Obsługa nowych pól
 
 Dotychczasowe wpisy ukończenia `{ at }` oraz sesje bez znacznika pozostają oryginalną wersją lekcji. Nowo rozpoczynana nieukończona lekcja korzysta z opcjonalnego `update`, jeśli jej definicja je zawiera. Taka sesja zapisuje `lesson.edition: 2`, a pierwsze ukończenie zachowuje ten znacznik w `adventure.completed[lessonKey]`. Sam wybór wydania nie dopisuje migracji ani nagród. Aktywna sesja nadal przechowuje konkretną listę pytań i miejsce odpowiedzi, a stare pytania pozostają dostępne dla jej wznowienia i powtórek. Nowe lekcje drugiej mapy bez `update` nie potrzebują znacznika wydania 2. Format kopii pozostaje w wersji 1; aktualna walidacja obsługuje oba warianty. Limity historii i synchronizacji bez zmian. [Pełna ochrona wyników](wdrozenie-food.md#ochrona-wyników-i-nagród).
 
+### Słuchanie — D-58
+
+- Element sesji może mieć opcjonalne `listen: true` — tylko zwykłe słówko, bez par, luk i scen. Znacznik mówi „to zadanie można pokazać jako słuchanie”; o tym, czy tak się stanie, decyduje urządzenie w chwili wyświetlenia. Ta sama sesja wznowiona na telefonie bez głosu ma zwykłą formę.
+- Wynik zapisuje się jak dla każdego zadania; w kolejce błędów element nie ma znacznika. Sesje i kopie bez pola działają bez zmian, kopia zostaje w wersji 1.
+- Przełącznik „Ćwiczenia ze słuchu” jest zapisany w `localStorage` urządzenia (`male-kroki:sluchanie`), poza postępami, kopią i synchronizacją. Gdy pamięć przeglądarki jest zablokowana, przełącznik działa do zamknięcia strony.
+- Słuchanie niczego nie zapisuje: odtworzenie nie zmienia sesji, wyników ani historii.
+
 ### Sceny dialogowe — D-53
 
 - Element sesji może mieć opcjonalne `sceneGroup` — klucz pierwszej luki sceny. Luki jednej sceny stoją obok siebie; kopia z rozerwaną grupą jest odrzucana. Sesje i kopie bez tego pola działają bez zmian, format kopii zostaje w wersji 1.

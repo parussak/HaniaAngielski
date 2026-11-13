@@ -1,5 +1,36 @@
 # Testy — podział i zasady
 
+## D-58 — słuchanie
+
+Automatyczne testy używają **atrapy syntezy mowy**: sprawdzają, co aplikacja każe odczytać, w jakim języku i tempie, oraz co robi bez dźwięku. Nie sprawdzają, czy telefon naprawdę wydaje dźwięk ani jak brzmi głos — to obejmuje lista ręczna niżej.
+
+`listening.test.ts` (11 testów, dane syntetyczne): głos musi pasować do języka kursu; brak syntezy, głosu lub błąd przeglądarki to brak dźwięku bez wyjątku; odtwarzanie bez limitu w tempie zwykłym i wolniejszym; offline tylko głos zapisany na urządzeniu; błąd odtwarzania wyłącza dźwięk do końca wizyty, a przerwanie i brak pierwszego dotknięcia nie są błędem; przełącznik pamiętany na urządzeniu, poza postępami, także przy zablokowanej pamięci; najwyżej dwa zwykłe słówka w sesji, nigdy pary, luki ani sceny; odczytywana jest pełna odpowiedź z rodzajnikiem, a długie hasło nie jest dyktandem; pytanie, odpowiedzi i zasady a/an są identyczne ze zwykłą formą; znacznik przechodzi kopię v1, wznowienie i sesję bez dźwięku, a zepsuty jest odrzucany; ten sam kod działa dla kursu z innym językiem i nie zawiera nazw modułów, adresów sieciowych ani plików dźwiękowych; lekcje słówek Food dostają słuchanie po angielsku.
+
+`browser/listening.spec.ts` (8 scenariuszy, telefon 390 px): „posłuchaj i wybierz” oraz „posłuchaj i wpisz” z odczytaniem przy pokazaniu zadania, trzykrotnym „Posłuchaj jeszcze raz”, „Wolniej”, przyciskami co najmniej 44 px, brakiem pisanego hasła przed odpowiedzią, błędem, odświeżeniem, ponowną próbą, +3 ★ i znacznikami w kopii; cztery powroty do zwykłej formy — urządzenie bez głosu, tylko polski głos, offline z głosem wymagającym sieci, błąd odtwarzania — każdy kończy lekcję bez żadnego elementu słuchania i bez alarmu; przełącznik w „Konto” z próbą dźwięku, zachowany po odświeżeniu i włączany klawiaturą; głośnik w scenie tylko przy kwestiach bez otwartej luki, z klawiatury i w podsumowaniu; na zbudowanej aplikacji — słuchanie offline po zamknięciu strony.
+
+Pozostałe pliki przeglądarkowe działają na **urządzeniu bez głosu** (`browser/fixtures.ts`), żeby wynik nie zależał od głosów komputera, na którym biegną testy. Dzięki temu cały dotychczasowy zestaw sprawdza zarazem zwykłą formę zadań oznaczonych do słuchania. Pomocnik `browser/helpers.ts` rozpoznaje zadanie ze słuchu po kluczu elementu.
+
+Weryfikacja 13 listopada 2026, Edge (`HANIA_BROWSER_CHANNEL=msedge`): `check:content`, budowanie z TypeScript i 206 zasobami PWA oraz kontrola odnośników przeszły. Node: **275/275**. Playwright: **131/131** na zbudowanej aplikacji; **117 przeszło, 14 pominiętych** na wersji deweloperskiej (pominięte wymagają zbudowanej PWA). Scenariusze słuchania przeszły dodatkowo w trzech powtórzeniach. Nie testowano na fizycznym telefonie, z prawdziwym głosem ani na prawdziwym koncie.
+
+### Lista kontroli ręcznej — głosy na Androidzie i w PWA
+
+Do wykonania na telefonie Hani, najlepiej w zainstalowanej aplikacji (PWA) i osobno w karcie Chrome. Wynik wpisz przy dacie.
+
+1. **Konto → Ćwiczenia ze słuchu:** komunikat mówi, że urządzenie ma głos; „Sprawdź dźwięk” odczytuje angielskie słowo po angielsku, nie z polską wymową.
+2. **Brak głosu:** jeśli komunikat mówi o braku głosu, w ustawieniach Androida sprawdź „Zamiana tekstu na mowę” (silnik Google, pobrany język angielski). Po pobraniu głosu wróć do aplikacji i odśwież.
+3. **Lekcja słówek:** zadanie „Posłuchaj i wybierz” odczytuje się samo po pojawieniu. Jeśli nie — czy działa „Posłuchaj jeszcze raz”? (Przeglądarka może wymagać pierwszego dotknięcia.)
+4. **„Wolniej”:** wyraźnie wolniej i nadal zrozumiale.
+5. **Rodzajnik:** przy haśle z a/an słychać rodzajnik, np. „an apple”.
+6. **Posłuchaj i wpisz:** klawiatura ekranowa nie zasłania przycisków słuchania i „Sprawdź”; po odpowiedzi widać poprawną formę.
+7. **Scena:** głośnik przy wcześniejszej kwestii odczytuje całe zdanie; kolejne dotknięcie przerywa poprzednie odtwarzanie, nie nakłada się na nie.
+8. **Tryb samolotowy:** czy głos nadal działa? Jeśli nie, zadania mają zwykłą formę i lekcję da się ukończyć.
+9. **Wyciszony telefon i słuchawki Bluetooth:** aplikacja nie zgłasza błędu; po podgłośnieniu dźwięk wraca.
+10. **Zablokowanie ekranu w trakcie odtwarzania i powrót:** lekcja jest na tym samym zadaniu, przyciski działają.
+11. **Przełącznik wyłączony:** zadania w zwykłej formie; po zamknięciu i otwarciu aplikacji nadal wyłączony.
+12. **Drugi kurs (gdy powstanie):** głos i wymowa odpowiadają językowi kursu.
+
+Znane ograniczenia do potwierdzenia na urządzeniu: Chrome na Androidzie bywa, że podaje listę głosów z opóźnieniem — aplikacja przerysowuje wtedy zadanie, gdy głos się pojawi; jakość i dostępność głosu zależą od silnika mowy telefonu, nie od aplikacji.
+
 ## D-57 — motywujący widok postępów
 
 Weryfikacja 13 listopada 2026: **264/264 testy Node**, także na rozszerzonej bibliotece, budowanie z walidacją materiałów i 206 zasobami offline oraz kontrola dokumentacji przeszły. Pełne uruchomienie Chrome dało 121/123: stary test konta oczekiwał usuniętego licznika, a nowy przykład ukończonej mapy nie oznaczał dawnych premii etapów jako już rozliczonych. Poprawiono test zachowania danych konta i stabilny przykład importu, bez zmiany logiki nagród. Po tych poprawkach, ostrożniejszym odczycie archiwalnych powrotów i kontroli następnego kroku innego kursu przeszło **13/13 końcowych scenariuszy postępów, archiwum i kont**. Obejrzano pusty i wypełniony widok mobilny przy 320 px. Nie testowano na fizycznym telefonie ani rzeczywistym koncie Firebase; scenariusze kont używają istniejącego adaptera testowego.

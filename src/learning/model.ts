@@ -84,6 +84,8 @@ export interface Item {
     gapGroup?: string;
     pairGroup?: string;
     sceneGroup?: string;
+    /** D-58: shown as a listening task when the device can speak; otherwise in its ordinary form. */
+    listen?: true;
     presentation?: 'bank';
     options?: string[];
     key: string;
@@ -101,7 +103,7 @@ export interface Attempt {
     corrections: number;
     corrected: boolean;
 }
-export function plainItem(item:Item):Item{const {pairGroup,gapGroup,sceneGroup,presentation,options,...plain}=item;return plain;}
+export function plainItem(item:Item):Item{const {pairGroup,gapGroup,sceneGroup,listen,presentation,options,...plain}=item;return plain;}
 export interface Session {
     boardSummary?: true;
     gapSelection?: string;

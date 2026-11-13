@@ -138,6 +138,13 @@
 .scene .scene-current{min-width:64px;background:#fff;border-bottom-color:#7851b3}
 .scene-summary .scene{margin:12px 0}
 .scene-summary li{text-align:left}
+.listen{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:12px 0}
+.listen button{min-height:48px;padding:10px 16px}
+.listen-options .listen-option{min-height:56px}
+.listen-picture{display:inline-block;margin:0 8px;font-size:26px;vertical-align:middle;object-fit:contain}
+.scene-say{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;margin-top:6px;border:1px solid #d8c6ed;border-radius:12px;background:#fff;color:#65468d;cursor:pointer}
+.listening-settings label{display:flex;align-items:center;gap:10px;min-height:44px;font-weight:600}
+.listening-settings input{width:22px;height:22px}
 .scene-message{display:flex;align-items:flex-start;gap:8px;min-width:0}.scene-message-reply{flex-direction:row-reverse}.scene-message>.dialogue-line{flex:1;min-width:0;margin:2px 0}.scene-line-avatar{flex:0 0 44px;width:44px;height:48px;display:grid;place-items:center;background:#eee5fa;border:1px solid #d9c9ec;border-radius:50%;overflow:hidden}.scene-line-avatar .scene-actor,.scene-summary .scene-line-avatar .scene-actor{width:40px}.studying .scene-line-avatar .scene-actor .cat-mascot .cat-artwork{height:44px}.scene-line-retry{margin-top:8px;min-height:44px;width:100%}
 .lesson-resume-actions{display:grid;gap:12px}.lesson-resume-actions button{min-height:48px;width:100%}
 .lesson-scene-badge,.stage-scene-count{display:inline-flex;align-items:center;gap:4px;max-width:100%;padding:3px 8px;border:1px solid #d8c3eb;border-radius:10px;background:#f5e9fa;color:#65437d;font-size:12px;font-weight:600;line-height:1.5;white-space:normal}

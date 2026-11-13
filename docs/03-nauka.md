@@ -1,5 +1,22 @@
 # Nauka — prowadzenie i utrwalanie
 
+## D-58 — słuchanie — wdrożone
+
+Cel: Hania słyszy poznawane słowa i rozmowy. Bez presji czasu i bez limitu odtworzeń. Mechanika jest wspólna dla wszystkich kursów; język mowy wynika z kursu.
+
+1. **Źródło dźwięku:** synteza mowy przeglądarki. Bez zewnętrznych usług, bez plików dźwiękowych w paczce PWA. Obsługa jest w jednym module, który można zastąpić odtwarzaniem nagrań bez zmiany ćwiczeń.
+2. **Posłuchaj i wybierz:** słychać hasło, a do wyboru są jego tłumaczenia z obrazkami. Pisanego hasła nie widać przed odpowiedzią.
+3. **Posłuchaj i wpisz:** słychać krótkie hasło (najwyżej trzy wyrazy) i trzeba je wpisać.
+4. **Głośnik w scenach:** przy każdej kwestii rozmowy, która nie ma już nieuzupełnionej luki, oraz w podsumowaniu sceny. Kwestii z otwartą luką nie odczytujemy, bo zdradziłaby odpowiedź.
+5. **Zawsze** są przyciski „Posłuchaj jeszcze raz” i „Wolniej”. Można słuchać dowolnie wiele razy; nic nie znika po czasie.
+6. **Powrót do zwykłej formy:** gdy nie ma głosu w języku kursu, urządzenie jest offline i głos wymaga sieci, odtwarzanie zgłosi błąd albo słuchanie jest wyłączone — to samo zadanie pokazuje się jak dotąd (tłumaczenie do wyboru lub wpisania). Odpowiedź, ocena i wynik są te same. Lekcja nigdy nie czeka na dźwięk.
+7. **Ustawienie:** przełącznik „Ćwiczenia ze słuchu” z przyciskiem próby dźwięku. Zapamiętany na urządzeniu, nie w postępach.
+8. **Ocena:** ta sama co w pozostałych zadaniach, razem z zasadami a/an. Słuchanie zmienia tylko sposób pokazania pytania.
+9. **Dobór:** w nowej sesji lekcji najwyżej dwa słówka dostają słuchanie — jedno do wyboru, jedno do wpisania. Rozpoczęte sesje nie są przebudowywane; znacznik w sesji jest opcjonalny, kopia zostaje w wersji 1.
+10. Telefon, klawiatura, przyciski co najmniej 44 px, offline. Brak dźwięku nie jest błędem i nie pokazuje alarmu; stan dźwięku widać w ustawieniach.
+
+Wdrożenie: hasło jest odczytywane raz, gdy zadanie się pojawia, a potem na życzenie. Po odpowiedzi można posłuchać poprawnej formy. Odczytujemy pełną formę z rodzajnikiem, jeśli hasło go ma. Przełącznik jest na ekranie „Konto”, także bez logowania. Słuchanie dostają lekcje map (także Poziom legendarny i trening); klasyczne tryby modułu pozostają bez zmian. Automatyczne testy używają atrapy syntezy mowy — [głosy prawdziwych urządzeń](07-testy.md#d-58--słuchanie) wymagają sprawdzenia ręcznego.
+
 ## D-57 — co mierzy widok postępów — wdrożone
 
 - **Przygoda:** ukończone klucze lekcji z `adventure.completed`, w aktualnej projekcji map i planów tego konta. Powtórzenie lekcji nie dodaje nowego ukończenia, błędy nie zmniejszają wyniku. Pasek oznacza ukończenie konkretnej mapy, nie zapamiętanie całego materiału. Brakujące mapy są sygnalizowane; nie udajemy pełnego zestawu.

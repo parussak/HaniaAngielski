@@ -9,6 +9,7 @@ import { deadline, sdk } from './services/firebase-client.ts';
 import { createAccountController } from './controllers/account.ts';
 import { bindAppEvents } from './app/events.ts';
 import { createRenderer } from './app/renderer.ts';
+import { onSpeechChange } from './speech.ts';
 import { startApplication } from './app/startup.ts';
 import { AppState } from './app/state.ts';
 import { createViews } from './app/views.ts';
@@ -51,6 +52,8 @@ const sync = new ProgressSync({
 const scheduler = createSyncScheduler(root, state, sync);
 const renderScreen = createViews(state, sync, syncLabel);
 const renderer = createRenderer(root, state, renderScreen);
+// D-58: voices can appear late or sound can fail; redraw so a task moves between listening and its ordinary form.
+onSpeechChange(() => { if (!state.ready || state.busy) return; const typed = root.querySelector<HTMLInputElement>('#answer')?.value; renderer.render(); const input = root.querySelector<HTMLInputElement>('#answer'); if (input && typed) input.value = typed; });
 const progressService = createProgressController(state, { sync, run, render, scheduleSync });
 const backups = createBackupController(state, { mutate, getHistoryPage: id => progressService.getHistoryPage(id), run });
 const courses = createCourseController(state, { read: key => readStored(key), write: writeStored });

@@ -10,6 +10,7 @@ import {homeFor} from '../house/progress.ts';
 import {currentCourse} from './selectors.ts';
 import {bindNavigation} from './navigation.ts';
 import {bindGapDrag} from './gap-drag.ts';
+import {speaker} from '../speech.ts';
 interface EventPorts {
     accounts: ReturnType<typeof createAccountController>;
     house: ReturnType<typeof createHouseController>;
@@ -62,6 +63,8 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
         if (!el)
             return;
         ev.preventDefault();
+        // D-58: listening changes no progress, so it neither saves nor redraws — unless sound just failed.
+        if (el.dataset.action === 'listen') { if (!speaker().speak(el.dataset.say ?? '', el.dataset.lang, el.dataset.slow === 'true')) void run(async () => {}); return; }
         void run(() => action(el.dataset.action!, el));
     });
     root.addEventListener('submit', ev => {
@@ -79,7 +82,8 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
         proxy.dataset.answer = input.value;
         void run(() => action('answer', proxy));
     });
-    root.addEventListener('change', ev => { learning.handleSettingsChange(ev.target as HTMLInputElement); void backups.handleChange(ev); });
+    root.addEventListener('change', ev => { const input = ev.target as HTMLInputElement; if (input.id === 'listening') { speaker().setEnabled(input.checked); void run(async () => {}); return; }
+        learning.handleSettingsChange(ev.target as HTMLInputElement); void backups.handleChange(ev); });
     window.addEventListener('online', () => { if (sync.cache?.dirty || !state.progress.active)
         scheduleSync(0); });
     window.addEventListener('focus', () => { if (state.user && !state.progress.active)

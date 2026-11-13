@@ -1,6 +1,8 @@
 import { AppState } from './state.ts';
 import {saveNavigation,restoreViewContext} from './navigation.ts';
+import {speaker} from '../speech.ts';
 export function createRenderer(root: HTMLDivElement, state: AppState, renderScreen: () => string) {
+    let spoken = '';
     function render() {
         saveNavigation(state);
         const historyContext = `${state.user?.uid ?? 'guest'}:${state.progress.history?.head ?? 'none'}`;
@@ -66,6 +68,11 @@ export function createRenderer(root: HTMLDivElement, state: AppState, renderScre
             const target = focusId ? document.getElementById(focusId) : Array.from(root.querySelectorAll<HTMLElement>('[data-action]')).find(el => el.dataset.action === focusAction);
             target?.focus({ preventScroll: true });
         }
+        // D-58: a listening task is read out once when it appears; the buttons repeat it without limit.
+        const listen = state.busy ? null : root.querySelector<HTMLElement>('.listen[data-autoplay]');
+        const task = listen ? `${state.progress.active?.id}:${state.progress.active?.index}:${listen.dataset.key}` : '';
+        if (listen && task !== spoken) speaker().speak(listen.dataset.say ?? '', listen.dataset.lang);
+        if (!state.busy) { if (!listen && spoken) speaker().stop(); spoken = task; }
         state.renderedScreen = state.screen;
         restoreViewContext(root);
     }
