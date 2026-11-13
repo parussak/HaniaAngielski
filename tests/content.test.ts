@@ -7,7 +7,13 @@ test('materiały Food mają źródła, komplet słów i wszystkie zagadnienia gr
   const m=modules[0];
   assert.equal(m.id,'unit-2-food'); assert.equal(m.order,2);
   assert.equal(m.words.length,97); assert.equal(m.exercises.filter(q=>q.kind!=='dialogue').length,189);
-  assert.equal(m.exercises.filter(q=>q.kind==='dialogue').length,12);
+  const dialogues=m.exercises.filter(q=>q.kind==='dialogue');
+  // The original dialogues stay; each new scene contributes one task per gap.
+  assert.equal(dialogues.filter(q=>!q.scene).length,12);
+  const sceneGapIds=(m.scenes??[]).flatMap(scene=>scene.gapIds);
+  assert.equal(new Set(sceneGapIds).size,sceneGapIds.length);
+  assert.deepEqual(new Set(dialogues.filter(q=>q.scene).map(q=>q.id)),new Set(sceneGapIds));
+  assert.equal(dialogues.length,12+sceneGapIds.length);
   assert.ok(m.words.every(w=>w.source)); assert.ok(m.exercises.every(q=>q.source));
   for(const rule of m.grammar) assert.ok(m.exercises.some(q=>q.ruleId===rule.id));
   assert.ok(m.words.some(w=>w.back==='flour'));
