@@ -4,6 +4,7 @@ import {sceneActor} from './scene-actors.ts';
 import {sceneView} from '../learning/scenes.ts';
 import {listeningTask} from '../learning/listening.ts';
 import {speaker} from '../speech.ts';
+import {speechButtons} from './speech-controls.ts';
 import {lessonSummaryActions} from './lesson-summary-actions.ts';
 import { catView } from './cat.ts';
 import { endingCat, responseCat } from '../cats.ts';
@@ -32,8 +33,7 @@ function explanationView(q: Exercise, state: Readonly<AppState>, moduleId: strin
 }
 /** "Listen again" and "slower" are always there, as often as the learner likes. */
 function listenButtons(task: {text:string;language:string}, key: string, autoplay: boolean) {
-    const data=`data-action="listen" data-say="${e(task.text)}" data-lang="${e(task.language)}"`;
-    return `<div class="listen" data-key="${e(key)}" ${autoplay?'data-autoplay="true"':''} ${data.replace('data-action="listen" ','')}><button class="secondary listen-play" ${data}>${icon('sound')} Posłuchaj jeszcze raz</button><button class="secondary listen-slow" ${data} data-slow="true">Wolniej</button></div>`;
+    return `<div class="listen" data-key="${e(key)}" ${autoplay?'data-autoplay="true"':''} data-say="${e(task.text)}" data-lang="${e(task.language)}">${speechButtons(task.text,task.language,{playLabel:'Posłuchaj jeszcze raz',playClass:'secondary listen-play',slowClass:'secondary listen-slow'})}</div>`;
 }
 export function studyView(state: Readonly<AppState>) {
     const s = state.progress.active;
@@ -56,7 +56,7 @@ export function studyView(state: Readonly<AppState>) {
     const language=state.modules.find(m=>m.id===item.moduleId)?.languageCode;
     const heard=!scene&&!s.boardSummary?listeningTask(state.modules,item):undefined;
     const listen=heard&&speaker().available(heard.language,heard.text)?heard:undefined,asking=!!listen&&s.phase!=='feedback';
-    const say=(text:string)=>speaker().available(language,text)?`<button class="scene-say" data-action="listen" data-say="${e(text)}" data-lang="${e(language!)}" aria-label="Posłuchaj tej kwestii">${icon('sound')}</button>`:'';
+    const say=(text:string)=>speaker().available(language,text)?`<span class="scene-audio">${speechButtons(text,language!,{playLabel:'',playClass:'scene-say',slowClass:'scene-slow',playAria:'Posłuchaj tej kwestii',slowAria:'Posłuchaj tej kwestii wolniej'})}</span>`:'';
     let card = '';
     if(asking)card=`<div class="exercise-label">${icon('sound')} POSŁUCHAJ</div><h2 class="question">${listen!.choices?'Posłuchaj i wybierz, co to znaczy.':'Posłuchaj i wpisz to, co słyszysz.'}</h2>${listenButtons(listen!,item.key,true)}`;
     else card = `<div class="exercise-label">${icon(item.type === 'word' ? 'cards' : q.kind === 'grammar' ? 'book' : 'spark')} ${item.type === 'word' ? 'FISZKA · '+translationPrompt(state.modules.find(m=>m.id===item.moduleId)!).toLocaleUpperCase('pl') : q.kind === 'dialogue' ? 'POROZMAWIAJMY'+(scene?' · '+e(scene.scene.title.toLocaleUpperCase('pl')):'') : q.kind === 'grammar' ? 'MAŁY KROK W GRAMATYCE' : 'SŁÓWKO PO SŁÓWKU'}</div><h2 class="question">${e(q.prompt)}</h2>`;

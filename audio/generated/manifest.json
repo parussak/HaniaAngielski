@@ -31,7 +31,7 @@
       "encoding": {
         "codec": "libopus",
         "channels": 1,
-        "bitrate": 16000,
+        "bitrate": 24000,
         "sampleRate": 24000,
         "application": "voip"
       },
@@ -56,7 +56,7 @@
           "key": "unit-2-food:scene:food-scene-drinks:line:0",
           "kind": "scene-line",
           "text": "Would you like anything to drink?",
-          "clip": "07f1c325e5ddc46229f00ea17302ce4fe0318f60ca4479a3db8035d9611ad162",
+          "clip": "662e90940c2a58226b8222736b06619ccb9597702678a8c694c955afb14c8871",
           "sceneId": "food-scene-drinks",
           "line": 0,
           "speaker": "Kelner"
@@ -65,7 +65,7 @@
           "key": "unit-2-food:scene:food-scene-drinks:line:1",
           "kind": "scene-line",
           "text": "I'd like a strawberry milkshake, please.",
-          "clip": "3112dfde685047c85fdc0709c249908a34211d0615a422fac236a44b33f90d1a",
+          "clip": "9db6b3fc6c2215dcc4656ca597ade6fd53e9ee99ca83935f188f8c1851a7c337",
           "sceneId": "food-scene-drinks",
           "line": 1,
           "speaker": "Gość"
@@ -74,7 +74,7 @@
           "key": "unit-2-food:scene:food-scene-drinks:line:2",
           "kind": "scene-line",
           "text": "Anything else?",
-          "clip": "0dc763c17f40a0b552d42f2e648694f9bfa237ef3d7d2ee128dbfdff2a87d85c",
+          "clip": "7ca78be4867c7b84791ac342b83fc0663c3e92daac57ed6856583391053af5b5",
           "sceneId": "food-scene-drinks",
           "line": 2,
           "speaker": "Kelner"
@@ -83,7 +83,7 @@
           "key": "unit-2-food:scene:food-scene-drinks:line:3",
           "kind": "scene-line",
           "text": "Can I have some chips, please?",
-          "clip": "ef2d5c5d16d2ac9f790361008de9ae0bc9bed0c9c2c5260785599e79ddfce2c7",
+          "clip": "79d698c419ba208fabc06a8295a6066d6535649bd3b3500c4115ec61a679e1be",
           "sceneId": "food-scene-drinks",
           "line": 3,
           "speaker": "Gość"
@@ -92,7 +92,7 @@
           "key": "unit-2-food:scene:food-scene-drinks:line:4",
           "kind": "scene-line",
           "text": "Enjoy your meal!",
-          "clip": "b7d0026eb554bfa8512383f25bea8d1714ac42963b90e0ed8a73eb5b882d3bae",
+          "clip": "ecd47b60c791f723f5d5457e4e6166c54f9347c92084079de6106447d291208d",
           "sceneId": "food-scene-drinks",
           "line": 4,
           "speaker": "Kelner"
@@ -101,7 +101,7 @@
           "key": "unit-2-food:scene:food-scene-order:line:0",
           "kind": "scene-line",
           "text": "What would you like?",
-          "clip": "fa586b00a310e073de2401adb3167589b645145aa0f37950c8839a2eb3c59277",
+          "clip": "f889109d4a4ceac7fd712e87d55987c2a01efa74dc684754ace785ac5fe55816",
           "sceneId": "food-scene-order",
           "line": 0,
           "speaker": "Kelner"
@@ -110,7 +110,7 @@
           "key": "unit-2-food:scene:food-scene-order:line:1",
           "kind": "scene-line",
           "text": "Can I have a chicken sandwich, please?",
-          "clip": "b40fac931d1b849ccad68d43187fe664f44b02bc5a6fc169b742e3435c1d5d9f",
+          "clip": "0a246852494596233eab2e03c2d3aa3b26392fb6fad8fb9936bf1dec3fe99d01",
           "sceneId": "food-scene-order",
           "line": 1,
           "speaker": "Gość"
@@ -119,7 +119,7 @@
           "key": "unit-2-food:scene:food-scene-order:line:2",
           "kind": "scene-line",
           "text": "Would you like anything to drink?",
-          "clip": "07f1c325e5ddc46229f00ea17302ce4fe0318f60ca4479a3db8035d9611ad162",
+          "clip": "662e90940c2a58226b8222736b06619ccb9597702678a8c694c955afb14c8871",
           "sceneId": "food-scene-order",
           "line": 2,
           "speaker": "Kelner"
@@ -128,7 +128,7 @@
           "key": "unit-2-food:scene:food-scene-order:line:3",
           "kind": "scene-line",
           "text": "I'd like a lemonade, please.",
-          "clip": "1aff2bf8759e052d46757dc868ee64fdb37d4ce99331eed4832c75941456eb90",
+          "clip": "c2b3f9f2a1a54133a3a3c92575e1874c74a5d054d99d3ef2c7810ab5e3eb8b5f",
           "sceneId": "food-scene-order",
           "line": 3,
           "speaker": "Gość"
@@ -137,7 +137,7 @@
           "key": "unit-2-food:scene:food-scene-order:line:4",
           "kind": "scene-line",
           "text": "Anything else?",
-          "clip": "0dc763c17f40a0b552d42f2e648694f9bfa237ef3d7d2ee128dbfdff2a87d85c",
+          "clip": "7ca78be4867c7b84791ac342b83fc0663c3e92daac57ed6856583391053af5b5",
           "sceneId": "food-scene-order",
           "line": 4,
           "speaker": "Kelner"
@@ -146,7 +146,7 @@
           "key": "unit-2-food:scene:food-scene-order:line:5",
           "kind": "scene-line",
           "text": "Can I have a bottle of water, please?",
-          "clip": "d7c2f59f5ccd45e0c4f1635a28400a45da8597a24326f800954a92ce770912d7",
+          "clip": "96bb6d1d0794b629911e68afde08e6eb6071bcf2ec691b1aad4f0aee30eb52ab",
           "sceneId": "food-scene-order",
           "line": 5,
           "speaker": "Gość"
@@ -155,7 +155,7 @@
           "key": "unit-2-food:scene:food-scene-order:line:6",
           "kind": "scene-line",
           "text": "Enjoy your meal!",
-          "clip": "b7d0026eb554bfa8512383f25bea8d1714ac42963b90e0ed8a73eb5b882d3bae",
+          "clip": "ecd47b60c791f723f5d5457e4e6166c54f9347c92084079de6106447d291208d",
           "sceneId": "food-scene-order",
           "line": 6,
           "speaker": "Kelner"
@@ -164,7 +164,7 @@
           "key": "unit-2-food:scene:food-scene-picnic:line:0",
           "kind": "scene-line",
           "text": "Would you like to have a picnic in the park?",
-          "clip": "be4f51a58ecfe4fe071257e99956453b30d0ed331c6503dbb62176b14bb5bfe5",
+          "clip": "8baf4ae944c9dae6987440ed6d3be62f344f53c927e6ef38e19d2f12dc371386",
           "sceneId": "food-scene-picnic",
           "line": 0,
           "speaker": "Krzywołap"
@@ -173,7 +173,7 @@
           "key": "unit-2-food:scene:food-scene-picnic:line:1",
           "kind": "scene-line",
           "text": "Good idea!",
-          "clip": "c62fb3d56d5d7e6f5f5cdb95d9648ed553f9b8aed60a9655c6c43ed67029ec5c",
+          "clip": "bdf61428ad8f83814fce1521b99abe667c08bec29e3a79c41dbdff890c1331f0",
           "sceneId": "food-scene-picnic",
           "line": 1,
           "speaker": "Maja"
@@ -182,7 +182,7 @@
           "key": "unit-2-food:scene:food-scene-picnic:line:2",
           "kind": "scene-line",
           "text": "Are there any sandwiches?",
-          "clip": "a2f866368039338208b774c40951336dc6905acf0c28de264dfb14129d21856c",
+          "clip": "9b516b81df953f1eb86e0a8aed3c531271962cd9ee85c2fb2aba709ca9215abe",
           "sceneId": "food-scene-picnic",
           "line": 2,
           "speaker": "Krzywołap"
@@ -191,7 +191,7 @@
           "key": "unit-2-food:scene:food-scene-picnic:line:3",
           "kind": "scene-line",
           "text": "Yes, there are. And there is a packet of biscuits.",
-          "clip": "a6bc578f07a310eee88d63c861b72d27871aa10e48ad245c8f2dbeaa1255d3b7",
+          "clip": "94a7f1543dd9e062be7cd9924bab4dda516a28536564ee0dbe090a1e10420300",
           "sceneId": "food-scene-picnic",
           "line": 3,
           "speaker": "Maja"
@@ -200,7 +200,7 @@
           "key": "unit-2-food:scene:food-scene-picnic:line:4",
           "kind": "scene-line",
           "text": "Cool! I can't wait!",
-          "clip": "324a1a1005d7af322836a239a78befc47c4d0203a57a43912e4181238c9524a5",
+          "clip": "155d19f36aec6e7f46e5cef7cbc039773eeb59ee861ade8db6d2a409234c4a10",
           "sceneId": "food-scene-picnic",
           "line": 4,
           "speaker": "Krzywołap"
@@ -209,7 +209,7 @@
           "key": "unit-2-food:scene:food-scene-shopping:line:0",
           "kind": "scene-line",
           "text": "Is there any milk?",
-          "clip": "f72e381a3cc1e361e7e8f256594a8cedc10e7f2ffb84627cccaef00a49dfa2a1",
+          "clip": "5d6cdeac183a40478899ceac6c512684b68e5b14999695b8022db682b7dc03d1",
           "sceneId": "food-scene-shopping",
           "line": 0,
           "speaker": "Hania"
@@ -218,7 +218,7 @@
           "key": "unit-2-food:scene:food-scene-shopping:line:1",
           "kind": "scene-line",
           "text": "No, there isn't.",
-          "clip": "2c8455c27eb266c737099dfac162fa7dda4dabe8edd53474e8f2baaf9f998401",
+          "clip": "059dfd7667ffd237d2b60261ffe1661e2d9071fafccc2f9f2319b04f32404d41",
           "sceneId": "food-scene-shopping",
           "line": 1,
           "speaker": "Tata"
@@ -227,7 +227,7 @@
           "key": "unit-2-food:scene:food-scene-shopping:line:2",
           "kind": "scene-line",
           "text": "How many eggs are there?",
-          "clip": "20f0995b4f8aa12d96aa6ae7fafc7f89ee8060bf07205f8b16e801ec12d2bfa3",
+          "clip": "c9befd19b94e1ff767bae3ca4d6d9e750fed3b6e93a34fc1ba3a7916d5460e06",
           "sceneId": "food-scene-shopping",
           "line": 2,
           "speaker": "Hania"
@@ -236,7 +236,7 @@
           "key": "unit-2-food:scene:food-scene-shopping:line:3",
           "kind": "scene-line",
           "text": "There are two eggs and a carton of juice.",
-          "clip": "bebfb4aa736ce95d59b657f8b80522127788ee1a16646a2f8c7568e44da8df83",
+          "clip": "5ae54e051c314d95ff9bbebf12913ac60df51ad72d458c9b83993f10c856f8fc",
           "sceneId": "food-scene-shopping",
           "line": 3,
           "speaker": "Tata"
@@ -245,7 +245,7 @@
           "key": "unit-2-food:scene:food-scene-shopping:line:4",
           "kind": "scene-line",
           "text": "How much water is there?",
-          "clip": "557a7b6ded936a3a4ebb38ad3e82ac220f3de9f2db6bf56235b434e7dcfc1e57",
+          "clip": "596e61638408852de9497a1af81e24749fa4af6d6a534d0cacf1146d7aab1941",
           "sceneId": "food-scene-shopping",
           "line": 4,
           "speaker": "Hania"
@@ -254,7 +254,7 @@
           "key": "unit-2-food:scene:food-scene-shopping:line:5",
           "kind": "scene-line",
           "text": "There is a lot of water.",
-          "clip": "e5d7c07f15b7a2318c325755d745de5c6f01e7fbb9142200888abdc07d57d4f7",
+          "clip": "cc72560404f47d262a686a50a1ae2df27607abd2ae2c11a3be22b5572ea9d9f0",
           "sceneId": "food-scene-shopping",
           "line": 5,
           "speaker": "Tata"
@@ -263,966 +263,900 @@
           "key": "unit-2-food@1:word:a-bar-of-chocolate",
           "kind": "word",
           "text": "a bar of chocolate",
-          "clip": "fcfcb0965770fba752d63e0ef82e05097be9f5d4a31aa7c784455063ce8426b0"
+          "clip": "9a6a12bf9bc6ac61967097616ab61b628c016643540b0a7b23140c3a96bb2dc8"
         },
         {
           "key": "unit-2-food@1:word:a-bottle-of-water",
           "kind": "word",
           "text": "a bottle of water",
-          "clip": "893f49474ba8d2c63d46b3b7b3c271c1df88f303bbf058fd08b8c5adb0c72896"
+          "clip": "3732ab01c9f20bc85dd3cab94db12dfd6497748fbe5cd411aa598a907f102f0b"
         },
         {
           "key": "unit-2-food@1:word:a-can-of-cola",
           "kind": "word",
           "text": "a can of cola",
-          "clip": "52f880e9e5fea21b5ed0df3bda77102da37af9aa4c9a61b545da07d20060215a"
+          "clip": "cc9ec55ba71203a09b1fc0eb52a062a7a940b50ddbf191e450de3487ba8da16d"
         },
         {
           "key": "unit-2-food@1:word:a-carton-of-juice",
           "kind": "word",
           "text": "a carton of juice",
-          "clip": "81807f28c3a33151e534220cccc0ebd803b7da147b18654f216f491158e5febc"
+          "clip": "8fc87dfde7b6bb388501b87fd1eb253bffcb90f7cc12f833a7f00b9d9da4f7b8"
         },
         {
           "key": "unit-2-food@1:word:a-jar-of-jam",
           "kind": "word",
           "text": "a jar of jam",
-          "clip": "e339c5ca43a3089d3589cee2993611064f2da11f50e3bbe0b1a878e74ce4ddb7"
+          "clip": "42816e283fa7d24f4e5759cc737f0febe642b9ce50eb59d15bae45e2befe5d92"
         },
         {
           "key": "unit-2-food@1:word:a-packet-of-biscuits",
           "kind": "word",
           "text": "a packet of biscuits",
-          "clip": "c48b5190db1e45c23162e9483c5c44e6e7dfe8c6ec35f664a649184053558840"
+          "clip": "b3551fc33437fc73f32365a97772681ac878df6353989b778cda7b67169e104a"
         },
         {
           "key": "unit-2-food@1:word:all-of",
           "kind": "word",
           "text": "all of",
-          "clip": "b355d0f2869a9dfb1b128fb8145364814a34f26b0f2dc1d95aee19fa36f57fae"
+          "clip": "c2271af3cfa0bd424ebcc090a784e3ff46aa0386b9eb9391910cf40eb55dba5b"
         },
         {
           "key": "unit-2-food@1:word:all-over-the-world",
           "kind": "word",
           "text": "all over the world",
-          "clip": "7e4477bcfdc2158a4ed89a525f9350c3c8a34ebdd94a721b8bac15b3996325ad"
+          "clip": "5e3b967828a61d5cef59ea839512268b4ba9cde95aa861471aab2d1563a9301a"
         },
         {
           "key": "unit-2-food@1:word:anything-else",
           "kind": "word",
           "text": "Anything else?",
-          "clip": "0dc763c17f40a0b552d42f2e648694f9bfa237ef3d7d2ee128dbfdff2a87d85c"
+          "clip": "7ca78be4867c7b84791ac342b83fc0663c3e92daac57ed6856583391053af5b5"
         },
         {
           "key": "unit-2-food@1:word:apple",
           "kind": "word",
           "text": "an apple",
-          "clip": "09971b038d0edc681e7aa4c7f53a0caf905ed14c7bac9b68c1510dce766585b7"
+          "clip": "788c721f18fe13956000967cfa49030fb73af09517f0463059b73a573bb30831"
         },
         {
           "key": "unit-2-food@1:word:art",
           "kind": "word",
           "text": "art",
-          "clip": "9a3cead35a0f46446e66ee10533d666b8710999ffca36a114dde66ed22d14bc0"
+          "clip": "b607d2b8428e6528b6cf4d47e641cf172a6233104cad05c97048f9da8b30218a"
         },
         {
           "key": "unit-2-food@1:word:beach",
           "kind": "word",
           "text": "a beach",
-          "clip": "f7c52420a3e5d07ca4106c2449a356ee406aa575ddd73e0a5b4c27d3aa6c1d75"
+          "clip": "37ee81fb970b667158be247b9ce023d6a6e2c97ba03658f481389d19112ea5ab"
         },
         {
           "key": "unit-2-food@1:word:beautiful",
           "kind": "word",
           "text": "beautiful",
-          "clip": "f3870d5064b899a2a2fdf7f078159e54c497d75310d8e58964a8f7f9c7af3186"
+          "clip": "d8eb1ac7e2a7ca79c861c69d9250ca511619fa260a53b602ae94db3eca2b0de5"
         },
         {
           "key": "unit-2-food@1:word:birthday",
           "kind": "word",
           "text": "a birthday",
-          "clip": "67f012ecf85f826a7c0d93bddfe2519f065e8bab35452707b3ef8982df61ff92"
+          "clip": "20d7134b1ddafabbc5f69041fde33be222067ea47812c4151d0eeaf991499308"
         },
         {
           "key": "unit-2-food@1:word:biscuit",
           "kind": "word",
           "text": "a biscuit",
-          "clip": "610736bda48b02511c211d745c38f6907a76b54c270fc4cc696975abb7ed0d3c"
+          "clip": "3270d8f36c3e39a4bd1591e97447a51b3f6f1b2efd39a73d9df66ad000d085bf"
         },
         {
           "key": "unit-2-food@1:word:bread",
           "kind": "word",
           "text": "bread",
-          "clip": "c0aa0b5608eac2e14da73a223ab65ffefc67d78cfb41d88b17a512c274dd466d"
+          "clip": "65ea37ded48804f7becad3d21d5d96ee964b33ca6d339f40e1602a6ee0869432"
         },
         {
           "key": "unit-2-food@1:word:breakfast",
           "kind": "word",
           "text": "breakfast",
-          "clip": "bd88b0a7d42e292cd0c063efc739f402c3fe09b161b0385d1e58fb62a849c2e7"
+          "clip": "97721f0f79e0aaeacb394970eb13143cc7f01d7b9fa62a1f3ee6c79a59dacbd8"
         },
         {
           "key": "unit-2-food@1:word:butter",
           "kind": "word",
           "text": "butter",
-          "clip": "bc89b5f56d2692e6890bffd92f24295ee1e5378ff510cb5dcdfb74b0500a6b4e"
+          "clip": "1668128f69424913cefa0f19443282974a095cf840e18ceade20f288336d656e"
         },
         {
           "key": "unit-2-food@1:word:can-i-have-a-vegetarian-pizza-please",
           "kind": "word",
           "text": "Can I have a vegetarian pizza, please?",
-          "clip": "87b17bd85cba93a9fa3c94a1c3bd4afb9dfeb424ef19f754b64c8aabb3145e8a"
+          "clip": "8117b918a714e42d989bb4e0602ee486a90d7d91424329b2c827027cd6c9e2bc"
         },
         {
           "key": "unit-2-food@1:word:can-t-wait",
           "kind": "word",
           "text": "can't wait",
-          "clip": "e583969091653a9018658b5e075108c342d43663885579e0fda27856b28f49e9"
+          "clip": "c6be3f8643adddcb48c3f7d886eba915c152730801f894a12c4ba9aad5110d01"
         },
         {
           "key": "unit-2-food@1:word:celebrity",
           "kind": "word",
           "text": "a celebrity",
-          "clip": "c8c8c34134a7ea65facdb53412e01acfafcbfad8dcf949281a067ab020d0ce21"
+          "clip": "86eb9f54dbf0af98c1b15155c55f413e4b0056b0e828c6a1bba2f08e3778b394"
         },
         {
           "key": "unit-2-food@1:word:cereal",
           "kind": "word",
           "text": "cereal",
-          "clip": "5932b838e38aaa563ca9690752ba6cf0823471849e701bb7e6e4a406c7392239"
+          "clip": "c56186369067984dfa1c52dd13db64ca4a4a4d6aad113a4e3349b8d16a4601e8"
         },
         {
           "key": "unit-2-food@1:word:cheese",
           "kind": "word",
           "text": "cheese",
-          "clip": "d2598b5f0e08292d1a600e1bfd5a79745504c56060708a988ae35e61ee4abb7c"
+          "clip": "85aa0f438b4eecc7bc2befe9e6a538035ffe1490f08e120d2e7ea611213b995f"
         },
         {
           "key": "unit-2-food@1:word:chicken",
           "kind": "word",
           "text": "chicken",
-          "clip": "c75189adc2fd6c0c144e603521f7640a96f3bbb69e1f43cba538401509b53e65"
+          "clip": "6ec4d4d7c454b08e9711386d0aad756027a4d74d1c50461b2ef2275cb3356904"
         },
         {
           "key": "unit-2-food@1:word:chicken-legs",
           "kind": "word",
           "text": "chicken legs",
-          "clip": "afee084c6b5f5284c11d69d74b98a6b5d84fcb5692d87eb6d2fde02246e20b0f"
+          "clip": "0e8df5dc36979f2a387392547a0a4db2e25a63f6fc08e327a6e93205607a1a09"
         },
         {
           "key": "unit-2-food@1:word:chips",
           "kind": "word",
           "text": "chips",
-          "clip": "51209ac7477ba8df361a0f2a338c61c10dcc3b2871f7e886274b1724fb40f831"
+          "clip": "e61f0b59897cb49485d4a739774caa2218235d3b0e32a88c3bd5cd8ea7331bc7"
         },
         {
           "key": "unit-2-food@1:word:chocolate",
           "kind": "word",
           "text": "chocolate",
-          "clip": "5c3ddf861593279bee1d54d2b078d88021ae59f79f1ff993ef30bb817419a362"
+          "clip": "d7cab3a9776cca4388585cbe3dde5f6d5b881007a1e0dbaf5706104b18476d82"
         },
         {
           "key": "unit-2-food@1:word:chocolate-cake",
           "kind": "word",
           "text": "a chocolate cake",
-          "clip": "faec27103fa6689fdba8ca0d1b6193f0a24785465edeb7b9b92ce87e911dc040"
+          "clip": "ad75871ef2e05f8e3ba6f73e688a62860a554198744a61e15fea3f2613983984"
         },
         {
           "key": "unit-2-food@1:word:cook",
           "kind": "word",
           "text": "cook",
-          "clip": "3e90d0e6b640b4a5153ca1c63f1fa41f94703b4adacbe850a1cebff2ecb76a8e"
+          "clip": "c7dcb9362b3daddff7b8b89978c0ef272e60d0698240e9cfb298e2baa1fbf8c0"
         },
         {
           "key": "unit-2-food@1:word:cool",
           "kind": "word",
           "text": "Cool!",
-          "clip": "63e6a6c3fdcaae9b86fbfa03cd0af4e19119c895870c0a9294f992dab7d9cff2"
+          "clip": "915f448e31a036b1eb5fea907c7b519b33bf70153ac4edadc399d78d8fa2c876"
         },
         {
           "key": "unit-2-food@1:word:cottage-cheese",
           "kind": "word",
           "text": "cottage cheese",
-          "clip": "28e082a2c9809a7a633a0e45ce120f4bcaddcd57a7091f8c94e77ea1c37b288d"
+          "clip": "1298c8d4bce321ee7ff27542b14ac239de719d950b26a1e04d57320b3f3e7d45"
         },
         {
           "key": "unit-2-food@1:word:cream",
           "kind": "word",
           "text": "cream",
-          "clip": "bd6a48f56196ef383b1cb47b3c84142751d509d55cc008eea9a40c2a8553c108"
+          "clip": "dd83f36155f771b7327a2daad167b436d492ec66be934bf01fa46c9f7a42b9b6"
         },
         {
           "key": "unit-2-food@1:word:decorate",
           "kind": "word",
           "text": "decorate",
-          "clip": "4314f3ae4b123ecb07e78efd5312565919ac189ecd45ae2daa7f294f59df01cf"
+          "clip": "fff00cb8ce10447b0a288d6155cb5a8c6542d07b0aa77f0f41f284fa1c43c87f"
         },
         {
           "key": "unit-2-food@1:word:diary",
           "kind": "word",
           "text": "a diary",
-          "clip": "9b07ee81e70063556b8cbed059733455ff9c075887ed0bd7cf725597213a2464"
+          "clip": "3e963ddb8dfce068eeefa6120a155312b0011da8c2eded87e977b54f14e41987"
         },
         {
           "key": "unit-2-food@1:word:dinner",
           "kind": "word",
           "text": "dinner",
-          "clip": "7a86b370d674569f21fb5643d60c63521e8a2dc0f7b3193a5b71ce2b140eb93a"
+          "clip": "6a0d10463ab68a1f83d93fcd1ef64adff7b23ee23f73b6da17478fff5a7aa920"
         },
         {
           "key": "unit-2-food@1:word:egg",
           "kind": "word",
           "text": "an egg",
-          "clip": "aceb7329714bbc196bc906e005066820ea610b748048e0922ece2a3e0f4dcc76"
+          "clip": "087d09dd062f031c6c247ca03f2d1bb3d7f1d21468efbc37dd802a025193b551"
         },
         {
           "key": "unit-2-food@1:word:enjoy-your-meal",
           "kind": "word",
           "text": "Enjoy your meal!",
-          "clip": "b7d0026eb554bfa8512383f25bea8d1714ac42963b90e0ed8a73eb5b882d3bae"
+          "clip": "ecd47b60c791f723f5d5457e4e6166c54f9347c92084079de6106447d291208d"
         },
         {
           "key": "unit-2-food@1:word:fish",
           "kind": "word",
           "text": "fish",
-          "clip": "f82df256ef6aa8393af1b0fa7608dcd054d618e103212d496b98c89658007eae"
+          "clip": "55d19d492f4d218e9fbd0c9ba394b4ecd1f56f3df6640bf402afd60d48af8f8a"
         },
         {
           "key": "unit-2-food@1:word:flour",
           "kind": "word",
           "text": "flour",
-          "clip": "aea1d3af5984e37b49f0dea4c17c7e1e5388802f5c4b2b012600062d5c4c7993"
+          "clip": "1a8e857f48917dedf7f9a51cc782c5825f46ccf443d00b73214790da15c6b5ad"
         },
         {
           "key": "unit-2-food@1:word:fruit",
           "kind": "word",
           "text": "fruit",
-          "clip": "94a35818a8e2947fe91b88012b674cfd60e105b9f684ac776d05cf12b392539d"
+          "clip": "29751be3d6474b8eda88974cde53e3cb53ca31b1e4b9f408d647cec9d6b3afc6"
         },
         {
           "key": "unit-2-food@1:word:frying-pan",
           "kind": "word",
           "text": "a frying pan",
-          "clip": "f25cc98c46b788dd944b7d30b6543e3823abf7ecdc799df31a224ffb9073ada0"
+          "clip": "87e9ab6818fc8736e89419bb4bf04b1b4b8f626642bf75e4802c7ccb1276172f"
         },
         {
           "key": "unit-2-food@1:word:go-for-a-swim",
           "kind": "word",
           "text": "go for a swim",
-          "clip": "77e61d49351b922aa96f8d59598d5833a5bf7d8b1510a483f4fb99b59937adb3"
+          "clip": "8f92317aac817bec15135b6bb807817fe303b35f0f037ebd4d87b150464111b6"
         },
         {
           "key": "unit-2-food@1:word:go-to-the-beach",
           "kind": "word",
           "text": "go to the beach",
-          "clip": "45835fbc77d89785467b25fe68bbf71264c56b18d5cd86966d721f9eecaa711e"
+          "clip": "fe49bc2c4da5621b32ae0d05dbc3c53a7eeb7392d2bf86c70cb4a570a0c665c4"
         },
         {
           "key": "unit-2-food@1:word:go-to-the-park",
           "kind": "word",
           "text": "go to the park",
-          "clip": "605e96ea41e79bd43f13f306504721940b26cbf2ed048e47ad2b2c11d0e4c3db"
+          "clip": "4b713c39be8c2b96cb4481e5716ba5a27a03dea35ffd1b5953333626d7c4e108"
         },
         {
           "key": "unit-2-food@1:word:good-idea",
           "kind": "word",
           "text": "Good idea!",
-          "clip": "c62fb3d56d5d7e6f5f5cdb95d9648ed553f9b8aed60a9655c6c43ed67029ec5c"
+          "clip": "bdf61428ad8f83814fce1521b99abe667c08bec29e3a79c41dbdff890c1331f0"
         },
         {
           "key": "unit-2-food@1:word:good-luck",
           "kind": "word",
           "text": "Good luck!",
-          "clip": "65d4b816268f5b1811611d5dc19f757136b0d5ecc915540b7409ad36e600df7e"
+          "clip": "b3a592fa1fe008e50c83ac16bef691070f88041f19d4824c3afab113da248cb0"
         },
         {
           "key": "unit-2-food@1:word:ham",
           "kind": "word",
           "text": "ham",
-          "clip": "53671d140802810dd94c7c693f1d7980facc173dc88d80af32860b3955e9047a"
+          "clip": "d248845728c5e7b5aecb4801db6204f823e869b51cecd145663580fb953d3a17"
         },
         {
           "key": "unit-2-food@1:word:have-a-picnic",
           "kind": "word",
           "text": "have a picnic",
-          "clip": "dc853a3f1fffcc25b4fc2fa29cd6f7084276e0cde2ad87fe59f287fe6188e228"
+          "clip": "cbfa2ec0fe5fd769bf395684fc139103f24d6fdb84bfb4b13c1c5920d41b2738"
         },
         {
           "key": "unit-2-food@1:word:have-a-quick-breakfast",
           "kind": "word",
           "text": "have a quick breakfast",
-          "clip": "586cc4859b618341f3397f5625e63df0efcdd684660a5ea0a1fbadb0cd513416"
+          "clip": "85b83d94e2121ce1ee9ebaaa94ba83f663a561103413961906303fbac02dcff7"
         },
         {
           "key": "unit-2-food@1:word:have-fun",
           "kind": "word",
           "text": "have fun",
-          "clip": "72541a4fde27392e3dd2f71eca83c54aac5074fe5d0d31e04c61c470ac535efa"
+          "clip": "d802734748eab9ee8e58b5c6dd6778ce0f352292f03254e322699a017636179e"
         },
         {
           "key": "unit-2-food@1:word:horrible",
           "kind": "word",
           "text": "horrible",
-          "clip": "5c62bc304a09fb511e5af6bc91b3e9771ef46853c1928dcd19cf4723d88f1510"
+          "clip": "2775ffe41434ffdbc312e8304936db151b0678002fd41cbbb6373d196226dd0f"
         },
         {
           "key": "unit-2-food@1:word:how-many",
           "kind": "word",
           "text": "How many",
-          "clip": "eec16f30aa00e34061d2a0f8588d4af793ef13f683e7beab74b67c4454f9fc59"
+          "clip": "1137e3c0fad5799da0c3257b79cb88f7ccc26b05e35d289902641e850e64e0b0"
         },
         {
           "key": "unit-2-food@1:word:how-much",
           "kind": "word",
           "text": "How much",
-          "clip": "281f0a8c98bcf05715059f92a82fdf97032e88c065f6033063f0d1e819b1f676"
+          "clip": "a78bf4aaae0ade578845de151fa06ce3c900a5afc34d75300451fb48563d68ea"
         },
         {
           "key": "unit-2-food@1:word:i-d-like-a-lemonade-please",
           "kind": "word",
           "text": "I'd like a lemonade, please.",
-          "clip": "1aff2bf8759e052d46757dc868ee64fdb37d4ce99331eed4832c75941456eb90"
+          "clip": "c2b3f9f2a1a54133a3a3c92575e1874c74a5d054d99d3ef2c7810ab5e3eb8b5f"
         },
         {
           "key": "unit-2-food@1:word:in-the-air",
           "kind": "word",
           "text": "in the air",
-          "clip": "e930835672707fc5ce33da7c59ef6758b84b99976b5a9cf99c3bee212ee92d49"
+          "clip": "b286f7464cafe58d9448577b4627f1262e8cd0bad14a6dd5895dbef8f9882d63"
         },
         {
           "key": "unit-2-food@1:word:ingredient",
           "kind": "word",
           "text": "an ingredient",
-          "clip": "dd6a8792f42c97a160cdb5dff5ed22e50bdf16c360d009fa9e9053197236e6f4"
+          "clip": "dd14fdc39137a3907d9d95fff5fa7690e796f243fd62c8862a2f40bb37dcecc6"
         },
         {
           "key": "unit-2-food@1:word:jam",
           "kind": "word",
           "text": "jam",
-          "clip": "5638747f99c5ba6660ec5f3fd22174c50e929f1151c222ebdbfd069ca1fff95b"
+          "clip": "4473871ab9bc099be494494a47deea215a598381101ec3f71fb57328be34775b"
         },
         {
           "key": "unit-2-food@1:word:lemon",
           "kind": "word",
           "text": "a lemon",
-          "clip": "b5e39959d847d7f63979a2fa1c3be954387aa59e18f1c30634b176a2bff4f907"
+          "clip": "2efcd6db9de212b87d94a6ec124a92d4ab2b05c7708a7d37c28a7cf7bede0134"
         },
         {
           "key": "unit-2-food@1:word:look",
           "kind": "word",
           "text": "look",
-          "clip": "43926d97c827ee161c65c214d2fdb1c9a18cd0f5b33324f552e122a86f4a603a"
+          "clip": "8f37db2ebe7c1e9276acb5b672a453bba73d9dbb90ea047109f6bd34052b31e4"
         },
         {
           "key": "unit-2-food@1:word:lunch",
           "kind": "word",
           "text": "lunch",
-          "clip": "6de1a1a4757e0d028bacb8d8be8eed520527ee134c4f19dfb0e6a3b615ea1218"
+          "clip": "2dfffd64a48fb0540067b460ff2106f5e86ff339bc600c1481a1b9993730d136"
         },
         {
           "key": "unit-2-food@1:word:make",
           "kind": "word",
           "text": "make",
-          "clip": "5f90db89cf50de139c12b1c889aa8d97717c55c930a18c3293aa45f0797aaf4b"
+          "clip": "695aa936df8573bf048aa635f55fb921876fe7175ec9b987200e4d04797f257a"
         },
         {
           "key": "unit-2-food@1:word:meat",
           "kind": "word",
           "text": "meat",
-          "clip": "a364a0797acff6206634a810f2a12a1748fe03bb75e9494ee736cd2d5313fbe6"
+          "clip": "de45b499651e21480af151563f9db57cc05cdd57102a357927fbc1b931833d07"
         },
         {
           "key": "unit-2-food@1:word:milk",
           "kind": "word",
           "text": "milk",
-          "clip": "70d0e550dd2959da6afb216166bded618a38c9c10587699cffae73042c37bdde"
+          "clip": "2070b0cad900d5c106865755bacff8ff74ebbcaaace20c98c7ce36a152d6ca62"
         },
         {
           "key": "unit-2-food@1:word:milkshake",
           "kind": "word",
           "text": "a milkshake",
-          "clip": "250129f6ceadc85d224ee45bac2d88c690596974942495e160f234306942cc1a"
+          "clip": "5cb67dd8aa1fd4351cede196c8415c7623df7d5866fd7a478b78ffd91e0c1ee5"
         },
         {
           "key": "unit-2-food@1:word:on-top",
           "kind": "word",
           "text": "on top",
-          "clip": "b8ecb87d3dee0181f187e6587b9fc220fbd964308d7d77c64ed74fb1403d83df"
+          "clip": "133e454710405a63fa30520e2016b3a56070808fb05405bfd9209d10ece4fa61"
         },
         {
           "key": "unit-2-food@1:word:orange-juice",
           "kind": "word",
           "text": "orange juice",
-          "clip": "93621b3ee6e98a21d05c99e0b0cb6ec432d405b222d35714fabb03c90b997a2e"
+          "clip": "5413da300f74715ef77d2f7260365266ac9fef5334da365ec9f482e697189b05"
         },
         {
           "key": "unit-2-food@1:word:pan",
           "kind": "word",
           "text": "a pan",
-          "clip": "bed60d3eae434431e94336c5a220a51a2236cbcbb76e831e75c6f34252d1ce5b"
+          "clip": "e911bce9825f64d473938bb26fb2f20045b87dbe9b1a0e291522362fa2b65c82"
         },
         {
           "key": "unit-2-food@1:word:pancake",
           "kind": "word",
           "text": "a pancake",
-          "clip": "acb722b4f7b34f09771d69f93c63c37e100e4ebb225996b9b3055c83488c2d0b"
+          "clip": "f2d0621fe79369d72224e9815b0c3cce475695974ad19dcdcdb33fff19bae256"
         },
         {
           "key": "unit-2-food@1:word:pasta",
           "kind": "word",
           "text": "pasta",
-          "clip": "60ecaeac257fe1f3dc50615ba3509e97f1f1120aed6f774e30eef79f865ccd15"
+          "clip": "b1c9f739a110d7966adfce2fd0d9c2370a52d932fbe36c83afcf77b30ababc37"
         },
         {
           "key": "unit-2-food@1:word:popular",
           "kind": "word",
           "text": "popular",
-          "clip": "d98f43d5142c9a9883f8e08d85babbb26f5cb8bf9a0a7a9b75921190b5030001"
+          "clip": "273fc7ced628784ab344092e74f4650bdb8fa9f1c12142e11f1be3f4ae747499"
         },
         {
           "key": "unit-2-food@1:word:potato",
           "kind": "word",
           "text": "a potato",
-          "clip": "a3e3e18fbe9227d79a3952d8a84fe7cdede71d67c1cb0ff0e847a0046f25fa82"
+          "clip": "4b685d65916e7d5fee083e1eeb20569159631fe74ffe2b33139fa646b41d2020"
         },
         {
           "key": "unit-2-food@1:word:put",
           "kind": "word",
           "text": "put",
-          "clip": "877f8d40b376a59d20b99ccf76c7273081703f75be0963a8d2af5303acd68a48"
+          "clip": "1db0e82ea6a933159c96fd0f555a502ae4e0231787d720a2cbaa8ab1b23d1f61"
         },
         {
           "key": "unit-2-food@1:word:quick",
           "kind": "word",
           "text": "quick",
-          "clip": "232ee19fbb5bf26a04f782014374ea80eb5cd286ca8a77e2aaeda212fb828d0d"
+          "clip": "24a02ee7e30ad07a2f4f83233801eb48684d20d94d0c5ba1b90cf74c4d103ec4"
         },
         {
           "key": "unit-2-food@1:word:recipe",
           "kind": "word",
           "text": "a recipe",
-          "clip": "46079594c959ea60f59c1b3b794c20482a68a312a73f689acf2dbfab36800112"
+          "clip": "ccebe92c8a65217cb0addf3466226b7a48a89dfec82551b2431f296640c822ee"
         },
         {
           "key": "unit-2-food@1:word:rice",
           "kind": "word",
           "text": "rice",
-          "clip": "46f27cfdf2a7fd47f836d1b2417e19f594439d722b0e15664810d47f4a6f5579"
+          "clip": "b15beaeb46b73774f98deada1194c109e11a0c770dd49b1b52b742599e4be579"
         },
         {
           "key": "unit-2-food@1:word:round",
           "kind": "word",
           "text": "round",
-          "clip": "42dbdf0245f2213fb1be68cba2aed7bca7f5d21246222fe938377aa9d639168d"
+          "clip": "05cea434c6de204bc10ec3de332feb8d91ae624ba3d49b7628346b08ea08d125"
         },
         {
           "key": "unit-2-food@1:word:salad",
           "kind": "word",
           "text": "a salad",
-          "clip": "48908fcfdb6724a007992b15b5ae043b176ac1a228c737399c092a78a6e14457"
+          "clip": "fe56db70c2a21a2c31db433a1414a46de42b2cb332d4aa8b313ef0eb0bda3793"
         },
         {
           "key": "unit-2-food@1:word:sandwich",
           "kind": "word",
           "text": "a sandwich",
-          "clip": "bcf6f8137b23260b206108ecbf429070adbb3fdde836be326579b736794418b2"
+          "clip": "b49ba2c1053e319b03b14637db1454fadf8be1ad1db7cafb4eb9b3a7be2a23f9"
         },
         {
           "key": "unit-2-food@1:word:sausage",
           "kind": "word",
           "text": "a sausage",
-          "clip": "b736d3fe60e2c390d9d302b5017e581839d49acdd70ac86c9b9f2108be866acd"
+          "clip": "6befbcc231fab7f63b907b855096019a89af49a7e0e1ef27de8d5207eb63bf2e"
         },
         {
           "key": "unit-2-food@1:word:seagull",
           "kind": "word",
           "text": "a seagull",
-          "clip": "1c3e1be81fec1b715c38d9cad2d463897b185d28102f1ce16f4676970b0704f8"
+          "clip": "3a336bdcc1dac08d67040603ebb78a5093092196c63a168a2ecb97bc5a68c7e6"
         },
         {
           "key": "unit-2-food@1:word:special",
           "kind": "word",
           "text": "special",
-          "clip": "3796da3c7e9118f201c258b74dc25eb773dc9a9884a6a8f9302281c7d0d7d073"
+          "clip": "36ba339a3e6d7aca330f3fca889b327bed9e60592248e0ba43d2839d0314c15f"
         },
         {
           "key": "unit-2-food@1:word:strawberry",
           "kind": "word",
           "text": "a strawberry",
-          "clip": "e49778fa1d3b1d154bbb6b290ad2dc7ce2c17a1598f7003143dbc08f5273ec01"
+          "clip": "c195634f8931e1f7c11c367d623e4fabddd950ef5bb9799fea09a2f5613b54c3"
         },
         {
           "key": "unit-2-food@1:word:sugar",
           "kind": "word",
           "text": "sugar",
-          "clip": "eed63f56912863ad7cdb850bd9d647612dba336ef5b18d3bb93ab6e0fe01ea95"
+          "clip": "80adcb667593c1ebabfce3f973a8627546b180e42575893714640adecb584217"
         },
         {
           "key": "unit-2-food@1:word:sweet",
           "kind": "word",
           "text": "sweet",
-          "clip": "d35b7153b6777aabd262b0924c089c829d2894e69b045d37be081c581c5cfe50"
+          "clip": "30ea762ad79e59ce9848ee7ac57ceef9af50c536bbdb7ca20167a293f28ce446"
         },
         {
           "key": "unit-2-food@1:word:terrible",
           "kind": "word",
           "text": "terrible",
-          "clip": "acfb27761a536b880edcc48a24806fecfdc3c00b8bd2c506e0e7ca5466b8af14"
+          "clip": "22c066c802ae51879927fc6829d4a8330d4d8150b1de29056502e99083b49255"
         },
         {
           "key": "unit-2-food@1:word:throw",
           "kind": "word",
           "text": "throw",
-          "clip": "4a892409962f97d70cda95becf431108f1c42b4f0fcad00c422481252e9fa04a"
+          "clip": "f659eb9922c32739bff040eaa5a4c35f03bb79cf6cc274c9a8ab15f39a5336b1"
         },
         {
           "key": "unit-2-food@1:word:toast",
           "kind": "word",
           "text": "toast",
-          "clip": "f423cd2f447a119ff9ee4d920c450434f13a4355309be3f9338254c1f9cde737"
+          "clip": "7cbdbf3bdfab1a2e2f900fd1de051bf10d66a67d2a8909a7e3ea5f2bfc6bba00"
         },
         {
           "key": "unit-2-food@1:word:toaster",
           "kind": "word",
           "text": "a toaster",
-          "clip": "c3ee436531db9aa91b0351c7678e03381923a492c3ad8f12738531c4c9d98a8c"
+          "clip": "0df6cb61e3c852e06110219bc8c6285de86f892bc29988b88e6a7cbf1303cf47"
         },
         {
           "key": "unit-2-food@1:word:tomato",
           "kind": "word",
           "text": "a tomato",
-          "clip": "f32ebd013e0a3db257823d163db13c24655a4c78127ebed41e213a58e72c50a7"
+          "clip": "5567ef4696aff15c7eb0ebeb8d67b3216f4f616e7d32a527aefcf8f5f2248803"
         },
         {
           "key": "unit-2-food@1:word:tuna",
           "kind": "word",
           "text": "tuna",
-          "clip": "ca1b1d094c44ae52eb518cfcc7b3a7b8a90e523253140f6c23dc3699c08fcf3d"
+          "clip": "2aa79f37bbe135b9d60b4b5cae1a6dbc00875d82369e986c40c81a34cd33023f"
         },
         {
           "key": "unit-2-food@1:word:use",
           "kind": "word",
           "text": "use",
-          "clip": "ada23cfcf76c121bfdb4e142eab97f844a114cbdf29103f0b30cfda6072c399c"
+          "clip": "b6bb7b3cabeddb193fc4ae25ee785c40df7241e61914dc42da9efe51b373d865"
         },
         {
           "key": "unit-2-food@1:word:vegetable",
           "kind": "word",
           "text": "a vegetable",
-          "clip": "ac6bbf57d3e677f1eeea32b1abb4b90c5f52fed152cc5ebbcded1f3002161a0d"
+          "clip": "9695a0a574ba1e537494b0e8369bc0361d3511acc5ca9bad67398acf1f06103a"
         },
         {
           "key": "unit-2-food@1:word:water",
           "kind": "word",
           "text": "water",
-          "clip": "ceab6eb607329346586fe839e95ea0a59f5a7c2c4f48f468e5714db2e45447f7"
+          "clip": "395ee03fe81fb201c368f810aeaad73b755dcb6d5487bd4e11936c61f8889766"
         },
         {
           "key": "unit-2-food@1:word:what-a-disaster",
           "kind": "word",
           "text": "What a disaster!",
-          "clip": "38fccc52b204d6c5c363bce5fa70a28de0860217d5db6795e69182117e7c8444"
+          "clip": "26138097013baeadf942da91edd666f7e48bd241e7e4eb41d148f9b9062de8b3"
         },
         {
           "key": "unit-2-food@1:word:what-would-you-like",
           "kind": "word",
           "text": "What would you like?",
-          "clip": "fa586b00a310e073de2401adb3167589b645145aa0f37950c8839a2eb3c59277"
+          "clip": "f889109d4a4ceac7fd712e87d55987c2a01efa74dc684754ace785ac5fe55816"
         },
         {
           "key": "unit-2-food@1:word:would-you-like-anything-to-drink",
           "kind": "word",
           "text": "Would you like anything to drink?",
-          "clip": "07f1c325e5ddc46229f00ea17302ce4fe0318f60ca4479a3db8035d9611ad162"
+          "clip": "662e90940c2a58226b8222736b06619ccb9597702678a8c694c955afb14c8871"
         },
         {
           "key": "unit-2-food@1:word:yoghurt",
           "kind": "word",
           "text": "a yoghurt",
-          "clip": "15ba154d8205a235c8305e9ac14e7eec06f281f707ad7d877400233d4bef5709"
+          "clip": "a9f0884c77915943ba7891ac596e4d996b00d876a652248fe3a77e6497765ed5"
         }
       ]
     }
   ],
   "clips": {
-    "07f1c325e5ddc46229f00ea17302ce4fe0318f60ca4479a3db8035d9611ad162": {
-      "file": "clips/07f1c325e5ddc46229f00ea17302ce4fe0318f60ca4479a3db8035d9611ad162.ogg",
-      "bytes": 3652,
-      "sha256": "d27dd77f5e8b523ced545e5b935d6ae7c30e21f22038de2665c7b5d0ebd9b4d2",
+    "059dfd7667ffd237d2b60261ffe1661e2d9071fafccc2f9f2319b04f32404d41": {
+      "file": "clips/059dfd7667ffd237d2b60261ffe1661e2d9071fafccc2f9f2319b04f32404d41.ogg",
+      "bytes": 4728,
+      "sha256": "2e02bfdb707b2243783f23691f071fdb0f8d09ef30cad9aced9a5d6b5cc2ac38",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.685
+        "durationSeconds": 1.521
       }
     },
-    "09971b038d0edc681e7aa4c7f53a0caf905ed14c7bac9b68c1510dce766585b7": {
-      "file": "clips/09971b038d0edc681e7aa4c7f53a0caf905ed14c7bac9b68c1510dce766585b7.ogg",
-      "bytes": 1913,
-      "sha256": "5cca47119e877359081cadc803b2ed123ba1260f0095d0f339f840377498bf88",
+    "05cea434c6de204bc10ec3de332feb8d91ae624ba3d49b7628346b08ea08d125": {
+      "file": "clips/05cea434c6de204bc10ec3de332feb8d91ae624ba3d49b7628346b08ea08d125.ogg",
+      "bytes": 2827,
+      "sha256": "72e367072c2f588b5af148601f418a2bcbad98a344e7768dc00a04e0c054974b",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.835
+        "durationSeconds": 0.86
       }
     },
-    "0dc763c17f40a0b552d42f2e648694f9bfa237ef3d7d2ee128dbfdff2a87d85c": {
-      "file": "clips/0dc763c17f40a0b552d42f2e648694f9bfa237ef3d7d2ee128dbfdff2a87d85c.ogg",
-      "bytes": 2527,
-      "sha256": "34a8b5367e6e2dd7542c125e4ad3c8d9d01736156fd40503fe5511096c2ad90f",
+    "087d09dd062f031c6c247ca03f2d1bb3d7f1d21468efbc37dd802a025193b551": {
+      "file": "clips/087d09dd062f031c6c247ca03f2d1bb3d7f1d21468efbc37dd802a025193b551.ogg",
+      "bytes": 2760,
+      "sha256": "cb39c47e199de94ebf795234b25b61d9b94f691c91807c1fe396c2ecc7cf0a06",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.15
+        "durationSeconds": 0.895
       }
     },
-    "15ba154d8205a235c8305e9ac14e7eec06f281f707ad7d877400233d4bef5709": {
-      "file": "clips/15ba154d8205a235c8305e9ac14e7eec06f281f707ad7d877400233d4bef5709.ogg",
-      "bytes": 1792,
-      "sha256": "0a701a6b6e72fa97dc5b6a0ed963e3b59917532e8bc818d0042d961d45d00434",
+    "0a246852494596233eab2e03c2d3aa3b26392fb6fad8fb9936bf1dec3fe99d01": {
+      "file": "clips/0a246852494596233eab2e03c2d3aa3b26392fb6fad8fb9936bf1dec3fe99d01.ogg",
+      "bytes": 6924,
+      "sha256": "fc8b9cac75ac9356c15abb7409ec891deb5bb3b2514d67c55d9e3a596f5957ce",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.831
+        "durationSeconds": 2.213
       }
     },
-    "1aff2bf8759e052d46757dc868ee64fdb37d4ce99331eed4832c75941456eb90": {
-      "file": "clips/1aff2bf8759e052d46757dc868ee64fdb37d4ce99331eed4832c75941456eb90.ogg",
-      "bytes": 4236,
-      "sha256": "e3b3b76f7b7391fa66de5bf10d98ab8997fdc34f582117a7831b66bd73f21598",
+    "0df6cb61e3c852e06110219bc8c6285de86f892bc29988b88e6a7cbf1303cf47": {
+      "file": "clips/0df6cb61e3c852e06110219bc8c6285de86f892bc29988b88e6a7cbf1303cf47.ogg",
+      "bytes": 2859,
+      "sha256": "9b1dc83876de7a99be98584e4a1b2ce38428ad0e2920c40c0ef66233a0024279",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.988
+        "durationSeconds": 0.908
       }
     },
-    "1c3e1be81fec1b715c38d9cad2d463897b185d28102f1ce16f4676970b0704f8": {
-      "file": "clips/1c3e1be81fec1b715c38d9cad2d463897b185d28102f1ce16f4676970b0704f8.ogg",
-      "bytes": 1864,
-      "sha256": "c826a38bcd1166824a4929fde2bc7f87863c6a7314819bc16b67a4e79d436fef",
+    "0e8df5dc36979f2a387392547a0a4db2e25a63f6fc08e327a6e93205607a1a09": {
+      "file": "clips/0e8df5dc36979f2a387392547a0a4db2e25a63f6fc08e327a6e93205607a1a09.ogg",
+      "bytes": 3589,
+      "sha256": "771ec46749954607c14e873acba99fb7527c5533bdd02453d4c2315668bc558c",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.866
+        "durationSeconds": 1.137
       }
     },
-    "20f0995b4f8aa12d96aa6ae7fafc7f89ee8060bf07205f8b16e801ec12d2bfa3": {
-      "file": "clips/20f0995b4f8aa12d96aa6ae7fafc7f89ee8060bf07205f8b16e801ec12d2bfa3.ogg",
-      "bytes": 2933,
-      "sha256": "699e1654f71f0f16d1c9fe75082254034622ece385ccd97885d02ea5df2fcac5",
+    "1137e3c0fad5799da0c3257b79cb88f7ccc26b05e35d289902641e850e64e0b0": {
+      "file": "clips/1137e3c0fad5799da0c3257b79cb88f7ccc26b05e35d289902641e850e64e0b0.ogg",
+      "bytes": 3967,
+      "sha256": "172907fb6c80ed7e8f1d14c5b3f0d7635cb8fda0dc51522dcc7a2a807df29881",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.327
+        "durationSeconds": 1.276
       }
     },
-    "232ee19fbb5bf26a04f782014374ea80eb5cd286ca8a77e2aaeda212fb828d0d": {
-      "file": "clips/232ee19fbb5bf26a04f782014374ea80eb5cd286ca8a77e2aaeda212fb828d0d.ogg",
-      "bytes": 1209,
-      "sha256": "8e5404dbc411a205996921e0b71d515203c9c1940eaf5fb94261997e90496132",
+    "1298c8d4bce321ee7ff27542b14ac239de719d950b26a1e04d57320b3f3e7d45": {
+      "file": "clips/1298c8d4bce321ee7ff27542b14ac239de719d950b26a1e04d57320b3f3e7d45.ogg",
+      "bytes": 3782,
+      "sha256": "e9d7d024b92c5fb1dcb54d014bd7782cd8a21c818f85105af2b912c23a88b4aa",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.542
+        "durationSeconds": 1.236
       }
     },
-    "250129f6ceadc85d224ee45bac2d88c690596974942495e160f234306942cc1a": {
-      "file": "clips/250129f6ceadc85d224ee45bac2d88c690596974942495e160f234306942cc1a.ogg",
-      "bytes": 2120,
-      "sha256": "3df63607a519be28a957b1ce477199d4581c1c7853736a53c26b508f5acdb66b",
+    "133e454710405a63fa30520e2016b3a56070808fb05405bfd9209d10ece4fa61": {
+      "file": "clips/133e454710405a63fa30520e2016b3a56070808fb05405bfd9209d10ece4fa61.ogg",
+      "bytes": 2484,
+      "sha256": "2858f92e9d56aaa5038f8dd140844ee8df096bab15066f0ffcfcf2117a946a3e",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.977
+        "durationSeconds": 0.796
       }
     },
-    "281f0a8c98bcf05715059f92a82fdf97032e88c065f6033063f0d1e819b1f676": {
-      "file": "clips/281f0a8c98bcf05715059f92a82fdf97032e88c065f6033063f0d1e819b1f676.ogg",
+    "155d19f36aec6e7f46e5cef7cbc039773eeb59ee861ade8db6d2a409234c4a10": {
+      "file": "clips/155d19f36aec6e7f46e5cef7cbc039773eeb59ee861ade8db6d2a409234c4a10.ogg",
+      "bytes": 5960,
+      "sha256": "bd7c36833503d55eab8e4ef13de240a25c18ceb38a888f1cbba8c1d033522eb8",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.042
+      }
+    },
+    "1668128f69424913cefa0f19443282974a095cf840e18ceade20f288336d656e": {
+      "file": "clips/1668128f69424913cefa0f19443282974a095cf840e18ceade20f288336d656e.ogg",
+      "bytes": 2156,
+      "sha256": "3a5de92b4e1215e49e638670aeac61110a787c5921b27fc10ff2e0a0ebb85c73",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.666
+      }
+    },
+    "1a8e857f48917dedf7f9a51cc782c5825f46ccf443d00b73214790da15c6b5ad": {
+      "file": "clips/1a8e857f48917dedf7f9a51cc782c5825f46ccf443d00b73214790da15c6b5ad.ogg",
+      "bytes": 2678,
+      "sha256": "0ddf385c1d1ccb00ec50d9d4c921eed4fbf0b10e9f72783dd2a908a1946136fd",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.834
+      }
+    },
+    "1db0e82ea6a933159c96fd0f555a502ae4e0231787d720a2cbaa8ab1b23d1f61": {
+      "file": "clips/1db0e82ea6a933159c96fd0f555a502ae4e0231787d720a2cbaa8ab1b23d1f61.ogg",
+      "bytes": 2053,
+      "sha256": "1bc1dc2dd16d4ae2d416ea3f9918dd1bc926532af39dc83834f6e8fcc1ad6ad6",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.628
+      }
+    },
+    "2070b0cad900d5c106865755bacff8ff74ebbcaaace20c98c7ce36a152d6ca62": {
+      "file": "clips/2070b0cad900d5c106865755bacff8ff74ebbcaaace20c98c7ce36a152d6ca62.ogg",
+      "bytes": 1843,
+      "sha256": "9031f1bed925b4398a22351e23476c1bae51ada0153861349afb0886edf3e4c6",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.599
+      }
+    },
+    "20d7134b1ddafabbc5f69041fde33be222067ea47812c4151d0eeaf991499308": {
+      "file": "clips/20d7134b1ddafabbc5f69041fde33be222067ea47812c4151d0eeaf991499308.ogg",
+      "bytes": 3058,
+      "sha256": "11c4b85792e026ef69ecde968a8bb01e55b8f85e3c67cc7f026d9d69a2fb4558",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.971
+      }
+    },
+    "22c066c802ae51879927fc6829d4a8330d4d8150b1de29056502e99083b49255": {
+      "file": "clips/22c066c802ae51879927fc6829d4a8330d4d8150b1de29056502e99083b49255.ogg",
+      "bytes": 2455,
+      "sha256": "dde0b9e487e40dafcc744ca6df450b2512ada44923f8ba56dbfefb4454dd720e",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.77
+      }
+    },
+    "24a02ee7e30ad07a2f4f83233801eb48684d20d94d0c5ba1b90cf74c4d103ec4": {
+      "file": "clips/24a02ee7e30ad07a2f4f83233801eb48684d20d94d0c5ba1b90cf74c4d103ec4.ogg",
+      "bytes": 1691,
+      "sha256": "a1a5ae16c188ffc10763c9ec766c480fc44c42607a367190fa5947b11dbc2a34",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.522
+      }
+    },
+    "26138097013baeadf942da91edd666f7e48bd241e7e4eb41d148f9b9062de8b3": {
+      "file": "clips/26138097013baeadf942da91edd666f7e48bd241e7e4eb41d148f9b9062de8b3.ogg",
+      "bytes": 3868,
+      "sha256": "855b3b961477f555305fd78af553bf7e7b7f1f54842ccfe744adb6600eaec929",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.204
+      }
+    },
+    "273fc7ced628784ab344092e74f4650bdb8fa9f1c12142e11f1be3f4ae747499": {
+      "file": "clips/273fc7ced628784ab344092e74f4650bdb8fa9f1c12142e11f1be3f4ae747499.ogg",
       "bytes": 2463,
-      "sha256": "d328b4aa166a5139307df0cf30066b7f67a4e85d42ee22b89cea5040aab0a3c2",
+      "sha256": "2062a6f68a38c585bd859f3aae73be9ab2d01ae1b475da14e86807b8b7385218",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.123
+        "durationSeconds": 0.773
       }
     },
-    "28e082a2c9809a7a633a0e45ce120f4bcaddcd57a7091f8c94e77ea1c37b288d": {
-      "file": "clips/28e082a2c9809a7a633a0e45ce120f4bcaddcd57a7091f8c94e77ea1c37b288d.ogg",
-      "bytes": 2603,
-      "sha256": "806e3557d06ddb4c032fe11131a5a3431ca1f2de458f0a06c86d038699671f37",
+    "2775ffe41434ffdbc312e8304936db151b0678002fd41cbbb6373d196226dd0f": {
+      "file": "clips/2775ffe41434ffdbc312e8304936db151b0678002fd41cbbb6373d196226dd0f.ogg",
+      "bytes": 2294,
+      "sha256": "60a590b8ad2172060d13357da41489d0c0660ed8ddb2456ee78ebef3ab28f6bb",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.163
+        "durationSeconds": 0.694
       }
     },
-    "2c8455c27eb266c737099dfac162fa7dda4dabe8edd53474e8f2baaf9f998401": {
-      "file": "clips/2c8455c27eb266c737099dfac162fa7dda4dabe8edd53474e8f2baaf9f998401.ogg",
-      "bytes": 3696,
-      "sha256": "98897e2d65bfbad8c43e4ff65c3a2db79a5186fadda8c6c2d23642b203d1ea76",
+    "29751be3d6474b8eda88974cde53e3cb53ca31b1e4b9f408d647cec9d6b3afc6": {
+      "file": "clips/29751be3d6474b8eda88974cde53e3cb53ca31b1e4b9f408d647cec9d6b3afc6.ogg",
+      "bytes": 1906,
+      "sha256": "ebd79b38d0cf5f6bdaec64546e56327df8b167d08a64401be7b68f22d21fafdd",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.791
+        "durationSeconds": 0.601
       }
     },
-    "3112dfde685047c85fdc0709c249908a34211d0615a422fac236a44b33f90d1a": {
-      "file": "clips/3112dfde685047c85fdc0709c249908a34211d0615a422fac236a44b33f90d1a.ogg",
-      "bytes": 5066,
-      "sha256": "544ff61267bed58a579124820c9e564ef600298997c49ab4fa3ad958ea92e33a",
+    "2aa79f37bbe135b9d60b4b5cae1a6dbc00875d82369e986c40c81a34cd33023f": {
+      "file": "clips/2aa79f37bbe135b9d60b4b5cae1a6dbc00875d82369e986c40c81a34cd33023f.ogg",
+      "bytes": 2305,
+      "sha256": "f9e1948ae368649cbca96e525987886fe6736bac36261e8b4ca601c9bfa1e6c7",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 2.33
+        "durationSeconds": 0.729
       }
     },
-    "324a1a1005d7af322836a239a78befc47c4d0203a57a43912e4181238c9524a5": {
-      "file": "clips/324a1a1005d7af322836a239a78befc47c4d0203a57a43912e4181238c9524a5.ogg",
-      "bytes": 4579,
-      "sha256": "93f06e3efcbd70439f2518b83df38dc983ba3a202f4a6c08dac56ecc85a42684",
+    "2dfffd64a48fb0540067b460ff2106f5e86ff339bc600c1481a1b9993730d136": {
+      "file": "clips/2dfffd64a48fb0540067b460ff2106f5e86ff339bc600c1481a1b9993730d136.ogg",
+      "bytes": 2273,
+      "sha256": "a24ae95d3bdc8f8546d411841d9c75c34e7eb551de870b3185f601f0410b0f87",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 2.297
+        "durationSeconds": 0.706
       }
     },
-    "3796da3c7e9118f201c258b74dc25eb773dc9a9884a6a8f9302281c7d0d7d073": {
-      "file": "clips/3796da3c7e9118f201c258b74dc25eb773dc9a9884a6a8f9302281c7d0d7d073.ogg",
-      "bytes": 1977,
-      "sha256": "f00a80f712cc4dc17a0457aac4200edb735d7431d9a54a21d42fdd5cc888afaa",
+    "2efcd6db9de212b87d94a6ec124a92d4ab2b05c7708a7d37c28a7cf7bede0134": {
+      "file": "clips/2efcd6db9de212b87d94a6ec124a92d4ab2b05c7708a7d37c28a7cf7bede0134.ogg",
+      "bytes": 2743,
+      "sha256": "afb8cc959d630d07ec4fad9039768cf89b77b787fc00e40ac80acfb107cdf88e",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.88
+        "durationSeconds": 0.837
       }
     },
-    "38fccc52b204d6c5c363bce5fa70a28de0860217d5db6795e69182117e7c8444": {
-      "file": "clips/38fccc52b204d6c5c363bce5fa70a28de0860217d5db6795e69182117e7c8444.ogg",
-      "bytes": 2828,
-      "sha256": "9fd3408428ccce6ec892ec863a5e2ddef72b40f6b21066d986d607949ce6bd46",
+    "30ea762ad79e59ce9848ee7ac57ceef9af50c536bbdb7ca20167a293f28ce446": {
+      "file": "clips/30ea762ad79e59ce9848ee7ac57ceef9af50c536bbdb7ca20167a293f28ce446.ogg",
+      "bytes": 2480,
+      "sha256": "1b5b1bc49a0794fb81cb6587dfccf74b6efc3446302522692dce93f31a3c78e6",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.261
+        "durationSeconds": 0.798
       }
     },
-    "3e90d0e6b640b4a5153ca1c63f1fa41f94703b4adacbe850a1cebff2ecb76a8e": {
-      "file": "clips/3e90d0e6b640b4a5153ca1c63f1fa41f94703b4adacbe850a1cebff2ecb76a8e.ogg",
-      "bytes": 1959,
-      "sha256": "9ca4887539f3ae0841b229af622b3909919616de0a1af609f25b0b83e08d26fa",
+    "3270d8f36c3e39a4bd1591e97447a51b3f6f1b2efd39a73d9df66ad000d085bf": {
+      "file": "clips/3270d8f36c3e39a4bd1591e97447a51b3f6f1b2efd39a73d9df66ad000d085bf.ogg",
+      "bytes": 2533,
+      "sha256": "86c319b975332149ec2a455d0c82b130c34cdf4e3c38e5320aa44ba93fa0af12",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.933
+        "durationSeconds": 0.809
       }
     },
-    "42dbdf0245f2213fb1be68cba2aed7bca7f5d21246222fe938377aa9d639168d": {
-      "file": "clips/42dbdf0245f2213fb1be68cba2aed7bca7f5d21246222fe938377aa9d639168d.ogg",
-      "bytes": 1772,
-      "sha256": "8b46e77074b8bba14af4a37d993e8982e5b40e3eb610cf49c10cb09e043247d1",
+    "36ba339a3e6d7aca330f3fca889b327bed9e60592248e0ba43d2839d0314c15f": {
+      "file": "clips/36ba339a3e6d7aca330f3fca889b327bed9e60592248e0ba43d2839d0314c15f.ogg",
+      "bytes": 2405,
+      "sha256": "24a3852958943522b4b8bef81957dc980ff531ce6142a2c617e32b893b65d45c",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.779
+        "durationSeconds": 0.739
       }
     },
-    "4314f3ae4b123ecb07e78efd5312565919ac189ecd45ae2daa7f294f59df01cf": {
-      "file": "clips/4314f3ae4b123ecb07e78efd5312565919ac189ecd45ae2daa7f294f59df01cf.ogg",
-      "bytes": 1688,
-      "sha256": "4e3faded7f94d80af5de970637b093c591084e6d5198acdd60835265b3a9fe81",
+    "3732ab01c9f20bc85dd3cab94db12dfd6497748fbe5cd411aa598a907f102f0b": {
+      "file": "clips/3732ab01c9f20bc85dd3cab94db12dfd6497748fbe5cd411aa598a907f102f0b.ogg",
+      "bytes": 4442,
+      "sha256": "611cf0a0376161ecdd6424abd6d5b450032eda3da088ffa826b507b2d5c8e0ed",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.762
+        "durationSeconds": 1.41
       }
     },
-    "43926d97c827ee161c65c214d2fdb1c9a18cd0f5b33324f552e122a86f4a603a": {
-      "file": "clips/43926d97c827ee161c65c214d2fdb1c9a18cd0f5b33324f552e122a86f4a603a.ogg",
-      "bytes": 1386,
-      "sha256": "71fff72c0999d675e0cc5a210b552ea5ee59be25712ec305d1de730437e69c04",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.629
-      }
-    },
-    "45835fbc77d89785467b25fe68bbf71264c56b18d5cd86966d721f9eecaa711e": {
-      "file": "clips/45835fbc77d89785467b25fe68bbf71264c56b18d5cd86966d721f9eecaa711e.ogg",
-      "bytes": 2401,
-      "sha256": "25d7e4c9fd749c202f218ed866f7a845840327dce71d61e9bc28d1888ab81763",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.111
-      }
-    },
-    "46079594c959ea60f59c1b3b794c20482a68a312a73f689acf2dbfab36800112": {
-      "file": "clips/46079594c959ea60f59c1b3b794c20482a68a312a73f689acf2dbfab36800112.ogg",
-      "bytes": 2059,
-      "sha256": "452a61660740685f6bcf11e8b89e56c74cd94767776bec3fb6c5fbed75303713",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.919
-      }
-    },
-    "46f27cfdf2a7fd47f836d1b2417e19f594439d722b0e15664810d47f4a6f5579": {
-      "file": "clips/46f27cfdf2a7fd47f836d1b2417e19f594439d722b0e15664810d47f4a6f5579.ogg",
-      "bytes": 1505,
-      "sha256": "5798fe85226087587cf4e31b57028900331a9658539c243c301540ef1ca6a8de",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.655
-      }
-    },
-    "48908fcfdb6724a007992b15b5ae043b176ac1a228c737399c092a78a6e14457": {
-      "file": "clips/48908fcfdb6724a007992b15b5ae043b176ac1a228c737399c092a78a6e14457.ogg",
-      "bytes": 1824,
-      "sha256": "9995f2a636f10c9f0a27b370c29944b4b72d5c3aadce2ae85fb09279e70c786c",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.832
-      }
-    },
-    "4a892409962f97d70cda95becf431108f1c42b4f0fcad00c422481252e9fa04a": {
-      "file": "clips/4a892409962f97d70cda95becf431108f1c42b4f0fcad00c422481252e9fa04a.ogg",
-      "bytes": 1191,
-      "sha256": "db92d2e24f9da48212fc3240b53d45769caea53c1f934ccc58af935680a3d60e",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.549
-      }
-    },
-    "51209ac7477ba8df361a0f2a338c61c10dcc3b2871f7e886274b1724fb40f831": {
-      "file": "clips/51209ac7477ba8df361a0f2a338c61c10dcc3b2871f7e886274b1724fb40f831.ogg",
-      "bytes": 1512,
-      "sha256": "d770f15130a63cc5f76ec67fb3afd3cc1128711199a02f4ac5d6cd4ec4fd2507",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.702
-      }
-    },
-    "52f880e9e5fea21b5ed0df3bda77102da37af9aa4c9a61b545da07d20060215a": {
-      "file": "clips/52f880e9e5fea21b5ed0df3bda77102da37af9aa4c9a61b545da07d20060215a.ogg",
-      "bytes": 2747,
-      "sha256": "ba2dda6d798b9801d868f11cb4d5190c2a566642f47271a8ffcd2d346772a1a2",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.256
-      }
-    },
-    "53671d140802810dd94c7c693f1d7980facc173dc88d80af32860b3955e9047a": {
-      "file": "clips/53671d140802810dd94c7c693f1d7980facc173dc88d80af32860b3955e9047a.ogg",
-      "bytes": 1491,
-      "sha256": "927dae9b9cadc0dd0d89d820fed61a6e7918d24ad8c9ccc85380e987acdbabf0",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.678
-      }
-    },
-    "557a7b6ded936a3a4ebb38ad3e82ac220f3de9f2db6bf56235b434e7dcfc1e57": {
-      "file": "clips/557a7b6ded936a3a4ebb38ad3e82ac220f3de9f2db6bf56235b434e7dcfc1e57.ogg",
-      "bytes": 3291,
-      "sha256": "70949724e95e3f63ecb3c2241a7b3751b34fe607cff0d645505d2fecd2631969",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.511
-      }
-    },
-    "5638747f99c5ba6660ec5f3fd22174c50e929f1151c222ebdbfd069ca1fff95b": {
-      "file": "clips/5638747f99c5ba6660ec5f3fd22174c50e929f1151c222ebdbfd069ca1fff95b.ogg",
-      "bytes": 1822,
-      "sha256": "d1ec6f221dc90489961818537e8d167237e09737453af76fa9f55d78208d8e1a",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.825
-      }
-    },
-    "586cc4859b618341f3397f5625e63df0efcdd684660a5ea0a1fbadb0cd513416": {
-      "file": "clips/586cc4859b618341f3397f5625e63df0efcdd684660a5ea0a1fbadb0cd513416.ogg",
-      "bytes": 2758,
-      "sha256": "3addda668f1d9a92023acc58ef2cc0a8aa3da4bcc01005871376cf3a9da4ab54",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.255
-      }
-    },
-    "5932b838e38aaa563ca9690752ba6cf0823471849e701bb7e6e4a406c7392239": {
-      "file": "clips/5932b838e38aaa563ca9690752ba6cf0823471849e701bb7e6e4a406c7392239.ogg",
-      "bytes": 1654,
-      "sha256": "f7697aa1b202aeb42c31b3405e1d3616eac5d7a54386040864657ee5656d3c2b",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.74
-      }
-    },
-    "5c3ddf861593279bee1d54d2b078d88021ae59f79f1ff993ef30bb817419a362": {
-      "file": "clips/5c3ddf861593279bee1d54d2b078d88021ae59f79f1ff993ef30bb817419a362.ogg",
-      "bytes": 1651,
-      "sha256": "103f8522a3e2c9fdc278ceba4e405db47573bc1c201be7612d03cf5c99337a4d",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.751
-      }
-    },
-    "5c62bc304a09fb511e5af6bc91b3e9771ef46853c1928dcd19cf4723d88f1510": {
-      "file": "clips/5c62bc304a09fb511e5af6bc91b3e9771ef46853c1928dcd19cf4723d88f1510.ogg",
-      "bytes": 1560,
-      "sha256": "feca03171426e170a21fc3ef09c944c7dc14e729568afe81e6fec4c47c8b78af",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.686
-      }
-    },
-    "5f90db89cf50de139c12b1c889aa8d97717c55c930a18c3293aa45f0797aaf4b": {
-      "file": "clips/5f90db89cf50de139c12b1c889aa8d97717c55c930a18c3293aa45f0797aaf4b.ogg",
-      "bytes": 1655,
-      "sha256": "7ba08842b163cd9400fec4480d5afc42aaa66478cd5dc3c2046c01a0c5758f9a",
+    "37ee81fb970b667158be247b9ce023d6a6e2c97ba03658f481389d19112ea5ab": {
+      "file": "clips/37ee81fb970b667158be247b9ce023d6a6e2c97ba03658f481389d19112ea5ab.ogg",
+      "bytes": 2384,
+      "sha256": "1c775df5ee8ce34856189bc87d0fd85ccec481789aba7d6d193d525f84d864cf",
       "audio": {
         "codec": "opus",
         "channels": 1,
@@ -1230,252 +1164,527 @@
         "durationSeconds": 0.782
       }
     },
-    "605e96ea41e79bd43f13f306504721940b26cbf2ed048e47ad2b2c11d0e4c3db": {
-      "file": "clips/605e96ea41e79bd43f13f306504721940b26cbf2ed048e47ad2b2c11d0e4c3db.ogg",
-      "bytes": 2600,
-      "sha256": "04f7adc7391aedd4563b01fa1c443abcc2f2a20bba035ad62d5e219873816b16",
+    "395ee03fe81fb201c368f810aeaad73b755dcb6d5487bd4e11936c61f8889766": {
+      "file": "clips/395ee03fe81fb201c368f810aeaad73b755dcb6d5487bd4e11936c61f8889766.ogg",
+      "bytes": 2277,
+      "sha256": "e2c84ecf4934aec816f4e577859dfdc2ccbaf37e01925dac53127e212acbe01c",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.175
+        "durationSeconds": 0.7
       }
     },
-    "60ecaeac257fe1f3dc50615ba3509e97f1f1120aed6f774e30eef79f865ccd15": {
-      "file": "clips/60ecaeac257fe1f3dc50615ba3509e97f1f1120aed6f774e30eef79f865ccd15.ogg",
-      "bytes": 1554,
-      "sha256": "d1b48658d2c0059cd25ed3a1611a1a860db52032dfbacac5d5b38ceda715313b",
+    "3a336bdcc1dac08d67040603ebb78a5093092196c63a168a2ecb97bc5a68c7e6": {
+      "file": "clips/3a336bdcc1dac08d67040603ebb78a5093092196c63a168a2ecb97bc5a68c7e6.ogg",
+      "bytes": 2625,
+      "sha256": "7b7744aae694aa5d6d090fefcda33b531243aad2f2f136011486ba528788d762",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.668
+        "durationSeconds": 0.836
       }
     },
-    "610736bda48b02511c211d745c38f6907a76b54c270fc4cc696975abb7ed0d3c": {
-      "file": "clips/610736bda48b02511c211d745c38f6907a76b54c270fc4cc696975abb7ed0d3c.ogg",
-      "bytes": 1687,
-      "sha256": "f624fc2c955a8f92c7ce759efae6e7bf07f4c7c3a3f220117ebf096bf1345c13",
+    "3e963ddb8dfce068eeefa6120a155312b0011da8c2eded87e977b54f14e41987": {
+      "file": "clips/3e963ddb8dfce068eeefa6120a155312b0011da8c2eded87e977b54f14e41987.ogg",
+      "bytes": 3393,
+      "sha256": "2b4233f900ede6beb086e7e67c3726b11496467bc5d7834d2f5960531cd007a8",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.766
+        "durationSeconds": 1.044
       }
     },
-    "63e6a6c3fdcaae9b86fbfa03cd0af4e19119c895870c0a9294f992dab7d9cff2": {
-      "file": "clips/63e6a6c3fdcaae9b86fbfa03cd0af4e19119c895870c0a9294f992dab7d9cff2.ogg",
-      "bytes": 1320,
-      "sha256": "5a1b3bc2b9398133a2cd869df2f35e279111637310362656a2060520b53b9f66",
+    "42816e283fa7d24f4e5759cc737f0febe642b9ce50eb59d15bae45e2befe5d92": {
+      "file": "clips/42816e283fa7d24f4e5759cc737f0febe642b9ce50eb59d15bae45e2befe5d92.ogg",
+      "bytes": 3835,
+      "sha256": "467e2a5f2ba731d40bc54615a9fc27d8661bda468aafcafd5fc9ccd055504c90",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.59
+        "durationSeconds": 1.249
       }
     },
-    "65d4b816268f5b1811611d5dc19f757136b0d5ecc915540b7409ad36e600df7e": {
-      "file": "clips/65d4b816268f5b1811611d5dc19f757136b0d5ecc915540b7409ad36e600df7e.ogg",
-      "bytes": 1682,
-      "sha256": "827cf8fcbfddc5fe533ec11c1d5af02476cd5d116200a152a5efd73141b16bc9",
+    "4473871ab9bc099be494494a47deea215a598381101ec3f71fb57328be34775b": {
+      "file": "clips/4473871ab9bc099be494494a47deea215a598381101ec3f71fb57328be34775b.ogg",
+      "bytes": 2803,
+      "sha256": "bf865028ee46474a0c774a188034fa973f13d23b5174cc914e42a24e3d40fa31",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.762
+        "durationSeconds": 0.908
       }
     },
-    "67f012ecf85f826a7c0d93bddfe2519f065e8bab35452707b3ef8982df61ff92": {
-      "file": "clips/67f012ecf85f826a7c0d93bddfe2519f065e8bab35452707b3ef8982df61ff92.ogg",
-      "bytes": 2156,
-      "sha256": "710997c9e5ff41a7c34856eed12ff0bb1c8cb3bac80c5e055ef516a030d2b641",
+    "4b685d65916e7d5fee083e1eeb20569159631fe74ffe2b33139fa646b41d2020": {
+      "file": "clips/4b685d65916e7d5fee083e1eeb20569159631fe74ffe2b33139fa646b41d2020.ogg",
+      "bytes": 2930,
+      "sha256": "07f8473d9d193ab2ceabd29be083345900ff73252fdabf10ae97312750bb408e",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.985
+        "durationSeconds": 0.933
       }
     },
-    "6de1a1a4757e0d028bacb8d8be8eed520527ee134c4f19dfb0e6a3b615ea1218": {
-      "file": "clips/6de1a1a4757e0d028bacb8d8be8eed520527ee134c4f19dfb0e6a3b615ea1218.ogg",
-      "bytes": 1979,
-      "sha256": "09ca13bd9c348aa08ea63154cd4537f2b4b7cf948ad0ddc210f48b914c24f291",
+    "4b713c39be8c2b96cb4481e5716ba5a27a03dea35ffd1b5953333626d7c4e108": {
+      "file": "clips/4b713c39be8c2b96cb4481e5716ba5a27a03dea35ffd1b5953333626d7c4e108.ogg",
+      "bytes": 3080,
+      "sha256": "320cd1ae23827835327f5123ea916661e4922b888ee8f1fd0d7da0befd2393f1",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.947
+        "durationSeconds": 0.989
       }
     },
-    "70d0e550dd2959da6afb216166bded618a38c9c10587699cffae73042c37bdde": {
-      "file": "clips/70d0e550dd2959da6afb216166bded618a38c9c10587699cffae73042c37bdde.ogg",
-      "bytes": 1429,
-      "sha256": "ca69f5275e73b6a2348e43a85deb3699c7bcffdc4aee8d49b6d12b837ea930e2",
+    "5413da300f74715ef77d2f7260365266ac9fef5334da365ec9f482e697189b05": {
+      "file": "clips/5413da300f74715ef77d2f7260365266ac9fef5334da365ec9f482e697189b05.ogg",
+      "bytes": 3676,
+      "sha256": "298e0f63fd58ffebc0529eff8c3401051f721119db8adca46f8586da9fd3175f",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.642
+        "durationSeconds": 1.208
       }
     },
-    "72541a4fde27392e3dd2f71eca83c54aac5074fe5d0d31e04c61c470ac535efa": {
-      "file": "clips/72541a4fde27392e3dd2f71eca83c54aac5074fe5d0d31e04c61c470ac535efa.ogg",
-      "bytes": 2034,
-      "sha256": "5c99827121af36100185048eb81062d72b2b435ae7fe04dce1c248fb01d328a9",
+    "5567ef4696aff15c7eb0ebeb8d67b3216f4f616e7d32a527aefcf8f5f2248803": {
+      "file": "clips/5567ef4696aff15c7eb0ebeb8d67b3216f4f616e7d32a527aefcf8f5f2248803.ogg",
+      "bytes": 2952,
+      "sha256": "10c45b84068253879dee3eb2a4a6c02c255d38c3cbae4f42ceaea5435176d42b",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.905
+        "durationSeconds": 0.965
       }
     },
-    "77e61d49351b922aa96f8d59598d5833a5bf7d8b1510a483f4fb99b59937adb3": {
-      "file": "clips/77e61d49351b922aa96f8d59598d5833a5bf7d8b1510a483f4fb99b59937adb3.ogg",
-      "bytes": 2592,
-      "sha256": "2f55b83857d510b8b7a95fd35b4ec9c3b2394e4ccaf772f56377835497b80ab1",
+    "55d19d492f4d218e9fbd0c9ba394b4ecd1f56f3df6640bf402afd60d48af8f8a": {
+      "file": "clips/55d19d492f4d218e9fbd0c9ba394b4ecd1f56f3df6640bf402afd60d48af8f8a.ogg",
+      "bytes": 2309,
+      "sha256": "e2faa42fd28e30f4cb570a307bbb92ae44866ecab386bb19ee35db2821ffeadc",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.155
+        "durationSeconds": 0.767
       }
     },
-    "7a86b370d674569f21fb5643d60c63521e8a2dc0f7b3193a5b71ce2b140eb93a": {
-      "file": "clips/7a86b370d674569f21fb5643d60c63521e8a2dc0f7b3193a5b71ce2b140eb93a.ogg",
-      "bytes": 1305,
-      "sha256": "4a4d8c290204eb0c208865947295b6141a9df3673ef67cae6d1f7b590d59fd35",
+    "596e61638408852de9497a1af81e24749fa4af6d6a534d0cacf1146d7aab1941": {
+      "file": "clips/596e61638408852de9497a1af81e24749fa4af6d6a534d0cacf1146d7aab1941.ogg",
+      "bytes": 5064,
+      "sha256": "271c257bf45360f6941e9030ebf3d5b8d0f2937efe7be0664847c1346d396ed6",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.558
+        "durationSeconds": 1.643
       }
     },
-    "7e4477bcfdc2158a4ed89a525f9350c3c8a34ebdd94a721b8bac15b3996325ad": {
-      "file": "clips/7e4477bcfdc2158a4ed89a525f9350c3c8a34ebdd94a721b8bac15b3996325ad.ogg",
-      "bytes": 2863,
-      "sha256": "512064044ac28ac4c323c00a39313ecb8538d769984fc692aa38ad7df6e294af",
+    "5ae54e051c314d95ff9bbebf12913ac60df51ad72d458c9b83993f10c856f8fc": {
+      "file": "clips/5ae54e051c314d95ff9bbebf12913ac60df51ad72d458c9b83993f10c856f8fc.ogg",
+      "bytes": 7048,
+      "sha256": "bc812930ea803d21687f27871fd1e0b11a048dead6cb4b2e5c7d8ba44c490f3e",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.297
+        "durationSeconds": 2.261
       }
     },
-    "81807f28c3a33151e534220cccc0ebd803b7da147b18654f216f491158e5febc": {
-      "file": "clips/81807f28c3a33151e534220cccc0ebd803b7da147b18654f216f491158e5febc.ogg",
-      "bytes": 3185,
-      "sha256": "93862524e6efe122c2a9fc5c115afacfbe21d56040b0632775401af646a27e97",
+    "5cb67dd8aa1fd4351cede196c8415c7623df7d5866fd7a478b78ffd91e0c1ee5": {
+      "file": "clips/5cb67dd8aa1fd4351cede196c8415c7623df7d5866fd7a478b78ffd91e0c1ee5.ogg",
+      "bytes": 2981,
+      "sha256": "d63eb0d86504d8eeff0e3ebadb0ced339af7efffb06656d0bcfb5b016847d643",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.512
+        "durationSeconds": 0.989
       }
     },
-    "877f8d40b376a59d20b99ccf76c7273081703f75be0963a8d2af5303acd68a48": {
-      "file": "clips/877f8d40b376a59d20b99ccf76c7273081703f75be0963a8d2af5303acd68a48.ogg",
-      "bytes": 1562,
-      "sha256": "6478cfa6a0544aa2e6cd4313ca7e3e81839376302fb73be3e898158508937516",
+    "5d6cdeac183a40478899ceac6c512684b68e5b14999695b8022db682b7dc03d1": {
+      "file": "clips/5d6cdeac183a40478899ceac6c512684b68e5b14999695b8022db682b7dc03d1.ogg",
+      "bytes": 4019,
+      "sha256": "0180e6093b75acdd827d8a9acc4f7a9523facdc7d032474f583b8744862d9581",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.697
+        "durationSeconds": 1.266
       }
     },
-    "87b17bd85cba93a9fa3c94a1c3bd4afb9dfeb424ef19f754b64c8aabb3145e8a": {
-      "file": "clips/87b17bd85cba93a9fa3c94a1c3bd4afb9dfeb424ef19f754b64c8aabb3145e8a.ogg",
-      "bytes": 5510,
-      "sha256": "405fd3e01d7c6012b97f1918d3317e3f3b47e7f5937751270d58306aebff58e2",
+    "5e3b967828a61d5cef59ea839512268b4ba9cde95aa861471aab2d1563a9301a": {
+      "file": "clips/5e3b967828a61d5cef59ea839512268b4ba9cde95aa861471aab2d1563a9301a.ogg",
+      "bytes": 4836,
+      "sha256": "6cc000589ab18d7ece6506e92ee937c84ee8bbb561de806482d6bf06fce48ac8",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 2.589
+        "durationSeconds": 1.542
       }
     },
-    "893f49474ba8d2c63d46b3b7b3c271c1df88f303bbf058fd08b8c5adb0c72896": {
-      "file": "clips/893f49474ba8d2c63d46b3b7b3c271c1df88f303bbf058fd08b8c5adb0c72896.ogg",
-      "bytes": 3239,
-      "sha256": "3258bb4ce0341999d4af5078568e322b96f74a033b290365eea5bc3f84f0ebab",
+    "65ea37ded48804f7becad3d21d5d96ee964b33ca6d339f40e1602a6ee0869432": {
+      "file": "clips/65ea37ded48804f7becad3d21d5d96ee964b33ca6d339f40e1602a6ee0869432.ogg",
+      "bytes": 7046,
+      "sha256": "bdf0bd55e7d80cf78cfa55e4ff07801271309c0f3031f62616fff9de83ec02c4",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.472
+        "durationSeconds": 2.311
       }
     },
-    "93621b3ee6e98a21d05c99e0b0cb6ec432d405b222d35714fabb03c90b997a2e": {
-      "file": "clips/93621b3ee6e98a21d05c99e0b0cb6ec432d405b222d35714fabb03c90b997a2e.ogg",
-      "bytes": 2597,
-      "sha256": "52e5cb1837dd849802b17e960e35eb189e71acea4e664c98f539c2ee9bbb6fac",
+    "662e90940c2a58226b8222736b06619ccb9597702678a8c694c955afb14c8871": {
+      "file": "clips/662e90940c2a58226b8222736b06619ccb9597702678a8c694c955afb14c8871.ogg",
+      "bytes": 5031,
+      "sha256": "b23ee0965d8ad18693079152b1f4d5e4c6073edf1bc5cc26a70aeea761c71e70",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.18
+        "durationSeconds": 1.563
       }
     },
-    "94a35818a8e2947fe91b88012b674cfd60e105b9f684ac776d05cf12b392539d": {
-      "file": "clips/94a35818a8e2947fe91b88012b674cfd60e105b9f684ac776d05cf12b392539d.ogg",
-      "bytes": 1491,
-      "sha256": "4195ce5ea65be5c5776810006353f493e81a0d5458da4ff97a2b1ca7a7d20742",
+    "695aa936df8573bf048aa635f55fb921876fe7175ec9b987200e4d04797f257a": {
+      "file": "clips/695aa936df8573bf048aa635f55fb921876fe7175ec9b987200e4d04797f257a.ogg",
+      "bytes": 1779,
+      "sha256": "e94cb83ab56cd7fb443e6611156cdc709bb0412e955902f1ebf346b430feed00",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.679
+        "durationSeconds": 0.571
       }
     },
-    "9a3cead35a0f46446e66ee10533d666b8710999ffca36a114dde66ed22d14bc0": {
-      "file": "clips/9a3cead35a0f46446e66ee10533d666b8710999ffca36a114dde66ed22d14bc0.ogg",
-      "bytes": 1515,
-      "sha256": "70aa2fa54605d505eb2d957f548457faef34c787073457a118f292450d8e83af",
+    "6a0d10463ab68a1f83d93fcd1ef64adff7b23ee23f73b6da17478fff5a7aa920": {
+      "file": "clips/6a0d10463ab68a1f83d93fcd1ef64adff7b23ee23f73b6da17478fff5a7aa920.ogg",
+      "bytes": 1949,
+      "sha256": "08f244c04809ae5eb738fcf36d2c70fa505dc769b875581a19c7bc1f69ca420c",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.655
+        "durationSeconds": 0.608
       }
     },
-    "9b07ee81e70063556b8cbed059733455ff9c075887ed0bd7cf725597213a2464": {
-      "file": "clips/9b07ee81e70063556b8cbed059733455ff9c075887ed0bd7cf725597213a2464.ogg",
-      "bytes": 2061,
-      "sha256": "89cfe25d56615907c28ef283a507d6a9a840c95ac921b2d1a273647a998d1562",
+    "6befbcc231fab7f63b907b855096019a89af49a7e0e1ef27de8d5207eb63bf2e": {
+      "file": "clips/6befbcc231fab7f63b907b855096019a89af49a7e0e1ef27de8d5207eb63bf2e.ogg",
+      "bytes": 3381,
+      "sha256": "df632e2ef8d14146188d770e9108994abe33e40786a9cd4b1772d7c8bafac352",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.918
+        "durationSeconds": 1.085
       }
     },
-    "a2f866368039338208b774c40951336dc6905acf0c28de264dfb14129d21856c": {
-      "file": "clips/a2f866368039338208b774c40951336dc6905acf0c28de264dfb14129d21856c.ogg",
-      "bytes": 3631,
-      "sha256": "8c29dbb0369615332a4dfa95096ba045292912c4efcbb9b1d91edea92c21b479",
+    "6ec4d4d7c454b08e9711386d0aad756027a4d74d1c50461b2ef2275cb3356904": {
+      "file": "clips/6ec4d4d7c454b08e9711386d0aad756027a4d74d1c50461b2ef2275cb3356904.ogg",
+      "bytes": 2222,
+      "sha256": "04a1147f4c0233dacf799df089a60ef5123abe78c4673c9618eef26f529f6718",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.656
+        "durationSeconds": 0.7
       }
     },
-    "a364a0797acff6206634a810f2a12a1748fe03bb75e9494ee736cd2d5313fbe6": {
-      "file": "clips/a364a0797acff6206634a810f2a12a1748fe03bb75e9494ee736cd2d5313fbe6.ogg",
-      "bytes": 1456,
-      "sha256": "973c25e8aa27e70295d330bf81e77b447fd36a9036164c2078d4ad129b7590d7",
+    "788c721f18fe13956000967cfa49030fb73af09517f0463059b73a573bb30831": {
+      "file": "clips/788c721f18fe13956000967cfa49030fb73af09517f0463059b73a573bb30831.ogg",
+      "bytes": 2536,
+      "sha256": "06ec2c002623eb3806cdbfb7cf8d04122425df1bf8ee9b125848a2d5cef47770",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.642
+        "durationSeconds": 0.79
       }
     },
-    "a3e3e18fbe9227d79a3952d8a84fe7cdede71d67c1cb0ff0e847a0046f25fa82": {
-      "file": "clips/a3e3e18fbe9227d79a3952d8a84fe7cdede71d67c1cb0ff0e847a0046f25fa82.ogg",
-      "bytes": 2044,
-      "sha256": "ba1bafc14ce98ed7f5499c81f415f1c4452d9e3197b2c90b602af34cee11ce2a",
+    "79d698c419ba208fabc06a8295a6066d6535649bd3b3500c4115ec61a679e1be": {
+      "file": "clips/79d698c419ba208fabc06a8295a6066d6535649bd3b3500c4115ec61a679e1be.ogg",
+      "bytes": 5580,
+      "sha256": "2ce97c4d35073821a926df14bc3172dd8a3495c4e72fcbd88c3400b0e66f6854",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.798
+      }
+    },
+    "7ca78be4867c7b84791ac342b83fc0663c3e92daac57ed6856583391053af5b5": {
+      "file": "clips/7ca78be4867c7b84791ac342b83fc0663c3e92daac57ed6856583391053af5b5.ogg",
+      "bytes": 3405,
+      "sha256": "511816c1bdb11255fcb5bc9fcdbd410945d1720c51059090dba78503f760456b",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.067
+      }
+    },
+    "7cbdbf3bdfab1a2e2f900fd1de051bf10d66a67d2a8909a7e3ea5f2bfc6bba00": {
+      "file": "clips/7cbdbf3bdfab1a2e2f900fd1de051bf10d66a67d2a8909a7e3ea5f2bfc6bba00.ogg",
+      "bytes": 1678,
+      "sha256": "030f8254b0c02a0cd725aa596bec232cbc82bcd27c88453c3c7009bbe01afb9d",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.517
+      }
+    },
+    "80adcb667593c1ebabfce3f973a8627546b180e42575893714640adecb584217": {
+      "file": "clips/80adcb667593c1ebabfce3f973a8627546b180e42575893714640adecb584217.ogg",
+      "bytes": 2181,
+      "sha256": "aae32083363d91631a59c30b9449d8e67d58e400bd33eb14d85a79aba4dd4e85",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.66
+      }
+    },
+    "8117b918a714e42d989bb4e0602ee486a90d7d91424329b2c827027cd6c9e2bc": {
+      "file": "clips/8117b918a714e42d989bb4e0602ee486a90d7d91424329b2c827027cd6c9e2bc.ogg",
+      "bytes": 7650,
+      "sha256": "4638aee23cf691ccd67ee781f7744c807816e288d8cc29755cb5adec61f4dd0d",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.449
+      }
+    },
+    "85aa0f438b4eecc7bc2befe9e6a538035ffe1490f08e120d2e7ea611213b995f": {
+      "file": "clips/85aa0f438b4eecc7bc2befe9e6a538035ffe1490f08e120d2e7ea611213b995f.ogg",
+      "bytes": 2265,
+      "sha256": "42450783fb2757e758005a22755deb3f4fb6f30e7de4d1053db245850feced68",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.702
+      }
+    },
+    "85b83d94e2121ce1ee9ebaaa94ba83f663a561103413961906303fbac02dcff7": {
+      "file": "clips/85b83d94e2121ce1ee9ebaaa94ba83f663a561103413961906303fbac02dcff7.ogg",
+      "bytes": 3938,
+      "sha256": "7bbaa5b233850aafe9954ad0f73dec0dae4366eecea79a4ec78321870faae297",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.233
+      }
+    },
+    "86eb9f54dbf0af98c1b15155c55f413e4b0056b0e828c6a1bba2f08e3778b394": {
+      "file": "clips/86eb9f54dbf0af98c1b15155c55f413e4b0056b0e828c6a1bba2f08e3778b394.ogg",
+      "bytes": 3516,
+      "sha256": "9e977ea193d9645aa50de6249a4414a4c5bd18a719744aff613b5522c173a2aa",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.142
+      }
+    },
+    "87e9ab6818fc8736e89419bb4bf04b1b4b8f626642bf75e4802c7ccb1276172f": {
+      "file": "clips/87e9ab6818fc8736e89419bb4bf04b1b4b8f626642bf75e4802c7ccb1276172f.ogg",
+      "bytes": 4369,
+      "sha256": "c289bdc25e1814352a34ff2d2500492c87714f1b06b34ef3e4d16ad035e5a4e7",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.423
+      }
+    },
+    "8baf4ae944c9dae6987440ed6d3be62f344f53c927e6ef38e19d2f12dc371386": {
+      "file": "clips/8baf4ae944c9dae6987440ed6d3be62f344f53c927e6ef38e19d2f12dc371386.ogg",
+      "bytes": 6569,
+      "sha256": "544ab11038699ab449e1f4041f1e63161c42dd6ad461b593cbc4c8e4e9e5d7ff",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.112
+      }
+    },
+    "8f37db2ebe7c1e9276acb5b672a453bba73d9dbb90ea047109f6bd34052b31e4": {
+      "file": "clips/8f37db2ebe7c1e9276acb5b672a453bba73d9dbb90ea047109f6bd34052b31e4.ogg",
+      "bytes": 2018,
+      "sha256": "fd117c7f98b180e9db78b13ec3363954b0e0fd66e4fcb627480a65363c3375d6",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.673
+      }
+    },
+    "8f92317aac817bec15135b6bb807817fe303b35f0f037ebd4d87b150464111b6": {
+      "file": "clips/8f92317aac817bec15135b6bb807817fe303b35f0f037ebd4d87b150464111b6.ogg",
+      "bytes": 3665,
+      "sha256": "082b4eca8498a9953b157573283edd7e5f9494e60b1c298b5de0aac44aee55ab",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.144
+      }
+    },
+    "8fc87dfde7b6bb388501b87fd1eb253bffcb90f7cc12f833a7f00b9d9da4f7b8": {
+      "file": "clips/8fc87dfde7b6bb388501b87fd1eb253bffcb90f7cc12f833a7f00b9d9da4f7b8.ogg",
+      "bytes": 4155,
+      "sha256": "42e1666dce15ee5c74eb1390ca19b2c888ecb8770df38b9ea20f7a451e67d943",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.311
+      }
+    },
+    "915f448e31a036b1eb5fea907c7b519b33bf70153ac4edadc399d78d8fa2c876": {
+      "file": "clips/915f448e31a036b1eb5fea907c7b519b33bf70153ac4edadc399d78d8fa2c876.ogg",
+      "bytes": 2070,
+      "sha256": "b8dd033829733d0e40addf0fc4a899cdb2af4217e87a50b41e0df04c27505b84",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.662
+      }
+    },
+    "94a7f1543dd9e062be7cd9924bab4dda516a28536564ee0dbe090a1e10420300": {
+      "file": "clips/94a7f1543dd9e062be7cd9924bab4dda516a28536564ee0dbe090a1e10420300.ogg",
+      "bytes": 11386,
+      "sha256": "e63487031acd9267011973894c23d1c132af1aaca8771c02df5ff2f725a294c1",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 4
+      }
+    },
+    "9695a0a574ba1e537494b0e8369bc0361d3511acc5ca9bad67398acf1f06103a": {
+      "file": "clips/9695a0a574ba1e537494b0e8369bc0361d3511acc5ca9bad67398acf1f06103a.ogg",
+      "bytes": 2902,
+      "sha256": "132d46a27a2cdd991c323d95af309d08f51c1b67918cc9cdb1ad609f8fd5bdec",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.912
+      }
+    },
+    "96bb6d1d0794b629911e68afde08e6eb6071bcf2ec691b1aad4f0aee30eb52ab": {
+      "file": "clips/96bb6d1d0794b629911e68afde08e6eb6071bcf2ec691b1aad4f0aee30eb52ab.ogg",
+      "bytes": 6918,
+      "sha256": "5a15a675d6c95e24268a282003bfbeb019d02395e5da3999fd9d3014ef57f010",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.213
+      }
+    },
+    "97721f0f79e0aaeacb394970eb13143cc7f01d7b9fa62a1f3ee6c79a59dacbd8": {
+      "file": "clips/97721f0f79e0aaeacb394970eb13143cc7f01d7b9fa62a1f3ee6c79a59dacbd8.ogg",
+      "bytes": 2697,
+      "sha256": "7e54e38b4ba4523aa225ea809a50fbe4e5b8e4c0c67499df195388b02656532d",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.879
+      }
+    },
+    "9a6a12bf9bc6ac61967097616ab61b628c016643540b0a7b23140c3a96bb2dc8": {
+      "file": "clips/9a6a12bf9bc6ac61967097616ab61b628c016643540b0a7b23140c3a96bb2dc8.ogg",
+      "bytes": 3846,
+      "sha256": "a6975b61fbc7d18c4f997aa7027303a7faef46016376c9ffc965e4d13cde691b",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.243
+      }
+    },
+    "9b516b81df953f1eb86e0a8aed3c531271962cd9ee85c2fb2aba709ca9215abe": {
+      "file": "clips/9b516b81df953f1eb86e0a8aed3c531271962cd9ee85c2fb2aba709ca9215abe.ogg",
+      "bytes": 5078,
+      "sha256": "717acd4ba1640d18e5c145cac6c2df82ff57c7b457085eb99cc8c919f5165ae3",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.628
+      }
+    },
+    "9db6b3fc6c2215dcc4656ca597ade6fd53e9ee99ca83935f188f8c1851a7c337": {
+      "file": "clips/9db6b3fc6c2215dcc4656ca597ade6fd53e9ee99ca83935f188f8c1851a7c337.ogg",
+      "bytes": 7418,
+      "sha256": "c308ad6c08b780ad1790f2f50d3bfe13108e05e3c9bd26a3e8c5a558ba5197eb",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.383
+      }
+    },
+    "a78bf4aaae0ade578845de151fa06ce3c900a5afc34d75300451fb48563d68ea": {
+      "file": "clips/a78bf4aaae0ade578845de151fa06ce3c900a5afc34d75300451fb48563d68ea.ogg",
+      "bytes": 3416,
+      "sha256": "b1de34d07ce73ebefae7228042f947221e0e9660d0823b89a3b857e96b3924ca",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.122
+      }
+    },
+    "a9f0884c77915943ba7891ac596e4d996b00d876a652248fe3a77e6497765ed5": {
+      "file": "clips/a9f0884c77915943ba7891ac596e4d996b00d876a652248fe3a77e6497765ed5.ogg",
+      "bytes": 2790,
+      "sha256": "4483e41988073a3c8d81707975f6ec7d02a7549382a1b879ae2d566e06488c42",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.913
+      }
+    },
+    "ad75871ef2e05f8e3ba6f73e688a62860a554198744a61e15fea3f2613983984": {
+      "file": "clips/ad75871ef2e05f8e3ba6f73e688a62860a554198744a61e15fea3f2613983984.ogg",
+      "bytes": 3841,
+      "sha256": "a11a3bdce80c2049f29ea103b6b01ad23ee684ef8dc30dbc5699589cdabadac0",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.228
+      }
+    },
+    "b15beaeb46b73774f98deada1194c109e11a0c770dd49b1b52b742599e4be579": {
+      "file": "clips/b15beaeb46b73774f98deada1194c109e11a0c770dd49b1b52b742599e4be579.ogg",
+      "bytes": 2666,
+      "sha256": "d1a53ea99be6191e8b401caa55c52ad9e80e62282457a04ec3b6c99e06f3c9d7",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.825
+      }
+    },
+    "b1c9f739a110d7966adfce2fd0d9c2370a52d932fbe36c83afcf77b30ababc37": {
+      "file": "clips/b1c9f739a110d7966adfce2fd0d9c2370a52d932fbe36c83afcf77b30ababc37.ogg",
+      "bytes": 2868,
+      "sha256": "813bb839adc2101c2d5a38ff163744962572331579088f6b631345b69c30dd55",
       "audio": {
         "codec": "opus",
         "channels": 1,
@@ -1483,587 +1692,378 @@
         "durationSeconds": 0.941
       }
     },
-    "a6bc578f07a310eee88d63c861b72d27871aa10e48ad245c8f2dbeaa1255d3b7": {
-      "file": "clips/a6bc578f07a310eee88d63c861b72d27871aa10e48ad245c8f2dbeaa1255d3b7.ogg",
-      "bytes": 8503,
-      "sha256": "47b869fdececcdec2d919c158eab4c911316ba9eb66a1739da96cdc372186030",
+    "b286f7464cafe58d9448577b4627f1262e8cd0bad14a6dd5895dbef8f9882d63": {
+      "file": "clips/b286f7464cafe58d9448577b4627f1262e8cd0bad14a6dd5895dbef8f9882d63.ogg",
+      "bytes": 2884,
+      "sha256": "381f2efdec04f88adae6c291666f646dd447f39e413f06f5250d03634d2ba7ed",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 4.3
+        "durationSeconds": 0.866
       }
     },
-    "ac6bbf57d3e677f1eeea32b1abb4b90c5f52fed152cc5ebbcded1f3002161a0d": {
-      "file": "clips/ac6bbf57d3e677f1eeea32b1abb4b90c5f52fed152cc5ebbcded1f3002161a0d.ogg",
-      "bytes": 1990,
-      "sha256": "e8407eba8397f84735c8bc9c5f0623d3899a55098e9c4db8ac2e386cb9c1f2a3",
+    "b3551fc33437fc73f32365a97772681ac878df6353989b778cda7b67169e104a": {
+      "file": "clips/b3551fc33437fc73f32365a97772681ac878df6353989b778cda7b67169e104a.ogg",
+      "bytes": 4240,
+      "sha256": "e0fb61b323b0222b32a02aeff95bfea3e074bbacf62e31b7c3bcbbc77b026b33",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.876
+        "durationSeconds": 1.391
       }
     },
-    "acb722b4f7b34f09771d69f93c63c37e100e4ebb225996b9b3055c83488c2d0b": {
-      "file": "clips/acb722b4f7b34f09771d69f93c63c37e100e4ebb225996b9b3055c83488c2d0b.ogg",
-      "bytes": 1959,
-      "sha256": "92e5137447ce614e8a472d6949e9f3d5e91296a0f00701a9e1498f2153bcd095",
+    "b3a592fa1fe008e50c83ac16bef691070f88041f19d4824c3afab113da248cb0": {
+      "file": "clips/b3a592fa1fe008e50c83ac16bef691070f88041f19d4824c3afab113da248cb0.ogg",
+      "bytes": 2435,
+      "sha256": "166c6376bcc0f4e75855fa247adfdf945684e915cd418ffbb1234ed5f13af95c",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.901
+        "durationSeconds": 0.771
       }
     },
-    "aceb7329714bbc196bc906e005066820ea610b748048e0922ece2a3e0f4dcc76": {
-      "file": "clips/aceb7329714bbc196bc906e005066820ea610b748048e0922ece2a3e0f4dcc76.ogg",
-      "bytes": 1561,
-      "sha256": "0231b5322521a4291c21f33dd130d6687362436c355843be3878c20ad322ba0b",
+    "b49ba2c1053e319b03b14637db1454fadf8be1ad1db7cafb4eb9b3a7be2a23f9": {
+      "file": "clips/b49ba2c1053e319b03b14637db1454fadf8be1ad1db7cafb4eb9b3a7be2a23f9.ogg",
+      "bytes": 3429,
+      "sha256": "25613bcb1fdaa132eef9d088cd3a2b327e5a86762b67241ec8769901a6992bec",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.695
+        "durationSeconds": 1.113
       }
     },
-    "acfb27761a536b880edcc48a24806fecfdc3c00b8bd2c506e0e7ca5466b8af14": {
-      "file": "clips/acfb27761a536b880edcc48a24806fecfdc3c00b8bd2c506e0e7ca5466b8af14.ogg",
-      "bytes": 1568,
-      "sha256": "2e87241a630de092812e22be2dbb3b125d310d9e6d17f514e7216c3e3d89ecfe",
+    "b607d2b8428e6528b6cf4d47e641cf172a6233104cad05c97048f9da8b30218a": {
+      "file": "clips/b607d2b8428e6528b6cf4d47e641cf172a6233104cad05c97048f9da8b30218a.ogg",
+      "bytes": 1857,
+      "sha256": "713a7035b506751f8f5c8d88b03da6de8ecd9338a19d61c34e260a0d2d38a505",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.701
+        "durationSeconds": 0.598
       }
     },
-    "ada23cfcf76c121bfdb4e142eab97f844a114cbdf29103f0b30cfda6072c399c": {
-      "file": "clips/ada23cfcf76c121bfdb4e142eab97f844a114cbdf29103f0b30cfda6072c399c.ogg",
-      "bytes": 1194,
-      "sha256": "39393e3eac94b721503c64c6e18222a111f4117583a833d0b31e44634eddd8e5",
+    "b6bb7b3cabeddb193fc4ae25ee785c40df7241e61914dc42da9efe51b373d865": {
+      "file": "clips/b6bb7b3cabeddb193fc4ae25ee785c40df7241e61914dc42da9efe51b373d865.ogg",
+      "bytes": 2353,
+      "sha256": "67a490cdd2c872d608ead0f237bd3280f27cd54760e5fd16a5f86493107d7197",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.545
+        "durationSeconds": 0.792
       }
     },
-    "aea1d3af5984e37b49f0dea4c17c7e1e5388802f5c4b2b012600062d5c4c7993": {
-      "file": "clips/aea1d3af5984e37b49f0dea4c17c7e1e5388802f5c4b2b012600062d5c4c7993.ogg",
-      "bytes": 1591,
-      "sha256": "0f2de756c0ac8a944f3ec691473ed41caf0f966f618cad49741c9ab2e728de85",
+    "bdf61428ad8f83814fce1521b99abe667c08bec29e3a79c41dbdff890c1331f0": {
+      "file": "clips/bdf61428ad8f83814fce1521b99abe667c08bec29e3a79c41dbdff890c1331f0.ogg",
+      "bytes": 2821,
+      "sha256": "47256aad08635ccf237cb74dd00b346e11b30dffc5c664caa595d2ecb36d01d1",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.692
+        "durationSeconds": 0.892
       }
     },
-    "afee084c6b5f5284c11d69d74b98a6b5d84fcb5692d87eb6d2fde02246e20b0f": {
-      "file": "clips/afee084c6b5f5284c11d69d74b98a6b5d84fcb5692d87eb6d2fde02246e20b0f.ogg",
-      "bytes": 2396,
-      "sha256": "32d48d9ba40e38d6d5c72acf25d174abd2a6dca433146958c663865f8f558f17",
+    "c195634f8931e1f7c11c367d623e4fabddd950ef5bb9799fea09a2f5613b54c3": {
+      "file": "clips/c195634f8931e1f7c11c367d623e4fabddd950ef5bb9799fea09a2f5613b54c3.ogg",
+      "bytes": 3386,
+      "sha256": "660e773bf7d366b4fee2e4aa32e6b2dddd0cdb213a2558c2565863332d8282c0",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.096
+        "durationSeconds": 1.071
       }
     },
-    "b355d0f2869a9dfb1b128fb8145364814a34f26b0f2dc1d95aee19fa36f57fae": {
-      "file": "clips/b355d0f2869a9dfb1b128fb8145364814a34f26b0f2dc1d95aee19fa36f57fae.ogg",
-      "bytes": 1291,
-      "sha256": "e309a626163fff36e7340dd68d1c487ed7360e3dd6b81dce8e2b2818c2156327",
+    "c2271af3cfa0bd424ebcc090a784e3ff46aa0386b9eb9391910cf40eb55dba5b": {
+      "file": "clips/c2271af3cfa0bd424ebcc090a784e3ff46aa0386b9eb9391910cf40eb55dba5b.ogg",
+      "bytes": 1699,
+      "sha256": "ed1adda60519c9fb9589fc9a5face0dc52a7798f6a6d0fbeec55c0a35113d59a",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.574
+        "durationSeconds": 0.533
       }
     },
-    "b40fac931d1b849ccad68d43187fe664f44b02bc5a6fc169b742e3435c1d5d9f": {
-      "file": "clips/b40fac931d1b849ccad68d43187fe664f44b02bc5a6fc169b742e3435c1d5d9f.ogg",
-      "bytes": 5295,
-      "sha256": "ffd725410bfcbe8f67bca501a82a6ff463fd76f01c0f6c879c9fe6f4361c56e3",
+    "c2b3f9f2a1a54133a3a3c92575e1874c74a5d054d99d3ef2c7810ab5e3eb8b5f": {
+      "file": "clips/c2b3f9f2a1a54133a3a3c92575e1874c74a5d054d99d3ef2c7810ab5e3eb8b5f.ogg",
+      "bytes": 5616,
+      "sha256": "55736332dd19d72f58583586c9ceb56bb41e5048b20612ffa97b676be3e7e44a",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 2.477
+        "durationSeconds": 1.778
       }
     },
-    "b5e39959d847d7f63979a2fa1c3be954387aa59e18f1c30634b176a2bff4f907": {
-      "file": "clips/b5e39959d847d7f63979a2fa1c3be954387aa59e18f1c30634b176a2bff4f907.ogg",
-      "bytes": 2087,
-      "sha256": "abf6d5f4092a6081d1bba3faecb5fc17d670c645a3692638814478d466e5cedc",
+    "c56186369067984dfa1c52dd13db64ca4a4a4d6aad113a4e3349b8d16a4601e8": {
+      "file": "clips/c56186369067984dfa1c52dd13db64ca4a4a4d6aad113a4e3349b8d16a4601e8.ogg",
+      "bytes": 2542,
+      "sha256": "f6aae5e4a064735e192bb71b88ffaf6ae46448857c9cd993e33727be8294e82a",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.961
+        "durationSeconds": 0.822
       }
     },
-    "b736d3fe60e2c390d9d302b5017e581839d49acdd70ac86c9b9f2108be866acd": {
-      "file": "clips/b736d3fe60e2c390d9d302b5017e581839d49acdd70ac86c9b9f2108be866acd.ogg",
-      "bytes": 2006,
-      "sha256": "19641177e074bc2c825ef4d025308c2b7bfdf93b5323680650866bacd0c16492",
+    "c6be3f8643adddcb48c3f7d886eba915c152730801f894a12c4ba9aad5110d01": {
+      "file": "clips/c6be3f8643adddcb48c3f7d886eba915c152730801f894a12c4ba9aad5110d01.ogg",
+      "bytes": 3126,
+      "sha256": "bacaa4fb7c20bc6aebaad43f2d56ccbad68c696190ef775236294b8e17dd1612",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.93
+        "durationSeconds": 0.984
       }
     },
-    "b7d0026eb554bfa8512383f25bea8d1714ac42963b90e0ed8a73eb5b882d3bae": {
-      "file": "clips/b7d0026eb554bfa8512383f25bea8d1714ac42963b90e0ed8a73eb5b882d3bae.ogg",
-      "bytes": 2695,
-      "sha256": "bfd49f7b60eec40b23b3890ab00953c577afa37da75e223189e2b4c9be6c5dad",
+    "c7dcb9362b3daddff7b8b89978c0ef272e60d0698240e9cfb298e2baa1fbf8c0": {
+      "file": "clips/c7dcb9362b3daddff7b8b89978c0ef272e60d0698240e9cfb298e2baa1fbf8c0.ogg",
+      "bytes": 2116,
+      "sha256": "f0ca36ff7408796004f6481527e38ecf1d4ecae23d1c3f87356115a9be338f4c",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.21
+        "durationSeconds": 0.664
       }
     },
-    "b8ecb87d3dee0181f187e6587b9fc220fbd964308d7d77c64ed74fb1403d83df": {
-      "file": "clips/b8ecb87d3dee0181f187e6587b9fc220fbd964308d7d77c64ed74fb1403d83df.ogg",
-      "bytes": 1677,
-      "sha256": "9a80b270f8d094fee6a043229de7461f46df86c53ce998af272b569aeb50c7d4",
+    "c9befd19b94e1ff767bae3ca4d6d9e750fed3b6e93a34fc1ba3a7916d5460e06": {
+      "file": "clips/c9befd19b94e1ff767bae3ca4d6d9e750fed3b6e93a34fc1ba3a7916d5460e06.ogg",
+      "bytes": 4547,
+      "sha256": "4f30db65e5c7cbc2be6faf4de89780b6a6b7409597f8a52b81f99c22329e0508",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.759
+        "durationSeconds": 1.414
       }
     },
-    "bc89b5f56d2692e6890bffd92f24295ee1e5378ff510cb5dcdfb74b0500a6b4e": {
-      "file": "clips/bc89b5f56d2692e6890bffd92f24295ee1e5378ff510cb5dcdfb74b0500a6b4e.ogg",
-      "bytes": 1456,
-      "sha256": "85000c4fe186519c55d296cef76794901b752c3e5a3a989619481dc3e860f18a",
+    "cbfa2ec0fe5fd769bf395684fc139103f24d6fdb84bfb4b13c1c5920d41b2738": {
+      "file": "clips/cbfa2ec0fe5fd769bf395684fc139103f24d6fdb84bfb4b13c1c5920d41b2738.ogg",
+      "bytes": 3353,
+      "sha256": "642935a5028497e08905c2c026183115db25121085dcec1b70864c915e9ba587",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.634
+        "durationSeconds": 1.077
       }
     },
-    "bcf6f8137b23260b206108ecbf429070adbb3fdde836be326579b736794418b2": {
-      "file": "clips/bcf6f8137b23260b206108ecbf429070adbb3fdde836be326579b736794418b2.ogg",
-      "bytes": 2161,
-      "sha256": "75aa726b49937740adb4eba9b38b802436091bb312169c8487f1db4b25093ba7",
+    "cc72560404f47d262a686a50a1ae2df27607abd2ae2c11a3be22b5572ea9d9f0": {
+      "file": "clips/cc72560404f47d262a686a50a1ae2df27607abd2ae2c11a3be22b5572ea9d9f0.ogg",
+      "bytes": 4396,
+      "sha256": "bb213c133d9a7b6d5935d98081337b28358ebba1fd1dee2bc95a3dbec88faa11",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.982
+        "durationSeconds": 1.39
       }
     },
-    "bd6a48f56196ef383b1cb47b3c84142751d509d55cc008eea9a40c2a8553c108": {
-      "file": "clips/bd6a48f56196ef383b1cb47b3c84142751d509d55cc008eea9a40c2a8553c108.ogg",
-      "bytes": 1640,
-      "sha256": "c0c83441ab5c9983da5976e7c851cf447f273792e2d5ec55db0940c1cec2e2f7",
+    "cc9ec55ba71203a09b1fc0eb52a062a7a940b50ddbf191e450de3487ba8da16d": {
+      "file": "clips/cc9ec55ba71203a09b1fc0eb52a062a7a940b50ddbf191e450de3487ba8da16d.ogg",
+      "bytes": 3588,
+      "sha256": "ad7d414ad8cbb0bcf543d8e30f50cf6fdee42d884a89dccc1e8693c09ca813d7",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.73
+        "durationSeconds": 1.15
       }
     },
-    "bd88b0a7d42e292cd0c063efc739f402c3fe09b161b0385d1e58fb62a849c2e7": {
-      "file": "clips/bd88b0a7d42e292cd0c063efc739f402c3fe09b161b0385d1e58fb62a849c2e7.ogg",
-      "bytes": 1801,
-      "sha256": "9eb2aa6276ebe1fec474d2cb9b49f719f9f5ea1c0e941ff896e9286b39a583b5",
+    "ccebe92c8a65217cb0addf3466226b7a48a89dfec82551b2431f296640c822ee": {
+      "file": "clips/ccebe92c8a65217cb0addf3466226b7a48a89dfec82551b2431f296640c822ee.ogg",
+      "bytes": 3136,
+      "sha256": "d362d2663e0c2638e3c96a4ba2c3f54b3531013c8c915aaed7162da5f21e0727",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.806
+        "durationSeconds": 0.987
       }
     },
-    "be4f51a58ecfe4fe071257e99956453b30d0ed331c6503dbb62176b14bb5bfe5": {
-      "file": "clips/be4f51a58ecfe4fe071257e99956453b30d0ed331c6503dbb62176b14bb5bfe5.ogg",
-      "bytes": 4736,
-      "sha256": "8f899dbf426f1f8a720a01f850bf91885c101143508a8c1822c06a91d4c7c363",
+    "d248845728c5e7b5aecb4801db6204f823e869b51cecd145663580fb953d3a17": {
+      "file": "clips/d248845728c5e7b5aecb4801db6204f823e869b51cecd145663580fb953d3a17.ogg",
+      "bytes": 1707,
+      "sha256": "7bff67be9dd0288d7ebc34fb5e61745e02f39f319a88a09ccdd8b33a01210460",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 2.18
+        "durationSeconds": 0.537
       }
     },
-    "bebfb4aa736ce95d59b657f8b80522127788ee1a16646a2f8c7568e44da8df83": {
-      "file": "clips/bebfb4aa736ce95d59b657f8b80522127788ee1a16646a2f8c7568e44da8df83.ogg",
-      "bytes": 4844,
-      "sha256": "9a6ebb187e52272d076c379d3c3758107ec13e1464ae3e35d51b87bba65f915d",
+    "d7cab3a9776cca4388585cbe3dde5f6d5b881007a1e0dbaf5706104b18476d82": {
+      "file": "clips/d7cab3a9776cca4388585cbe3dde5f6d5b881007a1e0dbaf5706104b18476d82.ogg",
+      "bytes": 2450,
+      "sha256": "080929ce15402cfa976a77abd9d2e48bfc42577ad985ce27b6e945ef2d244f60",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 2.305
+        "durationSeconds": 0.778
       }
     },
-    "bed60d3eae434431e94336c5a220a51a2236cbcbb76e831e75c6f34252d1ce5b": {
-      "file": "clips/bed60d3eae434431e94336c5a220a51a2236cbcbb76e831e75c6f34252d1ce5b.ogg",
-      "bytes": 1917,
-      "sha256": "46a7ee97a84fd3fc2a084ba1bdb04153bc73e8036e76af75571bcf40796b71d5",
+    "d802734748eab9ee8e58b5c6dd6778ce0f352292f03254e322699a017636179e": {
+      "file": "clips/d802734748eab9ee8e58b5c6dd6778ce0f352292f03254e322699a017636179e.ogg",
+      "bytes": 2681,
+      "sha256": "c76c99d6854c3e0ef2f7f41f362d0e2d80a3d4726ea00f1d90b1b9eed4a8f774",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.881
+        "durationSeconds": 0.868
       }
     },
-    "c0aa0b5608eac2e14da73a223ab65ffefc67d78cfb41d88b17a512c274dd466d": {
-      "file": "clips/c0aa0b5608eac2e14da73a223ab65ffefc67d78cfb41d88b17a512c274dd466d.ogg",
-      "bytes": 8295,
-      "sha256": "d5d2a2aeab77d6edab358ea8e7d81697a9c2d59d8ee5d2cbd648ec35e67676ff",
+    "d8eb1ac7e2a7ca79c861c69d9250ca511619fa260a53b602ae94db3eca2b0de5": {
+      "file": "clips/d8eb1ac7e2a7ca79c861c69d9250ca511619fa260a53b602ae94db3eca2b0de5.ogg",
+      "bytes": 2646,
+      "sha256": "88075b2a933f2b000a63088e05020f6818b48ee11412f2c457d8ac8d8a197349",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 4.1
+        "durationSeconds": 0.852
       }
     },
-    "c3ee436531db9aa91b0351c7678e03381923a492c3ad8f12738531c4c9d98a8c": {
-      "file": "clips/c3ee436531db9aa91b0351c7678e03381923a492c3ad8f12738531c4c9d98a8c.ogg",
-      "bytes": 1948,
-      "sha256": "60111a8776a7eb83ad57ce57b52c42a59cf8e197d059a7e13de42fe66c950ff6",
+    "dd14fdc39137a3907d9d95fff5fa7690e796f243fd62c8862a2f40bb37dcecc6": {
+      "file": "clips/dd14fdc39137a3907d9d95fff5fa7690e796f243fd62c8862a2f40bb37dcecc6.ogg",
+      "bytes": 4201,
+      "sha256": "c3504531ae4208baacb0799a9dde477e05c160f7423740af3552145e65368711",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.901
+        "durationSeconds": 1.368
       }
     },
-    "c48b5190db1e45c23162e9483c5c44e6e7dfe8c6ec35f664a649184053558840": {
-      "file": "clips/c48b5190db1e45c23162e9483c5c44e6e7dfe8c6ec35f664a649184053558840.ogg",
-      "bytes": 3232,
-      "sha256": "6ba776a00143654b5c3b814099edb8f5970791e3c2174a4e6010800caf8cd943",
+    "dd83f36155f771b7327a2daad167b436d492ec66be934bf01fa46c9f7a42b9b6": {
+      "file": "clips/dd83f36155f771b7327a2daad167b436d492ec66be934bf01fa46c9f7a42b9b6.ogg",
+      "bytes": 1960,
+      "sha256": "8ab07760243a2765526206ec8fe2f7072820c74e9de1c6b6b8057f1aa94c5a02",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.523
+        "durationSeconds": 0.615
       }
     },
-    "c62fb3d56d5d7e6f5f5cdb95d9648ed553f9b8aed60a9655c6c43ed67029ec5c": {
-      "file": "clips/c62fb3d56d5d7e6f5f5cdb95d9648ed553f9b8aed60a9655c6c43ed67029ec5c.ogg",
-      "bytes": 1953,
-      "sha256": "f1c07397b48f5d585f6268865dc919ce0980795616a55d40e7844fb37a8b08c8",
+    "de45b499651e21480af151563f9db57cc05cdd57102a357927fbc1b931833d07": {
+      "file": "clips/de45b499651e21480af151563f9db57cc05cdd57102a357927fbc1b931833d07.ogg",
+      "bytes": 1902,
+      "sha256": "d12eb03ccc6f71e2deddfc609c32f87e81ef6f59a81fe8e49b2555c4cc2a23e6",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.88
+        "durationSeconds": 0.603
       }
     },
-    "c75189adc2fd6c0c144e603521f7640a96f3bbb69e1f43cba538401509b53e65": {
-      "file": "clips/c75189adc2fd6c0c144e603521f7640a96f3bbb69e1f43cba538401509b53e65.ogg",
-      "bytes": 1571,
-      "sha256": "cb0c1f8d8b48258bdc76fcfadfc855361a34cf1961efa314d1e155aaa1b88408",
+    "e61f0b59897cb49485d4a739774caa2218235d3b0e32a88c3bd5cd8ea7331bc7": {
+      "file": "clips/e61f0b59897cb49485d4a739774caa2218235d3b0e32a88c3bd5cd8ea7331bc7.ogg",
+      "bytes": 2103,
+      "sha256": "5c04e181cdc2afa5f67eb280a16cc6afe816dc9d7987de6fb1b24a2e883ddcf6",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.732
+        "durationSeconds": 0.696
       }
     },
-    "c8c8c34134a7ea65facdb53412e01acfafcbfad8dcf949281a067ab020d0ce21": {
-      "file": "clips/c8c8c34134a7ea65facdb53412e01acfafcbfad8dcf949281a067ab020d0ce21.ogg",
-      "bytes": 2208,
-      "sha256": "6e3789e2d97c332f3130c4e997b0dc417be4e8f4d6352d6cf4cf2033f2528607",
+    "e911bce9825f64d473938bb26fb2f20045b87dbe9b1a0e291522362fa2b65c82": {
+      "file": "clips/e911bce9825f64d473938bb26fb2f20045b87dbe9b1a0e291522362fa2b65c82.ogg",
+      "bytes": 2738,
+      "sha256": "010f17e009fea1d37cd63d1b601dc810c2bfd9940b08e6c3373e49c70bc6f4a7",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.985
+        "durationSeconds": 0.866
       }
     },
-    "ca1b1d094c44ae52eb518cfcc7b3a7b8a90e523253140f6c23dc3699c08fcf3d": {
-      "file": "clips/ca1b1d094c44ae52eb518cfcc7b3a7b8a90e523253140f6c23dc3699c08fcf3d.ogg",
-      "bytes": 1437,
-      "sha256": "6bca38c26cac636586b2e2e521c51ef76d1527f7d541fce76d3a01886bf12c47",
+    "ecd47b60c791f723f5d5457e4e6166c54f9347c92084079de6106447d291208d": {
+      "file": "clips/ecd47b60c791f723f5d5457e4e6166c54f9347c92084079de6106447d291208d.ogg",
+      "bytes": 3489,
+      "sha256": "89d2a4ca83768bb2df8c76631ab65719a417b0899d933afaee13a6714c79c797",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.623
+        "durationSeconds": 1.089
       }
     },
-    "ceab6eb607329346586fe839e95ea0a59f5a7c2c4f48f468e5714db2e45447f7": {
-      "file": "clips/ceab6eb607329346586fe839e95ea0a59f5a7c2c4f48f468e5714db2e45447f7.ogg",
-      "bytes": 1435,
-      "sha256": "e364cab6ba2248f587841c9b5f300a0dafda27abf6a4826ac8b74d93a09ed36e",
+    "f2d0621fe79369d72224e9815b0c3cce475695974ad19dcdcdb33fff19bae256": {
+      "file": "clips/f2d0621fe79369d72224e9815b0c3cce475695974ad19dcdcdb33fff19bae256.ogg",
+      "bytes": 3098,
+      "sha256": "1358ceb87a116009b5371527154a4ee65ed3042a743e3e0cfeca4dd9efa6395c",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.621
+        "durationSeconds": 0.995
       }
     },
-    "d2598b5f0e08292d1a600e1bfd5a79745504c56060708a988ae35e61ee4abb7c": {
-      "file": "clips/d2598b5f0e08292d1a600e1bfd5a79745504c56060708a988ae35e61ee4abb7c.ogg",
-      "bytes": 1610,
-      "sha256": "79115cbad3fc20acad6e1c0d7153c8007c118d3d161a9387782bb29019410ec6",
+    "f659eb9922c32739bff040eaa5a4c35f03bb79cf6cc274c9a8ab15f39a5336b1": {
+      "file": "clips/f659eb9922c32739bff040eaa5a4c35f03bb79cf6cc274c9a8ab15f39a5336b1.ogg",
+      "bytes": 2360,
+      "sha256": "1621fe59476b2e21511d2ae12ea734282c828533357424f6e123616e086317fe",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.765
+        "durationSeconds": 0.783
       }
     },
-    "d35b7153b6777aabd262b0924c089c829d2894e69b045d37be081c581c5cfe50": {
-      "file": "clips/d35b7153b6777aabd262b0924c089c829d2894e69b045d37be081c581c5cfe50.ogg",
-      "bytes": 1453,
-      "sha256": "829972a040e514100f391b06ff040ac041608cc0e108f13429b3a431548a40bd",
+    "f889109d4a4ceac7fd712e87d55987c2a01efa74dc684754ace785ac5fe55816": {
+      "file": "clips/f889109d4a4ceac7fd712e87d55987c2a01efa74dc684754ace785ac5fe55816.ogg",
+      "bytes": 3410,
+      "sha256": "8dac982568b3b608cce7ddb63268322676667d0981242df5c8e39ac5f25dafd7",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.656
+        "durationSeconds": 1.064
       }
     },
-    "d7c2f59f5ccd45e0c4f1635a28400a45da8597a24326f800954a92ce770912d7": {
-      "file": "clips/d7c2f59f5ccd45e0c4f1635a28400a45da8597a24326f800954a92ce770912d7.ogg",
-      "bytes": 4855,
-      "sha256": "dc4c7eaf34f8d9a88bd84cb6ec8b17e9b908a0bcd030b2efd7c5cd9ce48a6e6e",
+    "fe49bc2c4da5621b32ae0d05dbc3c53a7eeb7392d2bf86c70cb4a570a0c665c4": {
+      "file": "clips/fe49bc2c4da5621b32ae0d05dbc3c53a7eeb7392d2bf86c70cb4a570a0c665c4.ogg",
+      "bytes": 2952,
+      "sha256": "2bea57020f23aa80fc3094a12629333c21fb5c5f249bfa2e9d926b3404a8c133",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 2.268
+        "durationSeconds": 0.932
       }
     },
-    "d98f43d5142c9a9883f8e08d85babbb26f5cb8bf9a0a7a9b75921190b5030001": {
-      "file": "clips/d98f43d5142c9a9883f8e08d85babbb26f5cb8bf9a0a7a9b75921190b5030001.ogg",
-      "bytes": 1736,
-      "sha256": "ac93565c449ca1b5fb6b512d39a87467c67a4ddd14d1aa8d2cb5405d2f5b9d02",
+    "fe56db70c2a21a2c31db433a1414a46de42b2cb332d4aa8b313ef0eb0bda3793": {
+      "file": "clips/fe56db70c2a21a2c31db433a1414a46de42b2cb332d4aa8b313ef0eb0bda3793.ogg",
+      "bytes": 3273,
+      "sha256": "45beb2b1ec850c1c34adce6d5979116b5fd57f003e3feea5208b8d0e5436a04e",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.756
+        "durationSeconds": 1.079
       }
     },
-    "dc853a3f1fffcc25b4fc2fa29cd6f7084276e0cde2ad87fe59f287fe6188e228": {
-      "file": "clips/dc853a3f1fffcc25b4fc2fa29cd6f7084276e0cde2ad87fe59f287fe6188e228.ogg",
-      "bytes": 1820,
-      "sha256": "5f94e1c34e55a01b6ae0b66b880d07943e2173609fdf6040cf185d2790744128",
+    "fff00cb8ce10447b0a288d6155cb5a8c6542d07b0aa77f0f41f284fa1c43c87f": {
+      "file": "clips/fff00cb8ce10447b0a288d6155cb5a8c6542d07b0aa77f0f41f284fa1c43c87f.ogg",
+      "bytes": 2608,
+      "sha256": "fa7054c5dcb139e6f4aa97bbafa4c7ed313d5fda5fba5fceeba8c05fa220b88c",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.823
-      }
-    },
-    "dd6a8792f42c97a160cdb5dff5ed22e50bdf16c360d009fa9e9053197236e6f4": {
-      "file": "clips/dd6a8792f42c97a160cdb5dff5ed22e50bdf16c360d009fa9e9053197236e6f4.ogg",
-      "bytes": 2735,
-      "sha256": "15c82a970cbbac54e414e0003cc611c688be07900e206a6ddd4e9b6983452df8",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.221
-      }
-    },
-    "e339c5ca43a3089d3589cee2993611064f2da11f50e3bbe0b1a878e74ce4ddb7": {
-      "file": "clips/e339c5ca43a3089d3589cee2993611064f2da11f50e3bbe0b1a878e74ce4ddb7.ogg",
-      "bytes": 2869,
-      "sha256": "088b253346ab1400d7f02cddb59500d42cd4e2f882c9adebb7c833eb2ee180fc",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.309
-      }
-    },
-    "e49778fa1d3b1d154bbb6b290ad2dc7ce2c17a1598f7003143dbc08f5273ec01": {
-      "file": "clips/e49778fa1d3b1d154bbb6b290ad2dc7ce2c17a1598f7003143dbc08f5273ec01.ogg",
-      "bytes": 2561,
-      "sha256": "0ce97f1716bc8c84d923f25b487fe30c970ea0122d45f242953ec371b0a5db00",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.217
-      }
-    },
-    "e583969091653a9018658b5e075108c342d43663885579e0fda27856b28f49e9": {
-      "file": "clips/e583969091653a9018658b5e075108c342d43663885579e0fda27856b28f49e9.ogg",
-      "bytes": 2205,
-      "sha256": "895479db905805a9aa6ed0f37f5a78fd188187bc467ba8b98d2c40382fe68714",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.006
-      }
-    },
-    "e5d7c07f15b7a2318c325755d745de5c6f01e7fbb9142200888abdc07d57d4f7": {
-      "file": "clips/e5d7c07f15b7a2318c325755d745de5c6f01e7fbb9142200888abdc07d57d4f7.ogg",
-      "bytes": 2958,
-      "sha256": "4882cc19494aaab43aec7d4939221d6cd10535b4779f3a8383bee4aedd401ddc",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.32
-      }
-    },
-    "e930835672707fc5ce33da7c59ef6758b84b99976b5a9cf99c3bee212ee92d49": {
-      "file": "clips/e930835672707fc5ce33da7c59ef6758b84b99976b5a9cf99c3bee212ee92d49.ogg",
-      "bytes": 1836,
-      "sha256": "1924a42bb674a98117a47fd361a5573c759a3f650b435f81d80ca9e16cb12ab3",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.814
-      }
-    },
-    "eec16f30aa00e34061d2a0f8588d4af793ef13f683e7beab74b67c4454f9fc59": {
-      "file": "clips/eec16f30aa00e34061d2a0f8588d4af793ef13f683e7beab74b67c4454f9fc59.ogg",
-      "bytes": 2613,
-      "sha256": "5d1c0debd4e26525964faeff82cb1787397746e146aa905001eb5d9fae25a5a1",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.191
-      }
-    },
-    "eed63f56912863ad7cdb850bd9d647612dba336ef5b18d3bb93ab6e0fe01ea95": {
-      "file": "clips/eed63f56912863ad7cdb850bd9d647612dba336ef5b18d3bb93ab6e0fe01ea95.ogg",
-      "bytes": 1472,
-      "sha256": "3994683d6056751d686cb03935e2ef5a9aed6976f619952724d08710c0602c52",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.643
-      }
-    },
-    "ef2d5c5d16d2ac9f790361008de9ae0bc9bed0c9c2c5260785599e79ddfce2c7": {
-      "file": "clips/ef2d5c5d16d2ac9f790361008de9ae0bc9bed0c9c2c5260785599e79ddfce2c7.ogg",
-      "bytes": 3858,
-      "sha256": "4693f66827e80743dcff8c7dc4bdda447b54930a698e6e2ef44ede6a46bdec00",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.766
-      }
-    },
-    "f25cc98c46b788dd944b7d30b6543e3823abf7ecdc799df31a224ffb9073ada0": {
-      "file": "clips/f25cc98c46b788dd944b7d30b6543e3823abf7ecdc799df31a224ffb9073ada0.ogg",
-      "bytes": 2691,
-      "sha256": "e9e806d68b7923c46c0a3cbeacbc3c0cb8b4c9b716d6542deec85c3f5994561f",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.21
-      }
-    },
-    "f32ebd013e0a3db257823d163db13c24655a4c78127ebed41e213a58e72c50a7": {
-      "file": "clips/f32ebd013e0a3db257823d163db13c24655a4c78127ebed41e213a58e72c50a7.ogg",
-      "bytes": 2245,
-      "sha256": "bf73d74cfe035960aa036c3f2c810bbb7dc6fc0b4c3aa877b0dd604b7beb11ce",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.01
-      }
-    },
-    "f3870d5064b899a2a2fdf7f078159e54c497d75310d8e58964a8f7f9c7af3186": {
-      "file": "clips/f3870d5064b899a2a2fdf7f078159e54c497d75310d8e58964a8f7f9c7af3186.ogg",
-      "bytes": 1827,
-      "sha256": "3b7103590f5b0a79afe44123a124ad50931b90def59479cd2717f71690d05419",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.828
-      }
-    },
-    "f423cd2f447a119ff9ee4d920c450434f13a4355309be3f9338254c1f9cde737": {
-      "file": "clips/f423cd2f447a119ff9ee4d920c450434f13a4355309be3f9338254c1f9cde737.ogg",
-      "bytes": 1324,
-      "sha256": "810d5b5c2b977f11ab8a20c199ac0e298cedef89c47dad30204e5ccd73917ab1",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.582
-      }
-    },
-    "f72e381a3cc1e361e7e8f256594a8cedc10e7f2ffb84627cccaef00a49dfa2a1": {
-      "file": "clips/f72e381a3cc1e361e7e8f256594a8cedc10e7f2ffb84627cccaef00a49dfa2a1.ogg",
-      "bytes": 2852,
-      "sha256": "fdad921d89e9e0bebed1f2ffb5463e1cf905c4f29c921ad743f8115c5395a660",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.366
-      }
-    },
-    "f7c52420a3e5d07ca4106c2449a356ee406aa575ddd73e0a5b4c27d3aa6c1d75": {
-      "file": "clips/f7c52420a3e5d07ca4106c2449a356ee406aa575ddd73e0a5b4c27d3aa6c1d75.ogg",
-      "bytes": 1724,
-      "sha256": "8b8a31a0b4bcb13f8861dc55ea25357bac625f53c592f542379d45b72db78281",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.808
-      }
-    },
-    "f82df256ef6aa8393af1b0fa7608dcd054d618e103212d496b98c89658007eae": {
-      "file": "clips/f82df256ef6aa8393af1b0fa7608dcd054d618e103212d496b98c89658007eae.ogg",
-      "bytes": 1596,
-      "sha256": "0977b0886108091d6c79224c876e3f3cf7c7efc5494c69d80e8dabf229ea6e60",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.721
-      }
-    },
-    "fa586b00a310e073de2401adb3167589b645145aa0f37950c8839a2eb3c59277": {
-      "file": "clips/fa586b00a310e073de2401adb3167589b645145aa0f37950c8839a2eb3c59277.ogg",
-      "bytes": 2517,
-      "sha256": "45fbfc4b94da6eae375e26e84bbf55ae5fa0428e67bfaec78333ae9eb9118d32",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.114
-      }
-    },
-    "faec27103fa6689fdba8ca0d1b6193f0a24785465edeb7b9b92ce87e911dc040": {
-      "file": "clips/faec27103fa6689fdba8ca0d1b6193f0a24785465edeb7b9b92ce87e911dc040.ogg",
-      "bytes": 2788,
-      "sha256": "24ecc0cfada51a7d4bd4dc2c8978806ebca8d563d6ea022fa033b9d8c820f2b5",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.314
-      }
-    },
-    "fcfcb0965770fba752d63e0ef82e05097be9f5d4a31aa7c784455063ce8426b0": {
-      "file": "clips/fcfcb0965770fba752d63e0ef82e05097be9f5d4a31aa7c784455063ce8426b0.ogg",
-      "bytes": 2647,
-      "sha256": "cf22c87f55162757314babf2ca416009202c2e7e3c96fbded59b723834ffc6fc",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.222
+        "durationSeconds": 0.818
       }
     }
   }

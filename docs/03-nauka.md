@@ -1,5 +1,9 @@
 # Nauka — prowadzenie i utrwalanie
 
+## D-61 — jakość i dostęp do wolniejszego odsłuchu
+
+**Wdrożone:** nagrania Cori Food są generowane w Opus mono **24 kb/s**. Przy każdym dostępnym odsłuchu są dwie możliwości: zwykłe tempo i „Wolniej”, także przy kwestiach historyjek, w ich podsumowaniu i próbie dźwięku w ustawieniach. Otwarte luki nadal nie mają odsłuchu. Nagranie zwalniamy do 0,7× z zachowaniem wysokości głosu; zapis plików, synteza zapasowa i wyniki nauki pozostają rozdzielone. Kompresja nie zmienia rytmu wygenerowanego głosu — jakość i naturalność tempa oceniamy odsłuchem.
+
 ## D-60 — gotowe nagrania Cori i offline
 
 **Wdrożone:** dla danego tekstu i języka najpierw odtwarzamy gotowy klip, a jeśli go nie ma, nie jest obsługiwany albo zawiedzie — korzystamy z dotychczasowego syntezatora. Bez dźwięku to samo zadanie przechodzi do zwykłej formy, bez utraty wpisanego tekstu. Stan odtwarzacza nie jest wynikiem nauki. Niedostępność jednego klipu nie wyłącza pozostałych. Przerwanie lub blokada automatycznego odtwarzania nie są błędem odpowiedzi.

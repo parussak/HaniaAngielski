@@ -10,7 +10,7 @@ npm run audio
 
 Generator czyta aktualne materiały Food i tworzy lub aktualizuje nagrania. Nie trzeba ręcznie przepisywać słów, zmieniać kodu strony ani wskazywać każdego pliku. Zmień treść w `public/content/02-food/`, zapisz ją i ponownie uruchom polecenie.
 
-Wyniki są w [generated/manifest.json](generated/manifest.json) i katalogu `generated/clips/`. Manifest jest indeksem: przy każdym haśle i wypowiedzi sceny zawiera tekst oraz identyfikator klipu. Identyczne teksty współdzielą nagranie. Pliki `.ogg` zawierają **Opus mono 16 kb/s**, nie Vorbis. Model Cori i ustawienia są w [config.json](config.json).
+Wyniki są w [generated/manifest.json](generated/manifest.json) i katalogu `generated/clips/`. Manifest jest indeksem: przy każdym haśle i wypowiedzi sceny zawiera tekst oraz identyfikator klipu. Identyczne teksty współdzielą nagranie. Pliki `.ogg` zawierają **Opus mono 24 kb/s**, nie Vorbis. Model Cori i ustawienia są w [config.json](config.json).
 
 **Aplikacja korzysta z nagrań (D-60).** Budowanie sprawdza ich zgodność i publikuje klipy oraz mały indeks `audio/catalog.json`; PWA zapisuje je offline razem z wydaniem. Do Firebase nie wysyłamy dźwięku. Do Git dodaj cały katalog `audio/` wraz z gotowymi klipami. Nie edytuj ręcznie manifestu ani nazw nagrań.
 

@@ -13,7 +13,7 @@
       "modelConfig": {"file": "voices/en_GB-cori-high.onnx.json", "sha256": "9e7fb5b5671612c22f3c81cbe46c1ae87b031a4632bcb509e499dad6f1e2adec"},
       "source": "https://huggingface.co/rhasspy/piper-voices/blob/main/en/en_GB/cori/high/MODEL_CARD",
       "inference": {"lengthScale": 1.08, "sentenceSilence": 0.25},
-      "encoding": {"codec": "libopus", "channels": 1, "bitrate": 16000, "sampleRate": 24000, "application": "voip"},
+      "encoding": {"codec": "libopus", "channels": 1, "bitrate": 24000, "sampleRate": 24000, "application": "voip"},
       "processing": {"silenceThresholdDb": -50, "startSilence": 0.05, "endSilence": 0.12, "loudness": -18, "truePeak": -2, "loudnessRange": 11}
     }
   },

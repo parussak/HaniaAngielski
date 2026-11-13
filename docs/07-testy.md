@@ -1,5 +1,9 @@
 # Testy — podział i zasady
 
+## D-61 — 24 kb/s i „Wolniej” przy każdym odsłuchu
+
+Weryfikacja 13 listopada 2026: rzeczywiste `npm run audio` wygenerowało ponownie **111 klipów / 120 odwołań**, Ogg Opus mono 24 kb/s, **375 669 bajtów**. `audio:check`, **296/296 testów Node**, budowanie z kontrolą treści i TypeScript oraz **318 plikami PWA** przeszły. Celowany przebieg Chrome na gotowej aplikacji: **24/24 scenariusze** słuchania, nagrań, scen i ekranów mobilnych. Testy sprawdzają „Wolniej” w ustawieniach, przy gotowej kwestii sceny i w jej podsumowaniu, zarówno z syntezą, jak i prawdziwymi plikami; zachowują ochronę przed zdradzaniem otwartej luki. Ponownie potwierdzono zimny start z nagraniami offline i niezmienione zakupy oraz nagrodę za lekcję. Obejrzano zrzut historyjki 320 px; kontrola dokumentacji i różnic przeszła. Nie ponawiano całego zestawu 137 scenariuszy z poprzedniego etapu ani odsłuchu na fizycznym telefonie. Podniesienie przepływności nie dowodzi subiektywnej poprawy rytmu lub wymowy.
+
 ## D-60 — nagrania i PWA offline
 
 Weryfikacja 13 listopada 2026, Chrome: **296/296 testów Node**, także z rozszerzoną biblioteką; **137/137 scenariuszy Playwright** na zbudowanej aplikacji. Budowanie z walidacją materiałów, TypeScript, kontrolą nagrań i **318 zasobami PWA** przeszło. `audio:check` potwierdził 111 klipów / 120 odwołań i 266 115 bajtów. Lekki indeks publikowany z aplikacją zajmuje około 13,8 kB; pełny manifest generatora nie jest publikowany. Na serwerze deweloperskim celowany zestaw nagrań i syntezy: **12 przeszło, 2 pominięte** (wymagają zbudowanej PWA). Pierwszy przebieg deweloperski wykrył sztywną ścieżkę GitHub Pages w nowym teście; oczekiwanie adresu dostosowano do rzeczywistej bazy strony, bez zmiany aplikacji. Kontrola dokumentacji i różnic przeszła. Nie testowano na fizycznym telefonie ani prawdziwym koncie Firebase; synchronizacja kont używa adaptera testowego.

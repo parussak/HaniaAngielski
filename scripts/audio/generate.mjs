@@ -49,7 +49,7 @@ async function main(){
    }
   });
   console.log(`Audio gotowe: ${result.generated} wygenerowanych, ${result.reused} zachowanych, ${result.removed} nieużywanych usuniętych. ${result.clips} klipów / ${result.references} odwołań / ${(result.bytes/1024).toFixed(1)} KiB.`);
-  console.log('Pliki: audio/generated. Bez zmian w odtwarzaniu aplikacji i paczce PWA.');
+  console.log('Pliki: audio/generated. Nagrania zostaną opublikowane z aplikacją i PWA przy następnym budowaniu.');
  }finally{await lock.close();await rm(lockPath,{force:true});}
 }
 main().catch(error=>{console.error(error.message);process.exitCode=1;});

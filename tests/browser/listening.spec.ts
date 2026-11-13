@@ -109,6 +109,7 @@ test('ustawienie: wyłączone słuchanie zostaje po odświeżeniu, a włączone 
  await install(context,english);await page.goto('./');await page.getByRole('button',{name:'Konto',exact:true}).click();
  const toggle=page.getByRole('checkbox',{name:'Włącz ćwiczenia ze słuchu'});await expect(toggle).toBeChecked();await expect(page.locator('.listening-status')).toContainText('jest dostępny');
  await page.getByRole('button',{name:'Sprawdź dźwięk',exact:true}).click();expect((await spoken(page)).at(-1)).toEqual({text:vocabularyFullAnswer(questionFor(modules,{key:keyFor(modules[0],'word',modules[0].words[0].id),moduleId:modules[0].id,id:modules[0].words[0].id,version:1,type:'word',input:'text'})),lang:'en-GB',rate:0.9});
+ await page.getByRole('button',{name:'Wolniej',exact:true}).click();expect((await spoken(page)).at(-1)!.rate).toBe(0.6);
  await toggle.uncheck();await expect(page.locator('.listening-status')).toContainText('wyłączone');await expect(page.getByRole('button',{name:'Sprawdź dźwięk',exact:true})).toHaveCount(0);
  await page.reload();await expect(page.getByRole('checkbox',{name:'Włącz ćwiczenia ze słuchu'})).not.toBeChecked();
  await page.setViewportSize({width:320,height:640});await noScroll(page);await page.screenshot({path:'test-results/listening-settings-320.png',fullPage:true});await page.setViewportSize({width:390,height:844});
@@ -135,11 +136,14 @@ test('głośnik w scenie: tylko przy kwestiach bez otwartej luki, także z klawi
  const button=scene.locator('.scene-say'),box=(await button.boundingBox())!;expect(box.width).toBeGreaterThanOrEqual(44);expect(box.height).toBeGreaterThanOrEqual(44);
  await button.click();expect((await spoken(page)).at(-1)).toEqual({text:'What would you like?',lang:'en-GB',rate:0.9});
  await button.focus();await page.keyboard.press('Enter');expect(await spoken(page)).toHaveLength(2);
+ await scene.getByRole('button',{name:'Posłuchaj tej kwestii wolniej',exact:true}).click();expect((await spoken(page)).at(-1)).toEqual({text:'What would you like?',lang:'en-GB',rate:0.6});
  // Listening saves nothing and does not move the conversation.
  await expect(scene).toHaveAttribute('data-position','2');await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
  for(let gap=2;gap<=5;gap++){await expect(scene).toHaveAttribute('data-position',String(gap));await answerCurrent(page,modules);}
+ await expect(scene.locator('.scene-slow')).toHaveCount(await scene.locator('.scene-say').count());
  const all=page.locator('.scene-summary .scene-say');await expect(all).toHaveCount(7);await all.last().scrollIntoViewIfNeeded();await all.last().click();
  expect((await spoken(page)).at(-1)!.text).toBe('Enjoy your meal!');await all.nth(1).click();expect((await spoken(page)).at(-1)!.text).toBe('Can I have a chicken sandwich, please?');
+ await expect(page.locator('.scene-summary .scene-slow')).toHaveCount(7);await page.locator('.scene-summary .scene-slow').last().click();expect((await spoken(page)).at(-1)).toEqual({text:'Enjoy your meal!',lang:'en-GB',rate:0.6});
  await page.setViewportSize({width:320,height:640});await noScroll(page);await page.screenshot({path:'test-results/listening-scene-320.png',fullPage:true});
 });
 

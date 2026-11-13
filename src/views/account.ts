@@ -24,6 +24,7 @@ function cloudError(error: unknown) {
     return error instanceof Error && !code ? error.message : 'Połączenie z kontem jest niedostępne. Spróbuj ponownie później; możesz kontynuować naukę z lokalnym zapisem.';
 }
 import { speaker } from '../speech.ts';
+import {speechButtons} from './speech-controls.ts';
 import type { Module } from '../core.ts';
 import {keyFor,questionFor} from '../core.ts';
 import {vocabularyFullAnswer} from '../learning/vocabulary-answer.ts';
@@ -33,5 +34,5 @@ export function listeningSettingsView(modules: Module[]) {
     const word=sample?.words[0],text=sample&&word?vocabularyFullAnswer(questionFor(modules,{key:keyFor(sample,'word',word.id),moduleId:sample.id,id:word.id,version:word.rev??1,type:'word',input:'text'})):'';
     const ready=speech.available(language,text);
     const status = !on ? 'Słuchanie jest wyłączone. Zadania mają zwykłą formę.' : ready ? 'Dźwięk dla tego kursu jest dostępny: nagrania lub głos urządzenia.' : 'Dźwięk jest teraz niedostępny. Zadania mają zwykłą formę — nic nie trzeba robić.';
-    return `<section class="panel listening-settings"><h2>Ćwiczenia ze słuchu</h2><p>W lekcjach można posłuchać słówek i rozmów. Bez dźwięku te same zadania pokazują się w zwykłej formie.</p><label for="listening"><input type="checkbox" id="listening" ${on ? 'checked' : ''}> Włącz ćwiczenia ze słuchu</label><p class="listening-status" aria-live="polite">${status}</p>${ready && sample ? `<button class="secondary" data-action="listen" data-say="${e(text)}" data-lang="${e(language!)}">Sprawdź dźwięk</button>` : ''}</section>`;
+    return `<section class="panel listening-settings"><h2>Ćwiczenia ze słuchu</h2><p>W lekcjach można posłuchać słówek i rozmów. Bez dźwięku te same zadania pokazują się w zwykłej formie.</p><label for="listening"><input type="checkbox" id="listening" ${on ? 'checked' : ''}> Włącz ćwiczenia ze słuchu</label><p class="listening-status" aria-live="polite">${status}</p>${ready && sample ? `<div class="listen">${speechButtons(text,language!,{playLabel:'Sprawdź dźwięk'})}</div>` : ''}</section>`;
 }

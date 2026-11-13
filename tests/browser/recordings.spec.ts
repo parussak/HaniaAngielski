@@ -53,8 +53,8 @@ test('brak indeksu i głosu nie blokuje lekcji',async({page,context})=>{
 
 test('historyjka odtwarza tylko ukończone kwestie i podsumowanie, także z klawiatury',async({page,context})=>{
  await device(context);const p=seed(),lesson=lessons(j).find(l=>l.lesson.id==='restaurant-dialogue-1')!.lesson;p.active=makeLessonSession(modules,j,lesson,'mixed',p);await restore(page,p);await expect(page.locator('.scene-say')).toHaveCount(0);
- await answerCurrent(page,modules);await page.getByRole('button',{name:'Posłuchaj tej kwestii',exact:true}).focus();await page.keyboard.press('Enter');await expect.poll(()=>page.evaluate(()=>(window as any).__playing)).toBeGreaterThan(0);
- for(let i=1;i<5;i++)await answerCurrent(page,modules);await expect(page.locator('.scene-summary .scene-say')).toHaveCount(7);await page.locator('.scene-summary .scene-say').last().click();expect(await page.evaluate(()=>(window as any).__tts)).toEqual([]);await page.getByRole('button',{name:/Dalej/}).click();await expect(page.locator('.lesson-reward')).toContainText('+3 ★');
+ await answerCurrent(page,modules);await page.getByRole('button',{name:'Posłuchaj tej kwestii wolniej',exact:true}).click();expect((await plays(page)).at(-1)).toMatchObject({rate:0.7,pitch:true});await page.getByRole('button',{name:'Posłuchaj tej kwestii',exact:true}).focus();await page.keyboard.press('Enter');await expect.poll(()=>page.evaluate(()=>(window as any).__playing)).toBeGreaterThan(0);
+ for(let i=1;i<5;i++)await answerCurrent(page,modules);await expect(page.locator('.scene-summary .scene-say')).toHaveCount(7);await expect(page.locator('.scene-summary .scene-slow')).toHaveCount(7);await page.locator('.scene-summary .scene-slow').last().click();expect((await plays(page)).at(-1)).toMatchObject({rate:0.7,pitch:true});await page.locator('.scene-summary .scene-say').last().click();expect(await page.evaluate(()=>(window as any).__tts)).toEqual([]);await page.getByRole('button',{name:/Dalej/}).click();await expect(page.locator('.lesson-reward')).toContainText('+3 ★');
 });
 
 test.describe('offline',()=>{test.use({serviceWorkers:'allow'});

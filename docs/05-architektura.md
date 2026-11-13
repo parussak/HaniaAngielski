@@ -1,5 +1,9 @@
 # Architektura — realizacja techniczna
 
+## D-61 — wspólne przyciski odsłuchu
+
+`src/views/speech-controls.ts` renderuje parę zwykły odsłuch / „Wolniej” dla słówek, dialogów i ustawień. Oba przyciski przekazują ten sam tekst i język do istniejącej akcji, a wolniejszy dodatkowo `data-slow`. Nie wprowadzają drugiego pliku audio ani stanu w wynikach. Przepływność nagrań należy do `audio/config.json`; odtwarzacz jej nie ustawia.
+
 ## D-60 — publikowanie i odtwarzanie nagrań
 
 - `scripts/audio/publish.mjs` sprawdza manifest względem aktualnych materiałów, profilu i sum klipów. Wtyczka w `vite.config.ts` publikuje tylko klipy i mały `audio/catalog.json`, także na serwerze deweloperskim. Budowanie nie uruchamia syntezy; nie kopiuje narzędzi, modelu ani pełnego manifestu generatora.

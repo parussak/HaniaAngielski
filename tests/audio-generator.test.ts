@@ -29,7 +29,7 @@ test('audio: plan korzysta z pełnych haseł z a/an i uzupełnia także dwie luk
 test('audio: identyczny tekst współdzieli klip, a tłumaczenie i kolejność JSON nie zmieniają nazwy',()=>{
  const m=material();m.words.push({...m.words[0],id:'second-apple'});const c=config(),p=createPlan([m],c),refs=p.header.modules[0].references.filter((r:any)=>r.kind==='word'&&r.text==='an apple');assert.equal(refs.length,2);assert.equal(refs[0].clip,refs[1].clip);
  m.words[0].front='Inne objaśnienie';m.words.reverse();const changed=createPlan([m],c);assert.equal(canonical(p),canonical(changed));
- const n=structuredClone(c);n.profiles.cori.encoding={...n.profiles.cori.encoding,bitrate:24000};assert.notEqual(createPlan([m],n).clips[0].id,p.clips[0].id);
+ const n=structuredClone(c);n.profiles.cori.encoding={...n.profiles.cori.encoding,bitrate:c.profiles.cori.encoding.bitrate===24000?16000:24000};assert.notEqual(createPlan([m],n).clips[0].id,p.clips[0].id);
  n.profiles.cori.encoding=c.profiles.cori.encoding;n.profiles.cori.inference.lengthScale=1.1;assert.notEqual(createPlan([m],n).clips[0].id,p.clips[0].id);
 });
 

@@ -142,7 +142,7 @@
 .listen button{min-height:48px;padding:10px 16px}
 .listen-options .listen-option{min-height:56px}
 .listen-picture{display:inline-block;margin:0 8px;font-size:26px;vertical-align:middle;object-fit:contain}
-.scene-say{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;margin-top:6px;border:1px solid #d8c6ed;border-radius:12px;background:#fff;color:#65468d;cursor:pointer}
+.scene-audio{display:inline-flex;flex-wrap:wrap;gap:6px;max-width:100%}.scene-say,.scene-slow{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;margin-top:6px;border:1px solid #d8c6ed;border-radius:12px;background:#fff;color:#65468d;cursor:pointer}
 .listening-settings label{display:flex;align-items:center;gap:10px;min-height:44px;font-weight:600}
 .listening-settings input{width:22px;height:22px}
 .scene-message{display:flex;align-items:flex-start;gap:8px;min-width:0}.scene-message-reply{flex-direction:row-reverse}.scene-message>.dialogue-line{flex:1;min-width:0;margin:2px 0}.scene-line-avatar{flex:0 0 44px;width:44px;height:48px;display:grid;place-items:center;background:#eee5fa;border:1px solid #d9c9ec;border-radius:50%;overflow:hidden}.scene-line-avatar .scene-actor,.scene-summary .scene-line-avatar .scene-actor{width:40px}.studying .scene-line-avatar .scene-actor .cat-mascot .cat-artwork{height:44px}.scene-line-retry{margin-top:8px;min-height:44px;width:100%}
@@ -152,3 +152,5 @@
 .scene-actor{display:block;width:70px;max-width:100%}.scene-actor .cat-mascot{width:100%;margin:0}.studying .scene-actor .cat-mascot .cat-artwork{display:block;width:100%;max-width:100%;height:75px}
 .scene-summary .scene-actor{width:54px}.studying .scene-summary .scene-actor .cat-artwork{height:58px}
 @media(max-width:380px),(max-height:700px){.studying:has(.scene-message) .question-illustration img{height:60px;width:110px}}
+
+.scene-slow{padding:6px 10px;font:inherit;font-size:13px}

@@ -2,7 +2,7 @@
 
 **D-60 — nagrania w aplikacji i PWA offline:** [zasady odtwarzania](03-nauka.md), [architektura](05-architektura.md), [testy](07-testy.md). Pierwszeństwo ma gotowy klip, następnie synteza urządzenia, na końcu zwykłe zadanie. Bez zmiany wyników i gwiazdek.
 
-**D-59 — generator lokalnych nagrań Food:** [wymagania i granice](generowanie-audio.md), [jedno polecenie i obsługa](../audio/README.md). Cori, Opus mono 16 kb/s; gotowe pliki w repozytorium. W D-60 podłączono je do aplikacji i pamięci PWA.
+**D-59 — generator lokalnych nagrań Food:** [wymagania i granice](generowanie-audio.md), [jedno polecenie i obsługa](../audio/README.md). Cori, Opus mono 24 kb/s; gotowe pliki w repozytorium. W D-60 podłączono je do aplikacji i pamięci PWA.
 
 **D-54 — wdrożone:** każda z czterech historyjek Food stanowi całą lekcję, z 4–5 lukami i kocimi rozmówcami. Obsada jest stała przez sesję i wznowienie; nie zmienia formatu zapisu. [Zasady nauki](03-nauka.md), [oprawa](01-produkt.md).
 

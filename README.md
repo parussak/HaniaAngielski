@@ -1,6 +1,6 @@
 # Małe kroki — nauka Hani
 
-Nagrania Food można przygotować lokalnie poleceniem `npm run audio` — Cori, Opus mono 16 kb/s. Generator aktualizuje potrzebne pliki, a `npm run audio:check` sprawdza ich spójność. **Aplikacja odtwarza nagrania także offline po przygotowaniu PWA.** Bez odpowiedniego pliku korzysta z syntezy urządzenia lub zwykłej formy zadania. [Instrukcja](audio/README.md), [wymagania](docs/generowanie-audio.md).
+Nagrania Food można przygotować lokalnie poleceniem `npm run audio` — Cori, Opus mono 24 kb/s. Generator aktualizuje potrzebne pliki, a `npm run audio:check` sprawdza ich spójność. **Aplikacja odtwarza nagrania także offline po przygotowaniu PWA.** Bez odpowiedniego pliku korzysta z syntezy urządzenia lub zwykłej formy zadania. [Instrukcja](audio/README.md), [wymagania](docs/generowanie-audio.md).
 
 „Postępy” pokazują osobno ukończone mapy i lekcje, tydzień nauki oraz małe sukcesy w wybranym kursie. Zdobyte gwiazdki pozostają widoczne po zakupach; dokładne wyniki i historia są w rozwijanych szczegółach. Widok korzysta z dotychczasowych zapisów, bez nowego algorytmu opanowania — [zasady liczenia](docs/03-nauka.md).
 
