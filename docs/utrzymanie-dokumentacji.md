@@ -42,7 +42,7 @@ Katalog `docs/archiwum/` (stan obecny sprzed zmian, audyty, raporty etapów) jes
 
 **Tylko dokumentacja:** przeczytaj zmienione fragmenty, sprawdź zgodność z właściwym kodem/treściami/testami, odnośniki i zakres różnic. Nie trzeba uruchamiać całej aplikacji ani dopisywać testów dopasowanych do brzmienia akapitów.
 
-**Materiały lub zachowanie aplikacji:** stosuj [zasady testowania](07-testy.md). Zapisz polecenia i scenariusze, które faktycznie wykonano, wraz z wynikiem. Nie dopisuj „przetestowane offline” wyłącznie dlatego, że service worker istnieje. Nie zastępuj recenzji językowej walidacją JSON.
+**Materiały lub zachowanie aplikacji:** stosuj [zasady testowania](07-testy.md). Polecenia i scenariusze, które faktycznie wykonano, wraz z wynikiem podaj w podsumowaniu zmiany i w opisie commita — nie dopisuj ich do dokumentacji. Trwały brak weryfikacji (np. telefon, recenzja językowa) dopisz do listy otwartych braków w [testach](07-testy.md). Nie dopisuj „przetestowane offline” wyłącznie dlatego, że service worker istnieje. Nie zastępuj recenzji językowej walidacją JSON.
 
 Pomocniczy skrypt dostarczony ze skillem sprawdza lokalne odnośniki plikowe w dokumentacji i kompletność prostego opisu skilla:
 
