@@ -197,35 +197,35 @@ Aktualnym punktem odniesienia jest D-50 powyżej: **226 testów Node w obu bibli
 
 ## Stan obecny
 
-**Dobór danych po etapie 2 refaktoringu:** mechanika korzysta z danych syntetycznych, regresje Food wskazują go po ID, a kompletność i rozbudowa całego katalogu mają osobne kontrole. Nie wymagamy jednego modułu lub kursu w aplikacji. [Instrukcja danych testowych](../tests/README.md) i [zakres etapu 2](refaktoring-etap-2.md). Wcześniejsze wyniki poniżej są historią uruchomień, a nie wymaganą liczbą testów.
+**Dobór danych po etapie 2 refaktoringu:** mechanika korzysta z danych syntetycznych, regresje Food wskazują go po ID, a kompletność i rozbudowa całego katalogu mają osobne kontrole. Nie wymagamy jednego modułu lub kursu w aplikacji. [Instrukcja danych testowych](../tests/README.md) i [zakres etapu 2](archiwum/refaktoring-etap-2.md). Wcześniejsze wyniki poniżej są historią uruchomień, a nie wymaganą liczbą testów.
 
 Są testy Node dla logiki, materiałów, historii i synchronizacji oraz scenariusze Playwright dla aplikacji i PWA. Część testów jest ogólna, część świadomie sprawdza konkretne ustalenia Food. Historyczne nazwy `stage1/2/3.test.ts` pozostają; kontrolę tekstu widoków zastąpiono sprawdzaniem wyrenderowanego interfejsu. Statyczne kontrole granic importów i workflow nadal mają uzasadniony zakres.
 
 W przeglądzie 9–10 listopada 2026 r. wykonano 84 testy Node i kontrolę materiałów z powodzeniem. Zebrano 51 testów przeglądarkowych, bez ponownego ich wykonania w zadaniu dokumentacyjnym. Nie są to wyniki nowego uruchomienia przy obecnym porządkowaniu dokumentacji.
 
-Po rozpoczęciu implementacji D-34 uruchomiono także pełny zestaw przeglądarkowy gotowej aplikacji: **57/57**, w tym dodatkowy trening offline i synchronizację jego nagrody. Nowe kontrole Node są w `tests/training.test.ts`, a przebiegi interfejsu w `tests/browser/training.spec.ts` i `tests/browser/pwa.spec.ts`. [Raport wdrożenia](wdrozenie-nauki.md) opisuje zakres i ograniczenia; historyczna macierz pozostaje punktem odniesienia sprzed zmian.
+Po rozpoczęciu implementacji D-34 uruchomiono także pełny zestaw przeglądarkowy gotowej aplikacji: **57/57**, w tym dodatkowy trening offline i synchronizację jego nagrody. Nowe kontrole Node są w `tests/training.test.ts`, a przebiegi interfejsu w `tests/browser/training.spec.ts` i `tests/browser/pwa.spec.ts`. [Raport wdrożenia](archiwum/wdrozenie-nauki.md) opisuje zakres i ograniczenia; historyczna macierz pozostaje punktem odniesienia sprzed zmian.
 
 Obecne workflow GitHub uruchamiają testy Node i budowanie z walidacją treści, ale nie Playwright. Brak błędu publikacji nie potwierdza kompletnej recenzji językowej ani działania na wszystkich prawdziwych telefonach.
 
-Szczegółowa macierz pokrycia, ograniczenia i dowody: [testy — punkt odniesienia](stan-obecny/testy.md).
+Szczegółowa macierz pokrycia, ograniczenia i dowody: [testy — punkt odniesienia](archiwum/stan-obecny/testy.md).
 
 ## Weryfikacja etapu 2
 
 Po uporządkowaniu kursów: **114/114 testów Node i 61/61 testów Playwright** gotowej aplikacji. `tests/courses.test.ts` obejmuje model i kontrolę materiałów; `tests/fixtures/course-materials.ts` zawiera wspólne syntetyczne dane EN/FR/IT, a `tests/browser/courses.spec.ts` cztery przebiegi mobilne. Dane testowe nie są dodawane do produkcyjnego katalogu. Test porównuje stare i nowe odczytanie wszystkich słów i skompilowanych zadań Food oraz ich kluczy.
 
-Budowanie korzysta bezpośrednio ze wspólnego `readLibrary`, a nie z importu danych przez plik testowy. Walidacja kursów nie zastępuje recenzji wariantów językowych ani podręcznika. [Raport etapu 2](wdrozenie-kursow.md).
+Budowanie korzysta bezpośrednio ze wspólnego `readLibrary`, a nie z importu danych przez plik testowy. Walidacja kursów nie zastępuje recenzji wariantów językowych ani podręcznika. [Raport etapu 2](archiwum/wdrozenie-kursow.md).
 
 ## Weryfikacja etapu 3
 
 **130/130 testów Node i 68/68 testów Playwright** gotowej aplikacji. `tests/course-practice.test.ts` sprawdza poznanie, archiwum, ograniczenie opcji, zgodność kopii, odrębność kursów i preferencje kont. `tests/browser/course-practice.spec.ts` obejmuje sześć scenariuszy mobilnych, a `tests/browser/pwa.spec.ts` dodatkowo globalne ćwiczenie offline i wysłanie jego wyniku po połączeniu.
 
-Sprawdzamy też zachowanie zaliczonych modułowych fiszek Food, brak nowych gwiazdek za globalne tryby, odmowę zastąpienia aktywnej sesji oraz utrzymanie poznania po zastąpieniu starszej niedokończonej sesji. Globalna historia nie jest zaliczana do wyników jednego przypadkowego modułu. [Raport etapu 3](wdrozenie-zakresow.md).
+Sprawdzamy też zachowanie zaliczonych modułowych fiszek Food, brak nowych gwiazdek za globalne tryby, odmowę zastąpienia aktywnej sesji oraz utrzymanie poznania po zastąpieniu starszej niedokończonej sesji. Globalna historia nie jest zaliczana do wyników jednego przypadkowego modułu. [Raport etapu 3](archiwum/wdrozenie-zakresow.md).
 
 ## Weryfikacja etapu 4
 
 **137/137 testów Node i 72/72 testów Playwright** gotowej aplikacji w Chrome, z testami PWA. `npm run build` przechodzi walidację treści, TypeScript, budowanie i przygotowanie zasobów offline. `tests/food-audit.test.ts` chroni oryginalne treści i mapę, odrębny wybór wersji według ukończeń, stare i nowe aktywne sesje, kopie, brak ponownych gwiazdek oraz trening drugiej mapy. `tests/browser/food-audit.spec.ts` obejmuje dawne ukończenie, rozpoczętą sesję, nową mapę z nagrodą i odznaką oraz zimny start nowej mapy offline. Sprawdzono wygląd zrzutów telefonu i brak przewijania poziomego przy 320 i 390 px.
 
-Testy kont używają lokalnego modelu Firebase; nie ingerują w prawdziwe wyniki. Przegląd zdjęć i objaśnień opisuje [raport Food](wdrozenie-food.md); testy struktury nie zastępują recenzji pedagogicznej ani próby na fizycznym telefonie Hani.
+Testy kont używają lokalnego modelu Firebase; nie ingerują w prawdziwe wyniki. Przegląd zdjęć i objaśnień opisuje [raport Food](archiwum/wdrozenie-food.md); testy struktury nie zastępują recenzji pedagogicznej ani próby na fizycznym telefonie Hani.
 
 ## Weryfikacja przygotowania treningu i odzyskiwania map
 
@@ -305,7 +305,7 @@ Weryfikacja 10 listopada 2026: **158/158 testów Node i 86/86 testów Playwright
 
 ## Refaktoring zależności i wspólnych stałych — etap 1
 
-`tests/refactor-boundaries.test.ts` chroni brak wykonawczej zależności domku od modułu map, zgodne eksporty i klucze map, formy polskich liczebników oraz walidację starej kopii i miejsc w domku. Istniejące 158 testów zachowano bez zmieniania ich oczekiwań; dodano cztery przypadki zgodności. Porównanie kontrolne przed/po dało identyczny zapis i decyzje walidacji 13 kopii oraz identyczny HTML sześciu wariantów ekranów. [Szczegółowy zakres](refaktoring-etap-1.md).
+`tests/refactor-boundaries.test.ts` chroni brak wykonawczej zależności domku od modułu map, zgodne eksporty i klucze map, formy polskich liczebników oraz walidację starej kopii i miejsc w domku. Istniejące 158 testów zachowano bez zmieniania ich oczekiwań; dodano cztery przypadki zgodności. Porównanie kontrolne przed/po dało identyczny zapis i decyzje walidacji 13 kopii oraz identyczny HTML sześciu wariantów ekranów. [Szczegółowy zakres](archiwum/refaktoring-etap-1.md).
 
 W `tests/browser/house.spec.ts` scenariusz ostatniej lekcji czeka na pokazanie pytania przed pętlą odpowiedzi, a scenariusz zimnego startu czeka na zapis ustawienia przed zamknięciem strony. Nie zastępujemy tych oczekiwań stałym opóźnieniem i nie zmniejszamy wymagań dotyczących wyniku ani trwałości postępów.
 
@@ -313,19 +313,19 @@ Weryfikacja 11 listopada 2026: **162/162 testy Node i 86/86 testów Playwright**
 
 ## Testy odporne na nowe moduły i kursy — etap 2 refaktoringu
 
-166/166 testów Node przeszło na zwykłej i wirtualnie rozszerzonej bibliotece. Pełny przebieg Playwright na testowym wydaniu z dodatkowym modułem EN, kursami FR/IT i Food poza pierwszą pozycją dał 88/88 po objęciu dodatkowych kontekstów przeglądarki jawnym scenariuszem Food. Testy pełnej biblioteki pozostają niezależne od tej fixture. [Zakres, wyniki i ograniczenia](refaktoring-etap-2.md); [instrukcja danych testowych](../tests/README.md).
+166/166 testów Node przeszło na zwykłej i wirtualnie rozszerzonej bibliotece. Pełny przebieg Playwright na testowym wydaniu z dodatkowym modułem EN, kursami FR/IT i Food poza pierwszą pozycją dał 88/88 po objęciu dodatkowych kontekstów przeglądarki jawnym scenariuszem Food. Testy pełnej biblioteki pozostają niezależne od tej fixture. [Zakres, wyniki i ograniczenia](archiwum/refaktoring-etap-2.md); [instrukcja danych testowych](../tests/README.md).
 
 Końcowy przebieg na standardowym wydaniu również dał **88/88**. Budowanie, kontrola dokumentacji i różnic przeszły; wersja PWA jest identyczna z wersją sprzed tego etapu. Nie zmieniono kodu aplikacji ani jej produkcyjnych materiałów.
 
 ## Wydzielenie kontrolera domku — etap 3 refaktoringu
 
-Dodano cztery testy w `tests/house-controller.test.ts`: brak wpływu na aktywną lekcję przy nawigacji, trwałe zakupy i ustawienia w osobnych kursach, brak zmiany postępów i komunikatu sukcesu po błędzie zapisu oraz przekazywanie nieswoich akcji między kontrolerami. Dotychczasowe oczekiwania testów Food i domku pozostają zachowane. Porównanie sekwencji 12 akcji przed/po dało identyczne postępy, stan ekranu i komunikaty. [Zakres etapu](refaktoring-etap-3.md).
+Dodano cztery testy w `tests/house-controller.test.ts`: brak wpływu na aktywną lekcję przy nawigacji, trwałe zakupy i ustawienia w osobnych kursach, brak zmiany postępów i komunikatu sukcesu po błędzie zapisu oraz przekazywanie nieswoich akcji między kontrolerami. Dotychczasowe oczekiwania testów Food i domku pozostają zachowane. Porównanie sekwencji 12 akcji przed/po dało identyczne postępy, stan ekranu i komunikaty. [Zakres etapu](archiwum/refaktoring-etap-3.md).
 
 Weryfikacja 11 listopada 2026: **170/170 testów Node i 88/88 testów Playwright** gotowej aplikacji w Chrome. Budowanie z walidacją treści, TypeScript i PWA, kontrola odnośników dokumentacji oraz kontrola różnic przeszły. Nie zmieniono dotychczasowych oczekiwań przeglądarkowych ani formatu postępów; nie testowano na fizycznym telefonie i prawdziwych danych Hani.
 
 ## Podział walidacji kopii — etap 4 refaktoringu
 
-`tests/backup-validation.test.ts` sprawdza publiczny kontrakt względem 116 wyników zapisanych przed podziałem: 21 poprawnych i 95 odrzuconych kopii. Porównuje dokładną zawartość zaakceptowanych danych i treść błędów, a także brak mutacji źródła, niezależność kopii i zachowanie dodatkowych pól. Osobny przypadek chroni rozdzielenie walidacji struktury od kontroli integralności pełnej historii. Dotychczasowe testy kopii, historii, domku, kont, synchronizacji i interfejsu zachowano bez zmiany oczekiwań. [Zakres i dowody zgodności](refaktoring-etap-4.md).
+`tests/backup-validation.test.ts` sprawdza publiczny kontrakt względem 116 wyników zapisanych przed podziałem: 21 poprawnych i 95 odrzuconych kopii. Porównuje dokładną zawartość zaakceptowanych danych i treść błędów, a także brak mutacji źródła, niezależność kopii i zachowanie dodatkowych pól. Osobny przypadek chroni rozdzielenie walidacji struktury od kontroli integralności pełnej historii. Dotychczasowe testy kopii, historii, domku, kont, synchronizacji i interfejsu zachowano bez zmiany oczekiwań. [Zakres i dowody zgodności](archiwum/refaktoring-etap-4.md).
 
 Weryfikacja 11 listopada 2026: **173/173 testy Node** na zwykłej i wirtualnie rozszerzonej bibliotece oraz **88/88 testów Playwright** gotowej aplikacji w Chrome. Budowanie z walidacją materiałów, TypeScript i PWA, kontrola dokumentacji i różnic przeszły. Wyniki 116 przypadków przed/po są identyczne. Nie testowano na fizycznym telefonie ani prawdziwym koncie Hani.
 

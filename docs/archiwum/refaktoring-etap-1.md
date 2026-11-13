@@ -4,12 +4,12 @@ Data: 11 listopada 2026. Zakres zatwierdzony po przeglądzie audytu: usunięcie 
 
 ## Wykonane zmiany
 
-- [Model i klucze map](../src/learning/journey.ts) zawierają `Journey`, `Stage`, `Lesson`, `JourneyIssue`, `journeyKey`, `lessonKey` i `lessons`. Ten moduł nie zależy od domku ani nagród. `adventure.ts` zachowuje dotychczasowe eksporty, więc istniejące importy pozostają zgodne.
-- [Zakres kursu](../src/learning/scope.ts) zawiera wspólny wybór kursu według modułu (`courseForModule`). Domek nie musi już importować wykonawczego modułu map `adventure.ts`. Dotychczasowy eksport `courseForModule` z domku pozostaje dostępny.
-- [Wartości nagród](../src/learning/rewards.ts) są wspólne dla naliczania, opisów na mapie i wprowadzeniu, ustawień treningu oraz podsumowania premii etapu. Wartości pozostają: 3 za pierwsze ukończenie, 1 za pełną powtórkę, 1 za dodatkowy trening i 3 za dawną premię etapu. Warunki przyznawania pozostają bez zmian.
-- [Identyfikator historycznego kursu](../src/materials/identity.ts) ma jedno źródło, używane przez wybór kursu, domek i walidację kopii. `house/catalog.ts` nadal udostępnia go jako zgodny eksport.
-- [Katalog domku](../src/house/catalog.ts) udostępnia listę `slotIds` wyprowadzoną z `slots`; walidacja kopii korzysta z tej samej listy, zamiast własnej kopii.
-- [Polska odmiana liczebników](../src/polish-count.ts) jest wspólna dla liczników ćwiczeń i etykiet zaległych słówek/zadań. Brzmienie etykiet nie zmienia się.
+- [Model i klucze map](../../src/learning/journey.ts) zawierają `Journey`, `Stage`, `Lesson`, `JourneyIssue`, `journeyKey`, `lessonKey` i `lessons`. Ten moduł nie zależy od domku ani nagród. `adventure.ts` zachowuje dotychczasowe eksporty, więc istniejące importy pozostają zgodne.
+- [Zakres kursu](../../src/learning/scope.ts) zawiera wspólny wybór kursu według modułu (`courseForModule`). Domek nie musi już importować wykonawczego modułu map `adventure.ts`. Dotychczasowy eksport `courseForModule` z domku pozostaje dostępny.
+- [Wartości nagród](../../src/learning/rewards.ts) są wspólne dla naliczania, opisów na mapie i wprowadzeniu, ustawień treningu oraz podsumowania premii etapu. Wartości pozostają: 3 za pierwsze ukończenie, 1 za pełną powtórkę, 1 za dodatkowy trening i 3 za dawną premię etapu. Warunki przyznawania pozostają bez zmian.
+- [Identyfikator historycznego kursu](../../src/materials/identity.ts) ma jedno źródło, używane przez wybór kursu, domek i walidację kopii. `house/catalog.ts` nadal udostępnia go jako zgodny eksport.
+- [Katalog domku](../../src/house/catalog.ts) udostępnia listę `slotIds` wyprowadzoną z `slots`; walidacja kopii korzysta z tej samej listy, zamiast własnej kopii.
+- [Polska odmiana liczebników](../../src/polish-count.ts) jest wspólna dla liczników ćwiczeń i etykiet zaległych słówek/zadań. Brzmienie etykiet nie zmienia się.
 
 ## Ochrona zgodności
 
@@ -17,7 +17,7 @@ Nie zmieniono publicznych materiałów, ich identyfikatorów i rewizji, formatu 
 
 Przed edycją przygotowano deterministyczny zapis kontrolny: przejście pierwszej mapy Food z błędami, nagrody i premie, odblokowania, zakupy i drugi portfel kursu. Po zmianie ten zapis oraz wyniki przyjęcia/odrzucenia 13 kopii (stara wersja 1, bieżąca i celowo uszkodzone warianty) były identyczne bajt po bajcie. Osobno porównano HTML mapy, wprowadzenia i ustawień dla dwóch stanów postępów — wszystkie sześć wyników było identycznych.
 
-Nowy [test granic i zgodności](../tests/refactor-boundaries.test.ts) sprawdza wykonawcze zależności po usunięciu importów typów, zachowanie starych eksportów i kluczy map, odmianę liczebników oraz odczyt starej kopii i walidację miejsc/portfela. To test granicy architektury; nie uzależnia treści interfejsu od formatowania kodu źródłowego.
+Nowy [test granic i zgodności](../../tests/refactor-boundaries.test.ts) sprawdza wykonawcze zależności po usunięciu importów typów, zachowanie starych eksportów i kluczy map, odmianę liczebników oraz odczyt starej kopii i walidację miejsc/portfela. To test granicy architektury; nie uzależnia treści interfejsu od formatowania kodu źródłowego.
 
 W dwóch testach przeglądarkowych domku doprecyzowano oczekiwanie na widoczne pytanie po rozpoczęciu lekcji i na zapisane ustawienie dekoracji przed zamknięciem strony. Pierwszy pełny przebieg wykazał brak tych oczekiwań (84/86); nie zmieniono przez to działania aplikacji ani oczekiwanych rezultatów nauki i zapisu.
 

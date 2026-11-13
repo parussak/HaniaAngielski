@@ -1,6 +1,6 @@
 # Produkt i ekrany — stan obecny
 
-Stan z 9–10 listopada 2026 r.; zakres i sposób weryfikacji: [spis dokumentacji](../README.md).
+Stan z 9–10 listopada 2026 r.; zakres i sposób weryfikacji: [spis dokumentacji](../../README.md).
 
 ## Cel i użytkownicy
 
@@ -10,7 +10,7 @@ Kod pozwala zakładać wiele kont, ale nie zawiera profilu wieku, roli rodzica, 
 
 **Obecny katalog produkcyjny zawiera tylko angielski moduł Food.** Francuski i włoski są kierunkami rozwoju, nie gotowymi kursami. Pole poziomu Food ma wartość `A2`; jest to metadana materiału, a nie wynik niezależnego pomiaru poziomu.
 
-Źródła: [katalog](../../public/content/katalog.json), [opis Food](../../public/content/02-food/modul.json), [model danych](../../src/learning/model.ts), [widok strony startowej](../../src/views/home.ts), [konto](../../src/views/account.ts).
+Źródła: [katalog](../../../public/content/katalog.json), [opis Food](../../../public/content/02-food/modul.json), [model danych](../../../src/learning/model.ts), [widok strony startowej](../../../src/views/home.ts), [konto](../../../src/views/account.ts).
 
 ## Strona startowa
 
@@ -24,7 +24,7 @@ Kolejność treści jest następująca:
 
 Nawigacja obejmuje naukę, domek, postępy i kopię postępów. Profil otwiera ustawienia konta. Na telefonie główna nawigacja znajduje się na dole ekranu.
 
-Źródła: [homeView](../../src/views/home.ts), [powłoka aplikacji](../../src/views/shell.ts), [style strony startowej](../../src/home.css), [testy strony startowej](../../tests/browser/home.spec.ts).
+Źródła: [homeView](../../../src/views/home.ts), [powłoka aplikacji](../../../src/views/shell.ts), [style strony startowej](../../../src/home.css), [testy strony startowej](../../../tests/browser/home.spec.ts).
 
 ## Dwa wejścia do nauki
 
@@ -35,7 +35,7 @@ Nawigacja obejmuje naukę, domek, postępy i kopię postępów. Profil otwiera u
 
 Mapa Food „Przygotowania do kociego pikniku” ma 7 etapów i 41 lekcji. Przejście dalej zależy od ukończenia lekcji; zaległe powtórki nie blokują kolejnych lekcji.
 
-Źródła: [katalogi](../../src/views/catalog.ts), [ustawienia ćwiczeń](../../src/views/setup.ts), [mapa](../../public/content/02-food/sciezka.json), [mechanika nauki](nauka.md).
+Źródła: [katalogi](../../../src/views/catalog.ts), [ustawienia ćwiczeń](../../../src/views/setup.ts), [mapa](../../../public/content/02-food/sciezka.json), [mechanika nauki](nauka.md).
 
 ## Ramka następnego kroku
 
@@ -45,7 +45,7 @@ Mapa Food „Przygotowania do kociego pikniku” ma 7 etapów i 41 lekcji. Przej
 
 Ramka wylicza wybór z istniejących wyników. Nie zapisuje dodatkowego wskaźnika „następnej lekcji”. Obecnie wybór nie jest ograniczony do języka ani kursu, bo taki podział jeszcze nie istnieje.
 
-Źródła: [getNextStep](../../src/next-step.ts), [obsługa kliknięcia](../../src/controllers/learning.ts), [testy wyboru](../../tests/next-step.test.ts), [scenariusze przeglądarkowe](../../tests/browser/next-step.spec.ts).
+Źródła: [getNextStep](../../../src/next-step.ts), [obsługa kliknięcia](../../../src/controllers/learning.ts), [testy wyboru](../../../tests/next-step.test.ts), [scenariusze przeglądarkowe](../../../tests/browser/next-step.spec.ts).
 
 ## Dostarczanie aplikacji i treści
 
@@ -55,4 +55,4 @@ Podczas nauki aplikacja nie odpytuje AI. Wyświetla wcześniej przygotowane plik
 
 Obecna oprawa i mechanizmy nagród są wspólne dla wszystkich kont. Materiały są wspólne i serwowane jako statyczne pliki; logowanie rozdziela wyniki użytkowników, nie dostęp do osobnych zestawów treści.
 
-Źródła: [zależności i polecenia](../../package.json), [ładowanie treści](../../src/content.ts), [PWA](../../src/pwa.ts), [workflow publikacji](../../.github/workflows/pages.yml).
+Źródła: [zależności i polecenia](../../../package.json), [ładowanie treści](../../../src/content.ts), [PWA](../../../src/pwa.ts), [workflow publikacji](../../../.github/workflows/pages.yml).

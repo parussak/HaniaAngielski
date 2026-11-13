@@ -35,7 +35,7 @@ Ten raport opisuje etap 2. Wymienione niżej jako dalszy zakres podstawowy wybó
 | Zakres kursu i porównywanie kolejności modułów | `src/learning/scope.ts` |
 | Pobieranie plików w przeglądarce | `src/content.ts` |
 
-Format dla autorów materiałów: [kursy i materiały](format-materialow.md).
+Format dla autorów materiałów: [kursy i materiały](../format-materialow.md).
 
 ## Sprawdzenie
 

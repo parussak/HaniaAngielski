@@ -12,7 +12,7 @@ W rejestrze jest kurs `angielski-hani` (`en` / `pl`) z modułem Food, `unit-2-fo
 
 Język nauki: **angielski**. Język objaśnień: **polski**, określony osobno dla kursu — [D-12](../decyzje.md).
 
-Rozwijamy naukę na podstawie podręcznika Hani. Docelowo moduł ma 1–3 mapy pokrywające jego najważniejsze słownictwo i gramatykę, treningi wcześniejszego zakresu i powtórki błędów. Food ma dwie mapy; ich zakres i ograniczenia dokumentuje [etap 4](../wdrozenie-food.md).
+Rozwijamy naukę na podstawie podręcznika Hani. Docelowo moduł ma 1–3 mapy pokrywające jego najważniejsze słownictwo i gramatykę, treningi wcześniejszego zakresu i powtórki błędów. Food ma dwie mapy; ich zakres i ograniczenia dokumentuje [etap 4](../archiwum/wdrozenie-food.md).
 
 Dla bieżącego Food zatwierdzono zachowanie obecnej mapy i postępów Hani (D-22), bez podziału na trzy mapy. Pierwsze cztery sekcje pozostają bez zmian; plan poprawek dotyczy „W restauracji”, „Powód i skutek” oraz „Koci piknik”. Dodatkowa mapa ma objąć rzeczywiste braki wykazane przez przegląd pokrycia podręcznika. Wdrożone: aktualizacje dotyczą tylko nieukończonych lekcji, zachowują stare wersje, a druga mapa ćwiczy posiłki, przepis i śniadanie.
 

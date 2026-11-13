@@ -4,7 +4,7 @@
 
 Źródło: archiwum `Photos-1-001.zip` udostępnione przez użytkownika, 27 zdjęć. Nie ustalono tytułu ani wydania podręcznika — nie dopisano ich na podstawie domysłów.
 
-Aktualny zakres po etapie 4: 97 haseł, 97 pytań słownikowych, 92 ćwiczenia, 12 dialogów, 10 objaśnień i dwie mapy. [Audyt, uzupełnienia i ochrona wyników](wdrozenie-food.md). Poniższa lista opisuje pierwotną ekstrakcję; nowe zadania są dopisane, nie podmieniają tych materiałów.
+Aktualny zakres po etapie 4: 97 haseł, 97 pytań słownikowych, 92 ćwiczenia, 12 dialogów, 10 objaśnień i dwie mapy. [Audyt, uzupełnienia i ochrona wyników](archiwum/wdrozenie-food.md). Poniższa lista opisuje pierwotną ekstrakcję; nowe zadania są dopisane, nie podmieniają tych materiałów.
 
 ## Co pierwotnie przeniesiono do aplikacji
 

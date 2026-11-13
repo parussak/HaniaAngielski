@@ -4,17 +4,17 @@ Data: 11 listopada 2026. Zmieniono testy i dokumentację. Kod aplikacji, produkc
 
 ## Co zostało rozdzielone
 
-- Wspólne testy sesji, aktywnych fiszek, historii, synchronizacji, zachowania ostatniej odpowiedzi i doboru kotków korzystają z małego [modułu syntetycznego](../tests/fixtures/engine.ts), niezależnego od podręcznika. Dane są sprawdzane istniejącym walidatorem, bez kopiowania całego Food.
-- Regresje słownictwa, map, gramatyki i nagród Food wybierają właściwy moduł i kurs [po stałym identyfikatorze](../tests/fixtures/select.ts). Wspólne odczytanie jest w [materials.ts](../tests/materials.ts). Lokalny scenariusz Food może mieć jeden moduł, ale pełna biblioteka nie ma już takiego ograniczenia.
+- Wspólne testy sesji, aktywnych fiszek, historii, synchronizacji, zachowania ostatniej odpowiedzi i doboru kotków korzystają z małego [modułu syntetycznego](../../tests/fixtures/engine.ts), niezależnego od podręcznika. Dane są sprawdzane istniejącym walidatorem, bez kopiowania całego Food.
+- Regresje słownictwa, map, gramatyki i nagród Food wybierają właściwy moduł i kurs [po stałym identyfikatorze](../../tests/fixtures/select.ts). Wspólne odczytanie jest w [materials.ts](../../tests/materials.ts). Lokalny scenariusz Food może mieć jeden moduł, ale pełna biblioteka nie ma już takiego ograniczenia.
 - Usunięto oczekiwanie, że produkcyjny katalog zawiera dokładnie jeden kurs/moduł. Regresja kursu angielskiego sprawdza obecność Food w jego modułach, a nie zakazuje dodawania innych działów. Liczby właściwe materiałom Food pozostają sprawdzane.
-- Nowe testy kontrolują [całą bibliotekę i jej wzrost](../tests/library-growth.test.ts): dodatkowy moduł w angielskim, dwa kolejne kursy, kolejność z Food poza pierwszą pozycją, zgodność aktywnej sesji i kopii oraz osobny poznany zakres kursów.
-- Scenariusze przeglądarkowe Food mają jawną [fixture katalogu](../tests/browser/fixtures.ts), również dla dodatkowych kontekstów urządzeń/kont. Oddzielne [testy pełnego katalogu](../tests/browser/library-growth.spec.ts) korzystają bezpośrednio z Playwright i sprawdzają rzeczywistą listę kursów/modułów oraz wybór EN/FR/IT w rozbudowanym przykładzie.
+- Nowe testy kontrolują [całą bibliotekę i jej wzrost](../../tests/library-growth.test.ts): dodatkowy moduł w angielskim, dwa kolejne kursy, kolejność z Food poza pierwszą pozycją, zgodność aktywnej sesji i kopii oraz osobny poznany zakres kursów.
+- Scenariusze przeglądarkowe Food mają jawną [fixture katalogu](../../tests/browser/fixtures.ts), również dla dodatkowych kontekstów urządzeń/kont. Oddzielne [testy pełnego katalogu](../../tests/browser/library-growth.spec.ts) korzystają bezpośrednio z Playwright i sprawdzają rzeczywistą listę kursów/modułów oraz wybór EN/FR/IT w rozbudowanym przykładzie.
 
 ## Dlaczego nie zastępujemy wszystkiego sztucznymi danymi
 
 Mechanika ma działać niezależnie od liczby i kolejności materiałów. Nadal jednak musimy wykrywać brakujące hasło, źródło, lekcję czy nagrodę Food. Dlatego zachowano regresje jego treści oraz kontrolę wszystkich produkcyjnych modułów. Jawny scenariusz Food nie jest testem kompletności katalogu — ten ma osobne kontrole.
 
-Instrukcja wyboru danych i polecenie pełnej próby Node z dodatkowymi modułami są w [tests/README.md](../tests/README.md). Dane rozszerzenia powstają w pamięci przez [growing-library.ts](../tests/fixtures/growing-library.ts); nie są dodawane do produkcyjnego `public/`.
+Instrukcja wyboru danych i polecenie pełnej próby Node z dodatkowymi modułami są w [tests/README.md](../../tests/README.md). Dane rozszerzenia powstają w pamięci przez [growing-library.ts](../../tests/fixtures/growing-library.ts); nie są dodawane do produkcyjnego `public/`.
 
 ## Granice etapu
 

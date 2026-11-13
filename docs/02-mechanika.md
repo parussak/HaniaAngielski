@@ -1,6 +1,6 @@
 # Mechanika — obiekty i ich możliwości
 
-Status: model pojęciowy i wdrożone podstawy etapu 2. [Format plików kursów i znaczeń](format-materialow.md) opisuje obecny kontrakt; [raport etapu 2](wdrozenie-kursow.md) oddziela wykonane zmiany od dalszych założeń. [Decyzje i statusy](decyzje.md).
+Status: model pojęciowy i wdrożone podstawy etapu 2. [Format plików kursów i znaczeń](format-materialow.md) opisuje obecny kontrakt; [raport etapu 2](archiwum/wdrozenie-kursow.md) oddziela wykonane zmiany od dalszych założeń. [Decyzje i statusy](decyzje.md).
 
 ## Stan obecny
 
@@ -14,9 +14,9 @@ Sekcja może deklarować opcjonalny plan 7 + 2: siedem lekcji bazowych i dwa gen
 
 **Sceny dialogowe (D-53, wdrożone).** Scena z kilkoma lukami jest zapisana raz w `rozmowki.json`; `src/learning/scenes.ts` rozkłada ją na zwykłe zadania, po jednym na lukę, i trzyma jej luki razem w sesji (opcjonalne `sceneGroup` elementu). Ocenianie, powtórki i kolejka błędów są wspólne z pozostałymi zadaniami. Moduł scen i widok nie znają żadnego kursu ani modułu — nowy moduł dostaje sceny wyłącznie przez swoje pliki treści. [Wymagania](03-nauka.md), [format](format-materialow.md#scena-dialogowa-z-kilkoma-lukami).
 
-Kod ma `Course`, `Meaning` i `LanguageVariant` w `src/materials/` oraz zgodne typy ćwiczeń `Word`, `Exercise`, `Module`, `Session`, `Journey`, `Stage` i `Lesson`. Moduł może wskazywać do trzech map, a lekcja może mieć rolę treningu. Food ma dwie mapy: starą z siedmioma etapami i drugą z pięcioma lekcjami, w tym treningiem wcześniejszego zakresu. Lekcja ma jedną aktualną treść (`update`, jeśli istnieje, inaczej sama lekcja), wspólną dla wszystkich kont; ukończenie zależy wyłącznie od identyfikatora lekcji, a rozpoczęta sesja od własnej zapisanej listy zadań (D-52). Zapisane `edition` jest znacznikiem historycznym. [Ochrona postępów](wdrozenie-food.md#ochrona-wyników-i-nagród). `Word` pozostaje projekcją znaczenia do istniejącego silnika, a nie drugim źródłem treści do ręcznej edycji.
+Kod ma `Course`, `Meaning` i `LanguageVariant` w `src/materials/` oraz zgodne typy ćwiczeń `Word`, `Exercise`, `Module`, `Session`, `Journey`, `Stage` i `Lesson`. Moduł może wskazywać do trzech map, a lekcja może mieć rolę treningu. Food ma dwie mapy: starą z siedmioma etapami i drugą z pięcioma lekcjami, w tym treningiem wcześniejszego zakresu. Lekcja ma jedną aktualną treść (`update`, jeśli istnieje, inaczej sama lekcja), wspólną dla wszystkich kont; ukończenie zależy wyłącznie od identyfikatora lekcji, a rozpoczęta sesja od własnej zapisanej listy zadań (D-52). Zapisane `edition` jest znacznikiem historycznym. [Ochrona postępów](archiwum/wdrozenie-food.md#ochrona-wyników-i-nagród). `Word` pozostaje projekcją znaczenia do istniejącego silnika, a nie drugim źródłem treści do ręcznej edycji.
 
-Źródła: [model danych](../src/learning/model.ts), [mapy](../src/adventure.ts). Szczegóły istniejącego formatu: [materiały — stan obecny](stan-obecny/materialy.md).
+Źródła: [model danych](../src/learning/model.ts), [mapy](../src/adventure.ts). Szczegóły istniejącego formatu: [materiały — stan obecny](archiwum/stan-obecny/materialy.md).
 
 ## Uzgodniona hierarchia docelowa
 

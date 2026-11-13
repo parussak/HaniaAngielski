@@ -1,6 +1,6 @@
 # Konta, postępy i offline — stan obecny
 
-[Zakres przeglądu](../README.md). Opis potwierdzono w kodzie i testach lokalnych; nie odczytywano prywatnych kont ani wdrożonych reguł produkcyjnego Firebase.
+[Zakres przeglądu](../../README.md). Opis potwierdzono w kodzie i testach lokalnych; nie odczytywano prywatnych kont ani wdrożonych reguł produkcyjnego Firebase.
 
 ## Co jest zapisywane
 
@@ -10,7 +10,7 @@ Aktywna sesja przechowuje m.in. kolejność pozycji, indeks pytania, fazę, pier
 
 Nie ma osobnej aktywnej sesji dla każdego języka. Nie ma też pola kursu w sesji: kontekst opiera się na `moduleId`, a sesja z wcześniejszymi modułami może zawierać pozycje z kilku modułów.
 
-Źródła: [model](../../src/learning/model.ts), [obsługa sesji](../../src/learning/session.ts), [walidacja kopii](../../src/learning/backup.ts).
+Źródła: [model](../../../src/learning/model.ts), [obsługa sesji](../../../src/learning/session.ts), [walidacja kopii](../../../src/learning/backup.ts).
 
 ## Urządzenie, gość i konta
 
@@ -27,7 +27,7 @@ Konta mają oddzielne wyniki. Przy logowaniu zapis gościa nie jest automatyczni
 
 Nazwa ścieżki strony jest częścią lokalnej przestrzeni zapisu. Zmiana adresu wdrożenia może więc oznaczać inną lokalną bazę, mimo zachowania danych konta w chmurze.
 
-Źródła: [storage.ts](../../src/storage.ts), [konto](../../src/controllers/account.ts), [Firebase](../../src/firebase.ts), [testy rozdzielenia kont](../../tests/sync.test.ts).
+Źródła: [storage.ts](../../../src/storage.ts), [konto](../../../src/controllers/account.ts), [Firebase](../../../src/firebase.ts), [testy rozdzielenia kont](../../../tests/sync.test.ts).
 
 ## Bezpieczny zapis i synchronizacja
 
@@ -37,7 +37,7 @@ Firebase przechowuje główny dokument pod `users/<uid>/progress/main`. Rewizja 
 
 Przy starcie aplikacja utrzymuje blokadę przeglądarki, aby dwie karty pod tą samą ścieżką nie zapisywały jednocześnie. Mechanizm wymaga obsługi Web Locks.
 
-Źródła: [kontroler postępów](../../src/controllers/progress.ts), [ProgressSync](../../src/sync.ts), [planowanie synchronizacji](../../src/services/sync-scheduler.ts), [rozruch i blokada](../../src/app/startup.ts), [testy synchronizacji](../../tests/sync.test.ts).
+Źródła: [kontroler postępów](../../../src/controllers/progress.ts), [ProgressSync](../../../src/sync.ts), [planowanie synchronizacji](../../../src/services/sync-scheduler.ts), [rozruch i blokada](../../../src/app/startup.ts), [testy synchronizacji](../../../tests/sync.test.ts).
 
 ## Historia i kopie
 
@@ -47,7 +47,7 @@ Lokalne części mają limit 200 000 bajtów. Reguły Firebase przewidują limit
 
 Eksport formatu `hania-language`, wersja `1`, zawiera postępy oraz potrzebne archiwa. Import kontroluje strukturę, powiązania, skróty i podsumowania, ma limit pliku 50 MB i wymaga potwierdzenia zastąpienia wyników. Kopia nie zawiera materiałów podręcznikowych. Starszy brakujący moduł może uniemożliwić wznowienie sesji, ale nie powinien usuwać jej historii.
 
-Źródła: [historia](../../src/history.ts), [pełne kopie](../../src/history-backup.ts), [import/eksport](../../src/controllers/backup.ts), [reguły](../../firestore.rules), [testy historii](../../tests/history.test.ts).
+Źródła: [historia](../../../src/history.ts), [pełne kopie](../../../src/history-backup.ts), [import/eksport](../../../src/controllers/backup.ts), [reguły](../../../firestore.rules), [testy historii](../../../tests/history.test.ts).
 
 ## PWA i materiały offline
 
@@ -55,7 +55,7 @@ Service worker przygotowuje cache całego publicznego wydania, w tym JSON i ilus
 
 Obecnie nie ma pobierania wybranych kursów na żądanie. Dodanie wielu podręczników zwiększy początkowy zestaw offline. Synchronizacja nie jest niezależną usługą działającą stale po zamknięciu aplikacji.
 
-Źródła: [PWA](../../src/pwa.ts), [generator service workera](../../scripts/build-sw.mjs), [testy PWA](../../tests/browser/pwa.spec.ts).
+Źródła: [PWA](../../../src/pwa.ts), [generator service workera](../../../scripts/build-sw.mjs), [testy PWA](../../../tests/browser/pwa.spec.ts).
 
 ## Granice obecnego modelu
 

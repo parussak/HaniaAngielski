@@ -8,11 +8,11 @@ Nagrania Food można przygotować lokalnie poleceniem `npm run audio` — Cori, 
 
 Lekcje mapowe automatycznie łączą wpisywanie, wybór, dobieranie par i luki z bankiem propozycji. Po lekcji można przejść dalej, zrobić dobrowolny **Poziom legendarny** (+1 ★ za pełną powtórkę) lub wrócić do mapy. Food zachowuje obie mapy i wcześniejsze postępy. [Zasady nauki](docs/03-nauka.md).
 
-Aplikacja internetowa: fiszki, quizy, gramatyka, lokalne postępy i opcjonalne konto z synchronizacją przez Firebase. Dostępny jest moduł 2 **Food — Fun with food**, opracowany z przesłanych zdjęć podręcznika i zeszytu ćwiczeń, z dwiema mapami nauki. Aktualny zakres i ograniczenia opisuje [audyt Food](docs/wdrozenie-food.md). Materiał demonstracyjny został usunięty.
+Aplikacja internetowa: fiszki, quizy, gramatyka, lokalne postępy i opcjonalne konto z synchronizacją przez Firebase. Dostępny jest moduł 2 **Food — Fun with food**, opracowany z przesłanych zdjęć podręcznika i zeszytu ćwiczeń, z dwiema mapami nauki. Aktualny zakres i ograniczenia opisuje [audyt Food](docs/archiwum/wdrozenie-food.md). Materiał demonstracyjny został usunięty.
 
 [Dokumentacja po polsku](docs/README.md) rozdziela produkt, mechanikę, naukę, merytorykę, architekturę, zapis i testy oraz oznacza stan obecny, założenia docelowe i sprawy do ustalenia. Oddzielna [lista braków dla francuskiego i włoskiego](docs/rozwoj-jezykow.md) rozróżnia stan obecny od propozycji rozwoju.
 
-Aktualizacja nauki: dobrowolna Kocia rozgrzewka z poznanego materiału za 1 ★, ukończenie mapy liczone niezależnie od błędów oraz wyjaśnienia gramatyczne z przypomnieniem reguły. Etap 2 dodaje kursy/podręczniki i wspólny format materiałów wielojęzycznych, zachowując wygląd, treści i zapis Food. [Format materiałów](docs/format-materialow.md), [raport etapu 1](docs/wdrozenie-nauki.md), [raport etapu 2](docs/wdrozenie-kursow.md). Etap 3 dodaje wybór kursu oraz globalne fiszki, quiz i gramatykę wyłącznie z poznanego materiału — [opis i sprawdzenie](docs/wdrozenie-zakresow.md).
+Aktualizacja nauki: dobrowolna Kocia rozgrzewka z poznanego materiału za 1 ★, ukończenie mapy liczone niezależnie od błędów oraz wyjaśnienia gramatyczne z przypomnieniem reguły. Etap 2 dodaje kursy/podręczniki i wspólny format materiałów wielojęzycznych, zachowując wygląd, treści i zapis Food. [Format materiałów](docs/format-materialow.md), [raport etapu 1](docs/archiwum/wdrozenie-nauki.md), [raport etapu 2](docs/archiwum/wdrozenie-kursow.md). Etap 3 dodaje wybór kursu oraz globalne fiszki, quiz i gramatykę wyłącznie z poznanego materiału — [opis i sprawdzenie](docs/archiwum/wdrozenie-zakresow.md).
 
 ## Uzgodniony kierunek — 13 listopada 2026
 
@@ -102,8 +102,8 @@ Wszystkie opublikowane moduły są publicznymi plikami strony. Wyniki gościa po
 
 ## Dokumenty
 
-- [Wymagania](docs/wymagania.md)
-- [Plan pierwszej wersji](docs/plan-pierwszej-wersji.md)
+- [Wymagania](docs/archiwum/wymagania.md)
+- [Plan pierwszej wersji](docs/archiwum/plan-pierwszej-wersji.md)
 ## Test zbudowanej strony w podkatalogu
 
 Po zbudowaniu aplikacji można sprawdzić pliki z `dist` pod ścieżką taką jak na GitHub Pages:

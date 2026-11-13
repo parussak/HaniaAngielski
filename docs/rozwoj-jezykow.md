@@ -6,13 +6,13 @@ Przegląd kodu i testów z 9–10 listopada 2026 r., rewizja `24cdeda`. **To lis
 
 ## Aktualizacja po etapach 1 i 2
 
-Poniższa diagnoza J1–J10 jest historycznym punktem odniesienia rewizji `24cdeda`. Obecny kod ma już kurs, osobne języki, format znaczeń z wariantami, zgodny adapter Food i ograniczenie zakresów do kursu. Polecenia nowego kursu są danymi, a materiały kontroluje wspólny odczyt. Testy obejmują syntetyczne FR/IT i dwa podręczniki tego samego języka. [Raport etapu 2](wdrozenie-kursow.md) i [format materiałów](format-materialow.md) określają aktualny stan.
+Poniższa diagnoza J1–J10 jest historycznym punktem odniesienia rewizji `24cdeda`. Obecny kod ma już kurs, osobne języki, format znaczeń z wariantami, zgodny adapter Food i ograniczenie zakresów do kursu. Polecenia nowego kursu są danymi, a materiały kontroluje wspólny odczyt. Testy obejmują syntetyczne FR/IT i dwa podręczniki tego samego języka. [Raport etapu 2](archiwum/wdrozenie-kursow.md) i [format materiałów](format-materialow.md) określają aktualny stan.
 
-Etap 3 wdraża wybór kursu oraz globalne fiszki/quiz/gramatykę z poznanego materiału — [raport zakresów](wdrozenie-zakresow.md). Nadal potrzebne są rzeczywiste podręczniki i recenzja ich treści (J4/J7/J8), usunięcie pozostałych szczegółów prezentacji Food przed innymi produkcyjnymi mapami (J5), pobieranie materiałów kursami (J9) i decyzje dla osoby dorosłej (J10). Nie uznajemy tych problemów za rozwiązane przez samo przejście testów.
+Etap 3 wdraża wybór kursu oraz globalne fiszki/quiz/gramatykę z poznanego materiału — [raport zakresów](archiwum/wdrozenie-zakresow.md). Nadal potrzebne są rzeczywiste podręczniki i recenzja ich treści (J4/J7/J8), usunięcie pozostałych szczegółów prezentacji Food przed innymi produkcyjnymi mapami (J5), pobieranie materiałów kursami (J9) i decyzje dla osoby dorosłej (J10). Nie uznajemy tych problemów za rozwiązane przez samo przejście testów.
 
 ## Aktualne miejsca do sprawdzenia przed produkcyjnym FR/IT — 11 listopada 2026
 
-Najważniejsze porządki techniczne po audycie są wykonane — [status ustaleń](status-audytu.md). Kursy, wybór zakresu, osobne portfele i domki oraz zgodny zapis istnieją; nie trzeba ponownie projektować tych mechanizmów. Nadal brak rzeczywistych materiałów podręcznikowych FR/IT i zatwierdzonych kryteriów ich odpowiedzi.
+Najważniejsze porządki techniczne po audycie są wykonane — [status ustaleń](archiwum/status-audytu.md). Kursy, wybór zakresu, osobne portfele i domki oraz zgodny zapis istnieją; nie trzeba ponownie projektować tych mechanizmów. Nadal brak rzeczywistych materiałów podręcznikowych FR/IT i zatwierdzonych kryteriów ich odpowiedzi.
 
 | Miejsce | Obecne działanie i kontrola przed nowym językiem |
 | --- | --- |
@@ -102,7 +102,7 @@ Ilustracja słowa jest opcjonalna w typie i walidatorze, ale wprowadzenie do lek
 
 **Stan:** [content.test.ts](../tests/content.test.ts) zakłada jeden moduł i konkretne liczby Food. Część pozostałych testów odwołuje się do `modules[0]`. [Test drugiego modułu](../tests/browser/next-step.spec.ts) kopiuje Food, nie tworzy prawdziwego kursu francuskiego. Playwright nie jest uruchamiany w obecnych workflow GitHub.
 
-**Proponowany warunek rozwiązania:** oddzielić wspólne kontrole każdego modułu/kursu od regresji Food; dodać małe reprezentatywne próbki FR/IT i testy granic kursów. Uzgodnić kontrolę przeglądarkową przed publikacją, nie tylko podmienić oczekiwane liczby. Szczegóły: [testy](stan-obecny/testy.md).
+**Proponowany warunek rozwiązania:** oddzielić wspólne kontrole każdego modułu/kursu od regresji Food; dodać małe reprezentatywne próbki FR/IT i testy granic kursów. Uzgodnić kontrolę przeglądarkową przed publikacją, nie tylko podmienić oczekiwane liczby. Szczegóły: [testy](archiwum/stan-obecny/testy.md).
 
 ### J9 · P2 · Wszystkie materiały pobierane razem
 

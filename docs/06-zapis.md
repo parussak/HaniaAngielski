@@ -41,13 +41,13 @@ Jedna aktywna sesja jest zapisywana dla użytkownika, nie osobno dla każdego j�
 
 Zachowano rozdzielenie kont i gościa, kontrolę wersji przy synchronizacji, wybór przy konflikcie i blokadę drugiej karty. Import kopii zastępuje wyniki po potwierdzeniu. Konto wysyła oczekujące zmiany po połączeniu podczas działania aplikacji lub kolejnego uruchomienia, nie jako stała usługa po zamknięciu.
 
-Pełny opis kluczy, limitów, archiwizacji, cache i dowodów: [zapis — punkt odniesienia](stan-obecny/zapis.md). Mapa implementacji: [architektura](05-architektura.md).
+Pełny opis kluczy, limitów, archiwizacji, cache i dowodów: [zapis — punkt odniesienia](archiwum/stan-obecny/zapis.md). Mapa implementacji: [architektura](05-architektura.md).
 
 ## Walidacja kopii po refaktoringu etapu 4
 
 Publiczne `validateBackup` i `backup` pozostają w `src/learning/backup.ts`. Wewnętrzne kontrole sesji, domków, przygody, historii i archiwów są rozdzielone w `src/learning/backup-validation/`. Sam podział walidatora zachował nagłówek i wersję pliku, dopuszczalne dane, limity i komunikat błędu. Walidacja nie zmienia źródła, zachowuje dodatkowe pola i zwraca niezależną kopię; nie wykonuje migracji. Odrzucenie importowanego pliku nadal nie zastępuje obecnych postępów.
 
-Sprawdzenie kompletności archiwum, skrótów stron i zgodności podsumowania nadal wykonuje `validateFullBackup` w `src/history-backup.ts`, po walidacji strukturalnej. Tego etapu nie należy pomijać przy imporcie pełnej kopii. [Podział odpowiedzialności i zestaw zgodności](refaktoring-etap-4.md).
+Sprawdzenie kompletności archiwum, skrótów stron i zgodności podsumowania nadal wykonuje `validateFullBackup` w `src/history-backup.ts`, po walidacji strukturalnej. Tego etapu nie należy pomijać przy imporcie pełnej kopii. [Podział odpowiedzialności i zestaw zgodności](archiwum/refaktoring-etap-4.md).
 
 ## Niedostępna mapa a zapis wyników
 
@@ -63,7 +63,7 @@ Format kopii pozostaje w wersji 1 i odczytuje stare dane. Kopie zawierające now
 
 `Course` wskazuje uporządkowane moduły, a każdy moduł należy do jednego kursu. Moduły różnych kursów muszą mieć różne identyfikatory. Klucz `moduleId@rewizja:typ:id` pozostaje bez zmian; nie dopisujemy kursu do historycznych kluczy. To zapewnia osobne wyniki również dla identycznych lokalnych identyfikatorów znaczeń w kilku kursach.
 
-Nie przenosimy istniejącego modułu do innego podręcznika: nowy podręcznik i istotnie zmienione wydanie wymagają nowego kursu oraz nowych identyfikatorów modułów. Kursy i znaczenia są wczytywane do pamięci aplikacji i cache materiałów PWA, a nie dopisywane do `Progress` ani payloadu Firestore. Odczyt Food nie wykonuje migracji. [Szczegóły zgodności](wdrozenie-kursow.md).
+Nie przenosimy istniejącego modułu do innego podręcznika: nowy podręcznik i istotnie zmienione wydanie wymagają nowego kursu oraz nowych identyfikatorów modułów. Kursy i znaczenia są wczytywane do pamięci aplikacji i cache materiałów PWA, a nie dopisywane do `Progress` ani payloadu Firestore. Odczyt Food nie wykonuje migracji. [Szczegóły zgodności](archiwum/wdrozenie-kursow.md).
 
 ## Globalny zakres i preferencja kursu — etap 3
 
@@ -73,11 +73,11 @@ Nie przenosimy istniejącego modułu do innego podręcznika: nowy podręcznik i 
 - `history.courses` agreguje zarchiwizowane sesje globalne osobno od modułowych. Suma sesji kursowych i modułowych musi zgadzać się z liczbą archiwalnych sesji; pełna kopia sprawdza także wartości względem części historii. `history.items` nadal uwzględnia każdą ocenioną próbę raz.
 - `course-selection:guest` i `course-selection:account:<uid>` w IndexedDB zawierają wyłącznie lokalną preferencję kursu. Nie są częścią `Progress`, kopii ani synchronizacji.
 
-Kopia pozostaje w wersji 1 i odczytuje wcześniejsze pliki. Obsługa nowych pól wymaga aktualnej aplikacji. Nie zmieniono reguł Firebase ani nie przeliczono starych ocen. [Raport etapu 3](wdrozenie-zakresow.md).
+Kopia pozostaje w wersji 1 i odczytuje wcześniejsze pliki. Obsługa nowych pól wymaga aktualnej aplikacji. Nie zmieniono reguł Firebase ani nie przeliczono starych ocen. [Raport etapu 3](archiwum/wdrozenie-zakresow.md).
 
 ## Wersje lekcji Food — etap 4
 
-Dotychczasowe wpisy ukończenia `{ at }` oraz sesje bez znacznika pozostają oryginalną wersją lekcji. Nowo rozpoczynana nieukończona lekcja korzysta z opcjonalnego `update`, jeśli jej definicja je zawiera. Taka sesja zapisuje `lesson.edition: 2`, a pierwsze ukończenie zachowuje ten znacznik w `adventure.completed[lessonKey]`. Sam wybór wydania nie dopisuje migracji ani nagród. Aktywna sesja nadal przechowuje konkretną listę pytań i miejsce odpowiedzi, a stare pytania pozostają dostępne dla jej wznowienia i powtórek. Nowe lekcje drugiej mapy bez `update` nie potrzebują znacznika wydania 2. Format kopii pozostaje w wersji 1; aktualna walidacja obsługuje oba warianty. Limity historii i synchronizacji bez zmian. [Pełna ochrona wyników](wdrozenie-food.md#ochrona-wyników-i-nagród).
+Dotychczasowe wpisy ukończenia `{ at }` oraz sesje bez znacznika pozostają oryginalną wersją lekcji. Nowo rozpoczynana nieukończona lekcja korzysta z opcjonalnego `update`, jeśli jej definicja je zawiera. Taka sesja zapisuje `lesson.edition: 2`, a pierwsze ukończenie zachowuje ten znacznik w `adventure.completed[lessonKey]`. Sam wybór wydania nie dopisuje migracji ani nagród. Aktywna sesja nadal przechowuje konkretną listę pytań i miejsce odpowiedzi, a stare pytania pozostają dostępne dla jej wznowienia i powtórek. Nowe lekcje drugiej mapy bez `update` nie potrzebują znacznika wydania 2. Format kopii pozostaje w wersji 1; aktualna walidacja obsługuje oba warianty. Limity historii i synchronizacji bez zmian. [Pełna ochrona wyników](archiwum/wdrozenie-food.md#ochrona-wyników-i-nagród).
 
 ### Słuchanie — D-58
 

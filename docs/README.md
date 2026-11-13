@@ -18,9 +18,9 @@
 
 Aktualizacja układu: **10 listopada 2026 r.** Rozdzielamy stan obecny, uzgodnione założenia docelowe i sprawy do ustalenia. Sam zapis założeń nie wdraża ich w aplikacji.
 
-**Status po audycie — 11 listopada 2026:** najważniejsze porządki wykonano w czterech etapach refaktoringu. [Co jest zamknięte, co zostało i co sprawdzono](status-audytu.md). Pozostałe propozycje nie są automatycznie planem kolejnej przebudowy.
+**Status po audycie — 11 listopada 2026:** najważniejsze porządki wykonano w czterech etapach refaktoringu. [Co jest zamknięte, co zostało i co sprawdzono](archiwum/status-audytu.md). Pozostałe propozycje nie są automatycznie planem kolejnej przebudowy.
 
-**Wdrożono etapy 1–4.** Pozostałe pytania są zaparkowane. [Raport nauki](wdrozenie-nauki.md) opisuje etap 1, [raport kursów](wdrozenie-kursow.md) etap 2, a [wybór kursu i globalne ćwiczenia](wdrozenie-zakresow.md) etap 3. [Audyt i uzupełnienie Food](wdrozenie-food.md) opisuje etap 4. Autorów materiałów obowiązuje [format kursów i znaczeń](format-materialow.md). Historyczny katalog `stan-obecny/` nadal przedstawia punkt odniesienia sprzed tych zmian.
+**Wdrożono etapy 1–4.** Pozostałe pytania są zaparkowane. [Raport nauki](archiwum/wdrozenie-nauki.md) opisuje etap 1, [raport kursów](archiwum/wdrozenie-kursow.md) etap 2, a [wybór kursu i globalne ćwiczenia](archiwum/wdrozenie-zakresow.md) etap 3. [Audyt i uzupełnienie Food](archiwum/wdrozenie-food.md) opisuje etap 4. Autorów materiałów obowiązuje [format kursów i znaczeń](format-materialow.md). Historyczny katalog `archiwum/stan-obecny/` nadal przedstawia punkt odniesienia sprzed tych zmian.
 
 Po przeglądzie dokumentacji poprawiono dwa ograniczenia: [przygotowanie do treningu i odporność map](odpornosc-map.md). Pozostałe mapy działają przy błędzie jednej, a trening bez poznanej puli prowadzi do wcześniejszej lekcji. Zapisane wyniki i zasady nagród pozostają zachowane.
 
@@ -36,13 +36,13 @@ Wprowadzono też swobodny wybór lekcji, stałą długość nowych sesji, nowe m
 
 **Wdrożono D-46–D-47:** „Kocia rozgrzewka” zastępuje treningi — na mapie jest wymagana, dodatkowa dobrowolna. Ukończone mapy i etapy pokazują sukces bez liczników zaległych błędów, a krótkie sesje mają wyraźne zakończenie. Stare ukończenia, gwiazdki i rozpoczęte sesje zostają. [Zasady, zakres i ochrona wyników](03-nauka.md).
 
-11 listopada 2026 wykonano [etap 1 refaktoringu: zależności i wspólne stałe](refaktoring-etap-1.md). Usunięto cykl mapy–domek, zachowując działanie, wygląd i format postępów. To osobny etap porządkowania po wcześniejszych etapach rozwoju funkcji 1–4.
+11 listopada 2026 wykonano [etap 1 refaktoringu: zależności i wspólne stałe](archiwum/refaktoring-etap-1.md). Usunięto cykl mapy–domek, zachowując działanie, wygląd i format postępów. To osobny etap porządkowania po wcześniejszych etapach rozwoju funkcji 1–4.
 
-[Etap 2 refaktoringu](refaktoring-etap-2.md) oddziela syntetyczne testy mechaniki, regresje Food wybieranego po ID i kontrole całej rozbudowywanej biblioteki. Nie zmienia kodu aplikacji ani produkcyjnych treści.
+[Etap 2 refaktoringu](archiwum/refaktoring-etap-2.md) oddziela syntetyczne testy mechaniki, regresje Food wybieranego po ID i kontrole całej rozbudowywanej biblioteki. Nie zmienia kodu aplikacji ani produkcyjnych treści.
 
-[Etap 3 refaktoringu](refaktoring-etap-3.md) wydziela obsługę przycisków domku do osobnego kontrolera. Rozliczanie ukończenia nauki, wygląd i zapis pozostają bez zmian.
+[Etap 3 refaktoringu](archiwum/refaktoring-etap-3.md) wydziela obsługę przycisków domku do osobnego kontrolera. Rozliczanie ukończenia nauki, wygląd i zapis pozostają bez zmian.
 
-[Etap 4 refaktoringu](refaktoring-etap-4.md) dzieli walidację kopii na mniejsze części. Zachowuje obsługę starych plików, kryteria walidacji i format postępów; zgodność sprawdza zestaw wyników sprzed podziału.
+[Etap 4 refaktoringu](archiwum/refaktoring-etap-4.md) dzieli walidację kopii na mniejsze części. Zachowuje obsługę starych plików, kryteria walidacji i format postępów; zgodność sprawdza zestaw wyników sprzed podziału.
 
 | Dokument | Na jakie pytanie odpowiada? |
 | --- | --- |
@@ -61,7 +61,7 @@ Wprowadzono też swobodny wybór lekcji, stałą długość nowych sesji, nowe m
 
 ## Statusy i pierwszeństwo
 
-- **Stan obecny** — potwierdzony w kodzie lub testach. [Punkt odniesienia](stan-obecny/README.md) oparto na rewizji 24cdeda.
+- **Stan obecny** — potwierdzony w kodzie lub testach. [Punkt odniesienia](archiwum/stan-obecny/README.md) oparto na rewizji 24cdeda.
 - **Uzgodnione założenia docelowe** — kierunek potwierdzony w rozmowie, który może jeszcze nie być wdrożony. Rejestr: D-01–D-42 w [decyzjach](decyzje.md).
 - **Do ustalenia** — pytanie bez zatwierdzonego rozwiązania. Rejestr U-01–U-10; odwołania w dokumentach nie są konkurencyjnymi decyzjami.
 - **Propozycja techniczna** — kandydat do oceny, nie automatycznie zaakceptowany zakres prac.
@@ -70,7 +70,7 @@ Kod i testy pokazują, co działa dziś; nie unieważniają uzgodnionego kierunk
 
 ## Ważna różnica
 
-Docelowo moduł ma **1–3 mapy**, każda po kilka lekcji. Food ma **dwie mapy**: zachowaną mapę z siedmioma etapami i 41 lekcjami oraz „Kocią kuchnię” z pięcioma lekcjami. Poprawione wersje lekcji etapów 5–7 są od D-52 aktualną treścią dla wszystkich kont; istniejące ukończenia, rozpoczęte sesje i gwiazdki pozostają zachowane. Wdrożono oddzielenie procentu ukończenia lekcji od liczby zaległych ćwiczeń oraz dodatkowy trening poznanego materiału za 1 ★. Druga mapa Food ma trening wcześniejszej mapy; pierwsza pozostaje bez takich lekcji. Model kursów i znaczeń oraz zgodny odczyt starego Food są wdrożone w etapie 2. Wybór kursu i globalne fiszki/quiz/gramatyka z poznanego materiału są wdrożone w etapie 3. Audyt i uzupełnienie Food wdrożono w etapie 4 — [zakres, źródła i ograniczenia](wdrozenie-food.md). Nowe podręczniki pozostają dalszym zakresem.
+Docelowo moduł ma **1–3 mapy**, każda po kilka lekcji. Food ma **dwie mapy**: zachowaną mapę z siedmioma etapami i 41 lekcjami oraz „Kocią kuchnię” z pięcioma lekcjami. Poprawione wersje lekcji etapów 5–7 są od D-52 aktualną treścią dla wszystkich kont; istniejące ukończenia, rozpoczęte sesje i gwiazdki pozostają zachowane. Wdrożono oddzielenie procentu ukończenia lekcji od liczby zaległych ćwiczeń oraz dodatkowy trening poznanego materiału za 1 ★. Druga mapa Food ma trening wcześniejszej mapy; pierwsza pozostaje bez takich lekcji. Model kursów i znaczeń oraz zgodny odczyt starego Food są wdrożone w etapie 2. Wybór kursu i globalne fiszki/quiz/gramatyka z poznanego materiału są wdrożone w etapie 3. Audyt i uzupełnienie Food wdrożono w etapie 4 — [zakres, źródła i ograniczenia](archiwum/wdrozenie-food.md). Nowe podręczniki pozostają dalszym zakresem.
 
 ## Jak czytać bez przeglądania wszystkiego
 
@@ -88,9 +88,9 @@ Nie powielamy list słówek w Markdown ani wspólnych zasad w każdej karcie kur
 
 Przegląd zgodności **10 listopada 2026 r.** objął bieżące opisy produktu, mechaniki, nauki, zapisu, architektury, instrukcji materiałów i PWA. Porównano je z właściwym kodem, odczytanym katalogiem treści, scenariuszami testów i workflow. Poprawiono rozbieżności pozostawione po etapach 1–4; znane ograniczenia są jawnie opisane w [nauce](03-nauka.md) i [architekturze](05-architektura.md). Był to przegląd dokumentacji, bez zmian aplikacji, ponownego uruchamiania pełnych testów, nowej recenzji podręcznika ani weryfikacji opublikowanej strony. Historyczne wyniki testów zachowują swoje pierwotne znaczenie.
 
-- [Stan obecny](stan-obecny/README.md) — opis z przeglądu kodu i testów 9–10 listopada 2026 r., z zakresem wykonanych kontroli.
+- [Stan obecny](archiwum/stan-obecny/README.md) — opis z przeglądu kodu i testów 9–10 listopada 2026 r., z zakresem wykonanych kontroli.
 - [Gotowość na francuski i włoski](rozwoj-jezykow.md) — diagnoza braków J1–J10 do planowania wybranej zmiany.
 - [Firebase](firebase.md), [historia](historia.md), [PWA](pwa.md), [obecna mapa i domek](kocia-przygoda.md), [edycja obecnych materiałów](../public/content/README.md) — instrukcje istniejącej aplikacji, do czytania w odpowiednim kontekście.
 - Dawne wymagania, plany, raporty i podglądy dokumentują historię rozwoju. Nie są specyfikacją wszystkich obecnych lub przyszłych funkcji.
 
-Pierwotne uporządkowanie dokumentacji nie zmieniało aplikacji. Późniejsze wdrożenia i wyniki kontroli opisują raporty etapów 1–4. Historycznego katalogu `stan-obecny/` nie aktualizujemy wstecz. Następnie dodano instrukcje pracy i skill utrzymania dokumentacji, bez zmiany zachowania aplikacji. Nie dodano Spec Kit.
+Pierwotne uporządkowanie dokumentacji nie zmieniało aplikacji. Późniejsze wdrożenia i wyniki kontroli opisują raporty etapów 1–4. Historycznego katalogu `archiwum/` nie aktualizujemy wstecz. Następnie dodano instrukcje pracy i skill utrzymania dokumentacji, bez zmiany zachowania aplikacji. Nie dodano Spec Kit.

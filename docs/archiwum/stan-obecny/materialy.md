@@ -1,6 +1,6 @@
 # Materiały i poprawność merytoryczna — stan obecny
 
-[Zakres przeglądu](../README.md). Ten dokument nie potwierdza ponownego porównania całej treści ze zdjęciami podręcznika.
+[Zakres przeglądu](../../README.md). Ten dokument nie potwierdza ponownego porównania całej treści ze zdjęciami podręcznika.
 
 ## Co jest dostępne
 
@@ -8,7 +8,7 @@ Katalog zawiera `02-food`, moduł `unit-2-food`, opisany jako angielski Food, po
 
 Obecny zestaw ma 97 haseł, 38 fiszek podstawowych, 97 pytań słownikowych, 59 zadań gramatycznych, 12 dialogów i 9 zasad gramatycznych. Mapa wskazuje 41 lekcji w 7 etapach. Liczby wynikają z aktualnych plików i testów; nie są wymogiem dla każdego przyszłego modułu.
 
-Źródła: [modul.json](../../public/content/02-food/modul.json), [tests/content.test.ts](../../tests/content.test.ts), [tests/adventure.test.ts](../../tests/adventure.test.ts), [kontrola materiałów](../../scripts/check-content.mjs).
+Źródła: [modul.json](../../../public/content/02-food/modul.json), [tests/content.test.ts](../../../tests/content.test.ts), [tests/adventure.test.ts](../../../tests/adventure.test.ts), [kontrola materiałów](../../../scripts/check-content.mjs).
 
 ## Podział plików
 
@@ -24,7 +24,7 @@ Obecny zestaw ma 97 haseł, 38 fiszek podstawowych, 97 pytań słownikowych, 59 
 
 Quiz korzysta ze słownika, więc poprawka słowa może aktualizować również pytanie i warianty odpowiedzi. `front`/`back` nie kodują formalnie języka; w Food oznaczają polskie hasło i angielską odpowiedź. `language` jest zwykłym napisem „Angielski”, nie kodem języka ani identyfikatorem kursu.
 
-Źródła: [model](../../src/learning/model.ts), [loadModules](../../src/content.ts), [assembleModule](../../src/content-validation.ts), [instrukcja edycji](../../public/content/README.md).
+Źródła: [model](../../../src/learning/model.ts), [loadModules](../../../src/content.ts), [assembleModule](../../../src/content-validation.ts), [instrukcja edycji](../../../public/content/README.md).
 
 ## Co sprawdza program
 
@@ -36,7 +36,7 @@ Ilustracje mają określony format i lokalną ścieżkę SVG lub symbol. Walidac
 
 `validateJourney` sprawdza strukturę mapy, identyfikatory etapów/lekcji i ich odwołania. **Obecne `check:content` nie wywołuje tej funkcji dla wszystkich map**: składa i waliduje moduły przez pomocnik testowy. Mapy są walidowane podczas uruchomienia aplikacji oraz w wybranych testach Food.
 
-Źródła: [walidacja modułów](../../src/content-validation.ts), [walidacja map](../../src/adventure.ts), [pomocnik materiałów](../../tests/materials.ts), [testy ilustracji](../../tests/illustrations.test.ts).
+Źródła: [walidacja modułów](../../../src/content-validation.ts), [walidacja map](../../../src/adventure.ts), [pomocnik materiałów](../../../tests/materials.ts), [testy ilustracji](../../../tests/illustrations.test.ts).
 
 ## Czego te kontrole nie potwierdzają
 
@@ -57,8 +57,8 @@ Klucze wyników zawierają identyfikator modułu, rewizję elementu, typ i ident
 
 Ukończenia lekcji i powtórki etapów korzystają ze stabilnych identyfikatorów modułu, lekcji i etapu. Samego przemianowania identyfikatorów nie należy traktować jak kosmetycznej korekty tytułu.
 
-Źródła: [keyFor](../../src/learning/model.ts), [resolveItem](../../src/learning/questions.ts), [walidacja kopii](../../src/learning/backup.ts), [testy zgodności](../../tests/stage2.test.ts).
+Źródła: [keyFor](../../../src/learning/model.ts), [resolveItem](../../../src/learning/questions.ts), [walidacja kopii](../../../src/learning/backup.ts), [testy zgodności](../../../tests/stage2.test.ts).
 
 ## Co wymaga ustalenia przed nowym językiem
 
-**Do ustalenia, jeszcze niewdrożone:** zapis źródła podręcznikowego i recenzji, zasady dopuszczania wariantów odpowiedzi, obowiązkowe rodzajniki/akcenty, kierunek tłumaczenia oraz sposób potwierdzenia zakresu nowego modułu. Konkretne luki opisuje [przegląd wielojęzyczności](../rozwoj-jezykow.md).
+**Do ustalenia, jeszcze niewdrożone:** zapis źródła podręcznikowego i recenzji, zasady dopuszczania wariantów odpowiedzi, obowiązkowe rodzajniki/akcenty, kierunek tłumaczenia oraz sposób potwierdzenia zakresu nowego modułu. Konkretne luki opisuje [przegląd wielojęzyczności](../../rozwoj-jezykow.md).

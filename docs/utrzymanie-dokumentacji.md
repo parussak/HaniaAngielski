@@ -36,7 +36,7 @@ Przy sprzeczności nie dopasowuj automatycznie wymagań do kodu. Zapisz, co jest
 4. Rejestr decyzji aktualizuj, gdy pojawiło się rzeczywiste uzgodnienie albo wdrożono już uzgodnioną rzecz. Nie zmieniaj znaczenia starych decyzji i nie zamykaj zaparkowanych pytań przy okazji porządków.
 5. Sprawdź główny `README.md` oraz instrukcję `public/content/README.md`, jeśli zmiana wpływa na pierwsze uruchomienie, widoczne możliwości albo edytowanie treści. Unikaj mnożenia liczników, które trzeba zmieniać w wielu miejscach.
 
-Katalog `docs/stan-obecny/` i raporty poprzednich etapów są historyczne. Nie przepisuj dawnych wyników testów na dzisiejsze. Jeśli starszy opis może wprowadzać w błąd, dodaj krótkie oznaczenie historycznego zakresu i odnośnik do bieżącego dokumentu. Już istniejące historyczne liczby nie są same w sobie błędem.
+Katalog `docs/archiwum/` (stan obecny sprzed zmian, audyty, raporty etapów) jest historyczny i nie jest czytany domyślnie. Nie przepisuj dawnych wyników testów na dzisiejsze. Jeśli starszy opis może wprowadzać w błąd, dodaj krótkie oznaczenie historycznego zakresu i odnośnik do bieżącego dokumentu. Już istniejące historyczne liczby nie są same w sobie błędem.
 
 ## Weryfikacja proporcjonalna do zmiany
 

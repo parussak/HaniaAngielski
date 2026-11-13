@@ -2,7 +2,7 @@
 
 Data: 8 listopada 2026 r.
 
-Aktualizacja realizacji: aplikacja jest zbudowana lokalnie. Użytkownik przekazał materiały modułu 2 Food; zastąpiły one wcześniejszą demonstrację. Materiały są niezależnie edytowalne w `public/content`. Aktualny zakres opisuje [dokument modułu Food](materialy-food.md); publikacja i próba na telefonie Hani pozostają do wykonania.
+Aktualizacja realizacji: aplikacja jest zbudowana lokalnie. Użytkownik przekazał materiały modułu 2 Food; zastąpiły one wcześniejszą demonstrację. Materiały są niezależnie edytowalne w `public/content`. Aktualny zakres opisuje [dokument modułu Food](../materialy-food.md); publikacja i próba na telefonie Hani pozostają do wykonania.
 
 Podstawa: [wymagania aplikacji](wymagania.md). Dokument jest planem; budowa aplikacji nie została jeszcze rozpoczęta.
 

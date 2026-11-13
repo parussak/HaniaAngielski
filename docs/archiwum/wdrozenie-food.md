@@ -2,11 +2,11 @@
 
 Stan na 10 listopada 2026 r. Wdrożenie D-22 i D-24: poprawiamy tylko nieukończone lekcje etapów 5–7, a brak ćwiczenia materiału w kontekście uzupełniamy drugą mapą. Nie przenosimy lekcji między etapami ani nie zerujemy wyników.
 
-Późniejsza aktualizacja: dodano przycisk do lekcji przygotowującej przy pustym treningu i niezależne odzyskiwanie map po błędach. [Bieżąca obsługa tych sytuacji](odpornosc-map.md). Poniższy raport zachowuje zakres i wyniki etapu 4.
+Późniejsza aktualizacja: dodano przycisk do lekcji przygotowującej przy pustym treningu i niezależne odzyskiwanie map po błędach. [Bieżąca obsługa tych sytuacji](../odpornosc-map.md). Poniższy raport zachowuje zakres i wyniki etapu 4.
 
 ## Porównanie z materiałami
 
-Punktem odniesienia są 27 zdjęć z archiwum użytkowniczki, opisane w [rejestrze źródeł](materialy-food.md). Przejrzano zestaw zdjęć na planszach kontaktowych, a kluczowe strony porównano w powiększeniu: podręcznik 25, 27, 29–33, 35 i zeszyt ćwiczeń 19–20. Tytuł i wydanie książki nadal nie są ustalone. Zdjęć ani skanów nie dodajemy do publicznej aplikacji.
+Punktem odniesienia są 27 zdjęć z archiwum użytkowniczki, opisane w [rejestrze źródeł](../materialy-food.md). Przejrzano zestaw zdjęć na planszach kontaktowych, a kluczowe strony porównano w powiększeniu: podręcznik 25, 27, 29–33, 35 i zeszyt ćwiczeń 19–20. Tytuł i wydanie książki nadal nie są ustalone. Zdjęć ani skanów nie dodajemy do publicznej aplikacji.
 
 | Zakres i źródło | Wynik porównania | Wdrożenie |
 | --- | --- | --- |
@@ -44,7 +44,7 @@ Nie dodano nagrań, oceniania wymowy ani rozumienia nieudostępnionego audio. Kr
 
 ## Kontrole
 
-`tests/food-audit.test.ts` chroni oryginalną mapę i dotychczasowe treści przez skróty ich kanonicznych danych oraz sprawdza warianty per konto, rozpoczęte sesje, kopie, nagrody, pokrycie i trening. Nowe kontrole telefonu i offline są w `tests/browser/food-audit.spec.ts`. Wyniki pełnej weryfikacji zapisujemy w [testach](07-testy.md).
+`tests/food-audit.test.ts` chroni oryginalną mapę i dotychczasowe treści przez skróty ich kanonicznych danych oraz sprawdza warianty per konto, rozpoczęte sesje, kopie, nagrody, pokrycie i trening. Nowe kontrole telefonu i offline są w `tests/browser/food-audit.spec.ts`. Wyniki pełnej weryfikacji zapisujemy w [testach](../07-testy.md).
 
 Weryfikacja: 137/137 testów Node, 72/72 testów przeglądarkowych gotowej aplikacji w Chrome, poprawne budowanie i 373 lokalne odnośniki dokumentacji bez brakujących plików. Sprawdzono zrzuty mobilne; nie jest to próba na fizycznym telefonie Hani.
 

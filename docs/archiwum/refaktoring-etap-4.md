@@ -4,17 +4,17 @@ Data: 11 listopada 2026. Cel: ułatwić utrzymanie walidatora bez zmiany formatu
 
 ## Podział odpowiedzialności
 
-[Publiczny punkt wejścia](../src/learning/backup.ts) nadal udostępnia `validateBackup` i `backup`. Sprawdza nagłówek pliku, wywołuje poszczególne kontrole i zwraca niezależną kopię danych. Zachowuje dotychczasowy komunikat błędu. Nie normalizuje, nie usuwa pól i nie migruje postępów.
+[Publiczny punkt wejścia](../../src/learning/backup.ts) nadal udostępnia `validateBackup` i `backup`. Sprawdza nagłówek pliku, wywołuje poszczególne kontrole i zwraca niezależną kopię danych. Zachowuje dotychczasowy komunikat błędu. Nie normalizuje, nie usuwa pól i nie migruje postępów.
 
 | Część | Odpowiedzialność |
 | --- | --- |
-| [values.ts](../src/learning/backup-validation/values.ts) | Dotychczasowe reguły obiektów, tekstów, dat, liczb i bezpiecznych identyfikatorów |
-| [session.ts](../src/learning/backup-validation/session.ts) | Element zadania, aktywna/ukończona sesja, odpowiedzi, tryby i opcjonalne znaczniki |
-| [home.ts](../src/learning/backup-validation/home.ts) | Portfel, zakupy, pokoje, odblokowania i zajętość miejsc w domku |
-| [adventure.ts](../src/learning/backup-validation/adventure.ts) | Ukończenia, domki kursów, stan powtórek etapów i ich nagrody |
-| [history.ts](../src/learning/backup-validation/history.ts) | Struktura podsumowania historii i liczby sesji modułowych/kursowych |
-| [archives.ts](../src/learning/backup-validation/archives.ts) | Struktura części archiwum i brak powielonych stron/sesji względem bieżącego zapisu |
-| [progress.ts](../src/learning/backup-validation/progress.ts) | Bieżące postępy, unikalność sesji i powiązanie aktywnej powtórki z kolejką etapu |
+| [values.ts](../../src/learning/backup-validation/values.ts) | Dotychczasowe reguły obiektów, tekstów, dat, liczb i bezpiecznych identyfikatorów |
+| [session.ts](../../src/learning/backup-validation/session.ts) | Element zadania, aktywna/ukończona sesja, odpowiedzi, tryby i opcjonalne znaczniki |
+| [home.ts](../../src/learning/backup-validation/home.ts) | Portfel, zakupy, pokoje, odblokowania i zajętość miejsc w domku |
+| [adventure.ts](../../src/learning/backup-validation/adventure.ts) | Ukończenia, domki kursów, stan powtórek etapów i ich nagrody |
+| [history.ts](../../src/learning/backup-validation/history.ts) | Struktura podsumowania historii i liczby sesji modułowych/kursowych |
+| [archives.ts](../../src/learning/backup-validation/archives.ts) | Struktura części archiwum i brak powielonych stron/sesji względem bieżącego zapisu |
+| [progress.ts](../../src/learning/backup-validation/progress.ts) | Bieżące postępy, unikalność sesji i powiązanie aktywnej powtórki z kolejką etapu |
 
 Funkcje pomocnicze zwracają wynik sprawdzenia, nie zapisują danych i nie wyświetlają komunikatów. Publiczny punkt wejścia składa całą walidację; pojedynczy helper nie zastępuje sprawdzenia pełnej kopii.
 
@@ -26,15 +26,15 @@ Funkcje pomocnicze zwracają wynik sprawdzenia, nie zapisują danych i nie wyśw
 - Zachowanie pól dodatkowych oraz brak modyfikowania przekazanego źródła.
 - Mechanizmy zapisu, synchronizacji, importu i eksportu. Nie zmieniano IndexedDB, reguł Firebase, widoków, stylów ani materiałów Food.
 
-`validateBackup` nadal sprawdza strukturę. [validateFullBackup](../src/history-backup.ts) nadal osobno kontroluje powiązanie i kompletność archiwum, skróty stron oraz zgodność podsumowania z historią. Jego logiki nie przepisywano. Plik ze strukturalnie poprawnym identyfikatorem strony może nie przejść sprawdzenia integralności pełnej kopii — to zamierzone rozdzielenie.
+`validateBackup` nadal sprawdza strukturę. [validateFullBackup](../../src/history-backup.ts) nadal osobno kontroluje powiązanie i kompletność archiwum, skróty stron oraz zgodność podsumowania z historią. Jego logiki nie przepisywano. Plik ze strukturalnie poprawnym identyfikatorem strony może nie przejść sprawdzenia integralności pełnej kopii — to zamierzone rozdzielenie.
 
 ## Dowody zgodności
 
 Przed zmianą wykonano 170/170 istniejących testów Node oraz zapisano wynik oryginalnego walidatora dla **116 przypadków: 21 przyjętych i 95 odrzuconych**. Zestaw obejmuje starą kopię wersji 1, aktywne i ukończone sesje, trening, lekcję z wydaniem 2, zakres kursu, domki i portfele, podsumowania i archiwa oraz aktywne powtórki. Celowo uszkodzone warianty obejmują brakujące pola, błędne indeksy i tryby, kolizje sesji, przekroczenie salda, nieprawidłowe pokoje i powiązania powtórek.
 
-[Przypadki](../tests/fixtures/backup-validation-cases.ts) są generowane z małych danych syntetycznych i dawnej fixture. [Wyniki odniesienia](../tests/fixtures/backup-validation-results.json) pochodzą ze starej implementacji: dla przyjętych plików zawierają skrót dokładnej serializacji wyniku, dla odrzuconych treść błędu. Po podziale otrzymano identyczny plik wyników, bajt po bajcie.
+[Przypadki](../../tests/fixtures/backup-validation-cases.ts) są generowane z małych danych syntetycznych i dawnej fixture. [Wyniki odniesienia](../../tests/fixtures/backup-validation-results.json) pochodzą ze starej implementacji: dla przyjętych plików zawierają skrót dokładnej serializacji wyniku, dla odrzuconych treść błędu. Po podziale otrzymano identyczny plik wyników, bajt po bajcie.
 
-[Test regresji](../tests/backup-validation.test.ts) porównuje cały zestaw z tym odniesieniem, sprawdza brak mutacji źródła, niezależność zwracanej kopii i granicę między walidacją struktury a integralnością historii. Nie regenerujemy odniesienia automatycznie po zmianie kodu; zmiana kryteriów wymaga osobnego uzgodnienia i świadomego przeglądu wyników.
+[Test regresji](../../tests/backup-validation.test.ts) porównuje cały zestaw z tym odniesieniem, sprawdza brak mutacji źródła, niezależność zwracanej kopii i granicę między walidacją struktury a integralnością historii. Nie regenerujemy odniesienia automatycznie po zmianie kodu; zmiana kryteriów wymaga osobnego uzgodnienia i świadomego przeglądu wyników.
 
 ## Weryfikacja — 11 listopada 2026
 

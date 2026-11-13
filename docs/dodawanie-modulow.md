@@ -73,7 +73,7 @@ Moduł jest gotowy do publikacji, gdy nie ma nierozstrzygniętych wątpliwości 
 
 Nie zmieniaj tożsamości istniejących materiałów dla porządku i nie podbijaj masowo rewizji. Najpierw sprawdź wpływ na ukończenia, rozpoczęte sesje, błędy, gwiazdki i kopie. Zmiana rewizji bez zachowania starego pytania może uniemożliwić jego wznowienie; nie traktuj jej jako bezpiecznego rozwiązania sama w sobie.
 
-Dla Food zachowujemy ukończone lekcje i stare pytania. Od D-52 treść lekcji (także w `update`) można poprawiać wielokrotnie, bo ukończenie zależy tylko od identyfikatora lekcji. Nie usuwaj opublikowanych słówek i zadań z plików modułu i nie zmieniaj ich `rev`; istotnie zmienione zadanie dostaje nowe `id`. [Zasady zgodności](format-materialow.md#aktualizacja-wydanej-lekcji) i [przykład Food](wdrozenie-food.md).
+Dla Food zachowujemy ukończone lekcje i stare pytania. Od D-52 treść lekcji (także w `update`) można poprawiać wielokrotnie, bo ukończenie zależy tylko od identyfikatora lekcji. Nie usuwaj opublikowanych słówek i zadań z plików modułu i nie zmieniaj ich `rev`; istotnie zmienione zadanie dostaje nowe `id`. [Zasady zgodności](format-materialow.md#aktualizacja-wydanej-lekcji) i [przykład Food](archiwum/wdrozenie-food.md).
 
 ## Pokój i wyposażenie za nowy moduł
 

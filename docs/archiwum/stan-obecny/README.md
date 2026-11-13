@@ -10,6 +10,6 @@ Dokumenty w tym katalogu powstały z przeglądu kodu i testów rewizji `24cdeda`
 | [zapis.md](zapis.md) | Obecne klucze, konta, archiwa i offline |
 | [testy.md](testy.md) | Zweryfikowany wówczas zakres kontroli i wyniki uruchomień |
 
-W tych opisach mogą występować końcowe sekcje z wcześniejszymi propozycjami. Nie są one nadrzędnym rejestrem decyzji. Aktualne docelowe ustalenia i otwarte pytania znajdują się w [głównej dokumentacji](../README.md) i [rejestrze decyzji](../decyzje.md).
+W tych opisach mogą występować końcowe sekcje z wcześniejszymi propozycjami. Nie są one nadrzędnym rejestrem decyzji. Aktualne docelowe ustalenia i otwarte pytania znajdują się w [głównej dokumentacji](../../README.md) i [rejestrze decyzji](../../decyzje.md).
 
 Nie traktujemy obecnego `Stage` jako już wdrożonej docelowej mapy ani obecnego pola `language` jako gotowego systemu kursów. Aktualizacja opisu nie zmienia zapisanych danych.

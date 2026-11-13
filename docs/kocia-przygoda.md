@@ -1,6 +1,6 @@
 # Kocia mapa i domek
 
-Food ma dwie mapy. Pierwsza zachowuje siedem etapów i 41 krótkich lekcji. Druga, „Kocia kuchnia — Food w praktyce”, ma cztery lekcje kontekstowe i jeden trening wcześniejszej mapy. [Zakres etapu 4 i ochrona wyników](wdrozenie-food.md). Pierwsza mapa obejmuje wszystkie 97 słówek oraz dotychczasowe zadania gramatyczne i rozmówki. Etap może mieć kilka lekcji; lekcja zawiera maksymalnie osiem pozycji przed powtórkami błędów.
+Food ma dwie mapy. Pierwsza zachowuje siedem etapów i 41 krótkich lekcji. Druga, „Kocia kuchnia — Food w praktyce”, ma cztery lekcje kontekstowe i jeden trening wcześniejszej mapy. [Zakres etapu 4 i ochrona wyników](archiwum/wdrozenie-food.md). Pierwsza mapa obejmuje wszystkie 97 słówek oraz dotychczasowe zadania gramatyczne i rozmówki. Etap może mieć kilka lekcji; lekcja zawiera maksymalnie osiem pozycji przed powtórkami błędów.
 
 1. Jedzenie i napoje — 5 lekcji.
 2. Śniadanie — 5 lekcji.

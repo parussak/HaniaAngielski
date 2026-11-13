@@ -61,7 +61,7 @@ Status: mapa obecnego kodu oraz docelowe granice odpowiedzialności. To nie jest
 
 ## Stan obecny
 
-Punkt odniesienia pochodzi z przeglądu rewizji `24cdeda` (9–10 listopada 2026 r.). Poniższa mapa jest uzupełniona o [etap 1](wdrozenie-nauki.md), [etap 2](wdrozenie-kursow.md), [etap 3](wdrozenie-zakresow.md) i [etap 4](wdrozenie-food.md). Opis zachowania użytkowego, zakres sprawdzonych testów i ograniczenia znajdują się w [spisie dokumentacji](README.md). Planowane zmiany dla innych języków są osobno w [przeglądzie gotowości](rozwoj-jezykow.md).
+Punkt odniesienia pochodzi z przeglądu rewizji `24cdeda` (9–10 listopada 2026 r.). Poniższa mapa jest uzupełniona o [etap 1](archiwum/wdrozenie-nauki.md), [etap 2](archiwum/wdrozenie-kursow.md), [etap 3](archiwum/wdrozenie-zakresow.md) i [etap 4](archiwum/wdrozenie-food.md). Opis zachowania użytkowego, zakres sprawdzonych testów i ograniczenia znajdują się w [spisie dokumentacji](README.md). Planowane zmiany dla innych języków są osobno w [przeglądzie gotowości](rozwoj-jezykow.md).
 
 `src/main.ts` uruchamia aplikację i łączy jej części. Nie zawiera już szablonów ekranów, oceniania odpowiedzi ani formularzy konta.
 
@@ -157,15 +157,15 @@ Podstawowy format kursów, wybór kursu, poznany zakres i aktualizacje Food są 
 
 `src/house/catalog.ts` to dane dekoracji, cen, pokoi i nagród. `src/house/progress.ts` realizuje portfele, zgodny odczyt angielskiego dorobku, odblokowania i ustawienia. `src/views/house.ts` odpowiada za ekran domku, oddzielony od `adventure-view.ts` z mapami i wprowadzeniami lekcji. Kontroler domku przekazuje kurs przy zakupach i ustawianiu dekoracji. Kontroler nauki przypisuje nagrodę według modułu sesji, a kontroler zapisu rozlicza odblokowania również dla dawnych ukończeń. [Kontrakt i ograniczenia](koci-domek.md).
 
-Po [etapie 3 refaktoringu](refaktoring-etap-3.md) `main.ts` tworzy kontroler domku ze wspólną funkcją `mutate`. `app/events.ts` przekazuje mu akcje domku przed pozostałymi kontrolerami; nierozpoznane akcje przechodzą dalej. Widok i zapis korzystają z tych samych mechanizmów co wcześniej.
+Po [etapie 3 refaktoringu](archiwum/refaktoring-etap-3.md) `main.ts` tworzy kontroler domku ze wspólną funkcją `mutate`. `app/events.ts` przekazuje mu akcje domku przed pozostałymi kontrolerami; nierozpoznane akcje przechodzą dalej. Widok i zapis korzystają z tych samych mechanizmów co wcześniej.
 
 ## Wspólne podstawy po refaktoringu etapu 1
 
-Po [etapie 4](refaktoring-etap-4.md) walidację kopii podzielono na kontrole sesji, domku, stanu przygody, podsumowania historii, stron archiwum i bieżących postępów. `backup.ts` zachowuje dotychczasowy interfejs i składa kontrole, a `history-backup.ts` nadal sprawdza integralność pełnej historii. Nie zmienia to formatu danych ani działania importu.
+Po [etapie 4](archiwum/refaktoring-etap-4.md) walidację kopii podzielono na kontrole sesji, domku, stanu przygody, podsumowania historii, stron archiwum i bieżących postępów. `backup.ts` zachowuje dotychczasowy interfejs i składa kontrole, a `history-backup.ts` nadal sprawdza integralność pełnej historii. Nie zmienia to formatu danych ani działania importu.
 
 `src/learning/journey.ts` zawiera typy i stabilne klucze map bez zależności od domku, zapisu i nagród. `adventure.ts` nadal eksportuje te symbole dla zgodności istniejących wywołań. Domek korzysta bezpośrednio z tego małego modułu, usuwając cykl wykonawczy `house/progress.ts` ↔ `adventure.ts`.
 
-Wartości gwiazdek są w `src/learning/rewards.ts`, wybór kursu według modułu w `src/learning/scope.ts`, a stały identyfikator dawnego angielskiego kursu w `src/materials/identity.ts`. Lista identyfikatorów miejsc w domku pochodzi z katalogu i służy również walidacji kopii. `src/polish-count.ts` współdzieli odmianę liczebników. [Zakres i dowody zachowania zgodności](refaktoring-etap-1.md).
+Wartości gwiazdek są w `src/learning/rewards.ts`, wybór kursu według modułu w `src/learning/scope.ts`, a stały identyfikator dawnego angielskiego kursu w `src/materials/identity.ts`. Lista identyfikatorów miejsc w domku pochodzi z katalogu i służy również walidacji kopii. `src/polish-count.ts` współdzieli odmianę liczebników. [Zakres i dowody zachowania zgodności](archiwum/refaktoring-etap-1.md).
 
 
 ### Rozmieszczanie i kolekcja domku — D-43

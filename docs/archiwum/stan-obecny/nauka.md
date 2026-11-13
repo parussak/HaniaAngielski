@@ -1,6 +1,6 @@
 # Mechanika nauki — stan obecny
 
-Dokument opisuje zachowanie kodu, nie ocenę skuteczności pedagogicznej. [Zakres przeglądu](../README.md).
+Dokument opisuje zachowanie kodu, nie ocenę skuteczności pedagogicznej. [Zakres przeglądu](../../README.md).
 
 ## Tryby i dobór zadań
 
@@ -18,7 +18,7 @@ Swobodna sesja wybiera do 10 pozycji początkowych. Pierwszeństwo mają trudne,
 
 Błędne odpowiedzi mogą dopisać pozycje do końca sesji, więc końcowa liczba pytań może przekroczyć 10. Lekcja mapy zawiera 1–8 wskazanych słów/zadań; nie jest losowym przekrojem całego modułu.
 
-Źródła: [makeSession](../../src/learning/session.ts), [eligibleModules](../../src/learning/questions.ts), [makeLessonSession i validateJourney](../../src/adventure.ts), [testy fiszek](../../tests/basic-flashcards.test.ts).
+Źródła: [makeSession](../../../src/learning/session.ts), [eligibleModules](../../../src/learning/questions.ts), [makeLessonSession i validateJourney](../../../src/adventure.ts), [testy fiszek](../../../tests/basic-flashcards.test.ts).
 
 ## Odpowiadanie i poprawki
 
@@ -30,7 +30,7 @@ Po błędzie użytkownik widzi własną odpowiedź, poprawny wariant, wyróżnie
 
 Pierwsza próba i późniejsze poprawki są liczone osobno. Poprawienie błędu w tej samej sesji nie zmienia pierwszej próby na poprawną i nie oznacza automatycznie trwałej znajomości słowa. Ogólna trudność może zostać usunięta przy poprawnej pierwszej próbie w nowej sesji.
 
-Źródła: [inputFor i requiresChoice](../../src/learning/questions.ts), [recordAnswer](../../src/learning/session.ts), [widok ćwiczenia](../../src/views/study.ts), [reakcje kotków](../../src/cats.ts), [testy odpowiedzi](../../tests/answer-comparison.test.ts), [testy obu powtórek](../../tests/review-input.test.ts).
+Źródła: [inputFor i requiresChoice](../../../src/learning/questions.ts), [recordAnswer](../../../src/learning/session.ts), [widok ćwiczenia](../../../src/views/study.ts), [reakcje kotków](../../../src/cats.ts), [testy odpowiedzi](../../../tests/answer-comparison.test.ts), [testy obu powtórek](../../../tests/review-input.test.ts).
 
 ## Co oznacza poprawna odpowiedź
 
@@ -44,7 +44,7 @@ Odpowiedź musi zgadzać się z jednym z jawnych wpisów `answers`, po normaliza
 
 Nie ma automatycznego akceptowania literówek, tłumaczenia odpowiedzi przez AI ani oceny dowolnego zdania. Akcenty i znaki językowe pozostają istotne; sam brak akcentu nie jest obecnie tolerowany. Wyświetlenie różnic nie zmienia zasad oceniania.
 
-Źródła: [normalizeAnswer](../../src/answers.ts), [isCorrect](../../src/learning/questions.ts), [porównanie odpowiedzi](../../src/answer-comparison.ts).
+Źródła: [normalizeAnswer](../../../src/answers.ts), [isCorrect](../../../src/learning/questions.ts), [porównanie odpowiedzi](../../../src/answer-comparison.ts).
 
 ## Powtórki etapowe i procent utrwalenia
 
@@ -59,7 +59,7 @@ Każdy etap mapy ma własną kolejkę błędów. Trafiają do niej błędy lekcj
 
 **Procent utrwalenia dotyczy tylko zebranych błędnych pozycji**, nie wszystkich słów i zadań modułu. To udział pozycji z 3/3; pusty zbiór daje 100% i komunikat o braku zaległości. Nie jest to pomiar opanowania całego podręcznika. Przy wspólnej pozycji w kilku etapach podsumowanie modułu uwzględnia słabszy wynik.
 
-Źródła: [stage-review.ts](../../src/stage-review.ts), [testy powtórek etapowych](../../tests/stage-review.test.ts), [testy mapy w przeglądarce](../../tests/browser/stage-review.spec.ts).
+Źródła: [stage-review.ts](../../../src/stage-review.ts), [testy powtórek etapowych](../../../tests/stage-review.test.ts), [testy mapy w przeglądarce](../../../tests/browser/stage-review.spec.ts).
 
 ## Gwiazdki i domek
 
@@ -69,4 +69,4 @@ Ponowne przejście lekcji i powtórki nie daje bez końca kolejnych nagród. Nie
 
 Domek ma 6 dekoracji. Zakup jest jednorazowy, zużywa zdobyte gwiazdki, a ustawienie można zmieniać lub schować. Gwiazdki, zakupy i pokój są wspólne w obrębie zapisu użytkownika, nie osobne dla języków.
 
-Źródła: [rewardCompletion, purchase, place](../../src/adventure.ts), [settleStageRewards](../../src/stage-review.ts), [test pełnej ścieżki](../../tests/adventure.test.ts).
+Źródła: [rewardCompletion, purchase, place](../../../src/adventure.ts), [settleStageRewards](../../../src/stage-review.ts), [test pełnej ścieżki](../../../tests/adventure.test.ts).

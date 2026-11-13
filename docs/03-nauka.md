@@ -153,7 +153,7 @@ D-52 zmienia ten akapit dla zwykłych lekcji: Poziom legendarny bierze aktualną
 
 Jeżeli dawna sesja zawierała automatyczne powroty tego samego zadania po błędzie, nowa powtórka legendarna bierze każdy element raz. Zachowuje wszystkie różne zadania; nie przywraca dawnego wydłużania sesji.
 
-Status: uzgodnione zasady docelowe z wyraźnymi miejscami wymagającymi decyzji. Pierwsze wdrożenie po D-34 opisuje [raport](wdrozenie-nauki.md); historyczne zachowanie sprzed zmian jest w [punkcie odniesienia](stan-obecny/nauka.md).
+Status: uzgodnione zasady docelowe z wyraźnymi miejscami wymagającymi decyzji. Pierwsze wdrożenie po D-34 opisuje [raport](archiwum/wdrozenie-nauki.md); historyczne zachowanie sprzed zmian jest w [punkcie odniesienia](archiwum/stan-obecny/nauka.md).
 
 ## Sekcja 7 + 2 i kocie zaproszenia — D-48–D-49, wdrożenie
 
@@ -254,7 +254,7 @@ Nie przemianowujemy automatycznie obecnych etapów na nowe mapy. Uzgodniono zach
 
 Zachowujemy istniejącą mapę, zamiast proponowanego wcześniej podziału na trzy. Według relacji użytkowniczki pierwsze cztery części są ukończone i pozostają bez zmian. Poprawione wersje nieukończonych lekcji dotyczą wyłącznie trzech kolejnych sekcji: **„W restauracji”, „Powód i skutek”, „Koci piknik”**. Potoczne „lekcje 5–7” oznacza tu obecne sekcje/etapy, nie trzy pojedyncze techniczne lekcje.
 
-Porównanie wykazało brak ćwiczenia posiłków, przepisu i opisu śniadania w kontekście. Druga mapa „Kocia kuchnia — Food w praktyce” uzupełnia ten zakres, zawiera cztery lekcje po 6 zadań i trening do 8 poznanych pozycji po trzech lekcjach. [Źródła, zakres i ograniczenia](wdrozenie-food.md).
+Porównanie wykazało brak ćwiczenia posiłków, przepisu i opisu śniadania w kontekście. Druga mapa „Kocia kuchnia — Food w praktyce” uzupełnia ten zakres, zawiera cztery lekcje po 6 zadań i trening do 8 poznanych pozycji po trzech lekcjach. [Źródła, zakres i ograniczenia](archiwum/wdrozenie-food.md).
 
 Uzgodniona ochrona wyników D-24: **każda już zaliczona lekcja pozostaje ukończona, również wewnątrz sekcji 5–7, a zdobyte gwiazdki zostają na koncie**. Poprawiamy wyłącznie nieukończone lekcje. Brakujący materiał trafia na kolejną mapę, zamiast wymuszać ponowne ukończenie zaliczonych lekcji. Ochronę wdrożono przez opcjonalną aktualizację definicji lekcji, zapis jej wydania i zachowanie wszystkich starych pytań. Rozpoczęte sesje zachowują zapisany zestaw zadań; stare ukończenia nie są ponownie otwierane. Od D-52 ukończone lekcje również pokazują aktualną treść, a ukończenie zależy tylko od identyfikatora lekcji.
 
@@ -326,7 +326,7 @@ Zakres globalny nie obejmuje automatycznie niepoznanych przyszłych treści ani 
 
 Po takiej próbie element może wejść do poznanego zakresu globalnych ćwiczeń. Przy rozgrzewce na mapie zakres ograniczamy do materiału wcześniejszych lekcji bieżącej mapy i wcześniejszych map. Dodatkowy trening uruchamiany poza mapą korzysta z poznanego zakresu kursu; to roboczy zakres pierwszego wdrożenia opisany w raporcie.
 
-Uwzględniamy również **wcześniejsze zapisane próby odpowiedzi, także ze starszej historii**, niezależnie od poprawności (D-26). Użytkownik nie musi od nowa poznawać elementów tylko z powodu wprowadzenia tej zasady. Odtworzenie poznanego zakresu nie zmienia ocen, ukończonych lekcji ani zdobytych gwiazdek. Poznanie jest wdrożone w etapie 3 przez wspólny odczyt prób i znacznik `encountered`. Nie znika po zastąpieniu niedokończonej sesji i nie zmienia ocen, ukończeń ani gwiazdek — [opis zakresów](wdrozenie-zakresow.md).
+Uwzględniamy również **wcześniejsze zapisane próby odpowiedzi, także ze starszej historii**, niezależnie od poprawności (D-26). Użytkownik nie musi od nowa poznawać elementów tylko z powodu wprowadzenia tej zasady. Odtworzenie poznanego zakresu nie zmienia ocen, ukończonych lekcji ani zdobytych gwiazdek. Poznanie jest wdrożone w etapie 3 przez wspólny odczyt prób i znacznik `encountered`. Nie znika po zastąpieniu niedokończonej sesji i nie zmienia ocen, ukończeń ani gwiazdek — [opis zakresów](archiwum/wdrozenie-zakresow.md).
 
 Globalne fiszki obejmują także poprawnie znane słówka, podczas gdy modułowe zachowują dotychczasowe pomijanie zaliczonych. Globalny quiz obejmuje pytania o poznane znaczenia i pytania już próbowane; globalna gramatyka tylko konkretne próbowane zadania. Znajomość jednej reguły nie odblokowuje automatycznie niepoznanych zadań. Jawne warianty z pytania pozostają przyciskami; słownikowe opcje globalne korzystają z poznanego zakresu, a przy zbyt małej puli wymagane jest wpisanie. Globalne sesje nie zaliczają map i nie przyznają nowych gwiazdek.
 

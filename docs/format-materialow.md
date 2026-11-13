@@ -104,7 +104,7 @@ Stary katalog bez `coursesFile` jest nadal obsługiwany przez adapter zgodności
 
 Uruchamiamy `npm run check:content`, `npm test` i `npm run build`. Te kroki wykrywają problemy formatu, odwołań i zakresów; nie potwierdzają poprawności językowej. Materiał sprawdzamy też względem źródeł według [zasad merytoryki](04-merytoryka.md). Nowe zachowanie interfejsu sprawdzamy w testach przeglądarkowych według [zasad testowania](07-testy.md).
 
-Wybór kursu i globalne fiszki/quiz/gramatyka są wdrożone w etapie 3 — [opis działania](wdrozenie-zakresow.md). Nowe podręcznikowe treści francuskie i włoskie nadal wymagają materiałów i recenzji. Dodanie treści przez ten format nie wymaga osobnego silnika oceniania dla języka.
+Wybór kursu i globalne fiszki/quiz/gramatyka są wdrożone w etapie 3 — [opis działania](archiwum/wdrozenie-zakresow.md). Nowe podręcznikowe treści francuskie i włoskie nadal wymagają materiałów i recenzji. Dodanie treści przez ten format nie wymaga osobnego silnika oceniania dla języka.
 
 ## Aktualizacja wydanej lekcji
 
@@ -117,7 +117,7 @@ Co wolno, a czego nie:
 - **Nie wolno:** usuwać z plików modułu opublikowanego słówka lub zadania ani zmieniać jego `rev`. Rozpoczęte sesje, kolejki błędów i liczniki utrwalenia wskazują klucz `moduleId@rewizja:typ:id`; bez tego elementu nie da się ich wznowić. Zadanie zdjęte z lekcji zostaje w pliku.
 - **Istotna zmiana zadania** (inne pytanie, inna odpowiedź) = nowe zadanie z nowym `id`; stare zostaje w pliku. Poprawka literówki lub wyjaśnienia nie wymaga nowego `id`.
 
-Pole `update` jest zachowanym formatem etapu 4, nie rejestrem wydań: zawiera `edition: 2`, `title`, `intro`, `wordIds`, `exerciseIds` i `ruleIds`, nie może zmieniać `id`, roli ani zawierać kolejnego `update`, ma 6–10 zadań i wskazuje istniejące materiały. W lekcjach, które je mają (etapy 5–7 pierwszej mapy Food), edytujemy treść wewnątrz `update`; oryginalna lista pod nim nie jest już pokazywana, ale zostaje jako źródło poznanego materiału. Nowe lekcje nie potrzebują `update` — edytujemy je bezpośrednio. Zapisywany przy sesji i ukończeniu znacznik `edition: 2` jest historyczny i nie wpływa na działanie; nie wprowadzamy wydań 3, 4… [Przykład Food i ochrona danych](wdrozenie-food.md) opisuje stan sprzed D-52.
+Pole `update` jest zachowanym formatem etapu 4, nie rejestrem wydań: zawiera `edition: 2`, `title`, `intro`, `wordIds`, `exerciseIds` i `ruleIds`, nie może zmieniać `id`, roli ani zawierać kolejnego `update`, ma 6–10 zadań i wskazuje istniejące materiały. W lekcjach, które je mają (etapy 5–7 pierwszej mapy Food), edytujemy treść wewnątrz `update`; oryginalna lista pod nim nie jest już pokazywana, ale zostaje jako źródło poznanego materiału. Nowe lekcje nie potrzebują `update` — edytujemy je bezpośrednio. Zapisywany przy sesji i ukończeniu znacznik `edition: 2` jest historyczny i nie wpływa na działanie; nie wprowadzamy wydań 3, 4… [Przykład Food i ochrona danych](archiwum/wdrozenie-food.md) opisuje stan sprzed D-52.
 
 ## Scena dialogowa z kilkoma lukami
 

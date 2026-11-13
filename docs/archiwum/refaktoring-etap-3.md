@@ -4,10 +4,10 @@ Data: 11 listopada 2026. Cel: oddzielić interakcje z domkiem od prowadzenia nau
 
 ## Wykonane zmiany
 
-- [Kontroler domku](../src/controllers/house.ts) obsługuje pięć istniejących akcji: `house`, `select-room`, `select-decoration`, `buy-decoration`, `place-decoration`. Zachowuje nazwy akcji, wartości domyślne, warunki dostępności i treść komunikatów.
-- [Rozruch](../src/main.ts) tworzy ten kontroler z tym samym stanem aplikacji i funkcją `mutate`, z których korzystały akcje w kontrolerze nauki.
-- [Obsługa zdarzeń](../src/app/events.ts) przekazuje akcję najpierw kontrolerowi domku, potem dotychczasowym kontrolerom. Każdy zwraca informację, czy obsłużył akcję; nie dodano nowego systemu zdarzeń ani rejestru.
-- [Kontroler nauki](../src/controllers/learning.ts) nadal prowadzi sesję i rozlicza jej ukończenie: gwiazdki, premie i odblokowanie pokoju po ostatniej lekcji. To połączenie wyniku nauki z nagrodą pozostaje w dotychczasowym miejscu. Kontroler domku odpowiada za oglądanie i urządzanie zdobytych pokoi, nie za zaliczanie lekcji.
+- [Kontroler domku](../../src/controllers/house.ts) obsługuje pięć istniejących akcji: `house`, `select-room`, `select-decoration`, `buy-decoration`, `place-decoration`. Zachowuje nazwy akcji, wartości domyślne, warunki dostępności i treść komunikatów.
+- [Rozruch](../../src/main.ts) tworzy ten kontroler z tym samym stanem aplikacji i funkcją `mutate`, z których korzystały akcje w kontrolerze nauki.
+- [Obsługa zdarzeń](../../src/app/events.ts) przekazuje akcję najpierw kontrolerowi domku, potem dotychczasowym kontrolerom. Każdy zwraca informację, czy obsłużył akcję; nie dodano nowego systemu zdarzeń ani rejestru.
+- [Kontroler nauki](../../src/controllers/learning.ts) nadal prowadzi sesję i rozlicza jej ukończenie: gwiazdki, premie i odblokowanie pokoju po ostatniej lekcji. To połączenie wyniku nauki z nagrodą pozostaje w dotychczasowym miejscu. Kontroler domku odpowiada za oglądanie i urządzanie zdobytych pokoi, nie za zaliczanie lekcji.
 
 ## Ochrona zgodności
 
@@ -17,7 +17,7 @@ Przed wydzieleniem zapisano wynik sekwencji 12 akcji, obejmującej otwarcie domk
 
 ## Testy
 
-[house-controller.test.ts](../tests/house-controller.test.ts) używa danych syntetycznych i sprawdza:
+[house-controller.test.ts](../../tests/house-controller.test.ts) używa danych syntetycznych i sprawdza:
 
 1. Nawigacja i wybór elementów domku nie zapisują ani nie zastępują aktywnej lekcji; zablokowany pokój pozostaje niedostępny.
 2. Zakup, przestawianie i schowanie zachowują osobne portfele kursów, zapisaną sesję i zgodność kopii; ponowny zakup nie pobiera drugi raz gwiazdek.

@@ -27,7 +27,7 @@ Aktualizuj dokument odpowiedzialny za zasadę oraz niezbędne odnośniki. Raport
 - Dokumentacja nie zmienia aplikacji. Jeśli zlecono tylko opisy, nie edytuj kodu, treści produkcyjnych, zapisu, reguł Firebase ani workflow. Zauważone braki przedstaw jako ustalenia; nie naprawiaj ich poza zakresem.
 - Przy zleconych zmianach materiału zachowaj tożsamość kursów i elementów oraz sprawdź wpływ na ukończenia, aktywne sesje, powtórki i gwiazdki według kontraktu. Sceny dialogowe (D-53) są treścią: opisuj je w formacie materiałów, a mechanikę osobno, bez nazw kursów i modułów. Treść lekcji można poprawiać wielokrotnie (D-52), ale opublikowanych słówek i zadań nie usuwaj z plików modułu i nie zmieniaj ich rewizji.
 - Nie zgaduj nieczytelnych źródeł ani kryteriów akcentów, rodzajników i wariantów. Oznacz niepewności; nie zamykaj zaparkowanych pytań bez uzgodnienia. Nie dodawaj AI do sesji nauki tylko po to, by opracować podręcznik.
-- `docs/stan-obecny/` i dawne raporty są historyczne. Zachowaj dawne wyniki; w razie potrzeby oznacz ich zakres i wskaż bieżący opis.
+- `docs/archiwum/` (w tym `stan-obecny/`) zawiera dawne raporty i jest historyczne; nie czytaj go domyślnie. Zachowaj dawne wyniki; w razie potrzeby oznacz ich zakres i wskaż bieżący opis.
 
 ## Sprawdź i podaj wynik
 

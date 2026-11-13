@@ -22,7 +22,7 @@ Status: opis obecnego produktu i uzgodnionego kierunku. Ostatnie uporządkowanie
 
 „Małe kroki” to aplikacja internetowa/PWA z polskim interfejsem, kontami, zapisem lokalnym i synchronizacją. Obecny materiał to angielski Food dla Hani. Są dwa wejścia: kocia mapa i ćwiczenia po swojemu. Strona startowa ma też ramkę następnego kroku, a stała nawigacja prowadzi do: Nauki, Map, Domku, Postępów i Konta. Kopia postępów jest w Koncie, również bez logowania. Na telefonie pięć wejść mieści się w dolnym pasku. Mapy dotyczą wybranego kursu.
 
-Szczegółowy punkt odniesienia: [produkt przed zmianami](stan-obecny/produkt.md). Food ma już dwie mapy i trening wcześniejszej mapy. Zakres uzupełnienia oraz ograniczenia względem podręcznika opisuje [raport etapu 4](wdrozenie-food.md). Francuski i włoski nie mają jeszcze produkcyjnych materiałów.
+Szczegółowy punkt odniesienia: [produkt przed zmianami](archiwum/stan-obecny/produkt.md). Food ma już dwie mapy i trening wcześniejszej mapy. Zakres uzupełnienia oraz ograniczenia względem podręcznika opisuje [raport etapu 4](archiwum/wdrozenie-food.md). Francuski i włoski nie mają jeszcze produkcyjnych materiałów.
 
 Każdy kurs każdego konta ma własny domek i portfel gwiazdek. Dawny dorobek pozostaje w angielskim. Ukończenie map Food udostępnia wyposażenie do kupienia, a obie mapy dają bezpłatnie kuchnię; zaległe błędy nie blokują pokoju. [Pokoje, nagrody i ochrona danych](koci-domek.md).
 
@@ -40,7 +40,7 @@ Każdy kurs każdego konta ma własny domek i portfel gwiazdek. Dawny dorobek po
 
 ### Wybór kursu i poznany materiał — wdrożone w etapie 3
 
-Pod powitaniem użytkownik widzi kurs i przycisk „Wybierz kurs”. Mapy i moduły są ograniczone do wybranego podręcznika. Link „Ćwicz cały poznany materiał” otwiera globalne fiszki, quiz i gramatykę; dotychczasowe wejścia modułowe pozostają. Zmiana kursu nie usuwa rozpoczętej sesji. Jeżeli jest z innego kursu, można do niej wrócić osobnym przyciskiem; rozpoczęcie nowej wymaga potwierdzenia zastąpienia. [Pełny opis działania](wdrozenie-zakresow.md).
+Pod powitaniem użytkownik widzi kurs i przycisk „Wybierz kurs”. Mapy i moduły są ograniczone do wybranego podręcznika. Link „Ćwicz cały poznany materiał” otwiera globalne fiszki, quiz i gramatykę; dotychczasowe wejścia modułowe pozostają. Zmiana kursu nie usuwa rozpoczętej sesji. Jeżeli jest z innego kursu, można do niej wrócić osobnym przyciskiem; rozpoczęcie nowej wymaga potwierdzenia zastąpienia. [Pełny opis działania](archiwum/wdrozenie-zakresow.md).
 
 ### Dwa sposoby korzystania
 
