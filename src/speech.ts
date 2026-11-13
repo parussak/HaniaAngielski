@@ -4,11 +4,12 @@
  */
 import {createRecordedSpeaker,type RecordedSpeaker} from './speech/recorded-speaker.ts';
 import {recordingCatalog} from './speech/recordings.ts';
+import {speakingRate,type SpeechKind} from './speech/tempo.ts';
 export interface Speaker {
     /** True when this device can speak the language right now. */
     available(language: string | undefined,text?:string): boolean;
     /** Starts speaking; returns false when nothing could be started. Never throws. */
-    speak(text: string, language: string | undefined, slow?: boolean): boolean;
+    speak(text: string, language: string | undefined, slow?: boolean,kind?:SpeechKind): boolean;
     stop(): void;
     /** The learner's own switch, remembered on this device only. */
     enabled(): boolean;
@@ -28,7 +29,7 @@ const preference = 'male-kroki:sluchanie';
 const primary = (language: string) => language.toLowerCase().split(/[-_]/)[0];
 // Not failures: one utterance replacing another, and a browser waiting for the first tap.
 const quiet = ['interrupted', 'canceled', 'not-allowed'];
-export const speechRate = { normal: 0.9, slow: 0.6 };
+export const speechRate = {normal:speakingRate(),slow:speakingRate(true)};
 
 export function createSpeaker(env: SpeechEnvironment): Speaker {
     // A device that failed once stays quiet until the page is opened again.
@@ -49,13 +50,13 @@ export function createSpeaker(env: SpeechEnvironment): Speaker {
         enabled: () => on,
         setEnabled(value) { on = value; if (value) failed = false; try { env.storage?.setItem(preference, value ? 'on' : 'off'); } catch { /* not remembered */ } if (!value) this.stop(); },
         available: language => on && !failed && !!voiceFor(language),
-        speak(text, language, slow = false) {
+        speak(text, language, slow = false,kind='word') {
             const voice = on && !failed ? voiceFor(language) : undefined;
             if (!voice || !text.trim()) return false;
             try {
                 env.synth!.cancel();
                 const utterance = new env.Utterance!(text);
-                utterance.voice = voice; utterance.lang = voice.lang; utterance.rate = slow ? speechRate.slow : speechRate.normal;
+                utterance.voice = voice; utterance.lang = voice.lang; utterance.rate = speakingRate(slow,kind);
                 utterance.onerror = event => { if (!quiet.includes(event?.error ?? '')) fail(); };
                 env.synth!.speak(utterance as never);
                 return true;

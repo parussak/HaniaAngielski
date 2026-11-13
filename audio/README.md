@@ -14,6 +14,10 @@ Wyniki są w [generated/manifest.json](generated/manifest.json) i katalogu `gene
 
 **Aplikacja korzysta z nagrań (D-60).** Budowanie sprawdza ich zgodność i publikuje klipy oraz mały indeks `audio/catalog.json`; PWA zapisuje je offline razem z wydaniem. Do Firebase nie wysyłamy dźwięku. Do Git dodaj cały katalog `audio/` wraz z gotowymi klipami. Nie edytuj ręcznie manifestu ani nazw nagrań.
 
+## Tempo odtwarzania
+
+Od D-62 aplikacja odtwarza słówka w tempie A (0,88×), dialogi w tempie B (0,75×), a „Wolniej” zwalnia je jeszcze o 30%. Ustawienia są w `src/speech/tempo.ts`; generator pozostawia klipy bazowe, aby nie stosować zwolnienia dwukrotnie. Nie trzeba generować osobnej wolnej wersji ani ponownie uruchamiać generatora przy zmianie samego tempa odtwarzacza.
+
 ## Wymagane narzędzia na komputerze przygotowującym dźwięk
 
 Domyślnie generator szuka folderu `male-kroki-audio-narzedzia` obok projektu, w układzie:

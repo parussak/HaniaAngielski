@@ -1,8 +1,14 @@
 # Nauka — prowadzenie i utrwalanie
 
+## D-62 — wybrane domyślne tempa
+
+**Wdrożone:** słówka są odtwarzane domyślnie w tempie A **0,88×**, a kwestie dialogów/historyjek w tempie B **0,75×**. „Wolniej” dodatkowo mnoży tempo przez 0,7: odpowiednio **0,616×** i **0,525×**, z zachowaniem wysokości głosu nagrania. Wybór ma działać bez dodatkowego kliknięcia. Przy próbie dźwięku w „Konto” obowiązuje tempo słówka; przy każdej kwestii i w podsumowaniu sceny — dialogu. To samo zdanie może być odczytane inaczej w zależności od kontekstu. Przejście między rodzajami nie pozostawia poprzedniego tempa.
+
+Tempa są wspólne dla ręcznego odtworzenia, automatycznego odsłuchu, wznowienia i PWA offline. Synteza zapasowa dostaje odpowiedni współczynnik, choć brzmienie zależy od głosu urządzenia. Parametry generatora i pliki 24 kb/s pozostają bazowe; nie zwalniamy ich drugi raz podczas generowania. Zapis wyników, gwiazdki, ukończenia i format kopii pozostają bez zmian.
+
 ## D-61 — jakość i dostęp do wolniejszego odsłuchu
 
-**Wdrożone:** nagrania Cori Food są generowane w Opus mono **24 kb/s**. Przy każdym dostępnym odsłuchu są dwie możliwości: zwykłe tempo i „Wolniej”, także przy kwestiach historyjek, w ich podsumowaniu i próbie dźwięku w ustawieniach. Otwarte luki nadal nie mają odsłuchu. Nagranie zwalniamy do 0,7× z zachowaniem wysokości głosu; zapis plików, synteza zapasowa i wyniki nauki pozostają rozdzielone. Kompresja nie zmienia rytmu wygenerowanego głosu — jakość i naturalność tempa oceniamy odsłuchem.
+**Wdrożone:** nagrania Cori Food są generowane w Opus mono **24 kb/s**. Przy każdym dostępnym odsłuchu są dwie możliwości: zwykłe tempo i „Wolniej”, także przy kwestiach historyjek, w ich podsumowaniu i próbie dźwięku w ustawieniach. Otwarte luki nadal nie mają odsłuchu. W D-61 dodatkowy odsłuch miał tempo 0,7×; od D-62 jest ono liczone względem wybranego tempa domyślnego, z zachowaniem wysokości głosu; zapis plików, synteza zapasowa i wyniki nauki pozostają rozdzielone. Kompresja nie zmienia rytmu wygenerowanego głosu — jakość i naturalność tempa oceniamy odsłuchem.
 
 ## D-60 — gotowe nagrania Cori i offline
 

@@ -1,5 +1,9 @@
 # Architektura — realizacja techniczna
 
+## D-62 — tempo niezależne od treści i zapisu
+
+`src/speech/tempo.ts` zawiera wybrane współczynniki oraz wspólną regułę dodatkowego „Wolniej”. `Speaker.speak` przyjmuje opcjonalny rodzaj wypowiedzi (`word` domyślnie lub `dialogue`). Przyciski scen przekazują rodzaj do akcji odsłuchu; słówka, ich automatyczny odsłuch i próbka konta korzystają z domyślnego rodzaju. Odtwarzacz nagrań i synteza stosują tę samą regułę, także po błędzie lub przy braku pliku. Rodzaj nie trafia do postępów ani materiałów. Zmiana kodu jest objęta wersją PWA, bez nowych zasobów audio.
+
 ## D-61 — wspólne przyciski odsłuchu
 
 `src/views/speech-controls.ts` renderuje parę zwykły odsłuch / „Wolniej” dla słówek, dialogów i ustawień. Oba przyciski przekazują ten sam tekst i język do istniejącej akcji, a wolniejszy dodatkowo `data-slow`. Nie wprowadzają drugiego pliku audio ani stanu w wynikach. Przepływność nagrań należy do `audio/config.json`; odtwarzacz jej nie ustawia.

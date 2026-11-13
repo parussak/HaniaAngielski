@@ -14,15 +14,25 @@ class Media implements AudioPlayer {
  play(){this.emit('playing');return Promise.resolve();}pause(){this.paused=true;}
 }
 function device(t:any,tts=true){
- let enabled=true,changes=0;const spoken:unknown[][]=[],media:Media[]=[],urls:string[]=[];
- const fallback={enabled:()=>enabled,setEnabled:(on:boolean)=>{enabled=on;},available:(language?:string)=>enabled&&tts&&language==='en',speak:(text:string,language?:string,slow=false)=>{if(!fallback.available(language))return false;spoken.push([text,language,slow]);return true;},stop:()=>{}};
+ let enabled=true,changes=0;const kinds:string[]=[],spoken:unknown[][]=[],media:Media[]=[],urls:string[]=[];
+ const fallback={enabled:()=>enabled,setEnabled:(on:boolean)=>{enabled=on;},available:(language?:string)=>enabled&&tts&&language==='en',speak:(text:string,language?:string,slow=false,kind='word')=>{kinds.push(kind);if(!fallback.available(language))return false;spoken.push([text,language,slow]);return true;},stop:()=>{}};
  const env={fallback,supported:()=>true,url:(file:string)=>`https://example.test/app/audio/${file}`,changed:()=>{changes++;},createAudio:(url:string)=>{urls.push(url);const a=new Media();media.push(a);return a;},timeoutMs:10};
- const speaker=createRecordedSpeaker(env);speaker.setCatalog([apple,water]);t.after(()=>speaker.stop());return {speaker,env,spoken,media,urls,changes:()=>changes};
+ const speaker=createRecordedSpeaker(env);speaker.setCatalog([apple,water]);t.after(()=>speaker.stop());return {speaker,env,spoken,kinds,media,urls,changes:()=>changes};
 }
 
 test('nagranie jest pierwsze, można powtarzać i zwalniać ten sam plik bez zmiany wysokości głosu',t=>{
- const d=device(t);assert.equal(d.speaker.speak('an apple','en'),true);assert.equal(d.spoken.length,0);assert.equal(d.media[0].playbackRate,1);assert.equal(d.media[0].preservesPitch,true);
- d.speaker.speak('an apple','en',true);assert.equal(d.media[0].paused,true);assert.equal(d.media[1].playbackRate,0.7);assert.equal(d.urls[0],d.urls[1]);assert.equal(d.speaker.available('fr','an apple'),false);
+ const d=device(t);assert.equal(d.speaker.speak('an apple','en'),true);assert.equal(d.spoken.length,0);assert.equal(d.media[0].playbackRate,0.88);assert.equal(d.media[0].preservesPitch,true);
+ d.speaker.speak('an apple','en',true);assert.equal(d.media[0].paused,true);assert.equal(d.media[1].playbackRate,0.616);assert.equal(d.urls[0],d.urls[1]);assert.equal(d.speaker.available('fr','an apple'),false);
+});
+
+test('domyślne tempo zależy od zastosowania; Wolniej zwalnia je dodatkowo, a błąd zachowuje rodzaj wypowiedzi',t=>{
+ const d=device(t);
+ d.speaker.speak('water','en',false,'dialogue');assert.equal(d.media.at(-1)!.playbackRate,0.75);
+ d.speaker.speak('water','en',true,'dialogue');assert.equal(d.media.at(-1)!.playbackRate,0.525);
+ d.speaker.speak('water','en');assert.equal(d.media.at(-1)!.playbackRate,0.88);
+ d.speaker.speak('water','en',true);assert.equal(d.media.at(-1)!.playbackRate,0.616);
+ d.speaker.speak('water','en',true,'dialogue');d.media.at(-1)!.emit('error');assert.equal(d.kinds.at(-1),'dialogue');assert.deepEqual(d.spoken.at(-1),['water','en',true]);
+ d.speaker.speak('missing','en',false,'dialogue');assert.equal(d.kinds.at(-1),'dialogue');
 });
 
 test('brak konkretnego klipu przechodzi do syntezy lub zwykłego zadania, niezależnie od innych klipów',t=>{

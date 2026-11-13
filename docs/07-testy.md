@@ -1,5 +1,11 @@
 # Testy — podział i zasady
 
+## D-62 — wybrane tempa domyślne
+
+Weryfikacja 13 listopada 2026: **298/298 testów Node** oraz **24/24 celowane scenariusze Chrome** na gotowej aplikacji (nagrania, synteza zapasowa, sceny i PWA). Budowanie z TypeScript, kontrolą materiałów i **318 zasobami offline**, `audio:check`, kontrola dokumentacji i różnic przeszły. Gotowe 111 plików audio pozostało bez zmian: 375 669 bajtów. Nie ponawiano całego zestawu przeglądarkowego ani odsłuchu na fizycznym telefonie.
+
+Dwa nowe testy jednostkowe sprawdzają tempo 0,88 dla słówek i 0,75 dla dialogów, dodatkowe „Wolniej” (0,616/0,525), powrót do tempa słówka po dialogu oraz zachowanie rodzaju przy braku/błędzie nagrania i przejściu do syntezy. Testy przeglądarkowe mierzą rzeczywisty `HTMLAudioElement.playbackRate` wraz z `preservesPitch`: ręczny i automatyczny odsłuch, przyciski dialogu i podsumowanie, zimny start offline, zachowaną kopię wyników, zakupy i zwykłą nagrodę za lekcję. Atrapa syntezy potwierdza właściwe współczynniki również bez nagrań. Początkowy test wykrył nieprzekazywanie rodzaju dialogu przy błędzie pliku; poprawiono odtwarzacz i ponowiono testy.
+
 ## D-61 — 24 kb/s i „Wolniej” przy każdym odsłuchu
 
 Weryfikacja 13 listopada 2026: rzeczywiste `npm run audio` wygenerowało ponownie **111 klipów / 120 odwołań**, Ogg Opus mono 24 kb/s, **375 669 bajtów**. `audio:check`, **296/296 testów Node**, budowanie z kontrolą treści i TypeScript oraz **318 plikami PWA** przeszły. Celowany przebieg Chrome na gotowej aplikacji: **24/24 scenariusze** słuchania, nagrań, scen i ekranów mobilnych. Testy sprawdzają „Wolniej” w ustawieniach, przy gotowej kwestii sceny i w jej podsumowaniu, zarówno z syntezą, jak i prawdziwymi plikami; zachowują ochronę przed zdradzaniem otwartej luki. Ponownie potwierdzono zimny start z nagraniami offline i niezmienione zakupy oraz nagrodę za lekcję. Obejrzano zrzut historyjki 320 px; kontrola dokumentacji i różnic przeszła. Nie ponawiano całego zestawu 137 scenariuszy z poprzedniego etapu ani odsłuchu na fizycznym telefonie. Podniesienie przepływności nie dowodzi subiektywnej poprawy rytmu lub wymowy.

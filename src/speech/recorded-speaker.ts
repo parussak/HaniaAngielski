@@ -1,6 +1,7 @@
 import type {Speaker} from '../speech.ts';
 import type {Recording} from './recordings.ts';
 import {speechKey} from './text.ts';
+import {speakingRate} from './tempo.ts';
 export interface AudioPlayer {
  playbackRate:number;preservesPitch:boolean;
  play():Promise<void>|void;pause():void;
@@ -31,17 +32,17 @@ export function createRecordedSpeaker(env:RecordedEnvironment):RecordedSpeaker {
   setCatalog(catalog){entries=new Map(catalog.map(e=>[speechKey(e.text,e.language),{...e}]));env.changed();},
   available:(language,text)=>!!find(language,text)||env.fallback.available(language,text),
   stop,
-  speak(text,language,slow=false){
-   stop();const entry=find(language,text);if(!entry)return env.fallback.speak(text,language,slow);
+  speak(text,language,slow=false,kind='word'){
+   stop();const entry=find(language,text);if(!entry)return env.fallback.speak(text,language,slow,kind);
    const current=epoch;let finished=false;
    const fail=(error:unknown)=>{
     if(current!==epoch||finished)return false;finished=true;clear();try{active?.pause();}catch{/* already stopped */}active=undefined;
     const name=error&&typeof error==='object'&&'name' in error?String(error.name):'';
     if(name==='NotAllowedError')return false; // A tap can retry. Our own cancellations were already excluded by epoch.
-    broken.add(entry.file);const spoken=env.fallback.speak(text,language,slow);if(!spoken)env.changed();return spoken;
+    broken.add(entry.file);const spoken=env.fallback.speak(text,language,slow,kind);if(!spoken)env.changed();return spoken;
    };
    try{
-    active=env.createAudio(env.url(entry.file));active.playbackRate=slow?0.7:1;active.preservesPitch=true;
+    active=env.createAudio(env.url(entry.file));active.playbackRate=speakingRate(slow,kind);active.preservesPitch=true;
     active.addEventListener('error',()=>fail(Error('Nagranie niedostępne.')));
     active.addEventListener('playing',()=>{if(current===epoch)clear();});
     active.addEventListener('ended',()=>{if(current===epoch){finished=true;clear();active=undefined;}});

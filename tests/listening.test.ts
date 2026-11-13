@@ -45,6 +45,14 @@ test('mowa: odtwarzanie bez limitu, zwykłe i wolniejsze, głosem języka kursu'
  assert.equal(d.cancelled,22);assert.equal(d.speaker.speak('  ','en'),false);assert.equal(d.speaker.speak('bonjour','fr'),false);assert.equal(d.spoken.length,22);
 });
 
+test('synteza zapasowa rozróżnia tempo słówek i dialogów, także przy dodatkowym Wolniej',()=>{
+ const d=device(english);
+ d.speaker.speak('an apple','en');assert.equal(d.spoken.at(-1)!.rate,0.88);
+ d.speaker.speak('What would you like?','en',false,'dialogue');assert.equal(d.spoken.at(-1)!.rate,0.75);
+ d.speaker.speak('What would you like?','en',true,'dialogue');assert.equal(d.spoken.at(-1)!.rate,0.525);
+ d.speaker.speak('an apple','en',true);assert.equal(d.spoken.at(-1)!.rate,0.616);
+});
+
 test('mowa offline: tylko głos zapisany na urządzeniu; po powrocie sieci dźwięk wraca',()=>{
  const d=device([{lang:'en-US',localService:false}],{online:false});
  assert.equal(d.speaker.available('en'),false);assert.equal(d.speaker.speak('apple','en'),false);

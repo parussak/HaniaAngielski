@@ -23,7 +23,7 @@ W tym etapie przygotowujemy nagrania dla Food: pełne formy wszystkich haseł z 
 1. Czyta i sprawdza aktualne materiały. Łączy identyczne teksty tego samego języka i profilu w jeden klip; manifest zachowuje osobne odwołania do słowa lub kwestii sceny.
 2. Nazwa klipu wynika z tekstu, języka, głosu i parametrów oraz wskazanych wersji narzędzi/modelu. Poprawienie tekstu zmienia właściwy klip, a zmiana profilu unieważnia odpowiedni zestaw.
 3. Przy kolejnym uruchomieniu sprawdza sumy istniejących plików, zachowuje prawidłowe i generuje tylko brakujące lub uszkodzone. Niezmieniony zestaw nie jest ponownie zapisywany.
-4. Zachowuje parametry zatwierdzonych próbek: długość fonemów 1,08; odstęp między zdaniami 0,25 s; przycięcie nadmiaru ciszy i wyrównanie głośności. Wolniejsza wersja nie jest osobnym plikiem.
+4. Zachowuje parametry zatwierdzonych próbek: długość fonemów 1,08; odstęp między zdaniami 0,25 s; przycięcie nadmiaru ciszy i wyrównanie głośności. Od D-62 słówka odtwarzają się domyślnie z mnożnikiem 0,88, dialogi 0,75; dodatkowe „Wolniej” stosuje kolejne 0,7. Te mnożniki należą do odtwarzacza (`src/speech/tempo.ts`), a nie obróbki generatora. Wolniejsza wersja nie jest osobnym plikiem.
 5. Przy błędzie nie zastępuje poprzedniego kompletnego zestawu. Po udanej aktualizacji usuwa wyłącznie stare pliki zarządzanego zestawu; nie czyści dowolnych katalogów ani nieznanych plików. Blokuje jednoczesne uruchomienia.
 6. Oddzielna kontrola `npm run audio:check` wykrywa brakujące, nieaktualne, uszkodzone i osierocone nagrania bez uruchamiania syntezatora. W pierwotnym D-59 kontrola była osobnym poleceniem. Od D-60 budowanie wykonuje tę kontrolę przed publikacją plików.
 

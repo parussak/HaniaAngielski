@@ -64,7 +64,7 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
             return;
         ev.preventDefault();
         // D-58: listening changes no progress, so it neither saves nor redraws — unless sound just failed.
-        if (el.dataset.action === 'listen') { if (!speaker().speak(el.dataset.say ?? '', el.dataset.lang, el.dataset.slow === 'true')) void run(async () => {}); return; }
+        if (el.dataset.action === 'listen') { if (!speaker().speak(el.dataset.say ?? '', el.dataset.lang, el.dataset.slow === 'true',el.dataset.speechKind==='dialogue'?'dialogue':'word')) void run(async () => {}); return; }
         void run(() => action(el.dataset.action!, el));
     });
     root.addEventListener('submit', ev => {

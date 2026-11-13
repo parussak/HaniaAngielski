@@ -46,13 +46,13 @@ test('telefon: posłuchaj i wybierz, posłuchaj i wpisz — bez limitu odtworze�
   if(await listening(page).count()){
    const key=(await listening(page).getAttribute('data-key'))!,q=fromKey(key),say=vocabularyFullAnswer(q),typing=await page.getByRole('textbox').count()>0;
    // Read out once when the task appears, in the voice of the course language.
-   await expect.poll(async()=>(await spoken(page)).at(-1)).toEqual({text:say,lang:'en-GB',rate:0.9});
+   await expect.poll(async()=>(await spoken(page)).at(-1)).toEqual({text:say,lang:'en-GB',rate:0.88});
    const before=(await spoken(page)).length;
    await expect(page.locator('.question')).toHaveText(typing?'Posłuchaj i wpisz to, co słyszysz.':'Posłuchaj i wybierz, co to znaczy.');
    // "Listen again" and "slower" as often as the learner likes.
    for(let again=0;again<3;again++)await page.getByRole('button',{name:'Posłuchaj jeszcze raz'}).click();
    await page.getByRole('button',{name:'Wolniej',exact:true}).click();
-   const now=await spoken(page);expect(now.length).toBe(before+4);expect(now.at(-1)).toEqual({text:say,lang:'en-GB',rate:0.6});expect(now.slice(before,before+3).every(u=>u.rate===0.9&&u.text===say)).toBeTruthy();
+   const now=await spoken(page);expect(now.length).toBe(before+4);expect(now.at(-1)).toEqual({text:say,lang:'en-GB',rate:0.616});expect(now.slice(before,before+3).every(u=>u.rate===0.88&&u.text===say)).toBeTruthy();
    expect((await page.locator('.listen button').evaluateAll(els=>els.map(el=>el.getBoundingClientRect().height))).every(h=>h>=44)).toBeTruthy();
    await page.setViewportSize({width:320,height:640});await noScroll(page);await page.screenshot({path:`test-results/listening-${typing?'type':'choose'}-320.png`,fullPage:true});await page.setViewportSize({width:390,height:844});
    if(typing){
@@ -108,8 +108,8 @@ for(const quiet of [
 test('ustawienie: wyłączone słuchanie zostaje po odświeżeniu, a włączone wraca razem z próbą dźwięku',async({page,context})=>{
  await install(context,english);await page.goto('./');await page.getByRole('button',{name:'Konto',exact:true}).click();
  const toggle=page.getByRole('checkbox',{name:'Włącz ćwiczenia ze słuchu'});await expect(toggle).toBeChecked();await expect(page.locator('.listening-status')).toContainText('jest dostępny');
- await page.getByRole('button',{name:'Sprawdź dźwięk',exact:true}).click();expect((await spoken(page)).at(-1)).toEqual({text:vocabularyFullAnswer(questionFor(modules,{key:keyFor(modules[0],'word',modules[0].words[0].id),moduleId:modules[0].id,id:modules[0].words[0].id,version:1,type:'word',input:'text'})),lang:'en-GB',rate:0.9});
- await page.getByRole('button',{name:'Wolniej',exact:true}).click();expect((await spoken(page)).at(-1)!.rate).toBe(0.6);
+ await page.getByRole('button',{name:'Sprawdź dźwięk',exact:true}).click();expect((await spoken(page)).at(-1)).toEqual({text:vocabularyFullAnswer(questionFor(modules,{key:keyFor(modules[0],'word',modules[0].words[0].id),moduleId:modules[0].id,id:modules[0].words[0].id,version:1,type:'word',input:'text'})),lang:'en-GB',rate:0.88});
+ await page.getByRole('button',{name:'Wolniej',exact:true}).click();expect((await spoken(page)).at(-1)!.rate).toBe(0.616);
  await toggle.uncheck();await expect(page.locator('.listening-status')).toContainText('wyłączone');await expect(page.getByRole('button',{name:'Sprawdź dźwięk',exact:true})).toHaveCount(0);
  await page.reload();await expect(page.getByRole('checkbox',{name:'Włącz ćwiczenia ze słuchu'})).not.toBeChecked();
  await page.setViewportSize({width:320,height:640});await noScroll(page);await page.screenshot({path:'test-results/listening-settings-320.png',fullPage:true});await page.setViewportSize({width:390,height:844});
@@ -134,16 +134,16 @@ test('głośnik w scenie: tylko przy kwestiach bez otwartej luki, także z klawi
  await answerCurrent(page,modules);await expect(scene).toHaveAttribute('data-position','2');
  await expect(scene.locator('.dialogue-line')).toHaveCount(2);await expect(scene.locator('.scene-say')).toHaveCount(1);await expect(scene.locator('.scene-now .scene-say')).toHaveCount(0);
  const button=scene.locator('.scene-say'),box=(await button.boundingBox())!;expect(box.width).toBeGreaterThanOrEqual(44);expect(box.height).toBeGreaterThanOrEqual(44);
- await button.click();expect((await spoken(page)).at(-1)).toEqual({text:'What would you like?',lang:'en-GB',rate:0.9});
+ await button.click();expect((await spoken(page)).at(-1)).toEqual({text:'What would you like?',lang:'en-GB',rate:0.75});
  await button.focus();await page.keyboard.press('Enter');expect(await spoken(page)).toHaveLength(2);
- await scene.getByRole('button',{name:'Posłuchaj tej kwestii wolniej',exact:true}).click();expect((await spoken(page)).at(-1)).toEqual({text:'What would you like?',lang:'en-GB',rate:0.6});
+ await scene.getByRole('button',{name:'Posłuchaj tej kwestii wolniej',exact:true}).click();expect((await spoken(page)).at(-1)).toEqual({text:'What would you like?',lang:'en-GB',rate:0.525});
  // Listening saves nothing and does not move the conversation.
  await expect(scene).toHaveAttribute('data-position','2');await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
  for(let gap=2;gap<=5;gap++){await expect(scene).toHaveAttribute('data-position',String(gap));await answerCurrent(page,modules);}
  await expect(scene.locator('.scene-slow')).toHaveCount(await scene.locator('.scene-say').count());
  const all=page.locator('.scene-summary .scene-say');await expect(all).toHaveCount(7);await all.last().scrollIntoViewIfNeeded();await all.last().click();
  expect((await spoken(page)).at(-1)!.text).toBe('Enjoy your meal!');await all.nth(1).click();expect((await spoken(page)).at(-1)!.text).toBe('Can I have a chicken sandwich, please?');
- await expect(page.locator('.scene-summary .scene-slow')).toHaveCount(7);await page.locator('.scene-summary .scene-slow').last().click();expect((await spoken(page)).at(-1)).toEqual({text:'Enjoy your meal!',lang:'en-GB',rate:0.6});
+ await expect(page.locator('.scene-summary .scene-slow')).toHaveCount(7);await page.locator('.scene-summary .scene-slow').last().click();expect((await spoken(page)).at(-1)).toEqual({text:'Enjoy your meal!',lang:'en-GB',rate:0.525});
  await page.setViewportSize({width:320,height:640});await noScroll(page);await page.screenshot({path:'test-results/listening-scene-320.png',fullPage:true});
 });
 
@@ -157,7 +157,7 @@ test.describe('offline',()=>{
   const key=(await listening(page).getAttribute('data-key'))!,say=vocabularyFullAnswer(fromKey(key));
   await page.close();const offline=await context.newPage();await offline.goto('./');await resumeStudy(offline);
   await expect(listening(offline)).toHaveAttribute('data-key',key);await offline.getByRole('button',{name:'Wolniej',exact:true}).click();
-  expect((await spoken(offline)).at(-1)).toEqual({text:say,lang:'en-GB',rate:0.6});
+  expect((await spoken(offline)).at(-1)).toEqual({text:say,lang:'en-GB',rate:0.616});
   await answerCurrent(offline,modules);await expect(offline.locator('.feedback.correct')).toBeVisible();
  });
 });
