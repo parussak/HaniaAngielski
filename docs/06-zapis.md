@@ -1,154 +1,102 @@
 # Zapis — co, gdzie i z jaką zgodnością
 
-**D-64:** ocena w łapkach jest wyliczana z obecnych `items` i `attempts`, bez nowego pola lub migracji. Gwiazdki, zakupy i ukończenia nie są przeliczane. Poprawki zachowują `first`, pierwotną `answer` oraz historię korekt; używają istniejących faz i pól wyboru. Brak próby w polu blokuje przejście, zamiast tworzyć pustą odpowiedź. Stare kopie z dawnymi pustymi próbami nadal się wczytują. Dla dawnych poprawnych pól bez `gapPlacements` można odtworzyć odpowiedź z istniejącej próby. Nie uzupełniamy ani nie poprawiamy wyników podczas importu.
+Gdzie aplikacja przechowuje wyniki, jakie pola mają znaczenie i jak chronimy dorobek przy zmianach. Reguły nauki, które te dane realizują: [nauka](03-nauka.md). Mapa kodu: [architektura](05-architektura.md). Poprzednia wersja, z opisem zmian według decyzji i etapów: [archiwum](archiwum/zapis-do-2026-11-13.md).
 
-**D-60:** źródłowy manifest i klipy audio są artefaktami repozytorium poza `public/`. Budowanie publikuje zweryfikowane klipy i lekki indeks; pamięć PWA zawiera je razem z materiałami i kodem wydania. Nie należą do postępów, kopii użytkownika ani Firebase. Zapis wyników, portfele, zakupy i format kopii v1 pozostają bez zmian. Pierwsza instalacja lub aktualizacja musi pobrać komplet przed użyciem offline; stary cache zostaje zastąpiony przy aktywacji nowego wydania. Generator nie czyta ani nie modyfikuje wyników i portfeli; nie wprowadzono migracji. Narzędzia i model głosu pozostają na komputerze przygotowującym treść. [Wymagania i pliki](generowanie-audio.md).
+## Gdzie leżą dane
 
-**D-57:** nowy widok postępów nie zmienia formatu, reguł Firebase, kompakcji ani danych wyników. Ukończenia, portfele i archiwa są tylko odczytywane. Wybór kursu korzysta z istniejącej lokalnej preferencji konta/gościa, nie przenosi postępów między kursami. Otwarcie szczegółów jest stanem widoku, nie nowym polem kopii. Archiwum nie przechowuje pełnych dat i tekstu odpowiedzi w podsumowaniu; tydzień może więc uzupełnić się po wczytaniu stron, a ostatnie sukcesy nie są prezentowane jako pełna historia opanowania. Zakupy nie zmniejszają liczby wszystkich zdobytych gwiazdek.
-
-**D-56:** kolor błędnej luki jest odtwarzany z `attempts`, więc nie wymaga nowych danych ani migracji. W historycznym D-56 wyjście „Dalej” zapisywało brakujące próby jako puste; od D-64 trzeba najpierw uzupełnić wszystkie pola, zachowując istniejące próby; ustawia indeks za całą grupą przez obecny mechanizm przechodzenia. Czyszczenie roboczego rozmieszczenia i naliczenie nagród nadal odbywają się w jednej mutacji. Poprawa linijki dialogu korzysta z dotychczasowego `retry`; pierwsza próba pozostaje osobno od poprawki. Portrety przy każdej kwestii nadal wynikają z tego samego ID sesji i sceny. Stare kopie, ukończenia, zakupy i gwiazdki pozostają zgodne.
-
-**D-55:** natychmiastowe sprawdzanie plansz wykorzystuje istniejące `gapPlacements`, `gapSelection` i próby. Błędny token pozostaje zapisany; odłożenie lub zaznaczenie nie dopisuje próby. Starsza kopia z nieocenionym rozmieszczeniem nadal się wczytuje — nie oceniamy jej automatycznie podczas odczytu. Nowa interakcja sprawdza nowe wstawienie. Rodzajniki w wariantach wyboru są dodawane przy odczycie pytania, bez zmiany `items[].options` w kopii. Ukończenia, gwiazdki i format v1 pozostają bez zmian.
-
-**D-54:** koci rozmówcy nie dodają nowych pól do wyników ani kopii — obsada wynika z istniejącego identyfikatora sesji i sceny. Zmiana czterech lekcji Food na same historyjki dotyczy nowych sesji. Rozpoczęte sesje mają swoje zapisane zadania i są wznawiane bez skracania, zaś ukończenia i nagrody pozostają zgodne z D-52.
-
-Status: obecne rozwiązanie oraz granice przyszłych zmian. Dokument nie wprowadza migracji.
-
-## Stan obecny
-
-### Nowe prezentacje i poziom legendarny — D-50
-
-Nowa sesja może zawierać `legendary: true`, wybór `pairSelection` lub `draftAnswer`; element ma opcjonalny `pairGroup` albo `presentation: bank`. Pola są walidowane w kopii v1 i zapisywane w istniejącym rekordzie lokalnym/konta. Plansza ma 2–3 kolejne elementy, każdy ze swoim dotychczasowym kluczem i oceną. Wybranie innego hasła przestawia tylko nierozwiązane elementy tej planszy, bez zmiany ocen wcześniejszych odpowiedzi. Bank zapisuje propozycję przed oceną; nowy krok usuwa robocze wybory. Kolejki błędów przechowują zwykły element bez oprawy planszy, aby powtórka z wpisywaniem nie wymagała odtworzenia innych par. Brak nowych pól zachowuje stary przebieg; nie przebudowujemy rozpoczętych sesji. Kopia, synchronizacja, kompakcja i nagroda za ponowną pełną lekcję korzystają z dotychczasowego mechanizmu.
-
-### Plany sekcji i wspólne utrwalenie — D-48–D-49
-
-Opcjonalne `adventure.sectionPlans` przechowuje jeden plan na sekcję: siedem identyfikatorów bazowych i dwa miejsca `after`. Losujemy go przy wejściu w naukę mapową, zapisując przez istniejącą transakcję lokalną/konta. Sam start aplikacji, import ani wznowienie starej sesji nie dopisują planu. Rozpoczęte sekcje bez planu zachowują stary zakres. Plan jest częścią kopii v1 i synchronizacji; istniejące rozstrzyganie konfliktów chroni równoległe urządzenia. Nie scalamy losowo dwóch różnych planów.
-
-`adventure.memory` ma jeden wpis na dokładny klucz elementu i wersji, z licznikiem 0–3 oraz odwołaniem do materiału. Rozliczenie ukończonej sesji ma znacznik `retentionCounted: true`; nie powstaje osobna lista wszystkich naliczeń. Współpracuje ze starymi `stageReviews` bez kasowania historii. Sesje nadal podlegają kompakcji, a przyrost pamięci zależy od liczby różnych ćwiczonych elementów, nie liczby odpowiedzi.
-
-Dynamiczna sesja jest zwykłą lekcją z `recall.stageId` i stabilnym kluczem zakończonym `-recall-1` lub `-recall-2`. Korzysta ze zwykłych nagród i ukończeń. Dobrowolny początek/finał zachowuje `training.kind: extra` i dodaje tylko `ritual: opening | finale`. Brak nowych pól oznacza dotychczasowy zapis. Walidacja weryfikuje plan, zakresy liczników, powiązanie kluczy i dozwolone kombinacje sesji. Nie zmieniono wersji kopii ani zapisanych identyfikatorów, ukończeń, gwiazdek, zakupów i sesji aktywnych. [Reguły nauki](03-nauka.md).
-
-| Dane | Miejsce i zakres |
+| Dane | Miejsce |
 | --- | --- |
-| Postępy gościa | IndexedDB w przestrzeni zależnej od ścieżki strony, osobny klucz `current` |
-| Postępy konta i stan synchronizacji | Lokalny rekord `account:<uid>` oraz dokument konta w Firestore |
-| Imię i dane logowania | Firebase Authentication; lokalne dane do przywrócenia kontekstu konta |
-| Starsza historia | Pełne sesje w niezmiennych częściach, lokalnie i na koncie; ich podsumowania w bieżącym zapisie |
-| Zewnętrzna kopia | Eksport JSON, format `hania-language`, wersja `1`, z potrzebnymi archiwami |
-| Materiały kursów | Wspólne pliki statyczne i cache PWA, oddzielnie od wyników |
+| Postępy gościa | IndexedDB, klucz `current`, w przestrzeni zależnej od ścieżki strony |
+| Postępy konta i stan synchronizacji | Lokalny rekord `account:<uid>` i dokument konta w Firestore |
+| Imię i logowanie | Firebase Authentication |
+| Starsza historia | Pełne sesje w niezmiennych częściach archiwum (lokalnie i na koncie), podsumowania w bieżącym zapisie |
+| Kopia zewnętrzna | Eksport JSON, format `hania-language`, **wersja 1**, z archiwami |
+| Materiały kursów, nagrania, indeks audio | Pliki statyczne i cache PWA — nie są częścią postępów ani Firebase |
+| Wybór kursu | IndexedDB `course-selection:guest` / `course-selection:account:<uid>` — lokalna preferencja, poza kopią i synchronizacją |
+| Przełącznik słuchania | `localStorage` `male-kroki:sluchanie` — na urządzeniu, poza postępami |
 
-Jedna aktywna sesja jest zapisywana dla użytkownika, nie osobno dla każdego języka. Wznowienie obejmuje m.in. pytanie, fazę, pierwszą odpowiedź i poprawki. Każde konto ma osobny bilans gwiazdek i domek dla każdego kursu.
+- Jedna aktywna sesja na użytkownika (nie na kurs). Wznowienie obejmuje pytanie, fazę, pierwszą odpowiedź i poprawki.
+- Konta i gość są rozdzielone. Synchronizacja ma kontrolę wersji, wybór przy konflikcie i blokadę drugiej karty. Oczekujące zmiany są wysyłane po połączeniu w trakcie działania aplikacji lub przy kolejnym uruchomieniu.
+- Import kopii zastępuje wyniki dopiero po potwierdzeniu; odrzucony plik nie zmienia obecnych postępów.
+- Materiały są wspólne dla kont; każde konto ma własne postępy (D-14), a postępy tego samego elementu są osobne w każdym kursie (D-15).
 
-Zachowano rozdzielenie kont i gościa, kontrolę wersji przy synchronizacji, wybór przy konflikcie i blokadę drugiej karty. Import kopii zastępuje wyniki po potwierdzeniu. Konto wysyła oczekujące zmiany po połączeniu podczas działania aplikacji lub kolejnego uruchomienia, nie jako stała usługa po zamknięciu.
+## Zasady zgodności
 
-Pełny opis kluczy, limitów, archiwizacji, cache i dowodów: [zapis — punkt odniesienia](archiwum/stan-obecny/zapis.md). Mapa implementacji: [architektura](05-architektura.md).
+1. **Kopia zostaje w wersji 1.** Nowe pola są opcjonalne i walidowane; brak pola oznacza dotychczasowe zachowanie. Stare kopie i sesje wczytują się bez migracji.
+2. **Nie zmieniamy identyfikatorów** modułów, map, lekcji, elementów, scen ani luk — także dla porządku nazewnictwa. Klucz elementu ma postać `moduleId@rewizja:typ:id` i nie zawiera kursu; moduły różnych kursów mają różne identyfikatory. Opublikowanych elementów nie usuwamy z plików modułu i nie zmieniamy im `rev` — [reguła edycji](format-materialow.md#aktualizacja-wydanej-lekcji).
+3. **Ukończenie lekcji** to wpis `adventure.completed[lessonKey]` i zależy tylko od klucza lekcji (D-52). Klucz: `moduleId/mapId/lessonId` dla nazwanych map, `moduleId/lessonId` dla pierwszej mapy Food.
+4. **Aktywna sesja przechowuje własną listę zadań** i wznawia się z niej, nie z definicji lekcji. Rozpoczętych sesji nie przebudowujemy ani nie skracamy.
+5. **Nagrody nalicza się raz na sesję** — znaczniki w samej sesji (`lessonRewarded`, `rewarded`, `retentionCounted`) chronią przed ponownym naliczeniem po odświeżeniu, imporcie i synchronizacji. Zdobytych gwiazdek nie przeliczamy wstecz.
+6. **Przyrost danych jest ograniczony:** sesje podlegają kompakcji i archiwizacji, liczniki rosną z liczbą różnych elementów, nie odpowiedzi. Nowy mechanizm (np. harmonogram treningu) musi określić swoje dane bez nieograniczonego powiększania głównego zapisu.
+7. **Starsza wersja aplikacji** może nie obsłużyć nowych pól — wtedy pokazuje bezpieczny ekran lub wymaga aktualizacji, ale nie niszczy zapisu.
+8. **Zmiana wymagająca migracji** potrzebuje osobnej decyzji, planu i testów zgodności.
 
-## Walidacja kopii po refaktoringu etapu 4
+## Walidacja kopii
 
-Publiczne `validateBackup` i `backup` pozostają w `src/learning/backup.ts`. Wewnętrzne kontrole sesji, domków, przygody, historii i archiwów są rozdzielone w `src/learning/backup-validation/`. Sam podział walidatora zachował nagłówek i wersję pliku, dopuszczalne dane, limity i komunikat błędu. Walidacja nie zmienia źródła, zachowuje dodatkowe pola i zwraca niezależną kopię; nie wykonuje migracji. Odrzucenie importowanego pliku nadal nie zastępuje obecnych postępów.
+`validateBackup` i `backup` (`src/learning/backup.ts`) sprawdzają strukturę; części walidacji są w `src/learning/backup-validation/`. Walidacja nie zmienia źródła, zachowuje dodatkowe pola, zwraca niezależną kopię i nie migruje. Pełna kopia przechodzi następnie `validateFullBackup` (`src/history-backup.ts`): kompletność archiwum, skróty stron i zgodność podsumowania — tego kroku nie wolno pominąć przy imporcie.
 
-Sprawdzenie kompletności archiwum, skrótów stron i zgodności podsumowania nadal wykonuje `validateFullBackup` w `src/history-backup.ts`, po walidacji strukturalnej. Tego etapu nie należy pomijać przy imporcie pełnej kopii. [Podział odpowiedzialności i zestaw zgodności](archiwum/refaktoring-etap-4.md).
+## Słownik pól
 
-## Niedostępna mapa a zapis wyników
+### Postępy (`Progress`)
 
-Problemy odczytu map są przejściowym stanem interfejsu, poza `Progress` i kopią. Niepełny katalog wstrzymuje migrację dawnych błędów, przesuwanie jej kursora oraz rozliczanie premii etapowych; po odzyskaniu kompletu te działania są wznawiane. Nagrody za zwykłe ukończenie lekcji działają nadal. Aktywna sesja mapy niedostępnej pozostaje zapisana i czeka na jej odzyskanie, co chroni przypisanie nowych błędów do etapu. Przygotowanie do pustego treningu nie zmienia formatu zapisu ani nie zalicza treningu za użytkownika. [Pełny opis](odpornosc-map.md).
+| Pole | Znaczenie |
+| --- | --- |
+| `adventure.completed[lessonKey]` | Ukończenie lekcji `{ at }`; historyczne `edition: 2` dla poprawionych lekcji Food (dopuszczalne tylko brak lub `2`) |
+| `adventure.earned`, `adventure.purchases` | Portfel i zakupy kursu `angielski-hani` (dawny format, bez kopiowania) — D-42 |
+| `adventure.courseHomes` | Portfele i zakupy pozostałych kursów; bez drugiego wpisu angielskiego |
+| `rooms`, `unlockedItems` (w domku kursu) | Odblokowane pokoje i wyposażenie |
+| zakup `{ cost, slot, room?, position? }` | `slot: null` bez `position` = schowek; brak `room` = salonik; `position: { x, y }` na siatce 24 × 15 (D-43–D-45) — [koci domek](koci-domek.md) |
+| `adventure.sectionPlans` | Plan sekcji 7 + 2: siedem lekcji bazowych i dwa miejsca `after`; losowany raz przy wejściu w naukę mapową (D-48) |
+| `adventure.memory` | Licznik utrwalenia 0–3 dla dokładnego klucza elementu z odwołaniem do materiału (D-48) |
+| `stageReviews` | Dawne kolejki błędów etapów; zachowane, współpracują z `memory` |
+| `encountered` | Unikalna lista kluczy elementów poznanych przez pierwszą próbę (D-25); bez ocen |
+| `history.courses`, `history.items` | Podsumowania archiwum: sesje globalne osobno od modułowych; każda oceniona próba raz |
 
-## Rozszerzenie treningów — wdrożone po D-34
+### Sesja
 
-Sesja treningu ma opcjonalne pole `training` z rolą `map` lub `extra`. Trening na mapie korzysta z istniejącego rejestru ukończeń lekcji; dodatkowy trening zapisuje `rewarded: true` w ukończonej sesji. Znacznik jest zapisywany razem z gwiazdką, nie na osobnej nieograniczonej liście nagród. Sesje nadal podlegają dotychczasowej kompakcji i archiwizacji.
+| Pole | Znaczenie |
+| --- | --- |
+| `training: { kind: map \| extra }` | Trening na mapie (zwykłe ukończenie lekcji) lub dodatkowy |
+| `rewarded`, `lessonRewarded` | Nagroda za tę sesję już naliczona |
+| `retentionCounted` | Sesja już rozliczona w liczniku utrwalenia |
+| `fixedLength` | Nowa sesja o stałym zestawie (D-38); tylko takie dają 1 ★ za pełne powtórzenie |
+| `legendary` | Poziom legendarny (D-50) |
+| `ritual: opening \| finale` | Dobrowolne otwarcie lub finał modułu (D-49); przy `training.kind: extra` |
+| `recall.stageId` | Kocia powtórka; klucz lekcji kończy się `-recall-1` / `-recall-2` |
+| `scope: { kind: "course", courseId }` | Sesja globalna z poznanego zakresu kursu |
+| `lesson.edition: 2` | Sesja z poprawionej wersji lekcji Food |
+| `pairSelection`, `draftAnswer`, `gapPlacements`, `gapSelection`, `boardSummary` | Robocze stany plansz, banku i podsumowań; błędne słowo zostaje w `gapPlacements` |
 
-Format kopii pozostaje w wersji 1 i odczytuje stare dane. Kopie zawierające nowy tryb treningu wymagają aktualnej aplikacji. Nie zmieniono kluczy istniejących materiałów, IndexedDB ani reguł Firestore. Sam dobór pytań treningu i wyliczenie podglądu postępu nie zmieniają wyników. Przy uruchomieniu i zapisie aplikacja może osobno skompaktować historię, odtworzyć starsze kolejki błędów oraz rozliczyć należną, jeszcze nieprzyznaną premię dawnego etapu. To istniejące przygotowanie postępu, nie skutek wyboru kursu lub nowej wersji lekcji. Nowe nazwane mapy używają kluczy `moduleId/mapId/lessonId`; pierwsza mapa Food zachowuje `moduleId/lessonId`.
+### Element sesji
 
-## Kursy bez migracji Food — etap 2
+| Pole | Znaczenie |
+| --- | --- |
+| `pairGroup` / `presentation: bank` | Element planszy par lub luki z bankiem; w kolejce błędów zapisywany bez oprawy |
+| `options` | Migawka 2–4 opcji słownictwa globalnego, by wznowienie miało ten sam zestaw |
+| `listen` | Zadanie może być pokazane jako słuchanie; decyduje urządzenie przy wyświetleniu (D-58) |
+| `sceneGroup` | Klucz pierwszej luki sceny; luki sceny stoją obok siebie, rozerwana grupa jest odrzucana (D-53) |
 
-`Course` wskazuje uporządkowane moduły, a każdy moduł należy do jednego kursu. Moduły różnych kursów muszą mieć różne identyfikatory. Klucz `moduleId@rewizja:typ:id` pozostaje bez zmian; nie dopisujemy kursu do historycznych kluczy. To zapewnia osobne wyniki również dla identycznych lokalnych identyfikatorów znaczeń w kilku kursach.
+Każda luka sceny ma własny wpis w `attempts` pod kluczem zwykłego zadania (`moduł@rewizja:exercise:<scena>--<luka>`); pozycję w scenie wyznacza `index` sesji. Poprawki zachowują `first` i pierwotną `answer` (D-64).
 
-Nie przenosimy istniejącego modułu do innego podręcznika: nowy podręcznik i istotnie zmienione wydanie wymagają nowego kursu oraz nowych identyfikatorów modułów. Kursy i znaczenia są wczytywane do pamięci aplikacji i cache materiałów PWA, a nie dopisywane do `Progress` ani payloadu Firestore. Odczyt Food nie wykonuje migracji. [Szczegóły zgodności](archiwum/wdrozenie-kursow.md).
+## Wyliczane, nie zapisywane
 
-## Globalny zakres i preferencja kursu — etap 3
+Te informacje powstają przy odczycie i **nie mają własnych pól**:
 
-- `Progress.encountered` jest opcjonalną, unikalną listą kluczy elementów po pierwszej próbie. Nie zawiera ocen ani listy zdarzeń; powtarzanie tego samego elementu nie powiększa jej. Stare próby są nadal odczytywane z historii. Przy zastąpieniu starej aktywnej sesji zachowujemy klucze jej prób, bez przepisywania ocen.
-- `Session.scope: { kind: "course", courseId }` oznacza globalną sesję; brak pola zachowuje dotychczasowe tryby. `moduleId` jest kotwicą zgodności kursu, a pytania nadal wskazują własne moduły i rewizje.
-- `Item.options` jest małą opcjonalną migawką 2–4 poznanych opcji dla słownictwa globalnego. Dzięki niej kopia i wznowienie zachowują ten sam zestaw odpowiedzi.
-- `history.courses` agreguje zarchiwizowane sesje globalne osobno od modułowych. Suma sesji kursowych i modułowych musi zgadzać się z liczbą archiwalnych sesji; pełna kopia sprawdza także wartości względem części historii. `history.items` nadal uwzględnia każdą ocenioną próbę raz.
-- `course-selection:guest` i `course-selection:account:<uid>` w IndexedDB zawierają wyłącznie lokalną preferencję kursu. Nie są częścią `Progress`, kopii ani synchronizacji.
+- ocena w kocich łapkach — z `items` i `attempts` (D-64),
+- kolor błędnej luki — z `attempts` (D-56),
+- obsada kocich rozmówców — z identyfikatora sesji i sceny (D-54),
+- rodzajniki w opcjach wyboru — dodawane do pytania, bez zmiany `options` (D-55),
+- poznany zakres — z prób ostatnich sesji, aktywnej sesji, podsumowania archiwum i `encountered` (`known-material.ts`),
+- widok postępów — tylko odczyt (D-57),
+- aktualna treść lekcji — `lessonForProgress` zawsze zwraca aktualną definicję (D-52),
+- odtwarzanie dźwięku — nie zmienia sesji, wyników ani historii.
 
-Kopia pozostaje w wersji 1 i odczytuje wcześniejsze pliki. Obsługa nowych pól wymaga aktualnej aplikacji. Nie zmieniono reguł Firebase ani nie przeliczono starych ocen. [Raport etapu 3](archiwum/wdrozenie-zakresow.md).
+## Niedostępna mapa
 
-## Wersje lekcji Food — etap 4
+Błąd odczytu mapy jest stanem interfejsu, poza `Progress` i kopią. Niepełny katalog wstrzymuje migrację dawnych błędów i premie etapowe do czasu odzyskania; zwykłe nagrody za lekcje działają. Aktywna sesja niedostępnej mapy czeka zapisana. Przygotowanie do pustego treningu niczego nie zalicza — [odporność map](odpornosc-map.md).
 
-Dotychczasowe wpisy ukończenia `{ at }` oraz sesje bez znacznika pozostają oryginalną wersją lekcji. Nowo rozpoczynana nieukończona lekcja korzysta z opcjonalnego `update`, jeśli jej definicja je zawiera. Taka sesja zapisuje `lesson.edition: 2`, a pierwsze ukończenie zachowuje ten znacznik w `adventure.completed[lessonKey]`. Sam wybór wydania nie dopisuje migracji ani nagród. Aktywna sesja nadal przechowuje konkretną listę pytań i miejsce odpowiedzi, a stare pytania pozostają dostępne dla jej wznowienia i powtórek. Nowe lekcje drugiej mapy bez `update` nie potrzebują znacznika wydania 2. Format kopii pozostaje w wersji 1; aktualna walidacja obsługuje oba warianty. Limity historii i synchronizacji bez zmian. [Pełna ochrona wyników](archiwum/wdrozenie-food.md#ochrona-wyników-i-nagród).
+## Pytania otwarte
 
-### Słuchanie — D-58
-
-- Element sesji może mieć opcjonalne `listen: true` — tylko zwykłe słówko, bez par, luk i scen. Znacznik mówi „to zadanie można pokazać jako słuchanie”; o tym, czy tak się stanie, decyduje urządzenie w chwili wyświetlenia. Ta sama sesja wznowiona na telefonie bez głosu ma zwykłą formę.
-- Wynik zapisuje się jak dla każdego zadania; w kolejce błędów element nie ma znacznika. Sesje i kopie bez pola działają bez zmian, kopia zostaje w wersji 1.
-- Przełącznik „Ćwiczenia ze słuchu” jest zapisany w `localStorage` urządzenia (`male-kroki:sluchanie`), poza postępami, kopią i synchronizacją. Gdy pamięć przeglądarki jest zablokowana, przełącznik działa do zamknięcia strony.
-- Słuchanie niczego nie zapisuje: odtworzenie nie zmienia sesji, wyników ani historii.
-
-### Sceny dialogowe — D-53
-
-- Element sesji może mieć opcjonalne `sceneGroup` — klucz pierwszej luki sceny. Luki jednej sceny stoją obok siebie; kopia z rozerwaną grupą jest odrzucana. Sesje i kopie bez tego pola działają bez zmian, format kopii zostaje w wersji 1.
-- Każda luka ma własny wpis w `attempts` pod kluczem zwykłego zadania (`moduł@rewizja:exercise:<scena>--<luka>`). Nie ma osobnego zapisu postępu sceny: pozycję wyznacza `index` sesji, dlatego odświeżenie i synchronizacja wracają do tej samej luki.
-- Podsumowanie sceny używa istniejącego znacznika `boardSummary`. Błędna luka trafia do `difficult` i `adventure.memory` jako zwykły element, bez `sceneGroup`.
-- Identyfikatory luk są kluczami postępów: po publikacji nie zmieniamy ich i nie usuwamy luk z pliku. Jeśli scena w materiałach przestanie pasować do zapisanej sesji, jej luki pokazują się jako zwykłe dialogi z jedną luką.
-- Urządzenie ze starszą wersją aplikacji, które dostanie z konta sesję ze sceną, pokaże bezpieczny ekran „Potrzebny jest moduł” do czasu aktualizacji; zapis zostaje.
-
-### Aktualna treść dla wszystkich — D-52
-
-Wybór treści lekcji nie czyta już ukończeń ani aktywnej sesji: `lessonForProgress` zawsze zwraca aktualną treść. Nie dodano żadnego pola. `adventure.completed[lessonKey]` pozostaje jedynym źródłem ukończenia, z opcjonalnym historycznym `edition: 2`; walidacja kopii nadal przyjmuje tylko brak pola lub `2`. Aktywna sesja przechowuje własne klucze zadań i jest wznawiana z nich, nie z definicji lekcji. `adventure.memory`, `stageReviews` i `sectionPlans` wskazują klucze elementów i identyfikatory lekcji, więc edycja listy zadań ich nie zmienia. Synchronizacja przesyła cały zapis postępów bez treści lekcji: urządzenie z nowszą treścią odczytuje te same ukończenia. Warunkiem wznowień jest pozostawienie opublikowanych elementów w plikach modułu z niezmienioną rewizją — [reguła edycji](format-materialow.md#aktualizacja-wydanej-lekcji). Kopia pozostaje w wersji 1, bez migracji.
-
-## Założenia docelowe przy rozwoju
-
-- Jeden kurs może być wspólny dla wielu kont, ale każde konto ma własne postępy; sesje i wyniki jednego konta nie zmieniają wyników innego — D-14 w [rejestrze](decyzje.md). W etapie 2 definicja kursu wskazuje globalnie unikalne moduły, a zapis nadal używa ich stabilnych identyfikatorów; nie kopiuje materiałów do danych konta.
-- Również na jednym koncie postępy tego samego elementu są oddzielne w każdym kursie. Poprawna odpowiedź w kursie A nie zalicza elementu w kursie B — D-15. Techniczne współdzielenie treści nie może znieść tej granicy.
-- Rozwój kursów i map musi zachować dotychczasowe wyniki, pierwsze próby i historię.
-- Przy planowanych poprawkach Food zachowujemy wszystkie zaliczone lekcje, także w sekcjach 5–7, i zdobyte gwiazdki. Pierwotnie zmiany obejmowały wyłącznie nieukończone lekcje (D-24); od D-52 aktualną treść widzą także ukończone, bez otwierania ich na nowo.
-- Materiał, mapa/lekcja, wykonana sesja i stan utrwalenia pozostają rozróżnialnymi pojęciami. Definicja lekcji nie jest tym samym co konkretne podejście użytkownika.
-- Poznanie elementu wynika z pierwszej próby odpowiedzi, także błędnej, w kontekście konta i kursu (D-25). Nie zależy od ukończenia lekcji i nie jest równoznaczne z utrwaleniem. Uwzględniamy wcześniejsze próby ze starszej historii, bez zmiany ocen, ukończeń i gwiazdek (D-26). Wspólny odczyt w `known-material.ts` korzysta z prób ostatnich sesji, aktywnej sesji, podsumowania archiwum oraz `Progress.encountered`. Trening i globalne zestawy korzystają z tych danych; nie trzeba pobierać pełnej dawnej historii do samego ustalenia poznanego zakresu.
-- Powiązanie błędu z miejscem jego wystąpienia nie usuwa informacji, z którego materiału pochodzi zadanie. Jest to ważne przy treningu wcześniejszych map.
-- Ewentualny nowy harmonogram treningów musi określić potrzebne dane i sposób ich przechowywania bez nieograniczonego powiększania głównego zapisu.
-- Nie zmieniamy identyfikatorów istniejących modułów, etapów, lekcji i elementów jedynie dla porządku nazewnictwa. Zmiana wymagająca migracji potrzebuje osobnego planu i testów zgodności.
-
-Nie przesądzamy, że wszystkie obecne pola zostaną zachowane bez rozszerzeń ani że przyszła wersja na pewno nie będzie wymagać migracji. **Sama reorganizacja dokumentacji nie zmienia formatu ani danych.**
-
-## Do ustalenia
-
-- Podstawowe rozdzielenie wyników kursów jest wdrożone przez przypisanie stabilnych modułów. Dalsze rozszerzenia, np. inne rodzaje współdzielonych jednostek materiału, należą do [U-01](decyzje.md#u-01). Osobne postępy kont (D-14) oraz osobne postępy w różnych kursach jednego konta (D-15) są już zatwierdzone.
-- Ochronę wyników, aktywnych sesji i kolejek błędów Food wdrożono w etapie 4 — [U-03](decyzje.md#u-03). Od D-52 treść lekcji można poprawiać wielokrotnie, pod warunkiem pozostawienia opublikowanych elementów w plikach modułu.
-- Poznanie i odczyt wcześniejszych prób są wdrożone zgodnie z D-25/D-26 — [U-04](decyzje.md#u-04). Dane przyszłego algorytmu treningu pozostają w [U-05](decyzje.md#u-05).
-- Czy potrzebne są oddzielne aktywne sesje, preferencje odpowiedzi albo synchronizacja wyboru kursu — [U-08](decyzje.md#u-08). Obecnie jest jedna sesja, wspólny wybór sposobu odpowiadania i lokalna preferencja kursu.
-- D-41 i D-42 rozstrzygają docelowo osobne domki i portfele gwiazdek dla każdego konta i kursu. Obecny pokój, zakupy, ustawienia i cały bilans gwiazdek przypisujemy do angielskiego, bez zmiany salda i bez podwójnego przypisania po imporcie lub synchronizacji. Inne kursy zaczynają z zerowym portfelem i bez zakupów. Wdrożone dla Food. [Wymaganie rozbudowy domku i zgodność starszych zapisów](koci-domek.md).
-
-## Stałe sesje i nagroda za ponowne ukończenie
-
-Nowa sesja ma opcjonalny znacznik `fixedLength: true`. Nagrodzona ukończona sesja lekcji zapisuje `lessonRewarded: true`, co zapobiega ponownemu naliczeniu nagrody za tę samą sesję po odświeżeniu, imporcie lub synchronizacji. Pełne powtórzenie to nowa sesja wszystkich zadań lekcji, z próbą przy każdym zadaniu; nie wymaga bezbłędnego wyniku. Pierwsze ukończenie nadal daje 3 gwiazdki, każde nowe pełne powtórzenie 1.
-
-Stare sesje bez znacznika stałej długości nie dostają wstecz premii za powtórzenie. Dotychczasowe ukończenia, pierwsze próby, kolejki błędów i saldo pozostają. Aktywnej starej sesji nie skracamy ani nie zmieniamy jej zapisanej listy. Nowa sesja powtórzenia może już zdobyć 1 gwiazdkę. Kopia pozostaje w wersji 1 i przyjmuje dawne pliki; nowe pola są opcjonalne, walidowane i przechodzą przez obecny zapis lokalny/chmurowy. Nie zmieniono reguł Firebase ani zasad kompakcji historii.
-
-## Osobne domki i portfele kursów — D-41/D-42
-
-Dotychczasowe `adventure.earned` i `adventure.purchases` zachowują dokładne wartości i reprezentują wyłącznie `angielski-hani`. To zgodny odczyt dawnego formatu, bez podwójnego kopiowania, zwrotu wydatków ani ponownego odliczania ceny. `adventure.courseHomes` jest opcjonalnym słownikiem portfeli i zakupów pozostałych kursów; nie może zawierać drugiego wpisu angielskiego. Nowy kurs ma zero gwiazdek i pusty salonik. Saldo na mapie i w domku oraz nagrody za lekcję, trening i etap odnoszą się do właściwego kursu.
-
-Każdy domek może mieć unikalne listy `rooms` i `unlockedItems`. Zakup ma opcjonalne `room`; brak oznacza salonik. Walidacja sprawdza osobno saldo każdego kursu i zajętość miejsc w każdym pokoju, a także istnienie pokoju wskazanego przy zakupie. Dane pozostają w obecnym dokumencie postępów i kopii wersji 1, z zachowaniem limitów historii. Reguły Firebase bez zmian. Przy imporcie starszego pliku brak nowych pól jest poprawny; ukończone mapy odtwarzają odblokowania. Szczegóły są w [dokumencie domku](koci-domek.md).
-
-
-## Miejsca i schowek domku — 12 listopada 2026
-
-D-43 rozszerza katalog do 14 identyfikatorów miejsc (11 dostępnych w saloniku, 14 w kuchni). Walidacja odczytuje wspólną listę z katalogu. Nie przenosi dawnych ustawień i zachowuje dotychczasowy kształt zakupu `{ cost, slot, room? }`: `slot: null` oznacza schowek, brak `room` — salonik. Warstwa rysowania wynika z katalogu, a „Moje rzeczy” jest widokiem zakupów, bez drugiego rejestru własności. Wybór zakładki sklepu/schowka to tylko stan interfejsu.
-
-Nowe ustawienia przechodzą przez tę samą transakcję `mutate`, walidację, IndexedDB, synchronizację i kopię wersji 1. Starsze kopie pozostają poprawne i nie zmieniają kosztów ani salda; odczyt nowego miejsca w starej wersji aplikacji nie jest obsługiwany — należy ją zaktualizować. Strukturalna walidacja nadal nie wymaga zgodności rodzaju mebla z miejscem; umożliwia to zachowanie starych aranżacji. Ograniczenia nowych miejsc i podpory stolika sprawdzane są podczas ustawiania. [Pełne zasady](koci-domek.md).
-
-
-## Współrzędne domku — D-44–D-45
-
-Zakup może mieć opcjonalne `position: { x, y }`, z całkowitymi współrzędnymi siatki 24 × 15. Przy współrzędnych `slot` jest `null`; samo `slot: null` bez `position` nadal oznacza schowek. Wielkość i orientacja wynikają z katalogu układu, a nie z zapisu użytkownika. Nie dodano rejestru własności ani nowego portfela. Brak `room` nadal oznacza salonik; nowe zakupy mają jeden pokój, a istniejące zachowują dotychczasowe przypisanie.
-
-Stare nazwane miejsca wyświetlamy przez funkcję odczytu bez migracji danych. Pierwszy ruch zapisuje współrzędne tylko przesuwanego przedmiotu. Walidator kontroluje całkowitość współrzędnych, zmieszczenie rozmiaru w pokoju, brak jednoczesnego starego miejsca oraz duplikaty pozycji tej samej warstwy. Nowe współrzędne podlegają transakcji zapisu, lokalnemu cache, synchronizacji i kopiom wersji 1. Wymagają aktualnej aplikacji; stary klient nie obsługuje edycji siatki. Nie zmieniono identyfikatorów ukończeń, nagród, kosztów zakupów ani archiwizacji historii.
-
-
-## Kocia rozgrzewka — zgodność D-46–D-47
-
-Nie zmieniono formatu kopii, kluczy map i lekcji ani zapisanych ukończeń. Rozgrzewki mapowe nadal mają `training.kind: map` i `lesson.id` istniejącego treningu; dodatkowe `training.kind: extra` i ten sam znacznik jednorazowego rozliczenia sesji. Stare aktywne sesje zachowują pytania, indeks, odpowiedzi i nagrody, a użytkownik widzi nową nazwę. Oryginalnych tytułów w historycznych sesjach nie przepisujemy.
-
-Kolejki `stageReviews`, statusy słówek i błędy nie są usuwane. Tematy ćwiczone osobno nadal aktualizują trzy zaliczenia i starą premię etapu, bez wyświetlania tego jako zaległości. Rozgrzewki mieszane korzystają ze wspólnej historii poznania i trudności; nie zmieniono ich w nowy algorytm odstępów. Zielone ukończenie mapy opisuje wymagane lekcje i nie oznacza wyczyszczenia danych utrwalania. Nie nadano gwiazdek ponownie za stare ukończenia ani nie dodano wymagań do pierwszej mapy Food.
+- [U-05](decyzje.md#u-05) — dane przyszłego algorytmu treningu.
+- [U-08](decyzje.md#u-08) — wiele aktywnych sesji, preferencje odpowiedzi per kurs, synchronizacja wyboru kursu.
+- [U-01](decyzje.md#u-01) — dalsze rodzaje współdzielonych jednostek materiału.
