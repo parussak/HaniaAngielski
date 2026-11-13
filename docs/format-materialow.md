@@ -157,15 +157,15 @@ Status: wdrożone (D-53). Scena jest wpisem w `rozmowki.json` z `kind: "dialogue
 
 Każda luka staje się zwykłym zadaniem o identyfikatorze `<id sceny>--<id luki>`, np. `scene-order--would`. Poza sceną — w powtórce błędów albo gdy do sesji trafiła tylko część luk — pokazuje się jako krótki dialog z jedną luką: kwestia z luką i kwestia sąsiednia, z pozostałymi lukami już uzupełnionymi.
 
-Lekcja bierze scenę, wymieniając **wszystkie jej luki** w `exerciseIds` (także wewnątrz `update`) — mapa nie ma osobnego pola scen. Kolejność na liście nie ma znaczenia: sesja układa luki według rozmowy i stawia scenę na końcu lekcji. Luki liczą się do limitu 10 zadań lekcji jak każde inne zadanie.
+Lekcja bierze scenę, wymieniając **wszystkie jej luki** w `exerciseIds` (także wewnątrz `update`) — mapa nie ma osobnego pola scen. Według D-54 historyjkę przygotowujemy jako całą lekcję: `wordIds` jest puste, a `exerciseIds` zawiera wyłącznie luki jednej sceny. Kolejność na liście nie ma znaczenia: sesja układa luki według rozmowy. Pełna scena z 2–6 lukami jest wyjątkiem od minimum sześciu zadań zwykłej lekcji; aplikacja nie dokłada do niej ćwiczeń uzupełniających. Starsze mieszane sesje zachowują zapisany zestaw i scenę na końcu, bez zmiany aktywnego postępu.
 
 ```json
-{"id": "restaurant-dialogue-1", "wordIds": [], "exerciseIds": ["food-else", "scene-order--would", "scene-order--vegetarian"], "ruleIds": ["ordering"]}
+{"id": "restaurant-dialogue-1", "wordIds": [], "exerciseIds": ["scene-order--would", "scene-order--vegetarian"], "ruleIds": ["ordering"]}
 ```
 
 Po publikacji sceny obowiązuje [reguła edycji treści](#aktualizacja-wydanej-lekcji): nie usuwamy sceny ani luki z pliku i nie zmieniamy identyfikatorów luk, bo są kluczami postępów. Wolno poprawić kwestie, odpowiedzi i wyjaśnienia oraz zdjąć scenę z listy lekcji. `npm run check:content` odrzuca scenę z niezgodną liczbą luk, brakiem opcji, wyjaśnienia lub `source`, powtórzonym identyfikatorem oraz lekcję, która wymienia tylko część luk sceny albo nieistniejącą lukę.
 
-Scena nie zależy od kursu: każdy moduł dowolnego kursu może mieć własne sceny w swoim `rozmowki.json`, bez zmian w kodzie.
+Scena nie zależy od kursu: każdy moduł dowolnego kursu może mieć własne sceny w swoim `rozmowki.json`, bez zmian w kodzie. Role z `dialogue[].speaker` otrzymują istniejące portrety kotków, różne dla różnych rozmówców i stałe w danej sesji. Nie trzeba dodawać obrazków ani identyfikatorów kotów do materiałów.
 
 ## Jawna wskazówka a/an dla słówka
 

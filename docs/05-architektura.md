@@ -1,5 +1,9 @@
 # Architektura — realizacja techniczna
 
+## Koci rozmówcy i samodzielne historyjki — D-54
+
+Aktualna treść czterech lekcji Food zawiera wyłącznie identyfikatory luk jednej sceny. `learning/lesson-variety.ts` nie dodaje zadań, gdy cały zestaw stanowi scenę; walidator map dopuszcza samodzielną pełną scenę krótszą niż sześć zadań, bez luzowania minimum zwykłych lekcji. `cats.ts:sceneCats` przypisuje różne kotki do ról na podstawie zapisanego ID sesji i ID sceny. `views/scene-actors.ts` łączy obsadę z obecnym rendererem obrazów; logika scen nie zna kotów ani Food. Portrety są renderowane w rozmowie i jej podsumowaniu. Osobne identyfikatory przycięcia SVG zapobiegają kolizjom z kotkami informacji zwrotnej.
+
 ## Zróżnicowanie lekcji i kontynuacja — D-50
 
 Fabryka `legendarySession` w `learning/lesson-flow.ts` kopiuje zakres ukończonej sesji i usuwa jej odpowiedzi oraz znaczniki rozliczenia. Dawne automatyczne powroty tego samego klucza usuwa wyłącznie z nowej powtórki. Dalsze urozmaicenie zmienia oprawę, bez ponownego dobierania zakresu. Oryginalny zapis pozostaje bez zmian.

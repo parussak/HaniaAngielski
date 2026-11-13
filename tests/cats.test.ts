@@ -1,12 +1,20 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {validateCats,responseCat,endingCat} from '../src/cats.ts';
+import {validateCats,responseCat,endingCat,sceneCats} from '../src/cats.ts';
 import {engineModules as modules} from './fixtures/engine.ts';
 import {emptyProgress,makeSession,backup,validateBackup} from '../src/core.ts';
 const raw=JSON.parse(readFileSync(new URL('../public/cats/catalog.json',import.meta.url),'utf8'));
 const catalog=validateCats(raw);
 const session=()=>makeSession(modules,modules[0],'flashcards','text',false,emptyProgress());
+
+test('rozmówcy mają różne koty i stałą obsadę po wznowieniu, nowa sesja może ją zmienić',()=>{
+ const scene={id:'dialogue',lines:[{speaker:'A',text:'Hello'},{speaker:'B',text:'Hi'},{speaker:'A',text:'Bye'}]},s=session();
+ const cast=sceneCats(catalog,s,scene),again=sceneCats(catalog,structuredClone(s),scene);
+ assert.equal(cast.size,2);assert.notEqual(cast.get('A')!.id,cast.get('B')!.id);assert.deepEqual([...again],[...cast]);
+ assert.equal(sceneCats(catalog,s,scene).get('A')!.id,cast.get('A')!.id);
+ const variants=new Set(Array.from({length:30},(_,i)=>[...sceneCats(catalog,{id:`session-${i}`},scene).values()].map(cat=>cat.id).join('/')));assert.ok(variants.size>1);
+});
 
 test('pięć zaakceptowanych kotków, 25 wersji i istniejące pliki ilustracji',()=>{
   assert.deepEqual(catalog.cats.map(c=>c.name),['Albert','Oluś','Felix','Maja','Krzywołap']);

@@ -97,21 +97,30 @@ test.describe('Food',()=>{
   const lesson=stage.locator('.lesson-step[data-id="restaurant-dialogue-1"]');await expect(lesson).toHaveClass(/lesson-done/);await expect(lesson.locator('.lesson-scene-badge')).toBeVisible();await expect(page.locator('.star-wallet')).toContainText('23');
   await page.setViewportSize({width:320,height:844});await noScroll(page);await stage.screenshot({path:'test-results/story-map-badges-mobile.png'});
   await lesson.click();await expect(page.locator('.lesson-scene-badge')).toBeVisible();await expect(page.locator('.lesson-begin')).toContainText('już ukończona');
+  await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).click();await expect(scene(page)).toHaveAttribute('data-position','1');await expect(page.locator('.study-heading .tag')).toHaveText('1 / 5');
+  for(let i=0;i<5;i++)await answerCurrent(page,real);
+  await page.getByRole('button',{name:/Dalej/}).click();await expect(page.locator('.lesson-reward')).toContainText('+1 ★');
+  const saved=await exported(page);expect(saved.adventure!.completed).toEqual(p.adventure!.completed);expect(saved.adventure!.earned).toBe(24);
  });
  async function openDialogueLesson(page:Page){
   await openMap(page);const stage=page.locator('.journey-stage').nth(4);if(await stage.getAttribute('open')===null)await stage.locator('summary').tap();
-  await stage.getByRole('button',{name:/Rozmowa przy stoliku(?! —)/}).first().tap();await expect(page.locator('#app')).toContainText('cała rozmowa przy stoliku');
-  await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await expect(page.locator('.study-heading .tag')).toHaveText(/^1 \/ ([7-9]|10)$/);
+  await stage.getByRole('button',{name:/Rozmowa przy stoliku(?! —)/}).first().tap();await expect(page.locator('#app')).toContainText('Uzupełniaj historyjkę krok po kroku');
+  await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await expect(page.locator('.study-heading .tag')).toHaveText('1 / 5');
  }
  async function untilScene(page:Page){for(let step=0;!await scene(page).count();step++){expect(step).toBeLessThan(6);await answerCurrent(page,real);await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');}}
  test('telefon: „Zamówienie w restauracji” zamyka lekcję Rozmowa przy stoliku i daje +3 ★',async({page})=>{
   await page.goto('./');await openDialogueLesson(page);await untilScene(page);
   await expect(page.locator('.exercise-label')).toContainText('ZAMÓWIENIE W RESTAURACJI');await expect(scene(page).locator('.dialogue-line')).toHaveCount(1);await expect(scene(page)).toContainText('What');
+  const actors=scene(page).locator('.scene-cast .cat-mascot');await expect(actors).toHaveCount(2);const cast=await actors.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.cat));expect(new Set(cast).size).toBe(2);
   await expect(page.locator('.question-illustration img')).toHaveAttribute('src',/scene-ordering\.svg$/);
   await page.locator('.option[data-answer="would"]').tap();await expect(scene(page)).toHaveAttribute('data-position','2');await expect(page.locator('.question-illustration')).toHaveCount(0);
-  await page.setViewportSize({width:320,height:640});await noScroll(page);await page.screenshot({path:'test-results/scene-food-320.png',fullPage:true});await page.setViewportSize({width:390,height:844});
+  expect(await actors.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.cat))).toEqual(cast);await page.reload();await resumeStudy(page);expect(await actors.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.cat))).toEqual(cast);
+  await page.setViewportSize({width:320,height:640});await noScroll(page);
+  for(const portrait of await actors.all()){const box=(await portrait.locator('svg').boundingBox())!,member=(await portrait.locator('..').boundingBox())!;expect(box.x+box.width).toBeLessThanOrEqual(member.x+member.width+1);}
+  await page.screenshot({path:'test-results/scene-food-320.png',fullPage:true});await page.setViewportSize({width:390,height:844});
   for(let gap=2;gap<=5;gap++){await expect(scene(page)).toHaveAttribute('data-position',String(gap));await answerCurrent(page,real);}
   await expect(page.locator('.scene-summary .dialogue-line')).toHaveCount(7);await expect(page.locator('.scene-summary')).toContainText('5 / 5');await expect(page.locator('.scene-summary')).toContainText('Enjoy your meal!');
+  expect(await page.locator('.scene-summary .scene-cast .cat-mascot').evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.cat))).toEqual(cast);
   await page.screenshot({path:'test-results/scene-food-summary-mobile.png',fullPage:true});
   // A long conversation scrolls inside the card: the last line and the last explanation can be reached.
   for(const part of ['.scene-summary .dialogue-line','.scene-summary li']){await page.locator(part).last().scrollIntoViewIfNeeded();await expect(page.locator(part).last()).toBeInViewport({ratio:0.9});}

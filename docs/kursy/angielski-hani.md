@@ -2,6 +2,8 @@
 
 ## Stan obecny
 
+D-54: cztery historyjki Food stanowią całe lekcje z kocimi rozmówcami. D-52 pozwala aktualizować również treść ukończonych lekcji bez odebrania ukończeń i gwiazdek; wcześniejsze ograniczenie do lekcji nieukończonych poniżej jest opisem etapu 4. [Bieżące reguły nauki](../03-nauka.md), [materiały Food](../materialy-food.md).
+
 W rejestrze jest kurs `angielski-hani` (`en` / `pl`) z modułem Food, `unit-2-food`. Identyfikacja całego podręcznika jest oznaczona jako nieustalona. Food zachowuje dotychczasowe pliki, pytania i klucze postępów. Materiały odwołują się do podręcznika s. 24–35, zeszytu ćwiczeń s. 14–21 i notatek. Metadana poziomu ma wartość A2; nie jest niezależną oceną trudności.
 
 Źródła: [metadane](../../public/content/02-food/modul.json), [opis opracowania Food](../materialy-food.md), [aktualny format materiałów](../format-materialow.md).

@@ -1,5 +1,13 @@
 # Testy — podział i zasady
 
+## D-54 — całe lekcje historyjek i koci rozmówcy
+
+Weryfikacja 13 listopada 2026: **254/254 testy Node** na zwykłej i rozszerzonej bibliotece, **115/115 scenariuszy Playwright** na gotowej aplikacji w Chrome, `npm run build` z kontrolą materiałów i 206 zasobami offline oraz `check-docs` przeszły. Obejrzano zrzuty rozmowy przy 320 px i podsumowania przy 390 px. Nie testowano na fizycznym telefonie; recenzja językowa scen nadal pozostaje otwarta.
+
+`food-scenes.test.ts` sprawdza, że każda z czterech lekcji ma dokładnie luki swojej sceny, również gdy znany materiał pozwalałby dołożyć ćwiczenia. `food-audit.test.ts` zachowuje sprawdzanie pokrycia wszystkich zadań niesłownikowych na mapach; przeniesienie „Anything else?” nie powoduje utraty materiału. `scenes.test.ts` dopuszcza krótszą pełną scenę na nowej mapie, ale odrzuca zbyt krótką zwykłą lekcję. `cats.test.ts` sprawdza dwóch różnych rozmówców, stałą obsadę po skopiowaniu sesji oraz różne obsady w nowych sesjach.
+
+`browser/scenes.spec.ts` obejmuje pięć scenariuszy: dotychczasowy przebieg mieszanej sesji i klawiaturę oraz Food jako całą historyjkę od pierwszego zadania, dwa różne portrety bez ucięcia przy 320 px, tę samą obsadę po odświeżeniu i w podsumowaniu, pierwszą nagrodę +3 ★, powtórkę ukończonej lekcji +1 ★ bez zmiany dawnego ukończenia, a także zamknięcie i wznowienie rozmowy offline. Kontrola PWA dopuszcza wiele kotków w rozmowie. Nie zmieniono formatu kopii ani kluczy postępów.
+
 ## D-53 — sceny dialogowe z lukami
 
 **Oznaczenia na mapie, 13 listopada 2026:** lekcje zawierające pełną scenę mają etykietę „Historyjka”, zwinięte etapy — ich liczbę. Scenariusz `mapa pokazuje historyjki także w ukończonej lekcji i zwiniętych etapach` sprawdza cztery etykiety Food, dwa liczniki, zachowane ukończenie oraz portfel, oznaczenie w widoku lekcji i brak przewijania poziomego przy 320 px. Przeszło 253/253 testy Node, budowanie i ten scenariusz na gotowej aplikacji w Chrome. Nie zmieniono treści, zapisu ani liczby lekcji.

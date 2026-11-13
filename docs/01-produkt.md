@@ -1,5 +1,7 @@
 # Produkt — dla kogo i po co
 
+**Historyjka to cała lekcja (D-54).** W czterech oznaczonych lekcjach Food od razu zaczyna się rozmowa z 4–5 lukami, bez fiszek i zadań wstępnych. Dwa różne kotki są portretami rozmówców, role pozostają podpisane, a wyróżnienie wskazuje aktualnie mówiącą postać. Ta sama obsada zostaje przez rozmowę, wznowienie i podsumowanie. Korzystamy z obecnych obrazków; nie wyświetlamy imion kotów zamiast ról w dialogu.
+
 Na mapie lekcje zawierające pełną scenę dialogową mają etykietę **💬 Historyjka**. Zwinięty etap pokazuje liczbę historyjek, a krótka legenda wyjaśnia oznaczenie. Etykieta pozostaje przy ukończonych lekcjach i w ich widoku przed rozpoczęciem; wynika z aktualnej treści, bez osobnej flagi do ręcznej edycji. Nie zmienia ukończeń, gwiazdek ani kolejności lekcji.
 
 ## Po lekcji i w lekcji — D-50

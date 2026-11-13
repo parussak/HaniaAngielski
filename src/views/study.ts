@@ -1,5 +1,6 @@
 import { AppState } from '../app/state.ts';
 import {pairsView,bankView,boardSummaryView,sceneScriptView,sceneSummaryView} from './lesson-activities.ts';
+import {sceneActor} from './scene-actors.ts';
 import {sceneView} from '../learning/scenes.ts';
 import {lessonSummaryActions} from './lesson-summary-actions.ts';
 import { catView } from './cat.ts';
@@ -43,13 +44,14 @@ export function studyView(state: Readonly<AppState>) {
     const input=inputFor(q,item.input,s.mode),hint=answerHint(q,input);
     const percent = Math.round(s.index / s.items.length * 100);
     const scene = sceneView(state.modules, s);
+    const actor=scene&&state.catCatalog?sceneActor(state.catCatalog,s,scene.scene):undefined;
     let card = '';
     card = `<div class="exercise-label">${icon(item.type === 'word' ? 'cards' : q.kind === 'grammar' ? 'book' : 'spark')} ${item.type === 'word' ? 'FISZKA · '+translationPrompt(state.modules.find(m=>m.id===item.moduleId)!).toLocaleUpperCase('pl') : q.kind === 'dialogue' ? 'POROZMAWIAJMY'+(scene?' · '+e(scene.scene.title.toLocaleUpperCase('pl')):'') : q.kind === 'grammar' ? 'MAŁY KROK W GRAMATYCE' : 'SŁÓWKO PO SŁÓWKU'}</div><h2 class="question">${e(q.prompt)}</h2>`;
     if (scene)
-        card += sceneScriptView(state.modules, scene);
+        card += sceneScriptView(state.modules, scene,false,actor);
     else if (q.dialogue&&item.presentation!=='bank')
         card += `<div class="dialogue" aria-label="Dialog do uzupełnienia">${q.dialogue.map((line, i) => `<div class="dialogue-line ${i % 2 ? 'dialogue-reply' : ''}"><span class="dialogue-speaker">${e(line.speaker)}</span><p>${line.text.split('___').map(e).join('<span class="dialogue-gap" aria-label="luka">'+e(s.draftAnswer??'…')+'</span>')}</p></div>`).join('')}</div>`;
-    if(s.boardSummary){card=scene?sceneSummaryView(state.modules,s,scene):boardSummaryView(state.modules,s);}
+    if(s.boardSummary){card=scene?sceneSummaryView(state.modules,s,scene,actor):boardSummaryView(state.modules,s);}
     else if (s.phase === 'feedback') {
         const ok = s.lastCorrect;
         const given=s.attempts.find(a=>a.key===item.key)?.lastAnswer;

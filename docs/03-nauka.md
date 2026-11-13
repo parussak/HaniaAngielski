@@ -1,5 +1,13 @@
 # Nauka — prowadzenie i utrwalanie
 
+## D-54 — historyjka jako cała lekcja i koci rozmówcy — wdrożone
+
+Wymagania zapisano przed zmianą kodu. Cztery obecne historyjki Food mają po 4–5 luk i zaczynają się od razu rozmową. Jedno samodzielne ćwiczenie „Anything else?” przeniesiono do istniejącej lekcji „Uprzejmie zamawiamy”, żeby nie stracić pokrycia materiału. Pozostałe wcześniejsze zadania są nadal w module i innych lekcjach; nie usunięto żadnego opublikowanego zadania ani jego rewizji. Powtórka zasad przed historyjką jest opcjonalna i zwinięta.
+
+Lekcja oznaczona jako historyjka w obecnym Food zawiera wyłącznie jedną pełną scenę: bez fiszek, ćwiczeń wstępnych i dobieranych powtórek. Zachowujemy identyfikatory czterech lekcji, scen i luk, ukończenia, gwiazdki oraz obie mapy. Rozpoczęte wcześniej sesje zachowują swój zapisany zestaw; czysta historyjka obowiązuje przy nowym rozpoczęciu lub restarcie. Samodzielna scena z 2–6 lukami może być krótsza niż standardowa lekcja; nie dodajemy innych zadań tylko do minimum.
+
+Rozmówcy są przedstawiani przez istniejące kotki. Dwie różne postacie otrzymują dwa różne koty. Przydział jest losowy dla sesji, ale stały przez całą rozmowę, jej podsumowanie, odświeżenie i wznowienie; role autora (np. kelner i gość) pozostają widoczne. Nowa sesja może dobrać inną obsadę. Nie dodajemy nowych dużych plików graficznych ani pól wyników tylko do dekoracji. Brak katalogu kotów nie blokuje nauki.
+
 ## D-53 — sceny dialogowe z lukami — wdrożone
 
 Cel: dialogi i historyjki, w których odpowiada się kilka razy w jednej rozmowie, bez pośpiechu. Mechanika jest wspólna dla wszystkich kursów i modułów; treść scen jest wyłącznie w plikach materiałów.

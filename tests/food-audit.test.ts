@@ -55,7 +55,8 @@ test('D-52: ukończona lekcja konta A zostaje ukończona i ma tę samą aktualn�
  assert.equal(getNextStep(modules,[j,second],b).kind,'lesson');
  journeyForProgress(j,a);validateBackup(backup(a));assert.deepEqual(a,original);
  for(const {lesson} of lessons(journeyForProgress(j,b)).filter(e=>j.stages.some(s=>['restaurant','reasons','picnic'].includes(s.id)&&s.lessons.some(l=>l.id===e.lesson.id)))){
-  assert.ok(lesson.wordIds.length+lesson.exerciseIds.length>=6);assert.ok(lesson.wordIds.length+lesson.exerciseIds.length<=8);
+  const story=m.scenes?.find(s=>lesson.wordIds.length===0&&s.gapIds.length===lesson.exerciseIds.length&&s.gapIds.every(id=>lesson.exerciseIds.includes(id)));
+  assert.ok(story||lesson.wordIds.length+lesson.exerciseIds.length>=6);assert.ok(lesson.wordIds.length+lesson.exerciseIds.length<=8);
  }
 });
 

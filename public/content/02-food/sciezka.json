@@ -484,7 +484,8 @@
               "g-order-like",
               "g-order-else",
               "g-order-drink",
-              "food-thanks"
+              "food-thanks",
+              "food-else"
             ],
             "ruleIds": [
               "ordering"
@@ -509,11 +510,9 @@
           "update": {
             "edition": 2,
             "title": "Rozmowa przy stoliku",
-            "intro": "Najpierw dwa krótkie zdania, potem cała rozmowa przy stoliku. Uzupełniaj ją krok po kroku.",
+            "intro": "Cała lekcja to rozmowa przy stoliku. Uzupełniaj historyjkę krok po kroku.",
             "wordIds": [],
             "exerciseIds": [
-              "food-can-pizza",
-              "food-else",
               "food-scene-order--would",
               "food-scene-order--can",
               "food-scene-order--drink",
@@ -521,8 +520,7 @@
               "food-scene-order--else"
             ],
             "ruleIds": [
-              "ordering",
-              "some-any"
+              "ordering"
             ]
           }
         },
@@ -543,13 +541,9 @@
           "update": {
             "edition": 2,
             "title": "Rozmowa przy stoliku — dalszy krok",
-            "intro": "Najpierw kilka krótkich zdań, potem rozmowa o napoju i frytkach. Uzupełniaj ją krok po kroku.",
+            "intro": "Cała lekcja to rozmowa o napoju i frytkach. Uzupełniaj historyjkę krok po kroku.",
             "wordIds": [],
             "exerciseIds": [
-              "d-no-milk",
-              "food-like-milkshake",
-              "food-would-drink",
-              "food-have-lemonade",
               "food-scene-drinks--like",
               "food-scene-drinks--milkshake",
               "food-scene-drinks--some",
@@ -885,12 +879,9 @@
           "update": {
             "edition": 2,
             "title": "Misja: sprawdzamy zapasy",
-            "intro": "Sprawdź, co mamy, czego brakuje i ile rzeczy zabierzemy na piknik.",
+            "intro": "Cała lekcja to rozmowa o zapasach na piknik. Uzupełniaj historyjkę krok po kroku.",
             "wordIds": [],
             "exerciseIds": [
-              "d-yes-milk",
-              "d-two-bottles",
-              "g-how-cartons",
               "food-scene-shopping--any",
               "food-scene-shopping--isnt",
               "food-scene-shopping--many",
@@ -927,24 +918,19 @@
           "update": {
             "edition": 2,
             "title": "Misja: zapraszamy kotki na piknik",
-            "intro": "Zakończ przygotowania do pikniku. Użyj poznanych zasad i zwrotów. Na kolejnej mapie czeka używanie Food w krótkich tekstach o posiłkach.",
+            "intro": "Cała lekcja to rozmowa podczas przygotowań do pikniku. Uzupełniaj historyjkę krok po kroku.",
             "wordIds": [],
             "exerciseIds": [
-              "g-container-plural",
-              "g-lot-apples",
-              "g-because-sport",
-              "g-there-bottles",
               "food-scene-picnic--have",
               "food-scene-picnic--any",
               "food-scene-picnic--are",
               "food-scene-picnic--packet"
             ],
             "ruleIds": [
-              "some-any",
-              "containers",
-              "a-lot-of",
               "ordering",
-              "so-because"
+              "some-any",
+              "there",
+              "containers"
             ]
           }
         }

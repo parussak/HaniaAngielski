@@ -3,7 +3,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {foodModules as modules} from './materials.ts';
-import {emptyProgress,questionFor,isCorrect} from '../src/core.ts';
+import {emptyProgress,questionFor,isCorrect,keyFor} from '../src/core.ts';
 import {freshAdventure,lessons,lessonForProgress,makeLessonSession,nextLesson,validateJourney,type Journey} from '../src/adventure.ts';
 import {varyLesson} from '../src/learning/lesson-variety.ts';
 import {sceneView} from '../src/learning/scenes.ts';
@@ -53,11 +53,12 @@ test('sceny są w czterech istniejących lekcjach; mapy mają te same lekcje, a 
  }
 });
 
-test('lekcja Food ze sceną: scena zamyka sesję, w kolejności rozmowy, i nie przekracza 10 zadań',()=>{
+test('historyjka Food jest całą lekcją, także przy dostępnym poznanym materiale do powtórek',()=>{
  for(const [lessonId,sceneId] of Object.entries(placed)){
   const lesson=lessons(j).find(e=>e.lesson.id===lessonId)!.lesson,p=emptyProgress(),scene=scenes.find(s=>s.id===sceneId)!;
+  p.encountered=m.words.map(w=>keyFor(m,'word',w.id));
   const s=varyLesson(makeLessonSession(modules,j,lesson,'mixed',p),modules,[j,second],j,lesson,p);
-  assert.ok(s.items.length<=10,lessonId);assert.deepEqual(s.items.slice(-scene.gapIds.length).map(i=>i.id),scene.gapIds);
+  assert.equal(s.items.length,scene.gapIds.length,lessonId);assert.deepEqual(s.items.map(i=>i.id),scene.gapIds);
   s.index=s.items.length-scene.gapIds.length;assert.equal(sceneView(modules,s)!.scene.id,sceneId);
   for(const item of s.items.slice(s.index))assert.equal(item.input,questionFor(modules,item).scene!.input==='bank'?'choice':'text');
  }

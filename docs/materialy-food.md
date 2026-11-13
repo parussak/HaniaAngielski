@@ -1,5 +1,7 @@
 # Moduł 2 — Food / Fun with food
 
+**D-54, stan obecny:** cztery sceny z D-53 są całymi lekcjami po 4–5 luk, z kocimi rozmówcami. Nie zmieniono ich tekstu ani odpowiedzi. Zadanie „Anything else?” przeniesiono do lekcji „Uprzejmie zamawiamy”, aby nadal występowało na mapie. Nie usunięto zadań z modułu; ukończenia i gwiazdki pozostają. [Sceny do recenzji](recenzja-scen-food.md), [aktualne zasady nauki](03-nauka.md). Poniższe liczby opisują wcześniejsze etapy opracowania.
+
 Źródło: archiwum `Photos-1-001.zip` udostępnione przez użytkownika, 27 zdjęć. Nie ustalono tytułu ani wydania podręcznika — nie dopisano ich na podstawie domysłów.
 
 Aktualny zakres po etapie 4: 97 haseł, 97 pytań słownikowych, 92 ćwiczenia, 12 dialogów, 10 objaśnień i dwie mapy. [Audyt, uzupełnienia i ochrona wyników](wdrozenie-food.md). Poniższa lista opisuje pierwotną ekstrakcję; nowe zadania są dopisane, nie podmieniają tych materiałów.

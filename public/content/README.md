@@ -6,6 +6,8 @@ Nowy dział zacznij od [krótkiej instrukcji dodawania modułu](../../docs/dodaw
 
 ## Gdzie co jest?
 
+**Historyjka to cała lekcja (D-54):** puste `wordIds` i wszystkie luki jednej sceny w `exerciseIds`, bez innych zadań. Może mieć 2–6 luk. Koci rozmówcy dobierają się automatycznie, bez nowych plików graficznych w module. [Format scen](../../docs/format-materialow.md#scena-dialogowa-z-kilkoma-lukami).
+
 Opcjonalny układ sekcji **7 lekcji bazowych + 2 dynamiczne powtórki** włącza pole `adaptiveReviews: true` na sekcji z dokładnie siedmioma lekcjami. Nie dopisuj przystanków ręcznie do listy. W Food pole ma „Ilości i opakowania”; rozpoczęte sekcje zachowują dotychczasowy zakres. [Kontrakt i zasady ochrony zapisów](../../docs/format-materialow.md).
 
 ```text

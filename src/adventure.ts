@@ -45,7 +45,8 @@ export function validateJourney(value:unknown,m:Module):Journey {
       // D-53: a lesson takes a dialogue scene whole — all of its gaps or none.
       for(const scene of m.scenes??[]){const listed=scene.gapIds.filter(id=>l.exerciseIds.includes(id)).length;if(listed&&listed!==scene.gapIds.length)return fail();}
       if(l.role!==undefined&&l.role!=='training'||l.targetCount!==undefined&&(!Number.isInteger(l.targetCount)||l.targetCount<6||l.targetCount>10)||l.role==='training'&&(l.wordIds.length+l.exerciseIds.length+l.ruleIds.length>0))return fail();
-      if(j.id&&l.role!=='training'&&l.wordIds.length+l.exerciseIds.length<6)return fail();
+      const wholeStory=l.wordIds.length===0&&m.scenes?.some(scene=>scene.gapIds.length===l.exerciseIds.length&&scene.gapIds.every(id=>l.exerciseIds.includes(id)));
+      if(j.id&&l.role!=='training'&&!wholeStory&&l.wordIds.length+l.exerciseIds.length<6)return fail();
       ids.add(l.id);
       if(new Set([...l.wordIds,...l.exerciseIds]).size!==l.wordIds.length+l.exerciseIds.length || !l.wordIds.every(id=>m.words.some(w=>w.id===id))||!l.exerciseIds.every(id=>m.exercises.some(q=>q.id===id&&q.requires.every(id=>id===m.id)))||!l.ruleIds.every(id=>m.grammar.some(r=>r.id===id)))return fail();
       if(l.edition!==undefined&&l.edition!==2)return fail();

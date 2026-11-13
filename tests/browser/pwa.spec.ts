@@ -32,8 +32,8 @@ test('PWA: manifest, ikony i zimny start bez sieci; fiszki, quiz, gramatyka i wz
   }
   const last=await offline.locator('.question').innerText();await offline.reload();await resumeStudy(offline);
   await expect(offline.locator('.question')).toHaveText(last);await expect(offline.locator('.feedback')).toBeVisible();
-  await expect(offline.locator('.cat-mascot')).toBeVisible();
-  await expect(offline.locator('.cat-mascot image')).toHaveAttribute('href',/\/cats\/(happy-teachers|play-celebrate)\.png$/);
+  await expect(offline.locator('.cat-mascot').first()).toBeVisible();
+  await expect(offline.locator('.cat-mascot image').first()).toHaveAttribute('href',/\/cats\/(happy-teachers|play-celebrate)\.png$/);
   expect(await offline.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
   await offline.screenshot({path:'test-results/pwa-offline-mobile.png'});
   await offline.getByRole('button',{name:'Moja nauka',exact:true}).tap();

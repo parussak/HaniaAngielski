@@ -10,6 +10,8 @@ export function varyLesson(s:Session,modules:Module[],journeys:Journey[],j:Journ
  // D-53: complete scenes keep their script order and authored answers; the rest is varied.
  groupScenes(modules,s,'end');
  const scenes=s.items.filter(i=>i.sceneGroup),items=s.items.filter(i=>!i.sceneGroup);
+ // A story-only lesson stays a whole story, even when earlier practice is available.
+ if(scenes.length>0&&items.length===0){s.answerMode='mixed';return s;}
  if(!s.training&&supplement){
   const vocabulary=(i:Item)=>questionFor(modules,i).kind==='vocabulary';
   const needsVocabulary=!items.some(vocabulary),needsGrammar=items.every(vocabulary);

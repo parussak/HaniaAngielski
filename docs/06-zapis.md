@@ -1,5 +1,7 @@
 # Zapis — co, gdzie i z jaką zgodnością
 
+**D-54:** koci rozmówcy nie dodają nowych pól do wyników ani kopii — obsada wynika z istniejącego identyfikatora sesji i sceny. Zmiana czterech lekcji Food na same historyjki dotyczy nowych sesji. Rozpoczęte sesje mają swoje zapisane zadania i są wznawiane bez skracania, zaś ukończenia i nagrody pozostają zgodne z D-52.
+
 Status: obecne rozwiązanie oraz granice przyszłych zmian. Dokument nie wprowadza migracji.
 
 ## Stan obecny

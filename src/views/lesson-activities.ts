@@ -4,6 +4,7 @@ import type {sceneView} from '../learning/scenes.ts';
 import {e} from '../ui.ts';
 import {vocabularyFullAnswer} from '../learning/vocabulary-answer.ts';
 import {boardItems,gapTokens,solved,settled} from '../learning/boards.ts';
+import type {SceneActor} from './scene-actors.ts';
 type ErrorFlash={key:string;answer:string;keys?:string[]}|undefined;
 export function pairsView(modules:Module[],s:Session,error?:ErrorFlash){
  const group=boardItems(s).slice().sort((a,b)=>a.key<b.key?-1:1),selected=s.pairSelection??s.items[s.index].key;
@@ -16,21 +17,23 @@ export function bankView(modules:Module[],s:Session,error?:ErrorFlash){
 }
 type SceneOnScreen=NonNullable<ReturnType<typeof sceneView>>;
 /** D-53: the conversation so far. Earlier lines stay, later lines wait for their gap. */
-export function sceneScriptView(modules:Module[],{scene,items,position}:SceneOnScreen,whole=false){
- let gap=0;const lines:string[]=[];
+export function sceneScriptView(modules:Module[],{scene,items,position}:SceneOnScreen,whole=false,actor?:SceneActor){
+ let gap=0,activeSpeaker='';const lines:string[]=[],speakers=[...new Set(scene.lines.map(line=>line.speaker))];
  for(const [index,line] of scene.lines.entries()){
   const first=gap,parts=line.text.split('___');
   const text=parts.map(e).reduce((html,part)=>{const g=gap++;return html+(whole||g<position?`<b class="scene-filled">${e(questionFor(modules,items[g]).answers[0])}</b>`:`<span class="dialogue-gap ${g===position?'scene-current':''}" ${g===position?'aria-label="luka do uzupełnienia"':'aria-hidden="true"'}>…</span>`)+part;});
   const now=!whole&&parts.length>1&&first<=position&&position<gap;
-  lines.push(`<div class="dialogue-line ${index%2?'dialogue-reply':''} ${now?'scene-now':''}"><span class="dialogue-speaker">${e(line.speaker)}</span><p>${text}</p></div>`);
+  if(now)activeSpeaker=line.speaker;
+  lines.push(`<div class="dialogue-line ${speakers.indexOf(line.speaker)%2?'dialogue-reply':''} ${now?'scene-now':''}"><span class="dialogue-speaker">${e(line.speaker)}</span><p>${text}</p></div>`);
   // Lines after the current gap wait for their turn.
   if(!whole&&gap>position)break;
  }
- return `<div class="scene" data-key="${e(items[position].key)}" data-position="${position+1}" role="group" aria-label="Rozmowa: ${e(scene.title)}">${lines.join('')}</div>`;
+ const cast=actor?`<div class="scene-cast" aria-label="Rozmówcy">${speakers.map((speaker,index)=>`<div class="scene-cast-member ${speaker===activeSpeaker?'is-speaking':''}" data-speaker="${e(speaker)}">${actor(speaker,index,whole)}<span>${e(speaker)}</span></div>`).join('')}</div>`:'';
+ return `<div class="scene" data-key="${e(items[position].key)}" data-position="${position+1}" role="group" aria-label="Rozmowa: ${e(scene.title)}">${cast}${lines.join('')}</div>`;
 }
-export function sceneSummaryView(modules:Module[],s:Session,view:SceneOnScreen){
+export function sceneSummaryView(modules:Module[],s:Session,view:SceneOnScreen,actor?:SceneActor){
  const first=view.items.filter(i=>s.attempts.find(a=>a.key===i.key)?.first).length;
- return `<div class="feedback correct board-summary scene-summary" role="status"><h2>Rozmowa ukończona!</h2><p>${first} / ${view.items.length} poprawnie za pierwszym razem. Przeczytaj całą rozmowę jeszcze raz.</p>${sceneScriptView(modules,view,true)}<ul>${view.items.map(i=>{const q=questionFor(modules,i);return `<li><strong>${e(q.answers[0])}</strong> — ${e(q.explanation)}</li>`;}).join('')}</ul></div><button class="primary" data-action="next">Dalej →</button>`;
+ return `<div class="feedback correct board-summary scene-summary" role="status"><h2>Rozmowa ukończona!</h2><p>${first} / ${view.items.length} poprawnie za pierwszym razem. Przeczytaj całą rozmowę jeszcze raz.</p>${sceneScriptView(modules,view,true,actor)}<ul>${view.items.map(i=>{const q=questionFor(modules,i);return `<li><strong>${e(q.answers[0])}</strong> — ${e(q.explanation)}</li>`;}).join('')}</ul></div><button class="primary" data-action="next">Dalej →</button>`;
 }
 export function boardSummaryView(modules:Module[],s:Session){
  const group=boardItems(s),first=group.filter(i=>s.attempts.find(a=>a.key===i.key)?.first).length;

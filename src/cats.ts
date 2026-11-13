@@ -1,4 +1,4 @@
-import type { Session } from './core.ts';
+import type { Session,Scene } from './core.ts';
 
 export type CatMood='teacher'|'happy'|'celebrating'|'funny';
 export interface CatFrame { sheet:string; x:number; y:number; width:number; height:number; clip?:number[][] }
@@ -33,6 +33,11 @@ export async function loadCats():Promise<CatCatalog|null> {
 function hash(value:string){let seed=2166136261;for(const char of value)seed=Math.imul(seed^char.charCodeAt(0),16777619)>>>0;return seed;}
 function order(catalog:CatCatalog,sessionId:string){
   return [...catalog.cats].sort((a,b)=>hash(`${sessionId}:${a.id}`)-hash(`${sessionId}:${b.id}`)||a.id.localeCompare(b.id));
+}
+/** Stable casting from the saved session id: no new progress or image assets. */
+export function sceneCats(catalog:CatCatalog,session:Pick<Session,'id'>,scene:Pick<Scene,'id'|'lines'>){
+ const cats=order(catalog,`${session.id}:dialogue:${scene.id}`),speakers=[...new Set(scene.lines.map(line=>line.speaker))];
+ return new Map(speakers.map((speaker,index)=>[speaker,cats[index%cats.length]]));
 }
 export function responseCat(catalog:CatCatalog,session:Session):CatReaction {
   // Losowa kolejność na sesję, bez sąsiednich powtórek. Powrót do tego samego

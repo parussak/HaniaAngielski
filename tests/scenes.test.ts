@@ -73,6 +73,9 @@ test('mapa: lekcja wymienia luki sceny w exerciseIds — całą scenę albo wcal
  // The current content of an updated lesson (D-52) can carry a scene too.
  const updated=validateJourney((()=>{const raw:any=sceneJourney();const l=raw.stages[0].lessons[1];l.update={edition:2,title:l.title,intro:'',wordIds:['word-4','word-5'],exerciseIds:sceneGapIds(m,['shop']),ruleIds:[]};return raw;})(),m);
  assert.deepEqual(updated.stages[0].lessons[1].update!.exerciseIds,['shop--one','shop--two','shop--three','shop--four']);
+ // A standalone story can be shorter than six tasks, including on a named map.
+ const standalone:any=sceneJourney();standalone.id='story-map';standalone.stages[0].lessons=[{...standalone.stages[0].lessons[1],wordIds:[],exerciseIds:gapIds}];assert.doesNotThrow(()=>validateJourney(standalone,m));
+ const tooShort=structuredClone(standalone);tooShort.stages[0].lessons[0].exerciseIds=['single-talk'];assert.throws(()=>validateJourney(tooShort,m));
 });
 
 test('sesja: luki sceny są razem, w kolejności rozmowy, na końcu lekcji i ze sposobem odpowiedzi z danych',()=>{

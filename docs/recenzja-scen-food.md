@@ -1,5 +1,7 @@
 # Sceny Food — do recenzji językowej
 
+**D-54, 13 listopada 2026:** każda z tych scen stanowi teraz całą lekcję (4–5 luk), z portretami kocich rozmówców. Nie zmieniono tekstu rozmów ani odpowiedzi; poniższa recenzja językowa pozostaje potrzebna.
+
 Status: **czeka na recenzję Pauliny.** Cztery sceny dodane w D-53 są adaptacjami, nie cytatami z podręcznika. Treść jest w `public/content/02-food/rozmowki.json` (wpisy `food-scene-…`); [format](format-materialow.md#scena-dialogowa-z-kilkoma-lukami), [wymagania](03-nauka.md).
 
 Strony w polu `source` przepisano ze źródeł istniejących rozmówek i słówek modułu. **Nie porównano ich z papierowym podręcznikiem** — to jest do sprawdzenia w recenzji. Automatyczny test potwierdza tylko, że każde słowo scen występuje już w słownictwie, przykładach gramatyki lub wcześniejszych zadaniach modułu.
