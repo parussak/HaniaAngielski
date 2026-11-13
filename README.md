@@ -2,7 +2,7 @@
 
 Podsumowanie ocenianej sesji pokazuje **do 3 kocich łapek**, także połówki, za pierwsze odpowiedzi. Łapki są osobną oceną; gwiazdki do domku pozostają bez zmian. Luki wymagają uzupełnienia przed przejściem dalej, a błędy można dobrowolnie poprawiać. [Zasady](docs/03-nauka.md).
 
-Nagrania Food można przygotować lokalnie poleceniem `npm run audio` — Cori, Opus mono 24 kb/s. Generator aktualizuje potrzebne pliki, a `npm run audio:check` sprawdza ich spójność. **Aplikacja odtwarza nagrania także offline po przygotowaniu PWA.** Odsłuch i „Wolniej” są również przy sprawdzonej odpowiedzi klasycznych fiszek i quizu. Domyślne tempo: A dla słówek (88%), B dla dialogów (75%); „Wolniej” pozostaje dodatkową pomocą. Bez odpowiedniego pliku korzysta z syntezy urządzenia lub zwykłej formy zadania. [Instrukcja](audio/README.md), [wymagania](docs/generowanie-audio.md).
+Nagrania Food można przygotować lokalnie poleceniem `npm run audio` — Cori, Opus mono 24 kb/s. Generator aktualizuje potrzebne pliki, a `npm run audio:check` sprawdza ich spójność. **Aplikacja odtwarza nagrania także offline po przygotowaniu PWA.** Odsłuch i „Wolniej” są również przy sprawdzonej odpowiedzi klasycznych fiszek i quizu. Domyślne tempo do próby na telefonie: słówka 95%, dialogi 90%; „Wolniej” pozostaje dodatkową pomocą. Bez odpowiedniego pliku korzysta z syntezy urządzenia lub zwykłej formy zadania. [Instrukcja](audio/README.md), [wymagania](docs/generowanie-audio.md).
 
 „Postępy” pokazują osobno ukończone mapy i lekcje, tydzień nauki oraz małe sukcesy w wybranym kursie. Zdobyte gwiazdki pozostają widoczne po zakupach; dokładne wyniki i historia są w rozwijanych szczegółach. Widok korzysta z dotychczasowych zapisów, bez nowego algorytmu opanowania — [zasady liczenia](docs/03-nauka.md).
 

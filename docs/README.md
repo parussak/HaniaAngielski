@@ -4,7 +4,7 @@
 
 **D-63 — odsłuch klasycznych fiszek i quizu:** po sprawdzeniu odpowiedzi, także w poznanym materiale kursu; te same tempa i PWA offline. [Reguły](03-nauka.md), [testy](07-testy.md).
 
-**D-62 — domyślne tempo:** A dla słówek (0,88×), B dla dialogów (0,75×); „Wolniej” dodatkowo zwalnia o 30%, także offline. [Reguły](03-nauka.md), [realizacja](05-architektura.md).
+**D-65 — próbne tempo:** słówka 0,95×, dialogi 0,90×; „Wolniej” dodatkowo zwalnia o 30%, także offline. [Reguły](03-nauka.md), [realizacja](05-architektura.md).
 
 **D-60 — nagrania w aplikacji i PWA offline:** [zasady odtwarzania](03-nauka.md), [architektura](05-architektura.md), [testy](07-testy.md). Pierwszeństwo ma gotowy klip, następnie synteza urządzenia, na końcu zwykłe zadanie. Bez zmiany wyników i gwiazdek.
 

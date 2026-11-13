@@ -16,7 +16,7 @@ Wyniki są w [generated/manifest.json](generated/manifest.json) i katalogu `gene
 
 ## Tempo odtwarzania
 
-Od D-62 aplikacja odtwarza słówka w tempie A (0,88×), dialogi w tempie B (0,75×), a „Wolniej” zwalnia je jeszcze o 30%. Ustawienia są w `src/speech/tempo.ts`; generator pozostawia klipy bazowe, aby nie stosować zwolnienia dwukrotnie. Nie trzeba generować osobnej wolnej wersji ani ponownie uruchamiać generatora przy zmianie samego tempa odtwarzacza.
+Od D-65 aplikacja próbnie odtwarza słówka w tempie 0,95×, dialogi w tempie 0,90×, a „Wolniej” zwalnia je jeszcze o 30%. Ustawienia są w `src/speech/tempo.ts`; generator pozostawia klipy bazowe, aby nie stosować zwolnienia dwukrotnie. Nie trzeba generować osobnej wolnej wersji ani ponownie uruchamiać generatora przy zmianie samego tempa odtwarzacza.
 
 ## Wymagane narzędzia na komputerze przygotowującym dźwięk
 

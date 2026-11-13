@@ -1,5 +1,9 @@
 # Testy — podział i zasady
 
+## D-65 — próbne tempo 95% / 90%
+
+Weryfikacja 13 listopada 2026: **305/305 testów Node** i **20/20 celowanych scenariuszy Chrome** na gotowej aplikacji (nagrania, synteza zapasowa, fiszki i quizy modułu/kursu, historyjki, ustawienia i zimny start PWA offline). Testy potwierdzają domyślne 0,95/0,90, dodatkowe „Wolniej” 0,665/0,63, zachowanie wysokości głosu nagrań, kopii wyników, zakupów i nagród. Budowanie z TypeScript, kontrolą treści i **318 plikami offline**, kontrola dokumentacji i różnic przeszły. Nie regenerowano nagrań ani nie zmieniano danych postępów. Pełnego zestawu przeglądarkowego nie ponawiano; ocena tempa i jakości na telefonie Hani pozostaje do wykonania.
+
 ## D-64 — wymagane próby, poprawki i łapki
 
 Weryfikacja 13 listopada 2026: **305/305 testów Node**, również z rozszerzoną biblioteką. Pełny przebieg Chrome: **144/144 scenariusze** na zbudowanej aplikacji, w tym konto, portfele kursów, zakupy, sceny, nagrania i PWA offline. Po końcowej ochronie ponownej próby w dawnej sesji z powtórzonym kluczem ponowiono **17/17 scenariuszy** plansz, historyjek, fiszek podstawowych i kontraktów UI. Końcowe budowanie z TypeScript, walidacją materiałów i **318 zasobami offline**, kontrola dokumentacji i różnic przeszły. Obejrzano podsumowania 2 i 2,5 łapki na 320 px. Nie testowano na fizycznym telefonie ani prawdziwym koncie Firebase; synchronizacja w testach korzysta z adaptera.

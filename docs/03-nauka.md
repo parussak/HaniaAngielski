@@ -1,5 +1,9 @@
 # Nauka — prowadzenie i utrwalanie
 
+## D-65 — próbne tempo na telefonie
+
+**Wdrożone do sprawdzenia:** słówka 95%, dialogi 90%. „Wolniej” nadal zwalnia o dodatkowe 30%, odpowiednio do 66,5% i 63%. Nowe wartości zastępują wybrane wcześniej 88%/75%. Mechanizm, jakość 24 kb/s, treść nagrań, działanie offline i zapis wyników pozostają bez zmian. Subiektywne tempo i słabsze wypowiedzi oceni Paulina na telefonie Hani; na tym etapie nie regenerujemy plików.
+
 ## D-64 — próba w każdej luce, poprawki i kocie łapki
 
 **Wdrożone:** „Dalej” na planszy z bankiem lub przeciąganiem jest dostępne dopiero po wypełnieniu wszystkich luk. Odłożenie błędnego słowa do banku ponownie blokuje przejście, dopóki pole nie zostanie uzupełnione. W parach każdy element wymaga próby dopasowania. Blokada działa również w kontrolerze, a odrzucenie przejścia nie zapisuje pustych prób ani nie nalicza nagród. Gdy wszystkie pola zawierają odpowiedzi, błędy nie blokują przejścia.
@@ -14,11 +18,11 @@ Na końcu ocenianej sesji zamiast licznika poprawnych odpowiedzi pokazujemy **0�
 
 **Wdrożone:** klasyczne fiszki, fiszki podstawowe i quiz słownictwa mają po sprawdzeniu odpowiedzi przyciski „Posłuchaj odpowiedzi” i „Wolniej”. Dotyczy wpisywania i wyboru, odpowiedzi poprawnej i błędnej, zakresu modułu i poznanego materiału kursu. Przed sprawdzeniem i podczas ponownej próby przyciski nie zdradzają oczekiwanego słowa. Odsłuch jest dobrowolny, bez automatycznego odtwarzania i bez przebudowy zestawu pytań.
 
-Czytamy pełną poprawną formę z a/an, także dłuższe hasła: limit dyktanda nie dotyczy odsłuchu poznanej odpowiedzi. Obowiązuje tempo słówka A (0,88×), a „Wolniej” daje 0,616×. Używamy dotychczasowego nagrania, następnie syntezy; przy wyłączonym słuchaniu lub braku obu źródeł nie ma przycisków, a ćwiczenie przebiega jak dotąd. Przy uszkodzonym klipie pozostają informacja zwrotna i zapis odpowiedzi. Gotowe nagrania działają po zimnym starcie PWA offline. Sam odsłuch nie zapisuje próby ani nie przyznaje gwiazdek.
+Czytamy pełną poprawną formę z a/an, także dłuższe hasła: limit dyktanda nie dotyczy odsłuchu poznanej odpowiedzi. Obowiązuje tempo słówka (0,95×), a „Wolniej” daje 0,665×. Używamy dotychczasowego nagrania, następnie syntezy; przy wyłączonym słuchaniu lub braku obu źródeł nie ma przycisków, a ćwiczenie przebiega jak dotąd. Przy uszkodzonym klipie pozostają informacja zwrotna i zapis odpowiedzi. Gotowe nagrania działają po zimnym starcie PWA offline. Sam odsłuch nie zapisuje próby ani nie przyznaje gwiazdek.
 
-## D-62 — wybrane domyślne tempa
+## D-62 / D-65 — wybrane domyślne tempa
 
-**Wdrożone:** słówka są odtwarzane domyślnie w tempie A **0,88×**, a kwestie dialogów/historyjek w tempie B **0,75×**. „Wolniej” dodatkowo mnoży tempo przez 0,7: odpowiednio **0,616×** i **0,525×**, z zachowaniem wysokości głosu nagrania. Wybór ma działać bez dodatkowego kliknięcia. Przy próbie dźwięku w „Konto” obowiązuje tempo słówka; przy każdej kwestii i w podsumowaniu sceny — dialogu. To samo zdanie może być odczytane inaczej w zależności od kontekstu. Przejście między rodzajami nie pozostawia poprzedniego tempa.
+**Wdrożone:** słówka są odtwarzane domyślnie w tempie **0,95×**, a kwestie dialogów/historyjek w tempie **0,90×**. „Wolniej” dodatkowo mnoży tempo przez 0,7: odpowiednio **0,665×** i **0,630×**, z zachowaniem wysokości głosu nagrania. Wybór ma działać bez dodatkowego kliknięcia. Przy próbie dźwięku w „Konto” obowiązuje tempo słówka; przy każdej kwestii i w podsumowaniu sceny — dialogu. To samo zdanie może być odczytane inaczej w zależności od kontekstu. Przejście między rodzajami nie pozostawia poprzedniego tempa.
 
 Tempa są wspólne dla ręcznego odtworzenia, automatycznego odsłuchu, wznowienia i PWA offline. Synteza zapasowa dostaje odpowiedni współczynnik, choć brzmienie zależy od głosu urządzenia. Parametry generatora i pliki 24 kb/s pozostają bazowe; nie zwalniamy ich drugi raz podczas generowania. Zapis wyników, gwiazdki, ukończenia i format kopii pozostają bez zmian.
 
