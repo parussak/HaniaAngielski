@@ -43,7 +43,7 @@ Aplikacja do nauki języków dla dziecka (Hania) i dorosłej (Paulina): TypeScri
 | Nagrania | `npm run audio:check` |
 | Dokumentacja | `node scripts/check-docs.mjs` |
 
-Uruchamiaj tylko to, czego dotyczy zmiana. W podsumowaniu i w opisie commita podaj, co faktycznie uruchomiono i z jakim wynikiem, oraz czego nie sprawdzono (np. telefon, recenzja językowa). **Nie dopisuj wyników uruchomień do dokumentacji.** Trwały brak weryfikacji dopisz do listy otwartych braków w [testach](docs/07-testy.md).
+Uruchamiaj tylko to, czego dotyczy zmiana. W podsumowaniu i w opisie commita podaj, co faktycznie uruchomiono i z jakim wynikiem, oraz czego nie sprawdzono (np. telefon, recenzja językowa). **Nie dopisuj wyników uruchomień do dokumentacji.** Nie opisuj jako sprawdzonego tego, czego testy automatyczne nie obejmują (telefon, prawdziwe konto, brzmienie nagrań, poprawność językowa) — [lista](docs/07-testy.md). Błąd zgłoszony z telefonu najpierw odtwórz testem, potem napraw.
 
 Najważniejsze zasady pisania testów ([pełne](docs/07-testy.md)):
 

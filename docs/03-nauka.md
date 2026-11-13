@@ -53,7 +53,7 @@ Cel: Hania słyszy poznawane słowa i rozmowy. Bez presji czasu i bez limitu odt
 9. **Dobór:** w nowej sesji lekcji najwyżej dwa słówka dostają słuchanie — jedno do wyboru, jedno do wpisania. Rozpoczęte sesje nie są przebudowywane; znacznik w sesji jest opcjonalny, kopia zostaje w wersji 1.
 10. Telefon, klawiatura, przyciski co najmniej 44 px, offline. Brak dźwięku nie jest błędem i nie pokazuje alarmu; stan dźwięku widać w ustawieniach.
 
-Wdrożenie: hasło jest odczytywane raz, gdy zadanie się pojawia, a potem na życzenie. Po odpowiedzi można posłuchać poprawnej formy. Odczytujemy pełną formę z rodzajnikiem, jeśli hasło go ma. Przełącznik jest na ekranie „Konto”, także bez logowania. Słuchanie dostają lekcje map (także Poziom legendarny i trening); D-63 dodaje dobrowolny odsłuch po odpowiedzi także w klasycznych fiszkach i quizie. Testy syntezy używają atrapy, a D-60 dodatkowo sprawdza rzeczywiste odtwarzanie plików Opus w przeglądarce — [głosy prawdziwych urządzeń](07-testy.md#d-58--słuchanie) wymagają sprawdzenia ręcznego.
+Wdrożenie: hasło jest odczytywane raz, gdy zadanie się pojawia, a potem na życzenie. Po odpowiedzi można posłuchać poprawnej formy. Odczytujemy pełną formę z rodzajnikiem, jeśli hasło go ma. Przełącznik jest na ekranie „Konto”, także bez logowania. Słuchanie dostają lekcje map (także Poziom legendarny i trening); D-63 dodaje dobrowolny odsłuch po odpowiedzi także w klasycznych fiszkach i quizie. Testy syntezy używają atrapy, a D-60 dodatkowo sprawdza rzeczywiste odtwarzanie plików Opus w przeglądarce — [głosy prawdziwych urządzeń](07-testy.md#gdy-coś-nie-działa-na-telefonie) wymagają sprawdzenia ręcznego.
 
 ## D-57 — co mierzy widok postępów — wdrożone
 
