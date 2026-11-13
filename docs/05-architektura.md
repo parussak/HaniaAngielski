@@ -1,5 +1,9 @@
 # Architektura — realizacja techniczna
 
+## D-63 — odsłuch odpowiedzi klasycznych
+
+`vocabularyPlayback` w `src/learning/listening.ts` przygotowuje pełną formę odpowiedzi i język dla słówka lub zadania quizowego, niezależnie od znacznika dyktanda i bez limitu długości. `studyView` pokazuje wspólne przyciski wyłącznie przy informacji zwrotnej klasycznych fiszek i quizu, po sprawdzeniu dostępności konkretnego tekstu. Odtwarzacz, tempo, reguły oceniania i zapis sesji nie wymagają nowej implementacji ani pól w kopii. Zakres całego kursu korzysta z modułu bieżącego elementu, więc nie zmienia języka na podstawie samego ekranu.
+
 ## D-62 — tempo niezależne od treści i zapisu
 
 `src/speech/tempo.ts` zawiera wybrane współczynniki oraz wspólną regułę dodatkowego „Wolniej”. `Speaker.speak` przyjmuje opcjonalny rodzaj wypowiedzi (`word` domyślnie lub `dialogue`). Przyciski scen przekazują rodzaj do akcji odsłuchu; słówka, ich automatyczny odsłuch i próbka konta korzystają z domyślnego rodzaju. Odtwarzacz nagrań i synteza stosują tę samą regułę, także po błędzie lub przy braku pliku. Rodzaj nie trafia do postępów ani materiałów. Zmiana kodu jest objęta wersją PWA, bez nowych zasobów audio.

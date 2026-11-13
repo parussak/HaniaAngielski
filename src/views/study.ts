@@ -2,7 +2,7 @@ import { AppState } from '../app/state.ts';
 import {pairsView,bankView,bankExplanationView,boardSummaryView,sceneScriptView,sceneSummaryView} from './lesson-activities.ts';
 import {sceneActor} from './scene-actors.ts';
 import {sceneView} from '../learning/scenes.ts';
-import {listeningTask} from '../learning/listening.ts';
+import {listeningTask,vocabularyPlayback} from '../learning/listening.ts';
 import {speaker} from '../speech.ts';
 import {speechButtons} from './speech-controls.ts';
 import {lessonSummaryActions} from './lesson-summary-actions.ts';
@@ -32,8 +32,8 @@ function explanationView(q: Exercise, state: Readonly<AppState>, moduleId: strin
     return `<section class="grammar-explanation"><h3>Dlaczego tak?</h3><p>${e(q.explanation)}</p>${rule ? `<details><summary>Przypomnij zasadę: ${e(rule.title)}</summary><p>${e(rule.explanation)}</p><ul>${rule.examples.map(example => `<li>${e(example)}</li>`).join('')}</ul></details>` : ''}</section>`;
 }
 /** "Listen again" and "slower" are always there, as often as the learner likes. */
-function listenButtons(task: {text:string;language:string}, key: string, autoplay: boolean) {
-    return `<div class="listen" data-key="${e(key)}" ${autoplay?'data-autoplay="true"':''} data-say="${e(task.text)}" data-lang="${e(task.language)}">${speechButtons(task.text,task.language,{playLabel:'Posłuchaj jeszcze raz',playClass:'secondary listen-play',slowClass:'secondary listen-slow'})}</div>`;
+function listenButtons(task: {text:string;language:string}, key: string, autoplay: boolean,playLabel='Posłuchaj jeszcze raz') {
+    return `<div class="listen" data-key="${e(key)}" ${autoplay?'data-autoplay="true"':''} data-say="${e(task.text)}" data-lang="${e(task.language)}">${speechButtons(task.text,task.language,{playLabel,playClass:'secondary listen-play',slowClass:'secondary listen-slow'})}</div>`;
 }
 export function studyView(state: Readonly<AppState>) {
     const s = state.progress.active;
@@ -56,6 +56,8 @@ export function studyView(state: Readonly<AppState>) {
     const language=state.modules.find(m=>m.id===item.moduleId)?.languageCode;
     const heard=!scene&&!s.boardSummary?listeningTask(state.modules,item):undefined;
     const listen=heard&&speaker().available(heard.language,heard.text)?heard:undefined,asking=!!listen&&s.phase!=='feedback';
+    const pronunciation=s.phase==='feedback'&&['flashcards','flashcards-basic','quiz'].includes(s.mode)?vocabularyPlayback(state.modules,item):undefined;
+    const answerAudio=pronunciation&&speaker().available(pronunciation.language,pronunciation.text)?pronunciation:undefined;
     const say=(text:string)=>speaker().available(language,text)?`<span class="scene-audio">${speechButtons(text,language!,{kind:'dialogue',playLabel:'',playClass:'scene-say',slowClass:'scene-slow',playAria:'Posłuchaj tej kwestii',slowAria:'Posłuchaj tej kwestii wolniej'})}</span>`:'';
     let card = '';
     if(asking)card=`<div class="exercise-label">${icon('sound')} POSŁUCHAJ</div><h2 class="question">${listen!.choices?'Posłuchaj i wybierz, co to znaczy.':'Posłuchaj i wpisz to, co słyszysz.'}</h2>${listenButtons(listen!,item.key,true)}`;
@@ -70,7 +72,7 @@ export function studyView(state: Readonly<AppState>) {
         const given=s.attempts.find(a=>a.key===item.key)?.lastAnswer;
         const article=given===undefined?null:vocabularyAssessment(q,given);
         const articleNote=article?.note?`<aside class="article-note"><strong>${ok?'Warto zapamiętać':'Rodzajnik w tym haśle'}</strong><p>Pełna forma: <b>${e(vocabularyFullAnswer(q))}</b>. ${e(article.note)}</p></aside>`:'';
-        card += `<div class="feedback ${ok ? 'correct' : 'incorrect'}" role="status"><div class="feedback-lead"><strong>${ok ? 'Tak jest! Dobra robota ✦' : 'Spokojnie, tak właśnie się uczymy.'}</strong>${state.catCatalog ? catView(state.catCatalog, responseCat(state.catCatalog, s)) : ''}</div>${!ok ? answerComparison(q, s) : ''}${articleNote}${explanationView(q,state,item.moduleId)}${q.source ? `<p class="source-reference">Źródło: ${e(q.source)}</p>` : ''}${illustrationView(q.illustration, true)}${listen?listenButtons(listen,item.key,false):''}</div><div class="actions">${!ok&&!scene ? button('retry', 'Spróbuję jeszcze raz', 'secondary') : ''}${button('next', `Dalej ${icon('arrow')}`)}</div>`;
+        card += `<div class="feedback ${ok ? 'correct' : 'incorrect'}" role="status"><div class="feedback-lead"><strong>${ok ? 'Tak jest! Dobra robota ✦' : 'Spokojnie, tak właśnie się uczymy.'}</strong>${state.catCatalog ? catView(state.catCatalog, responseCat(state.catCatalog, s)) : ''}</div>${!ok ? answerComparison(q, s) : ''}${articleNote}${explanationView(q,state,item.moduleId)}${q.source ? `<p class="source-reference">Źródło: ${e(q.source)}</p>` : ''}${illustrationView(q.illustration, true)}${listen?listenButtons(listen,item.key,false):answerAudio?listenButtons(answerAudio,item.key,false,'Posłuchaj odpowiedzi'):''}</div><div class="actions">${!ok&&!scene ? button('retry', 'Spróbuję jeszcze raz', 'secondary') : ''}${button('next', `Dalej ${icon('arrow')}`)}</div>`;
     }
     else {
         // A scene shows its picture once, with the first line, and then leaves room for the conversation.

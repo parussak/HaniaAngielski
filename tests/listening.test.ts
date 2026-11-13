@@ -3,7 +3,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createSpeaker,speechRate,type SpeechEnvironment} from '../src/speech.ts';
-import {listeningTask,markListening,dictationWords} from '../src/learning/listening.ts';
+import {listeningTask,markListening,dictationWords,vocabularyPlayback} from '../src/learning/listening.ts';
 import {engineModule} from './fixtures/engine.ts';
 import {validateModules} from '../src/content-validation.ts';
 import {backup,emptyProgress,isCorrect,keyFor,next,plainItem,questionFor,recordAnswer,validateBackup,type Item,type Module,type Session} from '../src/core.ts';
@@ -93,6 +93,18 @@ const m=spokenModule(),modules=[m];
 const word=(id:string,input:Item['input'],extra:Partial<Item>={}):Item=>({key:keyFor(m,'word',id),moduleId:m.id,version:1,type:'word',id,input,...extra});
 const j:Journey={version:1,moduleId:m.id,title:'Mapa',stages:[{id:'one',title:'Etap',cat:'albert',illustration:'illustrations/test.svg',lessons:[{id:'words',title:'Słowa',intro:'',wordIds:['word-0','word-1','word-2','word-3','word-4','word-5'],exerciseIds:[],ruleIds:[]}]}]};
 const started=()=>{const p=emptyProgress();return varyLesson(makeLessonSession(modules,j,j.stages[0].lessons[0],'mixed',p),modules,[j],j,j.stages[0].lessons[0],p);};
+
+test('odsłuch odpowiedzi działa bez znacznika słuchania, także w quizie i przy długim haśle z rodzajnikiem',()=>{
+ const before=structuredClone(modules);
+ assert.deepEqual(vocabularyPlayback(modules,word('word-0','text')),{text:'an answer 0',language:'en'});
+ assert.equal(vocabularyPlayback(modules,word('word-1','text'))!.text,'this is a much longer phrase');
+ const q=m.exercises.find(q=>q.kind==='vocabulary'&&q.wordId==='word-0')!;
+ assert.deepEqual(vocabularyPlayback(modules,{key:keyFor(m,'exercise',q.id),moduleId:m.id,version:q.rev??1,type:'exercise',id:q.id,input:'choice'}),{text:'an answer 0',language:'en'});
+ assert.equal(vocabularyPlayback(modules,{key:keyFor(m,'exercise','grammar-0'),moduleId:m.id,version:1,type:'exercise',id:'grammar-0',input:'choice'}),undefined);
+ assert.equal(vocabularyPlayback(modules,word('missing','text')),undefined);
+ assert.equal(vocabularyPlayback([{...m,languageCode:undefined}],word('word-0','text')),undefined);
+ assert.deepEqual(modules,before);
+});
 
 test('dobór: najwyżej dwa zwykłe słówka — jedno do wyboru, jedno do wpisania; nigdy pary, luki ani sceny',()=>{
  for(let run=0;run<30;run++){

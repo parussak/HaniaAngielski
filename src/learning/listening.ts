@@ -18,6 +18,13 @@ export interface ListeningTask {
 }
 const body=(text:string)=>normalizeAnswer(text).replace(/^(a|an)\s+/,'');
 
+/** Voluntary pronunciation after answering: also long phrases and vocabulary quiz items. */
+export function vocabularyPlayback(modules:Module[],item:Item):ListeningTask|undefined {
+ const m=modules.find(m=>m.id===item.moduleId);if(!m?.languageCode)return;
+ let q;try{q=questionFor(modules,item);}catch{return;}
+ return q.kind==='vocabulary'?{text:vocabularyFullAnswer(q),language:m.languageCode}:undefined;
+}
+
 /** What to say for this item, or undefined when it has to be shown in its ordinary form. */
 export function listeningTask(modules:Module[],item:Item):ListeningTask|undefined{
  if(!item.listen||item.type!=='word')return;

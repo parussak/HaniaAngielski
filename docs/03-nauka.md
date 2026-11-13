@@ -1,5 +1,11 @@
 # Nauka — prowadzenie i utrwalanie
 
+## D-63 — odsłuch w klasycznej nauce
+
+**Wdrożone:** klasyczne fiszki, fiszki podstawowe i quiz słownictwa mają po sprawdzeniu odpowiedzi przyciski „Posłuchaj odpowiedzi” i „Wolniej”. Dotyczy wpisywania i wyboru, odpowiedzi poprawnej i błędnej, zakresu modułu i poznanego materiału kursu. Przed sprawdzeniem i podczas ponownej próby przyciski nie zdradzają oczekiwanego słowa. Odsłuch jest dobrowolny, bez automatycznego odtwarzania i bez przebudowy zestawu pytań.
+
+Czytamy pełną poprawną formę z a/an, także dłuższe hasła: limit dyktanda nie dotyczy odsłuchu poznanej odpowiedzi. Obowiązuje tempo słówka A (0,88×), a „Wolniej” daje 0,616×. Używamy dotychczasowego nagrania, następnie syntezy; przy wyłączonym słuchaniu lub braku obu źródeł nie ma przycisków, a ćwiczenie przebiega jak dotąd. Przy uszkodzonym klipie pozostają informacja zwrotna i zapis odpowiedzi. Gotowe nagrania działają po zimnym starcie PWA offline. Sam odsłuch nie zapisuje próby ani nie przyznaje gwiazdek.
+
 ## D-62 — wybrane domyślne tempa
 
 **Wdrożone:** słówka są odtwarzane domyślnie w tempie A **0,88×**, a kwestie dialogów/historyjek w tempie B **0,75×**. „Wolniej” dodatkowo mnoży tempo przez 0,7: odpowiednio **0,616×** i **0,525×**, z zachowaniem wysokości głosu nagrania. Wybór ma działać bez dodatkowego kliknięcia. Przy próbie dźwięku w „Konto” obowiązuje tempo słówka; przy każdej kwestii i w podsumowaniu sceny — dialogu. To samo zdanie może być odczytane inaczej w zależności od kontekstu. Przejście między rodzajami nie pozostawia poprzedniego tempa.
@@ -33,7 +39,7 @@ Cel: Hania słyszy poznawane słowa i rozmowy. Bez presji czasu i bez limitu odt
 9. **Dobór:** w nowej sesji lekcji najwyżej dwa słówka dostają słuchanie — jedno do wyboru, jedno do wpisania. Rozpoczęte sesje nie są przebudowywane; znacznik w sesji jest opcjonalny, kopia zostaje w wersji 1.
 10. Telefon, klawiatura, przyciski co najmniej 44 px, offline. Brak dźwięku nie jest błędem i nie pokazuje alarmu; stan dźwięku widać w ustawieniach.
 
-Wdrożenie: hasło jest odczytywane raz, gdy zadanie się pojawia, a potem na życzenie. Po odpowiedzi można posłuchać poprawnej formy. Odczytujemy pełną formę z rodzajnikiem, jeśli hasło go ma. Przełącznik jest na ekranie „Konto”, także bez logowania. Słuchanie dostają lekcje map (także Poziom legendarny i trening); klasyczne tryby modułu pozostają bez zmian. Testy syntezy używają atrapy, a D-60 dodatkowo sprawdza rzeczywiste odtwarzanie plików Opus w przeglądarce — [głosy prawdziwych urządzeń](07-testy.md#d-58--słuchanie) wymagają sprawdzenia ręcznego.
+Wdrożenie: hasło jest odczytywane raz, gdy zadanie się pojawia, a potem na życzenie. Po odpowiedzi można posłuchać poprawnej formy. Odczytujemy pełną formę z rodzajnikiem, jeśli hasło go ma. Przełącznik jest na ekranie „Konto”, także bez logowania. Słuchanie dostają lekcje map (także Poziom legendarny i trening); D-63 dodaje dobrowolny odsłuch po odpowiedzi także w klasycznych fiszkach i quizie. Testy syntezy używają atrapy, a D-60 dodatkowo sprawdza rzeczywiste odtwarzanie plików Opus w przeglądarce — [głosy prawdziwych urządzeń](07-testy.md#d-58--słuchanie) wymagają sprawdzenia ręcznego.
 
 ## D-57 — co mierzy widok postępów — wdrożone
 

@@ -1,5 +1,11 @@
 # Testy — podział i zasady
 
+## D-63 — odsłuch klasycznych fiszek i quizu
+
+Weryfikacja 13 listopada 2026: **299/299 testów Node** i **31/31 celowanych scenariuszy Chrome** na gotowej aplikacji (nagrania, synteza, poznany materiał kursu, PWA). Budowanie z walidacją materiałów i TypeScript oraz **318 zasobami offline**, kontrola dokumentacji i różnic przeszły. Pliki audio, portfele i format kopii nie były zmieniane. Nie ponawiano całego zestawu przeglądarkowego ani prób na fizycznym telefonie.
+
+Nowy test jednostkowy sprawdza pełną odpowiedź z rodzajnikiem dla słówka i zadania quizowego, brak znacznika dyktanda, długie hasło, brak języka i materiału oraz brak mutacji treści. Sześć nowych scenariuszy przeglądarkowych sprawdza klasyczne fiszki, fiszki podstawowe i quiz, także w zakresie kursu: brak odsłuchu przed odpowiedzią i autoplay po sprawdzeniu, przyciski po poprawnej i błędnej odpowiedzi, rzeczywiste nagranie „an apple”, tempa 0,88/0,616, identyczną kopię przed i po odsłuchu oraz zachowane zakupy i gwiazdki bez nowej nagrody. Klasyczny quiz po zimnym starcie offline odtwarza poprawną formę i pozwala ukończyć sesję. Dotychczasowe scenariusze nadal sprawdzają źródło zapasowe, brak dźwięku i lekcje map.
+
 ## D-62 — wybrane tempa domyślne
 
 Weryfikacja 13 listopada 2026: **298/298 testów Node** oraz **24/24 celowane scenariusze Chrome** na gotowej aplikacji (nagrania, synteza zapasowa, sceny i PWA). Budowanie z TypeScript, kontrolą materiałów i **318 zasobami offline**, `audio:check`, kontrola dokumentacji i różnic przeszły. Gotowe 111 plików audio pozostało bez zmian: 375 669 bajtów. Nie ponawiano całego zestawu przeglądarkowego ani odsłuchu na fizycznym telefonie.
