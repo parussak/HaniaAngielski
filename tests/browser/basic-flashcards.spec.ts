@@ -59,6 +59,8 @@ test('telefon: aktywne fiszki mieszane, błąd, poprawa, wznowienie i wynik',asy
     await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
   }
   expect(sawText&&sawChoice).toBeTruthy();
-  await expect(page.locator('.summary-score')).toContainText('9 / 10');
-  await expect(page.getByText('Poprawione za drugim razem:',{exact:false})).toContainText('1');
+  await expect(page.locator('.rating-value')).toHaveText('2,5 / 3 łapki');
+  await expect(page.getByRole('img',{name:'Ocena: 2,5 z 3 kocich łapek',exact:true})).toBeVisible();
+  await page.setViewportSize({width:320,height:720});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();await page.screenshot({path:'test-results/lesson-half-paws-320.png',fullPage:true});
+  await expect(page.locator('.lesson-rating')).toContainText('Poprawki pomagają w nauce.');
 });

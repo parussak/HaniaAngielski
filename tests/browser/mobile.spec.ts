@@ -69,7 +69,7 @@ test.describe('telefon — dotyk i małe ekrany', () => {
       await page.getByRole('button',{name:'Dalej',exact:false}).tap();
       await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
     }
-    await expect(page.locator('.summary-score')).toContainText('9 / 10');
+    await expect(page.locator('.rating-value')).toHaveText('2,5 / 3 łapki');
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
   });
 });

@@ -1,5 +1,15 @@
 # Nauka — prowadzenie i utrwalanie
 
+## D-64 — próba w każdej luce, poprawki i kocie łapki
+
+**Wdrożone:** „Dalej” na planszy z bankiem lub przeciąganiem jest dostępne dopiero po wypełnieniu wszystkich luk. Odłożenie błędnego słowa do banku ponownie blokuje przejście, dopóki pole nie zostanie uzupełnione. W parach każdy element wymaga próby dopasowania. Blokada działa również w kontrolerze, a odrzucenie przejścia nie zapisuje pustych prób ani nie nalicza nagród. Gdy wszystkie pola zawierają odpowiedzi, błędy nie blokują przejścia.
+
+Po błędnej odpowiedzi można ponowić próbę: standardowy przycisk przy informacji zwrotnej, „Popraw lukę” na planszy, „Spróbuj jeszcze raz” przy błędnej parze oraz „Popraw tę linijkę” w rozmowie i jej podsumowaniu. Poprawienie linijki z podsumowania wraca do podsumowania bez ponownego rozwiązywania poprawnych kwestii. Pierwsza odpowiedź zostaje w wynikach, poprawki są zapisane oddzielnie. Można wypełnić wszystkie pola i zakończyć z błędami.
+
+Na końcu ocenianej sesji zamiast licznika poprawnych odpowiedzi pokazujemy **0–3 kocich łapek**, z połówkami. Liczymy udział unikalnych zadań poprawnych za pierwszym razem, mnożymy przez 3 i zaokrąglamy w dół do połowy łapki. Przykłady: 7/8 → 2,5; 4/5 → 2; 8/8 → 3. Pełne 3 wyłącznie za wszystkie pierwsze odpowiedzi poprawne; poprawki nie podnoszą tej oceny. Pominięte dawniej zadania nie stają się poprawne, a dawne powroty tego samego zadania nie zwiększają mianownika. Nie wyliczamy oceny z braku danych o próbach.
+
+Łapki są prezentacją wyniku, **osobną od gwiazdek do domku**. Reguły przyznawania gwiazdek, ukończenia map, zakupy i postępy pozostają bez zmian. Szczegółowe wyniki nadal istnieją w zapisie i widoku postępów.
+
 ## D-63 — odsłuch w klasycznej nauce
 
 **Wdrożone:** klasyczne fiszki, fiszki podstawowe i quiz słownictwa mają po sprawdzeniu odpowiedzi przyciski „Posłuchaj odpowiedzi” i „Wolniej”. Dotyczy wpisywania i wyboru, odpowiedzi poprawnej i błędnej, zakresu modułu i poznanego materiału kursu. Przed sprawdzeniem i podczas ponownej próby przyciski nie zdradzają oczekiwanego słowa. Odsłuch jest dobrowolny, bez automatycznego odtwarzania i bez przebudowy zestawu pytań.
@@ -53,7 +63,7 @@ Na razie nie dodajemy procentowego poziomu opanowania, nowego algorytmu utrwalan
 
 ## D-56 — plansze bez blokowania i dialogi jak rozmowa — wdrożone
 
-Przycisk „Dalej” jest dostępny na planszach luk i par również bez poprawienia błędów. Kończy bieżącą planszę i prowadzi do kolejnego zadania albo podsumowania lekcji, bez dokładania zadań. Zachowujemy już ocenione próby; niewypełnione pozycje zapisujemy jako bez odpowiedzi (niepoprawne), aby wynik nie udawał rozwiązania. Nie blokuje to ukończenia ani dotychczasowych nagród.
+Przycisk „Dalej” jest dostępny na uzupełnionych planszach luk i po próbie każdej pary, również bez poprawienia błędów. Kończy bieżącą planszę i prowadzi do kolejnego zadania albo podsumowania lekcji, bez dokładania zadań. Zachowujemy już ocenione próby. Od D-64 puste pola blokują przejście; historyczne D-56 zapisywało je jako niepoprawne puste odpowiedzi. Nie blokuje to ukończenia ani dotychczasowych nagród.
 
 Błędna luka pozostaje różowo-czerwona do poprawnego uzupełnienia, także po odłożeniu tokenu i odświeżeniu. Po wypełnieniu całej planszy pod oryginalnymi zdaniami i lukami pojawiają się poprawne odpowiedzi oraz widoczne wyjaśnienia. Przy błędach nadal można poprawiać lub wybrać „Dalej”. Po poprawnym rozwiązaniu zachowujemy tę samą ramkę, zdania, wstawione słowa i ilustrację, a poniżej pozytywne potwierdzenie z objaśnieniami. W podsumowaniu planszy i historyjki nie pokazujemy „0/2 poprawnie za pierwszym razem”; statystyki całej lekcji i zapis wyników pozostają.
 

@@ -1,4 +1,3 @@
-import {next} from './session.ts';
 import type {Exercise,Item,Module,Progress,Scene,Session} from './model.ts';
 
 /**
@@ -102,5 +101,7 @@ export function sceneView(modules:Module[],s:Session){
 export function continueScene(p:Progress){
  const s=p.active;if(!s||s.phase!=='feedback'||s.lastCorrect!==true)return;
  const item=s.items[s.index];if(!item.sceneGroup)return;
- if(s.items[s.index+1]?.sceneGroup===item.sceneGroup)next(p);else s.boardSummary=true;
+ const group=s.items.filter(i=>i.sceneGroup===item.sceneGroup),pending=group.find(i=>!s.attempts.some(a=>a.key===i.key));
+ if(pending){s.index=s.items.indexOf(pending);s.phase='question';s.lastCorrect=null;}
+ else{s.index=Math.max(...group.map(i=>s.items.indexOf(i)));s.boardSummary=true;}
 }

@@ -8,14 +8,18 @@ export function boardItems(s:Session){const current=s.items[s.index];return curr
 export function solved(s:Session,key:string){return s.attempts.some(a=>a.key===key&&(a.first||a.corrected));}
 export function settled(s:Session,key:string){return solved(s,key)||s.items.findIndex(i=>i.key===key)<s.index;}
 export function boardError(s:Session,key:string){return s.attempts.some(a=>a.key===key&&!a.first&&!a.corrected);}
-/** Leave a finite board even with mistakes. Unanswered tasks remain visible in results as unanswered. */
+export function gapPlacement(s:Session,key:string){return s.gapPlacements?.[key]??(solved(s,key)?s.attempts.find(a=>a.key===key)?.lastAnswer??s.attempts.find(a=>a.key===key)?.answer:undefined);}
+/** A choice is required for every slot, but an incorrect choice does not block leaving. */
+export function boardReady(s:Session){return boardItems(s).every(i=>i.presentation==='bank'?!!gapPlacement(s,i.key):s.attempts.some(a=>a.key===i.key));}
+/** Leave a finite board with all tasks attempted; keep the original first answers. */
 export function closeBoard(p:Progress,modules:Module[],journeys:Journey[]){
  const s=p.active;if(!s||!['question','retry'].includes(s.phase)||!s.items[s.index].pairGroup&&s.items[s.index].presentation!=='bank')return;
+ if(!boardReady(s))return false;
  const group=boardItems(s);
  for(const item of group){
   if(s.attempts.some(a=>a.key===item.key))continue;
   s.index=s.items.indexOf(item);s.phase='question';
-  if(recordAnswer(p,questionFor(modules,item),s.gapPlacements?.[item.key]??'')===false){rememberError(p,item);recordStageError(p,s,item,journeys);}
+  if(recordAnswer(p,questionFor(modules,item),gapPlacement(s,item.key)!)===false){rememberError(p,item);recordStageError(p,s,item,journeys);}
  }
  s.index=Math.max(...group.map(i=>s.items.indexOf(i)));s.phase='feedback';s.lastCorrect=true;
 }
@@ -44,6 +48,6 @@ export function answerOnBoard(p:Progress,modules:Module[],journeys:Journey[],key
  delete s.pairSelection;delete s.draftAnswer;delete s.gapSelection;
  if(ok===false){rememberError(p,item);recordStageError(p,s,item,journeys);s.phase='question';s.lastCorrect=null;return false;}
  const group=boardItems(s),remaining=group.some(i=>s.items.indexOf(i)>s.index&&!solved(s,i.key));
- if(remaining){next(p);}else{s.boardSummary=true;s.phase='feedback';s.lastCorrect=true;}
+ if(remaining){next(p);}else{s.index=Math.max(...group.map(i=>s.items.indexOf(i)));s.boardSummary=true;s.phase='feedback';s.lastCorrect=true;}
  return true;
 }

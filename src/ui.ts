@@ -1,5 +1,6 @@
 export const e = (value: unknown) => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
 const icons: Record<string, string> = {
+    paw:'<ellipse cx="5" cy="8" rx="2.3" ry="3"/><ellipse cx="10" cy="5" rx="2.2" ry="3"/><ellipse cx="15" cy="5" rx="2.2" ry="3"/><ellipse cx="20" cy="8" rx="2.3" ry="3"/><path d="M6 16c0-3 3-6 6-6s6 3 6 6c0 6-4 3-6 3s-6 3-6-3Z"/>',
     sound: '<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/>',
   map:'<path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2Zm6-2v16m6-14v16"/>',
   profile:'<circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/>',

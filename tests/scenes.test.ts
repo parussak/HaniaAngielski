@@ -10,10 +10,21 @@ import {makeLessonSession,validateJourney,freshAdventure,rewardCompletion} from 
 import {varyLesson} from '../src/learning/lesson-variety.ts';
 import {legendarySession} from '../src/learning/lesson-flow.ts';
 import {errorItems,rememberError} from '../src/learning/retention.ts';
+import {retryAnswer} from '../src/learning/retry.ts';
 
 const m=sceneModule(),modules=[m],j=validateJourney(sceneJourney(),m),lesson=j.stages[0].lessons[1];
 const gapIds=['talk--one','talk--two','talk--three','talk--four'];
 const started=(p=emptyProgress())=>varyLesson(makeLessonSession(modules,j,lesson,'mixed',p),modules,[j],j,lesson,p);
+test('powrót do błędnej linijki z podsumowania nie wymaga powtarzania poprawnych luk',()=>{
+ const p=emptyProgress();p.active=started(p);const s=atScene(p),first=s.items[s.index];
+ answer(p,'wrong');next(p);
+ while(!s.boardSummary)answer(p,questionFor(modules,s.items[s.index]).answers[0]);
+ const count=s.attempts.length,initial=structuredClone(s.attempts.find(a=>a.key===first.key));
+ assert.equal(retryAnswer(p,first.key),true);assert.equal(s.phase,'retry');assert.equal(s.boardSummary,undefined);
+ answer(p,questionFor(modules,s.items[s.index]).answers[0]);assert.equal(s.boardSummary,true);assert.equal(s.attempts.length,count);
+ const corrected=s.attempts.find(a=>a.key===first.key)!;assert.equal(corrected.first,false);assert.equal(corrected.answer,initial!.answer);assert.equal(corrected.corrected,true);
+ assert.deepEqual(validateBackup(backup(p)).progress,p);
+});
 /** Answers the current task the way the app does: a correct scene gap continues without a break. */
 function answer(p:Progress,value:string){const s=p.active!,item=s.items[s.index],ok=recordAnswer(p,questionFor(modules,item),value);if(ok===false)rememberError(p,item);else continueScene(p);return ok;}
 function atScene(p:Progress){const s=p.active!;while(!s.items[s.index].sceneGroup){recordAnswer(p,questionFor(modules,s.items[s.index]),questionFor(modules,s.items[s.index]).answers[0]);next(p);}return s;}

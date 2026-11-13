@@ -41,5 +41,5 @@ test('ustawienia, pole odpowiedzi, źródło i podsumowanie poprawki są dostęp
  await page.getByRole('button',{name:'Spróbuję jeszcze raz',exact:true}).click();
  await answer.fill(q.answers[0]);await page.getByRole('button',{name:/Sprawdź/}).click();
  await page.getByRole('button',{name:/^Dalej/}).click();
- await expect(page.locator('.summary')).toContainText('Poprawione za drugim razem: 1.');
+ await expect(page.locator('.rating-value')).toHaveText('0 / 3 łapki');
 });

@@ -1,5 +1,11 @@
 # Architektura — realizacja techniczna
 
+## D-64 — kompletność planszy, wspólna poprawka i ocena
+
+`learning/boards.ts:boardReady` jest wspólną regułą dostępności przejścia dla widoku i kontrolera; `closeBoard` odmawia zamknięcia nieuzupełnionej planszy. `gapPlacement` odczytuje również dawną poprawną próbę bez zapisanego rozmieszczenia. `learning/retry.ts:retryAnswer` otwiera wyłącznie bieżący błąd lub element bieżącej grupy, bez zerowania prób i nagród. `continueScene` po poprawieniu linijki odnajduje nieodpowiedziane luki albo wraca do podsumowania.
+
+`learning/statistics.ts:lessonRating` jest czystą projekcją sesji; nie modyfikuje istniejącego `score`, agregacji historii ani portfeli. `views/lesson-rating.ts` renderuje trzy wektorowe łapki, w tym połówki przez przycięcie wypełnienia, z opisem dla czytnika ekranu. Nie dodaje bitmap ani nowego pola wyniku w kopii.
+
 ## D-63 — odsłuch odpowiedzi klasycznych
 
 `vocabularyPlayback` w `src/learning/listening.ts` przygotowuje pełną formę odpowiedzi i język dla słówka lub zadania quizowego, niezależnie od znacznika dyktanda i bez limitu długości. `studyView` pokazuje wspólne przyciski wyłącznie przy informacji zwrotnej klasycznych fiszek i quizu, po sprawdzeniu dostępności konkretnego tekstu. Odtwarzacz, tempo, reguły oceniania i zapis sesji nie wymagają nowej implementacji ani pól w kopii. Zakres całego kursu korzysta z modułu bieżącego elementu, więc nie zmienia języka na podstawie samego ekranu.

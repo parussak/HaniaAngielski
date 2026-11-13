@@ -43,7 +43,7 @@ test('brak an zalicza słówko z pomarańczowym wyjaśnieniem bez dodania błęd
   await expect(page.locator('.article-note')).toContainText('an apple');
   await expect(page.locator('.article-note')).toContainText('policzalny');
   await page.screenshot({path:'test-results/article-note-mobile.png'});
-  await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('.summary-score')).toContainText('1 / 1');
+  await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('.rating-value')).toHaveText('3 / 3 łapki');
   await openBackup(page);const downloaded=page.waitForEvent('download');
   await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).tap();
   const saved=JSON.parse(readFileSync((await(await downloaded).path())!,'utf8')).progress;
@@ -59,7 +59,7 @@ test('zbędne a jest różowym błędem, poprawny wariant zielony, Dalej kończy
   expect(await page.locator('.given-answer').evaluate(el=>getComputedStyle(el).backgroundColor)).toBe('rgb(252, 232, 241)');
   expect(await page.locator('.expected-answer').evaluate(el=>getComputedStyle(el).backgroundColor)).toBe('rgb(237, 246, 239)');
   await page.screenshot({path:'test-results/pink-feedback-mobile.png'});
-  await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('.summary-score')).toContainText('0 / 1');
+  await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('.rating-value')).toHaveText('0 / 3 łapki');
   await openBackup(page);const downloaded=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).tap();
   const saved=JSON.parse(readFileSync((await(await downloaded).path())!,'utf8')).progress;
   expect(saved.sessions[0].items).toHaveLength(1);expect(saved.difficult).toContain(keyFor(modules[0],'word','water'));

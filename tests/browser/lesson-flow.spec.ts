@@ -5,10 +5,22 @@ import {answerCurrent,finishCurrent} from './helpers.ts';
 import {foodModules as modules} from '../materials.ts';
 import {backup,emptyProgress,makeSession,isCorrect,type Progress} from '../../src/core.ts';
 import {readFileSync} from 'node:fs';
+import {lessons,validateJourney,makeLessonSession} from '../../src/adventure.ts';
 const m=modules[0];
 async function exported(page:Page){await openBackup(page);const wait=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).click();return JSON.parse(readFileSync((await(await wait).path())!,'utf8')).progress as Progress;}
 async function restore(page:Page,p:Progress){await page.goto('./');await openBackup(page);await page.locator('#import-file').setInputFiles({name:'lesson.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await resumeStudy(page);}
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+test('podsumowanie historyjki pozwala poprawić pominięty błąd i wrócić bez powtarzania poprawnych kwestii',async({page})=>{
+ const j=validateJourney(JSON.parse(readFileSync(new URL('../../public/content/02-food/sciezka.json',import.meta.url),'utf8')),m),lesson=lessons(j).find(l=>l.lesson.id==='restaurant-dialogue-1')!.lesson;
+ const p=emptyProgress();p.adventure={version:1,earned:23,purchases:{},completed:{},reviewSchema:1};p.active=makeLessonSession(modules,j,lesson,'mixed',p);await restore(page,p);
+ await answerCurrent(page,modules,false);await expect(page.getByRole('button',{name:'Popraw tę linijkę',exact:true})).toBeVisible();await page.getByRole('button',{name:/Dalej/}).click();
+ for(let i=1;i<5;i++)await answerCurrent(page,modules);
+ await expect(page.locator('.scene-summary')).toBeVisible();await page.getByRole('button',{name:'Popraw tę linijkę',exact:true}).click();await answerCurrent(page,modules);
+ await expect(page.locator('.scene-summary')).toBeVisible();await expect(page.getByRole('button',{name:'Popraw tę linijkę',exact:true})).toHaveCount(0);
+ const before=await exported(page);expect(before.active!.attempts).toHaveLength(5);expect(before.active!.attempts[0]).toMatchObject({first:false,corrected:true});expect(before.adventure!.earned).toBe(23);
+ await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await resumeStudy(page);await page.getByRole('button',{name:/Dalej/}).click();await expect(page.locator('.rating-value')).toHaveText('2 / 3 łapki');await expect(page.locator('.lesson-reward')).toContainText('+3');
+ await page.setViewportSize({width:320,height:720});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();await page.screenshot({path:'test-results/lesson-paws-320.png',fullPage:true});
+});
 test('telefon: pary, wybór dowolnego hasła, wznowienie, trzy przyciski i legendarny bez utraty ukończenia',async({page})=>{
  await page.goto('./');await openMap(page);await resumeStudy(page);await expect(page.locator('input[name="answerMode"]')).toHaveCount(0);await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).click();
  const source=page.locator('.pair-source').nth(2);await expect(source).toBeVisible();const key=(await source.getAttribute('data-key'))!,word=m.words.find(w=>key.endsWith(':word:'+w.id))!;await source.click();await expect(source).toHaveAttribute('aria-pressed','true');await page.screenshot({path:'test-results/lesson-pairs-mobile.png',fullPage:true});await page.reload();await resumeStudy(page);await expect(page.locator('.pair-source[aria-pressed="true"]')).toHaveAttribute('data-key',key);await page.locator('.pair-target').filter({hasText:word.back}).first().click();

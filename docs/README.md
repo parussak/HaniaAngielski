@@ -1,5 +1,7 @@
 # Dokumentacja aplikacji „Małe kroki”
 
+**D-64 — łapki i poprawki:** wszystkie luki wymagają próby, błędne odpowiedzi można poprawiać, a oceną końcową są kocie łapki niezależne od gwiazdek do domku. [Zasady](03-nauka.md), [zapis](06-zapis.md), [testy](07-testy.md).
+
 **D-63 — odsłuch klasycznych fiszek i quizu:** po sprawdzeniu odpowiedzi, także w poznanym materiale kursu; te same tempa i PWA offline. [Reguły](03-nauka.md), [testy](07-testy.md).
 
 **D-62 — domyślne tempo:** A dla słówek (0,88×), B dla dialogów (0,75×); „Wolniej” dodatkowo zwalnia o 30%, także offline. [Reguły](03-nauka.md), [realizacja](05-architektura.md).

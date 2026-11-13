@@ -1,5 +1,13 @@
 # Testy — podział i zasady
 
+## D-64 — wymagane próby, poprawki i łapki
+
+Weryfikacja 13 listopada 2026: **305/305 testów Node**, również z rozszerzoną biblioteką. Pełny przebieg Chrome: **144/144 scenariusze** na zbudowanej aplikacji, w tym konto, portfele kursów, zakupy, sceny, nagrania i PWA offline. Po końcowej ochronie ponownej próby w dawnej sesji z powtórzonym kluczem ponowiono **17/17 scenariuszy** plansz, historyjek, fiszek podstawowych i kontraktów UI. Końcowe budowanie z TypeScript, walidacją materiałów i **318 zasobami offline**, kontrola dokumentacji i różnic przeszły. Obejrzano podsumowania 2 i 2,5 łapki na 320 px. Nie testowano na fizycznym telefonie ani prawdziwym koncie Firebase; synchronizacja w testach korzysta z adaptera.
+
+Testy jednostkowe sprawdzają brak mutacji i nagrody przy zablokowanym „Dalej”, obowiązek uzupełnienia całej planszy, możliwość wyjścia z błędnymi odpowiedziami, poprawę konkretnej luki bez usuwania pierwszej próby, powrót z podsumowania sceny bez ponownego odpowiadania na poprawne luki oraz poprawkę w starszej sesji z powtórzonym zadaniem. Ocena obejmuje 0/0,5/1,5/2,5/3 łapki, brak kompletu przy nieodpowiedzianym zadaniu, deduplikację dawnych powrotów i brak oceny przy braku prób.
+
+Scenariusze mobilne sprawdzają disabled/enabled „Dalej” po wstawieniu, odłożeniu i ponownym wstawieniu słowa, przyciski poprawy dla par/luk/scen, zachowane pierwsze błędy, liczbę prób i gwiazdki. Podsumowania oczekują łapek zamiast licznika odpowiedzi; widok połowy łapki ma opis dla czytnika ekranu. Dawne wyniki walidacji kopii pozostają zachowane; nie dodano migracji ani danych oceny do Firebase.
+
 ## D-63 — odsłuch klasycznych fiszek i quizu
 
 Weryfikacja 13 listopada 2026: **299/299 testów Node** i **31/31 celowanych scenariuszy Chrome** na gotowej aplikacji (nagrania, synteza, poznany materiał kursu, PWA). Budowanie z walidacją materiałów i TypeScript oraz **318 zasobami offline**, kontrola dokumentacji i różnic przeszły. Pliki audio, portfele i format kopii nie były zmieniane. Nie ponawiano całego zestawu przeglądarkowego ani prób na fizycznym telefonie.

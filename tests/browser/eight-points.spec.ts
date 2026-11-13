@@ -13,7 +13,7 @@ test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 test('pary: czerwony błysk zamiast przerwy, zapis błędu i jedno podsumowanie całej planszy',async({page})=>{
  await page.goto('./');await openMap(page);await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).click();
  await answerCurrent(page,modules,false);await expect(page.locator('.pair-board')).toBeVisible();await expect(page.locator('.feedback,.grammar-explanation')).toHaveCount(0);await expect(page.getByRole('button',{name:/Dalej/})).toHaveCount(1);await expect.poll(()=>page.locator('.match-flash').first().evaluate(el=>getComputedStyle(el).backgroundColor)).not.toBe('rgb(246, 183, 189)');
- await answerCurrent(page,modules);await expect(page.locator('.board-summary')).toContainText('Plansza ukończona');await expect(page.locator('.board-summary')).not.toContainText('poprawnie za pierwszym razem');await page.getByRole('button',{name:/Dalej/}).click();await finishCurrent(page,modules);
+ await page.getByRole('button',{name:/Spróbuj jeszcze raz:/}).click();await answerCurrent(page,modules);await expect(page.locator('.board-summary')).toContainText('Plansza ukończona');await expect(page.locator('.board-summary')).not.toContainText('poprawnie za pierwszym razem');await page.getByRole('button',{name:/Dalej/}).click();await finishCurrent(page,modules);
  const p=await exported(page);expect(p.sessions.at(-1)!.attempts.some(a=>!a.first&&a.corrected)).toBeTruthy();expect(p.sessions.at(-1)!.items).toHaveLength(5);
 });
 test('dwa zdania i dwa słowa: klik słowa i luki, odświeżenie i sprawdzenie planszy',async({page})=>{
@@ -26,10 +26,13 @@ test('rzeczywisty gest dotykowy przenosi słowo w lukę',async({page,context})=>
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:a.x+a.width/2,y:a.y+a.height/2,id:1}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:b.x+b.width/2,y:b.y+b.height/2,id:1}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await expect(target).toContainText(q.answers[0]);await expect(page.locator('.gap-drag-ghost')).toHaveCount(0);
 });
 
-test('Dalej po błędzie i pustej luce kończy planszę bez blokady i bez odebrania gwiazdek',async({page})=>{
+test('Dalej wymaga wszystkich luk; po wypełnieniu błędnych można poprawić albo zakończyć bez utraty gwiazdek',async({page})=>{
  const p=gaps(),[a,b]=p.active!.items,qb=questionFor(modules,b);p.adventure={version:1,earned:23,purchases:{},completed:{}};await restore(page,p);
  const gap=page.locator(`.gap-target[data-key=${JSON.stringify(a.key)}]`);await page.getByRole('button',{name:qb.answers[0],exact:true}).click();await gap.click();
  await expect(gap).toHaveClass(/gap-incorrect/);await expect.poll(()=>gap.evaluate(el=>getComputedStyle(el).backgroundColor)).toBe('rgb(252, 226, 232)');await page.reload();await expect(gap).toHaveClass(/gap-incorrect/);
+ await expect(page.getByRole('button',{name:/Dalej/})).toBeDisabled();await expect(page.getByRole('button',{name:'Popraw lukę',exact:true})).toBeVisible();
+ const qa=questionFor(modules,a);await page.getByRole('button',{name:qa.answers[0],exact:true}).click();await page.locator(`.gap-target[data-key=${JSON.stringify(b.key)}]`).click();await expect(page.getByRole('button',{name:/Dalej/})).toBeEnabled();
+ await page.getByRole('button',{name:'Popraw lukę',exact:true}).first().click();await expect(page.getByRole('button',{name:/Dalej/})).toBeDisabled();await page.getByRole('button',{name:qb.answers[0],exact:true}).click();await gap.click();await expect(page.getByRole('button',{name:/Dalej/})).toBeEnabled();
  await page.getByRole('button',{name:/Dalej/}).click();await expect(page.locator('.summary')).toBeVisible();const saved=await exported(page);expect(saved.active).toBeNull();expect(saved.sessions.at(-1)!.attempts).toHaveLength(2);expect(saved.adventure!.earned).toBe(23);
 });
 

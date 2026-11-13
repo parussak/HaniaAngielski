@@ -34,7 +34,7 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
     await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
   }
   await expect(page.getByRole('heading',{name:'Dobra robota, Haniu!'})).toBeVisible();
-  await expect(page.locator('.summary-score')).toContainText('9 / 10');
+  await expect(page.locator('.rating-value')).toHaveText('2,5 / 3 łapki');
   await page.getByRole('button',{name:'Moja nauka',exact:true}).click();
   await openModule(page);
   await page.getByText('Wpisuję odpowiedź',{exact:true}).click();

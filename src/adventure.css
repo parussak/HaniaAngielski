@@ -154,3 +154,5 @@
 @media(max-width:380px),(max-height:700px){.studying:has(.scene-message) .question-illustration img{height:60px;width:110px}}
 
 .scene-slow{padding:6px 10px;font:inherit;font-size:13px}
+
+.board-required{color:#78532a;font-size:14px}.board-retry{min-height:44px;margin:6px 0}.lesson-rating{text-align:center;margin:20px 0}.rating-paws{display:flex;justify-content:center;gap:12px}.rating-paw{position:relative;display:block;width:52px;height:52px;color:#ded2eb}.rating-paw>svg,.rating-paw>span svg{width:52px;height:52px;fill:currentColor;stroke-width:1}.rating-paw>span{position:absolute;inset:0 auto 0 0;overflow:hidden;color:#8d64bf}.rating-value{font-size:24px;font-weight:700;color:#65438d}.lesson-rating p{margin:8px 0}

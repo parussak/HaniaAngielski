@@ -21,7 +21,7 @@ test('kotki reagują na błąd i poprawę, wracają po odświeżeniu i bawią na
   await page.screenshot({path:'test-results/cat-success-mobile.png'});
   await page.getByRole('button',{name:'Dalej',exact:false}).click();
   await expect(page.getByRole('heading',{name:'Dobra robota, Haniu!'})).toBeVisible();await expect(page.locator('.summary .cat-mascot')).toHaveAttribute('data-mood','funny');
-  await expect(page.locator('.summary-score')).toContainText('0 / 1');await page.screenshot({path:'test-results/cat-summary-mobile.png'});
+  await expect(page.locator('.rating-value')).toHaveText('0 / 3 łapki');await page.screenshot({path:'test-results/cat-summary-mobile.png'});
 });
 
 test('galeria zaakceptowanych 25 wariantów — kontrola kadrowania',async({page})=>{

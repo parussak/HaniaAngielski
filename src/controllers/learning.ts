@@ -15,7 +15,8 @@ import type { createCourseController } from './courses.ts';
 import { courseKey } from '../learning/scope.ts';
 import {followingLesson,lessonContext,legendarySession} from '../learning/lesson-flow.ts';
 import {varyLesson} from '../learning/lesson-variety.ts';
-import {answerOnBoard,gapTokens,placeGap,closeBoard} from '../learning/boards.ts';
+import {answerOnBoard,gapTokens,placeGap,closeBoard,boardReady} from '../learning/boards.ts';
+import {retryAnswer} from '../learning/retry.ts';
 import {continueScene} from '../learning/scenes.ts';
 interface LearningPorts {
     courses: ReturnType<typeof createCourseController>;
@@ -254,6 +255,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             const s = state.progress.active;
             if (!s)
                 return true;
+            if(!el.dataset.answer?.trim())return true;
             await mutate(p => { const session = p.active!;
                 const q=questionFor(state.modules,session.items[session.index]);
                 if (recordAnswer(p, q, el.dataset.answer ?? '') === false){
@@ -264,11 +266,10 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             });
         }
         else if (action === 'retry')
-            await mutate(p => { if (p.active?.phase === 'feedback' && p.active.lastCorrect === false) {
-                p.active.phase = 'retry';
-                p.active.lastCorrect = null;
-            } });
+            await mutate(p => {retryAnswer(p,el.dataset.key);});
         else if (action === 'next') {
+            const active=state.progress.active,current=active?.items[active.index];
+            if(active&&(current?.pairGroup||current?.presentation==='bank')&&!boardReady(active))return true;
             const rewardCourse=currentCourse(state)!.id;
             const earned = homeFor(state.progress,rewardCourse)?.earned ?? 0, bonuses = Object.values(state.progress.adventure?.stageReviews ?? {}).filter(r => r.rewardedAt).length;
             state.lastReward = 0;

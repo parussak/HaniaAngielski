@@ -5,22 +5,35 @@ import {courseFixture} from './fixtures/course-materials.ts';
 import {emptyProgress,questionFor,recordAnswer,next,backup,validateBackup} from '../src/core.ts';
 import {makeLessonSession,type Journey} from '../src/adventure.ts';
 import {varyLesson} from '../src/learning/lesson-variety.ts';
-import {answerOnBoard,boardItems,placeGap,gapTokens,closeBoard,boardError} from '../src/learning/boards.ts';
+import {answerOnBoard,boardItems,placeGap,gapTokens,closeBoard,boardError,boardReady} from '../src/learning/boards.ts';
+import {retryAnswer} from '../src/learning/retry.ts';
 import {AppState} from '../src/app/state.ts';
 import {restoreNavigation,saveNavigation} from '../src/app/navigation.ts';
 import {courseContext} from '../src/views/courses.ts';
+import {createLearningController} from '../src/controllers/learning.ts';
 const course=courseFixture().courses[0],m=engineModule('board-unit',course.id);
 const j:Journey={version:1,moduleId:m.id,title:'Mapa',stages:[{id:'stage',title:'Etap',cat:'albert',illustration:'illustrations/test.svg',lessons:[{id:'words',title:'Słowa',intro:'',wordIds:m.words.slice(0,5).map(w=>w.id),exerciseIds:[],ruleIds:[]},{id:'gaps',title:'Luki',intro:'',wordIds:[],exerciseIds:m.exercises.filter(q=>q.kind==='grammar').slice(0,6).map(q=>q.id),ruleIds:[]}]}]};
 function active(index=0){const p=emptyProgress(),l=j.stages[0].lessons[index];p.active=varyLesson(makeLessonSession([m],j,l,'mixed',p),[m],[j],j,l,p);return p;}
 
-test('Dalej zamyka całą planszę mimo błędów i pustych luk, bez ponownego oceniania i zmiany gwiazdek',()=>{
+test('puste luki blokują Dalej bez zapisywania pustej odpowiedzi; wypełniona błędna plansza pozwala wyjść',()=>{
  const p=active(1),s=p.active!,group=boardItems(s);p.adventure={version:1,earned:27,purchases:{},completed:{}};
  placeGap(p,[m],[j],group[0].key,questionFor([m],group[1]).answers[0]);assert.equal(boardError(s,group[0].key),true);
- const attempt=structuredClone(s.attempts[0]);closeBoard(p,[m],[j]);
+ const attempt=structuredClone(s.attempts[0]),before=structuredClone(p);assert.equal(boardReady(s),false);assert.equal(closeBoard(p,[m],[j]),false);assert.deepEqual(p,before);
+ placeGap(p,[m],[j],group[1].key,questionFor([m],group[0]).answers[0]);assert.equal(boardReady(s),true);closeBoard(p,[m],[j]);
  assert.equal(s.index,Math.max(...group.map(i=>s.items.indexOf(i))));assert.equal(s.phase,'feedback');assert.equal(p.adventure!.earned,27);
  assert.deepEqual(s.attempts.find(a=>a.key===attempt.key),attempt);assert.equal(s.attempts.length,group.length);assert.ok(s.attempts.every(a=>!a.first));
  assert.deepEqual(validateBackup(backup(p)).progress,p);
  delete s.gapPlacements;delete s.gapSelection;next(p);assert.ok(!p.active||!group.includes(p.active.items[p.active.index]));
+});
+
+test('Popraw lukę zachowuje pierwszy błąd i gwiazdki; poprawione pola nie wymagają ponownej odpowiedzi',()=>{
+ const p=active(1),s=p.active!,group=boardItems(s);p.adventure={version:1,earned:27,purchases:{},completed:{}};
+ placeGap(p,[m],[j],group[0].key,questionFor([m],group[1]).answers[0]);
+ const first=structuredClone(s.attempts[0]);assert.equal(retryAnswer(p,group[0].key),true);assert.equal(boardReady(s),false);assert.deepEqual(s.attempts[0],first);
+ for(const i of group)placeGap(p,[m],[j],i.key,questionFor([m],i).answers[0]);
+ assert.equal(s.boardSummary,true);assert.equal(s.index,Math.max(...group.map(i=>s.items.indexOf(i))));assert.equal(s.attempts.length,2);
+ assert.equal(s.attempts.find(a=>a.key===first.key)!.first,false);assert.equal(s.attempts.find(a=>a.key===first.key)!.corrected,true);assert.equal(p.adventure!.earned,27);
+ assert.deepEqual(validateBackup(backup(p)).progress,p);
 });
 
 test('luka ocenia przy wstawieniu, zostawia błąd i pozwala przenieść lub odłożyć słowo bez dodatkowych prób',()=>{
@@ -54,6 +67,11 @@ test('dawna para już pominięta po błędzie nie powoduje skoku poza planszę a
  assert.equal(p.active,s);assert.equal(s.boardSummary,true);assert.equal(s.attempts[0].first,false);
 });
 function state(){const s=new AppState();s.modules=[m];s.courses=[course];s.selected=m;s.selectedCourseId=course.id;s.journeys=[j];s.ready=true;return s;}
+test('kontroler blokuje obejście Dalej przy pustej luce bez zapisu lub rozliczenia nagrody',async()=>{
+ const s=state();s.progress=active(1);s.lastReward=7;const before=structuredClone(s.progress);let writes=0;
+ const controller=createLearningController(s,{courses:{select:async()=>false,restore:async()=>{},followSession:async()=>{}},scheduleReviewMigration:()=>{},mutate:async change=>{writes++;change(s.progress);}});
+ assert.equal(await controller.handleAction('next',{dataset:{}} as HTMLElement),true);assert.deepEqual(s.progress,before);assert.equal(writes,0);assert.equal(s.lastReward,7);
+});
 test('historia zapisuje ekrany, nie odpowiedzi, i przywraca lekcję tylko właściwemu kontu',t=>{
  const originalHistory=Object.getOwnPropertyDescriptor(globalThis,'history'),originalLocation=Object.getOwnPropertyDescriptor(globalThis,'location');const entries:unknown[]=[];
  const h={state:null as unknown,replaceState(v:unknown){this.state=v;},pushState(v:unknown){this.state=v;entries.push(v);}};
