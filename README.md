@@ -1,5 +1,7 @@
 # Małe kroki — nauka Hani
 
+„Postępy” pokazują osobno ukończone mapy i lekcje, tydzień nauki oraz małe sukcesy w wybranym kursie. Zdobyte gwiazdki pozostają widoczne po zakupach; dokładne wyniki i historia są w rozwijanych szczegółach. Widok korzysta z dotychczasowych zapisów, bez nowego algorytmu opanowania — [zasady liczenia](docs/03-nauka.md).
+
 Lekcje mapowe automatycznie łączą wpisywanie, wybór, dobieranie par i luki z bankiem propozycji. Po lekcji można przejść dalej, zrobić dobrowolny **Poziom legendarny** (+1 ★ za pełną powtórkę) lub wrócić do mapy. Food zachowuje obie mapy i wcześniejsze postępy. [Zasady nauki](docs/03-nauka.md).
 
 Aplikacja internetowa: fiszki, quizy, gramatyka, lokalne postępy i opcjonalne konto z synchronizacją przez Firebase. Dostępny jest moduł 2 **Food — Fun with food**, opracowany z przesłanych zdjęć podręcznika i zeszytu ćwiczeń, z dwiema mapami nauki. Aktualny zakres i ograniczenia opisuje [audyt Food](docs/wdrozenie-food.md). Materiał demonstracyjny został usunięty.

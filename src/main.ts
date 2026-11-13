@@ -4,6 +4,7 @@ import './theme.css';
 import './adventure.css';
 import './home.css';
 import './courses.css';
+import './progress.css';
 import { deadline, sdk } from './services/firebase-client.ts';
 import { createAccountController } from './controllers/account.ts';
 import { bindAppEvents } from './app/events.ts';

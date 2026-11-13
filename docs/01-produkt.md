@@ -1,5 +1,11 @@
 # Produkt — dla kogo i po co
 
+## Postępy jako podróż — D-57, stan obecny
+
+Zakładka pokazuje postępy wybranego kursu, z przełącznikami pozostającymi na tym ekranie. U góry są kotek, życzliwy komunikat o aktywności, ukończone lekcje i mapy oraz wszystkie zdobyte gwiazdki z osobnym saldem do wydania. Karty map mają nazwy przygód, oznaczenie modułu, licznik ukończonych lekcji, pasek i wejście do właściwej mapy; „Kontynuuj przygodę” korzysta z istniejącego następnego kroku.
+
+Tydzień od poniedziałku do niedzieli zaznacza dni nauki bez kar za przerwę i bez obowiązkowej serii. „Ostatnie małe sukcesy” docenia trafne powroty, poprawki, przećwiczone słowa i ukończone historyjki, gdy potwierdzają je dane. „Twój domek rośnie” łączy osiągnięcia z wyposażeniem i pokojami. Dokładność i pełna dostępna historia są w rozwijanych „Wynikach i historii nauki”; starsze sesje nadal można wczytać i eksportować. Nie pokazujemy wyniku jako procentu opanowania języka. [Kryteria i ograniczenia danych](03-nauka.md).
+
 **Historyjka to cała lekcja (D-54).** W czterech oznaczonych lekcjach Food od razu zaczyna się rozmowa z 4–5 lukami, bez fiszek i zadań wstępnych. Dwa różne kotki są portretami rozmówców, role pozostają podpisane, a wyróżnienie wskazuje aktualnie mówiącą postać. Ta sama obsada zostaje przez rozmowę, wznowienie i podsumowanie. Korzystamy z obecnych obrazków; nie wyświetlamy imion kotów zamiast ról w dialogu.
 
 Na mapie lekcje zawierające pełną scenę dialogową mają etykietę **💬 Historyjka**. Zwinięty etap pokazuje liczbę historyjek, a krótka legenda wyjaśnia oznaczenie. Etykieta pozostaje przy ukończonych lekcjach i w ich widoku przed rozpoczęciem; wynika z aktualnej treści, bez osobnej flagi do ręcznej edycji. Nie zmienia ukończeń, gwiazdek ani kolejności lekcji.

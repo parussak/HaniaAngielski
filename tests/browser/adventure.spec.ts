@@ -45,13 +45,13 @@ test('stara historia po imporcie ma małą migawkę, pełną kopię i działa na
   await page.goto('./');await openBackup(page);
   await page.locator('#import-file').setInputFiles({name:'old.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();
-  await page.getByRole('button',{name:'Moje postępy',exact:true}).tap();await expect(page.getByText('65 ukończonych sesji',{exact:false})).toBeVisible();
+  await page.getByRole('button',{name:'Moje postępy',exact:true}).tap();await page.locator('.progress-details > summary').tap();await expect(page.getByText('65 ukończonych sesji',{exact:false})).toBeVisible();
   await expect(page.getByRole('button',{name:'Pokaż starsze sesje'})).toBeVisible();
-  await page.getByRole('button',{name:'Pokaż starsze sesje'}).tap();await expect(page.locator('.history-row')).toHaveCount(66);
+  await page.getByRole('button',{name:'Pokaż starsze sesje'}).tap();await expect(page.locator('.progress-history .history-row')).toHaveCount(65);
   await openBackup(page);
   const download=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).tap();
   const file=await (await download).path();const copied=JSON.parse(readFileSync(file!,'utf8'));
   expect(copied.progress.sessions.length).toBeLessThanOrEqual(30);expect(copied.progress.history.sessions).toBe(35);expect(copied.archives.length).toBeGreaterThan(0);
   const context=await browser.newContext({baseURL:test.info().project.use.baseURL,viewport:{width:390,height:844}});
-  try{const second=await context.newPage();await second.goto('./');await openBackup(second);await second.locator('#import-file').setInputFiles(file!);await second.getByRole('button',{name:'Zastąp postępy',exact:true}).click();await second.getByRole('button',{name:'Moje postępy',exact:true}).click();await expect(second.getByText('65 ukończonych sesji',{exact:false})).toBeVisible();await second.getByRole('button',{name:'Pokaż starsze sesje'}).click();await expect(second.locator('.history-row')).toHaveCount(66);}finally{await context.close();}
+  try{const second=await context.newPage();await second.goto('./');await openBackup(second);await second.locator('#import-file').setInputFiles(file!);await second.getByRole('button',{name:'Zastąp postępy',exact:true}).click();await second.getByRole('button',{name:'Moje postępy',exact:true}).click();await second.locator('.progress-details > summary').click();await expect(second.getByText('65 ukończonych sesji',{exact:false})).toBeVisible();await second.getByRole('button',{name:'Pokaż starsze sesje'}).click();await expect(second.locator('.progress-history .history-row')).toHaveCount(65);}finally{await context.close();}
 });

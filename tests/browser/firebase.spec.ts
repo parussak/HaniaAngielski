@@ -2,9 +2,10 @@ import {resumeStudy} from './helpers.ts';
 import {openWarmup,openStageReview} from './navigation.ts';
 import {openBackup} from './navigation.ts';
 import {openModule,openMap} from './navigation.ts';
-import {test,expect,type BrowserContext} from './fixtures.ts';
+import {test,expect,type BrowserContext,type Page} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
 import {backup,emptyProgress} from '../../src/core.ts';
+async function savedWords(page:Page){await openBackup(page);const download=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).click();return JSON.parse(readFileSync((await(await download).path())!,'utf8')).progress.words;}
 const mockSDK=String.raw`
 export const restoreUser=async()=>JSON.parse(localStorage.getItem('test-user')??'null');
 function accounts(){return JSON.parse(localStorage.getItem('test-accounts')??'{}');}
@@ -104,14 +105,14 @@ test('konto: migracja gościa, automatyczny zapis, drugie urządzenie i wylogowa
     await page.screenshot({path:'test-results/firebase-account-mobile.png',fullPage:true});
     const second=await b.newPage();await second.goto('./');await signIn(second);
     await second.getByRole('button',{name:'Moje postępy',exact:true}).click();
-    await expect(second.locator('.stats-grid article').first().locator('strong')).toHaveText('1');
+    expect(await savedWords(second)).toEqual(guest.words);
     await page.getByRole('button',{name:'Wyloguj się',exact:true}).click();
     await expect(page.getByRole('heading',{name:'Zaloguj się',exact:true})).toBeVisible();
     await page.getByRole('button',{name:'Moje postępy',exact:true}).click();
-    await expect(page.locator('.stats-grid article').first().locator('strong')).toHaveText('1');
+    expect(await savedWords(page)).toEqual(guest.words);
     // Inne konto nie otrzymuje automatycznie wyników gościa ani poprzedniego konta.
     await signIn(page,'other@example.test');expect(cloud.data.has('other@example.test')).toBe(false);
-    await page.getByRole('button',{name:'Moje postępy',exact:true}).click();await expect(page.locator('.stats-grid article').first().locator('strong')).toHaveText('0');
+    await page.getByRole('button',{name:'Moje postępy',exact:true}).click();expect(await savedWords(page)).toEqual({});
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
   }finally{await a.close();await b.close();}
 });

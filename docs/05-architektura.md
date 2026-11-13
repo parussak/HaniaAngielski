@@ -1,5 +1,9 @@
 # Architektura — realizacja techniczna
 
+## D-57 — odczyt postępów i ich prezentacja
+
+`learning/progress-overview.ts` jest czystą projekcją istniejących map, sesji, archiwum i kursu; przyjmuje datę, aby testy tygodnia nie zależały od zegara. Oddziela sumy z archiwum od dostępnej listy sesji, deduplikuje dołączone strony po ID sesji i nie modyfikuje `Progress`. `views/progress.ts` renderuje kurs, mapy, tydzień, sukcesy, domek i zwinięte szczegóły. `progress.css` ogranicza styl do tego widoku. Akcje kontynuacji i map korzystają z obecnych kontrolerów, a `progress-course` wybiera kurs istniejącą usługą preferencji i pozostaje na ekranie postępów. Renderer zachowuje otwarcie szczegółów przy dołączaniu archiwum lub odświeżeniu tego samego kursu, bez zapisywania go w wynikach.
+
 ## D-56 — zakończenie planszy i oprawa dialogu
 
 `learning/boards.ts:closeBoard` przygotowuje przejście poza całą grupę bez wymogu bezbłędności; zapisuje tylko brakujące próby i używa dotychczasowych mechanizmów błędów. Kontroler wywołuje je w tej samej mutacji co istniejące `next` i rozliczenie nagrody. `boardError` odtwarza trwały kolor z próby, bez nowego pola sesji. `views/lesson-activities.ts` zachowuje planszę, a `bankExplanationView` dodaje wyjaśnienia dopiero po wypełnieniu wszystkich luk. `sceneScriptView` umieszcza kociego rozmówcę przy każdej kwestii i wywołuje istniejącą akcję `retry` z przycisku w bieżącej linijce. Format materiałów i mechanika oceniania scen pozostają wspólne.

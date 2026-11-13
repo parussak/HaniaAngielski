@@ -1,5 +1,7 @@
 # Ustalenia i rzeczy do rozstrzygnięcia
 
+**D-57 · 13 listopada 2026 — wdrożone:** nowy widok „Postępy” pokazuje osobno trwałe ukończenia lekcji i map, aktywność tygodniową oraz konkretne sukcesy z ostatnich sesji. Widok jest oddzielny dla kursów, zdobyte gwiazdki są osobne od salda do wydania. Dokładność pierwszych odpowiedzi i historia są w zwiniętych szczegółach. Wyłącznie odczyt obecnych danych — bez nowego algorytmu opanowania, obowiązkowej serii, migracji lub zmiany nagród. [Produkt](01-produkt.md), [zasady liczenia](03-nauka.md).
+
 **D-56 · 13 listopada 2026 — wdrożone:** plansza ma „Dalej” również przy błędnych i pustych lukach. Kolor błędnej luki pozostaje do poprawy. Po wypełnieniu całej planszy pokazujemy wyjaśnienia pod zachowanym zadaniem; bez licznika pierwszych trafień w podsumowaniu planszy/historyjki. Historyjka ma poprawę konkretnej bieżącej linijki i portret stałego kociego rozmówcy przy każdej wypowiedzi. Dotychczasowe wyniki, ukończenia i gwiazdki pozostają; zapis kopii v1 nie wymaga migracji. [Reguły](03-nauka.md).
 
 **D-55 · 13 listopada 2026 — wdrożone:** opcje wyboru słówek pokazują własne wymagane a/an z danych materiału. Wstawienie słowa w planszę luk od razu je sprawdza, bez dodatkowego „Sprawdź”. Błędne słowo zostaje do ręcznego przeniesienia lub odłożenia; użyty token zostawia puste miejsce w banku. Klikanie i przeciąganie obsługują przenoszenie między lukami i powrót do banku. Bez zmian w ocenianiu rodzajników, identyfikatorach, formacie kopii, ukończeniach i gwiazdkach. [Reguły](03-nauka.md).

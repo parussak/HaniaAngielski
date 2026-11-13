@@ -1,5 +1,15 @@
 # Nauka — prowadzenie i utrwalanie
 
+## D-57 — co mierzy widok postępów — wdrożone
+
+- **Przygoda:** ukończone klucze lekcji z `adventure.completed`, w aktualnej projekcji map i planów tego konta. Powtórzenie lekcji nie dodaje nowego ukończenia, błędy nie zmniejszają wyniku. Pasek oznacza ukończenie konkretnej mapy, nie zapamiętanie całego materiału. Brakujące mapy są sygnalizowane; nie udajemy pełnego zestawu.
+- **Gwiazdki:** wszystkie zdobyte z portfela kursu oraz osobno dostępne po zakupach. Odczyt nie nadaje nagród ani nie odblokowuje rzeczy; wyposażenie i dodatkowe pokoje wynikają z dotychczasowego zapisu.
+- **Tydzień:** lokalny czas urządzenia, poniedziałek–niedziela. Dzień nauki wymaga zakończonej sesji z niepustą odpowiedzią lub poprawką. Same otwarcia, pominięcia z pustą odpowiedzią i przyszłe daty nie zapełniają dni. Kilka sesji jednego dnia zaznacza jeden dzień. Bez nowej ewidencji czasu ani serii.
+- **Ostatnie sukcesy:** z bieżących szczegółowych sesji kursu, osobno od trwałych ukończeń. Trafny powrót to poprawna pierwsza odpowiedź na klucz z niepustą próbą we wcześniejszej sesji lub potwierdzonym trafieniem w podsumowaniu archiwum. Poprawka po błędzie jest doceniana osobno. Liczymy różne hasła z niepustą próbą, łącząc fiszkę i quiz wskazujący to samo słowo. Historyjka wymaga zakończonej lekcji z grupą sceny i odpowiedzią na przynajmniej jedną jej lukę. To dowody ćwiczenia, nie deklaracja biegłości lub trwałego zapamiętania.
+- **Historia:** sumy sesji uwzględniają podsumowanie archiwum bez pobierania stron. Dołączenie stron nie zwiększa tej sumy ponownie. Tydzień korzysta z dostępnych dat; jeśli starszych stron brakuje, pokazujemy ograniczenie i możliwość ich wczytania. Szczegóły dokładności zachowują istniejące zasady pierwszych prób i osobnych poprawek. Dane spoza obecnej biblioteczki są dostępne osobno i nie są przypisywane dowolnemu kursowi.
+
+Na razie nie dodajemy procentowego poziomu opanowania, nowego algorytmu utrwalania ani ustawiania tygodniowych celów. To przyszłe możliwości wymagające osobnego uzgodnienia, nie warunek używania obecnego widoku.
+
 ## D-56 — plansze bez blokowania i dialogi jak rozmowa — wdrożone
 
 Przycisk „Dalej” jest dostępny na planszach luk i par również bez poprawienia błędów. Kończy bieżącą planszę i prowadzi do kolejnego zadania albo podsumowania lekcji, bez dokładania zadań. Zachowujemy już ocenione próby; niewypełnione pozycje zapisujemy jako bez odpowiedzi (niepoprawne), aby wynik nie udawał rozwiązania. Nie blokuje to ukończenia ani dotychczasowych nagród.

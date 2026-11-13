@@ -121,6 +121,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             state.selected=m;await openSession(session);return true;
         }
         if (action === 'courses') { state.screen = 'courses'; return true; }
+        if (action === 'progress-course') { if (await courses.select(el.dataset.id ?? '')) state.screen = 'progress'; return true; }
         if (action === 'select-course') { if (await courses.select(el.dataset.id ?? '')) state.screen = 'home'; return true; }
         if (action === 'resume') { await courses.followSession(); showResume(); return true; }
         if (action === 'module' || action === 'quick-start') {

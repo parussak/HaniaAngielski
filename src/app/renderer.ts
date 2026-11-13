@@ -18,10 +18,14 @@ export function createRenderer(root: HTMLDivElement, state: AppState, renderScre
         const focusId = focused?.id;
         const changedScreen = state.renderedScreen !== state.screen;
         const helpOpen = !changedScreen && !!root.querySelector<HTMLDetailsElement>('.home-help')?.open;
+        const progressDetails=root.querySelector<HTMLDetailsElement>('.progress-details');
+        const progressOpen=!changedScreen&&!!progressDetails?.open,progressCourse=progressDetails?.dataset.course;
         root.innerHTML = renderScreen();
         const help = root.querySelector<HTMLDetailsElement>('.home-help');
         if (help)
             help.open = helpOpen;
+        const newProgressDetails=root.querySelector<HTMLDetailsElement>('.progress-details');
+        if(newProgressDetails&&newProgressDetails.dataset.course===progressCourse)newProgressDetails.open=progressOpen;
         root.setAttribute('aria-busy', String(state.busy));
         if (!state.ready || state.busy)
             root.querySelectorAll<HTMLButtonElement | HTMLInputElement>('button,input').forEach(el => el.disabled = true);
