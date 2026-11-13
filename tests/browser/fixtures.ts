@@ -3,9 +3,9 @@ import {foodCourse} from '../materials.ts';
 export * from '@playwright/test';
 // UI regressions declare their Food scenario. Tests that install a different
 // library route override these handlers; real-catalog smoke tests use base.
-// D-58: tests run on a device without any voice unless they install one (see listening.spec.ts),
-// so results do not depend on the voices of the machine that runs them.
-export const silentDevice=()=>{Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{getVoices:()=>[],speak(){},cancel(){},addEventListener(){}}});};
+// Regressions use a device without system voices or an Opus decoder, exercising ordinary tasks.
+// listening.spec.ts adds TTS; recordings.spec.ts uses real media separately, without this fixture.
+export const silentDevice=()=>{Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{getVoices:()=>[],speak(){},cancel(){},addEventListener(){}}});Object.defineProperty(HTMLMediaElement.prototype,'canPlayType',{configurable:true,value:()=>''});};
 async function foodRoutes(context:BrowserContext){
   await context.addInitScript(silentDevice);
   await context.route('**/content/katalog.json',r=>r.fulfill({json:{version:1,coursesFile:'kursy.json',modules:['02-food']}}));

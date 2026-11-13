@@ -25,9 +25,13 @@ function cloudError(error: unknown) {
 }
 import { speaker } from '../speech.ts';
 import type { Module } from '../core.ts';
+import {keyFor,questionFor} from '../core.ts';
+import {vocabularyFullAnswer} from '../learning/vocabulary-answer.ts';
 /** D-58: the listening switch lives on the device, outside the saved progress. */
 export function listeningSettingsView(modules: Module[]) {
-    const speech = speaker(), sample = modules.find(m => m.languageCode && m.words.length), language = sample?.languageCode, on = speech.enabled(), ready = speech.available(language);
-    const status = !on ? 'Słuchanie jest wyłączone. Zadania mają zwykłą formę.' : ready ? 'To urządzenie ma głos dla języka tego kursu.' : 'To urządzenie nie ma teraz głosu dla języka tego kursu. Zadania mają zwykłą formę — nic nie trzeba robić.';
-    return `<section class="panel listening-settings"><h2>Ćwiczenia ze słuchu</h2><p>W lekcjach można posłuchać słówek i rozmów. Bez dźwięku te same zadania pokazują się w zwykłej formie.</p><label for="listening"><input type="checkbox" id="listening" ${on ? 'checked' : ''}> Włącz ćwiczenia ze słuchu</label><p class="listening-status" aria-live="polite">${status}</p>${ready && sample ? `<button class="secondary" data-action="listen" data-say="${e(sample.words[0].back)}" data-lang="${e(language!)}">Sprawdź dźwięk</button>` : ''}</section>`;
+    const speech = speaker(), sample = modules.find(m => m.languageCode && m.words.length), language = sample?.languageCode, on = speech.enabled();
+    const word=sample?.words[0],text=sample&&word?vocabularyFullAnswer(questionFor(modules,{key:keyFor(sample,'word',word.id),moduleId:sample.id,id:word.id,version:word.rev??1,type:'word',input:'text'})):'';
+    const ready=speech.available(language,text);
+    const status = !on ? 'Słuchanie jest wyłączone. Zadania mają zwykłą formę.' : ready ? 'Dźwięk dla tego kursu jest dostępny: nagrania lub głos urządzenia.' : 'Dźwięk jest teraz niedostępny. Zadania mają zwykłą formę — nic nie trzeba robić.';
+    return `<section class="panel listening-settings"><h2>Ćwiczenia ze słuchu</h2><p>W lekcjach można posłuchać słówek i rozmów. Bez dźwięku te same zadania pokazują się w zwykłej formie.</p><label for="listening"><input type="checkbox" id="listening" ${on ? 'checked' : ''}> Włącz ćwiczenia ze słuchu</label><p class="listening-status" aria-live="polite">${status}</p>${ready && sample ? `<button class="secondary" data-action="listen" data-say="${e(text)}" data-lang="${e(language!)}">Sprawdź dźwięk</button>` : ''}</section>`;
 }

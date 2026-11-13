@@ -148,8 +148,7 @@ test('każdy kurs: język mowy pochodzi z kursu, a kod słuchania nie zna żadne
  assert.equal(task.language,'fr');
  const d=device([{lang:'fr-FR',localService:true}]);assert.equal(d.speaker.speak(task.text,task.language),true);assert.equal(d.spoken[0].lang,'fr-FR');assert.equal(d.speaker.available('en'),false);
  for(const file of ['../src/speech.ts','../src/learning/listening.ts'])assert.doesNotMatch(readFileSync(new URL(file,import.meta.url),'utf8'),/unit-2-food|02-food|angielski|apple|en-GB|en-US/);
- // No sound file and no network address: the PWA package does not grow.
- assert.doesNotMatch(readFileSync(new URL('../src/speech.ts',import.meta.url),'utf8'),/https?:|\.mp3|\.ogg|\.wav|fetch\(/);
+ // D-60 adds local recordings; their index, fallback and offline requests have separate behavior tests.
 });
 
 test('Food: lekcje słówek dostają słuchanie w języku kursu, a hasła mają znaczenia do wyboru',()=>{

@@ -12,6 +12,7 @@ import { e } from '../ui.ts';
 import {restoreNavigation} from './navigation.ts';
 import {updateBanner} from '../views/home.ts';
 import {pwa} from '../pwa.ts';
+import {initializeRecordings} from '../speech.ts';
 interface StartupPorts {
     root: HTMLDivElement;
     state: AppState;
@@ -36,7 +37,7 @@ export async function startApplication({ root, state, sync, prepareProgress, rem
             return;
         }
         try {
-            const [library, cats] = await Promise.all([loadLibrary(), loadCats()]);
+            const [library, cats] = await Promise.all([loadLibrary(), loadCats(),initializeRecordings()]);
             state.courses = library.courses;
             state.modules = library.modules;
             state.catCatalog = cats;

@@ -1,6 +1,6 @@
 # Lokalne generowanie audio — D-59
 
-**Stan obecny:** generator i zestaw Food są gotowe. Uruchamianie i lokalizację narzędzi opisuje [instrukcja audio](../audio/README.md). Odtwarzanie w aplikacji pozostaje syntezą przeglądarki z D-58.
+**Stan obecny:** generator i zestaw Food są gotowe. Uruchamianie i lokalizację narzędzi opisuje [instrukcja audio](../audio/README.md). Od D-60 gotowe klipy są podłączone do aplikacji i PWA offline, z syntezą przeglądarki jako źródłem zapasowym — [reguły słuchania](03-nauka.md), [architektura](05-architektura.md).
 
 **Pomiar 13 listopada 2026:** 97 haseł i 23 kwestie scen dają 120 odwołań do 111 różnych klipów. Nagrania zajmują 266 115 bajtów (259,9 KiB), manifest 76 404 bajty; razem około 335 KiB. To pomiar tego zestawu, nie limit przyszłych modułów. Gotowe pliki sprawdzono przez pełne dekodowanie ffmpeg; nie wykonano nowego odsłuchu każdego słowa ani próby na telefonie.
 
@@ -15,7 +15,7 @@ W tym etapie przygotowujemy nagrania dla Food: pełne formy wszystkich haseł z 
 - `public/content/` pozostaje jedynym miejscem redakcji materiału. Generator korzysta ze wspólnego odczytu materiałów i istniejącej reguły pełnej odpowiedzi, zamiast kopiować słówka lub zasady a/an.
 - `audio/config.json` określa moduły, głos, parametry i wersje narzędzi poprzez sumy SHA-256. Nie zawiera kopii treści lekcji ani ścieżki konkretnego użytkownika.
 - `scripts/audio/` odpowiada za plan tekstów, generowanie, kontrolę i pliki wynikowe. Aplikacja nie importuje generatora.
-- `audio/generated/` zawiera gotowe nagrania i manifesty, przeznaczone do repozytorium. Pozostaje **poza `public/` i `dist/`**, dlatego strona i pamięć offline nadal nie korzystają z nagrań.
+- `audio/generated/` zawiera gotowe nagrania i manifesty, przeznaczone do repozytorium. Źródło pozostaje **poza `public/`**. W D-60 budowanie kopiuje zweryfikowane klipy do `dist/audio/` wraz z lekkim indeksem; pełny manifest pozostaje poza publikacją.
 - Piper, jego biblioteki, modele głosu i ffmpeg pozostają poza projektem. Ścieżkę można podać lokalnie; nie kopiujemy setek MB narzędzi do repozytorium.
 
 ## Zachowanie generatora
@@ -25,7 +25,7 @@ W tym etapie przygotowujemy nagrania dla Food: pełne formy wszystkich haseł z 
 3. Przy kolejnym uruchomieniu sprawdza sumy istniejących plików, zachowuje prawidłowe i generuje tylko brakujące lub uszkodzone. Niezmieniony zestaw nie jest ponownie zapisywany.
 4. Zachowuje parametry zatwierdzonych próbek: długość fonemów 1,08; odstęp między zdaniami 0,25 s; przycięcie nadmiaru ciszy i wyrównanie głośności. Wolniejsza wersja nie jest osobnym plikiem.
 5. Przy błędzie nie zastępuje poprzedniego kompletnego zestawu. Po udanej aktualizacji usuwa wyłącznie stare pliki zarządzanego zestawu; nie czyści dowolnych katalogów ani nieznanych plików. Blokuje jednoczesne uruchomienia.
-6. Oddzielna kontrola `npm run audio:check` wykrywa brakujące, nieaktualne, uszkodzone i osierocone nagrania bez uruchamiania syntezatora. W tym etapie nie podłączamy jej do zwykłego budowania strony.
+6. Oddzielna kontrola `npm run audio:check` wykrywa brakujące, nieaktualne, uszkodzone i osierocone nagrania bez uruchamiania syntezatora. W pierwotnym D-59 kontrola była osobnym poleceniem. Od D-60 budowanie wykonuje tę kontrolę przed publikacją plików.
 
 ## Głos i źródła
 
@@ -35,4 +35,4 @@ Generator korzysta z [udokumentowanego wejścia JSON Pipera](https://github.com/
 
 ## Poza tym etapem
 
-Podłączenie nagrań do `Speaker`, mechanizm nagranie → synteza → zwykłe zadanie, pobieranie nagrań przez PWA, zwalnianie odtwarzania i próby na telefonie należą do następnego etapu. Automatyczny tryb obserwowania zmian także pozostaje na później. Sam generator nie zmienia działania aplikacji.
+D-60 wdraża podłączenie do `Speaker`, mechanizm nagranie → synteza → zwykłe zadanie, pobieranie przez PWA i wolniejsze odtwarzanie bez dodatkowego pliku. Próby na fizycznym telefonie i automatyczny tryb obserwowania zmian pozostają na później. Sam generator nie uruchamia aplikacji ani nie zmienia wyników.

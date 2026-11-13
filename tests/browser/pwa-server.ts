@@ -41,7 +41,7 @@ export async function pwaServer(){
       if(/^assets\/firebase-[^/]+\.js$/.test(file))body=sdk;
       if(file==='sw.js' && version>1)body=body.toString().replace(/const CACHE=PREFIX\+'[^']+';/,`const CACHE=PREFIX+'test-release-${version}';`);
       if(file==='content/02-food/modul.json' && version>1){const data=JSON.parse(body.toString());data.subtitle='Nowe materiały — test aktualizacji';body=JSON.stringify(data);}
-      const type:Record<string,string>={'.html':'text/html','.js':'text/javascript','.json':'application/json','.webmanifest':'application/manifest+json','.css':'text/css','.svg':'image/svg+xml','.png':'image/png'};
+      const type:Record<string,string>={'.html':'text/html','.js':'text/javascript','.json':'application/json','.webmanifest':'application/manifest+json','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.ogg':'audio/ogg'};
       res.writeHead(200,{'Content-Type':type[path.extname(file)]??'application/octet-stream','Cache-Control':'no-cache'});res.end(body);
     }catch{res.writeHead(404);res.end('not found');}
   });

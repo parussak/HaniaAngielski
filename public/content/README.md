@@ -141,7 +141,7 @@ npm.cmd run check:content
 
 Sprawdzanie wykrywa m.in. brakujące pola, powtórzone identyfikatory, nieistniejące słówka i pytania z niejednoznacznym kluczem wyboru. Nie zastępuje oceny językowej przez człowieka.
 
-Podczas lokalnej pracy wystarczy zapisać pliki i odświeżyć stronę. Materiały są pobierane z `content/`, a nie zaszyte w kodzie strony. Dla publikacji na GitHub Pages wyślij zmiany na gałąź `main` — publikacja uruchomi się automatycznie po przejściu testów. Przebudowa skopiuje aktualne pliki `public/content` do `dist/content`; nie trzeba zmieniać kodu aplikacji. Zainstalowana PWA pobiera spójne wydanie materiałów w tle; użytkownik wczytuje je przyciskiem „Zaktualizuj”.
+Podczas lokalnej pracy wystarczy zapisać pliki i odświeżyć stronę. Jeśli zmieniasz odczytywany tekst modułu objętego konfiguracją audio (obecnie Food), uruchom też `npm run audio` i dołącz zaktualizowane nagrania do Git. Budowanie sprawdza ich zgodność; [instrukcja audio](../../audio/README.md). Materiały są pobierane z `content/`, a nie zaszyte w kodzie strony. Dla publikacji na GitHub Pages wyślij zmiany na gałąź `main` — publikacja uruchomi się automatycznie po przejściu testów. Przebudowa skopiuje aktualne pliki `public/content` do `dist/content`; nie trzeba zmieniać kodu aplikacji. Zainstalowana PWA pobiera spójne wydanie materiałów w tle; użytkownik wczytuje je przyciskiem „Zaktualizuj”.
 
 ## Kolejny moduł
 

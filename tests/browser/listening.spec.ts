@@ -5,7 +5,7 @@ import {openBackup,openMap} from './navigation.ts';
 import {answerCurrent,resumeStudy} from './helpers.ts';
 import {readFileSync} from 'node:fs';
 import {foodModules as modules} from '../materials.ts';
-import {isCorrect,questionFor,type Progress} from '../../src/core.ts';
+import {isCorrect,questionFor,keyFor,type Progress} from '../../src/core.ts';
 import {vocabularyFullAnswer} from '../../src/learning/vocabulary-answer.ts';
 
 interface Device {voices:{lang:string;localService:boolean}[];fails?:boolean}
@@ -102,13 +102,13 @@ for(const quiet of [
  if(quiet.offline)await context.setOffline(false);
  // The saved session is the same one a device with sound would get: the mark is there, the form was ordinary.
  const session=(await exported(page)).sessions.at(-1)!;expect(session.items.filter(i=>i.listen).length).toBeGreaterThanOrEqual(1);expect(session.attempts.every(a=>a.first)).toBeTruthy();
- await page.getByRole('button',{name:'Konto',exact:true}).click();await expect(page.locator('.listening-status')).toContainText(quiet.offline?/./:'nie ma teraz głosu');
+ await page.getByRole('button',{name:'Konto',exact:true}).click();await expect(page.locator('.listening-status')).toContainText(quiet.offline?/./:'teraz niedostępny');
 });
 
 test('ustawienie: wyłączone słuchanie zostaje po odświeżeniu, a włączone wraca razem z próbą dźwięku',async({page,context})=>{
  await install(context,english);await page.goto('./');await page.getByRole('button',{name:'Konto',exact:true}).click();
- const toggle=page.getByRole('checkbox',{name:'Włącz ćwiczenia ze słuchu'});await expect(toggle).toBeChecked();await expect(page.locator('.listening-status')).toContainText('ma głos');
- await page.getByRole('button',{name:'Sprawdź dźwięk',exact:true}).click();expect((await spoken(page)).at(-1)).toEqual({text:modules[0].words[0].back,lang:'en-GB',rate:0.9});
+ const toggle=page.getByRole('checkbox',{name:'Włącz ćwiczenia ze słuchu'});await expect(toggle).toBeChecked();await expect(page.locator('.listening-status')).toContainText('jest dostępny');
+ await page.getByRole('button',{name:'Sprawdź dźwięk',exact:true}).click();expect((await spoken(page)).at(-1)).toEqual({text:vocabularyFullAnswer(questionFor(modules,{key:keyFor(modules[0],'word',modules[0].words[0].id),moduleId:modules[0].id,id:modules[0].words[0].id,version:1,type:'word',input:'text'})),lang:'en-GB',rate:0.9});
  await toggle.uncheck();await expect(page.locator('.listening-status')).toContainText('wyłączone');await expect(page.getByRole('button',{name:'Sprawdź dźwięk',exact:true})).toHaveCount(0);
  await page.reload();await expect(page.getByRole('checkbox',{name:'Włącz ćwiczenia ze słuchu'})).not.toBeChecked();
  await page.setViewportSize({width:320,height:640});await noScroll(page);await page.screenshot({path:'test-results/listening-settings-320.png',fullPage:true});await page.setViewportSize({width:390,height:844});
@@ -116,7 +116,7 @@ test('ustawienie: wyłączone słuchanie zostaje po odświeżeniu, a włączone 
  expect(await finishQuietly(page)).toBe(0);await expect(page.locator('.lesson-reward')).toContainText('+3 ★');expect(await spoken(page)).toHaveLength(0);
  // Switched back on with the keyboard: listening returns in the next lesson.
  await page.getByRole('button',{name:'Konto',exact:true}).click();await page.getByRole('checkbox',{name:'Włącz ćwiczenia ze słuchu'}).focus();await page.keyboard.press('Space');
- await expect(page.locator('.listening-status')).toContainText('ma głos');await page.reload();await expect(page.getByRole('checkbox',{name:'Włącz ćwiczenia ze słuchu'})).toBeChecked();
+ await expect(page.locator('.listening-status')).toContainText('jest dostępny');await page.reload();await expect(page.getByRole('checkbox',{name:'Włącz ćwiczenia ze słuchu'})).toBeChecked();
  await openMap(page);await page.locator('.lesson-step').nth(1).click();await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).click();await expect(page.locator('.study-heading')).toBeVisible();
  let found=false;for(let step=0;step<8&&!found&&await page.locator('.study-heading').count();step++){await idle(page);found=await listening(page).count()>0;if(found)break;if(!await page.locator('.feedback').count())await answerCurrent(page,modules);await page.getByRole('button',{name:/Dalej/}).click();await idle(page);}
  expect(found).toBeTruthy();

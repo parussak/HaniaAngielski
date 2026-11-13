@@ -1,13 +1,15 @@
 import {readdir,readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
+import {mediaRangeResponse} from './service-worker-range.mjs';
 const root=new URL('../dist/',import.meta.url);
 async function filesAt(directory,prefix=''){
   const entries=await readdir(directory,{withFileTypes:true});
   const lists=await Promise.all(entries.map(entry=>entry.isDirectory()?filesAt(new URL(entry.name+'/',directory),prefix+entry.name+'/'):Promise.resolve([prefix+entry.name])));
   return lists.flat();
 }
-const files=(await filesAt(root)).filter(path=>path!=='sw.js' && /\.(?:html|js|css|json|svg|png|ico|woff2?|webmanifest)$/.test(path)).sort();
+const files=(await filesAt(root)).filter(path=>path!=='sw.js' && /\.(?:html|js|css|json|svg|png|ico|ogg|woff2?|webmanifest)$/.test(path)).sort();
 const hash=createHash('sha256').update(await readFile(new URL(import.meta.url)));
+hash.update(await readFile(new URL('./service-worker-range.mjs',import.meta.url)));
 for(const file of files)hash.update(file).update(await readFile(new URL(file,root)));
 const version=hash.digest('hex').slice(0,16);
 // Wszystkie pliki wydania są pobierane atomowo. Wersja aplikacji i materiałów
@@ -18,6 +20,7 @@ const PREFIX='male-kroki-offline-'+encodeURIComponent(BASE.pathname)+'-';
 const CACHE=PREFIX+'${version}';
 const FILES=${JSON.stringify(files)};
 const URLS=new Set(FILES.map(file=>new URL(file,BASE).href));
+const mediaRangeResponse=${mediaRangeResponse.toString()};
 const SHELL=new URL('index.html',BASE).href;
 self.addEventListener('install',event=>{
   event.waitUntil((async()=>{
@@ -53,7 +56,7 @@ self.addEventListener('fetch',event=>{
   // Tylko jawna lista publicznych zasobów. Nigdy odpowiedzi Firebase ani tokeny.
   url.search='';url.hash='';
   if(!URLS.has(url.href))return;
-  event.respondWith((async()=>{const cache=await caches.open(CACHE);return (await cache.match(url.href))||fetch(request);})());
+  event.respondWith((async()=>{const cache=await caches.open(CACHE);const response=(await cache.match(url.href))||await fetch(request);return url.pathname.endsWith('.ogg')?mediaRangeResponse(request,response):response;})());
 });
 `;
 await writeFile(new URL('sw.js',root),worker);

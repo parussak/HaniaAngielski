@@ -1,21 +1,29 @@
 # Nauka — prowadzenie i utrwalanie
 
+## D-60 — gotowe nagrania Cori i offline
+
+**Wdrożone:** dla danego tekstu i języka najpierw odtwarzamy gotowy klip, a jeśli go nie ma, nie jest obsługiwany albo zawiedzie — korzystamy z dotychczasowego syntezatora. Bez dźwięku to samo zadanie przechodzi do zwykłej formy, bez utraty wpisanego tekstu. Stan odtwarzacza nie jest wynikiem nauki. Niedostępność jednego klipu nie wyłącza pozostałych. Przerwanie lub blokada automatycznego odtwarzania nie są błędem odpowiedzi.
+
+Zostają dotychczasowe ćwiczenia i przyciski słuchania, powtarzanie bez limitu oraz przełącznik urządzenia. „Wolniej” zmniejsza tempo tego samego pliku, z zachowaniem wysokości głosu, bez drugiego kompletu nagrań. Zmiana ekranu, zadania, konta albo wyłączenie słuchania przerywa poprzedni dźwięk; spóźniony błąd nie uruchamia poprzedniej wypowiedzi.
+
+Nagrania są częścią spójnego wydania PWA razem z indeksem i materiałami. Po przygotowaniu offline działają bez głosu systemowego i sieci. Kopie wyników, postępy, ukończenia, gwiazdki oraz dane konta pozostają bez zmian. Wymowa na fizycznym telefonie nadal wymaga odsłuchu, niezależnie od testów odtwarzacza.
+
 ## D-58 — słuchanie — wdrożone
 
 Cel: Hania słyszy poznawane słowa i rozmowy. Bez presji czasu i bez limitu odtworzeń. Mechanika jest wspólna dla wszystkich kursów; język mowy wynika z kursu.
 
-1. **Źródło dźwięku:** synteza mowy przeglądarki. Bez zewnętrznych usług, bez plików dźwiękowych w paczce PWA. Obsługa jest w jednym module, który można zastąpić odtwarzaniem nagrań bez zmiany ćwiczeń.
+1. **Źródło dźwięku:** pierwotna synteza przeglądarki jest od D-60 źródłem zapasowym po gotowych nagraniach. Bez zewnętrznych usług. Odtwarzacz ma wspólny interfejs, niezależny od ćwiczeń.
 2. **Posłuchaj i wybierz:** słychać hasło, a do wyboru są jego tłumaczenia z obrazkami. Pisanego hasła nie widać przed odpowiedzią.
 3. **Posłuchaj i wpisz:** słychać krótkie hasło (najwyżej trzy wyrazy) i trzeba je wpisać.
 4. **Głośnik w scenach:** przy każdej kwestii rozmowy, która nie ma już nieuzupełnionej luki, oraz w podsumowaniu sceny. Kwestii z otwartą luką nie odczytujemy, bo zdradziłaby odpowiedź.
 5. **Zawsze** są przyciski „Posłuchaj jeszcze raz” i „Wolniej”. Można słuchać dowolnie wiele razy; nic nie znika po czasie.
-6. **Powrót do zwykłej formy:** gdy nie ma głosu w języku kursu, urządzenie jest offline i głos wymaga sieci, odtwarzanie zgłosi błąd albo słuchanie jest wyłączone — to samo zadanie pokazuje się jak dotąd (tłumaczenie do wyboru lub wpisania). Odpowiedź, ocena i wynik są te same. Lekcja nigdy nie czeka na dźwięk.
+6. **Powrót do zwykłej formy:** gdy dla konkretnego tekstu nie można użyć ani nagrania, ani syntezy (także offline), albo słuchanie jest wyłączone — to samo zadanie pokazuje się jak dotąd (tłumaczenie do wyboru lub wpisania). Odpowiedź, ocena i wynik są te same. Lekcja nigdy nie czeka na dźwięk.
 7. **Ustawienie:** przełącznik „Ćwiczenia ze słuchu” z przyciskiem próby dźwięku. Zapamiętany na urządzeniu, nie w postępach.
 8. **Ocena:** ta sama co w pozostałych zadaniach, razem z zasadami a/an. Słuchanie zmienia tylko sposób pokazania pytania.
 9. **Dobór:** w nowej sesji lekcji najwyżej dwa słówka dostają słuchanie — jedno do wyboru, jedno do wpisania. Rozpoczęte sesje nie są przebudowywane; znacznik w sesji jest opcjonalny, kopia zostaje w wersji 1.
 10. Telefon, klawiatura, przyciski co najmniej 44 px, offline. Brak dźwięku nie jest błędem i nie pokazuje alarmu; stan dźwięku widać w ustawieniach.
 
-Wdrożenie: hasło jest odczytywane raz, gdy zadanie się pojawia, a potem na życzenie. Po odpowiedzi można posłuchać poprawnej formy. Odczytujemy pełną formę z rodzajnikiem, jeśli hasło go ma. Przełącznik jest na ekranie „Konto”, także bez logowania. Słuchanie dostają lekcje map (także Poziom legendarny i trening); klasyczne tryby modułu pozostają bez zmian. Automatyczne testy używają atrapy syntezy mowy — [głosy prawdziwych urządzeń](07-testy.md#d-58--słuchanie) wymagają sprawdzenia ręcznego.
+Wdrożenie: hasło jest odczytywane raz, gdy zadanie się pojawia, a potem na życzenie. Po odpowiedzi można posłuchać poprawnej formy. Odczytujemy pełną formę z rodzajnikiem, jeśli hasło go ma. Przełącznik jest na ekranie „Konto”, także bez logowania. Słuchanie dostają lekcje map (także Poziom legendarny i trening); klasyczne tryby modułu pozostają bez zmian. Testy syntezy używają atrapy, a D-60 dodatkowo sprawdza rzeczywiste odtwarzanie plików Opus w przeglądarce — [głosy prawdziwych urządzeń](07-testy.md#d-58--słuchanie) wymagają sprawdzenia ręcznego.
 
 ## D-57 — co mierzy widok postępów — wdrożone
 

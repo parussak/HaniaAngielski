@@ -55,8 +55,8 @@ export function studyView(state: Readonly<AppState>) {
     // D-58: a task marked for listening is spoken only when this device can speak the course language.
     const language=state.modules.find(m=>m.id===item.moduleId)?.languageCode;
     const heard=!scene&&!s.boardSummary?listeningTask(state.modules,item):undefined;
-    const listen=heard&&speaker().available(heard.language)?heard:undefined,asking=!!listen&&s.phase!=='feedback';
-    const say=speaker().available(language)?(text:string)=>`<button class="scene-say" data-action="listen" data-say="${e(text)}" data-lang="${e(language!)}" aria-label="Posłuchaj tej kwestii">${icon('sound')}</button>`:undefined;
+    const listen=heard&&speaker().available(heard.language,heard.text)?heard:undefined,asking=!!listen&&s.phase!=='feedback';
+    const say=(text:string)=>speaker().available(language,text)?`<button class="scene-say" data-action="listen" data-say="${e(text)}" data-lang="${e(language!)}" aria-label="Posłuchaj tej kwestii">${icon('sound')}</button>`:'';
     let card = '';
     if(asking)card=`<div class="exercise-label">${icon('sound')} POSŁUCHAJ</div><h2 class="question">${listen!.choices?'Posłuchaj i wybierz, co to znaczy.':'Posłuchaj i wpisz to, co słyszysz.'}</h2>${listenButtons(listen!,item.key,true)}`;
     else card = `<div class="exercise-label">${icon(item.type === 'word' ? 'cards' : q.kind === 'grammar' ? 'book' : 'spark')} ${item.type === 'word' ? 'FISZKA · '+translationPrompt(state.modules.find(m=>m.id===item.moduleId)!).toLocaleUpperCase('pl') : q.kind === 'dialogue' ? 'POROZMAWIAJMY'+(scene?' · '+e(scene.scene.title.toLocaleUpperCase('pl')):'') : q.kind === 'grammar' ? 'MAŁY KROK W GRAMATYCE' : 'SŁÓWKO PO SŁÓWKU'}</div><h2 class="question">${e(q.prompt)}</h2>`;

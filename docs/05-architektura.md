@@ -1,8 +1,15 @@
 # Architektura — realizacja techniczna
 
+## D-60 — publikowanie i odtwarzanie nagrań
+
+- `scripts/audio/publish.mjs` sprawdza manifest względem aktualnych materiałów, profilu i sum klipów. Wtyczka w `vite.config.ts` publikuje tylko klipy i mały `audio/catalog.json`, także na serwerze deweloperskim. Budowanie nie uruchamia syntezy; nie kopiuje narzędzi, modelu ani pełnego manifestu generatora.
+- `src/speech/text.ts` jest wspólną czystą normalizacją tekstu. `recordings.ts` sprawdza bezpieczne ścieżki indeksu. `recorded-speaker.ts` odpowiada za nagranie → syntezę → brak dźwięku, wolniejsze tempo z zachowaniem wysokości, anulowanie i izolowanie błędu jednego pliku. Nie czyta wyników konta.
+- `src/speech.ts` składa odtwarzacz i dotychczasową syntezę za interfejsem `Speaker`. Start ładuje indeks z limitem 3 sekund; błąd indeksu nie blokuje aplikacji. Dostępność sprawdzana jest dla konkretnego tekstu i języka. Renderer przerywa wypowiedź przy zmianie kontekstu zadania, konta lub kursu; zwykły widok po awarii zachowuje wpisany tekst.
+- `scripts/build-sw.mjs` obejmuje klipy i indeks wersjonowanym cache całego wydania. `service-worker-range.mjs` obsługuje zakresy bajtów dla zapisanych plików audio (206/416), potrzebne odtwarzaczowi offline. Dane konta nie trafiają do tej pamięci.
+
 ## D-59 — generator poza aplikacją
 
-`scripts/audio/plan.mjs` odczytuje znaczenie materiałów przez istniejące czyste funkcje i tworzy plan pełnych haseł oraz kwestii scen. `generate.mjs` jest lokalnym punktem wejścia: sprawdza narzędzia/model i uruchamia Piper oraz ffmpeg bez powłoki. `files.mjs` zarządza pamięcią gotowych klipów, manifestem i wymianą kompletnego katalogu po udanym przetworzeniu. `ogg.mjs` kontroluje strukturę Ogg Opus i sumy stron bez zewnętrznych narzędzi. Profile i cele należą do `audio/config.json`, a wynik do `audio/generated/`. Zależność jest jednostronna: narzędzie korzysta z mechaniki materiałów, aplikacja nie importuje generatora ani nagrań. Nie zmieniono `src/speech.ts`, interfejsu ćwiczeń ani `build-sw.mjs`. [Obsługa i kontrakt](generowanie-audio.md).
+`scripts/audio/plan.mjs` odczytuje znaczenie materiałów przez istniejące czyste funkcje i tworzy plan pełnych haseł oraz kwestii scen. `generate.mjs` jest lokalnym punktem wejścia: sprawdza narzędzia/model i uruchamia Piper oraz ffmpeg bez powłoki. `files.mjs` zarządza pamięcią gotowych klipów, manifestem i wymianą kompletnego katalogu po udanym przetworzeniu. `ogg.mjs` kontroluje strukturę Ogg Opus i sumy stron bez zewnętrznych narzędzi. Profile i cele należą do `audio/config.json`, a wynik do `audio/generated/`. Zależność jest jednostronna: narzędzie korzysta z mechaniki materiałów, aplikacja nie importuje generatora. Sam D-59 nie zmieniał odtwarzacza; D-60 publikuje wynik generatora i odtwarza go za istniejącym interfejsem. [Obsługa i kontrakt](generowanie-audio.md).
 
 ## D-57 — odczyt postępów i ich prezentacja
 

@@ -3,6 +3,7 @@ import {saveNavigation,restoreViewContext} from './navigation.ts';
 import {speaker} from '../speech.ts';
 export function createRenderer(root: HTMLDivElement, state: AppState, renderScreen: () => string) {
     let spoken = '';
+    let speechContext='';
     function render() {
         saveNavigation(state);
         const historyContext = `${state.user?.uid ?? 'guest'}:${state.progress.history?.head ?? 'none'}`;
@@ -19,6 +20,8 @@ export function createRenderer(root: HTMLDivElement, state: AppState, renderScre
         const focusAction = focused?.dataset.action;
         const focusId = focused?.id;
         const changedScreen = state.renderedScreen !== state.screen;
+        const nextSpeechContext=[state.user?.uid??'guest',state.screen,state.selectedCourseId,state.progress.active?.id,state.progress.active?.index].join(':');
+        if(nextSpeechContext!==speechContext){speaker().stop();spoken='';speechContext=nextSpeechContext;}
         const helpOpen = !changedScreen && !!root.querySelector<HTMLDetailsElement>('.home-help')?.open;
         const progressDetails=root.querySelector<HTMLDetailsElement>('.progress-details');
         const progressOpen=!changedScreen&&!!progressDetails?.open,progressCourse=progressDetails?.dataset.course;

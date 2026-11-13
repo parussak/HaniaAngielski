@@ -1,11 +1,12 @@
 /**
- * D-58: the only place that produces sound. Today it uses the browser's own speech
- * synthesis; recorded files can replace it later by providing another Speaker with
- * the same four methods. Nothing here knows a course, a module or an exercise.
+ * Shared speech interface: recordings first, then browser synthesis, then ordinary tasks.
+ * Playback never reads or writes learning progress.
  */
+import {createRecordedSpeaker,type RecordedSpeaker} from './speech/recorded-speaker.ts';
+import {recordingCatalog} from './speech/recordings.ts';
 export interface Speaker {
     /** True when this device can speak the language right now. */
-    available(language: string | undefined): boolean;
+    available(language: string | undefined,text?:string): boolean;
     /** Starts speaking; returns false when nothing could be started. Never throws. */
     speak(text: string, language: string | undefined, slow?: boolean): boolean;
     stop(): void;
@@ -64,13 +65,21 @@ export function createSpeaker(env: SpeechEnvironment): Speaker {
     };
 }
 
-let shared: Speaker | undefined, redraw: (() => void) | undefined;
+let shared: RecordedSpeaker | undefined, redraw: (() => void) | undefined;
 /** The app's speaker. Outside a browser it is simply unavailable. */
 export function speaker(): Speaker {
     if (shared) return shared;
     const w = typeof window === 'undefined' ? undefined : window as unknown as { speechSynthesis?: SpeechEnvironment['synth']; SpeechSynthesisUtterance?: SpeechEnvironment['Utterance']; localStorage?: Storage };
     let storage: Storage | undefined;
     try { storage = w?.localStorage; } catch { /* blocked storage */ }
-    return shared = createSpeaker({ synth: w?.speechSynthesis, Utterance: w?.SpeechSynthesisUtterance, online: () => typeof navigator === 'undefined' || navigator.onLine !== false, storage, changed: () => redraw?.() });
+    const fallback=createSpeaker({ synth: w?.speechSynthesis, Utterance: w?.SpeechSynthesisUtterance, online: () => typeof navigator === 'undefined' || navigator.onLine !== false, storage, changed: () => redraw?.() });
+    return shared=createRecordedSpeaker({fallback,changed:()=>redraw?.(),supported:()=>{try{return typeof Audio!=='undefined'&&!!new Audio().canPlayType('audio/ogg; codecs="opus"');}catch{return false;}},createAudio:url=>new Audio(url),url:file=>new URL(`audio/${file}`,document.baseURI).href});
 }
 export function onSpeechChange(listener: () => void) { redraw = listener; }
+/** Missing/old indexes fall back silently. Startup waits at most three seconds for the small catalog. */
+export async function initializeRecordings(){
+ if(typeof window==='undefined')return;
+ const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),3000);
+ try{const response=await fetch(new URL('audio/catalog.json',document.baseURI),{cache:'no-cache',signal:controller.signal});if(!response.ok)throw Error('Brak indeksu nagrań.');speaker();shared!.setCatalog(recordingCatalog(await response.json()));}
+ catch{speaker();shared!.setCatalog([]);}finally{clearTimeout(timeout);}
+}

@@ -1,5 +1,17 @@
 # Testy — podział i zasady
 
+## D-60 — nagrania i PWA offline
+
+Weryfikacja 13 listopada 2026, Chrome: **296/296 testów Node**, także z rozszerzoną biblioteką; **137/137 scenariuszy Playwright** na zbudowanej aplikacji. Budowanie z walidacją materiałów, TypeScript, kontrolą nagrań i **318 zasobami PWA** przeszło. `audio:check` potwierdził 111 klipów / 120 odwołań i 266 115 bajtów. Lekki indeks publikowany z aplikacją zajmuje około 13,8 kB; pełny manifest generatora nie jest publikowany. Na serwerze deweloperskim celowany zestaw nagrań i syntezy: **12 przeszło, 2 pominięte** (wymagają zbudowanej PWA). Pierwszy przebieg deweloperski wykrył sztywną ścieżkę GitHub Pages w nowym teście; oczekiwanie adresu dostosowano do rzeczywistej bazy strony, bez zmiany aplikacji. Kontrola dokumentacji i różnic przeszła. Nie testowano na fizycznym telefonie ani prawdziwym koncie Firebase; synchronizacja kont używa adaptera testowego.
+
+`recorded-speaker.test.ts` zawiera 11 testów: pierwszeństwo nagrania, ten sam plik w wolniejszym tempie, brak właściwego klipu i dekodera, błąd pojedynczego pliku, zachowanie pozostałych klipów, ponowienie po blokadzie autoplay, limit czasu ładowania, nieoczekiwane przerwanie, ignorowanie opóźnionych błędów po zmianie zadania, bezpieczny indeks, zakresy bajtów cache oraz publikowanie tylko zweryfikowanych nagrań i lekkiego indeksu. Synteza i zdarzenia odtwarzacza są tu kontrolowanymi atrapami.
+
+`browser/recordings.spec.ts` ma 6 scenariuszy na ekranie dotykowym 390 px. Używa **prawdziwego odtwarzacza i plików Opus**, z atrapą tylko głosu systemowego: Cori ma pierwszeństwo także przy dostępnej syntezie; powtarzanie, wolniej i zachowanie wysokości; uszkodzony lub brakujący plik przechodzi do syntezy albo zwykłego zadania, zachowując wpisany tekst; brak indeksu nie blokuje lekcji; głośnik działa przy odpowiednich kwestiach scen; zimny start PWA offline odtwarza nagrania bez głosu systemowego. Sprawdzane są również odpowiedzi 206/416 dla zakresów bajtów, niezmieniona kopia po samym odsłuchu, zachowane zakupy i gwiazdki oraz zwykła nagroda za ukończenie lekcji. To nie jest odsłuch na fizycznym telefonie.
+
+Pozostałe regresje korzystają z urządzenia bez syntezy **i bez dekodera Opus**, aby sprawdzać zwykłą formę zadań bez zależności od komputera. Osobne scenariusze D-58 sprawdzają zapasową syntezę.
+
+Do ręcznego sprawdzenia na telefonie Hani: po aktualizacji i przygotowaniu offline włączyć tryb samolotowy, zamknąć i otworzyć PWA, odsłuchać słowo i kwestię sceny, sprawdzić „Wolniej”, pierwsze dotknięcie, klawiaturę oraz słuchawki. Jakość wymowy, Bluetooth i głośność urządzenia nie są oceniane przez test automatyczny.
+
 ## D-59 — lokalny generator Food
 
 Weryfikacja 13 listopada 2026: **285/285 testów Node**, także z rozszerzoną biblioteką; `npm run build` z kontrolą materiałów i **206 zasobami PWA**; kontrola dokumentacji przeszły. Rzeczywiste `npm run audio` utworzyło **111 klipów / 120 odwołań**, kolejne uruchomienia zachowały wszystkie klipy, bez ponownej syntezy. `npm run audio:check` potwierdziło zgodność tekstów, profili, sum i kontenerów. Dodatkowo ffmpeg w pełni zdekodował wszystkie 111 nagrań bez błędów. Rozmiar samych klipów: 266 115 bajtów. Odtwarzania nie podłączano, więc nie powtarzano testów przeglądarkowych interfejsu. Nie wykonano odsłuchu całego zestawu ani próby na fizycznym telefonie.
@@ -10,11 +22,11 @@ Weryfikacja 13 listopada 2026: **285/285 testów Node**, także z rozszerzoną b
 
 Automatyczne testy używają **atrapy syntezy mowy**: sprawdzają, co aplikacja każe odczytać, w jakim języku i tempie, oraz co robi bez dźwięku. Nie sprawdzają, czy telefon naprawdę wydaje dźwięk ani jak brzmi głos — to obejmuje lista ręczna niżej.
 
-`listening.test.ts` (11 testów, dane syntetyczne): głos musi pasować do języka kursu; brak syntezy, głosu lub błąd przeglądarki to brak dźwięku bez wyjątku; odtwarzanie bez limitu w tempie zwykłym i wolniejszym; offline tylko głos zapisany na urządzeniu; błąd odtwarzania wyłącza dźwięk do końca wizyty, a przerwanie i brak pierwszego dotknięcia nie są błędem; przełącznik pamiętany na urządzeniu, poza postępami, także przy zablokowanej pamięci; najwyżej dwa zwykłe słówka w sesji, nigdy pary, luki ani sceny; odczytywana jest pełna odpowiedź z rodzajnikiem, a długie hasło nie jest dyktandem; pytanie, odpowiedzi i zasady a/an są identyczne ze zwykłą formą; znacznik przechodzi kopię v1, wznowienie i sesję bez dźwięku, a zepsuty jest odrzucany; ten sam kod działa dla kursu z innym językiem i nie zawiera nazw modułów, adresów sieciowych ani plików dźwiękowych; lekcje słówek Food dostają słuchanie po angielsku.
+`listening.test.ts` (11 testów, dane syntetyczne): głos musi pasować do języka kursu; brak syntezy, głosu lub błąd przeglądarki to brak dźwięku bez wyjątku; odtwarzanie bez limitu w tempie zwykłym i wolniejszym; offline tylko głos zapisany na urządzeniu; błąd odtwarzania wyłącza dźwięk do końca wizyty, a przerwanie i brak pierwszego dotknięcia nie są błędem; przełącznik pamiętany na urządzeniu, poza postępami, także przy zablokowanej pamięci; najwyżej dwa zwykłe słówka w sesji, nigdy pary, luki ani sceny; odczytywana jest pełna odpowiedź z rodzajnikiem, a długie hasło nie jest dyktandem; pytanie, odpowiedzi i zasady a/an są identyczne ze zwykłą formą; znacznik przechodzi kopię v1, wznowienie i sesję bez dźwięku, a zepsuty jest odrzucany; ten sam kod działa dla kursu z innym językiem i nie zawiera nazw modułów; lekcje słówek Food dostają słuchanie po angielsku.
 
 `browser/listening.spec.ts` (8 scenariuszy, telefon 390 px): „posłuchaj i wybierz” oraz „posłuchaj i wpisz” z odczytaniem przy pokazaniu zadania, trzykrotnym „Posłuchaj jeszcze raz”, „Wolniej”, przyciskami co najmniej 44 px, brakiem pisanego hasła przed odpowiedzią, błędem, odświeżeniem, ponowną próbą, +3 ★ i znacznikami w kopii; cztery powroty do zwykłej formy — urządzenie bez głosu, tylko polski głos, offline z głosem wymagającym sieci, błąd odtwarzania — każdy kończy lekcję bez żadnego elementu słuchania i bez alarmu; przełącznik w „Konto” z próbą dźwięku, zachowany po odświeżeniu i włączany klawiaturą; głośnik w scenie tylko przy kwestiach bez otwartej luki, z klawiatury i w podsumowaniu; na zbudowanej aplikacji — słuchanie offline po zamknięciu strony.
 
-Pozostałe pliki przeglądarkowe działają na **urządzeniu bez głosu** (`browser/fixtures.ts`), żeby wynik nie zależał od głosów komputera, na którym biegną testy. Dzięki temu cały dotychczasowy zestaw sprawdza zarazem zwykłą formę zadań oznaczonych do słuchania. Pomocnik `browser/helpers.ts` rozpoznaje zadanie ze słuchu po kluczu elementu.
+Pozostałe pliki przeglądarkowe (poza `recordings.spec.ts`) działają na **urządzeniu bez głosu i dekodera Opus** (`browser/fixtures.ts`), żeby wynik nie zależał od głosów komputera, na którym biegną testy. Dzięki temu cały dotychczasowy zestaw sprawdza zarazem zwykłą formę zadań oznaczonych do słuchania. Pomocnik `browser/helpers.ts` rozpoznaje zadanie ze słuchu po kluczu elementu.
 
 Weryfikacja 13 listopada 2026, Edge (`HANIA_BROWSER_CHANNEL=msedge`): `check:content`, budowanie z TypeScript i 206 zasobami PWA oraz kontrola odnośników przeszły. Node: **275/275**. Playwright: **131/131** na zbudowanej aplikacji; **117 przeszło, 14 pominiętych** na wersji deweloperskiej (pominięte wymagają zbudowanej PWA). Scenariusze słuchania przeszły dodatkowo w trzech powtórzeniach. Nie testowano na fizycznym telefonie, z prawdziwym głosem ani na prawdziwym koncie.
 
@@ -22,20 +34,20 @@ Weryfikacja 13 listopada 2026, Edge (`HANIA_BROWSER_CHANNEL=msedge`): `check:con
 
 Do wykonania na telefonie Hani, najlepiej w zainstalowanej aplikacji (PWA) i osobno w karcie Chrome. Wynik wpisz przy dacie.
 
-1. **Konto → Ćwiczenia ze słuchu:** komunikat mówi, że urządzenie ma głos; „Sprawdź dźwięk” odczytuje angielskie słowo po angielsku, nie z polską wymową.
-2. **Brak głosu:** jeśli komunikat mówi o braku głosu, w ustawieniach Androida sprawdź „Zamiana tekstu na mowę” (silnik Google, pobrany język angielski). Po pobraniu głosu wróć do aplikacji i odśwież.
+1. **Konto → Ćwiczenia ze słuchu:** komunikat mówi, że dźwięk jest dostępny; „Sprawdź dźwięk” odczytuje angielskie słowo po angielsku, nie z polską wymową.
+2. **Brak dźwięku:** dla Food najpierw sprawdź aktualizację PWA i włączony przełącznik. Nagrania nie wymagają głosu systemowego. Dla tekstu bez nagrania w ustawieniach Androida sprawdź „Zamiana tekstu na mowę” (silnik Google, pobrany język angielski). Po pobraniu głosu wróć do aplikacji i odśwież.
 3. **Lekcja słówek:** zadanie „Posłuchaj i wybierz” odczytuje się samo po pojawieniu. Jeśli nie — czy działa „Posłuchaj jeszcze raz”? (Przeglądarka może wymagać pierwszego dotknięcia.)
 4. **„Wolniej”:** wyraźnie wolniej i nadal zrozumiale.
 5. **Rodzajnik:** przy haśle z a/an słychać rodzajnik, np. „an apple”.
 6. **Posłuchaj i wpisz:** klawiatura ekranowa nie zasłania przycisków słuchania i „Sprawdź”; po odpowiedzi widać poprawną formę.
 7. **Scena:** głośnik przy wcześniejszej kwestii odczytuje całe zdanie; kolejne dotknięcie przerywa poprzednie odtwarzanie, nie nakłada się na nie.
-8. **Tryb samolotowy:** czy głos nadal działa? Jeśli nie, zadania mają zwykłą formę i lekcję da się ukończyć.
+8. **Tryb samolotowy po przygotowaniu PWA:** nagrania Food działają po zimnym starcie. Dla tekstu bez nagrania działa lokalny głos systemowy albo zwykłe zadanie; lekcję da się ukończyć.
 9. **Wyciszony telefon i słuchawki Bluetooth:** aplikacja nie zgłasza błędu; po podgłośnieniu dźwięk wraca.
 10. **Zablokowanie ekranu w trakcie odtwarzania i powrót:** lekcja jest na tym samym zadaniu, przyciski działają.
 11. **Przełącznik wyłączony:** zadania w zwykłej formie; po zamknięciu i otwarciu aplikacji nadal wyłączony.
 12. **Drugi kurs (gdy powstanie):** głos i wymowa odpowiadają językowi kursu.
 
-Znane ograniczenia do potwierdzenia na urządzeniu: Chrome na Androidzie bywa, że podaje listę głosów z opóźnieniem — aplikacja przerysowuje wtedy zadanie, gdy głos się pojawi; jakość i dostępność głosu zależą od silnika mowy telefonu, nie od aplikacji.
+Znane ograniczenia do potwierdzenia na urządzeniu: Chrome na Androidzie bywa, że podaje listę głosów z opóźnieniem — aplikacja przerysowuje wtedy zadanie, gdy głos się pojawi; jakość i dostępność zapasowej syntezy zależą od silnika mowy telefonu; gotowe klipy Cori są niezależne od niego.
 
 ## D-57 — motywujący widok postępów
 

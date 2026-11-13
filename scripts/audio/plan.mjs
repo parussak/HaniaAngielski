@@ -2,6 +2,7 @@ import {createHash} from 'node:crypto';
 import {keyFor} from '../../src/learning/model.ts';
 import {questionFor} from '../../src/learning/questions.ts';
 import {vocabularyFullAnswer} from '../../src/learning/vocabulary-answer.ts';
+import {normalizeSpeechText} from '../../src/speech/text.ts';
 
 export const generatorVersion=1;
 export const hash=value=>createHash('sha256').update(value).digest('hex');
@@ -10,7 +11,7 @@ export function canonical(value){
  if(value&&typeof value==='object')return '{'+Object.keys(value).sort().map(k=>JSON.stringify(k)+':'+canonical(value[k])).join(',')+'}';
  return JSON.stringify(value);
 }
-export const normalizeText=text=>text.normalize('NFC').replace(/\s+/gu,' ').trim();
+export const normalizeText=normalizeSpeechText;
 const id=value=>typeof value==='string'&&/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
 const primary=lang=>lang.toLowerCase().split(/[-_]/)[0];
 const fail=message=>{throw Error(`Audio: ${message}`);};

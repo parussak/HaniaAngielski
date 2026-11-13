@@ -29,7 +29,7 @@ async function main(){
  try{lock=await open(lockPath,'wx');}catch(e){if(e.code==='EEXIST')throw Error('Audio: generator jest już uruchomiony (audio/.generator.lock). Jeśli poprzedni proces zakończył się awarią, sprawdź, czy nie pracuje, i usuń tylko ten plik blokady.');throw e;}
  try{
   await lock.writeFile(JSON.stringify({pid:process.pid}));
-  if(check){const result=await checkGenerated(plan,output);console.log(`Audio OK: ${result.references} odwołań, ${result.clips} klipów, ${result.bytes} bajtów. Aplikacja nadal używa syntezy przeglądarki.`);return;}
+  if(check){const result=await checkGenerated(plan,output);console.log(`Audio OK: ${result.references} odwołań, ${result.clips} klipów, ${result.bytes} bajtów.`);return;}
   const toolsRoot=resolve(root,toolsOption??process.env.MALE_KROKI_AUDIO_TOOLS??config.defaultToolsDirectory);
   const piper=await verifyTool(toolsRoot,config.tools.piper),ffmpeg=await verifyTool(toolsRoot,config.tools.ffmpeg),profiles={};
   for(const id of Object.keys(plan.header.profiles)){

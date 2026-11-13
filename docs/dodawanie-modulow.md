@@ -35,7 +35,7 @@ Skorzystaj z [formatu materiałów](format-materialow.md), zamiast kopiować ca�
 
 | Miejsce | Co robimy |
 | --- | --- |
-| `public/content/<folder>/` | Dodajemy metadane, słownictwo, quiz, gramatykę, ćwiczenia i potrzebne mapy; dialogi i [sceny z kilkoma lukami](format-materialow.md#scena-dialogowa-z-kilkoma-lukami) są opcjonalne. Scena jest adaptacją: tylko słownictwo i gramatyka modułu, `source` ze stronami, recenzja językowa przed publikacją. Słuchanie (D-58) nie wymaga żadnych plików: działa dla słówek modułu, gdy kurs ma język docelowy, a urządzenie głos w tym języku. |
+| `public/content/<folder>/` | Dodajemy metadane, słownictwo, quiz, gramatykę, ćwiczenia i potrzebne mapy; dialogi i [sceny z kilkoma lukami](format-materialow.md#scena-dialogowa-z-kilkoma-lukami) są opcjonalne. Scena jest adaptacją: tylko słownictwo i gramatyka modułu, `source` ze stronami, recenzja językowa przed publikacją. Słuchanie (D-58/D-60) korzysta z nagrania albo głosu urządzenia w języku kursu; bez nich pokazuje zwykłe zadanie. Nagrania są opcjonalne dla nowych kursów. |
 | `public/content/katalog.json` | Dopisujemy folder modułu. |
 | `public/content/kursy.json` | Dopisujemy `module.id` w odpowiedniej kolejności kursu; nowy kurs tylko dla nowego podręcznika. |
 | `public/illustrations/` | Wykorzystujemy pasujące ilustracje lub dodajemy potrzebne, lekkie zasoby zgodne ze stylem aplikacji. |
@@ -47,6 +47,8 @@ Każde zadanie powinno mieć jednoznaczną odpowiedź w podanym kontekście, źr
 Dla nowego języka określ w karcie kursu wymagania dotyczące akcentów, rodzajników i wariantów. Nie wprowadzaj globalnej tolerancji w mechanice przy okazji dodawania modułu. Nierozstrzygniętą zasadę oznacz do uzgodnienia.
 
 Zachowaj podręcznikową formę odpowiedzi i poziom wymagań (D-35). Przy luce kluczem jest brakujące słowo lub wyrażenie; nie zamieniaj jej na tłumaczenie albo przepisywanie całego zdania. Pełne zdanie wymagane jest tylko przy takim celu ćwiczenia źródłowego. Ta sama jednostka odpowiedzi pozostaje w poprawce i obu powtórkach. [Szczegóły](04-merytoryka.md#forma-odpowiedzi-a-poziom-nauki--d-35).
+
+Dla modułu objętego `audio/config.json` po zmianie odczytywanego tekstu uruchom `npm run audio`, sprawdź wymowę i dodaj zaktualizowane `audio/generated/` do Git. Budowanie sprawdza kompletność i publikuje audio do PWA; nie uruchamia generatora. Nowy język wymaga osobnego wybrania głosu i sprawdzenia licencji — nie kopiuj konfiguracji Cori do francuskiego czy włoskiego. [Instrukcja audio](../audio/README.md).
 
 ## 5. Sprawdź treść i działanie
 

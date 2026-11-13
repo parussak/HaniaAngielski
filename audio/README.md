@@ -12,7 +12,7 @@ Generator czyta aktualne materiały Food i tworzy lub aktualizuje nagrania. Nie 
 
 Wyniki są w [generated/manifest.json](generated/manifest.json) i katalogu `generated/clips/`. Manifest jest indeksem: przy każdym haśle i wypowiedzi sceny zawiera tekst oraz identyfikator klipu. Identyczne teksty współdzielą nagranie. Pliki `.ogg` zawierają **Opus mono 16 kb/s**, nie Vorbis. Model Cori i ustawienia są w [config.json](config.json).
 
-**Na razie aplikacja nie używa tych plików.** Nie są kopiowane do publikowanej strony, nie trafiają do pamięci PWA i nie są wysyłane do Firebase. Do Git dodaj cały katalog `audio/` wraz z gotowymi klipami. Nie edytuj ręcznie manifestu ani nazw nagrań.
+**Aplikacja korzysta z nagrań (D-60).** Budowanie sprawdza ich zgodność i publikuje klipy oraz mały indeks `audio/catalog.json`; PWA zapisuje je offline razem z wydaniem. Do Firebase nie wysyłamy dźwięku. Do Git dodaj cały katalog `audio/` wraz z gotowymi klipami. Nie edytuj ręcznie manifestu ani nazw nagrań.
 
 ## Wymagane narzędzia na komputerze przygotowującym dźwięk
 
@@ -59,7 +59,7 @@ npm run audio -- --plan
 - Zmiana głosu, jego modelu, tempa, obróbki, kompresji lub wskazanych wersji narzędzi zmienia identyfikatory nagrań. Przy świadomej wymianie narzędzia lub modelu uaktualnij jego sumę i profil. Nie omijaj błędu sumy, jeśli nie wiesz, skąd pochodzi plik.
 - Po udanej aktualizacji stare klipy z poprzedniego manifestu są usuwane. Nieznany plik w katalogu wynikowym zatrzymuje operację, zamiast zostać usunięty.
 - Błąd syntezy lub kompresji pozostawia poprzedni zestaw. Prace tymczasowe i blokada są pomijane przez Git. Po awarii procesu plik `audio/.generator.lock` można usunąć dopiero po upewnieniu się, że generator już nie działa.
-- Zwykłe `npm run build` i `npm run check:content` nadal działają niezależnie od audio. Przed commitem nagrań uruchom osobno `npm run audio:check`.
+- `npm run build` sprawdza zgodność nagrań z materiałem i zatrzymuje publikację przy brakujących, nieaktualnych lub uszkodzonych plikach. Nie wymaga Pipera ani ffmpeg i nie generuje dźwięku. Po zmianie odczytywanego tekstu uruchom `npm run audio`, a następnie dodaj zaktualizowany zestaw do Git. `npm run check:content` nadal sprawdza wyłącznie materiały.
 
 Nazwy są skrótami zawartości i profilu, a nie obietnicą identycznej syntezy bit po bicie po skasowaniu wszystkich nagrań. Poprawne istniejące pliki są zachowywane. Wymowa i jakość wymagają odsłuchu; plik w dobrej jakości technicznej może nadal zawierać źle wymówione słowo.
 
