@@ -27,8 +27,8 @@ export async function answerCurrent(page:Page,modules:Module[],correct=true){
  }
  if(await page.locator('.answer-bank').count()){
   const keys=await page.locator('.gap-target:not(:disabled)').evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.key!));
-  for(const key of keys){await idle(page);const q=fromKey(modules,key),choices=page.locator('.bank-token:not(:disabled)'),values=await choices.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.answer!));const index=values.findIndex(value=>isCorrect(q,value)===correct);expect(index).toBeGreaterThanOrEqual(0);await choices.nth(index).click();await idle(page);await page.locator(`.gap-target[data-key=${JSON.stringify(key)}]`).click();await idle(page);await expect(page.locator(`.gap-target[data-key=${JSON.stringify(key)}]`)).toContainText(values[index]);}
-  await page.getByRole('button',{name:/Sprawdź zdania/}).click();await expect(page.locator(correct?'.board-summary':'.match-flash').first()).toBeVisible();return;
+  for(const key of keys){await idle(page);const q=fromKey(modules,key),choices=page.locator('.bank-token:not(:disabled):not(.bank-empty)'),values=await choices.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.answer!));const index=values.findIndex(value=>isCorrect(q,value)===correct);expect(index).toBeGreaterThanOrEqual(0);await choices.nth(index).click();await idle(page);await page.locator(`.gap-target[data-key=${JSON.stringify(key)}]`).click();await idle(page);if(!correct){await expect(page.locator('.match-flash').first()).toBeVisible();return;}}
+  await expect(page.locator('.board-summary')).toBeVisible();return;
  }
  // A scene names its current gap, because all its gaps share one prompt.
  const sceneKey=await page.locator('.scene[data-key]').count()?await page.locator('.scene[data-key]').getAttribute('data-key'):null;

@@ -24,8 +24,9 @@ test('dialog: bank wypełnia lukę na wspólnej planszy, zapisuje propozycję i 
  // D-51: the dialogue is a gap board — lines with speakers, a word placed by tapping it and then the gap.
  await restore(page,p);const gap=page.locator('.answer-bank .gap-target');await expect(gap).toHaveCount(1);await expect(page.locator('.gap-sentence p strong')).toHaveCount(q.dialogue!.length);const wrong=q.options.find(o=>!isCorrect(q,o))!;
  await page.locator('.bank-token').filter({hasText:wrong}).first().click();await gap.click();await expect(gap).toContainText(wrong);await page.reload();await resumeStudy(page);await expect(gap).toContainText(wrong);
- // A wrong word flashes and leaves the gap, without a break; the error is still recorded.
- await page.getByRole('button',{name:/Sprawdź/}).click();await expect(gap).toHaveClass(/match-flash/);await expect(gap).not.toContainText(wrong);await expect(page.locator('.feedback')).toHaveCount(0);
+ // It is checked immediately; a wrong word stays until the learner moves or returns it.
+ await expect(gap).toContainText(wrong);await expect(page.locator('.feedback')).toHaveCount(0);await expect(page.getByRole('button',{name:/Sprawdź/})).toHaveCount(0);
+ await expect(page.locator('.bank-empty')).toHaveCount(1);await page.getByRole('button',{name:`Odłóż ${wrong} do banku`,exact:true}).click();await expect(gap).not.toContainText(wrong);await expect(page.locator('.bank-empty')).toHaveCount(0);
  await answerCurrent(page,modules);await expect(page.locator('.board-summary')).toBeVisible();await page.screenshot({path:'test-results/lesson-dialogue-bank-mobile.png',fullPage:true});
  const saved=await exported(page);expect(saved.active!.attempts).toHaveLength(1);expect(saved.active!.attempts[0].first).toBe(false);expect(saved.active!.attempts[0].corrected).toBe(true);
 });

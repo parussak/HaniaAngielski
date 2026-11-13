@@ -15,7 +15,7 @@ import type { createCourseController } from './courses.ts';
 import { courseKey } from '../learning/scope.ts';
 import {followingLesson,lessonContext,legendarySession} from '../learning/lesson-flow.ts';
 import {varyLesson} from '../learning/lesson-variety.ts';
-import {answerOnBoard,boardItems,gapTokens,solved} from '../learning/boards.ts';
+import {answerOnBoard,gapTokens,placeGap} from '../learning/boards.ts';
 import {continueScene} from '../learning/scenes.ts';
 interface LearningPorts {
     courses: ReturnType<typeof createCourseController>;
@@ -68,23 +68,9 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             if(ok===false)state.boardError={key,answer};return true;
         }
         if(action==='gap-place'){
-            await mutate(p=>{const s=p.active;if(!s||!['question','retry'].includes(s.phase)||s.items[s.index].presentation!=='bank')return;
-                const key=el.dataset.key??'',answer=el.dataset.answer??s.gapSelection??s.draftAnswer;
-                if(!boardItems(s).some(i=>i.key===key)||solved(s,key))return;
-                const placements=s.gapPlacements??={};
-                if(answer===undefined){delete placements[key];return;}
-                if(!gapTokens(state.modules,s).includes(answer)||boardItems(s).some(i=>solved(s,i.key)&&placements[i.key]===answer))return;
-                for(const [other,value] of Object.entries(placements))if(value===answer&&other!==key)delete placements[other];
-                placements[key]=answer;delete s.gapSelection;delete s.draftAnswer;
-            });return true;
-        }
-        if(action==='gap-check'){
-            const wrong:string[]=[];
-            await mutate(p=>{const s=p.active;if(!s||!['question','retry'].includes(s.phase)||s.items[s.index].presentation!=='bank')return;
-                const remaining=boardItems(s).filter(i=>!solved(s,i.key));if(remaining.some(i=>!s.gapPlacements?.[i.key]))return;
-                for(const item of remaining){const answer=s.gapPlacements![item.key];if(answerOnBoard(p,state.modules,state.journeys,item.key,answer)===false){wrong.push(item.key);delete s.gapPlacements![item.key];}}
-            });
-            if(wrong.length)state.boardError={key:wrong[0],keys:wrong,answer:''};return true;
+            const key=el.dataset.key??'',answer=el.dataset.answer??state.progress.active?.gapSelection??state.progress.active?.draftAnswer;
+            let ok:boolean|undefined;await mutate(p=>{ok=placeGap(p,state.modules,state.journeys,key,answer);});
+            if(ok===false)state.boardError={key,answer:answer??''};return true;
         }
         if(action==='continue-lesson'){
             const active=state.progress.active,j=currentJourney(state);

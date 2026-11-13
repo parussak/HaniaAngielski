@@ -125,6 +125,7 @@
 .gap-sentence p{line-height:2;margin:4px 0}
 .gap-correct{background:#e4f4e8;border-style:solid;border-color:#8fbc9c}
 .bank-token{touch-action:none;cursor:grab}
+.bank-options .bank-token>span{display:block;width:auto;height:auto;background:none;font:inherit;font-size:inherit!important;color:inherit}.bank-token.bank-empty{background:transparent;border:1px dashed #cdbfe0;box-shadow:none;cursor:pointer}.bank-token.bank-empty span{visibility:hidden}.gap-target[data-token]:not(:disabled){touch-action:none;cursor:grab}.gap-target.is-selected{border-style:solid;border-color:#7851b3}
 .gap-drag-ghost{position:fixed;z-index:10000;pointer-events:none;transform:translate(-50%,-50%);padding:12px 20px;border-radius:12px;background:#7650ae;color:#fff;box-shadow:0 4px 14px #50386544}
 @keyframes wrong-match{0%,65%{background:#f6b7bd;border-color:#c44254;color:#6f2430}100%{background:revert-layer}}
 .match-flash{animation:wrong-match .5s ease-out}

@@ -7,6 +7,7 @@ import { foodModules as modules } from '../materials.ts';
 import { readLibrary } from '../../src/materials/library.ts';
 import { backup, emptyProgress, keyFor, makeSession, next, questionFor, recordAnswer, type Item, type Module, type Progress } from '../../src/core.ts';
 import { openModule } from './navigation.ts';
+import {vocabularyFullAnswer} from '../../src/learning/vocabulary-answer.ts';
 
 test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 const m = modules[0];
@@ -52,7 +53,7 @@ test('Food: globalne fiszki wracają do zaliczonych słów, a modułowe i gwiazd
     while(await page.locator('.question').count()){
         const cue=await page.locator('.question').innerText(),word=m.words.find(w=>w.front===cue)!;expect(['apple','bread']).toContain(word.id);
         expect((await page.locator('.option').allTextContents()).join(' ')).not.toContain('water');
-        await page.getByRole('button',{name:word.back,exact:true}).tap();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
+        const full=vocabularyFullAnswer(questionFor(modules,item(m,word.id)));await page.getByRole('button',{name:full,exact:true}).tap();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
     }
     await expect(page.getByRole('button',{name:'Wróć do poznanego materiału',exact:true})).toBeVisible();
     const saved=await downloaded(page);expect(saved.sessions.at(-1)!.scope).toEqual({kind:'course',courseId:'angielski-hani'});expect(saved.adventure?.earned??0).toBe(0);
@@ -66,11 +67,11 @@ test('globalny quiz zachowuje opcje, błąd i poprawę po odświeżeniu',async({
     await restore(page,seed(modules,[item(m,'apple'),item(m,'bread')]));await global(page);await page.getByText('Wybieram odpowiedź',{exact:true}).tap();
     await page.getByRole('button',{name:/Quiz z poznanego materiału/}).tap();await expect(page.locator('.option')).toHaveCount(2);
     const prompt=await page.locator('.question').innerText(),q=m.exercises.find(q=>q.prompt===prompt)!;
-    await page.getByRole('button',{name:q.answers[0]==='apple'?'bread':'apple',exact:true}).tap();await expect(page.locator('.feedback.incorrect')).toBeVisible();
+    await page.getByRole('button',{name:q.answers[0]==='apple'?'bread':'an apple',exact:true}).tap();await expect(page.locator('.feedback.incorrect')).toBeVisible();
     await page.reload();await resumeStudy(page);
     await expect(page.locator('.question')).toHaveText(prompt);await expect(page.locator('.feedback.incorrect')).toBeVisible();
     await page.getByRole('button',{name:'Spróbuję jeszcze raz',exact:true}).tap();await expect(page.locator('.option')).toHaveCount(2);
-    await page.getByRole('button',{name:q.answers[0],exact:true}).tap();await expect(page.locator('.feedback.correct')).toBeVisible();
+    await page.getByRole('button',{name:vocabularyFullAnswer(q),exact:true}).tap();await expect(page.locator('.feedback.correct')).toBeVisible();
 });
 
 test('globalna gramatyka pokazuje tylko wcześniej próbowane pytanie i wyjaśnia regułę',async({page})=>{

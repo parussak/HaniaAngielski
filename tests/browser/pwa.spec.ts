@@ -1,4 +1,4 @@
-import {resumeStudy} from './helpers.ts';
+import {resumeStudy,answerCurrent} from './helpers.ts';
 import {openStageReview,openAdditionalWarmup} from './navigation.ts';
 import {openModule,openMap} from './navigation.ts';
 import {test,expect,type Page} from './fixtures.ts';
@@ -28,7 +28,8 @@ test('PWA: manifest, ikony i zimny start bez sieci; fiszki, quiz, gramatyka i wz
   for(const mode of ['Quiz słownictwa','Gramatyka','Rozmówki']){
     await offline.getByRole('button',{name:'Moja nauka',exact:true}).tap();await moduleSetup(offline);await offline.getByText('Wybieram odpowiedź',{exact:true}).tap();
     offline.once('dialog',d=>d.accept());await offline.getByRole('button',{name:mode,exact:true}).tap();await expect(offline.locator('.question-illustration')).toBeVisible();
-    await offline.locator('.option').first().tap();await expect(offline.locator('.feedback')).toBeVisible();
+    // A correct scene gap advances immediately; choose a deliberate mistake to test restored feedback.
+    await answerCurrent(offline,modules,false);await expect(offline.locator('.feedback.incorrect')).toBeVisible();
   }
   const last=await offline.locator('.question').innerText();await offline.reload();await resumeStudy(offline);
   await expect(offline.locator('.question')).toHaveText(last);await expect(offline.locator('.feedback')).toBeVisible();

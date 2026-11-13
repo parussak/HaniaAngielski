@@ -1,5 +1,9 @@
 # Architektura — realizacja techniczna
 
+## D-55 — opcje słownikowe i interakcje luk
+
+`learning/questions.ts` wzbogaca opcje słownikowe o rodzajniki z metadanych poszczególnych haseł tego kursu, bez modyfikowania materiału i zapisanej sesji. `learning/boards.ts:placeGap` przenosi lub odkłada token i wywołuje istniejące `answerOnBoard` przy nowym wstawieniu. Błędna odpowiedź pozostaje w `gapPlacements`; zaznaczanie i odkładanie nie dopisuje prób. `views/lesson-activities.ts` pokazuje stabilną kolejność i puste miejsca po tokenach; `app/gap-drag.ts` kieruje gesty z banku i z luk przez tę samą akcję kontrolera. Brak nowych pól kopii i drugiego oceniania.
+
 ## Koci rozmówcy i samodzielne historyjki — D-54
 
 Aktualna treść czterech lekcji Food zawiera wyłącznie identyfikatory luk jednej sceny. `learning/lesson-variety.ts` nie dodaje zadań, gdy cały zestaw stanowi scenę; walidator map dopuszcza samodzielną pełną scenę krótszą niż sześć zadań, bez luzowania minimum zwykłych lekcji. `cats.ts:sceneCats` przypisuje różne kotki do ról na podstawie zapisanego ID sesji i ID sceny. `views/scene-actors.ts` łączy obsadę z obecnym rendererem obrazów; logika scen nie zna kotów ani Food. Portrety są renderowane w rozmowie i jej podsumowaniu. Osobne identyfikatory przycięcia SVG zapobiegają kolizjom z kotkami informacji zwrotnej.

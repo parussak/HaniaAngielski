@@ -5,9 +5,9 @@ import {foodModules as modules} from '../materials.ts';
 import {emptyProgress,makeSession,backup,keyFor} from '../../src/core.ts';
 import {openBackup} from './navigation.ts';
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
-async function start(page:Page,id:string){
+async function start(page:Page,id:string,input:'text'|'choice'='text'){
   const p=emptyProgress(),m=modules[0];p.active=makeSession(modules,m,'flashcards','text',false,p);
-  p.active.items=[{key:keyFor(m,'word',id),moduleId:m.id,version:1,type:'word',id,input:'text'}];
+  p.active.items=[{key:keyFor(m,'word',id),moduleId:m.id,version:1,type:'word',id,input}];
   await page.goto('./');await openBackup(page);
   await page.locator('#import-file').setInputFiles({name:'word.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();
@@ -15,6 +15,11 @@ async function start(page:Page,id:string){
   await resumeStudy(page);
 }
 async function answer(page:Page,value:string){await page.getByRole('textbox').fill(value);await page.getByRole('button',{name:/Sprawdź/}).tap();}
+
+test('wybór słówka pokazuje an apple i nie poucza o brakującym rodzajniku po kliknięciu',async({page})=>{
+ await start(page,'apple','choice');const option=page.locator('.answer-options .option[data-answer="an apple"]');await expect(option).toBeVisible();await option.tap();
+ await expect(page.locator('.feedback.correct')).toBeVisible();await expect(page.locator('.article-note')).toHaveCount(0);
+});
 
 test('telefon: pięć wejść menu, Mapy bez szukania i kopia również dla gościa',async({page})=>{
   await page.goto('./');const nav=page.locator('.sidebar nav');

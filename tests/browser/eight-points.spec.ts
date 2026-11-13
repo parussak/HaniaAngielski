@@ -25,6 +25,20 @@ test('rzeczywisty gest dotykowy przenosi słowo w lukę',async({page,context})=>
  const p=gaps();await restore(page,p);const q=questionFor(modules,p.active!.items[0]);const token=page.getByRole('button',{name:q.answers[0],exact:true}),target=page.locator('.gap-target').first();await token.scrollIntoViewIfNeeded();const a=(await token.boundingBox())!,b=(await target.boundingBox())!,cdp=await context.newCDPSession(page);
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:a.x+a.width/2,y:a.y+a.height/2,id:1}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:b.x+b.width/2,y:b.y+b.height/2,id:1}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await expect(target).toContainText(q.answers[0]);await expect(page.locator('.gap-drag-ghost')).toHaveCount(0);
 });
+
+test('błędne słowo można przenieść między lukami i odłożyć; bank zostawia puste miejsce',async({page})=>{
+ const p=gaps(),[a,b]=p.active!.items,qa=questionFor(modules,a),qb=questionFor(modules,b);await restore(page,p);
+ const gapA=page.locator(`.gap-target[data-key=${JSON.stringify(a.key)}]`),gapB=page.locator(`.gap-target[data-key=${JSON.stringify(b.key)}]`);
+ const token=page.locator(`.bank-token[data-answer=${JSON.stringify(qb.answers[0])}]`),before=(await token.boundingBox())!;
+ expect(await token.locator('span').evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(15);
+ await token.click();await gapA.click();await expect(gapA).toHaveClass(/match-flash/);await expect(gapA).toContainText(qb.answers[0]);
+ await expect(page.locator('.bank-empty')).toHaveCount(1);expect((await token.boundingBox())!.width).toBeCloseTo(before.width,0);
+ await page.reload();await expect(gapA).toContainText(qb.answers[0]);await gapA.click();await expect(gapA).toHaveClass(/is-selected/);
+ await gapA.dragTo(page.locator('.bank-options'));await expect(gapA).toHaveText('…');await expect(page.locator('.bank-empty')).toHaveCount(0);
+ await page.getByRole('button',{name:qb.answers[0],exact:true}).click();await gapA.click();await gapA.click();await gapB.click();await expect(gapB).toHaveClass(/gap-correct/);await expect(gapA).toHaveText('…');await page.screenshot({path:'test-results/gap-empty-bank-mobile.png',fullPage:true});
+ await page.getByRole('button',{name:qa.answers[0],exact:true}).click();await gapA.click();await expect(page.locator('.board-summary')).toBeVisible();
+ const saved=await exported(page);expect(saved.active!.attempts).toHaveLength(2);expect(saved.active!.attempts.find(t=>t.key===a.key)!.first).toBe(false);
+});
 test('cofanie, odświeżenie, kontynuacja i restart nie kasują gwiazdek',async({page})=>{
  await page.goto('./');await openMap(page);const mapUrl=page.url();await page.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();const title=await page.locator('h1').innerText();await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).click();await expect(page.locator('.pair-board')).toBeVisible();await page.reload();await expect(page.locator('.pair-board')).toBeVisible();
  await page.goBack();await expect(page.locator('.lesson-resume-actions')).toBeVisible();await expect(page.getByRole('button',{name:'Kontynuuj',exact:true})).toBeVisible();await page.goBack();await expect(page.locator('.journey-path')).toBeVisible();expect(page.url()).toBe(mapUrl);await page.goForward();await expect(page.locator('h1')).toHaveText(title);

@@ -2,6 +2,7 @@ import {openGeneralReview} from './navigation.ts';
 import {openModule} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
 import {foodModules as modules} from '../materials.ts';
+import {vocabularyFullAnswer} from '../../src/learning/vocabulary-answer.ts';
 test.use({isMobile:true,hasTouch:true,viewport:{width:390,height:844}});
 test('telefon: fiszki, quiz mieszany, powtórka błędów i brak błędów zasobów',async({page})=>{
   const failures:string[]=[];
@@ -39,7 +40,7 @@ test('telefon: fiszki, quiz mieszany, powtórka błędów i brak błędów zasob
     }else{
       sawChoice=true;
       if(index===0) { const wrong=page.locator('.option').filter({hasNotText:word.answers[0]}).first(); await wrong.tap(); }
-      else await page.getByRole('button',{name:word.answers[0],exact:true}).tap();
+      else await page.getByRole('button',{name:vocabularyFullAnswer(word),exact:true}).tap();
     }
     await expect(page.locator('.feedback')).toBeVisible();
     await page.getByRole('button',{name:'Dalej',exact:false}).tap();

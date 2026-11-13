@@ -4,6 +4,8 @@ Status: model pojęciowy i wdrożone podstawy etapu 2. [Format plików kursów i
 
 ## Stan obecny
 
+Plansza luk (D-55) ocenia każde nowe wstawienie słowa od razu; przechowuje także błędne rozmieszczenie do ręcznego przeniesienia lub odłożenia. Bank pokazuje puste miejsca po użytych słowach. Przy słówkach warianty wyboru są prezentowane z własnymi a/an z danych haseł. [Szczegóły interakcji i oceniania](03-nauka.md).
+
 Prezentacja zadania może mieć opcjonalny `pairGroup` (2–3 słówka w planszy, każde oceniane oddzielnie) albo `presentation: bank` (jedna oceniana odpowiedź do luki, wybrana z propozycji). To oprawa istniejących `word`/`exercise`, nie drugi zestaw odpowiedzi lub tłumaczeń. Sesja zapisuje wybrane hasło lub propozycję, a jej ukończenie nadal wymaga próby każdego bazowego zadania. `legendary` oznacza pełną dobrowolną powtórkę tej samej lekcji, bez nowego identyfikatora ukończenia. [D-50](03-nauka.md).
 
 Sekcja może deklarować opcjonalny plan 7 + 2: siedem lekcji bazowych i dwa generowane przystanki z rolą `recall`. Zapisany plan zawiera identyfikatory bazowe i miejsca wstawienia; pytania powstają z historii przy uruchomieniu sesji, nie przez edycję treści lekcji. Sesja otwarcia/finału ma opcjonalną rolę `ritual`, bez tworzenia nowego rodzaju pytania. [Format](format-materialow.md), [dobór, wymagalność i nagrody](03-nauka.md), [zapis i zgodność](06-zapis.md).

@@ -1,5 +1,13 @@
 # Testy — podział i zasady
 
+## D-55 — rodzajniki i układanie słów w luki
+
+Weryfikacja 13 listopada 2026: **256/256 testów Node** na zwykłej i rozszerzonej bibliotece, budowanie z 206 zasobami PWA oraz kontrola dokumentacji przeszły. Pełny przebieg Chrome dał 115/117: starszy scenariusz quizu szukał opcji bez a/an, a scenariusz PWA zakładał informację zwrotną po każdej poprawnej luce historyjki (sceny przechodzą wtedy od razu dalej). Po poprawieniu tych oczekiwań oraz końcowej korekcie czytelności etykiet banku ponowiono **28/28 scenariuszy dotyczących zmian**, w tym oba wcześniejsze niepowodzenia, dotyk, przenoszenie z luki do banku, odświeżenie, kopię i offline. Obejrzano mobilny zrzut pustych miejsc w banku. Pozostałych 89 scenariuszy nie powtarzano po korekcie stylu etykiety; fizycznego telefonu nie testowano.
+
+`supportive-learning.test.ts` sprawdza własne rodzajniki poprawnej opcji i dystraktorów, quiz i zapisane warianty oraz brak mutacji materiałów. `course-practice.test.ts` nadal pilnuje zakresu tylko poznanych słów, z aktualną prezentacją „an apple”. `boards-navigation.test.ts` sprawdza ocenę przy wstawieniu, pozostawienie błędu, wybór i odłożenie bez dodatkowej próby, przeniesienie do drugiej luki, stałą kolejność tokenów oraz przejście przez kopię v1.
+
+Scenariusze przeglądarkowe obejmują wybór „an apple” bez uwagi o brakującym rodzajniku; dotykowe wkładanie tokenu; pozostawienie błędu po odświeżeniu, odłożenie kliknięciem i przeciągnięciem do banku, przeniesienie między lukami, puste miejsce o zachowanej szerokości oraz podsumowanie bez „Sprawdź”. Starsze testy fiszek i globalnych zestawów wybierają teraz pełne formy z rodzajnikami; pomocnik plansz nie klika usuniętego przycisku sprawdzania. Zakres merytoryczny i zasady oceniania nie zostały osłabione.
+
 ## D-54 — całe lekcje historyjek i koci rozmówcy
 
 Weryfikacja 13 listopada 2026: **254/254 testy Node** na zwykłej i rozszerzonej bibliotece, **115/115 scenariuszy Playwright** na gotowej aplikacji w Chrome, `npm run build` z kontrolą materiałów i 206 zasobami offline oraz `check-docs` przeszły. Obejrzano zrzuty rozmowy przy 320 px i podsumowania przy 390 px. Nie testowano na fizycznym telefonie; recenzja językowa scen nadal pozostaje otwarta.

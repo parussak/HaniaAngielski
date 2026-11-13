@@ -69,7 +69,7 @@ test('globalny wybór słówek używa wyłącznie poznanych opcji; pojedyncze ha
     tryItem(p, item('bread')); finish(p);
     const session = makeCoursePracticeSession(modules, m, p, 'quiz', 'choice')!;
     assert.ok(session.items.every(i => i.input === 'choice'));
-    for (const i of session.items) assert.deepEqual(new Set(questionFor(modules, i).options), new Set(['apple','bread']));
+    for (const i of session.items) assert.deepEqual(new Set(questionFor(modules, i).options), new Set(['an apple','bread']));
     p.active = session; const restored = validateBackup(backup(p)).progress;
     assert.deepEqual(restored.active!.items, session.items);
     assert.ok(sessionCompatible(modules, restored.active!));

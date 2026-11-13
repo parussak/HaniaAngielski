@@ -1,5 +1,13 @@
 # Nauka — prowadzenie i utrwalanie
 
+## D-55 — rodzajniki w wyborze i natychmiastowe sprawdzanie luk — wdrożone
+
+Przy słówkach każda opcja wyboru pokazuje własne wymagane a/an zgodnie z jawnymi danymi hasła, także w quizie i globalnej nauce. Nie stosujemy rodzajnika pytanego hasła do błędnych opcji ani nie zgadujemy reguły z pisowni. Zasady oceniania wpisanej odpowiedzi pozostają: brak wymaganego a/an jest zaliczany z uwagą, błędny rodzajnik jest błędem. Dane materiałów i zapisanych opcji pozostają niezmienione; pełna forma powstaje przy odczycie pytania.
+
+W planszy luk wstawienie słowa od razu ocenia daną odpowiedź — bez przycisku „Sprawdź zdania”. Błędne słowo krótko błyska i pozostaje w luce, a pierwsza próba trafia do wyników oraz powtórek. Użytkownik może zaznaczyć je i przenieść do innej luki lub odłożyć przyciskiem pustego miejsca w banku; działa też przeciąganie do luki lub banku na komputerze i telefonie. Samo zaznaczenie i odłożenie nie ocenia ponownie. Zastąpienie słowa zwalnia poprzedni token. Poprawnie rozwiązane luki pozostają zaznaczone i zablokowane; po ostatniej jest jedno podsumowanie planszy.
+
+Użyte słowo znika z banku, zostawiając puste miejsce o zachowanym rozmiarze. Kolejność luk i banku jest stała podczas rozwiązywania. Rozmieszczenie i wyniki nadal korzystają z istniejących pól kopii v1 i przetrwają odświeżenie; bez migracji, zmiany ukończeń i gwiazdek. To zastępuje wcześniejszy sposób ręcznego sprawdzania całej planszy i automatycznego usuwania błędnego słowa.
+
 ## D-54 — historyjka jako cała lekcja i koci rozmówcy — wdrożone
 
 Wymagania zapisano przed zmianą kodu. Cztery obecne historyjki Food mają po 4–5 luk i zaczynają się od razu rozmową. Jedno samodzielne ćwiczenie „Anything else?” przeniesiono do istniejącej lekcji „Uprzejmie zamawiamy”, żeby nie stracić pokrycia materiału. Pozostałe wcześniejsze zadania są nadal w module i innych lekcjach; nie usunięto żadnego opublikowanego zadania ani jego rewizji. Powtórka zasad przed historyjką jest opcjonalna i zwinięta.

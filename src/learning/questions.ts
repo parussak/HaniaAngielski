@@ -1,7 +1,7 @@
 import { normalizeAnswer } from '../answers.ts';
 import { compareModules, courseKey, sameCourse } from './scope.ts';
 import { wordExplanation } from '../materials/presentation.ts';
-import { vocabularyAssessment } from './vocabulary-answer.ts';
+import { vocabularyAssessment,vocabularyFullAnswer } from './vocabulary-answer.ts';
 import { type Exercise, type Item, type Mode, type Module, type Session, type Word } from './model.ts';
 export function shuffle<T>(input: T[], random = Math.random) {
     const result = [...input];
@@ -47,13 +47,25 @@ export function questionFor(modules: Module[], item: Item): Exercise {
     if (!data)
         throw new Error('Brak materiału do pytania.');
     if (item.type === 'exercise')
-        return item.options ? { ...data as Exercise, options: [...item.options] } : data as Exercise;
+        return vocabularyOptions(modules,item,item.options ? { ...data as Exercise, options: [...item.options] } : data as Exercise);
     const word = data as Word;
     const module = modules.find(m => m.id === item.moduleId)!;
     const linked = module.exercises.find(q => q.kind === 'vocabulary' && q.wordId === word.id);
     const answers = word.answers ?? [word.back];
     const options = item.options ?? linked?.options ?? [word.back, ...module.words.filter(w => !answers.some(a => normalizeAnswer(a) === normalizeAnswer(w.back))).map(w => w.back).filter((v, i, a) => a.indexOf(v) === i).slice(0, 2)];
-    return { article:word.article, illustration: word.illustration, id: word.id, kind: 'vocabulary', prompt: word.front, answers, options, explanation: linked?.explanation ?? wordExplanation(module,word), requires: [module.id], caseSensitive: false, source: word.source };
+    return vocabularyOptions(modules,item,{ article:word.article, illustration: word.illustration, id: word.id, kind: 'vocabulary', prompt: word.front, answers, options, explanation: linked?.explanation ?? wordExplanation(module,word), requires: [module.id], caseSensitive: false, source: word.source });
+}
+/** Each vocabulary option uses its own authored article, never the question's distractor article. */
+function vocabularyOptions(modules:Module[],item:Item,q:Exercise):Exercise{
+    if(q.kind!=='vocabulary')return q;
+    const source=modules.find(m=>m.id===item.moduleId)!;
+    const words=[source,...modules.filter(m=>m!==source&&sameCourse(m,source))].flatMap(m=>m.words);
+    const body=(s:string)=>normalizeAnswer(s).replace(/^(a|an)\s+/,'');
+    return {...q,options:q.options.map(option=>{
+        if(q.article&&q.answers.some(a=>body(a)===body(option)))return vocabularyFullAnswer({...q,answers:[option]});
+        const word=words.find(w=>w.article&&[w.back,...w.answers??[]].some(a=>body(a)===body(option)));
+        return word?.article?vocabularyFullAnswer({...q,article:word.article,answers:[option]}):option;
+    })};
 }
 export function sessionCompatible(modules: Module[], s: Session) {
     const anchor = modules.find(m => m.id === s.moduleId);

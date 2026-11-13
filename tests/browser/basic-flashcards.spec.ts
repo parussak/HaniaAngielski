@@ -4,6 +4,8 @@ import {openModule} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
 import {foodModules as modules} from '../materials.ts';
+import {questionFor,keyFor} from '../../src/core.ts';
+import {vocabularyFullAnswer} from '../../src/learning/vocabulary-answer.ts';
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 test('telefon: wybór podstawy i pełnych fiszek, zakres zapisany w kopii',async({page})=>{
   await page.goto('./');await openModule(page);
@@ -38,18 +40,19 @@ test('telefon: aktywne fiszki mieszane, błąd, poprawa, wznowienie i wynik',asy
   for(let i=0;i<10;i++){
     const front=await page.locator('.question').innerText();
     const word=modules[0].words.find(w=>w.front===front)!;
+    const full=vocabularyFullAnswer(questionFor(modules,{key:keyFor(modules[0],'word',word.id),moduleId:modules[0].id,version:word.rev??1,type:'word',id:word.id,input:'choice'}));
     if(await page.getByRole('textbox').isVisible()){
       sawText=true;await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();
     }else{
       sawChoice=true;
       if(i===0)await page.locator('.option').filter({hasNotText:word.back}).first().tap();
-      else await page.getByRole('button',{name:word.back,exact:true}).tap();
+      else await page.getByRole('button',{name:full,exact:true}).tap();
     }
     if(i===0){
       await expect(page.locator('.feedback.incorrect')).toContainText(word.back);
       await page.reload();await resumeStudy(page);
       await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).tap();
-      await page.getByRole('button',{name:word.back,exact:true}).tap();
+      await page.getByRole('button',{name:full,exact:true}).tap();
       await expect(page.locator('.feedback.correct')).toBeVisible();
     }
     await page.getByRole('button',{name:'Dalej',exact:false}).tap();

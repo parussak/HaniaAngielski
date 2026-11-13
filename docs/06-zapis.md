@@ -1,5 +1,7 @@
 # Zapis — co, gdzie i z jaką zgodnością
 
+**D-55:** natychmiastowe sprawdzanie plansz wykorzystuje istniejące `gapPlacements`, `gapSelection` i próby. Błędny token pozostaje zapisany; odłożenie lub zaznaczenie nie dopisuje próby. Starsza kopia z nieocenionym rozmieszczeniem nadal się wczytuje — nie oceniamy jej automatycznie podczas odczytu. Nowa interakcja sprawdza nowe wstawienie. Rodzajniki w wariantach wyboru są dodawane przy odczycie pytania, bez zmiany `items[].options` w kopii. Ukończenia, gwiazdki i format v1 pozostają bez zmian.
+
 **D-54:** koci rozmówcy nie dodają nowych pól do wyników ani kopii — obsada wynika z istniejącego identyfikatora sesji i sceny. Zmiana czterech lekcji Food na same historyjki dotyczy nowych sesji. Rozpoczęte sesje mają swoje zapisane zadania i są wznawiane bez skracania, zaś ukończenia i nagrody pozostają zgodne z D-52.
 
 Status: obecne rozwiązanie oraz granice przyszłych zmian. Dokument nie wprowadza migracji.

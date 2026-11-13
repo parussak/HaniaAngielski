@@ -5,13 +5,25 @@ import {courseFixture} from './fixtures/course-materials.ts';
 import {emptyProgress,questionFor,recordAnswer,next,backup,validateBackup} from '../src/core.ts';
 import {makeLessonSession,type Journey} from '../src/adventure.ts';
 import {varyLesson} from '../src/learning/lesson-variety.ts';
-import {answerOnBoard,boardItems} from '../src/learning/boards.ts';
+import {answerOnBoard,boardItems,placeGap,gapTokens} from '../src/learning/boards.ts';
 import {AppState} from '../src/app/state.ts';
 import {restoreNavigation,saveNavigation} from '../src/app/navigation.ts';
 import {courseContext} from '../src/views/courses.ts';
 const course=courseFixture().courses[0],m=engineModule('board-unit',course.id);
 const j:Journey={version:1,moduleId:m.id,title:'Mapa',stages:[{id:'stage',title:'Etap',cat:'albert',illustration:'illustrations/test.svg',lessons:[{id:'words',title:'Słowa',intro:'',wordIds:m.words.slice(0,5).map(w=>w.id),exerciseIds:[],ruleIds:[]},{id:'gaps',title:'Luki',intro:'',wordIds:[],exerciseIds:m.exercises.filter(q=>q.kind==='grammar').slice(0,6).map(q=>q.id),ruleIds:[]}]}]};
 function active(index=0){const p=emptyProgress(),l=j.stages[0].lessons[index];p.active=varyLesson(makeLessonSession([m],j,l,'mixed',p),[m],[j],j,l,p);return p;}
+
+test('luka ocenia przy wstawieniu, zostawia błąd i pozwala przenieść lub odłożyć słowo bez dodatkowych prób',()=>{
+ const p=active(1),s=p.active!,group=boardItems(s),[a,b]=group,answer=questionFor([m],b).answers[0],tokens=gapTokens([m],s);
+ assert.equal(placeGap(p,[m],[j],a.key,answer),false);assert.equal(s.gapPlacements![a.key],answer);assert.equal(s.attempts.length,1);
+ assert.deepEqual(validateBackup(backup(p)).progress,p);
+ placeGap(p,[m],[j],a.key);assert.equal(s.gapSelection,answer);
+ placeGap(p,[m],[j],'',answer);assert.equal(s.gapPlacements![a.key],undefined);assert.equal(s.attempts.length,1);
+ placeGap(p,[m],[j],a.key,answer);assert.equal(placeGap(p,[m],[j],b.key,answer),true);
+ assert.equal(s.gapPlacements![a.key],undefined);assert.equal(s.gapPlacements![b.key],answer);assert.deepEqual(gapTokens([m],s),tokens);
+ assert.equal(placeGap(p,[m],[j],a.key,questionFor([m],a).answers[0]),true);assert.equal(s.boardSummary,true);
+ assert.deepEqual(validateBackup(backup(p)).progress,p);
+});
 test('błąd w parze nie otwiera wyjaśnienia ani następnego pytania; cała plansza kończy się jednym podsumowaniem',()=>{
  const p=active(),s=p.active!,group=boardItems(s),key=group[0].key;
  assert.equal(answerOnBoard(p,[m],[j],key,'wrong'),false);assert.equal(s.index,0);assert.equal(s.phase,'question');assert.equal(s.boardSummary,undefined);assert.equal(s.attempts[0].first,false);assert.equal(p.adventure!.memory![key].correct,0);

@@ -11,6 +11,15 @@ const m=modules[0];
 const journey=validateJourney(JSON.parse(readFileSync(new URL('../public/content/02-food/sciezka.json',import.meta.url),'utf8')),m);
 function word(id:string){return questionFor(modules,{key:`${m.id}@1:word:${id}`,moduleId:m.id,version:1,type:'word',id,input:'text'});}
 
+test('wybór słówek pokazuje własne a/an każdej opcji, także w quizie i zapisanym zestawie',()=>{
+ const before=structuredClone(modules),item={key:`${m.id}@1:word:apple`,moduleId:m.id,version:1,type:'word' as const,id:'apple',input:'choice' as const,options:['apple','sandwich','water']};
+ assert.deepEqual(questionFor(modules,item).options,['an apple','a sandwich','water']);
+ const quiz=m.exercises.find(q=>q.kind==='vocabulary'&&q.wordId==='apple')!;
+ const q=questionFor(modules,{...item,type:'exercise',id:quiz.id});assert.deepEqual(q.options,['an apple','a sandwich','water']);
+ assert.ok(isCorrect(q,'an apple'));assert.equal(vocabularyAssessment(q,'an apple')!.note,null);
+ assert.deepEqual(modules,before);
+});
+
 test('słówka: brak a/an jest poprawny z objaśnieniem; zły lub zbędny rodzajnik jest błędem',()=>{
   for(const [id,bare,full,wrong] of [['apple','apple','an apple','a apple'],['sandwich','sandwich','a sandwich','an sandwich'],['a-bottle-of-water','bottle of water','a bottle of water','an bottle of water']]){
     const q=word(id);
