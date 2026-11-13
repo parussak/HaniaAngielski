@@ -422,5 +422,429 @@
       "caption": "Po uprawianiu sportu przychodzi ochota na jedzenie.",
       "scene": true
     }
+  },
+  {
+    "id": "food-scene-order",
+    "kind": "dialogue",
+    "title": "Zamówienie w restauracji",
+    "prompt": "Uzupełnij rozmowę w restauracji.",
+    "dialogue": [
+      {
+        "speaker": "Kelner",
+        "text": "What ___ you like?"
+      },
+      {
+        "speaker": "Gość",
+        "text": "___ I have a chicken sandwich, please?"
+      },
+      {
+        "speaker": "Kelner",
+        "text": "Would you like anything to ___?"
+      },
+      {
+        "speaker": "Gość",
+        "text": "I'd ___ a lemonade, please."
+      },
+      {
+        "speaker": "Kelner",
+        "text": "Anything ___?"
+      },
+      {
+        "speaker": "Gość",
+        "text": "Can I have a bottle of water, please?"
+      },
+      {
+        "speaker": "Kelner",
+        "text": "Enjoy your meal!"
+      }
+    ],
+    "gaps": [
+      {
+        "id": "would",
+        "input": "bank",
+        "answers": [
+          "would"
+        ],
+        "options": [
+          "would",
+          "many",
+          "some"
+        ],
+        "explanation": "What would you like? znaczy „Na co masz ochotę?”. Tak kelner pyta o zamówienie.",
+        "ruleId": "ordering"
+      },
+      {
+        "id": "can",
+        "input": "text",
+        "answers": [
+          "Can"
+        ],
+        "options": [
+          "Can",
+          "Are",
+          "There"
+        ],
+        "explanation": "Can I have …, please? to uprzejma prośba: „Czy mogę prosić …?”.",
+        "ruleId": "ordering"
+      },
+      {
+        "id": "drink",
+        "input": "bank",
+        "answers": [
+          "drink"
+        ],
+        "options": [
+          "drink",
+          "cook",
+          "decorate"
+        ],
+        "explanation": "Would you like anything to drink? znaczy „Czy życzysz sobie coś do picia?”.",
+        "ruleId": "ordering"
+      },
+      {
+        "id": "like",
+        "input": "text",
+        "answers": [
+          "like"
+        ],
+        "options": [
+          "like",
+          "look",
+          "make"
+        ],
+        "explanation": "I'd like … znaczy „Poproszę …”. I'd to skrót od I would.",
+        "ruleId": "ordering"
+      },
+      {
+        "id": "else",
+        "input": "bank",
+        "answers": [
+          "else"
+        ],
+        "options": [
+          "else",
+          "all",
+          "any"
+        ],
+        "explanation": "Anything else? znaczy „Coś jeszcze?”.",
+        "ruleId": "ordering"
+      }
+    ],
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "source": "Nowa scena ćwiczeniowa na podstawie modułu 2: podręcznik, s. 30; zwroty i słownictwo, s. 33; zeszyt ćwiczeń, s. 21. To adaptacja, nie cytat z podręcznika.",
+    "illustration": {
+      "src": "illustrations/scene-ordering.svg",
+      "caption": "Rozmowa z kelnerem przy stoliku.",
+      "scene": true
+    }
+  },
+  {
+    "id": "food-scene-drinks",
+    "kind": "dialogue",
+    "title": "Koktajl i frytki",
+    "prompt": "Uzupełnij rozmowę w restauracji.",
+    "dialogue": [
+      {
+        "speaker": "Kelner",
+        "text": "Would you ___ anything to drink?"
+      },
+      {
+        "speaker": "Gość",
+        "text": "I'd like a strawberry ___, please."
+      },
+      {
+        "speaker": "Kelner",
+        "text": "Anything else?"
+      },
+      {
+        "speaker": "Gość",
+        "text": "Can I have ___ chips, please?"
+      },
+      {
+        "speaker": "Kelner",
+        "text": "Enjoy your ___!"
+      }
+    ],
+    "gaps": [
+      {
+        "id": "like",
+        "input": "bank",
+        "answers": [
+          "like"
+        ],
+        "options": [
+          "like",
+          "look",
+          "cook"
+        ],
+        "explanation": "Would you like …? znaczy „Czy masz ochotę na …?”. Po would używamy like.",
+        "ruleId": "ordering"
+      },
+      {
+        "id": "milkshake",
+        "input": "bank",
+        "answers": [
+          "milkshake"
+        ],
+        "options": [
+          "milkshake",
+          "toaster",
+          "seagull"
+        ],
+        "explanation": "A strawberry milkshake to koktajl truskawkowy — jedyna z tych rzeczy, którą można zamówić do picia.",
+        "ruleId": "ordering"
+      },
+      {
+        "id": "some",
+        "input": "text",
+        "answers": [
+          "some"
+        ],
+        "options": [
+          "some",
+          "any",
+          "much"
+        ],
+        "explanation": "W uprzejmej prośbie Can I have …? używamy some: some chips — „trochę frytek”.",
+        "ruleId": "some-any"
+      },
+      {
+        "id": "meal",
+        "input": "text",
+        "answers": [
+          "meal"
+        ],
+        "options": [
+          "meal",
+          "recipe",
+          "diary"
+        ],
+        "explanation": "Enjoy your meal! znaczy „Smacznego!”.",
+        "ruleId": "ordering"
+      }
+    ],
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "source": "Nowa scena ćwiczeniowa na podstawie modułu 2: podręcznik, s. 30; zwroty i słownictwo, s. 33; zeszyt ćwiczeń, s. 21. To adaptacja, nie cytat z podręcznika.",
+    "illustration": {
+      "src": "illustrations/scene-milkshake-order.svg",
+      "caption": "Zamawianie koktajlu i frytek.",
+      "scene": true
+    }
+  },
+  {
+    "id": "food-scene-shopping",
+    "kind": "dialogue",
+    "title": "Lista zakupów na piknik",
+    "prompt": "Uzupełnij rozmowę o zakupach.",
+    "dialogue": [
+      {
+        "speaker": "Hania",
+        "text": "Is there ___ milk?"
+      },
+      {
+        "speaker": "Tata",
+        "text": "No, there ___."
+      },
+      {
+        "speaker": "Hania",
+        "text": "How ___ eggs are there?"
+      },
+      {
+        "speaker": "Tata",
+        "text": "There are two eggs and a ___ of juice."
+      },
+      {
+        "speaker": "Hania",
+        "text": "How ___ water is there?"
+      },
+      {
+        "speaker": "Tata",
+        "text": "There is a lot of water."
+      }
+    ],
+    "gaps": [
+      {
+        "id": "any",
+        "input": "bank",
+        "answers": [
+          "any"
+        ],
+        "options": [
+          "any",
+          "some",
+          "many"
+        ],
+        "explanation": "W pytaniach używamy any: Is there any milk? — „Czy jest jakieś mleko?”.",
+        "ruleId": "some-any"
+      },
+      {
+        "id": "isnt",
+        "input": "bank",
+        "answers": [
+          "isn't"
+        ],
+        "options": [
+          "isn't",
+          "aren't",
+          "is"
+        ],
+        "explanation": "Milk jest niepoliczalne, więc krótka odpowiedź przecząca to No, there isn't.",
+        "ruleId": "there"
+      },
+      {
+        "id": "many",
+        "input": "text",
+        "answers": [
+          "many"
+        ],
+        "options": [
+          "many",
+          "much",
+          "any"
+        ],
+        "explanation": "Eggs można policzyć, dlatego pytamy How many eggs …?",
+        "ruleId": "much-many"
+      },
+      {
+        "id": "carton",
+        "input": "bank",
+        "answers": [
+          "carton"
+        ],
+        "options": [
+          "carton",
+          "bar",
+          "packet"
+        ],
+        "explanation": "Sok kupujemy w kartonie: a carton of juice.",
+        "ruleId": "containers"
+      },
+      {
+        "id": "much",
+        "input": "text",
+        "answers": [
+          "much"
+        ],
+        "options": [
+          "much",
+          "many",
+          "any"
+        ],
+        "explanation": "Water jest niepoliczalne, dlatego pytamy How much water …?",
+        "ruleId": "much-many"
+      }
+    ],
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "source": "Nowa scena ćwiczeniowa na podstawie modułu 2: podręcznik, s. 27 i 29; zwroty i słownictwo, s. 33. To adaptacja, nie cytat z podręcznika.",
+    "illustration": {
+      "src": "illustrations/scene-shopping.svg",
+      "caption": "Sprawdzanie listy zakupów.",
+      "scene": true
+    }
+  },
+  {
+    "id": "food-scene-picnic",
+    "kind": "dialogue",
+    "title": "Koci piknik",
+    "prompt": "Uzupełnij rozmowę kotków.",
+    "dialogue": [
+      {
+        "speaker": "Krzywołap",
+        "text": "Would you like to ___ a picnic in the park?"
+      },
+      {
+        "speaker": "Maja",
+        "text": "Good idea!"
+      },
+      {
+        "speaker": "Krzywołap",
+        "text": "Are there ___ sandwiches?"
+      },
+      {
+        "speaker": "Maja",
+        "text": "Yes, there ___. And there is a ___ of biscuits."
+      },
+      {
+        "speaker": "Krzywołap",
+        "text": "Cool! I can't wait!"
+      }
+    ],
+    "gaps": [
+      {
+        "id": "have",
+        "input": "bank",
+        "answers": [
+          "have"
+        ],
+        "options": [
+          "have",
+          "go",
+          "throw"
+        ],
+        "explanation": "Have a picnic znaczy „zorganizować piknik”. Would you like to …? to uprzejma propozycja.",
+        "ruleId": "ordering"
+      },
+      {
+        "id": "any",
+        "input": "bank",
+        "answers": [
+          "any"
+        ],
+        "options": [
+          "any",
+          "much",
+          "a"
+        ],
+        "explanation": "W pytaniach o rzeczy policzalne w liczbie mnogiej używamy any: Are there any sandwiches?",
+        "ruleId": "some-any"
+      },
+      {
+        "id": "are",
+        "input": "text",
+        "answers": [
+          "are"
+        ],
+        "options": [
+          "are",
+          "is",
+          "any"
+        ],
+        "explanation": "Na pytanie Are there …? odpowiadamy Yes, there are.",
+        "ruleId": "there"
+      },
+      {
+        "id": "packet",
+        "input": "text",
+        "answers": [
+          "packet"
+        ],
+        "options": [
+          "packet",
+          "bottle",
+          "carton"
+        ],
+        "explanation": "Herbatniki są w paczce: a packet of biscuits.",
+        "ruleId": "containers"
+      }
+    ],
+    "requires": [
+      "unit-2-food"
+    ],
+    "caseSensitive": false,
+    "source": "Nowa scena ćwiczeniowa na podstawie modułu 2: podręcznik, s. 27, 29 i 30; zwroty i słownictwo, s. 33. To adaptacja, nie cytat z podręcznika.",
+    "illustration": {
+      "src": "illustrations/scene-picnic.svg",
+      "caption": "Kotki planują piknik w parku.",
+      "scene": true
+    }
   }
 ]

@@ -43,6 +43,16 @@ export function createRenderer(root: HTMLDivElement, state: AppState, renderScre
                 feedback.focus({ preventScroll: true });
             }
         }
+        else if (state.screen === 'study' && state.progress.active?.phase === 'question') {
+            // D-53: a scene continues without a feedback step, so focus follows the conversation.
+            const scene = root.querySelector<HTMLElement>('.scene[data-position]');
+            if (scene && scene.dataset.position !== '1') {
+                const input = root.querySelector<HTMLInputElement>('#answer');
+                if (input) input.focus();
+                else { scene.tabIndex = -1; scene.focus({ preventScroll: true }); }
+                scene.querySelector('.scene-now')?.scrollIntoView({ block: 'nearest' });
+            }
+        }
         else if (state.screen === 'house' && (focusAction === 'select-decoration'||focusAction==='house-edit')) {
             const controls=root.querySelector<HTMLElement>((state.houseEditing||focusAction==='house-edit')?'.cat-house':'#house-placement');
             controls?.scrollIntoView({block:'start'});

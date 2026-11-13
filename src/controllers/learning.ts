@@ -16,6 +16,7 @@ import { courseKey } from '../learning/scope.ts';
 import {followingLesson,lessonContext,legendarySession} from '../learning/lesson-flow.ts';
 import {varyLesson} from '../learning/lesson-variety.ts';
 import {answerOnBoard,boardItems,gapTokens,solved} from '../learning/boards.ts';
+import {continueScene} from '../learning/scenes.ts';
 interface LearningPorts {
     courses: ReturnType<typeof createCourseController>;
     mutate: (change: (p: Progress) => void) => Promise<void>;
@@ -271,7 +272,9 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
                 if (recordAnswer(p, q, el.dataset.answer ?? '') === false){
                 rememberError(p,session.items[session.index]);
                 recordStageError(p, session, session.items[session.index], state.journeys);
-            } });
+            }
+                else continueScene(p);
+            });
         }
         else if (action === 'retry')
             await mutate(p => { if (p.active?.phase === 'feedback' && p.active.lastCorrect === false) {

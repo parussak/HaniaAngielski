@@ -1,5 +1,23 @@
 # Testy — podział i zasady
 
+## D-53 — sceny dialogowe z lukami
+
+Mechanikę sprawdzają testy na danych syntetycznych, treść Food — osobny plik.
+
+`scenes.test.ts` (10 testów, `fixtures/scenes.ts`): scena staje się zwykłymi zadaniami ze stałymi identyfikatorami; 20 odmian zepsutej sceny jest odrzucanych (niezgodna liczba luk, 1 lub 7 luk, powtórzona luka, zły sposób odpowiedzi, brak źródła, opcji, wyjaśnienia lub reguły, dwie poprawne opcje); lekcja bierze scenę całą albo wcale i w limicie 10 zadań, a odczyt nie zmienia mapy; luki są w sesji razem, w kolejności rozmowy, ze sposobem odpowiedzi z danych; każda luka oceniana osobno, poprawna prowadzi dalej bez przerwy, błąd nie wydłuża sesji i trafia do kolejki błędów oraz powtórki z wpisywaniem; środek sceny przechodzi kopię v1, a rozerwana grupa jest odrzucana; poprawiona kwestia zostaje sceną, a scena niepasująca do sesji rozpada się na zwykłe dialogi; „Rozmówki” biorą scenę całą albo wcale; Poziom legendarny dostaje scenę z aktualnej treści; ta sama scena działa w innym kursie i module, a pliki mechaniki nie zawierają nazw Food.
+
+`food-scenes.test.ts` (4 testy): cztery sceny Food mają źródło z oznaczeniem adaptacji, regułę i jednowyrazowe odpowiedzi; każde słowo scen występuje już w materiale modułu; sceny są w czterech istniejących lekcjach, mapy mają nadal 41 i 5 lekcji, a ukończona mapa zostaje ukończona; lekcja ze sceną ma najwyżej 10 zadań i kończy się sceną.
+
+`browser/scenes.spec.ts` (4 scenariusze): telefon 390 px ze sceną syntetyczną podaną zamiast pliku rozmówek — kwestie po kolei, bank i wpisywanie, przyciski co najmniej 44 px, błąd z wyjaśnieniem, dwa odświeżenia w środku sceny, „Dalej” po błędzie, jedno podsumowanie, brak przewijania poziomego przy 320 px, osobne wyniki luk i błędy w `adventure.memory`; klawiatura w trybie „Rozmówki” (Enter, spacja, fokus w polu następnej luki); prawdziwa scena Food w lekcji „Rozmowa przy stoliku” z ilustracją pokazaną raz i przewijanym podsumowaniem; offline na zbudowanej aplikacji — zamknięcie strony w środku sceny i powrót do tej samej luki.
+
+Pomocnik `browser/helpers.ts` rozpoznaje scenę po kluczu bieżącej luki i nie czeka na „Dalej” po poprawnej luce.
+
+Sześć starszych testów Food zareagowało na nową treść i zostało spełnionych bez zmiany testów: sceny mają ilustracje i reguły, identyfikatory z przedrostkiem `food-`, lekcje 6–8 zadań, a mapa z pliku jest identyczna z wczytaną.
+
+Weryfikacja 13 listopada 2026, Edge: `check:content` (219 zadań), budowanie z 206 zasobami PWA i kontrola odnośników przeszły. Playwright: **114/114** na zbudowanej aplikacji; **102 przeszło, 12 pominiętych** na wersji deweloperskiej. Node: **252 z 253**.
+
+**Otwarte:** `content.test.ts` oczekuje dokładnie 12 zadań typu `dialogue`; po dodaniu 18 luk scen jest ich 30. Testu nie zmieniono — wymaga zgody. Nie testowano na fizycznym telefonie ani prawdziwym koncie; treść scen czeka na [recenzję językową](recenzja-scen-food.md).
+
 ## D-52 — ukończona lekcja zostaje ukończona
 
 `completed-stays.test.ts` (8 testów na danych syntetycznych): stare ukończenie + zmieniona lekcja = nadal ukończona i 100%; nowa sesja z aktualnej treści i tylko 1 ★ bez podwójnej nagrody; Poziom legendarny z aktualnej treści, a zestawy dynamiczne kopiowane; wznowienie starej sesji po zmianie treści i 3 ★ za pierwsze ukończenie; stara kopia v1 wczytana i zapisana bez zmian; liczniki utrwalenia i kolejka błędów dla zadania zdjętego z lekcji; plan 7 + 2 po zmianie treści lekcji bazowych; drugie urządzenie z nowszą treścią po synchronizacji przez testowy adapter.

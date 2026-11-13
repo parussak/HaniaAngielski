@@ -509,15 +509,16 @@
           "update": {
             "edition": 2,
             "title": "Rozmowa przy stoliku",
-            "intro": "Przeczytaj obie wypowiedzi. Uzupełnij tylko jedno brakujące słowo w każdej rozmowie.",
+            "intro": "Najpierw dwa krótkie zdania, potem cała rozmowa przy stoliku. Uzupełniaj ją krok po kroku.",
             "wordIds": [],
             "exerciseIds": [
-              "d-what-would",
-              "d-can-i-have",
-              "d-id-like",
-              "d-anything-else",
               "food-can-pizza",
-              "food-else"
+              "food-else",
+              "food-scene-order--would",
+              "food-scene-order--can",
+              "food-scene-order--drink",
+              "food-scene-order--like",
+              "food-scene-order--else"
             ],
             "ruleIds": [
               "ordering",
@@ -542,15 +543,17 @@
           "update": {
             "edition": 2,
             "title": "Rozmowa przy stoliku — dalszy krok",
-            "intro": "Przeczytaj obie wypowiedzi. Uzupełnij tylko jedno brakujące słowo w każdej rozmowie.",
+            "intro": "Najpierw kilka krótkich zdań, potem rozmowa o napoju i frytkach. Uzupełniaj ją krok po kroku.",
             "wordIds": [],
             "exerciseIds": [
-              "d-to-drink",
-              "d-some-chips",
               "d-no-milk",
               "food-like-milkshake",
               "food-would-drink",
-              "food-have-lemonade"
+              "food-have-lemonade",
+              "food-scene-drinks--like",
+              "food-scene-drinks--milkshake",
+              "food-scene-drinks--some",
+              "food-scene-drinks--meal"
             ],
             "ruleIds": [
               "ordering",
@@ -885,12 +888,14 @@
             "intro": "Sprawdź, co mamy, czego brakuje i ile rzeczy zabierzemy na piknik.",
             "wordIds": [],
             "exerciseIds": [
-              "d-no-milk",
               "d-yes-milk",
-              "d-how-many",
-              "d-how-much",
               "d-two-bottles",
-              "g-how-cartons"
+              "g-how-cartons",
+              "food-scene-shopping--any",
+              "food-scene-shopping--isnt",
+              "food-scene-shopping--many",
+              "food-scene-shopping--carton",
+              "food-scene-shopping--much"
             ],
             "ruleIds": [
               "some-any",
@@ -925,12 +930,14 @@
             "intro": "Zakończ przygotowania do pikniku. Użyj poznanych zasad i zwrotów. Na kolejnej mapie czeka używanie Food w krótkich tekstach o posiłkach.",
             "wordIds": [],
             "exerciseIds": [
-              "g-some-request",
               "g-container-plural",
               "g-lot-apples",
-              "d-to-drink",
               "g-because-sport",
-              "g-there-bottles"
+              "g-there-bottles",
+              "food-scene-picnic--have",
+              "food-scene-picnic--any",
+              "food-scene-picnic--are",
+              "food-scene-picnic--packet"
             ],
             "ruleIds": [
               "some-any",

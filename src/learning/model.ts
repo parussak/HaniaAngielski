@@ -20,6 +20,8 @@ export interface Exercise {
         text: string;
     }[];
     illustration?: Illustration;
+    /** D-53: this exercise is one gap of a dialogue scene. */
+    scene?: { id: string; gap: number; input: 'bank' | 'text' };
     responseType?: 'choice';
     id: string;
     wordId?: string;
@@ -33,6 +35,14 @@ export interface Exercise {
     source?: string;
     ruleId?: string;
     rev?: number;
+}
+/** D-53: the script of a dialogue scene; every gap is an ordinary exercise. */
+export interface Scene {
+    id: string;
+    title: string;
+    prompt: string;
+    lines: { speaker: string; text: string }[];
+    gapIds: string[];
 }
 export interface GrammarRule {
     id: string;
@@ -64,6 +74,7 @@ export interface Module {
     words: Word[];
     exercises: Exercise[];
     grammar: GrammarRule[];
+    scenes?: Scene[];
     basicFlashcardIds?: string[];
 }
 export type Mode = 'flashcards' | 'flashcards-basic' | 'quiz' | 'grammar' | 'dialogue' | 'review' | 'lesson' | 'training';
@@ -72,6 +83,7 @@ export type AnswerMode = 'choice' | 'text' | 'mixed';
 export interface Item {
     gapGroup?: string;
     pairGroup?: string;
+    sceneGroup?: string;
     presentation?: 'bank';
     options?: string[];
     key: string;
@@ -89,7 +101,7 @@ export interface Attempt {
     corrections: number;
     corrected: boolean;
 }
-export function plainItem(item:Item):Item{const {pairGroup,gapGroup,presentation,options,...plain}=item;return plain;}
+export function plainItem(item:Item):Item{const {pairGroup,gapGroup,sceneGroup,presentation,options,...plain}=item;return plain;}
 export interface Session {
     boardSummary?: true;
     gapSelection?: string;

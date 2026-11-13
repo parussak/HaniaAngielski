@@ -11,6 +11,7 @@ import { inputFor,keyFor,questionFor,type AnswerMode,type Item,type Module,type 
 import type { StageReview } from './stage-review.ts';
 import { compareModules } from './learning/scope.ts';
 import {plannedStage,type SectionPlan} from './learning/section-plan.ts';
+import {groupScenes} from './learning/scenes.ts';
 export interface Adventure extends Home {
   courseHomes?:Record<string,Home>;
   version:1;completed:Record<string,{at:string;edition?:2}>;
@@ -41,6 +42,8 @@ export function validateJourney(value:unknown,m:Module):Journey {
     if(stage.adaptiveReviews!==undefined&&(stage.adaptiveReviews!==true||stage.lessons.length!==7||stage.lessons.some(l=>l.id.startsWith(`${stage.id}-recall-`))))return fail();
     for(const l of stage.lessons){
       if(!l || !/^[a-z0-9-]+$/.test(l.id)||ids.has(l.id)||typeof l.title!=='string'||typeof l.intro!=='string'||![l.wordIds,l.exerciseIds,l.ruleIds].every(Array.isArray)||l.wordIds.length+l.exerciseIds.length<(l.role==='training'?0:1)||l.wordIds.length+l.exerciseIds.length>10)return fail();
+      // D-53: a lesson takes a dialogue scene whole — all of its gaps or none.
+      for(const scene of m.scenes??[]){const listed=scene.gapIds.filter(id=>l.exerciseIds.includes(id)).length;if(listed&&listed!==scene.gapIds.length)return fail();}
       if(l.role!==undefined&&l.role!=='training'||l.targetCount!==undefined&&(!Number.isInteger(l.targetCount)||l.targetCount<6||l.targetCount>10)||l.role==='training'&&(l.wordIds.length+l.exerciseIds.length+l.ruleIds.length>0))return fail();
       if(j.id&&l.role!=='training'&&l.wordIds.length+l.exerciseIds.length<6)return fail();
       ids.add(l.id);
@@ -79,7 +82,7 @@ export function makeLessonSession(modules:Module[],journey:Journey,lesson:Lesson
   const m=modules.find(m=>m.id===journey.moduleId)!;
   const items:Item[]=[...lesson.wordIds.map(id=>({key:keyFor(m,'word',id),moduleId:m.id,version:m.words.find(w=>w.id===id)?.rev??1,type:'word' as const,id,input:'text' as const})),...lesson.exerciseIds.map(id=>({key:keyFor(m,'exercise',id),moduleId:m.id,version:m.exercises.find(q=>q.id===id)?.rev??1,type:'exercise' as const,id,input:'text' as const}))];
   items.forEach((item,i)=>item.input=inputFor(questionFor(modules,item),answerMode==='mixed'?(i%2?'text':'choice'):answerMode));
-  return {fixedLength:true,id:crypto.randomUUID(),moduleId:m.id,mode:'lesson',lesson:{id:lessonKey(journey,lesson),title:lesson.title,...(lesson.edition?{edition:lesson.edition}:{})},answerMode,previous:false,startedAt:new Date().toISOString(),completedAt:null,items,index:0,phase:'question',lastCorrect:null,attempts:[],repeatKeys:[]};
+  return groupScenes(modules,{fixedLength:true,id:crypto.randomUUID(),moduleId:m.id,mode:'lesson',lesson:{id:lessonKey(journey,lesson),title:lesson.title,...(lesson.edition?{edition:lesson.edition}:{})},answerMode,previous:false,startedAt:new Date().toISOString(),completedAt:null,items,index:0,phase:'question',lastCorrect:null,attempts:[],repeatKeys:[]} as Session,'end') as Session;
 }
 export function rewardCompletion(p:Progress,s:Session,modules:Module[]=[]){
   if(!s.completedAt || !s.items.every(i=>s.attempts.some(a=>a.key===i.key)))return 0;

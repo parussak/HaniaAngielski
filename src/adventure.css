@@ -129,4 +129,10 @@
 @keyframes wrong-match{0%,65%{background:#f6b7bd;border-color:#c44254;color:#6f2430}100%{background:revert-layer}}
 .match-flash{animation:wrong-match .5s ease-out}
 .board-summary li{margin:12px 0;line-height:1.6}
+.scene{display:grid;gap:8px;margin:0 0 12px;text-align:left;flex-shrink:0}
+.scene .scene-now{outline:2px solid #b79fd8;outline-offset:1px}
+.scene-filled{padding:0 4px;border-radius:6px;background:#e4f4e8;color:#2f6243}
+.scene .scene-current{min-width:64px;background:#fff;border-bottom-color:#7851b3}
+.scene-summary .scene{margin:12px 0}
+.scene-summary li{text-align:left}
 .lesson-resume-actions{display:grid;gap:12px}.lesson-resume-actions button{min-height:48px;width:100%}

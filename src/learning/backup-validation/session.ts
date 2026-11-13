@@ -5,6 +5,7 @@ export const validItem = (i: unknown): boolean => obj(i) && str(i.key) && str(i.
     (i.pairGroup===undefined||str(i.pairGroup)&&i.type==='word'&&i.input==='choice'&&i.presentation===undefined)&&
     (i.gapGroup===undefined||str(i.gapGroup)&&i.type==='exercise'&&i.input==='choice'&&i.presentation==='bank'&&i.pairGroup===undefined)&&
     (i.presentation===undefined||i.presentation==='bank'&&i.type==='exercise'&&i.input==='choice')&&
+    (i.sceneGroup===undefined||str(i.sceneGroup)&&i.type==='exercise'&&i.pairGroup===undefined&&i.gapGroup===undefined&&i.presentation===undefined)&&
     (i.options === undefined || Array.isArray(i.options) && i.options.length >= 2 && i.options.length <= 4 && i.options.every(str) && new Set(i.options).size === i.options.length);
 export const validSession = (v: unknown, completed: boolean): boolean => {
     if(obj(v)){
@@ -45,6 +46,8 @@ export const validSession = (v: unknown, completed: boolean): boolean => {
     for(const key of groups){const indices=(v.items as Item[]).flatMap((i,index)=>i.pairGroup===key?[index]:[]);if(indices.length<2||indices.length>3||indices.at(-1)!-indices[0]!==indices.length-1||!(v.items as Item[]).some(i=>i.key===key&&i.pairGroup===key))return false;}
     const gapGroups=new Set((v.items as Item[]).flatMap(i=>i.gapGroup?[i.gapGroup]:[]));
     for(const key of gapGroups){const indices=(v.items as Item[]).flatMap((i,index)=>i.gapGroup===key?[index]:[]);if(indices.length!==2||indices[1]!==indices[0]+1||!(v.items as Item[]).some(i=>i.key===key&&i.gapGroup===key))return false;}
+    const sceneGroups=new Set((v.items as Item[]).flatMap(i=>i.sceneGroup?[i.sceneGroup]:[]));
+    for(const key of sceneGroups){const indices=(v.items as Item[]).flatMap((i,index)=>i.sceneGroup===key?[index]:[]);if(indices.length>6||indices.at(-1)!-indices[0]!==indices.length-1||(v.items as Item[])[indices[0]].key!==key)return false;}
     if (!v.scope && v.items.some(i => obj(i) && i.options !== undefined)) return false;
     if (!Array.isArray(v.attempts) || v.attempts.length > v.items.length || !v.attempts.every(a => obj(a) && str(a.key) && typeof a.first === 'boolean' && typeof a.answer === 'string' && a.answer.length <= 2000 && (a.lastAnswer === undefined || (typeof a.lastAnswer === 'string' && a.lastAnswer.length <= 2000)) && integer(a.corrections) && typeof a.corrected === 'boolean' && (v.items as Item[]).some(i => i.key === a.key)))
         return false;

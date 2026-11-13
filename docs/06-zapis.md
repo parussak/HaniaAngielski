@@ -67,6 +67,14 @@ Kopia pozostaje w wersji 1 i odczytuje wcześniejsze pliki. Obsługa nowych pól
 
 Dotychczasowe wpisy ukończenia `{ at }` oraz sesje bez znacznika pozostają oryginalną wersją lekcji. Nowo rozpoczynana nieukończona lekcja korzysta z opcjonalnego `update`, jeśli jej definicja je zawiera. Taka sesja zapisuje `lesson.edition: 2`, a pierwsze ukończenie zachowuje ten znacznik w `adventure.completed[lessonKey]`. Sam wybór wydania nie dopisuje migracji ani nagród. Aktywna sesja nadal przechowuje konkretną listę pytań i miejsce odpowiedzi, a stare pytania pozostają dostępne dla jej wznowienia i powtórek. Nowe lekcje drugiej mapy bez `update` nie potrzebują znacznika wydania 2. Format kopii pozostaje w wersji 1; aktualna walidacja obsługuje oba warianty. Limity historii i synchronizacji bez zmian. [Pełna ochrona wyników](wdrozenie-food.md#ochrona-wyników-i-nagród).
 
+### Sceny dialogowe — D-53
+
+- Element sesji może mieć opcjonalne `sceneGroup` — klucz pierwszej luki sceny. Luki jednej sceny stoją obok siebie; kopia z rozerwaną grupą jest odrzucana. Sesje i kopie bez tego pola działają bez zmian, format kopii zostaje w wersji 1.
+- Każda luka ma własny wpis w `attempts` pod kluczem zwykłego zadania (`moduł@rewizja:exercise:<scena>--<luka>`). Nie ma osobnego zapisu postępu sceny: pozycję wyznacza `index` sesji, dlatego odświeżenie i synchronizacja wracają do tej samej luki.
+- Podsumowanie sceny używa istniejącego znacznika `boardSummary`. Błędna luka trafia do `difficult` i `adventure.memory` jako zwykły element, bez `sceneGroup`.
+- Identyfikatory luk są kluczami postępów: po publikacji nie zmieniamy ich i nie usuwamy luk z pliku. Jeśli scena w materiałach przestanie pasować do zapisanej sesji, jej luki pokazują się jako zwykłe dialogi z jedną luką.
+- Urządzenie ze starszą wersją aplikacji, które dostanie z konta sesję ze sceną, pokaże bezpieczny ekran „Potrzebny jest moduł” do czasu aktualizacji; zapis zostaje.
+
 ### Aktualna treść dla wszystkich — D-52
 
 Wybór treści lekcji nie czyta już ukończeń ani aktywnej sesji: `lessonForProgress` zawsze zwraca aktualną treść. Nie dodano żadnego pola. `adventure.completed[lessonKey]` pozostaje jedynym źródłem ukończenia, z opcjonalnym historycznym `edition: 2`; walidacja kopii nadal przyjmuje tylko brak pola lub `2`. Aktywna sesja przechowuje własne klucze zadań i jest wznawiana z nich, nie z definicji lekcji. `adventure.memory`, `stageReviews` i `sectionPlans` wskazują klucze elementów i identyfikatory lekcji, więc edycja listy zadań ich nie zmienia. Synchronizacja przesyła cały zapis postępów bez treści lekcji: urządzenie z nowszą treścią odczytuje te same ukończenia. Warunkiem wznowień jest pozostawienie opublikowanych elementów w plikach modułu z niezmienioną rewizją — [reguła edycji](format-materialow.md#aktualizacja-wydanej-lekcji). Kopia pozostaje w wersji 1, bez migracji.

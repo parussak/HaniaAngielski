@@ -19,7 +19,7 @@ Status: **wdrożony format etapu 2**. To instrukcja edycji dla człowieka. Typy 
 | `<folder>/quiz.json` | Odwołania pytań słownikowych do znaczeń i dystraktorów |
 | `<folder>/gramatyka.json` | Reguły, objaśnienia, przykłady, źródła |
 | `<folder>/cwiczenia.json` | Konkretne zadania i ich własne odpowiedzi oraz wyjaśnienia |
-| `<folder>/rozmowki.json` | Opcjonalne dialogi z jedną luką |
+| `<folder>/rozmowki.json` | Opcjonalne dialogi z jedną luką i [sceny z kilkoma lukami](#scena-dialogowa-z-kilkoma-lukami) |
 
 Folder modułu, np. `02-food`, jest adresem plików. `unit-2-food` to identyfikator materiału i zapisu postępów. **To dwie różne rzeczy.** W `katalog.modules` wpisujemy foldery, a w `course.moduleIds` identyfikatory z `modul.json`.
 
@@ -118,6 +118,54 @@ Co wolno, a czego nie:
 - **Istotna zmiana zadania** (inne pytanie, inna odpowiedź) = nowe zadanie z nowym `id`; stare zostaje w pliku. Poprawka literówki lub wyjaśnienia nie wymaga nowego `id`.
 
 Pole `update` jest zachowanym formatem etapu 4, nie rejestrem wydań: zawiera `edition: 2`, `title`, `intro`, `wordIds`, `exerciseIds` i `ruleIds`, nie może zmieniać `id`, roli ani zawierać kolejnego `update`, ma 6–10 zadań i wskazuje istniejące materiały. W lekcjach, które je mają (etapy 5–7 pierwszej mapy Food), edytujemy treść wewnątrz `update`; oryginalna lista pod nim nie jest już pokazywana, ale zostaje jako źródło poznanego materiału. Nowe lekcje nie potrzebują `update` — edytujemy je bezpośrednio. Zapisywany przy sesji i ukończeniu znacznik `edition: 2` jest historyczny i nie wpływa na działanie; nie wprowadzamy wydań 3, 4… [Przykład Food i ochrona danych](wdrozenie-food.md) opisuje stan sprzed D-52.
+
+## Scena dialogowa z kilkoma lukami
+
+Status: wdrożone (D-53). Scena jest wpisem w `rozmowki.json` z `kind: "dialogue"` i polem `gaps`. Wpis z jedną luką (z `answers` i `options` na poziomie wpisu) pozostaje bez zmian.
+
+```json
+{
+  "id": "scene-order",
+  "kind": "dialogue",
+  "title": "Zamówienie w restauracji",
+  "prompt": "Uzupełnij rozmowę.",
+  "dialogue": [
+    {"speaker": "Kelner", "text": "What ___ you like?"},
+    {"speaker": "Gość", "text": "I'd like a ___ pizza, please."}
+  ],
+  "gaps": [
+    {"id": "would", "input": "bank", "answers": ["would"], "options": ["would", "many", "some"], "explanation": "…", "ruleId": "ordering"},
+    {"id": "vegetarian", "input": "text", "answers": ["vegetarian"], "options": ["vegetarian", "hungry"], "explanation": "…"}
+  ],
+  "requires": ["unit-2-food"],
+  "caseSensitive": false,
+  "source": "Adaptacja na podstawie modułu 2: podręcznik, s. 30 i 33. Nie jest cytatem."
+}
+```
+
+| Pole | Zasada |
+| --- | --- |
+| `title` | Krótki polski tytuł sceny, do 80 znaków |
+| `dialogue` | 2–8 kwestii; każde `___` to jedna luka |
+| `gaps` | 2–6 luk, w kolejności występowania `___`; liczba luk musi równać się liczbie `___` |
+| `gaps[].id` | Małe litery, cyfry i myślniki; niepowtarzalny w scenie |
+| `gaps[].input` | `bank` — wybór z propozycji; `text` — wpisanie |
+| `gaps[].answers`, `options` | Jak w zwykłym zadaniu: co najmniej dwie opcje i dokładnie jedna poprawna. Opcje są wymagane także przy `text`, bo w powtórkach i w trybie wyboru luka jest zwykłym zadaniem |
+| `gaps[].explanation` | Wyjaśnienie po polsku, pokazywane po błędzie i w podsumowaniu |
+| `gaps[].ruleId`, `rev` | Opcjonalne, jak w zwykłym zadaniu |
+| `requires`, `caseSensitive`, `source`, `illustration` | Wspólne dla całej sceny; `source` jest wymagane i oznacza adaptację oraz strony podręcznika. Ilustracja jest opcjonalna i pokazuje się raz, przy pierwszej kwestii |
+
+Każda luka staje się zwykłym zadaniem o identyfikatorze `<id sceny>--<id luki>`, np. `scene-order--would`. Poza sceną — w powtórce błędów albo gdy do sesji trafiła tylko część luk — pokazuje się jako krótki dialog z jedną luką: kwestia z luką i kwestia sąsiednia, z pozostałymi lukami już uzupełnionymi.
+
+Lekcja bierze scenę, wymieniając **wszystkie jej luki** w `exerciseIds` (także wewnątrz `update`) — mapa nie ma osobnego pola scen. Kolejność na liście nie ma znaczenia: sesja układa luki według rozmowy i stawia scenę na końcu lekcji. Luki liczą się do limitu 10 zadań lekcji jak każde inne zadanie.
+
+```json
+{"id": "restaurant-dialogue-1", "wordIds": [], "exerciseIds": ["food-else", "scene-order--would", "scene-order--vegetarian"], "ruleIds": ["ordering"]}
+```
+
+Po publikacji sceny obowiązuje [reguła edycji treści](#aktualizacja-wydanej-lekcji): nie usuwamy sceny ani luki z pliku i nie zmieniamy identyfikatorów luk, bo są kluczami postępów. Wolno poprawić kwestie, odpowiedzi i wyjaśnienia oraz zdjąć scenę z listy lekcji. `npm run check:content` odrzuca scenę z niezgodną liczbą luk, brakiem opcji, wyjaśnienia lub `source`, powtórzonym identyfikatorem oraz lekcję, która wymienia tylko część luk sceny albo nieistniejącą lukę.
+
+Scena nie zależy od kursu: każdy moduł dowolnego kursu może mieć własne sceny w swoim `rozmowki.json`, bez zmian w kodzie.
 
 ## Jawna wskazówka a/an dla słówka
 

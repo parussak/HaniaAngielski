@@ -30,8 +30,12 @@ export async function answerCurrent(page:Page,modules:Module[],correct=true){
   for(const key of keys){await idle(page);const q=fromKey(modules,key),choices=page.locator('.bank-token:not(:disabled)'),values=await choices.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.answer!));const index=values.findIndex(value=>isCorrect(q,value)===correct);expect(index).toBeGreaterThanOrEqual(0);await choices.nth(index).click();await idle(page);await page.locator(`.gap-target[data-key=${JSON.stringify(key)}]`).click();await idle(page);await expect(page.locator(`.gap-target[data-key=${JSON.stringify(key)}]`)).toContainText(values[index]);}
   await page.getByRole('button',{name:/Sprawdź zdania/}).click();await expect(page.locator(correct?'.board-summary':'.match-flash').first()).toBeVisible();return;
  }
- const prompt=await page.locator('.question').innerText();let q:Exercise|undefined;for(const m of modules){const w=m.words.find(w=>w.front===prompt);q??=w?fromKey(modules,`${m.id}@${w.rev??1}:word:${w.id}`):m.exercises.find(q=>q.prompt===prompt);}if(!q)throw Error(`Nieznane pytanie: ${prompt}`);
+ // A scene names its current gap, because all its gaps share one prompt.
+ const sceneKey=await page.locator('.scene[data-key]').count()?await page.locator('.scene[data-key]').getAttribute('data-key'):null;
+ const prompt=await page.locator('.question').innerText();let q:Exercise|undefined=sceneKey?fromKey(modules,sceneKey):undefined;if(!q)for(const m of modules){const w=m.words.find(w=>w.front===prompt);q??=w?fromKey(modules,`${m.id}@${w.rev??1}:word:${w.id}`):m.exercises.find(q=>q.prompt===prompt);}if(!q)throw Error(`Nieznane pytanie: ${prompt}`);
  if(await page.getByRole('textbox').isVisible()){await page.getByRole('textbox').fill(correct?q.answers[0]:'wrong');await page.getByRole('button',{name:/Sprawdź/}).click();}else{const choices=page.locator('.option'),values=await choices.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.answer!));await choices.nth(values.findIndex(value=>isCorrect(q!,value)===correct)).click();}
+ // A correct scene gap continues to the next gap without a feedback step.
+ if(sceneKey&&correct){await idle(page);await expect(page.locator(`.scene[data-key=${JSON.stringify(sceneKey)}]:not(.scene-summary .scene)`)).toHaveCount(0);return;}
  await expect(page.locator(correct?'.feedback.correct':'.feedback.incorrect')).toBeVisible();
 }
 export async function finishCurrent(page:Page,modules:Module[],firstWrong=false){
@@ -41,6 +45,8 @@ export async function finishCurrent(page:Page,modules:Module[],firstWrong=false)
   if(!await page.locator('.feedback').count()){
    if(firstWrong&&count===1){const board=await page.locator('.pair-board,.answer-bank').count();await answerCurrent(page,modules,false);if(!board)await page.getByRole('button',{name:'Spróbuję jeszcze raz'}).click();}
    await answerCurrent(page,modules);
+   // Inside a scene the next gap is already on screen; there is nothing to confirm.
+   if(await page.locator('.scene').count()&&!await page.locator('.feedback').count())continue;
   }
   await page.getByRole('button',{name:/Dalej/}).click();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
  }

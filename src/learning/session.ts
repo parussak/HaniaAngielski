@@ -1,5 +1,6 @@
 import { isFlashcardMode, keyFor, type AnswerMode, type Exercise, type Item, type Mode, type Module, type Progress, type Session } from './model.ts';
 import { eligibleModules, inputFor, isCorrect, questionFor, shuffle } from './questions.ts';
+import { groupScenes } from './scenes.ts';
 function remember(p: Progress, keys: string[]) {
     if (!keys.length) return;
     p.encountered = [...new Set([...(p.encountered ?? []), ...keys])];
@@ -44,12 +45,25 @@ export function makeSession(modules: Module[], selected: Module, mode: Mode, ans
     }
     const seen = new Set([...Object.keys(progress.history?.items ?? {}), ...Object.keys(progress.words), ...progress.sessions.flatMap(s => s.attempts.map(a => a.key)), ...(progress.active?.attempts.map(a => a.key) ?? [])]);
     const priority = (item: Item) => progress.difficult.includes(item.key) || progress.words[item.key] === 'review' ? 0 : !seen.has(item.key) ? 1 : 2;
-    const selectedItems = [0, 1, 2].flatMap(rank => shuffle(items.filter(i => priority(i) === rank))).slice(0, 10);
+    const ranked = [0, 1, 2].flatMap(rank => shuffle(items.filter(i => priority(i) === rank)));
+    let selectedItems = ranked.slice(0, 10);
+    if (mode === 'dialogue') {
+        // D-53: a scene enters the session whole or not at all.
+        const sceneOf = (item: Item) => { const m = modules.find(m => m.id === item.moduleId), q = m?.exercises.find(q => q.id === item.id); return q?.scene && m!.scenes?.find(s => s.id === q.scene!.id); };
+        selectedItems = [];
+        for (const item of ranked) {
+            if (selectedItems.includes(item)) continue;
+            const scene = sceneOf(item), group = scene ? scene.gapIds.map(id => ranked.find(i => i.moduleId === item.moduleId && i.id === id)) : [item];
+            if (group.every(i => i) && selectedItems.length + group.length <= 10) selectedItems.push(...group as Item[]);
+        }
+    }
     let questionIndex = 0;
     for (const item of selectedItems) {
         item.input = inputFor(questionFor(modules, item), answerMode === 'mixed' ? (questionIndex++ % 2 ? 'text' : 'choice') : answerMode, mode);
     }
-    return { fixedLength:true,id: crypto.randomUUID(), moduleId: selected.id, mode, answerMode: mode === 'review' ? 'text' : answerMode, previous, startedAt: new Date().toISOString(), completedAt: null, items: selectedItems, index: 0, phase: 'question', lastCorrect: null, attempts: [], repeatKeys: [] };
+    const session: Session = { fixedLength:true,id: crypto.randomUUID(), moduleId: selected.id, mode, answerMode: mode === 'review' ? 'text' : answerMode, previous, startedAt: new Date().toISOString(), completedAt: null, items: selectedItems, index: 0, phase: 'question', lastCorrect: null, attempts: [], repeatKeys: [] };
+    if (mode === 'dialogue') groupScenes(modules, session);
+    return session;
 }
 export function recordAnswer(p: Progress, exercise: Exercise, answer: string) {
     const s = p.active;

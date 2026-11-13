@@ -1,5 +1,24 @@
 # Nauka — prowadzenie i utrwalanie
 
+## D-53 — sceny dialogowe z lukami — wdrożone
+
+Cel: dialogi i historyjki, w których odpowiada się kilka razy w jednej rozmowie, bez pośpiechu. Mechanika jest wspólna dla wszystkich kursów i modułów; treść scen jest wyłącznie w plikach materiałów.
+
+1. Scena to rozmowa z 2–6 lukami. Kwestie pojawiają się po kolei, a wcześniejsze zostają widoczne z uzupełnionymi odpowiedziami.
+2. Każda luka ma w danych sposób odpowiedzi: wybór z banku albo wpisanie. Sposoby mogą się przeplatać w jednej scenie.
+3. Każda luka jest osobnym zadaniem: ma własną ocenę, własny wpis w wynikach sesji i własne wyjaśnienie. Nie ma drugiego silnika oceniania — obowiązują te same zasady odpowiedzi co w pozostałych ćwiczeniach.
+4. Poprawna odpowiedź uzupełnia lukę i odsłania następną kwestię bez przerwy. Po ostatniej luce jest jedno podsumowanie całej rozmowy z wyjaśnieniami.
+5. Błąd pokazuje wyjaśnienie po polsku i pozwala spróbować ponownie albo iść dalej. Nie wydłuża sesji, zapisuje trudność i trafia do powtórek. W powtórce luka wraca jako krótki dialog z jedną luką.
+6. Scena liczy się jako tyle zadań, ile ma luk, i mieści się w limicie 10 zadań sesji. Jej luki zostają razem i w kolejności, na końcu lekcji.
+7. Odświeżenie lub zamknięcie w środku sceny wraca do tej samej luki z zachowanymi odpowiedziami. Scena działa offline, na telefonie i z klawiatury; przyciski mają co najmniej 44 px.
+8. Sceny pojawiają się w lekcjach mapy i w trybie „Rozmówki”. Dopisanie sceny do lekcji nie dodaje wymaganych lekcji i nie otwiera ukończonych (D-52).
+9. Nowa scena jest adaptacją: tylko słownictwo i gramatyka modułu, `source` z oznaczeniem adaptacji i stronami podręcznika, recenzja językowa przed publikacją. To świadoma zmiana zapisu D-50 „nie dopisujemy wymyślonych dialogów”.
+10. Nowe pola zapisu i treści są opcjonalne. Kopia postępów zostaje w wersji 1; dawne sesje i kopie działają bez zmian.
+
+Wdrożenie: lekcja bierze scenę przez wymienienie jej luk w `exerciseIds`; mapa nie dostała nowego pola. Ilustracja sceny pokazuje się raz, przy pierwszej kwestii. Po poprawnej odpowiedzi fokus przechodzi do pola następnej luki albo do rozmowy. Cztery sceny Food są w lekcjach etapów „Restauracja” i „Piknik” i czekają na [recenzję językową](recenzja-scen-food.md).
+
+Format i zasady edycji opisuje [instrukcja materiałów](format-materialow.md#scena-dialogowa-z-kilkoma-lukami).
+
 ## D-52 — ukończona lekcja zostaje ukończona — wdrożone
 
 Cel: ćwiczenia w lekcjach, także ukończonych, można zmieniać i uzupełniać, a nikt nie musi robić niczego ponownie.
@@ -38,7 +57,7 @@ Wymagania zapisano przed zmianą kodu. Wdrożenie zachowuje obie mapy Food i źr
 - Poziom legendarny jest dobrowolną nową sesją pełnej powtórki ukończonej lekcji. Nie jest powtórką samych błędów, nie blokuje mapy i zachowuje obecną nagrodę 1 ★ za pełne ponowne ukończenie. Sama nazwa nie wprowadza progu bezbłędności, nowych odznak ani dodatkowej premii.
 - Przed lekcją mapową nie pytamy o sposób odpowiadania. Silnik miesza wpisywanie i wybór, z zachowaniem jawnych wariantów w pytaniu oraz wpisywania w powtórkach błędów. Uzupełnienie luki wymaga brakującego fragmentu, nie całego zdania. Klasyczne ćwiczenia poza mapą zachowują ustawienia.
 - Nowe sesje przeplatają słownictwo i gramatykę, gdy dostępny jest odpowiedni materiał. Zachowujemy bazowe zadania lekcji; można dodać maksymalnie dwa poznane zadania uzupełniające z wcześniejszego zakresu, do limitu 10. Nie wymuszamy nowej gramatyki w pierwszych lekcjach słownictwa ani nie zmieniamy rozpoczętych sesji.
-- Nowe prezentacje: dobieranie polskich haseł do tłumaczeń (każda oceniana para jest osobnym zadaniem), istniejące źródłowe dialogi z lukami do wpisania oraz luki uzupełniane propozycją z banku odpowiedzi. Nie dopisujemy wymyślonych dialogów do podręcznika. Gramatyka nadal ma objaśnienie po polsku.
+- Nowe prezentacje: dobieranie polskich haseł do tłumaczeń (każda oceniana para jest osobnym zadaniem), istniejące źródłowe dialogi z lukami do wpisania oraz luki uzupełniane propozycją z banku odpowiedzi. Nie dopisujemy wymyślonych dialogów do podręcznika (D-53 zmienia to: dozwolone są oznaczone adaptacje ze słownictwa i gramatyki modułu). Gramatyka nadal ma objaśnienie po polsku.
 - Nowy wybór pary lub propozycji jest zapisywany lokalnie i na koncie razem z sesją; ćwiczenia działają offline. Nowe pola są opcjonalne w kopiach v1. Dawne sesje i kopie zachowują dotychczasową formę.
 
 D-52 zmienia ten akapit dla zwykłych lekcji: Poziom legendarny bierze aktualną treść lekcji. Pierwotnie i nadal dla lekcji dynamicznych: Poziom legendarny zachowuje cały zestaw ukończonej sesji (także lekcji dynamicznej), z nowym identyfikatorem sesji i pustymi odpowiedziami. Nie dobiera nowego zakresu w miejsce poprzedniego i nie kopiuje znacznika wypłaconej nagrody. Oprawa zadań może być przeplatana ponownie. Plansze dobierania par pokazują pełne formy z wymaganym rodzajnikiem, według tych samych zasad odpowiedzi co pozostałe ćwiczenia.

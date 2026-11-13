@@ -18,7 +18,7 @@ public/content/
     quiz.json                  pytania słownikowe: odwołania do słówek
     gramatyka.json             zasady i przykłady w rozwijanej ściądze
     cwiczenia.json             zadania, odpowiedzi i wyjaśnienia
-    rozmowki.json              krótkie dialogi z jedną luką
+    rozmowki.json              krótkie dialogi z jedną luką i sceny z kilkoma lukami
     sciezka.json               siedem etapów Food, 41 lekcji i chronione aktualizacje
     sciezka-praktyka.json      druga mapa Food: posiłki, przepis i śniadanie
 ```
@@ -101,6 +101,18 @@ Pozycja poprawnej odpowiedzi jest tasowana dla każdej sesji i pytania. Po wznow
 - Poprawienie treści ściągi nie zmienia automatycznie wyjaśnień zadań. Jeśli zmieniasz regułę, sprawdź także zadania wskazujące jej `ruleId`.
 
 Nie zmieniaj identyfikatorów przy zwykłej korekcie literówki. Istotna zmiana sensu wymaga planu zgodności: samo zwiększenie `rev` powoduje, że zapisane pytanie ze starą rewizją przestaje być rozwiązywalne przez aktualną treść. Historia pozostaje, lecz aktywna sesja lub powtórka może wymagać poprzedniej wersji. Dla opublikowanego Food zachowuj stare zadania i dodawaj nowe identyfikatory, zamiast nadpisywania używanej treści. Słówko przekazuje rewizję pytaniu w quizie, chyba że wpis quizu ma własne `rev`; sprawdź oba odwołania. Pole `version` modułu samo nie zmienia kluczy postępu. [Ochrona wydań i wyników](../../docs/format-materialow.md#aktualizacja-wydanej-lekcji).
+
+## Scena — rozmowa z kilkoma lukami
+
+Scena to wpis w `rozmowki.json` z `kind: "dialogue"`, tablicą `dialogue` i polem `gaps`. Każde `___` w kwestiach to jedna luka; w `gaps` opisujesz je po kolei:
+
+- `id` — krótka nazwa luki (małe litery, cyfry, myślniki),
+- `input` — `bank` (wybór z propozycji) albo `text` (wpisanie),
+- `answers`, `options`, `explanation` — jak w zwykłym zadaniu; opcje podaj także przy `text`.
+
+Scena ma też `title`, `prompt`, `requires`, `caseSensitive` i `source`. W `source` zaznacz, że to adaptacja, i podaj strony podręcznika. Każda luka dostaje identyfikator `<id sceny>--<id luki>`. Lekcja bierze scenę, gdy w `exerciseIds` wymienisz wszystkie jej luki; liczą się do limitu 10 zadań lekcji.
+
+Po publikacji nie usuwaj sceny ani luki i nie zmieniaj ich `id`. Teksty kwestii, odpowiedzi i wyjaśnienia możesz poprawiać. Pełny opis: [instrukcja materiałów](../../docs/format-materialow.md#scena-dialogowa-z-kilkoma-lukami).
 
 ## Sprawdzenie i odświeżenie
 

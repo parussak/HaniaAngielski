@@ -2,16 +2,19 @@ import type {Journey,Lesson} from '../adventure.ts';
 import {questionFor,inputFor,shuffle,isCorrect} from './questions.ts';
 import {mapTrainingPool} from './training.ts';
 import type {Item,Module,Progress,Session} from './model.ts';
+import {groupScenes} from './scenes.ts';
 
 /** Keep every source task; supplement only with already encountered earlier material. */
 export function varyLesson(s:Session,modules:Module[],journeys:Journey[],j:Journey,l:Lesson,p:Progress,supplement=true){
  if(s.recall)return s; // Error reviews keep their writing/explicit-choice policy.
- const items=s.items;
+ // D-53: complete scenes keep their script order and authored answers; the rest is varied.
+ groupScenes(modules,s,'end');
+ const scenes=s.items.filter(i=>i.sceneGroup),items=s.items.filter(i=>!i.sceneGroup);
  if(!s.training&&supplement){
   const vocabulary=(i:Item)=>questionFor(modules,i).kind==='vocabulary';
   const needsVocabulary=!items.some(vocabulary),needsGrammar=items.every(vocabulary);
   const pool=shuffle(mapTrainingPool(modules,journeys,j,p,l)).map(v=>v.item).filter(i=>!items.some(v=>v.key===i.key));
-  const added=pool.filter(i=>needsVocabulary?vocabulary(i):needsGrammar&&!vocabulary(i)).slice(0,Math.min(2,10-items.length));
+  const added=pool.filter(i=>needsVocabulary?vocabulary(i):needsGrammar&&!vocabulary(i)).slice(0,Math.max(0,Math.min(2,10-items.length-scenes.length)));
   items.push(...added);
  }
  const words=items.filter(i=>questionFor(modules,i).kind==='vocabulary'),other=items.filter(i=>!words.includes(i));
@@ -29,5 +32,6 @@ export function varyLesson(s:Session,modules:Module[],journeys:Journey[],j:Journ
  for(const item of s.items){const q=questionFor(modules,item);if(item.input==='choice'&&(q.dialogue||q.prompt.includes('___')))item.presentation='bank';}
  const gaps=s.items.filter(i=>i.presentation==='bank'),first=gaps[0],second=first&&gaps.find(i=>i!==first&&questionFor(modules,i).answers[0]!==questionFor(modules,first).answers[0]);
  if(first&&second){const group=[first,second],start=s.items.indexOf(first);group.forEach(i=>i.gapGroup=first.key);s.items=s.items.flatMap((i,index)=>index===start?group:group.includes(i)?[]:[i]);}
+ s.items=[...s.items,...scenes];
  s.answerMode='mixed';return s;
 }

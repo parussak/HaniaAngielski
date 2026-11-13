@@ -5,6 +5,7 @@ import type { Course } from './materials/model.ts';
 import { compileVocabulary } from './materials/vocabulary.ts';
 import { languageCode } from './materials/validation.ts';
 import { wordExplanation } from './materials/presentation.ts';
+import { compileScene, isSceneEntry, validateScenes } from './learning/scenes.ts';
 
 // Pytania słownikowe wskazują słówka, zamiast dublować ich tekst i odpowiedzi.
 export function assembleModule(metadata: any, inputWords: unknown, quiz: any, exercises: any, grammar: any, dialogues: any = [], course?: Course) {
@@ -25,7 +26,11 @@ export function assembleModule(metadata: any, inputWords: unknown, quiz: any, ex
     return { article:word.article, illustration:word.illustration, id:entry.id, wordId:word.id, rev:entry.rev??word.rev??1, kind:'vocabulary', prompt:entry.prompt ?? `${translationPrompt(metadata)}: ${word.front}`, answers:word.answers ?? [word.back], options, explanation:entry.explanation ?? wordExplanation(metadata,word), requires:[metadata.id], caseSensitive:false, source:word.source };
   });
   if(!Array.isArray(dialogues))throw new Error('Niepoprawny plik rozmówek.');
-  return {...metadata, words, meanings, exercises:[...compiled,...exercises,...dialogues], grammar};
+  // D-53: a scene is authored once and becomes one ordinary exercise per gap.
+  const scenes=dialogues.filter(isSceneEntry).map(compileScene);
+  // Scenes come only from this module's own dialogue file, never from the metadata.
+  const {scenes:_inherited,...description}=metadata;
+  return {...description, words, meanings, exercises:[...compiled,...exercises,...dialogues.filter(entry=>!isSceneEntry(entry)),...scenes.flatMap(s=>s.exercises)], grammar, ...(scenes.length?{scenes:scenes.map(s=>s.scene)}:{})};
 }
 
 export function validateModules(input: unknown): Module[] {
@@ -59,6 +64,7 @@ export function validateModules(input: unknown): Module[] {
       if (q.responseType !== undefined && q.responseType !== 'choice') return fail(`niepoprawny sposób odpowiedzi (${q.id}).`);
       if (q.ruleId !== undefined && !m.grammar.some(r=>r.id===q.ruleId)) return fail(`brak reguły dla ${q.id}.`);
     }
+    validateScenes(m as {id:unknown;scenes?:unknown;exercises:unknown[]});
     unique(m.words,`${m.id}/słówka`); unique(m.exercises,`${m.id}/zadania`); unique(m.grammar,`${m.id}/gramatyka`);
     for(const word of m.words)if(word.answers && new Set(word.answers.map((a: string)=>normalizeAnswer(a))).size!==word.answers.length)return fail(`powtórzona odpowiedź: ${word.id}.`);
     for(const element of [...m.words,...m.exercises]){
