@@ -1,185 +1,132 @@
-# Architektura — realizacja techniczna
+# Architektura — mapa kodu
 
-## D-64 — kompletność planszy, wspólna poprawka i ocena
+Gdzie w kodzie jest dana odpowiedzialność i jakich granic pilnujemy. Zasady działania opisują [nauka](03-nauka.md) i [zapis](06-zapis.md); tu jest tylko „gdzie”. Poprzednia wersja, z opisem realizacji kolejnych decyzji i etapów refaktoringu: [archiwum](archiwum/architektura-do-2026-11-13.md).
 
-`learning/boards.ts:boardReady` jest wspólną regułą dostępności przejścia dla widoku i kontrolera; `closeBoard` odmawia zamknięcia nieuzupełnionej planszy. `gapPlacement` odczytuje również dawną poprawną próbę bez zapisanego rozmieszczenia. `learning/retry.ts:retryAnswer` otwiera wyłącznie bieżący błąd lub element bieżącej grupy, bez zerowania prób i nagród. `continueScene` po poprawieniu linijki odnajduje nieodpowiedziane luki albo wraca do podsumowania.
+## Warstwy i przepływ
 
-`learning/statistics.ts:lessonRating` jest czystą projekcją sesji; nie modyfikuje istniejącego `score`, agregacji historii ani portfeli. `views/lesson-rating.ts` renderuje trzy wektorowe łapki, w tym połówki przez przycięcie wypełnienia, z opisem dla czytnika ekranu. Nie dodaje bitmap ani nowego pola wyniku w kopii.
+```
+widok (views/) ──data-action──▶ app/events.ts ──▶ kontroler (controllers/)
+                                                        │
+                    logika (learning/, materials/, house/) ◀┤
+                                                        ▼
+                         controllers/progress.ts: mutate ──▶ zapis (storage, sync, Firebase)
+                                                        │
+                                   app/renderer.ts ◀────┘  (odświeżenie ekranu)
+```
 
-## D-63 — odsłuch odpowiedzi klasycznych
+- **Widoki** (`src/views/`) renderują stan i przyciski z `data-action`. Nie zapisują wyników i nie zawierają reguł konkretnego języka.
+- **Kontrolery** (`src/controllers/`) obsługują akcje, korzystają z logiki i usług przekazanych jako argumenty. Żaden nie importuje `main.ts`.
+- **Logika** (`src/learning/`, `src/materials/`, `src/house/`) to czyste funkcje: bez DOM, Firebase i IndexedDB. Nie zna kursów ani modułów z nazwy (np. Food).
+- **Zmiana wyników** zawsze przechodzi przez `mutate` w `controllers/progress.ts`: praca na kopii, kontrola wersji konta, potwierdzenie zapisu przed aktualizacją interfejsu.
+- **`main.ts`** tylko uruchamia i łączy części; nie wracamy do umieszczania w nim logiki.
+- **`AppState`** (`app/state.ts`) to stan otwartego interfejsu, nie zapisywany jako całość.
+- **`src/core.ts`** to wspólny punkt eksportu dla zgodności starszych importów.
 
-`vocabularyPlayback` w `src/learning/listening.ts` przygotowuje pełną formę odpowiedzi i język dla słówka lub zadania quizowego, niezależnie od znacznika dyktanda i bez limitu długości. `studyView` pokazuje wspólne przyciski wyłącznie przy informacji zwrotnej klasycznych fiszek i quizu, po sprawdzeniu dostępności konkretnego tekstu. Odtwarzacz, tempo, reguły oceniania i zapis sesji nie wymagają nowej implementacji ani pól w kopii. Zakres całego kursu korzysta z modułu bieżącego elementu, więc nie zmienia języka na podstawie samego ekranu.
+Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zależy od modułu map i nagród).
 
-## D-62 — tempo niezależne od treści i zapisu
+## Gdzie co jest
 
-`src/speech/tempo.ts` zawiera wybrane współczynniki oraz wspólną regułę dodatkowego „Wolniej”. `Speaker.speak` przyjmuje opcjonalny rodzaj wypowiedzi (`word` domyślnie lub `dialogue`). Przyciski scen przekazują rodzaj do akcji odsłuchu; słówka, ich automatyczny odsłuch i próbka konta korzystają z domyślnego rodzaju. Odtwarzacz nagrań i synteza stosują tę samą regułę, także po błędzie lub przy braku pliku. Rodzaj nie trafia do postępów ani materiałów. Zmiana kodu jest objęta wersją PWA, bez nowych zasobów audio.
+### Aplikacja i ekrany
 
-## D-61 — wspólne przyciski odsłuchu
-
-`src/views/speech-controls.ts` renderuje parę zwykły odsłuch / „Wolniej” dla słówek, dialogów i ustawień. Oba przyciski przekazują ten sam tekst i język do istniejącej akcji, a wolniejszy dodatkowo `data-slow`. Nie wprowadzają drugiego pliku audio ani stanu w wynikach. Przepływność nagrań należy do `audio/config.json`; odtwarzacz jej nie ustawia.
-
-## D-60 — publikowanie i odtwarzanie nagrań
-
-- `scripts/audio/publish.mjs` sprawdza manifest względem aktualnych materiałów, profilu i sum klipów. Wtyczka w `vite.config.ts` publikuje tylko klipy i mały `audio/catalog.json`, także na serwerze deweloperskim. Budowanie nie uruchamia syntezy; nie kopiuje narzędzi, modelu ani pełnego manifestu generatora.
-- `src/speech/text.ts` jest wspólną czystą normalizacją tekstu. `recordings.ts` sprawdza bezpieczne ścieżki indeksu. `recorded-speaker.ts` odpowiada za nagranie → syntezę → brak dźwięku, wolniejsze tempo z zachowaniem wysokości, anulowanie i izolowanie błędu jednego pliku. Nie czyta wyników konta.
-- `src/speech.ts` składa odtwarzacz i dotychczasową syntezę za interfejsem `Speaker`. Start ładuje indeks z limitem 3 sekund; błąd indeksu nie blokuje aplikacji. Dostępność sprawdzana jest dla konkretnego tekstu i języka. Renderer przerywa wypowiedź przy zmianie kontekstu zadania, konta lub kursu; zwykły widok po awarii zachowuje wpisany tekst.
-- `scripts/build-sw.mjs` obejmuje klipy i indeks wersjonowanym cache całego wydania. `service-worker-range.mjs` obsługuje zakresy bajtów dla zapisanych plików audio (206/416), potrzebne odtwarzaczowi offline. Dane konta nie trafiają do tej pamięci.
-
-## D-59 — generator poza aplikacją
-
-`scripts/audio/plan.mjs` odczytuje znaczenie materiałów przez istniejące czyste funkcje i tworzy plan pełnych haseł oraz kwestii scen. `generate.mjs` jest lokalnym punktem wejścia: sprawdza narzędzia/model i uruchamia Piper oraz ffmpeg bez powłoki. `files.mjs` zarządza pamięcią gotowych klipów, manifestem i wymianą kompletnego katalogu po udanym przetworzeniu. `ogg.mjs` kontroluje strukturę Ogg Opus i sumy stron bez zewnętrznych narzędzi. Profile i cele należą do `audio/config.json`, a wynik do `audio/generated/`. Zależność jest jednostronna: narzędzie korzysta z mechaniki materiałów, aplikacja nie importuje generatora. Sam D-59 nie zmieniał odtwarzacza; D-60 publikuje wynik generatora i odtwarza go za istniejącym interfejsem. [Obsługa i kontrakt](generowanie-audio.md).
-
-## D-57 — odczyt postępów i ich prezentacja
-
-`learning/progress-overview.ts` jest czystą projekcją istniejących map, sesji, archiwum i kursu; przyjmuje datę, aby testy tygodnia nie zależały od zegara. Oddziela sumy z archiwum od dostępnej listy sesji, deduplikuje dołączone strony po ID sesji i nie modyfikuje `Progress`. `views/progress.ts` renderuje kurs, mapy, tydzień, sukcesy, domek i zwinięte szczegóły. `progress.css` ogranicza styl do tego widoku. Akcje kontynuacji i map korzystają z obecnych kontrolerów, a `progress-course` wybiera kurs istniejącą usługą preferencji i pozostaje na ekranie postępów. Renderer zachowuje otwarcie szczegółów przy dołączaniu archiwum lub odświeżeniu tego samego kursu, bez zapisywania go w wynikach.
-
-## D-56 — zakończenie planszy i oprawa dialogu
-
-`learning/boards.ts:closeBoard` przygotowuje przejście poza całą grupę bez wymogu bezbłędności; zapisuje tylko brakujące próby i używa dotychczasowych mechanizmów błędów. Kontroler wywołuje je w tej samej mutacji co istniejące `next` i rozliczenie nagrody. `boardError` odtwarza trwały kolor z próby, bez nowego pola sesji. `views/lesson-activities.ts` zachowuje planszę, a `bankExplanationView` dodaje wyjaśnienia dopiero po wypełnieniu wszystkich luk. `sceneScriptView` umieszcza kociego rozmówcę przy każdej kwestii i wywołuje istniejącą akcję `retry` z przycisku w bieżącej linijce. Format materiałów i mechanika oceniania scen pozostają wspólne.
-
-## D-55 — opcje słownikowe i interakcje luk
-
-`learning/questions.ts` wzbogaca opcje słownikowe o rodzajniki z metadanych poszczególnych haseł tego kursu, bez modyfikowania materiału i zapisanej sesji. `learning/boards.ts:placeGap` przenosi lub odkłada token i wywołuje istniejące `answerOnBoard` przy nowym wstawieniu. Błędna odpowiedź pozostaje w `gapPlacements`; zaznaczanie i odkładanie nie dopisuje prób. `views/lesson-activities.ts` pokazuje stabilną kolejność i puste miejsca po tokenach; `app/gap-drag.ts` kieruje gesty z banku i z luk przez tę samą akcję kontrolera. Brak nowych pól kopii i drugiego oceniania.
-
-## Koci rozmówcy i samodzielne historyjki — D-54
-
-Aktualna treść czterech lekcji Food zawiera wyłącznie identyfikatory luk jednej sceny. `learning/lesson-variety.ts` nie dodaje zadań, gdy cały zestaw stanowi scenę; walidator map dopuszcza samodzielną pełną scenę krótszą niż sześć zadań, bez luzowania minimum zwykłych lekcji. `cats.ts:sceneCats` przypisuje różne kotki do ról na podstawie zapisanego ID sesji i ID sceny. `views/scene-actors.ts` łączy obsadę z obecnym rendererem obrazów; logika scen nie zna kotów ani Food. Portrety są renderowane w rozmowie i jej podsumowaniu. Osobne identyfikatory przycięcia SVG zapobiegają kolizjom z kotkami informacji zwrotnej.
-
-## Zróżnicowanie lekcji i kontynuacja — D-50
-
-Fabryka `legendarySession` w `learning/lesson-flow.ts` kopiuje zakres ukończonej sesji i usuwa jej odpowiedzi oraz znaczniki rozliczenia. Dawne automatyczne powroty tego samego klucza usuwa wyłącznie z nowej powtórki. Dalsze urozmaicenie zmienia oprawę, bez ponownego dobierania zakresu. Oryginalny zapis pozostaje bez zmian.
-
-`learning/lesson-variety.ts` przygotowuje wyłącznie nowe sesje mapowe: zachowuje bazowe zadania, dodaje najwyżej dwa poznane zadania uzupełniające z wcześniejszego zakresu i limituje zestaw do 10. Odpowiada za przeplatanie oraz oznaczenie planszy par i banku propozycji. `learning/lesson-flow.ts` szuka kontekstu i następnej lekcji w tym kursie, także pomiędzy mapami. `views/lesson-activities.ts` i `views/lesson-summary-actions.ts` oddzielają interakcje ćwiczeń i trzy akcje końcowe od głównego widoku. Kontroler zapisuje wybór przez dotychczasowe `mutate`, ocenia każdą parę zwykłym `recordAnswer`, a powtórkę legendarną rozlicza istniejącą nagrodą za ponowne ukończenie. Materiały podręcznika pozostają poza tymi mechanizmami.
-
-## Sekcje adaptacyjne i zaproszenia — D-48–D-49
-
-`learning/section-plan.ts` wybiera i projektuje dwa stabilne przystanki sekcji 7 + 2. Warstwa domku używa jego czystej projekcji, bez zależności od nagród w `adventure.ts`. `learning/recall.ts` dobiera wcześniejsze błędy, zastępstwo z poznanego materiału i dobrowolne otwarcie/finał. `learning/retention.ts` odpowiada za wspólny licznik elementu oraz jednokrotne rozliczenie ukończonej sesji; stary mechanizm tur tematycznych pozostaje w `stage-review.ts`. Żaden z tych mechanizmów nie zna reguł konkretnego języka ani treści Food.
-
-`controllers/learning.ts` zapisuje plan i sesję przez istniejące `mutate`; odczyt i renderer nie losują ani nie zapisują. `views/cat-invitation.ts` buduje wspólną ramkę, a `app/views.ts` umieszcza początek na pierwszej mapie i finał na ostatniej, również w ekranie modułu. `learning-labels.ts` rozdziela nazwy widoczne od historycznych tytułów. `learning/backup-validation/adaptive.ts` sprawdza nowe opcjonalne dane kopii v1. [Reguły](03-nauka.md), [zapis](06-zapis.md).
-
-Status: mapa obecnego kodu oraz docelowe granice odpowiedzialności. To nie jest plan ponownego refaktoringu całej aplikacji.
-
-## Stan obecny
-
-Punkt odniesienia pochodzi z przeglądu rewizji `24cdeda` (9–10 listopada 2026 r.). Poniższa mapa jest uzupełniona o [etap 1](archiwum/wdrozenie-nauki.md), [etap 2](archiwum/wdrozenie-kursow.md), [etap 3](archiwum/wdrozenie-zakresow.md) i [etap 4](archiwum/wdrozenie-food.md). Opis zachowania użytkowego, zakres sprawdzonych testów i ograniczenia znajdują się w [spisie dokumentacji](README.md). Planowane zmiany dla innych języków są osobno w [przeglądzie gotowości](rozwoj-jezykow.md).
-
-`src/main.ts` uruchamia aplikację i łączy jej części. Nie zawiera już szablonów ekranów, oceniania odpowiedzi ani formularzy konta.
-
-| Zmiana | Miejsce |
+| Odpowiedzialność | Pliki |
 | --- | --- |
-| Wygląd strony startowej i ramki kontynuacji | `src/views/home.ts`, `src/home.css` |
-| Wybór następnej lekcji lub modułu | `src/next-step.ts` |
-| Dobór wersji lekcji do ukończenia i aktywnej sesji | `src/adventure.ts`: `lessonForProgress`, `journeyForProgress`; `src/app/selectors.ts` |
-| Lista map i modułów | `src/views/catalog.ts` |
-| Ekran ćwiczenia, błąd, poprawka i podsumowanie | `src/views/study.ts` |
-| Ustawienia ćwiczeń i ściąga gramatyczna | `src/views/setup.ts` |
-| Konto, logowanie i formularze ustawień | `src/views/account.ts`, `src/controllers/account.ts` |
-| Wygląd postępów i kopii | `src/views/progress.ts`, `src/views/backup.ts` |
-| Import, eksport i pobieranie starszej historii | `src/controllers/backup.ts` |
-| Rozpoczęcie sesji, odpowiedzi, nagrody i odblokowania po nauce | `src/controllers/learning.ts` |
-| Otwarcie domku, wybór pokoju i dekoracji, zakupy i ustawienia | `src/controllers/house.ts` |
-| Zapis zmiany i odtwarzanie starszych błędów | `src/controllers/progress.ts` |
-| Obsługa kliknięć, formularzy i przejść | `src/app/events.ts` |
-| Rejestr ekranów | `src/app/views.ts` |
-| Odświeżanie ekranu, fokus i blokada przy zapisie | `src/app/renderer.ts` |
-| Rozruch, odczyt konta i blokada drugiej karty | `src/app/startup.ts` |
-| Stan otwartego interfejsu | `src/app/state.ts` |
-| Typy sesji i zapisanych wyników, zgodne typy ćwiczeń | `src/learning/model.ts` |
-| Kurs, znaczenie i wariant językowy | `src/materials/model.ts` |
-| Odczyt, walidacja, przypisania i adapter dawnego formatu materiałów | `src/materials/library.ts`, `validation.ts`, `vocabulary.ts`, `legacy.ts` |
-| Pobieranie plików materiałów | `src/content.ts` |
-| Treść pytania, warianty i ocenianie | `src/learning/questions.ts`, `src/answers.ts`; jawna polityka a/an słówek: `src/learning/vocabulary-answer.ts` |
-| Stałe menu i krótkie etykiety mobilne | `src/views/shell.ts`, `src/theme.css` |
-| Przebieg sesji i wynik pierwszej próby | `src/learning/session.ts` |
-| Poznany zakres, dobór treningu i kontrola jego rozmieszczenia | `src/learning/training.ts` |
-| Przygotowanie do treningu bez wcześniejszej puli | `src/views/training-preparation.ts`, `src/learning/training.ts`, `src/controllers/learning.ts` |
-| Procent ukończenia i opis zaległych ćwiczeń | `src/learning/map-progress.ts` |
-| Zakres kursu i język poleceń | `src/learning/scope.ts` |
-| Poznane elementy i globalne zestawy | `src/learning/known-material.ts`, `src/learning/course-practice.ts` |
-| Lokalny wybór kursu i powrót do rozpoczętej sesji | `src/controllers/courses.ts` |
-| Kafelek kontekstu, lista kursów i globalne ćwiczenia | `src/views/courses.ts`, `src/courses.css` |
-| Statystyki | `src/learning/statistics.ts` |
-| Publiczna walidacja/eksport kopii i części walidatora | `src/learning/backup.ts`, `src/learning/backup-validation/` |
-| Synchronizacja, konflikty i rozdzielenie kont | `src/sync.ts` |
-| Firebase i planowanie synchronizacji | `src/firebase.ts`, `src/services/` |
-| IndexedDB i archiwum historii | `src/storage.ts`, `src/history.ts`, `src/history-backup.ts` |
-| PWA i cache offline | `src/pwa.ts`, `scripts/build-sw.mjs` |
-| Materiały podręcznika | `public/content/` |
+| Rozruch, odczyt konta, blokada drugiej karty | `app/startup.ts` |
+| Rejestr ekranów, nawigacja i cofanie | `app/views.ts`, `app/navigation.ts` |
+| Odświeżanie ekranu, fokus, blokada przy zapisie, przerwanie dźwięku przy zmianie kontekstu | `app/renderer.ts` |
+| Kliknięcia, formularze, przeciąganie słów do luk | `app/events.ts`, `app/gap-drag.ts` |
+| Selektory stanu (np. bieżąca lekcja) | `app/selectors.ts` |
+| Menu i etykiety mobilne | `views/shell.ts` |
+| Strona startowa, następny krok | `views/home.ts`, `next-step.ts` |
+| Katalog map i modułów, widok mapy i wprowadzeń | `views/catalog.ts`, `adventure-view.ts` |
+| Ekran ćwiczenia, błąd, poprawka, podsumowanie | `views/study.ts` |
+| Plansze par i luk, sceny | `views/lesson-activities.ts` |
+| Trzy akcje po lekcji, kocie łapki | `views/lesson-summary-actions.ts`, `views/lesson-rating.ts` |
+| Kocie rozmówcy w scenach, przydział kotów | `views/scene-actors.ts`, `cats.ts` |
+| Zaproszenia (rozgrzewka, finał), ekran rozgrzewek, przygotowanie treningu | `views/cat-invitation.ts`, `views/warmup.ts`, `views/training-preparation.ts` |
+| Ustawienia ćwiczeń i ściąga gramatyczna | `views/setup.ts` |
+| Kursy i globalne ćwiczenia | `views/courses.ts`, `controllers/courses.ts` |
+| Postępy | `views/progress.ts`, `learning/progress-overview.ts` |
+| Konto i logowanie | `views/account.ts`, `controllers/account.ts` |
+| Kopia: import, eksport, starsza historia | `views/backup.ts`, `controllers/backup.ts` |
+| Nazwy wyświetlane aktywności | `learning-labels.ts` |
 
-### Przepływ działania
+### Nauka
 
-Widok wyświetla dane i przyciski z `data-action`. Obsługa zdarzeń przekazuje działanie do odpowiedniego kontrolera. Kontroler ćwiczeń lub konta korzysta z wydzielonej logiki i usług, a zmiany wyników przechodzą przez `mutate` w kontrolerze postępów. Po zakończeniu operacji renderer odświeża ekran.
+| Odpowiedzialność | Pliki |
+| --- | --- |
+| Typy sesji, wyników i ćwiczeń | `learning/model.ts` |
+| Rozpoczęcie sesji, odpowiedzi, nagrody, zastąpienie aktywnej sesji (`confirmReplacement`, `openSession`) | `controllers/learning.ts` |
+| Przebieg sesji, pierwsza próba | `learning/session.ts` |
+| Pytania, warianty i ocenianie; a/an słówek; porównanie odpowiedzi | `learning/questions.ts`, `answers.ts`, `learning/vocabulary-answer.ts`, `answer-comparison.ts` |
+| Plansze: kompletność, zamknięcie, rozmieszczanie słów | `learning/boards.ts` |
+| Poprawka po błędzie | `learning/retry.ts` |
+| Sceny dialogowe | `learning/scenes.ts` |
+| Skład nowych sesji, kolejna lekcja, poziom legendarny | `learning/lesson-variety.ts`, `learning/lesson-flow.ts` |
+| Klucze map, wersja lekcji dla postępów | `learning/journey.ts`, `adventure.ts` (`lessonForProgress`, `journeyForProgress`) |
+| Procent ukończenia | `learning/map-progress.ts` |
+| Trening i jego rozmieszczenie | `learning/training.ts` |
+| Sekcja 7 + 2, Kocie powtórki, licznik utrwalenia | `learning/section-plan.ts`, `learning/recall.ts`, `learning/retention.ts` |
+| Dawne kolejki etapów i premia etapu | `stage-review.ts` |
+| Poznany zakres, globalne zestawy, zakres kursu | `learning/known-material.ts`, `learning/course-practice.ts`, `learning/scope.ts` |
+| Wartości gwiazdek | `learning/rewards.ts` |
+| Statystyki i ocena w łapkach | `learning/statistics.ts` |
 
-W kontrolerze nauki `confirmReplacement` wspólnie sprawdza, czy jest aktywna sesja i czy użytkownik zgadza się ją zastąpić. Wywołujące akcje zachowują własne komunikaty i kolejność przygotowania sesji. `openSession` zapisuje ją przez `replaceActive` i dopiero po udanym zapisie przełącza ekran na ćwiczenie. Wyzerowanie przejściowej informacji o nagrodzie zachowuje dotychczasowy wyjątek dla modułowego wyboru trybu. Wznowienie sesji nie wymaga potwierdzenia ani ponownego zapisu. Nie zmienia to formatu postępów, historii ani naliczania gwiazdek.
+### Materiały
 
-Kursy i znaczenia są materiałami, nie stanem konta. `readLibrary` otrzymuje funkcję odczytu pliku i jest wspólny dla przeglądarki, testów i kontroli budowania. Nowe znaczenia są projektowane do zgodnych `Word` i `Exercise`. Dawne identyfikatory nie są przepisywane; silnik sesji i zapis postępów nie wymagają osobnej implementacji dla każdego języka.
+| Odpowiedzialność | Pliki |
+| --- | --- |
+| Model kursu, znaczenia, wariantu językowego | `materials/model.ts` |
+| Odczyt biblioteki (`readLibrary` — wspólny dla przeglądarki, testów i budowania), walidacja, słownictwo, dawny format | `materials/library.ts`, `materials/validation.ts`, `materials/vocabulary.ts`, `materials/legacy.ts` |
+| Składanie modułu z plików i walidacja treści | `content-validation.ts` |
+| Pobieranie plików materiałów | `content.ts` |
+| Wczytywanie map z izolacją błędów jednej mapy (`readJourneys` / `loadJourneys`) | `adventure.ts` |
+| Objaśnienia słówek, identyfikator dawnego kursu angielskiego | `materials/presentation.ts`, `materials/identity.ts` |
+| Pliki treści | `public/content/` — [format](format-materialow.md) |
 
-Widoki nie zapisują wyników. Moduły z `learning/` nie korzystają z DOM, Firebase ani IndexedDB. Kontrolery otrzymują potrzebne usługi jako argumenty; żaden nie importuje `main.ts`. `AppState` zawiera stan bieżącego interfejsu i nie jest zapisywany jako całość.
+### Dźwięk
 
-### Zgodność danych
+| Odpowiedzialność | Pliki |
+| --- | --- |
+| Interfejs `Speaker`: nagranie → synteza → brak dźwięku | `speech.ts` |
+| Odtwarzacz nagrań, indeks, normalizacja tekstu, tempa | `speech/recorded-speaker.ts`, `speech/recordings.ts`, `speech/text.ts`, `speech/tempo.ts` |
+| Dobór słuchania w sesji, odsłuch odpowiedzi | `learning/listening.ts` |
+| Przyciski zwykły / „Wolniej” | `views/speech-controls.ts` |
+| Generator nagrań (poza aplikacją; aplikacja go nie importuje) | `scripts/audio/` — [generowanie audio](generowanie-audio.md) |
 
-- `src/core.ts` pozostaje wspólnym punktem eksportu istniejących funkcji i typów; zachowano dotychczasowy interfejs.
-- Kopie i zapis postępów nadal mają wersję `1`; zachowano nazwy pól, identyfikatory materiałów i kont, rewizje oraz klucze IndexedDB i Firestore.
-- `mutate` nadal pracuje na kopii wyników, sprawdza wersję zapisu konta i potwierdza zapis przed aktualizacją interfejsu.
-- Zachowano reguły archiwizacji historii, ochronę przed konfliktem dwóch urządzeń i blokadę dwóch otwartych kart.
-- Kolejność istniejących stylów pozostaje: `style.css`, `theme.css`, `adventure.css`, `home.css`. Etap 3 dokłada na końcu `courses.css`, z regułami nowych elementów kursu. Nie należy jej zmieniać przy porządkowaniu importów.
+### Domek
 
-Ta reorganizacja nie wymaga migracji wyników, nowych reguł Firebase ani ponownego zakładania kont.
+| Odpowiedzialność | Pliki |
+| --- | --- |
+| Katalog dekoracji, cen, pokoi, miejsc i warstw | `house/catalog.ts` |
+| Portfele kursów, odblokowania, ustawianie, podpora stolika | `house/progress.ts` |
+| Siatka 24 × 15, rozmiary, kolizje, odczyt starych miejsc | `house/layout.ts` |
+| Przeciąganie (Pointer Events) | `house/drag.ts` |
+| Ekran domku, pokój, panel ustawiania | `views/house.ts`, `views/house-room.ts`, `views/house-placement.ts` |
+| Akcje domku (obsługiwane przed innymi kontrolerami) | `controllers/house.ts` |
 
-### Sprawdzanie zmian
+Szczegóły: [koci domek](koci-domek.md).
 
-Uruchom `npm.cmd test` i `npm.cmd run build`. Dla zmian w interfejsie lub obsłudze aplikacji uruchom też Playwright zgodnie z README. Istniejące testy obejmują starsze kopie, archiwizację, wznowienie sesji, wiele kont, konflikty, tryb offline i małe ekrany telefonu.
+### Zapis i offline
 
-Przy kolejnej zmianie zacznij od wskazanego obszaru i jego testów. Nie przenoś logiki z powrotem do `main.ts` ani nie zmieniaj formatu postępów przy zmianie wyglądu.
+| Odpowiedzialność | Pliki |
+| --- | --- |
+| Zapis zmiany, odtwarzanie starszych błędów | `controllers/progress.ts` |
+| Kopia: publiczna walidacja i eksport, części walidatora, integralność historii | `learning/backup.ts`, `learning/backup-validation/`, `history-backup.ts` |
+| IndexedDB, archiwum historii | `storage.ts`, `history.ts` |
+| Synchronizacja, konflikty, rozdzielenie kont | `sync.ts` |
+| Firebase i planowanie synchronizacji | `firebase.ts`, `services/firebase-client.ts`, `services/sync-scheduler.ts` |
+| PWA i cache (z nagraniami, zakresy bajtów) | `pwa.ts`, `scripts/build-sw.mjs`, `scripts/service-worker-range.mjs` |
 
-## Docelowe granice odpowiedzialności
+## Style
 
-- [Mechanika](02-mechanika.md) opisuje obiekty i możliwości, a kod stosuje ich kontrakt bez wyjątków dla konkretnego podręcznika.
-- [Nauka](03-nauka.md) opisuje dobór zakresu, role lekcji, utrwalanie i nagrody. Wybrany algorytm treningu powinien dać się sprawdzać niezależnie od ekranów.
-- [Merytoryka](04-merytoryka.md) dostarcza konkretne treści, źródła i kryteria odpowiedzi dla kursu.
-- Widoki pokazują stan i przyjmują działania użytkownika; nie zawierają własnego zapisu ani reguł francuskiego i włoskiego.
-- [Zapis](06-zapis.md) chroni zgodność sesji i wyników podczas rozwoju.
-- [Testy](07-testy.md) sprawdzają każdą granicę oraz najważniejsze pełne przebiegi.
+Kolejność arkuszy: `style.css`, `theme.css`, `adventure.css`, `home.css`, `courses.css`, `progress.css`. Nie zmieniaj jej przy porządkowaniu importów — późniejsze nadpisują wcześniejsze.
 
-Część tego podziału już istnieje po refaktoringu, ale nadal są powiązania z Food i angielskim. [Przegląd gotowości](rozwoj-jezykow.md) wskazuje konkretne miejsca. Nie opisujemy docelowego podziału jako w pełni wdrożonego.
+## Znane ograniczenia
 
-## Znane granice obecnej implementacji
+- Izolacja błędów obejmuje pliki map, ale nie pliki modułu ani rejestru kursów — [odporność map](odpornosc-map.md).
+- W prezentacji zostały szczegóły Food i angielskiego: opisy rozmówek, etykieta podstawowych fiszek, odznaka pierwszej mapy. Przed publikacją kolejnego języka trzeba je sprawdzić — [gotowość na francuski i włoski](rozwoj-jezykow.md).
+- Statystyki i historia obejmują całe konto; wybór kursu ogranicza katalogi, dobór ćwiczeń, domek i portfel.
 
-- Mapy są wczytywane niezależnie przez `readJourneys` / `loadJourneys`: wynik zawiera poprawne mapy i problemy odczytu. Błąd jednej mapy nie usuwa pozostałych; katalog pokazuje ponowienie pobrania. Przy duplikacie tożsamości izolowane są wszystkie konfliktujące definicje. Nie izoluje to błędów samych plików modułu lub rejestru kursów. [Obsługa awarii i zachowanie sesji](odpornosc-map.md).
-- Nadal istnieją szczegóły Food w prezentacji: opisy rozmówek, etykieta podstawowych fiszek i odznaka pierwszej mapy. Przed publikacją kolejnego języka trzeba sprawdzić te teksty na rzeczywistym materiale.
-- Statystyki i historia obejmują konto. Wybór kursu ogranicza katalogi i dobór ćwiczeń oraz wskazuje osobny domek i portfel tego kursu; każda sesja zachowuje swój zakres i pochodzenie.
+## Przy zmianie kodu
 
-## Do ustalenia
-
-Podstawowy format kursów, wybór kursu, poznany zakres i aktualizacje Food są wdrożone — [U-01](decyzje.md#u-01), [U-03](decyzje.md#u-03), [U-04](decyzje.md#u-04). Nie planujemy automatycznego podziału istniejących etapów na nowe mapy. Dalsze rozszerzenia i harmonogram treningu pozostają w [U-05](decyzje.md#u-05).
-
-## Domek rozdzielony na kursy
-
-`src/house/catalog.ts` to dane dekoracji, cen, pokoi i nagród. `src/house/progress.ts` realizuje portfele, zgodny odczyt angielskiego dorobku, odblokowania i ustawienia. `src/views/house.ts` odpowiada za ekran domku, oddzielony od `adventure-view.ts` z mapami i wprowadzeniami lekcji. Kontroler domku przekazuje kurs przy zakupach i ustawianiu dekoracji. Kontroler nauki przypisuje nagrodę według modułu sesji, a kontroler zapisu rozlicza odblokowania również dla dawnych ukończeń. [Kontrakt i ograniczenia](koci-domek.md).
-
-Po [etapie 3 refaktoringu](archiwum/refaktoring-etap-3.md) `main.ts` tworzy kontroler domku ze wspólną funkcją `mutate`. `app/events.ts` przekazuje mu akcje domku przed pozostałymi kontrolerami; nierozpoznane akcje przechodzą dalej. Widok i zapis korzystają z tych samych mechanizmów co wcześniej.
-
-## Wspólne podstawy po refaktoringu etapu 1
-
-Po [etapie 4](archiwum/refaktoring-etap-4.md) walidację kopii podzielono na kontrole sesji, domku, stanu przygody, podsumowania historii, stron archiwum i bieżących postępów. `backup.ts` zachowuje dotychczasowy interfejs i składa kontrole, a `history-backup.ts` nadal sprawdza integralność pełnej historii. Nie zmienia to formatu danych ani działania importu.
-
-`src/learning/journey.ts` zawiera typy i stabilne klucze map bez zależności od domku, zapisu i nagród. `adventure.ts` nadal eksportuje te symbole dla zgodności istniejących wywołań. Domek korzysta bezpośrednio z tego małego modułu, usuwając cykl wykonawczy `house/progress.ts` ↔ `adventure.ts`.
-
-Wartości gwiazdek są w `src/learning/rewards.ts`, wybór kursu według modułu w `src/learning/scope.ts`, a stały identyfikator dawnego angielskiego kursu w `src/materials/identity.ts`. Lista identyfikatorów miejsc w domku pochodzi z katalogu i służy również walidacji kopii. `src/polish-count.ts` współdzieli odmianę liczebników. [Zakres i dowody zachowania zgodności](archiwum/refaktoring-etap-1.md).
-
-
-### Rozmieszczanie i kolekcja domku — D-43
-
-`house/catalog.ts` zawiera miejsca, ich warstwy i dostępność dla pokoi. `house/progress.ts` sprawdza możliwość ustawienia, zajętość i podporę stolika. `views/house-placement.ts` prezentuje położenie zakupu, panel wyboru miejsca i zapowiedź schowania zastanego przedmiotu; główny `views/house.ts` składa pokój, sklep i kolekcję. Kontroler domku odpowiada za wybór zakładki i przejście do pasującego pokoju; zapis nadal przechodzi przez `mutate`. Renderer po wyborze dekoracji przewija i przenosi fokus do panelu ustawiania. Nie dodano osobnego modelu schowka ani nowych obrazków. [Zasady i zgodność](koci-domek.md).
-
-
-### Siatka i gesty domku — D-44–D-45
-
-`house/layout.ts` definiuje siatkę, rozmiary, odczyt starych miejsc, obszary i kolizje. `house/progress.ts` zapisuje ruch, sprawdza pokój i zachowuje dorobek. `views/house-room.ts` renderuje proporcjonalny pokój, siatkę, przedmioty i strzałki. `house/drag.ts` obsługuje Pointer Events, podgląd, anulowanie i kończenie dotyku; `app/events.ts` przekazuje zatwierdzony ruch do kontrolera i transakcji `run`/`mutate`. Nie zapisujemy danych przy każdym ruchu palca. Przed zapisem sprawdzamy aktualność konta, kursu, pokoju i stanu wyników, a zmianę DOM odkładamy do zakończenia cyklu gestu. Przyciski edytora mają obsługę dotykową bez zależności od opóźnionego kliknięcia po przeciąganiu. Walidator kopii używa tej samej siatki i rozmiarów. Nie dodano biblioteki przeciągania, nowych grafik ani serwera. [Kontrakt domku](koci-domek.md).
-
-
-### Kocia rozgrzewka — D-46–D-47
-
-`views/warmup.ts` jest osobnym ekranem dodatkowych rozgrzewek z wyborem kursu, modułu i tematu. `learning/training.ts` pozostaje wspólnym doborem materiału dawnego treningu i jego rozgrzewki: na mapie filtruje poznany materiał wcześniejszych lekcji tej mapy i wcześniejszych map; dodatkowo może ograniczyć zestaw do jednego modułu. `learning-labels.ts` odpowiada za nazwę wyświetlaną. Istniejące role w JSON, tryby sesji i klucze ukończeń nie zmieniły się.
-
-`adventure-view.ts` i `views/catalog.ts` nadają sukces według ukończenia lekcji, bez widocznych kolejek błędów. `next-step.ts` po zakończeniu dostępnych map proponuje dobrowolną rozgrzewkę, zamiast automatycznie wysyłać do kolejki. Rozpoczęta sesja zachowuje pierwszeństwo. `views/study.ts` wyświetla skończone, pozytywne podsumowanie, a `views/progress.ts` pokazuje ukończone sesje zamiast liczby rzeczy do powtórki. Wewnętrzne kolejki i stara premia etapu pozostają w `stage-review.ts`. Nie utożsamiamy braku ostrzeżeń z wyzerowaniem błędów w danych.
+Zacznij od wiersza tabeli powyżej i testów tego obszaru ([testy](07-testy.md)). Nie zmieniaj formatu postępów przy zmianie wyglądu. Zmiana granic odpowiedzialności to zmiana architektury — opisz ją tutaj, a nie w osobnym raporcie.
