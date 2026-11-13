@@ -1,5 +1,7 @@
 # Produkt — dla kogo i po co
 
+Na mapie lekcje zawierające pełną scenę dialogową mają etykietę **💬 Historyjka**. Zwinięty etap pokazuje liczbę historyjek, a krótka legenda wyjaśnia oznaczenie. Etykieta pozostaje przy ukończonych lekcjach i w ich widoku przed rozpoczęciem; wynika z aktualnej treści, bez osobnej flagi do ręcznej edycji. Nie zmienia ukończeń, gwiazdek ani kolejności lekcji.
+
 ## Po lekcji i w lekcji — D-50
 
 Food zachowuje dwie mapy i zapisany dorobek. Nowe moduły planujemy domyślnie z jedną mapą. Po lekcji mapowej są trzy główne akcje: **Kolejna lekcja**, **Poziom legendarny**, **Wróć do mapy**. Pierwsza prowadzi do wprowadzenia kolejnej nieukończonej lekcji w kursie; po końcu dostępnego zakresu jest nieaktywna. Poziom legendarny rozpoczyna nową, dobrowolną pełną powtórkę (+1 ★), bez nowego warunku ukończenia mapy. Domek pozostaje w nawigacji.

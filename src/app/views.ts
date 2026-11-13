@@ -39,7 +39,7 @@ export function createViews(state: AppState, sync: ProgressSync, syncLabel: () =
         const j=currentJourney(state);
         if(!j)return '<h1>Kocia mapa</h1><p>Mapa jest chwilowo niedostępna. Twoje własne ćwiczenia nadal działają.</p>'+button('home','Moja nauka');
         const maps=courseJourneys(state).filter(v=>v.moduleId===j.moduleId),cards=invitations(j.moduleId,j);
-        return journeyView(j,state.progress,decorativeCat,currentCourse(state)?.id,{opening:cards.opening,...(journeyKey(maps.at(-1)!)===journeyKey(j)?{finale:cards.finale}:{})});
+        return journeyView(j,state.progress,decorativeCat,currentCourse(state)?.id,{opening:cards.opening,...(journeyKey(maps.at(-1)!)===journeyKey(j)?{finale:cards.finale}:{})},state.modules.find(m=>m.id===j.moduleId));
     }
     function introView() {
         const j=currentJourney(state),l=j&&lessons(j).find(l=>l.lesson.id===state.introLessonId)?.lesson,m=state.modules.find(m=>m.id===j?.moduleId);

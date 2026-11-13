@@ -4,6 +4,7 @@ import {test,expect,type Page} from './fixtures.ts';
 import {openBackup,openMap,openModule} from './navigation.ts';
 import {answerCurrent,resumeStudy} from './helpers.ts';
 import {readFileSync} from 'node:fs';
+import {emptyProgress,backup} from '../../src/core.ts';
 import {food} from '../materials.ts';
 import {sceneEntry} from '../fixtures/scenes.ts';
 import {compileScene} from '../../src/learning/scenes.ts';
@@ -85,6 +86,18 @@ test('klawiatura: scena w trybie Rozmówki — Enter wybiera z banku i zatwierdz
 test.describe('Food',()=>{
  test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
  const real=[food];
+ test('mapa pokazuje historyjki także w ukończonej lekcji i zwiniętych etapach',async({page})=>{
+  const p=emptyProgress(),key=`${food.id}/restaurant-dialogue-1`;
+  p.adventure={version:1,earned:23,purchases:{},completed:{[key]:{at:'2026-11-01T12:00:00Z'}},reviewSchema:1};
+  await page.goto('./');await openBackup(page);await page.locator('#import-file').setInputFiles({name:'story-progress.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();await openMap(page);
+  await expect(page.locator('.lesson-step .lesson-scene-badge')).toHaveCount(4);
+  await expect(page.locator('.stage-scene-count')).toHaveText(['💬 Historyjki: 2','💬 Historyjki: 2']);
+  await expect(page.locator('.stage-scene-count').first()).toBeVisible();await expect(page.locator('.story-map-note')).toBeVisible();
+  const stage=page.locator('.journey-stage[data-stage-id="restaurant"]');if(await stage.getAttribute('open')===null)await stage.locator('summary').click();
+  const lesson=stage.locator('.lesson-step[data-id="restaurant-dialogue-1"]');await expect(lesson).toHaveClass(/lesson-done/);await expect(lesson.locator('.lesson-scene-badge')).toBeVisible();await expect(page.locator('.star-wallet')).toContainText('23');
+  await page.setViewportSize({width:320,height:844});await noScroll(page);await stage.screenshot({path:'test-results/story-map-badges-mobile.png'});
+  await lesson.click();await expect(page.locator('.lesson-scene-badge')).toBeVisible();await expect(page.locator('.lesson-begin')).toContainText('już ukończona');
+ });
  async function openDialogueLesson(page:Page){
   await openMap(page);const stage=page.locator('.journey-stage').nth(4);if(await stage.getAttribute('open')===null)await stage.locator('summary').tap();
   await stage.getByRole('button',{name:/Rozmowa przy stoliku(?! —)/}).first().tap();await expect(page.locator('#app')).toContainText('cała rozmowa przy stoliku');

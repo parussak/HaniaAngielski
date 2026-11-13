@@ -2,6 +2,8 @@
 
 ## D-53 — sceny dialogowe z lukami
 
+**Oznaczenia na mapie, 13 listopada 2026:** lekcje zawierające pełną scenę mają etykietę „Historyjka”, zwinięte etapy — ich liczbę. Scenariusz `mapa pokazuje historyjki także w ukończonej lekcji i zwiniętych etapach` sprawdza cztery etykiety Food, dwa liczniki, zachowane ukończenie oraz portfel, oznaczenie w widoku lekcji i brak przewijania poziomego przy 320 px. Przeszło 253/253 testy Node, budowanie i ten scenariusz na gotowej aplikacji w Chrome. Nie zmieniono treści, zapisu ani liczby lekcji.
+
 **Poprawka kontroli publikacji, 13 listopada 2026:** GitHub Actions dla `8ef7912` zatrzymał publikację na `npm test`, przed uruchomieniem budowania. Starszy `content.test.ts` oczekiwał 12 dialogów; po dodaniu scen jest łącznie 30 zadań dialogowych: 12 dotychczasowych oraz 18 luk scen. Test sprawdza teraz osobno zachowanie 12 dawnych dialogów i zgodność identyfikatorów nowych zadań z lukami zadeklarowanych scen, zamiast ograniczać dalszy rozwój stałą sumą. Po poprawce wykonano **253/253 testy Node** na zwykłej i rozszerzonej bibliotece. `npm run build` z walidacją treści i 206 zasobami PWA także przechodzi. Nie zmieniono działania aplikacji ani materiałów; wcześniejszy wynik 252/253 poniżej pozostaje historią tego wdrożenia.
 
 Mechanikę sprawdzają testy na danych syntetycznych, treść Food — osobny plik.
