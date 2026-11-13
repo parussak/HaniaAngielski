@@ -1,5 +1,9 @@
 # Architektura — realizacja techniczna
 
+## D-59 — generator poza aplikacją
+
+`scripts/audio/plan.mjs` odczytuje znaczenie materiałów przez istniejące czyste funkcje i tworzy plan pełnych haseł oraz kwestii scen. `generate.mjs` jest lokalnym punktem wejścia: sprawdza narzędzia/model i uruchamia Piper oraz ffmpeg bez powłoki. `files.mjs` zarządza pamięcią gotowych klipów, manifestem i wymianą kompletnego katalogu po udanym przetworzeniu. `ogg.mjs` kontroluje strukturę Ogg Opus i sumy stron bez zewnętrznych narzędzi. Profile i cele należą do `audio/config.json`, a wynik do `audio/generated/`. Zależność jest jednostronna: narzędzie korzysta z mechaniki materiałów, aplikacja nie importuje generatora ani nagrań. Nie zmieniono `src/speech.ts`, interfejsu ćwiczeń ani `build-sw.mjs`. [Obsługa i kontrakt](generowanie-audio.md).
+
 ## D-57 — odczyt postępów i ich prezentacja
 
 `learning/progress-overview.ts` jest czystą projekcją istniejących map, sesji, archiwum i kursu; przyjmuje datę, aby testy tygodnia nie zależały od zegara. Oddziela sumy z archiwum od dostępnej listy sesji, deduplikuje dołączone strony po ID sesji i nie modyfikuje `Progress`. `views/progress.ts` renderuje kurs, mapy, tydzień, sukcesy, domek i zwinięte szczegóły. `progress.css` ogranicza styl do tego widoku. Akcje kontynuacji i map korzystają z obecnych kontrolerów, a `progress-course` wybiera kurs istniejącą usługą preferencji i pozostaje na ekranie postępów. Renderer zachowuje otwarcie szczegółów przy dołączaniu archiwum lub odświeżeniu tego samego kursu, bez zapisywania go w wynikach.

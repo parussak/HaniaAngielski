@@ -1,5 +1,11 @@
 # Testy — podział i zasady
 
+## D-59 — lokalny generator Food
+
+Weryfikacja 13 listopada 2026: **285/285 testów Node**, także z rozszerzoną biblioteką; `npm run build` z kontrolą materiałów i **206 zasobami PWA**; kontrola dokumentacji przeszły. Rzeczywiste `npm run audio` utworzyło **111 klipów / 120 odwołań**, kolejne uruchomienia zachowały wszystkie klipy, bez ponownej syntezy. `npm run audio:check` potwierdziło zgodność tekstów, profili, sum i kontenerów. Dodatkowo ffmpeg w pełni zdekodował wszystkie 111 nagrań bez błędów. Rozmiar samych klipów: 266 115 bajtów. Odtwarzania nie podłączano, więc nie powtarzano testów przeglądarkowych interfejsu. Nie wykonano odsłuchu całego zestawu ani próby na fizycznym telefonie.
+
+`audio-generator.test.ts` zawiera 10 testów: a/an i wiele luk w jednej kwestii; współdzielenie klipów i brak regeneracji po zmianie tłumaczenia; wpływ tekstu, profilu i parametrów; odrzucanie złego języka i konfiguracji; Opus mono, CRC i kompletność kontenera; idempotencja z zachowaniem czasu modyfikacji; aktualizacja jednego tekstu i usunięcie starego klipu; naprawa brakującego/uszkodzonego pliku; ochrona poprzedniego zestawu przy błędzie syntezy lub kompresji; odmowa usuwania nieznanych plików i ścieżek poza katalogiem; pokrycie wszystkich słów i kwestii Food. Jednostkowe przypadki plikowe używają syntetycznych stron Ogg i atrapy syntezatora, a rzeczywiste pliki sprawdzono osobno powyżej. Testy nie wymagają pobrania modelu w CI.
+
 ## D-58 — słuchanie
 
 Automatyczne testy używają **atrapy syntezy mowy**: sprawdzają, co aplikacja każe odczytać, w jakim języku i tempie, oraz co robi bez dźwięku. Nie sprawdzają, czy telefon naprawdę wydaje dźwięk ani jak brzmi głos — to obejmuje lista ręczna niżej.

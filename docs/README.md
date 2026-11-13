@@ -1,5 +1,7 @@
 # Dokumentacja aplikacji „Małe kroki”
 
+**D-59 — generator lokalnych nagrań Food:** [wymagania i granice](generowanie-audio.md), [jedno polecenie i obsługa](../audio/README.md). Cori, Opus mono 16 kb/s; gotowe pliki w repozytorium, na razie bez używania ich przez aplikację i PWA.
+
 **D-54 — wdrożone:** każda z czterech historyjek Food stanowi całą lekcję, z 4–5 lukami i kocimi rozmówcami. Obsada jest stała przez sesję i wznowienie; nie zmienia formatu zapisu. [Zasady nauki](03-nauka.md), [oprawa](01-produkt.md).
 
 **D-58 — wdrożone:** słuchanie przez syntezę mowy przeglądarki, z powrotem do zwykłej formy zadania bez dźwięku; głosy prawdziwych urządzeń do [sprawdzenia ręcznego](07-testy.md#d-58--słuchanie). [Reguły nauki](03-nauka.md). **D-53 — wdrożone:** sceny dialogowe z kilkoma lukami, wspólne dla wszystkich kursów; cztery sceny Food czekają na [recenzję językową](recenzja-scen-food.md). [Reguły nauki](03-nauka.md), [format](format-materialow.md#scena-dialogowa-z-kilkoma-lukami). **D-52 — wdrożone:** ukończona lekcja zostaje ukończona po zmianie treści; każde konto widzi aktualną treść, a rozpoczęte sesje zachowują swój zestaw. [Reguły nauki](03-nauka.md), [edycja treści](format-materialow.md#aktualizacja-wydanej-lekcji). **D-51 — wdrożone**, z otwartą listą starszych testów przeglądarkowych do uzgodnienia — [testy](07-testy.md).

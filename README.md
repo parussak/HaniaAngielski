@@ -1,5 +1,7 @@
 # Małe kroki — nauka Hani
 
+Nagrania Food można przygotować lokalnie poleceniem `npm run audio` — Cori, Opus mono 16 kb/s. Generator aktualizuje potrzebne pliki, a `npm run audio:check` sprawdza ich spójność. **Nagrania nie są jeszcze podłączone do aplikacji.** [Instrukcja](audio/README.md), [wymagania](docs/generowanie-audio.md).
+
 „Postępy” pokazują osobno ukończone mapy i lekcje, tydzień nauki oraz małe sukcesy w wybranym kursie. Zdobyte gwiazdki pozostają widoczne po zakupach; dokładne wyniki i historia są w rozwijanych szczegółach. Widok korzysta z dotychczasowych zapisów, bez nowego algorytmu opanowania — [zasady liczenia](docs/03-nauka.md).
 
 Lekcje mapowe automatycznie łączą wpisywanie, wybór, dobieranie par i luki z bankiem propozycji. Po lekcji można przejść dalej, zrobić dobrowolny **Poziom legendarny** (+1 ★ za pełną powtórkę) lub wrócić do mapy. Food zachowuje obie mapy i wcześniejsze postępy. [Zasady nauki](docs/03-nauka.md).

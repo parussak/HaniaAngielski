@@ -1,5 +1,7 @@
 # Zapis — co, gdzie i z jaką zgodnością
 
+**D-59:** manifest i klipy audio są artefaktami repozytorium poza `public/`. Nie należą do postępów, kopii użytkownika, Firebase ani obecnej pamięci PWA. Generator nie czyta ani nie modyfikuje wyników i portfeli; nie wprowadzono migracji. Narzędzia i model głosu pozostają na komputerze przygotowującym treść. [Wymagania i pliki](generowanie-audio.md).
+
 **D-57:** nowy widok postępów nie zmienia formatu, reguł Firebase, kompakcji ani danych wyników. Ukończenia, portfele i archiwa są tylko odczytywane. Wybór kursu korzysta z istniejącej lokalnej preferencji konta/gościa, nie przenosi postępów między kursami. Otwarcie szczegółów jest stanem widoku, nie nowym polem kopii. Archiwum nie przechowuje pełnych dat i tekstu odpowiedzi w podsumowaniu; tydzień może więc uzupełnić się po wczytaniu stron, a ostatnie sukcesy nie są prezentowane jako pełna historia opanowania. Zakupy nie zmniejszają liczby wszystkich zdobytych gwiazdek.
 
 **D-56:** kolor błędnej luki jest odtwarzany z `attempts`, więc nie wymaga nowych danych ani migracji. Wyjście „Dalej” z planszy zachowuje istniejące próby i zapisuje brakujące jako puste odpowiedzi; ustawia indeks za całą grupą przez obecny mechanizm przechodzenia. Czyszczenie roboczego rozmieszczenia i naliczenie nagród nadal odbywają się w jednej mutacji. Poprawa linijki dialogu korzysta z dotychczasowego `retry`; pierwsza próba pozostaje osobno od poprawki. Portrety przy każdej kwestii nadal wynikają z tego samego ID sesji i sceny. Stare kopie, ukończenia, zakupy i gwiazdki pozostają zgodne.
