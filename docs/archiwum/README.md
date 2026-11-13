@@ -4,4 +4,6 @@ Dokumenty historyczne: audyty, raporty etapów refaktoringu i wdrożeń, dawne w
 
 **Nie czytaj tego katalogu domyślnie** — ani człowiek, ani agent AI. Opisy zachowują stan i wyniki testów z dnia powstania i mogą być nieaktualne. Obowiązujące zasady są w dokumentach `docs/01…07`, w [decyzjach](../decyzje.md) i w [spisie dokumentacji](../README.md).
 
+Dawne komunikaty o wdrożeniach z górnej części spisu dokumentacji: [dziennik zmian](dziennik-zmian.md).
+
 Zaglądaj tu tylko wtedy, gdy potrzebujesz uzasadnienia dawnej decyzji lub dowodu, co sprawdzono w danym etapie.

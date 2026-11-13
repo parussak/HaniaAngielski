@@ -1,96 +1,53 @@
 # Dokumentacja aplikacji „Małe kroki”
 
-**D-64 — łapki i poprawki:** wszystkie luki wymagają próby, błędne odpowiedzi można poprawiać, a oceną końcową są kocie łapki niezależne od gwiazdek do domku. [Zasady](03-nauka.md), [zapis](06-zapis.md), [testy](07-testy.md).
+Spis bieżącej dokumentacji. Czytaj tylko dokument potrzebny do zadania — nie całość. Historia zmian i dawne raporty są w [archiwum](archiwum/README.md) i nie są czytane domyślnie.
 
-**D-63 — odsłuch klasycznych fiszek i quizu:** po sprawdzeniu odpowiedzi, także w poznanym materiale kursu; te same tempa i PWA offline. [Reguły](03-nauka.md), [testy](07-testy.md).
+## Od czego zacząć
 
-**D-65 — próbne tempo:** słówka 0,95×, dialogi 0,90×; „Wolniej” dodatkowo zwalnia o 30%, także offline. [Reguły](03-nauka.md), [realizacja](05-architektura.md).
+| Zadanie | Przeczytaj |
+| --- | --- |
+| Nowy moduł lub rozdział z podręcznika | [Dodawanie modułu](dodawanie-modulow.md), [szablon karty](szablon-modulu.md), karta kursu w [kursach](kursy/README.md) |
+| Poprawka treści (słówka, zadania, sceny) | [Format materiałów](format-materialow.md), [merytoryka](04-merytoryka.md), [edycja treści](../public/content/README.md) |
+| Zmiana zasad nauki, treningów, nagród | [Nauka](03-nauka.md), [decyzje](decyzje.md) |
+| Zmiana ekranu | [Produkt](01-produkt.md), [architektura](05-architektura.md) |
+| Zmiana kodu lub podziału odpowiedzialności | [Architektura](05-architektura.md), [mechanika](02-mechanika.md) |
+| Konta, offline, kopie, synchronizacja | [Zapis](06-zapis.md) |
+| Testy i kontrole | [Testy](07-testy.md) |
+| Aktualizacja samej dokumentacji | [Utrzymanie dokumentacji](utrzymanie-dokumentacji.md) |
 
-**D-60 — nagrania w aplikacji i PWA offline:** [zasady odtwarzania](03-nauka.md), [architektura](05-architektura.md), [testy](07-testy.md). Pierwszeństwo ma gotowy klip, następnie synteza urządzenia, na końcu zwykłe zadanie. Bez zmiany wyników i gwiazdek.
-
-**D-59 — generator lokalnych nagrań Food:** [wymagania i granice](generowanie-audio.md), [jedno polecenie i obsługa](../audio/README.md). Cori, Opus mono 24 kb/s; gotowe pliki w repozytorium. W D-60 podłączono je do aplikacji i pamięci PWA.
-
-**D-54 — wdrożone:** każda z czterech historyjek Food stanowi całą lekcję, z 4–5 lukami i kocimi rozmówcami. Obsada jest stała przez sesję i wznowienie; nie zmienia formatu zapisu. [Zasady nauki](03-nauka.md), [oprawa](01-produkt.md).
-
-**D-58 — wdrożone, źródło dźwięku rozszerzone w D-60:** słuchanie z obsługą syntezy mowy przeglądarki, z powrotem do zwykłej formy zadania bez dźwięku; głosy prawdziwych urządzeń do [sprawdzenia ręcznego](07-testy.md#d-58--słuchanie). [Reguły nauki](03-nauka.md). **D-53 — wdrożone:** sceny dialogowe z kilkoma lukami, wspólne dla wszystkich kursów; cztery sceny Food czekają na [recenzję językową](recenzja-scen-food.md). [Reguły nauki](03-nauka.md), [format](format-materialow.md#scena-dialogowa-z-kilkoma-lukami). **D-52 — wdrożone:** ukończona lekcja zostaje ukończona po zmianie treści; każde konto widzi aktualną treść, a rozpoczęte sesje zachowują swój zestaw. [Reguły nauki](03-nauka.md), [edycja treści](format-materialow.md#aktualizacja-wydanej-lekcji). **D-51 — wdrożone**, z otwartą listą starszych testów przeglądarkowych do uzgodnienia — [testy](07-testy.md).
-
-**D-50 — wdrożone:** po lekcji mapowej: Kolejna lekcja, Poziom legendarny (+1 ★ za pełną powtórkę), Wróć do mapy. Nowe sesje automatycznie mieszają formy odpowiedzi i poznany materiał; są plansze par oraz bank propozycji do luk. Obie mapy Food, stare sesje i dorobek pozostają. [Reguły nauki](03-nauka.md), [interfejs](01-produkt.md), [zapis](06-zapis.md).
-
-Aktualizacja układu: **10 listopada 2026 r.** Rozdzielamy stan obecny, uzgodnione założenia docelowe i sprawy do ustalenia. Sam zapis założeń nie wdraża ich w aplikacji.
-
-**Status po audycie — 11 listopada 2026:** najważniejsze porządki wykonano w czterech etapach refaktoringu. [Co jest zamknięte, co zostało i co sprawdzono](archiwum/status-audytu.md). Pozostałe propozycje nie są automatycznie planem kolejnej przebudowy.
-
-**Wdrożono etapy 1–4.** Pozostałe pytania są zaparkowane. [Raport nauki](archiwum/wdrozenie-nauki.md) opisuje etap 1, [raport kursów](archiwum/wdrozenie-kursow.md) etap 2, a [wybór kursu i globalne ćwiczenia](archiwum/wdrozenie-zakresow.md) etap 3. [Audyt i uzupełnienie Food](archiwum/wdrozenie-food.md) opisuje etap 4. Autorów materiałów obowiązuje [format kursów i znaczeń](format-materialow.md). Historyczny katalog `archiwum/stan-obecny/` nadal przedstawia punkt odniesienia sprzed tych zmian.
-
-Po przeglądzie dokumentacji poprawiono dwa ograniczenia: [przygotowanie do treningu i odporność map](odpornosc-map.md). Pozostałe mapy działają przy błędzie jednej, a trening bez poznanej puli prowadzi do wcześniejszej lekcji. Zapisane wyniki i zasady nagród pozostają zachowane.
-
-Wprowadzono też swobodny wybór lekcji, stałą długość nowych sesji, nowe menu z Mapami, łagodniejszą informację zwrotną, jawne zasady a/an dla słówek oraz 1 ★ za pełne nowe powtórzenie lekcji — [D-36–D-40](decyzje.md). Historyczne raporty zachowują opis poprzedniego działania i dawne wyniki testów.
-
-12 listopada rozbudowano [koci domek](koci-domek.md) o dodatkowe miejsca, osobne warstwy i kolekcję „Moje rzeczy”. Stare zakupy, ustawienia, gwiazdki i postępy pozostają zachowane; nowe miejsca działają także offline i w kopiach.
-
-**Wdrożono D-44–D-45:** domek ma przesuwanie po siatce 24 × 15, stałe rozmiary wyposażenia i własne kolekcje pokojów. Jest przeciąganie myszą/dotykiem i strzałki pod podglądem. Stare zakupy i ustawienia pozostają czytelne bez przymusowej migracji. [Specyfikacja domku](koci-domek.md).
-
-## Główny podział
-
-**Wdrożono D-48–D-49:** stabilna sekcja 7 + 2 dla nie rozpoczętych „Ilości i opakowania”, krótkie powtórki wcześniejszych błędów ze wspólnym licznikiem, kocie zaproszenia do rozgrzewki, treningu i Misji Kociego Mistrza. Rozpoczęte sekcje, ukończenia i dorobek pozostają. [Zasady i zakres](03-nauka.md), [wygląd zaproszeń](01-produkt.md).
-
-**Wdrożono D-46–D-47:** „Kocia rozgrzewka” zastępuje treningi — na mapie jest wymagana, dodatkowa dobrowolna. Ukończone mapy i etapy pokazują sukces bez liczników zaległych błędów, a krótkie sesje mają wyraźne zakończenie. Stare ukończenia, gwiazdki i rozpoczęte sesje zostają. [Zasady, zakres i ochrona wyników](03-nauka.md).
-
-11 listopada 2026 wykonano [etap 1 refaktoringu: zależności i wspólne stałe](archiwum/refaktoring-etap-1.md). Usunięto cykl mapy–domek, zachowując działanie, wygląd i format postępów. To osobny etap porządkowania po wcześniejszych etapach rozwoju funkcji 1–4.
-
-[Etap 2 refaktoringu](archiwum/refaktoring-etap-2.md) oddziela syntetyczne testy mechaniki, regresje Food wybieranego po ID i kontrole całej rozbudowywanej biblioteki. Nie zmienia kodu aplikacji ani produkcyjnych treści.
-
-[Etap 3 refaktoringu](archiwum/refaktoring-etap-3.md) wydziela obsługę przycisków domku do osobnego kontrolera. Rozliczanie ukończenia nauki, wygląd i zapis pozostają bez zmian.
-
-[Etap 4 refaktoringu](archiwum/refaktoring-etap-4.md) dzieli walidację kopii na mniejsze części. Zachowuje obsługę starych plików, kryteria walidacji i format postępów; zgodność sprawdza zestaw wyników sprzed podziału.
+## Dokumenty główne
 
 | Dokument | Na jakie pytanie odpowiada? |
 | --- | --- |
-| [01 · Produkt](01-produkt.md) | Dla kogo i po co jest aplikacja? Jak korzystamy z nauki prowadzonej i swobodnej? |
-| [02 · Mechanika](02-mechanika.md) | Jakie obiekty istnieją i co mogą: kurs, moduł, mapa, lekcja, hasło, pytanie, quiz i sesja? |
+| [01 · Produkt](01-produkt.md) | Dla kogo i po co jest aplikacja? Jak wygląda nauka prowadzona i swobodna? |
+| [02 · Mechanika](02-mechanika.md) | Jakie obiekty istnieją i co mogą: kurs, moduł, mapa, lekcja, hasło, pytanie, quiz, sesja? |
 | [03 · Nauka](03-nauka.md) | Jak prowadzimy przez materiał, dobieramy treningi, zbieramy błędy i przyznajemy nagrody? |
 | [04 · Merytoryka](04-merytoryka.md) | Skąd pochodzą treści i co oznacza ich poprawność językowa? |
-| [05 · Architektura](05-architektura.md) | Jak odpowiedzialności są realizowane w kodzie i gdzie wprowadzać zmiany? |
+| [05 · Architektura](05-architektura.md) | Gdzie w kodzie jest dana odpowiedzialność i gdzie wprowadzać zmiany? |
 | [06 · Zapis](06-zapis.md) | Co i gdzie zapisujemy oraz jak chronimy wyniki? |
 | [07 · Testy](07-testy.md) | Jak kontrolujemy każdą część i kiedy dodajemy lub uruchamiamy testy? |
-| [Decyzje](decyzje.md) | Co ustalono i jakie pytania wymagają rozstrzygnięcia? |
+| [Decyzje](decyzje.md) | Co ustalono (D-xx) i co czeka na rozstrzygnięcie (U-xx)? |
 | [Karty kursów](kursy/README.md) | Co jest właściwe dla angielskiego Hani, francuskiego Hani i włoskiego Pauliny? |
-| [Rozbudowa kociego domku](koci-domek.md) | Wdrożone: osobne domki i portfele kursów, kuchnia za Food i wyposażenie za mapy |
 
-**Mechanika opisuje możliwości, nauka określa ich użycie, a merytoryka dostarcza konkretne treści i kryteria poprawności.** Format materiałów należy do kontraktu mechaniki; reguła francuskiego rodzajnika do merytoryki, a częstotliwość treningu do nauki.
+Tematyczne: [koci domek](koci-domek.md), [mapa i domek](kocia-przygoda.md), [odporność map](odpornosc-map.md), [generowanie audio](generowanie-audio.md), [PWA](pwa.md), [Firebase](firebase.md), [historia sesji](historia.md), [moduł Food](materialy-food.md), [sceny Food do recenzji](recenzja-scen-food.md), [gotowość na francuski i włoski](rozwoj-jezykow.md).
 
-## Statusy i pierwszeństwo
+## Zasada podziału
 
-- **Stan obecny** — potwierdzony w kodzie lub testach. [Punkt odniesienia](archiwum/stan-obecny/README.md) oparto na rewizji 24cdeda.
-- **Uzgodnione założenia docelowe** — kierunek potwierdzony w rozmowie, który może jeszcze nie być wdrożony. Rejestr: D-01–D-42 w [decyzjach](decyzje.md).
-- **Do ustalenia** — pytanie bez zatwierdzonego rozwiązania. Rejestr U-01–U-10; odwołania w dokumentach nie są konkurencyjnymi decyzjami.
-- **Propozycja techniczna** — kandydat do oceny, nie automatycznie zaakceptowany zakres prac.
+**Mechanika opisuje możliwości, nauka określa ich użycie, a merytoryka dostarcza treść i kryteria poprawności.** Format materiałów należy do mechaniki i jest wspólny dla wszystkich kursów; reguła francuskiego rodzajnika należy do merytoryki, a częstotliwość treningu do nauki. Treść kursów leży w `public/content/` i nie zawiera logiki.
 
-Kod i testy pokazują, co działa dziś; nie unieważniają uzgodnionego kierunku. Dokument docelowy nie dowodzi, że funkcja już działa. Rozbieżności opisujemy jawnie, zamiast bez decyzji dopasowywać specyfikację do przypadkowego zachowania kodu.
+## Statusy
 
-## Ważna różnica
+- **Stan obecny** — potwierdzony w kodzie lub testach.
+- **Uzgodnione** — decyzja D-xx w [rejestrze](decyzje.md); może jeszcze nie być wdrożona.
+- **Do ustalenia** — pytanie U-xx bez zatwierdzonego rozwiązania.
+- **Propozycja** — kandydat do oceny, nie zaakceptowany zakres prac.
 
-Docelowo moduł ma **1–3 mapy**, każda po kilka lekcji. Food ma **dwie mapy**: zachowaną mapę z siedmioma etapami i 41 lekcjami oraz „Kocią kuchnię” z pięcioma lekcjami. Poprawione wersje lekcji etapów 5–7 są od D-52 aktualną treścią dla wszystkich kont; istniejące ukończenia, rozpoczęte sesje i gwiazdki pozostają zachowane. Wdrożono oddzielenie procentu ukończenia lekcji od liczby zaległych ćwiczeń oraz dodatkowy trening poznanego materiału za 1 ★. Druga mapa Food ma trening wcześniejszej mapy; pierwsza pozostaje bez takich lekcji. Model kursów i znaczeń oraz zgodny odczyt starego Food są wdrożone w etapie 2. Wybór kursu i globalne fiszki/quiz/gramatyka z poznanego materiału są wdrożone w etapie 3. Audyt i uzupełnienie Food wdrożono w etapie 4 — [zakres, źródła i ograniczenia](archiwum/wdrozenie-food.md). Nowe podręczniki pozostają dalszym zakresem.
+Kod pokazuje, co działa dziś, ale nie unieważnia uzgodnionego kierunku. Rozbieżności opisujemy jawnie zamiast dopasowywać specyfikację do przypadkowego zachowania kodu.
 
-## Jak czytać bez przeglądania wszystkiego
+## Stan treści
 
-Do bieżącej pracy: [dodawanie modułu](dodawanie-modulow.md), [szablon karty materiałów](szablon-modulu.md) i [utrzymanie dokumentacji](utrzymanie-dokumentacji.md). Towarzyszy im [skill projektu](../.agents/skills/male-kroki-dokumentacja/SKILL.md), który pomaga sprawdzić i aktualizować odpowiedni wycinek dokumentacji bez wczytywania całego projektu. Skrypt `node scripts/check-docs.mjs` kontroluje odnośniki plikowe; zgodność merytoryczna wymaga przeglądu właściwych źródeł.
+Kurs angielski Hani ma moduł **Food**: dwie mapy (siedem etapów z 41 lekcjami oraz „Kocia kuchnia” z pięcioma lekcjami), w tym cztery historyjki-sceny i nagrania głosem Cori. Francuski i włoski nie mają jeszcze materiałów; kolejne rozdziały podręcznika to dalszy zakres.
 
-- Typ zadania: mechanika, właściwy fragment nauki i testy.
-- Podręcznik lub treści: [format plików](format-materialow.md), merytoryka i karta kursu.
-- Trening: nauka, decyzje oraz konsekwencje dla zapisu i testów.
-- Ekran: produkt, architektura i odpowiednie scenariusze interfejsu.
-- Dane: zapis, model i kontrole zgodności.
+## Kontrola
 
-Nie powielamy list słówek w Markdown ani wspólnych zasad w każdej karcie kursu. Dokumenty odsyłają do szczegółów i źródeł, żeby nie trzeba było wczytywać całej historii projektu do każdej poprawki.
-
-## Punkt odniesienia i wcześniejsze materiały
-
-Przegląd zgodności **10 listopada 2026 r.** objął bieżące opisy produktu, mechaniki, nauki, zapisu, architektury, instrukcji materiałów i PWA. Porównano je z właściwym kodem, odczytanym katalogiem treści, scenariuszami testów i workflow. Poprawiono rozbieżności pozostawione po etapach 1–4; znane ograniczenia są jawnie opisane w [nauce](03-nauka.md) i [architekturze](05-architektura.md). Był to przegląd dokumentacji, bez zmian aplikacji, ponownego uruchamiania pełnych testów, nowej recenzji podręcznika ani weryfikacji opublikowanej strony. Historyczne wyniki testów zachowują swoje pierwotne znaczenie.
-
-- [Stan obecny](archiwum/stan-obecny/README.md) — opis z przeglądu kodu i testów 9–10 listopada 2026 r., z zakresem wykonanych kontroli.
-- [Gotowość na francuski i włoski](rozwoj-jezykow.md) — diagnoza braków J1–J10 do planowania wybranej zmiany.
-- [Firebase](firebase.md), [historia](historia.md), [PWA](pwa.md), [obecna mapa i domek](kocia-przygoda.md), [edycja obecnych materiałów](../public/content/README.md) — instrukcje istniejącej aplikacji, do czytania w odpowiednim kontekście.
-- Dawne wymagania, plany, raporty i podglądy dokumentują historię rozwoju. Nie są specyfikacją wszystkich obecnych lub przyszłych funkcji.
-
-Pierwotne uporządkowanie dokumentacji nie zmieniało aplikacji. Późniejsze wdrożenia i wyniki kontroli opisują raporty etapów 1–4. Historycznego katalogu `archiwum/` nie aktualizujemy wstecz. Następnie dodano instrukcje pracy i skill utrzymania dokumentacji, bez zmiany zachowania aplikacji. Nie dodano Spec Kit.
+`node scripts/check-docs.mjs` sprawdza lokalne odnośniki w dokumentacji. Nie sprawdza kotwic nagłówków ani zgodności opisów z kodem — do tego służy przegląd właściwych źródeł, np. ze [skillem projektu](../.agents/skills/male-kroki-dokumentacja/SKILL.md).
