@@ -83,10 +83,12 @@ test('wybór kursu zmienia domek i portfel; stare zakupy należą tylko do angie
  await page.route('**/content/**',route=>{const key=new URL(route.request().url()).pathname.split('/content/')[1];return key in f.files?route.fulfill({json:f.files[key]}):route.continue();});
  const p=emptyProgress();p.adventure=freshAdventure();p.adventure.earned=100;p.adventure.purchases.pillow={cost:6,slot:'right'};p.adventure.courseHomes={'french-book':{earned:20,purchases:{}}};
  await restore(page,p);await expect(page.locator('.star-wallet')).toHaveText('94 ★');
- await page.getByRole('button',{name:'Wybierz kurs',exact:true}).tap();await page.getByRole('button',{name:'Wybierz kurs Test: french-book',exact:true}).tap();await page.getByRole('button',{name:'Domek',exact:true}).tap();
+ // D-51: the course frame lives only on the home screen.
+ await expect(page.locator('.course-context')).toHaveCount(0);const chooseCourse=async()=>{await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:'Wybierz kurs',exact:true}).tap();};
+ await chooseCourse();await page.getByRole('button',{name:'Wybierz kurs Test: french-book',exact:true}).tap();await page.getByRole('button',{name:'Domek',exact:true}).tap();
  await expect(page.locator('.star-wallet')).toHaveText('20 ★');await expect(page.locator('.room-decoration')).toHaveCount(0);await expect(page.getByRole('button',{name:/Kocia kuchnia/})).toHaveCount(0);
  await page.getByRole('button',{name:'Kup za 6 ★',exact:true}).tap();await expect(page.locator('.star-wallet')).toHaveText('14 ★');
- await page.getByRole('button',{name:'Wybierz kurs',exact:true}).tap();await page.getByRole('button',{name:'Wybierz kurs Test: english-book',exact:true}).tap();await page.getByRole('button',{name:'Domek',exact:true}).tap();
+ await chooseCourse();await page.getByRole('button',{name:'Wybierz kurs Test: english-book',exact:true}).tap();await page.getByRole('button',{name:'Domek',exact:true}).tap();
  await expect(page.locator('.star-wallet')).toHaveText('94 ★');await expect(page.locator('.room-decoration')).toHaveClass(/slot-right/);
  const saved=await exported(page);expect(saved.adventure!.courseHomes!['french-book'].purchases.pillow.cost).toBe(6);expect(saved.adventure!.purchases.pillow.slot).toBe('right');
 });

@@ -1,5 +1,7 @@
 # Dokumentacja aplikacji „Małe kroki”
 
+**D-52 — wdrożone:** ukończona lekcja zostaje ukończona po zmianie treści; każde konto widzi aktualną treść, a rozpoczęte sesje zachowują swój zestaw. [Reguły nauki](03-nauka.md), [edycja treści](format-materialow.md#aktualizacja-wydanej-lekcji). **D-51 — wdrożone**, z otwartą listą starszych testów przeglądarkowych do uzgodnienia — [testy](07-testy.md).
+
 **D-50 — wdrożone:** po lekcji mapowej: Kolejna lekcja, Poziom legendarny (+1 ★ za pełną powtórkę), Wróć do mapy. Nowe sesje automatycznie mieszają formy odpowiedzi i poznany materiał; są plansze par oraz bank propozycji do luk. Obie mapy Food, stare sesje i dorobek pozostają. [Reguły nauki](03-nauka.md), [interfejs](01-produkt.md), [zapis](06-zapis.md).
 
 Aktualizacja układu: **10 listopada 2026 r.** Rozdzielamy stan obecny, uzgodnione założenia docelowe i sprawy do ustalenia. Sam zapis założeń nie wdraża ich w aplikacji.
@@ -56,7 +58,7 @@ Kod i testy pokazują, co działa dziś; nie unieważniają uzgodnionego kierunk
 
 ## Ważna różnica
 
-Docelowo moduł ma **1–3 mapy**, każda po kilka lekcji. Food ma **dwie mapy**: zachowaną mapę z siedmioma etapami i 41 lekcjami oraz „Kocią kuchnię” z pięcioma lekcjami. Poprawione wersje lekcji etapów 5–7 trafiają tylko do nieukończonej nauki; istniejące ukończenia, rozpoczęte sesje i gwiazdki pozostają zachowane. Wdrożono oddzielenie procentu ukończenia lekcji od liczby zaległych ćwiczeń oraz dodatkowy trening poznanego materiału za 1 ★. Druga mapa Food ma trening wcześniejszej mapy; pierwsza pozostaje bez takich lekcji. Model kursów i znaczeń oraz zgodny odczyt starego Food są wdrożone w etapie 2. Wybór kursu i globalne fiszki/quiz/gramatyka z poznanego materiału są wdrożone w etapie 3. Audyt i uzupełnienie Food wdrożono w etapie 4 — [zakres, źródła i ograniczenia](wdrozenie-food.md). Nowe podręczniki pozostają dalszym zakresem.
+Docelowo moduł ma **1–3 mapy**, każda po kilka lekcji. Food ma **dwie mapy**: zachowaną mapę z siedmioma etapami i 41 lekcjami oraz „Kocią kuchnię” z pięcioma lekcjami. Poprawione wersje lekcji etapów 5–7 są od D-52 aktualną treścią dla wszystkich kont; istniejące ukończenia, rozpoczęte sesje i gwiazdki pozostają zachowane. Wdrożono oddzielenie procentu ukończenia lekcji od liczby zaległych ćwiczeń oraz dodatkowy trening poznanego materiału za 1 ★. Druga mapa Food ma trening wcześniejszej mapy; pierwsza pozostaje bez takich lekcji. Model kursów i znaczeń oraz zgodny odczyt starego Food są wdrożone w etapie 2. Wybór kursu i globalne fiszki/quiz/gramatyka z poznanego materiału są wdrożone w etapie 3. Audyt i uzupełnienie Food wdrożono w etapie 4 — [zakres, źródła i ograniczenia](wdrozenie-food.md). Nowe podręczniki pozostają dalszym zakresem.
 
 ## Jak czytać bez przeglądania wszystkiego
 

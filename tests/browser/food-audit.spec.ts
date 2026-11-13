@@ -13,12 +13,12 @@ function progress(all=false){const p=emptyProgress();p.adventure=freshAdventure(
 async function restore(page:Page,p:Progress){await page.goto('./');await openBackup(page);await page.locator('#import-file').setInputFiles({name:'food.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();}
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 
-test('telefon: ukończona restauracja zachowuje pięć pytań, nieukończona dostaje sześć',async({page})=>{
+test('telefon: D-52 — ukończona restauracja zostaje ukończona, a jej powtórka ma te same sześć aktualnych pytań co nieukończona',async({page})=>{
  const p=progress();p.adventure!.completed[`${j.moduleId}/restaurant-words-1`]={at};await restore(page,p);await openMap(page);
  const stage=page.locator('.journey-stage').nth(4);
- await stage.getByRole('button',{name:/Pierwsze zamówienie/}).tap();
- await expect(page.locator('.lesson-begin')).toContainText('do 10 zadań');
- await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await expect(page.locator('.study-heading .tag')).toHaveText('1 / 5');
+ await expect(stage.locator('.lesson-step').first()).toHaveClass(/lesson-done/);await stage.getByRole('button',{name:/Pierwsze zamówienie/}).tap();
+ await expect(page.locator('.lesson-begin')).toContainText('do 10 zadań');await expect(page.locator('.lesson-rule')).toHaveCount(1);
+ await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await expect(page.locator('.study-heading .tag')).toHaveText('1 / 6');
  await restore(page,progress());await openMap(page);await stage.getByRole('button',{name:/Pierwsze zamówienie/}).tap();
  await expect(page.locator('.lesson-begin')).toContainText('do 10 zadań');await expect(page.locator('.lesson-rule')).toHaveCount(1);
  await page.setViewportSize({width:320,height:640});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
@@ -40,6 +40,8 @@ test('telefon: po starej mapie kontynuacja otwiera nową, przyznaje trzy gwiazdk
  await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();
  await finishCurrent(page,modules);
  await expect(page.locator('.lesson-reward')).toContainText('+3 ★');await page.reload();
+ // D-51: a refresh restores the lesson summary; the next step is on the home screen.
+ await expect(page.locator('.lesson-reward')).toContainText('+3 ★');await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
  await expect(page.locator('.next-step-detail')).toContainText('Naleśnik krok po kroku');await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('147');
  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:/Wybierz przygodę/}).tap();await expect(page.locator('.adventure-invite')).toHaveCount(2);
  await page.getByRole('button',{name:`Otwórz mapę ${second.title}`,exact:true}).tap();await expect(page.locator('.lead')).toContainText('1 z 5');
@@ -56,7 +58,9 @@ test.describe('PWA Food',()=>{
   await resumeStudy(offline);await expect(offline.getByRole('heading',{name:'Dzienniczek posiłków',exact:true})).toBeVisible();
   await offline.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();
   await answerCurrent(offline,modules);
-  await offline.reload();await resumeStudy(offline);await expect(offline.locator('.feedback.correct')).toBeVisible();await expect(offline.locator('.study-heading .tag')).toHaveText('1 / 6');
-  await offline.getByRole('button',{name:/Dalej/}).tap();await expect(offline.locator('.question')).toContainText('Dzienniczek:');await expect(offline.locator('.study-heading .tag')).toHaveText('2 / 6');
+  // D-51: a pair board is settled as a whole, so the counter stands on its last pair.
+  const tag=offline.locator('.study-heading .tag'),answered=await tag.innerText(),position=Number(answered.split(' / ')[0]);expect(answered).toMatch(/^[1-3] \/ 6$/);
+  await offline.reload();await resumeStudy(offline);await expect(offline.locator('.feedback.correct')).toBeVisible();await expect(tag).toHaveText(answered);
+  await offline.getByRole('button',{name:/Dalej/}).tap();await expect(offline.locator('.question')).toContainText('Dzienniczek:');await expect(tag).toHaveText(`${position+1} / 6`);
  });
 });

@@ -21,13 +21,11 @@ export interface Adventure extends Home {
 }
 export const freshAdventure=():Adventure=>({version:1,earned:0,completed:{},purchases:{}});
 export function orderedJourneys(modules:Module[],journeys:Journey[]){return journeys.filter(j=>modules.some(m=>m.id===j.moduleId)).slice().sort((a,b)=>compareModules(modules.find(m=>m.id===a.moduleId)!,modules.find(m=>m.id===b.moduleId)!));}
-// No progress migration: absent edition means the original, already saved lesson.
-export function lessonForProgress(j:Journey,l:Lesson,p:Progress):Lesson {
-  if(!l.update)return l;
-  const key=lessonKey(j,l),completed=p.adventure?.completed[key];
-  const active=p.active?.lesson?.id===key?p.active.lesson:undefined;
-  const edition=completed?completed.edition:active?active.edition:2;
-  return edition===2?{...l,...l.update}:l;
+// D-52: every account sees the current lesson content. Completion depends only on
+// the lesson key, and a started session resumes from its own saved item list, so
+// neither needs the superseded definition. The saved edition is a historical marker.
+export function lessonForProgress(_j:Journey,l:Lesson,_p:Progress):Lesson {
+  return l.update?{...l,...l.update}:l;
 }
 export function journeyForProgress(j:Journey,p:Progress):Journey{return {...j,stages:j.stages.map(s=>{const planned=plannedStage(j,s,p);return {...planned,lessons:planned.lessons.map(l=>lessonForProgress(j,l,p))};})};}
 export function nextLesson(journey:Journey,p:Progress){return lessons(journeyForProgress(journey,p)).find(({key})=>!p.adventure?.completed[key]);}

@@ -47,10 +47,10 @@ test('audyt Food: oryginalne mapy, słówka, pytania i objaśnienia nie są podm
  assert.ok(j.stages.slice(4).every(s=>s.lessons.every(l=>l.update)));
 });
 
-test('ukończona lekcja konta A zostaje oryginalna, nieukończona konta B ma 6–8 zadań, bez migracji gwiazdek',()=>{
+test('D-52: ukończona lekcja konta A zostaje ukończona i ma tę samą aktualną treść co nieukończona konta B (6–8 zadań), bez migracji gwiazdek',()=>{
  const a=unlockedRestaurant(),b=unlockedRestaurant(),l=j.stages[4].lessons[0],key=`${m.id}/${l.id}`;
  a.adventure!.completed[key]={at};const original=structuredClone(a);
- assert.equal(lessonForProgress(j,l,a).wordIds.length+lessonForProgress(j,l,a).exerciseIds.length,5);
+ assert.equal(lessonForProgress(j,l,a).wordIds.length+lessonForProgress(j,l,a).exerciseIds.length,6);assert.ok(a.adventure!.completed[key]);assert.equal(a.adventure!.completed[key].edition,undefined);assert.equal(a.adventure!.earned,92);
  assert.equal(lessonForProgress(j,l,b).wordIds.length+lessonForProgress(j,l,b).exerciseIds.length,6);
  assert.equal(getNextStep(modules,[j,second],b).kind,'lesson');
  journeyForProgress(j,a);validateBackup(backup(a));assert.deepEqual(a,original);
@@ -66,7 +66,8 @@ test('rozpoczęta dawna lekcja, błędy i backup pozostają obsługiwane po aktu
  const saved=structuredClone(p.active);
  const restored=validateBackup(backup(p)).progress;
  assert.ok(sessionCompatible(modules,restored.active!));assert.equal(restored.active!.lesson!.edition,undefined);
- assert.equal(lessonForProgress(j,l,restored).exerciseIds.length,0);
+ // D-52: the definition is current; the started session keeps its own saved items below.
+ assert.equal(lessonForProgress(j,l,restored).exerciseIds.length,1);
  assert.deepEqual(restored.active!.items,saved.items);
  const review=makeStageReviewSession(modules,j,j.stages[4],'choice',restored)!;
  assert.equal(review.items[0].key,saved.items[0].key);assert.equal(reviewStats(restored,j,j.stages[4]).pending,1);

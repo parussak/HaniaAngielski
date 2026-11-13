@@ -1,6 +1,22 @@
 # Nauka — prowadzenie i utrwalanie
 
-## D-51 — poprawki plansz i nawigacji, wymagania przed kodem
+## D-52 — ukończona lekcja zostaje ukończona — wdrożone
+
+Cel: ćwiczenia w lekcjach, także ukończonych, można zmieniać i uzupełniać, a nikt nie musi robić niczego ponownie.
+
+1. Ukończenie zależy wyłącznie od identyfikatora lekcji. Lekcja ukończona wcześniej jest ukończona niezależnie od nowych zadań, wydania i rewizji materiału.
+2. Mapa, etap i moduł zachowują 100%, gratulacje, gwiazdki, odblokowania domku i zakupy. Nie pokazujemy komunikatu o nowych zadaniach do zrobienia ani licznika zmian.
+3. Każde konto widzi aktualną treść lekcji: wstęp, słówka, zadania i reguły. Nowa sesja ukończonej lekcji bierze aktualną treść i daje 1 ★ za pełne powtórzenie, nigdy ponownie 3 ★.
+4. Poziom legendarny zwykłej lekcji tworzy nową sesję z aktualnej treści, także po zakończeniu dawnej, wznowionej sesji. Dla Kociej powtórki i Kociego treningu nadal kopiuje zestaw zakończonej sesji, bo ich dobór jest dynamiczny.
+5. Rozpoczęta, niedokończona sesja zachowuje zapisany zestaw zadań i wznawia się bez przebudowy. Jej ukończenie zalicza lekcję jak dotąd.
+6. Zmiana treści wewnątrz lekcji nie dodaje wymaganych lekcji do ukończonej mapy. Dodanie nowej lekcji do ukończonej mapy wymaga osobnej decyzji.
+7. Liczniki utrwalenia, kolejki błędów i plany sekcji 7 + 2 działają na kluczach elementów i identyfikatorach lekcji, więc zmiana listy zadań lekcji ich nie rusza. Zadanie usunięte z lekcji, ale pozostawione w pliku modułu, nadal wraca w powtórkach.
+
+Warunkiem jest [reguła edycji treści](format-materialow.md#aktualizacja-wydanej-lekcji): opublikowanych słówek i zadań nie usuwamy z plików modułu i nie zmieniamy im rewizji. D-52 zastępuje „poprawiamy wyłącznie nieukończone lekcje” z D-24 oraz zapis D-50 o kopiowaniu zestawu przez Poziom legendarny dla zwykłych lekcji.
+
+## D-51 — poprawki plansz i nawigacji — wdrożone
+
+Wdrożone w kodzie i objęte własnymi testami. Piętnaście starszych scenariuszy przeglądarkowych, które oczekiwały zachowania sprzed tych punktów, dostosowano 13 listopada 2026 — [lista](07-testy.md).
 
 1. Luki: kilka zdań i odpowiadające im słowa na jednej planszy. Wypełnianie przez klik słowa i luki albo przeciągnięcie; bez osobnego „W luce”. Materiał źródłowy i ocena każdego zadania pozostają.
 2. Pary: bez wyjaśnienia i „Dalej” po każdym wyborze. Błąd krótko świeci na czerwono i znika, można próbować ponownie; błędna pierwsza próba nadal zapisuje trudność. Podsumowanie dopiero po całej planszy.
@@ -25,7 +41,7 @@ Wymagania zapisano przed zmianą kodu. Wdrożenie zachowuje obie mapy Food i źr
 - Nowe prezentacje: dobieranie polskich haseł do tłumaczeń (każda oceniana para jest osobnym zadaniem), istniejące źródłowe dialogi z lukami do wpisania oraz luki uzupełniane propozycją z banku odpowiedzi. Nie dopisujemy wymyślonych dialogów do podręcznika. Gramatyka nadal ma objaśnienie po polsku.
 - Nowy wybór pary lub propozycji jest zapisywany lokalnie i na koncie razem z sesją; ćwiczenia działają offline. Nowe pola są opcjonalne w kopiach v1. Dawne sesje i kopie zachowują dotychczasową formę.
 
-Poziom legendarny zachowuje cały zestaw ukończonej sesji (także lekcji dynamicznej), z nowym identyfikatorem sesji i pustymi odpowiedziami. Nie dobiera nowego zakresu w miejsce poprzedniego i nie kopiuje znacznika wypłaconej nagrody. Oprawa zadań może być przeplatana ponownie. Plansze dobierania par pokazują pełne formy z wymaganym rodzajnikiem, według tych samych zasad odpowiedzi co pozostałe ćwiczenia.
+D-52 zmienia ten akapit dla zwykłych lekcji: Poziom legendarny bierze aktualną treść lekcji. Pierwotnie i nadal dla lekcji dynamicznych: Poziom legendarny zachowuje cały zestaw ukończonej sesji (także lekcji dynamicznej), z nowym identyfikatorem sesji i pustymi odpowiedziami. Nie dobiera nowego zakresu w miejsce poprzedniego i nie kopiuje znacznika wypłaconej nagrody. Oprawa zadań może być przeplatana ponownie. Plansze dobierania par pokazują pełne formy z wymaganym rodzajnikiem, według tych samych zasad odpowiedzi co pozostałe ćwiczenia.
 
 Jeżeli dawna sesja zawierała automatyczne powroty tego samego zadania po błędzie, nowa powtórka legendarna bierze każdy element raz. Zachowuje wszystkie różne zadania; nie przywraca dawnego wydłużania sesji.
 
@@ -132,7 +148,7 @@ Zachowujemy istniejącą mapę, zamiast proponowanego wcześniej podziału na tr
 
 Porównanie wykazało brak ćwiczenia posiłków, przepisu i opisu śniadania w kontekście. Druga mapa „Kocia kuchnia — Food w praktyce” uzupełnia ten zakres, zawiera cztery lekcje po 6 zadań i trening do 8 poznanych pozycji po trzech lekcjach. [Źródła, zakres i ograniczenia](wdrozenie-food.md).
 
-Uzgodniona ochrona wyników D-24: **każda już zaliczona lekcja pozostaje ukończona, również wewnątrz sekcji 5–7, a zdobyte gwiazdki zostają na koncie**. Poprawiamy wyłącznie nieukończone lekcje. Brakujący materiał trafia na kolejną mapę, zamiast wymuszać ponowne ukończenie zaliczonych lekcji. Ochronę wdrożono przez opcjonalną aktualizację definicji lekcji, zapis jej wydania i zachowanie wszystkich starych pytań. Rozpoczęte sesje zachowują zapisany zestaw zadań; stare ukończenia nie są ponownie otwierane.
+Uzgodniona ochrona wyników D-24: **każda już zaliczona lekcja pozostaje ukończona, również wewnątrz sekcji 5–7, a zdobyte gwiazdki zostają na koncie**. Poprawiamy wyłącznie nieukończone lekcje. Brakujący materiał trafia na kolejną mapę, zamiast wymuszać ponowne ukończenie zaliczonych lekcji. Ochronę wdrożono przez opcjonalną aktualizację definicji lekcji, zapis jej wydania i zachowanie wszystkich starych pytań. Rozpoczęte sesje zachowują zapisany zestaw zadań; stare ukończenia nie są ponownie otwierane. Od D-52 ukończone lekcje również pokazują aktualną treść, a ukończenie zależy tylko od identyfikatora lekcji.
 
 ## Uzgodnione założenia docelowe
 

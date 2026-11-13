@@ -33,13 +33,15 @@ test.describe('PWA — powtórka',()=>{
  });
 });
 
-test('zaproszenia: pierwszy moduł zaczyna od nowości, dobrowolny finał zachowuje zaliczenia',async({page})=>{
+test('zaproszenia: bez poznanego materiału rozgrzewka odsyła do pierwszej lekcji; dobrowolny finał zachowuje zaliczenia',async({page})=>{
+ // D-51: the warm-up uses known material of the current module too, so only a profile that knows nothing gets the message.
+ await page.goto('./');await openMap(page);await page.getByRole('button',{name:/Rozgrzej łapki/}).click();await expect(page.getByRole('status').filter({hasText:'To początek przygody!'})).toContainText('Zacznij od pierwszej lekcji');await expect(page.locator('.study-heading')).toHaveCount(0);
  const p=sample(),maps=['sciezka','sciezka-praktyka'].map(name=>JSON.parse(readFileSync(new URL(`../../public/content/02-food/${name}.json`,import.meta.url),'utf8')) as Journey);
  for(const j of maps)for(const {key} of lessons(j))p.adventure!.completed[key]={at:'2026-11-12T12:00:00Z'};
  for(const j of maps)for(const stage of j.stages)p.adventure!.stageReviews![`${j.moduleId}/${j.id?j.id+'/':''}${stage.id}`]??={round:0,items:{},rewardedAt:'2026-11-12T12:00:00Z'};
  // The old stage bonus is already settled; this test isolates the finale's 1 star.
  p.adventure!.stageReviews!['unit-2-food/food'].rewardedAt='2026-11-12T12:00:00Z';
- await restore(page,p);await openMap(page);await page.getByRole('button',{name:/Rozgrzej łapki/}).click();await expect(page.getByRole('status').filter({hasText:'To początek przygody!'})).toContainText('Zacznij od pierwszej lekcji');await expect(page.locator('.study-heading')).toHaveCount(0);
+ await restore(page,p);await openMap(page);
  await page.locator('button[data-action="module"]').click();await page.getByText('Wpisuję odpowiedź',{exact:true}).click();await page.getByRole('button',{name:/Podejmuję misję/}).click();await expect(page.locator('.study-heading h1')).toHaveText('Misja Kociego Mistrza');
  await page.getByRole('textbox').fill('apple');await page.getByRole('button',{name:/Sprawdź/}).click();await expect(page.locator('.feedback.correct')).toBeVisible();await page.getByRole('button',{name:/Dalej/}).click();await expect(page.getByRole('heading',{name:'Misja Kociego Mistrza ukończona!',exact:true})).toBeVisible();await expect(page.locator('.lesson-reward')).toContainText('+1 ★');
  const result=await saved(page);expect(result.adventure!.completed).toEqual(p.adventure!.completed);expect(result.adventure!.earned).toBe(21);expect(result.adventure!.sectionPlans).toBeUndefined();

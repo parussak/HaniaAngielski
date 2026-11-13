@@ -73,6 +73,8 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   await mobile.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
   await expect(mobile.getByRole('status')).toContainText('Kopia została wczytana');
   await mobile.reload();
+  // D-51: a refresh restores the backup screen; resuming starts from the home screen.
+  await expect(mobile.getByRole('button',{name:'Zapisz kopię postępów',exact:true})).toBeVisible();await mobile.getByRole('button',{name:'Moja nauka',exact:true}).click();
   await mobile.getByRole('button',{name:'Kontynuuj naukę →',exact:true}).click();
   await expect(mobile.locator('.question')).toHaveText(revealed);
   await expect(mobile.locator('.feedback.correct')).toBeVisible();

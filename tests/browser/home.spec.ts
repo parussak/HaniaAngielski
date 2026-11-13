@@ -13,7 +13,9 @@ for(const width of [320,390])test(`strona startowa ${width}px: dwa wejścia, kot
   await expect(page.locator('.update-banner')).toHaveCount(0);
   await expect(page.locator('.next-step-card')).toHaveAttribute('data-step-kind','lesson');
   await expect(page.locator('.stats-grid,.module-card,.adventure-invite')).toHaveCount(0);
-  const order=await page.locator('.home-start').evaluate(el=>Array.from(el.children).map(c=>c.className));
+  // D-51: the home screen keeps an empty slot for the update banner and shows the course frame under the greeting.
+  await expect(page.locator('.home-start>[data-update-banner]')).toBeEmpty();await expect(page.locator('.welcome .course-context')).toBeVisible();
+  const order=await page.locator('.home-start').evaluate(el=>Array.from(el.children).filter(c=>!c.hasAttribute('data-update-banner')).map(c=>c.className));
   expect(order).toEqual(['welcome','next-step-card','hero home-hero','practice-entry','home-help']);
   const check=async()=>expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
   await check();

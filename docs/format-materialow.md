@@ -108,9 +108,16 @@ Wybór kursu i globalne fiszki/quiz/gramatyka są wdrożone w etapie 3 — [opis
 
 ## Aktualizacja wydanej lekcji
 
-Oryginalna lekcja w `sciezka.json` pozostaje bez zmian. Opcjonalne `update` zawiera `edition: 2`, `title`, `intro`, `wordIds`, `exerciseIds` i `ruleIds`. Nie może zmieniać `id`, roli ani zawierać kolejnego `update`. Aktualizacja ma 6–10 zadań i musi wskazywać istniejące materiały. Domyślnie trafia do nieukończonej lekcji; stare ukończenia bez `edition` i stare aktywne sesje zachowują oryginał. Nowa sesja i jej ukończenie zapisują `edition: 2`.
+**Zasada D-52:** aktualna treść lekcji to jej `update`, jeżeli istnieje, a w przeciwnym razie sama lekcja. Tę treść widzi każde konto, także z ukończoną lekcją. Można ją poprawiać w miejscu dowolną liczbę razy: `title`, `intro`, `wordIds`, `exerciseIds`, `ruleIds`. Ukończenie zależy tylko od `id` lekcji, więc edycja nie otwiera lekcji ani mapy ponownie.
 
-To obecnie obsługa oryginału i jednego poprawionego wydania, nie nieograniczona lista rewizji. Wydania 2 nie wolno później nadpisywać istotną zmianą: trzeba rozbudować jawny rejestr wydań lub dodać nową lekcję, z testami zgodności. Nowe zadania dostają nowe identyfikatory; stare pozostają do wznowień i powtórek. Instrukcja nie zezwala na masową przebudowę ukończonych lekcji. [Przykład Food i ochrona danych](wdrozenie-food.md).
+Co wolno, a czego nie:
+
+- **Wolno:** dodawać, usuwać i przestawiać zadania na liście lekcji; zmieniać tytuł i wstęp; dopisywać nowe słówka i zadania do plików modułu.
+- **Nie wolno:** zmieniać `id` lekcji, usuwać lekcji ani dodawać nowej wymaganej lekcji do ukończonej mapy bez osobnej decyzji; zmieniać listy i kolejności lekcji w sekcji z `adaptiveReviews`.
+- **Nie wolno:** usuwać z plików modułu opublikowanego słówka lub zadania ani zmieniać jego `rev`. Rozpoczęte sesje, kolejki błędów i liczniki utrwalenia wskazują klucz `moduleId@rewizja:typ:id`; bez tego elementu nie da się ich wznowić. Zadanie zdjęte z lekcji zostaje w pliku.
+- **Istotna zmiana zadania** (inne pytanie, inna odpowiedź) = nowe zadanie z nowym `id`; stare zostaje w pliku. Poprawka literówki lub wyjaśnienia nie wymaga nowego `id`.
+
+Pole `update` jest zachowanym formatem etapu 4, nie rejestrem wydań: zawiera `edition: 2`, `title`, `intro`, `wordIds`, `exerciseIds` i `ruleIds`, nie może zmieniać `id`, roli ani zawierać kolejnego `update`, ma 6–10 zadań i wskazuje istniejące materiały. W lekcjach, które je mają (etapy 5–7 pierwszej mapy Food), edytujemy treść wewnątrz `update`; oryginalna lista pod nim nie jest już pokazywana, ale zostaje jako źródło poznanego materiału. Nowe lekcje nie potrzebują `update` — edytujemy je bezpośrednio. Zapisywany przy sesji i ukończeniu znacznik `edition: 2` jest historyczny i nie wpływa na działanie; nie wprowadzamy wydań 3, 4… [Przykład Food i ochrona danych](wdrozenie-food.md) opisuje stan sprzed D-52.
 
 ## Jawna wskazówka a/an dla słówka
 

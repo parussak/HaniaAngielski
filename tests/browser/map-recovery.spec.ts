@@ -73,5 +73,7 @@ test('sesja uszkodzonej mapy pozostaje zapisana, po naprawie wraca do tego sameg
  await resumeStudy(page);await expect(page.getByRole('heading',{name:'Wczytaj mapę tej lekcji',exact:true})).toBeVisible();
  await page.getByRole('button',{name:'Wybierz inną mapę',exact:true}).tap();await expect(page.locator('.adventure-invite h2')).toHaveText(second.title);
  await page.unroute('**/content/02-food/sciezka.json');await page.getByRole('button',{name:'Spróbuj wczytać mapy ponownie',exact:true}).tap();
+ // D-51: reloading the maps keeps the catalogue open, now with both maps; the session resumes from the home screen.
+ await expect(page.locator('.adventure-invite')).toHaveCount(2);await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
  await resumeStudy(page);await expect(page.locator('.question')).toHaveText(prompt);await expect(page.locator('.study-heading .tag')).toHaveText('1 / 5');
 });

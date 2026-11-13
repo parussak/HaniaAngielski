@@ -8,12 +8,10 @@ Aplikacja internetowa: fiszki, quizy, gramatyka, lokalne postępy i opcjonalne k
 
 Aktualizacja nauki: dobrowolna Kocia rozgrzewka z poznanego materiału za 1 ★, ukończenie mapy liczone niezależnie od błędów oraz wyjaśnienia gramatyczne z przypomnieniem reguły. Etap 2 dodaje kursy/podręczniki i wspólny format materiałów wielojęzycznych, zachowując wygląd, treści i zapis Food. [Format materiałów](docs/format-materialow.md), [raport etapu 1](docs/wdrozenie-nauki.md), [raport etapu 2](docs/wdrozenie-kursow.md). Etap 3 dodaje wybór kursu oraz globalne fiszki, quiz i gramatykę wyłącznie z poznanego materiału — [opis i sprawdzenie](docs/wdrozenie-zakresow.md).
 
-## Uzgodniony kierunek — 13 listopada 2026, do wdrożenia
+## Uzgodniony kierunek — 13 listopada 2026
 
-Poniższe punkty są ustaleniami produktu, a nie opisem obecnego działania. Wymagania trzeba zapisać w [nauce](docs/03-nauka.md) i [rejestrze decyzji](docs/decyzje.md) przed zmianą kodu.
-
-- **Ukończona lekcja pozostaje ukończona po zmianie treści.** Hania ukończyła pierwszą mapę Food w 100% i nie powtarza jej. Ćwiczenia w lekcjach, także ukończonych, można zmieniać i uzupełniać. Lekcja ukończona wcześniej nadal liczy się jako ukończona, a mapa zachowuje 100%, gwiazdki i nagrody, nawet gdy doszły nowe zadania. Dziś poprawione wydanie trafia tylko do nieukończonych lekcji, a ukończone zachowują oryginał ([zasady wydań](docs/format-materialow.md#aktualizacja-wydanej-lekcji)).
-- **Urozmaicenie ćwiczeń.** Do dobierania par i luk z bankiem dochodzą dialogi i historyjki z kilkoma lukami, uzupełnianymi słowem z propozycji albo wpisywanym, oraz ćwiczenia ze słuchaniem.
+- **Wdrożone (D-52): ukończona lekcja pozostaje ukończona po zmianie treści.** Ćwiczenia w lekcjach, także ukończonych, można zmieniać i uzupełniać wielokrotnie. Lekcja ukończona wcześniej nadal liczy się jako ukończona, a mapa zachowuje 100%, gwiazdki i nagrody. Powtórka i Poziom legendarny biorą aktualną treść i dają 1 ★. Rozpoczęte sesje zachowują swój zestaw zadań. [Wymagania](docs/03-nauka.md), [zasady edycji treści](docs/format-materialow.md#aktualizacja-wydanej-lekcji).
+- **Do wdrożenia — urozmaicenie ćwiczeń.** Wymagania trzeba zapisać w [nauce](docs/03-nauka.md) i [rejestrze decyzji](docs/decyzje.md) przed zmianą kodu. Do dobierania par i luk z bankiem dochodzą dialogi i historyjki z kilkoma lukami, uzupełnianymi słowem z propozycji albo wpisywanym, oraz ćwiczenia ze słuchaniem.
 
 ## Uruchomienie
 
@@ -83,7 +81,7 @@ Słówka, gramatyka i rozmówki używają lokalnych pastelowych ilustracji SVG p
 
 [Instrukcja edycji materiałów](public/content/README.md) zawiera przykłady. Po zmianie uruchom `npm.cmd run check:content`. Podczas lokalnej nauki wystarczy zapisać pliki i odświeżyć stronę. Po wysłaniu zmian na `main` GitHub automatycznie sprawdzi, zbuduje i opublikuje aplikację. W zainstalowanej PWA nowa wersja pojawi się jako przycisk „Zaktualizuj”.
 
-Przy istotnej zmianie używanego już słówka, zadania lub lekcji sprawdź wpływ na ukończenia, aktywne sesje i powtórki. Samo zwiększenie `rev` bez zachowania starej treści może uniemożliwić wznowienie zapisanych pytań. Stosuj [zasady zgodności i wydań lekcji](docs/format-materialow.md#aktualizacja-wydanej-lekcji); nie podbijaj masowo rewizji ani wersji Food. Kopia postępów nie zawiera treści modułów. Zdjęcia źródłowe są w pomijanym przez Git folderze `.local-materials`.
+Przy istotnej zmianie używanego już słówka, zadania lub lekcji sprawdź wpływ na ukończenia, aktywne sesje i powtórki. Listę zadań lekcji można zmieniać także po jej ukończeniu (D-52), ale opublikowanych słówek i zadań nie usuwamy z plików i nie zmieniamy im `rev`: to uniemożliwia wznowienie zapisanych pytań. Stosuj [zasady edycji lekcji](docs/format-materialow.md#aktualizacja-wydanej-lekcji); nie podbijaj masowo rewizji ani wersji Food. Kopia postępów nie zawiera treści modułów. Zdjęcia źródłowe są w pomijanym przez Git folderze `.local-materials`.
 
 [Zakres i źródła modułu Food](docs/materialy-food.md).
 

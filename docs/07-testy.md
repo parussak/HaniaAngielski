@@ -1,5 +1,45 @@
 # Testy — podział i zasady
 
+## D-52 — ukończona lekcja zostaje ukończona
+
+`completed-stays.test.ts` (8 testów na danych syntetycznych): stare ukończenie + zmieniona lekcja = nadal ukończona i 100%; nowa sesja z aktualnej treści i tylko 1 ★ bez podwójnej nagrody; Poziom legendarny z aktualnej treści, a zestawy dynamiczne kopiowane; wznowienie starej sesji po zmianie treści i 3 ★ za pierwsze ukończenie; stara kopia v1 wczytana i zapisana bez zmian; liczniki utrwalenia i kolejka błędów dla zadania zdjętego z lekcji; plan 7 + 2 po zmianie treści lekcji bazowych; drugie urządzenie z nowszą treścią po synchronizacji przez testowy adapter.
+
+`browser/completed-stays.spec.ts` (2 scenariusze na telefonie 390 px, z podmienioną w teście pierwszą lekcją Food): ukończona mapa ma siedem ukończonych etapów i gratulacje bez komunikatu o nowych zadaniach, powtórka ma 7 aktualnych zadań i daje +1 ★, saldo 144 → 145, brak przewijania poziomego przy 320 px; rozpoczęta stara sesja wznawia te same 5 pytań i daje +3 ★, a Poziom legendarny po niej ma 7 zadań i daje +1 ★.
+
+Zgodnie z D-52 zmieniono oczekiwania trzech starszych testów: w `food-audit.test.ts` ukończona lekcja ma teraz tę samą aktualną treść co nieukończona (6 zadań zamiast 5), a definicja przy starej aktywnej sesji jest aktualna; w `browser/food-audit.spec.ts` powtórka ukończonej lekcji pokazuje „1 / 6”. Zachowano sprawdzenia nietkniętych postępów, gwiazdek, wznowienia tych samych pytań i kolejki błędów. Wspólny pomocnik `browser/helpers.ts` czeka teraz na zakończenie zapisu przed odczytem i kliknięciem przycisków; usunęło to niestabilność dwóch scenariuszy D-51.
+
+Weryfikacja 13 listopada 2026, Edge (`HANIA_BROWSER_CHANNEL=msedge`): **239/239 Node**; `check:content`, budowanie z TypeScript i 206 zasobami PWA oraz kontrola odnośników dokumentacji przeszły. Playwright na zbudowanej aplikacji (`HANIA_TEST_BUILD=1`): **110/110**. Playwright na wersji deweloperskiej: **99 przeszło, 0 nie przeszło, 11 pominiętych** (pominięte wymagają zbudowanej PWA). Zmienione scenariusze PWA przeszły dodatkowo w trzech powtórzeniach. Nie testowano na fizycznym telefonie ani prawdziwym koncie Hani.
+
+### Dziesięć starszych scenariuszy dostosowanych do D-51
+
+Nie przechodziły także na commicie sprzed D-52. Oczekiwały zachowania, które D-51 zmieniło. Po zgodzie Pauliny z 13 listopada 2026 zmieniono oczekiwania; żadnego sprawdzenia nie usunięto, a przy każdej zmianie doszło sprawdzenie nowego zachowania.
+
+| Scenariusz | Dawne oczekiwanie | Teraz sprawdza |
+| --- | --- | --- |
+| `home.spec.ts` strona startowa (320 i 390 px) | pięć elementów strony startowej | te same pięć w tej samej kolejności, pomijając puste miejsce na ramkę aktualizacji (pkt 8); dodatkowo ramkę kursu pod powitaniem (pkt 7) |
+| `house.spec.ts` wybór kursu | „Wybierz kurs” w domku | brak ramki kursu w domku i wybór kursu ze strony startowej (pkt 7) |
+| `food-audit.spec.ts` kontynuacja po starej mapie | strona startowa po odświeżeniu | przywrócone podsumowanie z +3 ★, potem następny krok na stronie startowej (pkt 6) |
+| `next-step.spec.ts` ramka następnego kroku | ramka po odświeżeniu | przywrócone to samo pytanie, a ramka wznowienia po przejściu do „Moja nauka” (pkt 6) |
+| `app.spec.ts` pełna nauka | „Kontynuuj naukę” od razu po odświeżeniu | przywrócony ekran kopii, wznowienie ze strony startowej (pkt 6) |
+| `map-recovery.spec.ts` naprawa mapy | pytanie od razu po ponownym wczytaniu map | katalog z obiema mapami, wznowienie tego samego pytania ze strony startowej (pkt 6) |
+| `lesson-flow.spec.ts` pary | ocena i „Dalej” po każdej parze | para oznaczona na planszy i wyłączona, bez przerwy; podsumowanie po całej planszy (pkt 2) |
+| `lesson-flow.spec.ts` dialog z bankiem | dawny widok `.dialogue` i `.bank-gap` | wspólna plansza luk: kwestie z rozmówcami, słowo i luka, zapis propozycji po odświeżeniu, błysk błędu bez przerwy i zapisany błąd pierwszej próby (pkt 1) |
+| `adaptive-recall.spec.ts` zaproszenia | „To początek przygody!” przy poznanym jabłku | ten sam komunikat dla profilu bez poznanego materiału (pkt 4); rozgrzewkę z poznanego materiału sprawdza `eight-points.spec.ts` |
+
+`map-recovery.spec.ts` nie wykrył błędu aplikacji: „Spróbuj wczytać mapy ponownie” odświeża stronę, a D-51 przywraca wtedy otwarty katalog przygód.
+
+### Pięć scenariuszy PWA dostosowanych do D-51
+
+Uruchamiają się tylko na zbudowanej aplikacji, dlatego wyszły dopiero w pełnym przebiegu. Nie dotyczyły D-52. Po drugiej zgodzie Pauliny z 13 listopada 2026 zmieniono oczekiwania na tej samej zasadzie: bez usuwania sprawdzeń.
+
+| Scenariusz | Dawne oczekiwanie | Teraz sprawdza |
+| --- | --- | --- |
+| `food-audit.spec.ts` druga mapa offline | „1 / 6” po pierwszej odpowiedzi i „2 / 6” po „Dalej” | licznik po rozliczonej planszy zostaje ten sam po odświeżeniu offline i rośnie o jeden po „Dalej” (pkt 2) |
+| `lesson-flow.spec.ts` pary offline | ocena i „Dalej” po jednej parze | para oznaczona na planszy bez przerwy, potem pełna sesja i +3 ★ (pkt 2) |
+| `pwa.spec.ts` zimny start bez sieci | ocena błędu po jednym wyborze | błysk błędu na planszy bez przerwy; błąd nadal trafia do powtórki z wpisywaniem (pkt 2) |
+| `pwa.spec.ts` dodatkowy trening offline | strona startowa po odświeżeniu | przywrócone podsumowanie z +1 ★, potem strona startowa (pkt 6) |
+| `pwa.spec.ts` globalne fiszki offline | strona startowa po odświeżeniu | przywrócone podsumowanie sesji, potem wejście ze strony startowej (pkt 6) |
+
 ## D-50 — koniec lekcji, poziom legendarny i nowe prezentacje
 
 `lesson-variety.test.ts` sprawdza zachowanie bazowych zadań, dobór wyłącznie wcześniej poznanego zakresu, limit sesji, pary i wpisywanie, zapis banku, odrzucanie uszkodzonych grup/wyborów, przenoszenie błędu z planszy do powtórki z wpisywaniem, kontynuację pomiędzy mapami i koniec dostępnego zakresu. Sprawdza też zachowanie ukończeń, jednokrotną nagrodę 1 ★ i utworzenie pełnej legendarnej powtórki bez kopiowania ocen i nagród poprzedniej sesji.

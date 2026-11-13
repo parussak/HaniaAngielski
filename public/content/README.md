@@ -27,7 +27,7 @@ public/content/
 
 ## Bezpieczne poprawianie wydanych lekcji
 
-Nie podmieniaj ani nie usuwaj używanych już pytań i identyfikatorów. W etapach 5–7 Food oryginalna definicja lekcji zostaje, a pole `update` zawiera wydanie 2. Silnik stosuje je wyłącznie do nieukończonej nauki oraz wcześniej zapisanych ukończeń wydania 2. Oryginalne ukończenia i aktywne sesje zachowują swoją wersję. Nowe pytania mają nowe identyfikatory; poziom i wersja całego Food nie są podbijane. Nie zmieniaj później opublikowanego `update` wydania 2 w miejscu — kolejne istotne zmiany potrzebują jawnej obsługi dalszych wydań albo nowych lekcji. Szczegóły: [format map](../../docs/format-materialow.md#aktualizacja-wydanej-lekcji) i [audyt Food](../../docs/wdrozenie-food.md).
+Nie usuwaj z plików modułu używanych już słówek i zadań ani nie zmieniaj ich identyfikatorów i `rev`: rozpoczęte sesje i powtórki wskazują je po kluczu. Listę zadań lekcji w mapie (`wordIds`, `exerciseIds`, `ruleIds`), jej tytuł i wstęp można zmieniać wielokrotnie, także gdy lekcja jest już ukończona — ukończenie zależy tylko od `id` lekcji (D-52). W etapach 5–7 Food aktualna treść jest w polu `update`; tam ją edytuj. Istotnie zmienione zadanie dostaje nowe `id`, a stare zostaje w pliku. [Pełne zasady](../../docs/format-materialow.md#aktualizacja-wydanej-lekcji).
 
 ## Kocia mapa Food
 

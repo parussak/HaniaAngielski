@@ -1,10 +1,14 @@
-import {journeyForProgress,journeyKey,lessons,orderedJourneys,type Journey,type Lesson} from '../adventure.ts';
+import {journeyForProgress,journeyKey,lessons,makeLessonSession,orderedJourneys,type Journey,type Lesson} from '../adventure.ts';
 import {sameCourse} from './scope.ts';
 import {type Module,type Progress,type Session} from './model.ts';
 import {sessionCompatible} from './questions.ts';
 
-export function legendarySession(modules:Module[],finished:Session):Session|null{
- if(!finished.lesson||!finished.completedAt||!sessionCompatible(modules,finished)||!finished.items.every(i=>finished.attempts.some(a=>a.key===i.key)))return null;
+/** A regular lesson replays its current content (D-52); dynamic sets are copied. */
+export function legendarySession(modules:Module[],finished:Session,current?:{journey:Journey;lesson:Lesson;progress:Progress}):Session|null{
+ if(!finished.lesson||!finished.completedAt||!finished.items.every(i=>finished.attempts.some(a=>a.key===i.key)))return null;
+ if(current&&!current.lesson.role&&!finished.recall&&!finished.training&&modules.some(m=>m.id===current.journey.moduleId))
+  return {...makeLessonSession(modules,current.journey,current.lesson,'mixed',current.progress),legendary:true};
+ if(!sessionCompatible(modules,finished))return null;
  const copy=structuredClone(finished);delete copy.retentionCounted;delete copy.lessonRewarded;delete copy.pairSelection;delete copy.draftAnswer;
  // Older sessions could append the same task after a mistake. A new full replay
  // includes each source task once, without restoring that old endless-loop policy.

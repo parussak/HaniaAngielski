@@ -97,7 +97,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             if(!target){state.notice='Wszystkie dostępne lekcje ukończone. Gratulacje!';return true;}
             state.selected=state.modules.find(m=>m.id===target.journey.moduleId)!;state.selectedJourneyKey=journeyKey(target.journey);state.introLessonId=target.lesson.id;state.answerMode='mixed';
             if(action==='following-lesson'){state.screen='lesson-intro';return true;}
-            const session=legendarySession(state.modules,finished);
+            const session=legendarySession(state.modules,finished,{...target,progress:state.progress});
             if(!session){state.notice='Ta starsza lekcja wymaga dostępnej wersji materiału. Wyniki pozostają zachowane.';return true;}
             if(!confirmReplacement('Rozpocząć poziom legendarny zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))return true;
             varyLesson(session,state.modules,state.journeys,target.journey,target.lesson,state.progress,false);

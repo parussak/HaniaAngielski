@@ -23,6 +23,8 @@ test('ramka rozpoczyna lekcję, wznawia ją po odświeżeniu i wskazuje następn
   await expect(page.getByRole('heading',{name:j.stages[0].lessons[0].title,exact:true})).toBeVisible();
   await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();
   const first=await page.locator('.question').innerText();await page.reload();
+  // D-51: a refresh restores the exercise itself; the home frame still offers to resume it.
+  await expect(page.locator('.question')).toHaveText(first);await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
   await expect(page.locator('.next-step-card')).toHaveAttribute('data-step-kind','resume');
   await resumeStudy(page);await expect(page.locator('.question')).toHaveText(first);
   await finishCurrent(page,modules);

@@ -40,7 +40,8 @@ test('PWA: manifest, ikony i zimny start bez sieci; fiszki, quiz, gramatyka i wz
   await openMap(offline);await expect(offline.locator('.journey-stage')).toHaveCount(7);
   await resumeStudy(offline);await expect(offline.locator('.learn-word')).toHaveCount(5);
   offline.once('dialog',d=>d.accept());await offline.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await expect(offline.locator('.option').first()).toBeVisible();
-  await offline.locator('.option').filter({hasNotText:'apple'}).first().tap();await expect(offline.locator('.feedback.incorrect')).toBeVisible();
+  // D-51: a wrong pair flashes on the board without a break; the error still reaches the review below.
+  await offline.locator('.option').filter({hasNotText:'apple'}).first().tap();await expect(offline.locator('.match-flash').first()).toBeVisible();await expect(offline.locator('.feedback')).toHaveCount(0);
   await offline.getByRole('button',{name:'Moja nauka',exact:true}).tap();await openMap(offline);
   await expect(offline.locator('.stage-review-step')).toHaveCount(0);
   offline.once('dialog',d=>d.accept());await openStageReview(offline);await expect(offline.locator('.review-meter')).toHaveCount(0);
@@ -79,7 +80,8 @@ test('PWA: dodatkowy trening offline, wznowienie i synchronizacja jednej gwiazdk
     page.once('dialog',d=>d.accept());await openAdditionalWarmup(page);await expect(page.locator('.study-heading .tag')).toHaveText('1 / 1');
     await page.reload();await resumeStudy(page);await expect(page.locator('.question')).toHaveText(prompt);
     await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('.lesson-reward')).toContainText('+1 ★');
-    await page.reload();await expect(page.getByRole('heading',{name:'Dobrze Cię widzieć!'})).toBeVisible();
+    // D-51: a refresh restores the summary; the home screen is one tap away.
+    await page.reload();await expect(page.locator('.lesson-reward')).toContainText('+1 ★');await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await expect(page.getByRole('heading',{name:'Dobrze Cię widzieć!'})).toBeVisible();
     await context.setOffline(false);await expect.poll(()=>server.remote.get('training@example.test')?.progress.adventure?.earned).toBe(1);
     const saved=server.remote.get('training@example.test')!.progress;
     expect(saved.sessions.filter((s:any)=>s.training?.kind==='extra')).toHaveLength(1);
@@ -117,7 +119,8 @@ test('PWA: globalne fiszki offline zachowują zakres, poznanie i zapis konta po 
     await context.setOffline(true);page.once('dialog',d=>d.accept());await page.getByRole('button',{name:/Fiszki z poznanego materiału/}).tap();await expect(page.locator('.question')).toHaveText(prompt);
     await page.reload();await resumeStudy(page);await expect(page.locator('.question')).toHaveText(prompt);
     await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.getByRole('button',{name:'Wróć do poznanego materiału',exact:true})).toBeVisible();
-    await page.reload();await page.getByRole('button',{name:'Ćwicz cały poznany materiał →',exact:true}).tap();await expect(page.getByRole('button',{name:/Fiszki z poznanego materiału/})).toContainText('1 poznane hasło');
+    // D-51: a refresh restores the summary; the practice entry is on the home screen.
+    await page.reload();await expect(page.getByRole('button',{name:'Wróć do poznanego materiału',exact:true})).toBeVisible();await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:'Ćwicz cały poznany materiał →',exact:true}).tap();await expect(page.getByRole('button',{name:/Fiszki z poznanego materiału/})).toContainText('1 poznane hasło');
     await context.setOffline(false);await expect.poll(()=>server.remote.get('global@example.test')?.progress.sessions.filter((s:any)=>s.scope?.kind==='course').length).toBe(1);
     const saved=server.remote.get('global@example.test')!.progress;expect(saved.sessions.at(-1).scope).toEqual({kind:'course',courseId:'angielski-hani'});expect(saved.encountered).toContain(`unit-2-food@1:word:${word.id}`);expect(saved.adventure?.earned??0).toBe(0);
   }finally{await context.setOffline(false);await server.close();}
