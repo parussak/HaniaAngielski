@@ -23,6 +23,8 @@ Aplikacja do nauki języków dla dziecka (Hania) i dorosłej (Paulina): TypeScri
 - **Audio**: generator czyta treść, aplikacja nie importuje generatora. Nagrania generuj dopiero po zatwierdzeniu treści.
 - **Dokumentacja**: aktualizuj tylko dokument odpowiedzialny za zmienioną zasadę ([jak](docs/utrzymanie-dokumentacji.md)).
 
+Role, kolejność kroków i przekazywanie pracy między narzędziami: [proces pracy](docs/proces-pracy.md).
+
 ## Zasady, których nie wolno łamać
 
 - Opublikowanych słówek, zadań, scen ani luk **nie usuwaj** i nie zmieniaj ich `id` ani `rev` — od nich zależą ukończenia, sesje i gwiazdki dziecka (D-52). Tekst, odpowiedzi i wyjaśnienia można poprawiać.

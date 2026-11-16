@@ -14,6 +14,7 @@ Spis bieżącej dokumentacji. Czytaj tylko dokument potrzebny do zadania — nie
 | Konta, offline, kopie, synchronizacja | [Zapis](06-zapis.md) |
 | Testy i kontrole | [Testy](07-testy.md) |
 | Aktualizacja samej dokumentacji | [Utrzymanie dokumentacji](utrzymanie-dokumentacji.md) |
+| Praca z agentami AI: role, kroki, przekazanie | [Proces pracy](proces-pracy.md) |
 
 ## Dokumenty główne
 
