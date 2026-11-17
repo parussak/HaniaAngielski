@@ -11,7 +11,8 @@
     "test": "node --experimental-strip-types --test tests/*.test.ts",
     "icons:generate": "node scripts/generate-icons.mjs",
     "audio": "node --experimental-strip-types scripts/audio/generate.mjs",
-    "audio:check": "node --experimental-strip-types scripts/audio/generate.mjs --check"
+    "audio:check": "node --experimental-strip-types scripts/audio/generate.mjs --check",
+    "audio:verify": "node scripts/audio/verify.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.1",

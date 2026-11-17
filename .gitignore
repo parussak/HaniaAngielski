@@ -12,3 +12,4 @@ playwright-report/
 .local-materials/
 audio/.generator.lock
 audio/.audio-tmp-*/
+audio/.verify/

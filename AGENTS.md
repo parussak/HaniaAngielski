@@ -19,7 +19,7 @@ Aplikacja do nauki języków dla dziecka (Hania) i dorosłej (Paulina): TypeScri
 ## Tory pracy — jedna zmiana, jeden tor
 
 - **Treść** (nowy rozdział, poprawka słówka, dialogu, wyjaśnienia): zmieniaj tylko `public/content/` i karty w `docs/kursy/`. Nie ruszaj `src/`. Jeśli treść nie mieści się w obecnym formacie, zatrzymaj się i opisz, czego brakuje w mechanice — to osobne zadanie.
-- **Mechanika** (zasady nauki, ekrany, zapis): zmieniaj `src/` i testy. Nie zmieniaj produkcyjnych JSON-ów kursów; do testów używaj fikstur z `tests/fixtures/`. Mechanika nie zna konkretnych kursów ani modułów (np. Food).
+- **Mechanika** (zasady nauki, ekrany, zapis): zmieniaj `src/` i testy. Nie zmieniaj produkcyjnych JSON-ów kursów; do testów używaj fikstur z `tests/fixtures/`. Mechanika nie zna konkretnych kursów ani modułów (np. Food). Pisz kod według [zasad projektowania i kodu](docs/zasady-kodu.md).
 - **Audio**: generator czyta treść, aplikacja nie importuje generatora. Nagrania generuj dopiero po zatwierdzeniu treści.
 - **Dokumentacja**: aktualizuj tylko dokument odpowiedzialny za zmienioną zasadę ([jak](docs/utrzymanie-dokumentacji.md)).
 

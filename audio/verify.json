@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "whisper": {
+    "release": "whisper.cpp b5454 (v1.9.5), whisper-bin-x64.zip",
+    "source": "https://github.com/ggml-org/whisper.cpp/releases/tag/b5454",
+    "file": "whisper/Release/whisper-cli.exe",
+    "sha256": "331dba46d6427105d2b802cdbc7eae916ea1c5abf9b0d3b5cfe460d8db8e4366"
+  },
+  "model": {
+    "name": "ggml-small.en-q8_0",
+    "language": "en",
+    "source": "https://huggingface.co/ggerganov/whisper.cpp/blob/main/ggml-small.en-q8_0.bin",
+    "file": "whisper/models/ggml-small.en-q8_0.bin",
+    "sha256": "67a179f608ea6114bd3fdb9060e762b588a3fb3bd00c4387971be4d177958067"
+  }
+}

@@ -33,6 +33,44 @@ W tym etapie przygotowujemy nagrania dla Food: pełne formy wszystkich haseł z 
 
 Generator korzysta z [udokumentowanego wejścia JSON Pipera](https://github.com/rhasspy/piper/blob/2023.11.14-2/README.md#json-input): wiele tekstów w jednym uruchomieniu modelu, osobny WAV dla każdego. Parametry kompresji są jawne w konfiguracji. Docelowa przepływność VBR nie oznacza identycznej wielkości wszystkich klipów.
 
+## Kontrola brzmienia — `npm run audio:verify`
+
+`npm run audio:check` sprawdza tylko pliki. Brzmienie („zepsuty robot”) sprawdza osobne, lokalne polecenie `npm run audio:verify`, uruchamiane po `npm run audio` przy każdym nowym rozdziale. Skrypt **tylko czyta** `audio/generated/` — nie zmienia nagrań, treści ani aplikacji i nie jest częścią `npm run build`.
+
+**Co robi.** Tekst każdego klipu bierze z `audio/generated/manifest.json`. Dekoduje nagranie przez ffmpeg z narzędzi generatora, przepuszcza je przez [whisper.cpp](https://github.com/ggml-org/whisper.cpp) (rozpoznawanie mowy offline, sam procesor, bez Pythona) i porównuje usłyszany tekst z oczekiwanym. Do tego mierzy próbki: długość względem długości tekstu, ciszę w środku, udział mowy i przesterowanie. Wynik: krótki raport `audio/.verify/raport.md` (też na ekranie), posortowany od najgorszych. Dla każdego podejrzanego: klucz hasła lub kwestii, tekst oczekiwany, usłyszany, pewność rozpoznania, pomiary, powód i ścieżka pliku do odsłuchu. Katalog `audio/.verify/` jest poza Git; pamięć podręczna rozpoznań sprawia, że przy kolejnym rozdziale Whisper słucha tylko nowych klipów (`--od-nowa` wymusza wszystko).
+
+**Kiedy klip jest podejrzany** (progi w `scripts/audio/verify-core.mjs`):
+
+| Powód | Próg | Dlaczego tak |
+| --- | --- | --- |
+| Inny tekst | ponad 25% znaków różnicy albo połowa słów inna przy ≥ 12,5% znaków | Jedna literówka Whispera w dłuższym słowie (np. „beautifull”) nie alarmuje; „sandwich” → „sad wish” tak. |
+| Nic nie rozpoznano | pusta transkrypcja | Szum, bełkot lub cisza. |
+| Niska pewność | średnio poniżej 45% | Whisper zgadł tekst, ale niepewnie — wstępny próg, do skalibrowania. |
+| Za długie / za krótkie | ponad 1,8× / poniżej 0,55× typowego tempa zestawu | Tempo = czas / (liczba liter + 4), względem mediany wszystkich klipów; „+4” wyrównuje stały narzut krótkich słówek. |
+| Długa cisza w środku | ponad 0,8 s | Odstęp między zdaniami to 0,25 s; najdłuższa naturalna pauza w Food to 0,5 s. |
+| Mało mowy | poniżej 35% nagrania | Krótkie słowa ze spółgłoskami zwartymi („milk”, „meat”) mają ok. 45%. |
+| Przesterowanie | więcej niż 3 próbki na granicy skali | Generator ogranicza szczyt do −2 dB, więc każde przesterowanie jest błędem. |
+
+**Normalizacja.** Przed porównaniem: małe litery, bez interpunkcji i apostrofów („I'd” = „id”), łączniki jako spacje, liczby 0–20 słownie, porównanie znaków bez spacji („milk shake” = „milkshake”). Jeśli różni się **tylko początkowy rodzajnik** („an apple” → „Apple.”), klip nie jest podejrzany, ale trafia do osobnej listy „Do odsłuchu: rodzajnik” — Whisper często gubi rodzajnik w pojedynczym słówku, a a/an jest tu treścią nauki.
+
+**Ograniczenia.** Whisper nie dostaje podpowiedzi z oczekiwanym tekstem (żeby nie „słyszał” tego, co powinien), więc pojedyncze słówka bez kontekstu bywają rozpoznane błędnie mimo dobrej wymowy. W drugą stronę: poprawne rozpoznanie nie gwarantuje ładnego brzmienia — model rozumie też mowę lekko „robotyczną”. Raport wskazuje, co odsłuchać; nie zastępuje odsłuchu. Model `small.en` obsługuje tylko angielski; klipy w innych językach są pomijane z informacją w raporcie (francuski i włoski będą wymagały modelu wielojęzycznego). Bez Whispera: `npm run audio:verify -- --bez-rozpoznawania` wykonuje same pomiary.
+
+**Decyzja po raporcie** (Claude proponuje, Paulina odsłuchuje tylko podejrzane): *wygenerować ponownie* — model Pipera losuje drobne różnice intonacji przy każdej syntezie, więc nowa próba może zabrzmieć lepiej (nie zmierzono, jak bardzo różnią się kolejne syntezy); generator zachowuje poprawne pliki, więc trzeba usunąć ten jeden plik `.ogg` z `audio/generated/clips/` i uruchomić `npm run audio`; *zmienić tekst* (np. interpunkcję, która zmienia intonację) to zmiana treści w `public/content/`, po której `npm run audio`; *zostawić*, gdy po odsłuchu brzmi dobrze.
+
+**Instalacja (raz, poza repozytorium).** W folderze narzędzi generatora (`male-kroki-audio-narzedzia/`) utwórz `whisper/` i umieść w nim:
+
+```text
+male-kroki-audio-narzedzia/
+  whisper/
+    Release/whisper-cli.exe   …i pozostałe pliki z whisper-bin-x64.zip
+    models/ggml-small.en-q8_0.bin
+```
+
+1. Z wydania [whisper.cpp b5454](https://github.com/ggml-org/whisper.cpp/releases/tag/b5454) pobierz `whisper-bin-x64.zip` (ok. 9 MB, wersja dla procesora) i rozpakuj do `whisper/` (powstanie `Release/`).
+2. Z [modeli whisper.cpp](https://huggingface.co/ggerganov/whisper.cpp/tree/main) pobierz `ggml-small.en-q8_0.bin` (ok. 264 MB) do `whisper/models/`.
+
+Wersje i sumy SHA-256 są w `audio/verify.json`; skrypt sprawdza je przed uruchomieniem i niczego nie pobiera. Katalog narzędzi wybiera tak jak generator (`--tools`, `MALE_KROKI_AUDIO_TOOLS`, domyślna lokalizacja). Przy świadomej wymianie programu lub modelu uaktualnij `audio/verify.json`; pamięć podręczna jest związana z sumą modelu.
+
 ## Poza tym etapem
 
 D-60 wdraża podłączenie do `Speaker`, mechanizm nagranie → synteza → zwykłe zadanie, pobieranie przez PWA i wolniejsze odtwarzanie bez dodatkowego pliku. Próby na fizycznym telefonie i automatyczny tryb obserwowania zmian pozostają na później. Sam generator nie uruchamia aplikacji ani nie zmienia wyników.

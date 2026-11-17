@@ -10,7 +10,7 @@ Spis bieżącej dokumentacji. Czytaj tylko dokument potrzebny do zadania — nie
 | Poprawka treści (słówka, zadania, sceny) | [Format materiałów](format-materialow.md), [merytoryka](04-merytoryka.md), [edycja treści](../public/content/README.md) |
 | Zmiana zasad nauki, treningów, nagród | [Nauka](03-nauka.md), [decyzje](decyzje.md) |
 | Zmiana ekranu | [Produkt](01-produkt.md), [architektura](05-architektura.md) |
-| Zmiana kodu lub podziału odpowiedzialności | [Architektura](05-architektura.md), [mechanika](02-mechanika.md) |
+| Zmiana kodu lub podziału odpowiedzialności | [Zasady kodu](zasady-kodu.md), [architektura](05-architektura.md), [mechanika](02-mechanika.md) |
 | Konta, offline, kopie, synchronizacja | [Zapis](06-zapis.md) |
 | Testy i kontrole | [Testy](07-testy.md) |
 | Aktualizacja samej dokumentacji | [Utrzymanie dokumentacji](utrzymanie-dokumentacji.md) |

@@ -57,6 +57,14 @@ Podgląd planu, bez zapisywania i bez narzędzi:
 npm run audio -- --plan
 ```
 
+## Kontrola brzmienia (Whisper)
+
+```powershell
+npm run audio:verify
+```
+
+Uruchamiaj po `npm run audio` przy każdym nowym rozdziale. Lokalny Whisper (whisper.cpp, bez internetu) słucha każdego nagrania i porównuje z tekstem; skrypt mierzy też długość, ciszę i przesterowanie. Krótki raport podejrzanych, od najgorszych, trafia do `audio/.verify/raport.md` (poza Git). Odsłuchaj tylko te klipy i zdecyduj: wygenerować ponownie, zmienić tekst albo zostawić. Skrypt niczego nie zmienia. Wymaga folderu `whisper/` w katalogu narzędzi; bez niego: `npm run audio:verify -- --bez-rozpoznawania` (same pomiary). Instalacja, progi i ograniczenia: [kontrola brzmienia](../docs/generowanie-audio.md#kontrola-brzmienia--npm-run-audioverify).
+
 ## Co dzieje się po poprawkach
 
 - Poprawienie hasła lub odpowiedzi w scenie zmienia tylko potrzebne nagrania. Zmiana polskiego tłumaczenia bez zmiany odczytywanego tekstu nie uruchamia syntezy ponownie.

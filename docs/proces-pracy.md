@@ -33,7 +33,7 @@ Nie ma osobnej recenzji każdej zmiany — tę rolę pełnią testy, kontrole au
 2. **Claude:** sprawdza rozdział — poprawność językową, zgodność z podręcznikiem, formę ćwiczeń (D-35: w luce brakujące słowo, nie całe zdanie), odpowiedzi i wyjaśnienia. Szczególnie treści napisane do odsłuchu (sceny-adaptacje, kwestie dialogów), bo nie pochodzą wprost z podręcznika. Zwraca listę poprawek.
 3. **ChatGPT** nanosi poprawki (albo Claude, jeśli są drobne).
 4. **Paulina** rozstrzyga sporne miejsca z listy niepewności.
-5. **Nagrania:** `npm run audio` generuje klipy (Piper), potem automatyczna kontrola Whisper odsłuchuje każde nagranie i porównuje z tekstem. Claude czyta tylko raport z podejrzanymi nagraniami i proponuje: wygenerować ponownie, zmienić tekst albo zostawić. Paulina odsłuchuje wyłącznie podejrzane.
+5. **Nagrania:** `npm run audio` generuje klipy (Piper), potem `npm run audio:verify` przepuszcza każde nagranie przez Whisper i porównuje z tekstem ([kontrola brzmienia](generowanie-audio.md#kontrola-brzmienia--npm-run-audioverify)). Claude czyta tylko raport `audio/.verify/raport.md` z podejrzanymi nagraniami i proponuje: wygenerować ponownie, zmienić tekst albo zostawić. Paulina odsłuchuje wyłącznie podejrzane.
 6. **Paulina:** wyrywkowo na telefonie, commit.
 
 Jeśli rozdział wymaga czegoś, czego format nie obsługuje, zatrzymujemy się — to duży projekt dla Claude.
@@ -78,10 +78,9 @@ Następny krok: <np. „sprawdzenie rozdziału w Claude” albo „commit”>
 
 ## Do przygotowania
 
-Kolejność: najpierw zasady kodu (od nich zależy przegląd jakości), potem narzędzia; kontrola Whisper niezależnie.
+Kolejność: najpierw zasady kodu (od nich zależy przegląd jakości), potem narzędzia.
 
 - **Zasady projektowania i kodu** (`docs/zasady-kodu.md`) — spisane z obecnego kodu i architektury przez Claude, zatwierdzone przez Paulinę.
-- **Kontrola nagrań Whisper** — lokalny skrypt (np. `npm run audio:verify`) z raportem podejrzanych nagrań.
 - Instrukcja dla ChatGPT/Codex (odwołanie do `AGENTS.md` i tego procesu).
 - Skill tworzenia modułu ze zdjęć dla Codexa — dziś istnieje tylko w Claude (`male-kroki-modul-ze-zdjec`); miejsce na skille Codexa: `.agents/skills/`.
 - Komendy w Claude Code: sprawdzenie rozdziału i przegląd jakości.
