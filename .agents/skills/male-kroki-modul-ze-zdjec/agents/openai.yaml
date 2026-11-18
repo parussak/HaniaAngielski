@@ -1,0 +1,4 @@
+interface:
+  display_name: "Małe kroki — moduł ze zdjęć"
+  short_description: "Szkic modułu ze zdjęć podręcznika i zeszytu"
+  default_prompt: "Użyj $male-kroki-modul-ze-zdjec, aby ze zdjęć podręcznika przygotować spis stron i plan modułu, a po akceptacji planu szkic plików treści i kartę pokrycia."

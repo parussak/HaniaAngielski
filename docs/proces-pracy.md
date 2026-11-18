@@ -12,6 +12,8 @@ Kto robi jaką pracę, żeby na co dzień korzystać z jednego narzędzia, oszcz
 | **Przegląd jakości** — architektura, jakość testów, refaktoryzacja | Claude | raz w tygodniu i przed każdym dużym projektem |
 | **Decyzje, telefon, commit** | Paulina | zawsze |
 
+Narzędzia: dla ChatGPT [instrukcja do wklejenia](instrukcja-chatgpt.md) i skill `$male-kroki-modul-ze-zdjec` (`.agents/skills/`); w Claude Code komendy `/sprawdz-rozdzial <folder modułu>` i `/przeglad-jakosci` (`.claude/commands/`, same przełączają się na Sonnet).
+
 Lokalny Qwopus jest opcjonalnym pomocnikiem w VS Code (pytania o kod, drobiazgi w jednym pliku). Proces na nim nie polega.
 
 ## Zasady projektowania i kodu
@@ -29,8 +31,8 @@ Nie ma osobnej recenzji każdej zmiany — tę rolę pełnią testy, kontrole au
 
 ## Nowy rozdział — ChatGPT, potem Claude
 
-1. **ChatGPT:** ze zdjęć podręcznika i zeszytu przygotowuje pliki w `public/content/<moduł>/`, kartę pokrycia i listę niepewności — według [dodawania modułu](dodawanie-modulow.md). `check:content` i `npm test` muszą przejść.
-2. **Claude:** sprawdza rozdział — poprawność językową, zgodność z podręcznikiem, formę ćwiczeń (D-35: w luce brakujące słowo, nie całe zdanie), odpowiedzi i wyjaśnienia. Szczególnie treści napisane do odsłuchu (sceny-adaptacje, kwestie dialogów), bo nie pochodzą wprost z podręcznika. Zwraca listę poprawek.
+1. **ChatGPT:** ze zdjęć podręcznika i zeszytu (skill `$male-kroki-modul-ze-zdjec`) przygotowuje pliki w `public/content/<moduł>/`, kartę pokrycia i listę niepewności — według [dodawania modułu](dodawanie-modulow.md). `check:content` i `npm test` muszą przejść.
+2. **Claude** (`/sprawdz-rozdzial <folder modułu>`)**:** sprawdza rozdział — poprawność językową, zgodność z podręcznikiem, formę ćwiczeń (D-35: w luce brakujące słowo, nie całe zdanie), odpowiedzi i wyjaśnienia. Szczególnie treści napisane do odsłuchu (sceny-adaptacje, kwestie dialogów), bo nie pochodzą wprost z podręcznika. Zwraca listę poprawek.
 3. **ChatGPT** nanosi poprawki (albo Claude, jeśli są drobne).
 4. **Paulina** rozstrzyga sporne miejsca z listy niepewności.
 5. **Nagrania:** `npm run audio` generuje klipy (Piper), potem `npm run audio:verify` przepuszcza każde nagranie przez Whisper i porównuje z tekstem ([kontrola brzmienia](generowanie-audio.md#kontrola-brzmienia--npm-run-audioverify)). Claude czyta tylko raport `audio/.verify/raport.md` z podejrzanymi nagraniami i proponuje: wygenerować ponownie, zmienić tekst albo zostawić. Paulina odsłuchuje wyłącznie podejrzane.
@@ -51,13 +53,23 @@ Przed projektem robimy przegląd jakości, żeby zaczynać od czystej bazy.
 
 ## Przegląd jakości — Claude
 
-Raz w tygodniu i przed każdym dużym projektem. Claude przegląda zmiany od poprzedniego przeglądu (`git log` / `git diff` od ostatniego znacznika) i sprawdza:
+Raz w tygodniu i przed każdym dużym projektem, komendą `/przeglad-jakosci` w nowej sesji Claude Code. Claude przegląda zmiany od poprzedniego przeglądu (`git log` / `git diff` od ostatniego znacznika) i sprawdza:
 
 - czy zachowane są [zasady projektowania i kodu](zasady-kodu.md), granice z [architektury](05-architektura.md) i tory z `AGENTS.md`,
 - jakość testów: czy sprawdzają efekt, czy oczekiwania nie zostały dopasowane do kodu bez zgody,
 - powtórzenia, rosnące pliki i miejsca do refaktoryzacji.
 
 Wynik to krótka lista w rozmowie. Paulina wybiera, co poprawić; refaktoryzację robi Claude w tej samej lub kolejnej sesji. Listy nie zapisujemy w dokumentacji.
+
+### Znacznik ostatniego przeglądu
+
+Po przeglądzie Paulina zaznacza w Git commit, do którego sięgnął przegląd. Znacznik (tag) to stała nazwa przyklejona do commita; kolejny przegląd zaczyna od najnowszego znacznika `przeglad-…`. Claude podaje gotowe polecenie na końcu przeglądu, np.:
+
+```bash
+git tag przeglad-2026-11-23 a1b2c3d
+```
+
+Format nazwy: `przeglad-RRRR-MM-DD` (data przeglądu, bez polskich znaków). Znacznik jest lokalny; żeby był widoczny także na GitHubie i w innych kopiach repozytorium, wyślij go: `git push origin przeglad-2026-11-23`. Gdy nie ma żadnego znacznika, przegląd obejmuje ostatnie 7 dni.
 
 ## Jak oszczędzać limity Claude
 
@@ -78,10 +90,8 @@ Następny krok: <np. „sprawdzenie rozdziału w Claude” albo „commit”>
 
 ## Do przygotowania
 
-Kolejność: najpierw zasady kodu (od nich zależy przegląd jakości), potem narzędzia.
+- **Zatwierdzenie [zasad projektowania i kodu](zasady-kodu.md)** przez Paulinę (dziś: projekt do zatwierdzenia).
+- **Pierwszy przegląd jakości** i pierwszy znacznik `przeglad-…`.
+- Wklejenie [instrukcji](instrukcja-chatgpt.md) do projektu w ChatGPT.
 
-- **Zasady projektowania i kodu** (`docs/zasady-kodu.md`) — spisane z obecnego kodu i architektury przez Claude, zatwierdzone przez Paulinę.
-- Instrukcja dla ChatGPT/Codex (odwołanie do `AGENTS.md` i tego procesu).
-- Skill tworzenia modułu ze zdjęć dla Codexa — dziś istnieje tylko w Claude (`male-kroki-modul-ze-zdjec`); miejsce na skille Codexa: `.agents/skills/`.
-- Komendy w Claude Code: sprawdzenie rozdziału i przegląd jakości.
-- Sposób zaznaczania ostatniego przeglądu (np. znacznik git), żeby kolejny wiedział, od czego zacząć.
+Gotowe: instrukcja dla ChatGPT/Codex, skill modułu ze zdjęć dla Codexa, komendy Claude Code, znacznik przeglądu.
