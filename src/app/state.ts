@@ -3,6 +3,9 @@ import type { CatCatalog } from '../cats.ts';
 import { emptyProgress, type AnswerMode, type Backup, type Mode, type Module, type Progress, type Session } from '../core.ts';
 import type { AccountUser } from '../firebase.ts';
 import type { Course } from '../materials/model.ts';
+// Jedyna lista ekranów: typ `Screen` i przywracanie historii (`navigation.ts`) korzystają z niej obie.
+export const screens = ['home', 'setup', 'study', 'progress', 'backup', 'account', 'summary', 'map', 'lesson-intro', 'house', 'journeys', 'module-list', 'courses', 'course-practice', 'warmup'] as const;
+export type Screen = typeof screens[number];
 // Transient application state only. Stored Progress and Backup formats are unchanged.
 export class AppState {
     boardError?: {key:string;answer:string;keys?:string[]};
@@ -11,7 +14,7 @@ export class AppState {
     modules: Module[] = [];
     catCatalog: CatCatalog | null = null;
     progress: Progress = emptyProgress();
-    screen: 'home' | 'setup' | 'study' | 'progress' | 'backup' | 'account' | 'summary' | 'map' | 'lesson-intro' | 'house' | 'journeys' | 'module-list' | 'courses' | 'course-practice' | 'warmup' = 'home';
+    screen: Screen = 'home';
     journeys: Journey[] = [];
     journeyIssues: JourneyIssue[] = [];
     selectedJourneyKey = '';
@@ -45,4 +48,3 @@ export class AppState {
     authWorking = false;
     reauthNeeded = false;
 }
-export type Screen = AppState['screen'];

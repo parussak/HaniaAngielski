@@ -14,7 +14,8 @@ Status: **wdrożony format etapu 2**. To instrukcja edycji dla człowieka. Typy 
 | --- | --- |
 | `public/content/katalog.json` | Foldery modułów do pobrania i nazwa rejestru kursów w `coursesFile` |
 | `public/content/kursy.json` | Kursy/podręczniki: języki, opis książki, uporządkowane identyfikatory modułów i polecenia |
-| `<folder>/modul.json` | Nazwa i numer działu, opis źródła, poziom działu, tematy, mapy |
+| `<folder>/modul.json` | Nazwa i numer działu, opis źródła, poziom działu, tematy, mapy, [pokój za moduł](#nagrody-domku) |
+| `<folder>/sciezka*.json` | Mapa: sekcje i lekcje, [nagrody domku za mapę](#nagrody-domku) |
 | `<folder>/slownictwo.json` | Znaczenia, ilustracje, formy językowe i domyślne akceptowane odpowiedzi |
 | `<folder>/quiz.json` | Odwołania pytań słownikowych do znaczeń i dystraktorów |
 | `<folder>/gramatyka.json` | Reguły, objaśnienia, przykłady, źródła |
@@ -90,6 +91,26 @@ Dotychczasowa tablica słów `front` / `back` / `answers` nadal działa. Food po
 To jednorazowy kierunek odczytu, nie dwa miejsca do ręcznej edycji. Edytujemy `slownictwo.json`, nie wygenerowane obiekty w pamięci. Zmiana tekstu w pliku aktualizuje fiszkę i quiz przez wspólne odwołanie `wordId`. Źródła i rewizje zachowują dotychczasowe znaczenie.
 
 Stary katalog bez `coursesFile` jest nadal obsługiwany przez adapter zgodności. Moduły można połączyć jawnym `courseId`; sam jednakowy język nie dowodzi, że pochodzą z jednej książki. Nowe podręczniki dodajemy przez jawny rejestr kursów.
+
+## Nagrody domku
+
+Nagrody przypisuje treść kursu (D-67). Kod zna tylko wspólny katalog przedmiotów i pokoi (`src/house/catalog.ts`): nazwy, ceny, grafiki, miejsca. Przedmiot oznaczony tam jako nagroda (`reward: true`) można kupić dopiero po mapie, która go wymienia.
+
+Mapa (`sciezka*.json`) — oba pola opcjonalne:
+
+```json
+"rewards": {
+  "decorations": ["bowls", "lemonade", "picnic-basket", "picnic-blanket"],
+  "badge": "Odznaka kociego kucharza"
+}
+```
+
+- `decorations` — identyfikatory przedmiotów-nagród z katalogu, bez powtórzeń. Odblokowują się do kupienia za gwiazdki po ukończeniu wszystkich lekcji mapy.
+- `badge` — nazwa odznaki pokazywana na końcu mapy („Mapa ukończona! Zdobywasz: …”) i w domku.
+
+Moduł (`modul.json`) — pole opcjonalne `"houseRoom": "kitchen"`: pokój z katalogu (nie salonik), który odblokowuje ukończenie wszystkich map modułu. Moduł z `houseRoom` musi mieć mapy. W napisach pokoju używamy krótkiej nazwy modułu z `cover`, np. „Kocia kuchnia zdobyta za cały moduł Food!”.
+
+W jednym kursie przedmiot może być nagrodą tylko jednej mapy, a pokój — tylko jednego modułu; `npm run check:content` to sprawdza. Zdobytych przedmiotów i pokoi nie odbieramy, gdy treść później zmieni przypisanie. Nowy pokój lub przedmiot (grafika, miejsca w pokoju) to zmiana mechaniki, nie treści.
 
 ## Identyfikatory i postępy
 

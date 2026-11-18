@@ -1,6 +1,6 @@
-import type {AppState,Screen} from './state.ts';
+import {screens,type AppState} from './state.ts';
 import {lessons,journeyForProgress,journeyKey} from '../adventure.ts';
-const screens:Screen[]=['home','setup','study','progress','backup','account','summary','map','lesson-intro','house','journeys','module-list','courses','course-practice','warmup'];
+import {rooms} from '../house/catalog.ts';
 let replacing=false,pendingPop=false;
 let restoredUi:{openStages?:string[];scroll?:number}|undefined;
 function snapshot(s:AppState){return {app:'male-kroki',owner:s.user?.uid??'guest',screen:s.screen,course:s.selectedCourseId,module:s.selected?.id,journey:s.selectedJourneyKey,lesson:s.introLessonId,session:s.screen==='summary'?(s.lastSession??s.progress.sessions.at(-1))?.id:s.screen==='study'?s.progress.active?.id:undefined,room:s.chosenRoom,reward:s.lastReward,bonus:s.lastStageReward};}
@@ -15,7 +15,7 @@ export function restoreNavigation(s:AppState,value:unknown=history.state){
  s.selectedCourseId=v.course;
  s.selected=s.modules.find(m=>m.id===v.module&&(!v.course||m.courseId===v.course))??s.modules.find(m=>m.courseId===v.course)??s.modules[0];
  s.selectedJourneyKey=typeof v.journey==='string'?v.journey:'';s.introLessonId=typeof v.lesson==='string'?v.lesson:'';
- if(['salon','kitchen'].includes(v.room))s.chosenRoom=v.room;
+ if(rooms.some(r=>r.id===v.room))s.chosenRoom=v.room;
  s.screen=v.screen;
  if(s.screen==='study'&&s.progress.active?.id!==v.session){const completed=s.progress.sessions.find(x=>x.id===v.session);if(completed){s.lastSession=completed;s.screen='summary';}else s.screen='home';}
  if(s.screen==='summary'){const completed=s.progress.sessions.find(x=>x.id===v.session);if(!completed){s.screen='home';return;}s.lastSession=completed;s.lastReward=Number.isInteger(v.reward)&&v.reward>=0&&v.reward<=1000?v.reward:0;s.lastStageReward=Number.isInteger(v.bonus)&&v.bonus>=0&&v.bonus<=1000?v.bonus:0;}

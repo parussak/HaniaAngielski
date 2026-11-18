@@ -1,4 +1,3 @@
-import {lessonRatingView} from './lesson-rating.ts';
 import { AppState } from '../app/state.ts';
 import {pairsView,bankView,bankExplanationView,boardSummaryView,sceneScriptView,sceneSummaryView,boardNextButton} from './lesson-activities.ts';
 import {sceneActor} from './scene-actors.ts';
@@ -6,9 +5,8 @@ import {sceneView} from '../learning/scenes.ts';
 import {listeningTask,vocabularyPlayback} from '../learning/listening.ts';
 import {speaker} from '../speech.ts';
 import {speechButtons} from './speech-controls.ts';
-import {lessonSummaryActions} from './lesson-summary-actions.ts';
 import { catView } from './cat.ts';
-import { endingCat, responseCat } from '../cats.ts';
+import { responseCat } from '../cats.ts';
 import { inputFor, optionsFor, questionFor, sessionCompatible, type Exercise, type Illustration, type Session } from '../core.ts';
 import { labels,sessionTitle } from '../learning-labels.ts';
 import { translationPrompt } from '../learning/scope.ts';
@@ -83,12 +81,4 @@ export function studyView(state: Readonly<AppState>) {
     }
     if(!s.boardSummary&&s.phase!=='feedback'&&(item.pairGroup||item.presentation==='bank'))card+=`${item.presentation==='bank'?bankExplanationView(state.modules,s):''}${boardNextButton(s)}`;
     return `<button class="back" data-action="home">← Wróć do modułów · sesja zostaje zapisana</button><div class="study-heading"><div><div class="eyebrow">${s.scope?e(state.courses.find(c=>c.id===s.scope!.courseId)?.name??'POZNANY MATERIAŁ KURSU'):'TWÓJ MAŁY KROK'}</div><h1>${e(s.scope ? coursePracticeLabels[s.mode as CoursePracticeMode] : sessionTitle(s))}</h1></div><span class="tag">${s.index + 1} / ${s.items.length}</span></div><div class="progress-track" role="progressbar" aria-label="Pytanie ${s.index + 1} z ${s.items.length}" aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100"><span style="width:${percent}%"></span></div><section class="study-card">${card}</section><p class="under-card">${icon('check')} ${state.storageError ? 'Zapis niedostępny — zapisz kopię przed zamknięciem.' : 'Każdy krok zapisuje się na tym urządzeniu.'}</p>`;
-}
-export function summaryView(state: Readonly<AppState>, home: () => string) {
-    const s = state.lastSession ?? state.progress.sessions.at(-1);
-    if (!s)
-        return home();
-
-    const warmup=!!s.training||!!s.stageReview||!!s.recall||s.mode==='review';
-    return `<section class="summary panel"><div class="celebration">${state.catCatalog ? catView(state.catCatalog, endingCat(state.catCatalog, s), true) : icon('cat')}</div><div class="eyebrow">KOLEJNY MAŁY KROK ZA TOBĄ</div><h1>${s.legendary?'Poziom legendarny ukończony!':warmup?`${sessionTitle(s)} ukończon${s.training?.kind==='map'?'y':'a'}!`:state.user ? state.user.displayName ? `Dobra robota, ${e(state.user.displayName)}!` : 'Dobra robota!' : 'Dobra robota, Haniu!'}</h1><p>${warmup?'Ten krótki zestaw masz za sobą. Możesz odpocząć albo dobrowolnie zrobić następny.':'Każda próba pomaga. Dziś wiesz już trochę więcej.'}</p>${s.lesson || s.stageReview || s.training ? `<div class="lesson-reward">${state.lastReward ? `+${state.lastReward} ★` : s.stageReview ? 'Rozgrzewka ukończona ✓' : s.training ? 'Rozgrzewka ukończona ✓' : 'Lekcja utrwalona ✓'}<small>${state.lastReward ? `Gwiazdki są już w Twoim portfelu.${state.lastStageReward ? ` W tym ${state.lastStageReward} ★ za ukończony etap i utrwalone błędy.` : ''}` : s.stageReview ? 'Ta sesja jest ukończona. Dalsze ćwiczenia są dobrowolne.' : 'Postęp tej sesji jest zachowany.'}</small></div>` : ''}${!s.attempts.length ? `<div class="summary-score">${new Set(s.items.map(i => i.key)).size}<span>przećwiczonych fiszek</span></div>` : lessonRatingView(s)}${warmup&&!s.lesson?button('warmup','Wybierz kolejną rozgrzewkę','secondary'):''}${s.lesson?lessonSummaryActions(state,s):`<div class="actions journey-summary-actions">${s.stageReview ? `${button('map', 'Wróć na mapę')}${button('house', 'Urządź domek', 'secondary')}` : `${s.scope?button('course-practice','Wróć do poznanego materiału'):button('home', 'Wróć do modułów')}${button('progress', 'Zobacz postępy', 'secondary')}`}</div>`}</section>`;
 }

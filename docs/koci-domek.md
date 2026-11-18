@@ -13,7 +13,7 @@ Domek ma przede wszystkim motywować do nauki i pokazywać jej efekty. Ukończen
 - Każdy pokój ma własne wyposażenie. Nowy zakup trafia do pierwszego pokoju wskazanego w katalogu dekoracji. Jedenaście obecnych dekoracji saloniku pozostaje wyposażeniem tego pokoju; toster, kubki i stolik należą do dotychczasowej kuchni.
 - Zakupione wcześniej rzeczy zachowują swój zapisany pokój, nawet jeśli stara wersja pozwoliła umieścić je gdzie indziej. Brak pokoju w starym zapisie nadal oznacza salonik. Niczego nie odbieramy ani nie duplikujemy.
 - Nie można teraz przenosić wyposażenia między pokojami. Wybranie rzeczy z kolekcji przełącza do pokoju, do którego należy; nie przenosi zakupu.
-- Food zachowuje dotychczasowy charakter pokoju i grafiki. Nie dodano nowego pomieszczenia ani nie usunięto istniejącej, zdobytej kuchni. Zachowano dotychczasowe odblokowania map, pokoi i wyposażenia, ceny oraz nagrody za naukę. Dane nagród kolejnych modułów trzeba nadal zdefiniować osobno.
+- Food zachowuje dotychczasowy charakter pokoju i grafiki. Nie dodano nowego pomieszczenia ani nie usunięto istniejącej, zdobytej kuchni. Zachowano dotychczasowe odblokowania map, pokoi i wyposażenia, ceny oraz nagrody za naukę. Od D-67 przypisanie nagród zapisuje treść kursu ([format](format-materialow.md#nagrody-domku)); Food ma je w swoich plikach `sciezka*.json` i `modul.json`.
 - Mapa odblokowuje wyposażenie do zakupu, wszystkie mapy modułu odblokowują przypisany pokój, a gwiazdki z nauki służą do kupowania. Urządzanie samo nie daje gwiazdek ani nowych nagród.
 
 ### Siatka i wygląd

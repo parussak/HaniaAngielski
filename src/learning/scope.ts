@@ -10,6 +10,6 @@ export const compareModules = (a: Module, b: Module) => (a.courseOrder ?? a.orde
 export function targetLanguage(module: Module) {
     return module.languageCode ?? legacyTargetLanguage(module);
 }
-export function translationPrompt(module: Module) {
+export function translationPrompt(module: Pick<Module, 'instructions' | 'languageCode' | 'language'>) {
     return module.instructions?.translationPrompt ?? legacyTranslationPrompt(module);
 }

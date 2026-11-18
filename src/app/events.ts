@@ -5,7 +5,7 @@ import { createBackupController } from '../controllers/backup.ts';
 import { createLearningController } from '../controllers/learning.ts';
 import { applyUpdate, installPwa, prepareOffline } from '../pwa.ts';
 import { ProgressSync } from '../sync.ts';
-import {bindHouseDrag} from '../house/drag.ts';
+import {bindHouseDrag} from './house-drag.ts';
 import {homeFor} from '../house/progress.ts';
 import {currentCourse} from './selectors.ts';
 import {bindNavigation} from './navigation.ts';

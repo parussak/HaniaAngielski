@@ -1,5 +1,5 @@
-import {grid,placementError,type Position} from './layout.ts';
-import type {Home} from './progress.ts';
+import {grid,placementError,type Position} from '../house/layout.ts';
+import type {Home} from '../house/progress.ts';
 
 interface Context {h:Home|undefined;room:string;course:string;owner:string;editing:boolean;busy:boolean;epoch:object}
 export function bindHouseDrag(root:HTMLElement,context:()=>Context,commit:(id:string,at:Position,scope:Context)=>void){

@@ -6,20 +6,31 @@ import { compileVocabulary } from './materials/vocabulary.ts';
 import { languageCode } from './materials/validation.ts';
 import { wordExplanation } from './materials/presentation.ts';
 import { compileScene, isSceneEntry, validateScenes } from './learning/scenes.ts';
+import { rewardRooms } from './house/catalog.ts';
+
+// Opis modułu przed walidacją: pola, z których korzysta składanie. Całość sprawdza dopiero `validateModules`.
+type RawMetadata = Record<string, unknown> & Pick<Module, 'id' | 'language' | 'languageCode' | 'explanationLanguageCode' | 'instructions'>;
+interface QuizEntry { id: string; wordId: string; distractorIds: string[]; prompt?: string; explanation?: string; rev?: number }
+const isQuizEntry = (v: unknown): v is QuizEntry => {
+  if (!v || typeof v !== 'object') return false;
+  const entry = v as Record<string, unknown>;
+  return typeof entry.id==='string' && typeof entry.wordId==='string' && Array.isArray(entry.distractorIds) && entry.distractorIds.length>=1 && entry.distractorIds.every(id=>typeof id==='string') && (entry.prompt===undefined || typeof entry.prompt==='string') && (entry.explanation===undefined || typeof entry.explanation==='string');
+};
 
 // Pytania słownikowe wskazują słówka, zamiast dublować ich tekst i odpowiedzi.
-export function assembleModule(metadata: any, inputWords: unknown, quiz: any, exercises: any, grammar: any, dialogues: any = [], course?: Course) {
-  if (!metadata || typeof metadata !== 'object' || !Array.isArray(quiz) || !Array.isArray(exercises) || !Array.isArray(grammar)) throw new Error('Niepoprawne pliki modułu.');
+export function assembleModule(input: unknown, inputWords: unknown, quiz: unknown, exercises: unknown, grammar: unknown, dialogues: unknown = [], course?: Course) {
+  if (!input || typeof input !== 'object' || Array.isArray(input) || typeof (input as Record<string, unknown>).id !== 'string' || !Array.isArray(quiz) || !Array.isArray(exercises) || !Array.isArray(grammar)) throw new Error('Niepoprawne pliki modułu.');
+  let metadata = input as RawMetadata;
   if(course){
     if(!course.moduleIds.includes(metadata.id)||metadata.courseId!==undefined&&metadata.courseId!==course.id||metadata.languageCode!==undefined&&metadata.languageCode!==course.targetLanguage||metadata.explanationLanguageCode!==undefined&&metadata.explanationLanguageCode!==course.explanationLanguage)throw new Error('Moduł nie pasuje do kursu lub języka.');
     metadata={...metadata,courseId:course.id,languageCode:course.targetLanguage,explanationLanguageCode:course.explanationLanguage,courseOrder:course.moduleIds.indexOf(metadata.id)+1,instructions:{...course.instructions}};
   }
   const {words,meanings}=compileVocabulary(inputWords,metadata,course);
   const vocabulary = new Map<string, Word>(words.map(w=>[w.id,w]));
-  const compiled: Exercise[] = quiz.map((entry: any) => {
-    if (!entry || typeof entry.id!=='string' || typeof entry.wordId!=='string' || !Array.isArray(entry.distractorIds) || entry.distractorIds.length<1 || !entry.distractorIds.every((id: unknown)=>typeof id==='string') || (entry.prompt!==undefined && typeof entry.prompt!=='string') || (entry.explanation!==undefined && typeof entry.explanation!=='string')) throw new Error('Niepoprawny wpis w quiz.json.');
+  const compiled: Exercise[] = quiz.map((entry: unknown) => {
+    if (!isQuizEntry(entry)) throw new Error('Niepoprawny wpis w quiz.json.');
     const word = vocabulary.get(entry.wordId);
-    const distractors: (Word | undefined)[] = entry.distractorIds.map((id: string)=>vocabulary.get(id));
+    const distractors = entry.distractorIds.map(id=>vocabulary.get(id));
     if (!word || distractors.some(w=>!w)) throw new Error(`Quiz ${entry.id}: brak wskazanego słówka.`);
     const options=distractors.map(w=>w!.back);
     options.unshift(word.back);
@@ -50,6 +61,8 @@ export function validateModules(input: unknown): Module[] {
     if(m.instructions!==undefined&&(!obj(m.instructions)||!text(m.instructions.translationPrompt)))return fail('niepoprawne polecenia kursu.');
     if(obj(m.instructions)&&m.instructions.wordExplanationTemplate!==undefined&&!text(m.instructions.wordExplanationTemplate))return fail('niepoprawny wzór objaśnienia.');
     if(m.journeyPaths!==undefined && (!Array.isArray(m.journeyPaths)||m.journeyPaths.length<1||m.journeyPaths.length>3||new Set(m.journeyPaths).size!==m.journeyPaths.length||!m.journeyPaths.every(path=>typeof path==='string'&&/^[a-z0-9-]+\/[a-z0-9-]+\.json$/.test(path))||m.journeyPath!==undefined))return fail('niepoprawna lista map modułu.');
+    // D-67: pokój z katalogu domku (nie salonik) za wszystkie mapy modułu, więc moduł musi mieć mapy.
+    if(m.houseRoom!==undefined && (!rewardRooms.some(r=>r.id===m.houseRoom)||m.journeyPaths===undefined&&m.journeyPath===undefined))return fail(`niepoprawny pokój za moduł (${m.id}).`);
     if(m.level!==undefined && !['A1','A2','B1','B2','C1','C2'].includes(m.level as string))return fail('niepoprawny poziom modułu.');
     if (!Array.isArray(m.words) || !m.words.length || !m.words.every(w=>obj(w) && text(w.id) && text(w.front) && text(w.back) && text(w.source) && (w.answers===undefined || texts(w.answers)))) return fail(`sprawdź slownictwo.json (${m.id}).`);
     if(m.basicFlashcardIds!==undefined && (!texts(m.basicFlashcardIds)||new Set(m.basicFlashcardIds).size!==m.basicFlashcardIds.length||!m.basicFlashcardIds.every(id=>(m.words as Word[]).some(w=>w.id===id))))return fail(`sprawdź listę podstawowych fiszek (${m.id}).`);

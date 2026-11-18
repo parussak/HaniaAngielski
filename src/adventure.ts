@@ -1,10 +1,11 @@
 import {creditStars} from './house/progress.ts';
 import {courseForModule} from './learning/scope.ts';
 import {rewardStars} from './learning/rewards.ts';
-import {journeyKey,lessonKey,lessons,type Journey,type Lesson,type Stage,type JourneyIssue} from './learning/journey.ts';
-export {journeyKey,lessonKey,lessons} from './learning/journey.ts';
-export type {Journey,Lesson,Stage,JourneyIssue} from './learning/journey.ts';
+import {journeyKey,journeyPaths,lessonKey,lessons,type Journey,type Lesson,type Stage,type JourneyIssue} from './learning/journey.ts';
+export {journeyKey,journeyPaths,lessonKey,lessons} from './learning/journey.ts';
+export type {Journey,JourneyRewards,Lesson,Stage,JourneyIssue} from './learning/journey.ts';
 import type {Home} from './house/progress.ts';
+import {decorations} from './house/catalog.ts';
 export {decorations,slots} from './house/catalog.ts';
 export {stars,purchase,place} from './house/progress.ts';
 import { inputFor,keyFor,questionFor,type AnswerMode,type Item,type Module,type Progress,type Session } from './core.ts';
@@ -31,10 +32,19 @@ export function lessonForProgress(_j:Journey,l:Lesson,_p:Progress):Lesson {
 export function journeyForProgress(j:Journey,p:Progress):Journey{return {...j,stages:j.stages.map(s=>{const planned=plannedStage(j,s,p);return {...planned,lessons:planned.lessons.map(l=>lessonForProgress(j,l,p))};})};}
 export function nextLesson(journey:Journey,p:Progress){return lessons(journeyForProgress(journey,p)).find(({key})=>!p.adventure?.completed[key]);}
 export function unlocked(journey:Journey,lesson:Lesson,_p:Progress){return lessons(journey).some(l=>l.lesson.id===lesson.id);}
+// D-67: mapa wymienia tylko przedmioty z katalogu oznaczone jako nagroda, bez powtórzeń.
+function validRewards(r:unknown){
+  if(!r||typeof r!=='object'||Array.isArray(r))return false;
+  const {decorations:ids,badge,...rest}=r as Record<string,unknown>;
+  if(Object.keys(rest).length)return false;
+  if(ids!==undefined&&(!Array.isArray(ids)||!ids.length||new Set(ids).size!==ids.length||!ids.every(id=>decorations.some(d=>d.id===id&&d.reward))))return false;
+  return badge===undefined||typeof badge==='string'&&badge.trim().length>0;
+}
 export function validateJourney(value:unknown,m:Module):Journey {
   const j=value as Journey,fail=():never=>{throw new Error('Niepoprawna mapa modułu.');};
   if(!j || j.version!==1 || j.moduleId!==m.id || !/^[a-z0-9-]+$/.test(j.moduleId) || typeof j.title!=='string' || !Array.isArray(j.stages)||!j.stages.length)return fail();
   if(j.id!==undefined&&!/^[a-z0-9-]+$/.test(j.id))return fail();
+  if(j.rewards!==undefined&&!validRewards(j.rewards))return fail();
   const ids=new Set<string>(),stageIds=new Set<string>();
   for(const stage of j.stages){
     if(!stage || !/^[a-z0-9-]+$/.test(stage.id) || stageIds.has(stage.id) || typeof stage.title!=='string'||!['albert','olus','felix','maja','krzywolap'].includes(stage.cat)||!/^illustrations\/[a-z0-9-]+\.svg$/.test(stage.illustration)||!Array.isArray(stage.lessons)||!stage.lessons.length)return fail();
@@ -59,7 +69,7 @@ export function validateJourney(value:unknown,m:Module):Journey {
   return structuredClone(j);
 }
 export async function readJourneys(modules:Module[],read:(path:string)=>Promise<unknown>):Promise<{journeys:Journey[];issues:JourneyIssue[]}>{
-  const requests=modules.flatMap(m=>(m.journeyPaths??(m.journeyPath?[m.journeyPath]:m.id==='unit-2-food'?['02-food/sciezka.json']:[])).map(path=>({m,path})));
+  const requests=modules.flatMap(m=>journeyPaths(m).map(path=>({m,path})));
   const results=await Promise.allSettled(requests.map(async({m,path})=>validateJourney(await read(path),m)));
   const counts=new Map<string,number>();
   for(const result of results)if(result.status==='fulfilled'){const key=journeyKey(result.value);counts.set(key,(counts.get(key)??0)+1);}

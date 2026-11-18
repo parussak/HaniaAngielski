@@ -19,8 +19,8 @@ Najważniejsze porządki techniczne po audycie są wykonane — [status ustaleń
 | [vocabulary-answer.ts](../src/learning/vocabulary-answer.ts) | Tolerancja a/an dotyczy pytań słownikowych z jawną metadaną `article`. Nie stosuje się automatycznie do każdego kursu. Nie kopiować angielskiej metadanej do FR/IT; ustalić własne kryteria na konkretnych hasłach. |
 | [questions.ts](../src/learning/questions.ts), `requiresChoice` | Obsługuje jawne `responseType: choice`, nawiasowe warianty i heurystyki rozpoznające polskie/angielskie alternatywy. Dla nowej formy polecenia użyć jawnych danych i sprawdzić formę odpowiedzi, również w powtórkach. |
 | [presentation.ts](../src/materials/presentation.ts) i [scope.ts](../src/learning/scope.ts) | Polecenia, język nauki i objaśnienia wynikają z kursu; domyślne ustawienia zgodności nadal obsługują stare materiały. Nowy podręcznik dodawać przez jawny rejestr kursów i jego instrukcje. |
-| [Widok katalogu](../src/views/catalog.ts), [ustawienia](../src/views/setup.ts), [domek](../src/views/house.ts) i [katalog nagród](../src/house/catalog.ts) | Pozostają obrazek pikniku, opisy Food i jego konkretne nagrody. Dane nagród są celowo przypisane do modułu, ale prezentację nowego materiału trzeba obejrzeć przed publikacją. |
-| [adventure.ts](../src/adventure.ts), `readJourneys` | Ma już wstrzykiwany odczyt i niezależną walidację map. Domyślna ścieżka Food pozostaje adapterem zgodności; nowe mapy deklarować w danych modułu. |
+| [Widok katalogu](../src/views/catalog.ts) i [ustawienia](../src/views/setup.ts) | Pozostają obrazek pikniku i opisy Food. Nagrody domku i odznakę przypisuje już treść kursu (D-67), ale prezentację nowego materiału trzeba obejrzeć przed publikacją. |
+| [adventure.ts](../src/adventure.ts), `readJourneys` | Ma już wstrzykiwany odczyt i niezależną walidację map. Mapy każdego modułu, także Food, są deklarowane w danych modułu (`journeyPaths`); wspólna funkcja `journeyPaths` służy aplikacji i `check:content`. |
 
 Powyższa lista nie zatwierdza nowej tolerancji akcentów, rodzajników ani swobodnej wypowiedzi. Najpierw sprawdzamy mały, rzeczywisty zakres z podręcznika; dopiero potrzeba ujawniona w tej próbce uzasadnia rozszerzanie mechaniki.
 
@@ -76,7 +76,7 @@ P0 — rozstrzygnąć przed udostępnieniem jednocześnie różnych języków. P
 
 ### J5 · P1 · Food i ilustracje poza materiałem modułu
 
-**Stan:** [adventure-view.ts](../src/adventure-view.ts) zawiera etykiety „Mapa Food”, komunikaty Food i odznakę kucharza. [Katalog map](../src/views/catalog.ts) używa obrazka pikniku, a [setup](../src/views/setup.ts) opisuje rozmówki o jedzeniu. Rozpoznawanie wyboru w [questions.ts](../src/learning/questions.ts) zawiera też konkretną konstrukcję o policzalności.
+**Stan:** odznaka i nagrody domku pochodzą z plików treści (D-67), a [adventure-view.ts](../src/adventure-view.ts) i [domek](../src/views/house.ts) nie znają już Food. [Katalog map](../src/views/catalog.ts) używa obrazka pikniku, a [setup](../src/views/setup.ts) opisuje rozmówki o jedzeniu. Rozpoznawanie wyboru w [questions.ts](../src/learning/questions.ts) zawiera też konkretną konstrukcję o policzalności.
 
 Ilustracja słowa jest opcjonalna w typie i walidatorze, ale wprowadzenie do lekcji odczytuje `w.illustration!.src!`. [Generator ilustracji](../scripts/generate-food-art.mjs) jest narzędziem dla Food, nie uniwersalnym generatorem kursów.
 

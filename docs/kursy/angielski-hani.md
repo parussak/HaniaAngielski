@@ -6,6 +6,8 @@ D-54: cztery historyjki Food stanowią całe lekcje z kocimi rozmówcami. D-52 p
 
 W rejestrze jest kurs `angielski-hani` (`en` / `pl`) z modułem Food, `unit-2-food`. Identyfikacja całego podręcznika jest oznaczona jako nieustalona. Food zachowuje dotychczasowe pliki, pytania i klucze postępów. Materiały odwołują się do podręcznika s. 24–35, zeszytu ćwiczeń s. 14–21 i notatek. Metadana poziomu ma wartość A2; nie jest niezależną oceną trudności.
 
+Nagrody domku Food są zapisane w treści (D-67): pierwsza mapa odblokowuje miseczki, lemoniadę, koszyk i koc piknikowy oraz odznakę kociego kucharza, druga — misę owoców, toster, kubki i stolik, a obie mapy razem — Kocią kuchnię (`houseRoom` w `modul.json`).
+
 Źródła: [metadane](../../public/content/02-food/modul.json), [opis opracowania Food](../materialy-food.md), [aktualny format materiałów](../format-materialow.md).
 
 ## Uzgodniony kierunek

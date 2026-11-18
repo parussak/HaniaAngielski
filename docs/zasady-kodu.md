@@ -22,7 +22,7 @@ Każda zmiana zasady nauki zaczyna się od decyzji D-xx w [rejestrze](decyzje.md
 2. Typ: `learning/model.ts` — pole opcjonalne (`kind`, `presentation` lub znacznik elementu sesji).
 3. Walidacja treści: `content-validation.ts` (`assembleModule`, `validateModules`) — błędny plik ma być odrzucony z czytelnym komunikatem.
 4. Pytanie i ocena: `learning/questions.ts` (`questionFor`, `isCorrect`) albo nowy plik w `learning/` (wzór: `boards.ts`, `scenes.ts`).
-5. Widok: `views/study.ts` lub `views/lesson-activities.ts`; obsługa akcji w `controllers/learning.ts`.
+5. Widok: `views/study.ts` lub `views/lesson-activities.ts`; obsługa akcji w `controllers/learning.ts` (rozpoczęcie sesji) lub `controllers/session-answers.ts` (odpowiedź w trwającej sesji).
 6. Jeśli sesja dostaje nowe pole — przepis niżej.
 7. Format dla autorów treści: [format materiałów](format-materialow.md).
 8. Testy: logika na fiksturze z `tests/fixtures/`, przebieg w `tests/browser/` na wąskim ekranie.
@@ -38,7 +38,7 @@ Każda zmiana zasady nauki zaczyna się od decyzji D-xx w [rejestrze](decyzje.md
 
 ### Nowy ekran
 
-1. Nazwa ekranu w `screen` w `app/state.ts` **oraz** w liście `screens` w `app/navigation.ts` (bez tego cofanie wraca na stronę główną).
+1. Nazwa ekranu w liście `screens` w `app/state.ts` — z niej powstaje typ `Screen` i z niej korzysta cofanie w `app/navigation.ts`.
 2. Widok: funkcja w `views/<nazwa>.ts` zwracająca HTML; tekst z danych zawsze przez `e()` z `ui.ts`.
 3. Rejestracja w `views` w `app/views.ts`.
 4. Przyciski z `data-action` i `data-*`; obsługa w `handleAction` właściwego kontrolera (kolejność w `app/events.ts`: domek, nauka, kopia, konto).
@@ -101,10 +101,6 @@ Przy przeglądzie diffu od ostatniego przeglądu:
 
 Stan na listopad 2026; poprawiamy przy okazji przeglądu, po wyborze Pauliny.
 
-- **Food w mechanice:** `adventure.ts` (domyślna ścieżka `02-food/sciezka.json`), `house/catalog.ts` (dekoracje i kuchnia przypisane do map Food), `views/house.ts` i `adventure-view.ts` (odznaka i napisy Food). Por. [gotowość na inne języki](rozwoj-jezykow.md).
-- **DOM w logice:** `house/drag.ts` (Pointer Events) leży w `house/`, a należy do warstwy aplikacji.
-- **Lista ekranów w dwóch miejscach:** `app/state.ts` i `app/navigation.ts`.
-- **Duże pliki:** `controllers/learning.ts` (~20 KB), `views/study.ts` (~14 KB), `content-validation.ts`, `views/account.ts`.
-- **Dwa style zapisu:** rozwinięty (wcięcia 4 spacje) i zbity w jednej linii (np. `learning/boards.ts`, `house/layout.ts`); w widokach linie do kilku tysięcy znaków. Brak automatycznego formatowania.
-- **`any`** w `content-validation.ts` (`assembleModule`) zamiast `unknown` z walidacją.
-- **Zasada 2 bez testu:** dziś żaden plik logiki nie sięga do `app/`, `controllers/` ani `views/`, ale jeśli ktoś to zmieni, `npm test` dalej przejdzie i błąd wyjdzie dopiero w przeglądzie. `refactor-boundaries.test.ts` pilnuje tylko jednej granicy (domek nie zależy od map); można go rozszerzyć na całą zasadę 2.
+- **Duże pliki:** `controllers/learning.ts` (~16 KB; kandydat: wydzielić nawigację między ekranami od rozpoczynania sesji), `views/study.ts` (~12 KB; `studyView` to jedna długa funkcja), `content-validation.ts`, `views/account.ts`.
+- **Dwa style zapisu:** rozwinięty (wcięcia 4 spacje) i zbity w jednej linii (np. `learning/boards.ts`, `house/layout.ts`); w widokach linie do kilku tysięcy znaków. Brak automatycznego formatowania — wprowadzenie formatera to nowa zależność (zgoda Pauliny) i jednorazowy diff całych plików, osobno od innych zmian.
+- **`any`** pozostaje w `firebase.ts` (`decode`) — dane z Firebase powinny być `unknown` do czasu walidacji.

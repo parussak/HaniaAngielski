@@ -1,9 +1,9 @@
 import type {Progress,Module} from '../learning/model.ts';
 import {courseKey} from '../learning/scope.ts';
 export {courseForModule} from '../learning/scope.ts';
-import {journeyKey,lessons,type Journey,type JourneyIssue} from '../learning/journey.ts';
+import {journeyKey,journeyPaths,lessons,type Journey,type JourneyIssue} from '../learning/journey.ts';
 import {plannedJourney} from '../learning/section-plan.ts';
-import {decorations,legacyCourse,roomRewards,slots,canUseSlot} from './catalog.ts';
+import {decorations,legacyCourse,roomFor,slots,canUseSlot} from './catalog.ts';
 import {placementError,itemRoom,supportingItem,boxFor,type Position} from './layout.ts';
 export interface Home {
  earned:number;
@@ -28,21 +28,21 @@ export function ensureHome(p:Progress,course=legacyCourse):Home {
 export function stars(p:Progress,course=legacyCourse){const h=homeFor(p,course);return h?h.earned-Object.values(h.purchases).reduce((n,v)=>n+v.cost,0):0;}
 export function creditStars(p:Progress,amount:number,course=legacyCourse){ensureHome(p,course).earned+=amount;}
 export function roomAvailable(p:Progress,course:string,room:string){return room==='salon'||!!homeFor(p,course)?.rooms?.includes(room);}
-export function itemAvailable(p:Progress,course:string,id:string){const d=decorations.find(d=>d.id===id);return !!d&&(!d.map||!!homeFor(p,course)?.unlockedItems?.includes(id));}
+export function itemAvailable(p:Progress,course:string,id:string){const d=decorations.find(d=>d.id===id);return !!d&&(!d.reward||!!homeFor(p,course)?.unlockedItems?.includes(id));}
 export function settleHouseUnlocks(p:Progress,modules:Module[],journeys:Journey[],issues:JourneyIssue[]=[]){
  const unlocked:string[]=[];
  const complete=(key:string)=>{const j=journeys.find(j=>journeyKey(j)===key);return !!j&&lessons(plannedJourney(j,p)).every(l=>p.adventure?.completed[l.key]);};
  for(const m of modules){
   const course=courseKey(m);
   const maps=journeys.filter(j=>j.moduleId===m.id);
-  for(const d of decorations.filter(d=>d.map&&maps.some(j=>journeyKey(j)===d.map))){
-   if(complete(d.map!)&&!itemAvailable(p,course,d.id)){const h=ensureHome(p,course);(h.unlockedItems??=[]).push(d.id);}
+  // D-67: map lists its reward items; the module names its room (content files).
+  for(const j of maps)for(const id of j.rewards?.decorations??[]){
+   if(complete(journeyKey(j))&&!itemAvailable(p,course,id)){const h=ensureHome(p,course);(h.unlockedItems??=[]).push(id);}
   }
-  for(const r of roomRewards.filter(r=>r.moduleId===m.id)){
-   // A partial map catalog must never falsely award a completed module.
-   if(!issues.some(i=>i.moduleId===m.id)&&maps.length>=r.maps.length&&r.maps.every(complete)&&maps.every(j=>complete(journeyKey(j)))&&!roomAvailable(p,course,r.id)){
-    const h=ensureHome(p,course);(h.rooms??=[]).push(r.id);unlocked.push(r.name);
-   }
+  // A partial map catalog must never falsely award a completed module.
+  const room=m.houseRoom;
+  if(room&&!issues.some(i=>i.moduleId===m.id)&&maps.length>0&&maps.length>=journeyPaths(m).length&&maps.every(j=>complete(journeyKey(j)))&&!roomAvailable(p,course,room)){
+   const h=ensureHome(p,course);(h.rooms??=[]).push(room);unlocked.push(roomFor(room).name);
   }
  }
  return unlocked;

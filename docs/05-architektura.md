@@ -31,14 +31,15 @@ Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zal
 | Odpowiedzialność | Pliki |
 | --- | --- |
 | Rozruch, odczyt konta, blokada drugiej karty | `app/startup.ts` |
-| Rejestr ekranów, nawigacja i cofanie | `app/views.ts`, `app/navigation.ts` |
+| Lista ekranów (`screens`), rejestr widoków, nawigacja i cofanie | `app/state.ts`, `app/views.ts`, `app/navigation.ts` |
 | Odświeżanie ekranu, fokus, blokada przy zapisie, przerwanie dźwięku przy zmianie kontekstu | `app/renderer.ts` |
 | Kliknięcia, formularze, przeciąganie słów do luk | `app/events.ts`, `app/gap-drag.ts` |
 | Selektory stanu (np. bieżąca lekcja) | `app/selectors.ts` |
 | Menu i etykiety mobilne | `views/shell.ts` |
 | Strona startowa, następny krok | `views/home.ts`, `next-step.ts` |
 | Katalog map i modułów, widok mapy i wprowadzeń | `views/catalog.ts`, `adventure-view.ts` |
-| Ekran ćwiczenia, błąd, poprawka, podsumowanie | `views/study.ts` |
+| Ekran ćwiczenia, błąd, poprawka | `views/study.ts` |
+| Podsumowanie zakończonej sesji | `views/summary.ts` |
 | Plansze par i luk, sceny | `views/lesson-activities.ts` |
 | Trzy akcje po lekcji, kocie łapki | `views/lesson-summary-actions.ts`, `views/lesson-rating.ts` |
 | Kocie rozmówcy w scenach, przydział kotów | `views/scene-actors.ts`, `cats.ts` |
@@ -55,7 +56,8 @@ Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zal
 | Odpowiedzialność | Pliki |
 | --- | --- |
 | Typy sesji, wyników i ćwiczeń | `learning/model.ts` |
-| Rozpoczęcie sesji, odpowiedzi, nagrody, zastąpienie aktywnej sesji (`confirmReplacement`, `openSession`) | `controllers/learning.ts` |
+| Rozpoczęcie sesji, zastąpienie aktywnej sesji (`confirmReplacement`, `openSession`) | `controllers/learning.ts` |
+| Odpowiedzi w trwającej sesji, plansze par i luk, przejście dalej i nagrody | `controllers/session-answers.ts` |
 | Przebieg sesji, pierwsza próba | `learning/session.ts` |
 | Pytania, warianty i ocenianie; a/an słówek; porównanie odpowiedzi | `learning/questions.ts`, `answers.ts`, `learning/vocabulary-answer.ts`, `answer-comparison.ts` |
 | Plansze: kompletność, zamknięcie, rozmieszczanie słów | `learning/boards.ts` |
@@ -99,8 +101,9 @@ Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zal
 | --- | --- |
 | Katalog dekoracji, cen, pokoi, miejsc i warstw | `house/catalog.ts` |
 | Portfele kursów, odblokowania, ustawianie, podpora stolika | `house/progress.ts` |
+| Nagrody z treści: przedmioty map, pokoje modułów, kontrola powtórzeń (D-67) | `house/rewards.ts` |
 | Siatka 24 × 15, rozmiary, kolizje, odczyt starych miejsc | `house/layout.ts` |
-| Przeciąganie (Pointer Events) | `house/drag.ts` |
+| Przeciąganie (Pointer Events, warstwa aplikacji) | `app/house-drag.ts` |
 | Ekran domku, pokój, panel ustawiania | `views/house.ts`, `views/house-room.ts`, `views/house-placement.ts` |
 | Akcje domku (obsługiwane przed innymi kontrolerami) | `controllers/house.ts` |
 

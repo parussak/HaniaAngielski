@@ -60,6 +60,8 @@ export interface Module {
     meanings?: Meaning[];
     journeyPaths?: string[];
     journeyPath?: string;
+    /** D-67: pokój domku, który odblokowuje ukończenie wszystkich map modułu. */
+    houseRoom?: string;
     level?: string;
     id: string;
     version: number;
