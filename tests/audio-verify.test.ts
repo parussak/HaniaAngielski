@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {analyzeSamples,assessClips,compareTexts,formatReport,normalizeWords,readWhisperJson,wavFile} from '../scripts/audio/verify-core.mjs';
+import {analyzeSamples,assessClips,compareTexts,formatReport,listeningFiles,listeningPage,normalizeWords,readWhisperJson,wavFile} from '../scripts/audio/verify-core.mjs';
 
 // Dane syntetyczne: bez Whispera i bez prawdziwych nagrań.
 const rate=16000;
@@ -96,4 +96,19 @@ test('WAV ma poprawny nagłówek PCM 16-bit mono', () => {
  assert.equal(wav.readUInt32LE(24),rate);
  assert.equal(wav.readUInt32LE(40),6);
  assert.equal(wav.length,50);
+});
+
+test('pliki do odsłuchu mają czytelne nazwy z numerem z raportu, a strona escapuje tekst', () => {
+ const assessed=assessClips([
+  clip('good','a cake','A cake.',0.9),
+  clip('bad','a carton of juice','A Carlton of <Jews>',1.3),
+  clip('worse','bread','So where do you go?',1),
+  clip('article','an egg','Egg.',0.8),
+ ]);
+ const files=listeningFiles(assessed);
+ assert.deepEqual(files.map(f=>f.name),['01-bread.ogg','02-a-carton-of-juice.ogg','r1-an-egg.ogg']);
+ const page=listeningPage(files,{date:'2026-11-18'});
+ assert.match(page,/<audio controls preload="none" src="01-bread\.ogg">/);
+ assert.match(page,/A Carlton of &lt;Jews&gt;/);
+ assert.doesNotMatch(page,/a cake/);
 });

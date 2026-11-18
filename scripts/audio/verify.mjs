@@ -1,6 +1,6 @@
 // npm run audio:verify — lokalna kontrola brzmienia nagrań (Whisper + pomiary).
 // Tylko czyta audio/generated/. Wyniki i pamięć podręczna: audio/.verify/ (poza Git).
-import {readFile,writeFile,mkdir,mkdtemp,rm,stat} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,mkdtemp,rm,stat,copyFile} from 'node:fs/promises';
 import {createReadStream} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
@@ -8,7 +8,7 @@ import {tmpdir,availableParallelism} from 'node:os';
 import {dirname,join,resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {inside} from './files.mjs';
-import {analyzeSamples,assessClips,formatReport,readWhisperJson,wavFile} from './verify-core.mjs';
+import {analyzeSamples,assessClips,formatReport,listeningFiles,listeningPage,readWhisperJson,wavFile} from './verify-core.mjs';
 
 const root=fileURLToPath(new URL('../../',import.meta.url)),audio=join(root,'audio'),generated=join(audio,'generated'),work=join(audio,'.verify');
 const rate=16000,padding=new Int16Array(rate*0.3);
@@ -80,9 +80,14 @@ async function main(){
   }
  }finally{await rm(temp,{recursive:true,force:true});}
 
- const report=formatReport(assessClips(checked),{model:verify.model.name,recognition})+(skipped.length?`\nPominięto ${skipped.length} klipów w języku innym niż ${verify.model.language} (brak modelu).\n`:'');
+ const assessed=assessClips(checked),report=formatReport(assessed,{model:verify.model.name,recognition})+(skipped.length?`\nPominięto ${skipped.length} klipów w języku innym niż ${verify.model.language} (brak modelu).\n`:'');
  await writeFile(join(work,'raport.md'),report);
+ // Kopie z czytelnymi nazwami; katalog odsluch/ należy tylko do tego skryptu i jest odtwarzany przy każdym uruchomieniu.
+ const listening=join(work,'odsluch'),files=listeningFiles(assessed);
+ await rm(listening,{recursive:true,force:true});await mkdir(listening);
+ for(const f of files)await copyFile(join(root,f.clip.file),join(listening,f.name));
+ await writeFile(join(listening,'index.html'),listeningPage(files));
  console.log(report);
- console.log('Raport zapisany: audio/.verify/raport.md');
+ console.log('Raport zapisany: audio/.verify/raport.md. Odsłuch: audio/.verify/odsluch/index.html');
 }
 main().catch(error=>{console.error(error.message);process.exitCode=1;});

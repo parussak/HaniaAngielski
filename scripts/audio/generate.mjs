@@ -40,7 +40,7 @@ async function main(){
   const result=await generateFiles(plan,output,{
    log:console.log,
    synthesize:async tasks=>{
-    for(const id of new Set(tasks.map(t=>t.profile))){const p=config.profiles[id],files=profiles[id];run(piper,['--model',files.model,'--config',files.config,'--json-input','--length_scale',String(p.inference.lengthScale),'--sentence_silence',String(p.inference.sentenceSilence)],tasks.filter(t=>t.profile===id).map(t=>JSON.stringify({text:t.text,output_file:t.wav})).join('\n')+'\n');}
+    for(const id of new Set(tasks.map(t=>t.profile))){const p=config.profiles[id],files=profiles[id];run(piper,['--model',files.model,'--config',files.config,'--json-input','--length_scale',String(p.inference.lengthScale),'--sentence_silence',String(p.inference.sentenceSilence)],tasks.filter(t=>t.profile===id).map(t=>JSON.stringify({text:t.spoken??t.text,output_file:t.wav})).join('\n')+'\n');}
    },
    encode:async(task,target)=>{
     const {encoding:e,processing:f}=config.profiles[task.profile];

@@ -28,6 +28,14 @@
         "lengthScale": 1.08,
         "sentenceSilence": 0.25
       },
+      "synthesis": {
+        "singleWordSuffix": ",",
+        "articles": [
+          "a",
+          "an",
+          "the"
+        ]
+      },
       "encoding": {
         "codec": "libopus",
         "channels": 1,
@@ -317,55 +325,64 @@
           "key": "unit-2-food@1:word:apple",
           "kind": "word",
           "text": "an apple",
-          "clip": "788c721f18fe13956000967cfa49030fb73af09517f0463059b73a573bb30831"
+          "spoken": "an apple,",
+          "clip": "1f7992845d40249d133a40b3d6a5c8296e160ebd0af07ab4a1284856cc1e5a47"
         },
         {
           "key": "unit-2-food@1:word:art",
           "kind": "word",
           "text": "art",
-          "clip": "b607d2b8428e6528b6cf4d47e641cf172a6233104cad05c97048f9da8b30218a"
+          "spoken": "art,",
+          "clip": "7caa89710bf71b48f3f2a81e1a118ac7fffd5aad48bfcf9294f607b3319dfc29"
         },
         {
           "key": "unit-2-food@1:word:beach",
           "kind": "word",
           "text": "a beach",
-          "clip": "37ee81fb970b667158be247b9ce023d6a6e2c97ba03658f481389d19112ea5ab"
+          "spoken": "a beach,",
+          "clip": "4fd088e97a88dbffad1325679109d69484920bedb978bdaee832aa3ac8955a0a"
         },
         {
           "key": "unit-2-food@1:word:beautiful",
           "kind": "word",
           "text": "beautiful",
-          "clip": "d8eb1ac7e2a7ca79c861c69d9250ca511619fa260a53b602ae94db3eca2b0de5"
+          "spoken": "beautiful,",
+          "clip": "c5f085c2adbfa74aa00a113512ab387e751898e458ed86b4fbd9613b9ffe934c"
         },
         {
           "key": "unit-2-food@1:word:birthday",
           "kind": "word",
           "text": "a birthday",
-          "clip": "20d7134b1ddafabbc5f69041fde33be222067ea47812c4151d0eeaf991499308"
+          "spoken": "a birthday,",
+          "clip": "e2f81bc3d287d8a227a215ba71b38b684083938d8431d608ffdec10991c67f97"
         },
         {
           "key": "unit-2-food@1:word:biscuit",
           "kind": "word",
           "text": "a biscuit",
-          "clip": "3270d8f36c3e39a4bd1591e97447a51b3f6f1b2efd39a73d9df66ad000d085bf"
+          "spoken": "a biscuit,",
+          "clip": "f14eb6ed79c371942ae82d50dc9c2b383b663283b33588a0fb0c10b980bd0d74"
         },
         {
           "key": "unit-2-food@1:word:bread",
           "kind": "word",
           "text": "bread",
-          "clip": "65ea37ded48804f7becad3d21d5d96ee964b33ca6d339f40e1602a6ee0869432"
+          "spoken": "bread,",
+          "clip": "2ddf988185891356e84664b9a1929dda88ea0f93f07b30fcccb5a65803d29567"
         },
         {
           "key": "unit-2-food@1:word:breakfast",
           "kind": "word",
           "text": "breakfast",
-          "clip": "97721f0f79e0aaeacb394970eb13143cc7f01d7b9fa62a1f3ee6c79a59dacbd8"
+          "spoken": "breakfast,",
+          "clip": "b4e1389e06a6e1ab06ce4c9592148e95a0727f1775e63cbc4c28af3a27ee010b"
         },
         {
           "key": "unit-2-food@1:word:butter",
           "kind": "word",
           "text": "butter",
-          "clip": "1668128f69424913cefa0f19443282974a095cf840e18ceade20f288336d656e"
+          "spoken": "butter,",
+          "clip": "6b1755de3b08ae40f6af9b73fcc81aaea72142a4b716a111755b28f2a8655412"
         },
         {
           "key": "unit-2-food@1:word:can-i-have-a-vegetarian-pizza-please",
@@ -383,25 +400,29 @@
           "key": "unit-2-food@1:word:celebrity",
           "kind": "word",
           "text": "a celebrity",
-          "clip": "86eb9f54dbf0af98c1b15155c55f413e4b0056b0e828c6a1bba2f08e3778b394"
+          "spoken": "a celebrity,",
+          "clip": "9ecd28148446ff162576bfca0b57eac19aea315847d1b0a1ce044296b7c45a03"
         },
         {
           "key": "unit-2-food@1:word:cereal",
           "kind": "word",
           "text": "cereal",
-          "clip": "c56186369067984dfa1c52dd13db64ca4a4a4d6aad113a4e3349b8d16a4601e8"
+          "spoken": "cereal,",
+          "clip": "c801b69fed158ed5e42f283797b426916155a76a05a7b44eb077610931586c34"
         },
         {
           "key": "unit-2-food@1:word:cheese",
           "kind": "word",
           "text": "cheese",
-          "clip": "85aa0f438b4eecc7bc2befe9e6a538035ffe1490f08e120d2e7ea611213b995f"
+          "spoken": "cheese,",
+          "clip": "badedf504ef94a7374126374c46341a8c93e16e25b46fcef153979be9a9d3ac7"
         },
         {
           "key": "unit-2-food@1:word:chicken",
           "kind": "word",
           "text": "chicken",
-          "clip": "6ec4d4d7c454b08e9711386d0aad756027a4d74d1c50461b2ef2275cb3356904"
+          "spoken": "chicken,",
+          "clip": "b41aca7bcd2cf0830cdbd3d7597d83061f846d6f065c2f4b75795df711c741ac"
         },
         {
           "key": "unit-2-food@1:word:chicken-legs",
@@ -413,13 +434,15 @@
           "key": "unit-2-food@1:word:chips",
           "kind": "word",
           "text": "chips",
-          "clip": "e61f0b59897cb49485d4a739774caa2218235d3b0e32a88c3bd5cd8ea7331bc7"
+          "spoken": "chips,",
+          "clip": "b4ab11764c89dc5d81403782a162b365ea487acd2fe351115f7040ef3db33a31"
         },
         {
           "key": "unit-2-food@1:word:chocolate",
           "kind": "word",
           "text": "chocolate",
-          "clip": "d7cab3a9776cca4388585cbe3dde5f6d5b881007a1e0dbaf5706104b18476d82"
+          "spoken": "chocolate,",
+          "clip": "16f6914626a3c220a08956f79742d0c4c7792a8ac4638a8d79da03f26fa8332e"
         },
         {
           "key": "unit-2-food@1:word:chocolate-cake",
@@ -431,13 +454,15 @@
           "key": "unit-2-food@1:word:cook",
           "kind": "word",
           "text": "cook",
-          "clip": "c7dcb9362b3daddff7b8b89978c0ef272e60d0698240e9cfb298e2baa1fbf8c0"
+          "spoken": "cook,",
+          "clip": "e083975f805064584eeb0e2dccffdb101e6caf8f7d088891538028765ed2b2a2"
         },
         {
           "key": "unit-2-food@1:word:cool",
           "kind": "word",
           "text": "Cool!",
-          "clip": "915f448e31a036b1eb5fea907c7b519b33bf70153ac4edadc399d78d8fa2c876"
+          "spoken": "Cool,",
+          "clip": "41309b7e305738466d2098f618ae8c1df967e779e342eeb087259220e961638b"
         },
         {
           "key": "unit-2-food@1:word:cottage-cheese",
@@ -449,31 +474,36 @@
           "key": "unit-2-food@1:word:cream",
           "kind": "word",
           "text": "cream",
-          "clip": "dd83f36155f771b7327a2daad167b436d492ec66be934bf01fa46c9f7a42b9b6"
+          "spoken": "cream,",
+          "clip": "ce72860b7221488050bcc683a88b758a035c8f8eee66a4e38dc1cf341a706079"
         },
         {
           "key": "unit-2-food@1:word:decorate",
           "kind": "word",
           "text": "decorate",
-          "clip": "fff00cb8ce10447b0a288d6155cb5a8c6542d07b0aa77f0f41f284fa1c43c87f"
+          "spoken": "decorate,",
+          "clip": "2dcd3ba547355a83485bb7de5c543dcb98f1740fd1601829491d2d7c30bd6721"
         },
         {
           "key": "unit-2-food@1:word:diary",
           "kind": "word",
           "text": "a diary",
-          "clip": "3e963ddb8dfce068eeefa6120a155312b0011da8c2eded87e977b54f14e41987"
+          "spoken": "a diary,",
+          "clip": "d8b90b52bd677f6a284c02c09708654e81bce2f2c1b4a46960617a52dbb0a9a1"
         },
         {
           "key": "unit-2-food@1:word:dinner",
           "kind": "word",
           "text": "dinner",
-          "clip": "6a0d10463ab68a1f83d93fcd1ef64adff7b23ee23f73b6da17478fff5a7aa920"
+          "spoken": "dinner,",
+          "clip": "c4f1a566e1a8b0361a610a3239a1cd1e2f7f2a2dbdf53b1b9867fa77b77aba5d"
         },
         {
           "key": "unit-2-food@1:word:egg",
           "kind": "word",
           "text": "an egg",
-          "clip": "087d09dd062f031c6c247ca03f2d1bb3d7f1d21468efbc37dd802a025193b551"
+          "spoken": "an egg,",
+          "clip": "80a0a5ec45f6c1f772201ee8e171d5f89ca7eb027f38ec1b5b33505cdf15460d"
         },
         {
           "key": "unit-2-food@1:word:enjoy-your-meal",
@@ -485,19 +515,22 @@
           "key": "unit-2-food@1:word:fish",
           "kind": "word",
           "text": "fish",
-          "clip": "55d19d492f4d218e9fbd0c9ba394b4ecd1f56f3df6640bf402afd60d48af8f8a"
+          "spoken": "fish,",
+          "clip": "91e959b6b4588668985979cde2fb774ad089b05e3ffa97538212b12a94c3ae89"
         },
         {
           "key": "unit-2-food@1:word:flour",
           "kind": "word",
           "text": "flour",
-          "clip": "1a8e857f48917dedf7f9a51cc782c5825f46ccf443d00b73214790da15c6b5ad"
+          "spoken": "flour,",
+          "clip": "548f221fbe717e5f20b206153142cc525f83e971ba32adf6a9caf405620b5173"
         },
         {
           "key": "unit-2-food@1:word:fruit",
           "kind": "word",
           "text": "fruit",
-          "clip": "29751be3d6474b8eda88974cde53e3cb53ca31b1e4b9f408d647cec9d6b3afc6"
+          "spoken": "fruit,",
+          "clip": "5ba7b3796fccaa5be48e0ff1291b47a1bfe90b8e5273c3ca7b57a8d3a856f11d"
         },
         {
           "key": "unit-2-food@1:word:frying-pan",
@@ -539,7 +572,8 @@
           "key": "unit-2-food@1:word:ham",
           "kind": "word",
           "text": "ham",
-          "clip": "d248845728c5e7b5aecb4801db6204f823e869b51cecd145663580fb953d3a17"
+          "spoken": "ham,",
+          "clip": "08b00c6292262d1a5dd7a24139466646afdfec9d45923311443193ab6c6c2bd9"
         },
         {
           "key": "unit-2-food@1:word:have-a-picnic",
@@ -563,7 +597,8 @@
           "key": "unit-2-food@1:word:horrible",
           "kind": "word",
           "text": "horrible",
-          "clip": "2775ffe41434ffdbc312e8304936db151b0678002fd41cbbb6373d196226dd0f"
+          "spoken": "horrible,",
+          "clip": "09c291376cb1e7e7e6487e60ce590c864a4db09518389f7fd233b13a5e807ece"
         },
         {
           "key": "unit-2-food@1:word:how-many",
@@ -593,55 +628,64 @@
           "key": "unit-2-food@1:word:ingredient",
           "kind": "word",
           "text": "an ingredient",
-          "clip": "dd14fdc39137a3907d9d95fff5fa7690e796f243fd62c8862a2f40bb37dcecc6"
+          "spoken": "an ingredient,",
+          "clip": "9b80a6f1a1d0f7049bf353481f0393565f8264dcf51c857e14dd796226cd92c1"
         },
         {
           "key": "unit-2-food@1:word:jam",
           "kind": "word",
           "text": "jam",
-          "clip": "4473871ab9bc099be494494a47deea215a598381101ec3f71fb57328be34775b"
+          "spoken": "jam,",
+          "clip": "4e02279f099dd41a8d1bbd102ddd412f70265b2b4635e0214ea224d3420a664c"
         },
         {
           "key": "unit-2-food@1:word:lemon",
           "kind": "word",
           "text": "a lemon",
-          "clip": "2efcd6db9de212b87d94a6ec124a92d4ab2b05c7708a7d37c28a7cf7bede0134"
+          "spoken": "a lemon,",
+          "clip": "5a929501879f22aa01ef9c6e7f01df0117d2878bbab2b7c327f6512c6e5ac8f9"
         },
         {
           "key": "unit-2-food@1:word:look",
           "kind": "word",
           "text": "look",
-          "clip": "8f37db2ebe7c1e9276acb5b672a453bba73d9dbb90ea047109f6bd34052b31e4"
+          "spoken": "look,",
+          "clip": "ff179fd5dc5958cd5a27a06c24b4d8fbd3be61a959877af8eb44aa8e04f8f96d"
         },
         {
           "key": "unit-2-food@1:word:lunch",
           "kind": "word",
           "text": "lunch",
-          "clip": "2dfffd64a48fb0540067b460ff2106f5e86ff339bc600c1481a1b9993730d136"
+          "spoken": "lunch,",
+          "clip": "fd95a9f6c88f40ff846a5d037dd02833f57e7686b6821633476d0389254f5ec5"
         },
         {
           "key": "unit-2-food@1:word:make",
           "kind": "word",
           "text": "make",
-          "clip": "695aa936df8573bf048aa635f55fb921876fe7175ec9b987200e4d04797f257a"
+          "spoken": "make,",
+          "clip": "1b8efa1acdcd4e371b2d3841e5e2174b7d94dcd89c9197e7ff9d223f866f039d"
         },
         {
           "key": "unit-2-food@1:word:meat",
           "kind": "word",
           "text": "meat",
-          "clip": "de45b499651e21480af151563f9db57cc05cdd57102a357927fbc1b931833d07"
+          "spoken": "meat,",
+          "clip": "fc955dc85570ac639a5e330746e53b7c3c9d4186275205e1aba9aa0b95b3a2f4"
         },
         {
           "key": "unit-2-food@1:word:milk",
           "kind": "word",
           "text": "milk",
-          "clip": "2070b0cad900d5c106865755bacff8ff74ebbcaaace20c98c7ce36a152d6ca62"
+          "spoken": "milk,",
+          "clip": "e8bf2248c7dd7f7462541b43e8293eb8ddc5d83ea610751f57b2f57f189e94af"
         },
         {
           "key": "unit-2-food@1:word:milkshake",
           "kind": "word",
           "text": "a milkshake",
-          "clip": "5cb67dd8aa1fd4351cede196c8415c7623df7d5866fd7a478b78ffd91e0c1ee5"
+          "spoken": "a milkshake,",
+          "clip": "d2816d4cfbc8389d1388380a3780d328c37d1b4c6b0ad237ceeec826cc7b6d23"
         },
         {
           "key": "unit-2-food@1:word:on-top",
@@ -659,163 +703,190 @@
           "key": "unit-2-food@1:word:pan",
           "kind": "word",
           "text": "a pan",
-          "clip": "e911bce9825f64d473938bb26fb2f20045b87dbe9b1a0e291522362fa2b65c82"
+          "spoken": "a pan,",
+          "clip": "5562501c9b52d88c327c72eb5107b07b7e4309649d1fe9794ecd966cb1bd63df"
         },
         {
           "key": "unit-2-food@1:word:pancake",
           "kind": "word",
           "text": "a pancake",
-          "clip": "f2d0621fe79369d72224e9815b0c3cce475695974ad19dcdcdb33fff19bae256"
+          "spoken": "a pancake,",
+          "clip": "3d0673506ae06d0bc6ea30bfd02a04ebd657592fdb8b1198a302f5e3cb0ea1ad"
         },
         {
           "key": "unit-2-food@1:word:pasta",
           "kind": "word",
           "text": "pasta",
-          "clip": "b1c9f739a110d7966adfce2fd0d9c2370a52d932fbe36c83afcf77b30ababc37"
+          "spoken": "pasta,",
+          "clip": "e98ac6d9e968a83ed1b66d50b73c929f8ea9d7810fbeb2d204f69042110b378e"
         },
         {
           "key": "unit-2-food@1:word:popular",
           "kind": "word",
           "text": "popular",
-          "clip": "273fc7ced628784ab344092e74f4650bdb8fa9f1c12142e11f1be3f4ae747499"
+          "spoken": "popular,",
+          "clip": "c132e5068f0942639df1809a6558cfc7dfcc2e56125c96f4858fec29410af8d6"
         },
         {
           "key": "unit-2-food@1:word:potato",
           "kind": "word",
           "text": "a potato",
-          "clip": "4b685d65916e7d5fee083e1eeb20569159631fe74ffe2b33139fa646b41d2020"
+          "spoken": "a potato,",
+          "clip": "8dec7af04fccf2e82e26ebb79a36531b2a614bfdd01845e433dd8b1ac0e3b6f0"
         },
         {
           "key": "unit-2-food@1:word:put",
           "kind": "word",
           "text": "put",
-          "clip": "1db0e82ea6a933159c96fd0f555a502ae4e0231787d720a2cbaa8ab1b23d1f61"
+          "spoken": "put,",
+          "clip": "23a1ad7e88cdac0065584efa8e92493f904408e3b11aefa819a66f3bfc6fe5b0"
         },
         {
           "key": "unit-2-food@1:word:quick",
           "kind": "word",
           "text": "quick",
-          "clip": "24a02ee7e30ad07a2f4f83233801eb48684d20d94d0c5ba1b90cf74c4d103ec4"
+          "spoken": "quick,",
+          "clip": "9392a342da96bdc84687afcfb0bec76bafb41f91613aef7bb0d264f369328b42"
         },
         {
           "key": "unit-2-food@1:word:recipe",
           "kind": "word",
           "text": "a recipe",
-          "clip": "ccebe92c8a65217cb0addf3466226b7a48a89dfec82551b2431f296640c822ee"
+          "spoken": "a recipe,",
+          "clip": "21e7be4628ba245fc5603062a02d148ceb816aa4924376e4dcf6c8a75c1fcb01"
         },
         {
           "key": "unit-2-food@1:word:rice",
           "kind": "word",
           "text": "rice",
-          "clip": "b15beaeb46b73774f98deada1194c109e11a0c770dd49b1b52b742599e4be579"
+          "spoken": "rice,",
+          "clip": "e24ad7e7902a14cff32fbe351890c307d28d3f5e6b1102abf4ad6be3f01e8b7e"
         },
         {
           "key": "unit-2-food@1:word:round",
           "kind": "word",
           "text": "round",
-          "clip": "05cea434c6de204bc10ec3de332feb8d91ae624ba3d49b7628346b08ea08d125"
+          "spoken": "round,",
+          "clip": "b0c069967c82d484657dc90b3c4113b67f8b792ca8c69a6dcedd16ac239c2774"
         },
         {
           "key": "unit-2-food@1:word:salad",
           "kind": "word",
           "text": "a salad",
-          "clip": "fe56db70c2a21a2c31db433a1414a46de42b2cb332d4aa8b313ef0eb0bda3793"
+          "spoken": "a salad,",
+          "clip": "4149f608069556b6dd41c817cbfdeac66031fbb3d7f17fd8a493dd9228f3ad0d"
         },
         {
           "key": "unit-2-food@1:word:sandwich",
           "kind": "word",
           "text": "a sandwich",
-          "clip": "b49ba2c1053e319b03b14637db1454fadf8be1ad1db7cafb4eb9b3a7be2a23f9"
+          "spoken": "a sandwich,",
+          "clip": "57cfe1783a034c6601fd25205e27c6a6dedb1c87348c2f2a730972992f5f764a"
         },
         {
           "key": "unit-2-food@1:word:sausage",
           "kind": "word",
           "text": "a sausage",
-          "clip": "6befbcc231fab7f63b907b855096019a89af49a7e0e1ef27de8d5207eb63bf2e"
+          "spoken": "a sausage,",
+          "clip": "9b4d9066acc86c8bd516c498adb1f0b83fb3edff28301797252218c5354f1f8a"
         },
         {
           "key": "unit-2-food@1:word:seagull",
           "kind": "word",
           "text": "a seagull",
-          "clip": "3a336bdcc1dac08d67040603ebb78a5093092196c63a168a2ecb97bc5a68c7e6"
+          "spoken": "a seagull,",
+          "clip": "a13b2c8ff6eb6fc9a8c84a9420b8e2527fffd865163a30c8bc2927dbe0fd74d2"
         },
         {
           "key": "unit-2-food@1:word:special",
           "kind": "word",
           "text": "special",
-          "clip": "36ba339a3e6d7aca330f3fca889b327bed9e60592248e0ba43d2839d0314c15f"
+          "spoken": "special,",
+          "clip": "bee704a578c01b4f366abd7cb4559ec58233091837d8b2969092ea53265cb47c"
         },
         {
           "key": "unit-2-food@1:word:strawberry",
           "kind": "word",
           "text": "a strawberry",
-          "clip": "c195634f8931e1f7c11c367d623e4fabddd950ef5bb9799fea09a2f5613b54c3"
+          "spoken": "a strawberry,",
+          "clip": "b2381242a20279885636fd80528153bdfddd42df550f3842e5f691c99add7718"
         },
         {
           "key": "unit-2-food@1:word:sugar",
           "kind": "word",
           "text": "sugar",
-          "clip": "80adcb667593c1ebabfce3f973a8627546b180e42575893714640adecb584217"
+          "spoken": "sugar,",
+          "clip": "33345ead748e5b322f14779ef0f190ef728ead60381b427e97676933b870bd04"
         },
         {
           "key": "unit-2-food@1:word:sweet",
           "kind": "word",
           "text": "sweet",
-          "clip": "30ea762ad79e59ce9848ee7ac57ceef9af50c536bbdb7ca20167a293f28ce446"
+          "spoken": "sweet,",
+          "clip": "cd3818226590f5b380f63d2703895c1bd81a74cad7be96785f5915d3c7bdc921"
         },
         {
           "key": "unit-2-food@1:word:terrible",
           "kind": "word",
           "text": "terrible",
-          "clip": "22c066c802ae51879927fc6829d4a8330d4d8150b1de29056502e99083b49255"
+          "spoken": "terrible,",
+          "clip": "d3d01d2f8af19691bef9a354d85f101e64e6acede8211db05e875f5ae990f217"
         },
         {
           "key": "unit-2-food@1:word:throw",
           "kind": "word",
           "text": "throw",
-          "clip": "f659eb9922c32739bff040eaa5a4c35f03bb79cf6cc274c9a8ab15f39a5336b1"
+          "spoken": "throw,",
+          "clip": "a1b637877c1e5dccc8b68e146de06e38df66c091aeb26138217f9384813c5c80"
         },
         {
           "key": "unit-2-food@1:word:toast",
           "kind": "word",
           "text": "toast",
-          "clip": "7cbdbf3bdfab1a2e2f900fd1de051bf10d66a67d2a8909a7e3ea5f2bfc6bba00"
+          "spoken": "toast,",
+          "clip": "e312862e2080ff46d5cd0d850e5796c7d943cd377fb550ac643a6f29e0e8537a"
         },
         {
           "key": "unit-2-food@1:word:toaster",
           "kind": "word",
           "text": "a toaster",
-          "clip": "0df6cb61e3c852e06110219bc8c6285de86f892bc29988b88e6a7cbf1303cf47"
+          "spoken": "a toaster,",
+          "clip": "94e12a1ac74bdc26542ceb70671865d874e050b0376caf93fc9b0a866c768a54"
         },
         {
           "key": "unit-2-food@1:word:tomato",
           "kind": "word",
           "text": "a tomato",
-          "clip": "5567ef4696aff15c7eb0ebeb8d67b3216f4f616e7d32a527aefcf8f5f2248803"
+          "spoken": "a tomato,",
+          "clip": "cc7db709f285d42eb6dc12f8fd49f3667db3acf688262d606ba12fa8119491a5"
         },
         {
           "key": "unit-2-food@1:word:tuna",
           "kind": "word",
           "text": "tuna",
-          "clip": "2aa79f37bbe135b9d60b4b5cae1a6dbc00875d82369e986c40c81a34cd33023f"
+          "spoken": "tuna,",
+          "clip": "8ecd9d313d55cfb4dc8c731533d83519e453e2f431394ffa36c4dadb19e07b64"
         },
         {
           "key": "unit-2-food@1:word:use",
           "kind": "word",
           "text": "use",
-          "clip": "b6bb7b3cabeddb193fc4ae25ee785c40df7241e61914dc42da9efe51b373d865"
+          "spoken": "use,",
+          "clip": "5cfa016972a61e07268c3e1cb5f520e17f6886a5a4db170f82b25d00a52c632f"
         },
         {
           "key": "unit-2-food@1:word:vegetable",
           "kind": "word",
           "text": "a vegetable",
-          "clip": "9695a0a574ba1e537494b0e8369bc0361d3511acc5ca9bad67398acf1f06103a"
+          "spoken": "a vegetable,",
+          "clip": "e21200215d8a2e61596b8ff02976ffdf0dcb52a96723f1afbccb2a7901c6b1ea"
         },
         {
           "key": "unit-2-food@1:word:water",
           "kind": "word",
           "text": "water",
-          "clip": "395ee03fe81fb201c368f810aeaad73b755dcb6d5487bd4e11936c61f8889766"
+          "spoken": "water,",
+          "clip": "da4955d80e387931bb7cb64c6c6f0ac70907625c0fd53f7d2d0c18468c09a997"
         },
         {
           "key": "unit-2-food@1:word:what-a-disaster",
@@ -839,7 +910,8 @@
           "key": "unit-2-food@1:word:yoghurt",
           "kind": "word",
           "text": "a yoghurt",
-          "clip": "a9f0884c77915943ba7891ac596e4d996b00d876a652248fe3a77e6497765ed5"
+          "spoken": "a yoghurt,",
+          "clip": "d0efc8ef25949d0d349f0d8145c318645e46015d12e57aacad0241613989bfd0"
         }
       ]
     }
@@ -856,26 +928,26 @@
         "durationSeconds": 1.521
       }
     },
-    "05cea434c6de204bc10ec3de332feb8d91ae624ba3d49b7628346b08ea08d125": {
-      "file": "clips/05cea434c6de204bc10ec3de332feb8d91ae624ba3d49b7628346b08ea08d125.ogg",
-      "bytes": 2827,
-      "sha256": "72e367072c2f588b5af148601f418a2bcbad98a344e7768dc00a04e0c054974b",
+    "08b00c6292262d1a5dd7a24139466646afdfec9d45923311443193ab6c6c2bd9": {
+      "file": "clips/08b00c6292262d1a5dd7a24139466646afdfec9d45923311443193ab6c6c2bd9.ogg",
+      "bytes": 1800,
+      "sha256": "169aab3c6744d4bec6d0cf6676755ae3bbfad3ab1cd50be925dd8aa7c60287e1",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.86
+        "durationSeconds": 0.556
       }
     },
-    "087d09dd062f031c6c247ca03f2d1bb3d7f1d21468efbc37dd802a025193b551": {
-      "file": "clips/087d09dd062f031c6c247ca03f2d1bb3d7f1d21468efbc37dd802a025193b551.ogg",
-      "bytes": 2760,
-      "sha256": "cb39c47e199de94ebf795234b25b61d9b94f691c91807c1fe396c2ecc7cf0a06",
+    "09c291376cb1e7e7e6487e60ce590c864a4db09518389f7fd233b13a5e807ece": {
+      "file": "clips/09c291376cb1e7e7e6487e60ce590c864a4db09518389f7fd233b13a5e807ece.ogg",
+      "bytes": 2564,
+      "sha256": "304c0b70abca40ebd6d4be43398e2158a6095e312ef97b84a31ab3fa2ba349f0",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.895
+        "durationSeconds": 0.807
       }
     },
     "0a246852494596233eab2e03c2d3aa3b26392fb6fad8fb9936bf1dec3fe99d01": {
@@ -887,17 +959,6 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 2.213
-      }
-    },
-    "0df6cb61e3c852e06110219bc8c6285de86f892bc29988b88e6a7cbf1303cf47": {
-      "file": "clips/0df6cb61e3c852e06110219bc8c6285de86f892bc29988b88e6a7cbf1303cf47.ogg",
-      "bytes": 2859,
-      "sha256": "9b1dc83876de7a99be98584e4a1b2ce38428ad0e2920c40c0ef66233a0024279",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.908
       }
     },
     "0e8df5dc36979f2a387392547a0a4db2e25a63f6fc08e327a6e93205607a1a09": {
@@ -955,81 +1016,59 @@
         "durationSeconds": 2.042
       }
     },
-    "1668128f69424913cefa0f19443282974a095cf840e18ceade20f288336d656e": {
-      "file": "clips/1668128f69424913cefa0f19443282974a095cf840e18ceade20f288336d656e.ogg",
-      "bytes": 2156,
-      "sha256": "3a5de92b4e1215e49e638670aeac61110a787c5921b27fc10ff2e0a0ebb85c73",
+    "16f6914626a3c220a08956f79742d0c4c7792a8ac4638a8d79da03f26fa8332e": {
+      "file": "clips/16f6914626a3c220a08956f79742d0c4c7792a8ac4638a8d79da03f26fa8332e.ogg",
+      "bytes": 2538,
+      "sha256": "997b24b7476c9a8738b6022004847d7da402287d05fcc414c763e00f5b7c1c3a",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.666
+        "durationSeconds": 0.841
       }
     },
-    "1a8e857f48917dedf7f9a51cc782c5825f46ccf443d00b73214790da15c6b5ad": {
-      "file": "clips/1a8e857f48917dedf7f9a51cc782c5825f46ccf443d00b73214790da15c6b5ad.ogg",
-      "bytes": 2678,
-      "sha256": "0ddf385c1d1ccb00ec50d9d4c921eed4fbf0b10e9f72783dd2a908a1946136fd",
+    "1b8efa1acdcd4e371b2d3841e5e2174b7d94dcd89c9197e7ff9d223f866f039d": {
+      "file": "clips/1b8efa1acdcd4e371b2d3841e5e2174b7d94dcd89c9197e7ff9d223f866f039d.ogg",
+      "bytes": 2425,
+      "sha256": "c57af212dc21496a8a0fcf0997effaac4356315a9be51982ef37377a229ccac7",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.834
+        "durationSeconds": 0.796
       }
     },
-    "1db0e82ea6a933159c96fd0f555a502ae4e0231787d720a2cbaa8ab1b23d1f61": {
-      "file": "clips/1db0e82ea6a933159c96fd0f555a502ae4e0231787d720a2cbaa8ab1b23d1f61.ogg",
-      "bytes": 2053,
-      "sha256": "1bc1dc2dd16d4ae2d416ea3f9918dd1bc926532af39dc83834f6e8fcc1ad6ad6",
+    "1f7992845d40249d133a40b3d6a5c8296e160ebd0af07ab4a1284856cc1e5a47": {
+      "file": "clips/1f7992845d40249d133a40b3d6a5c8296e160ebd0af07ab4a1284856cc1e5a47.ogg",
+      "bytes": 3370,
+      "sha256": "4611efedd35bd507be01164a498e2ae264444ab2e1c2ffbfd8bc174c1c219e66",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.628
+        "durationSeconds": 1.097
       }
     },
-    "2070b0cad900d5c106865755bacff8ff74ebbcaaace20c98c7ce36a152d6ca62": {
-      "file": "clips/2070b0cad900d5c106865755bacff8ff74ebbcaaace20c98c7ce36a152d6ca62.ogg",
-      "bytes": 1843,
-      "sha256": "9031f1bed925b4398a22351e23476c1bae51ada0153861349afb0886edf3e4c6",
+    "21e7be4628ba245fc5603062a02d148ceb816aa4924376e4dcf6c8a75c1fcb01": {
+      "file": "clips/21e7be4628ba245fc5603062a02d148ceb816aa4924376e4dcf6c8a75c1fcb01.ogg",
+      "bytes": 3564,
+      "sha256": "91021fa8075edaef0187a1cb57794e5cdce18ca3a577644cc24c0480d8e47fde",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.599
+        "durationSeconds": 1.093
       }
     },
-    "20d7134b1ddafabbc5f69041fde33be222067ea47812c4151d0eeaf991499308": {
-      "file": "clips/20d7134b1ddafabbc5f69041fde33be222067ea47812c4151d0eeaf991499308.ogg",
-      "bytes": 3058,
-      "sha256": "11c4b85792e026ef69ecde968a8bb01e55b8f85e3c67cc7f026d9d69a2fb4558",
+    "23a1ad7e88cdac0065584efa8e92493f904408e3b11aefa819a66f3bfc6fe5b0": {
+      "file": "clips/23a1ad7e88cdac0065584efa8e92493f904408e3b11aefa819a66f3bfc6fe5b0.ogg",
+      "bytes": 1656,
+      "sha256": "058263b62bd97781bac5d7c4b9f1c1d9bd73671733f035111fa18c025df9b895",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.971
-      }
-    },
-    "22c066c802ae51879927fc6829d4a8330d4d8150b1de29056502e99083b49255": {
-      "file": "clips/22c066c802ae51879927fc6829d4a8330d4d8150b1de29056502e99083b49255.ogg",
-      "bytes": 2455,
-      "sha256": "dde0b9e487e40dafcc744ca6df450b2512ada44923f8ba56dbfefb4454dd720e",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.77
-      }
-    },
-    "24a02ee7e30ad07a2f4f83233801eb48684d20d94d0c5ba1b90cf74c4d103ec4": {
-      "file": "clips/24a02ee7e30ad07a2f4f83233801eb48684d20d94d0c5ba1b90cf74c4d103ec4.ogg",
-      "bytes": 1691,
-      "sha256": "a1a5ae16c188ffc10763c9ec766c480fc44c42607a367190fa5947b11dbc2a34",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.522
+        "durationSeconds": 0.5
       }
     },
     "26138097013baeadf942da91edd666f7e48bd241e7e4eb41d148f9b9062de8b3": {
@@ -1043,87 +1082,10 @@
         "durationSeconds": 1.204
       }
     },
-    "273fc7ced628784ab344092e74f4650bdb8fa9f1c12142e11f1be3f4ae747499": {
-      "file": "clips/273fc7ced628784ab344092e74f4650bdb8fa9f1c12142e11f1be3f4ae747499.ogg",
-      "bytes": 2463,
-      "sha256": "2062a6f68a38c585bd859f3aae73be9ab2d01ae1b475da14e86807b8b7385218",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.773
-      }
-    },
-    "2775ffe41434ffdbc312e8304936db151b0678002fd41cbbb6373d196226dd0f": {
-      "file": "clips/2775ffe41434ffdbc312e8304936db151b0678002fd41cbbb6373d196226dd0f.ogg",
-      "bytes": 2294,
-      "sha256": "60a590b8ad2172060d13357da41489d0c0660ed8ddb2456ee78ebef3ab28f6bb",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.694
-      }
-    },
-    "29751be3d6474b8eda88974cde53e3cb53ca31b1e4b9f408d647cec9d6b3afc6": {
-      "file": "clips/29751be3d6474b8eda88974cde53e3cb53ca31b1e4b9f408d647cec9d6b3afc6.ogg",
-      "bytes": 1906,
-      "sha256": "ebd79b38d0cf5f6bdaec64546e56327df8b167d08a64401be7b68f22d21fafdd",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.601
-      }
-    },
-    "2aa79f37bbe135b9d60b4b5cae1a6dbc00875d82369e986c40c81a34cd33023f": {
-      "file": "clips/2aa79f37bbe135b9d60b4b5cae1a6dbc00875d82369e986c40c81a34cd33023f.ogg",
-      "bytes": 2305,
-      "sha256": "f9e1948ae368649cbca96e525987886fe6736bac36261e8b4ca601c9bfa1e6c7",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.729
-      }
-    },
-    "2dfffd64a48fb0540067b460ff2106f5e86ff339bc600c1481a1b9993730d136": {
-      "file": "clips/2dfffd64a48fb0540067b460ff2106f5e86ff339bc600c1481a1b9993730d136.ogg",
-      "bytes": 2273,
-      "sha256": "a24ae95d3bdc8f8546d411841d9c75c34e7eb551de870b3185f601f0410b0f87",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.706
-      }
-    },
-    "2efcd6db9de212b87d94a6ec124a92d4ab2b05c7708a7d37c28a7cf7bede0134": {
-      "file": "clips/2efcd6db9de212b87d94a6ec124a92d4ab2b05c7708a7d37c28a7cf7bede0134.ogg",
-      "bytes": 2743,
-      "sha256": "afb8cc959d630d07ec4fad9039768cf89b77b787fc00e40ac80acfb107cdf88e",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.837
-      }
-    },
-    "30ea762ad79e59ce9848ee7ac57ceef9af50c536bbdb7ca20167a293f28ce446": {
-      "file": "clips/30ea762ad79e59ce9848ee7ac57ceef9af50c536bbdb7ca20167a293f28ce446.ogg",
-      "bytes": 2480,
-      "sha256": "1b5b1bc49a0794fb81cb6587dfccf74b6efc3446302522692dce93f31a3c78e6",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.798
-      }
-    },
-    "3270d8f36c3e39a4bd1591e97447a51b3f6f1b2efd39a73d9df66ad000d085bf": {
-      "file": "clips/3270d8f36c3e39a4bd1591e97447a51b3f6f1b2efd39a73d9df66ad000d085bf.ogg",
-      "bytes": 2533,
-      "sha256": "86c319b975332149ec2a455d0c82b130c34cdf4e3c38e5320aa44ba93fa0af12",
+    "2dcd3ba547355a83485bb7de5c543dcb98f1740fd1601829491d2d7c30bd6721": {
+      "file": "clips/2dcd3ba547355a83485bb7de5c543dcb98f1740fd1601829491d2d7c30bd6721.ogg",
+      "bytes": 2573,
+      "sha256": "c3a8a8b6d98b4695ef29651fb93a04aff0f577624becf29bd955c8d5868dd6af",
       "audio": {
         "codec": "opus",
         "channels": 1,
@@ -1131,15 +1093,26 @@
         "durationSeconds": 0.809
       }
     },
-    "36ba339a3e6d7aca330f3fca889b327bed9e60592248e0ba43d2839d0314c15f": {
-      "file": "clips/36ba339a3e6d7aca330f3fca889b327bed9e60592248e0ba43d2839d0314c15f.ogg",
-      "bytes": 2405,
-      "sha256": "24a3852958943522b4b8bef81957dc980ff531ce6142a2c617e32b893b65d45c",
+    "2ddf988185891356e84664b9a1929dda88ea0f93f07b30fcccb5a65803d29567": {
+      "file": "clips/2ddf988185891356e84664b9a1929dda88ea0f93f07b30fcccb5a65803d29567.ogg",
+      "bytes": 2354,
+      "sha256": "3d02bf5da30ca76c6248922f83358d908fa98d0809a115dd25d39afc383e455a",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.739
+        "durationSeconds": 0.782
+      }
+    },
+    "33345ead748e5b322f14779ef0f190ef728ead60381b427e97676933b870bd04": {
+      "file": "clips/33345ead748e5b322f14779ef0f190ef728ead60381b427e97676933b870bd04.ogg",
+      "bytes": 2342,
+      "sha256": "48f936325867e173ec1a301bade0eaa671574b2bd9ac51c588b537c995913254",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.749
       }
     },
     "3732ab01c9f20bc85dd3cab94db12dfd6497748fbe5cd411aa598a907f102f0b": {
@@ -1153,48 +1126,37 @@
         "durationSeconds": 1.41
       }
     },
-    "37ee81fb970b667158be247b9ce023d6a6e2c97ba03658f481389d19112ea5ab": {
-      "file": "clips/37ee81fb970b667158be247b9ce023d6a6e2c97ba03658f481389d19112ea5ab.ogg",
-      "bytes": 2384,
-      "sha256": "1c775df5ee8ce34856189bc87d0fd85ccec481789aba7d6d193d525f84d864cf",
+    "3d0673506ae06d0bc6ea30bfd02a04ebd657592fdb8b1198a302f5e3cb0ea1ad": {
+      "file": "clips/3d0673506ae06d0bc6ea30bfd02a04ebd657592fdb8b1198a302f5e3cb0ea1ad.ogg",
+      "bytes": 3303,
+      "sha256": "dc80b18ab3179b527b3875a3f23c39977ebefec64e54eab275ab7c5f1478095c",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.782
+        "durationSeconds": 1.077
       }
     },
-    "395ee03fe81fb201c368f810aeaad73b755dcb6d5487bd4e11936c61f8889766": {
-      "file": "clips/395ee03fe81fb201c368f810aeaad73b755dcb6d5487bd4e11936c61f8889766.ogg",
-      "bytes": 2277,
-      "sha256": "e2c84ecf4934aec816f4e577859dfdc2ccbaf37e01925dac53127e212acbe01c",
+    "41309b7e305738466d2098f618ae8c1df967e779e342eeb087259220e961638b": {
+      "file": "clips/41309b7e305738466d2098f618ae8c1df967e779e342eeb087259220e961638b.ogg",
+      "bytes": 2317,
+      "sha256": "a3efea36d32336c1f15e5d517a4f9d3765fa7cbd139e02748bd3dd946bb7d2aa",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.7
+        "durationSeconds": 0.776
       }
     },
-    "3a336bdcc1dac08d67040603ebb78a5093092196c63a168a2ecb97bc5a68c7e6": {
-      "file": "clips/3a336bdcc1dac08d67040603ebb78a5093092196c63a168a2ecb97bc5a68c7e6.ogg",
-      "bytes": 2625,
-      "sha256": "7b7744aae694aa5d6d090fefcda33b531243aad2f2f136011486ba528788d762",
+    "4149f608069556b6dd41c817cbfdeac66031fbb3d7f17fd8a493dd9228f3ad0d": {
+      "file": "clips/4149f608069556b6dd41c817cbfdeac66031fbb3d7f17fd8a493dd9228f3ad0d.ogg",
+      "bytes": 2903,
+      "sha256": "10a0c4bf962d13ddbdc8f4a301db7986014fde0e2a2e7a1eb27a6e03a6fa82f1",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.836
-      }
-    },
-    "3e963ddb8dfce068eeefa6120a155312b0011da8c2eded87e977b54f14e41987": {
-      "file": "clips/3e963ddb8dfce068eeefa6120a155312b0011da8c2eded87e977b54f14e41987.ogg",
-      "bytes": 3393,
-      "sha256": "2b4233f900ede6beb086e7e67c3726b11496467bc5d7834d2f5960531cd007a8",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.044
+        "durationSeconds": 0.966
       }
     },
     "42816e283fa7d24f4e5759cc737f0febe642b9ce50eb59d15bae45e2befe5d92": {
@@ -1208,28 +1170,6 @@
         "durationSeconds": 1.249
       }
     },
-    "4473871ab9bc099be494494a47deea215a598381101ec3f71fb57328be34775b": {
-      "file": "clips/4473871ab9bc099be494494a47deea215a598381101ec3f71fb57328be34775b.ogg",
-      "bytes": 2803,
-      "sha256": "bf865028ee46474a0c774a188034fa973f13d23b5174cc914e42a24e3d40fa31",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.908
-      }
-    },
-    "4b685d65916e7d5fee083e1eeb20569159631fe74ffe2b33139fa646b41d2020": {
-      "file": "clips/4b685d65916e7d5fee083e1eeb20569159631fe74ffe2b33139fa646b41d2020.ogg",
-      "bytes": 2930,
-      "sha256": "07f8473d9d193ab2ceabd29be083345900ff73252fdabf10ae97312750bb408e",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.933
-      }
-    },
     "4b713c39be8c2b96cb4481e5716ba5a27a03dea35ffd1b5953333626d7c4e108": {
       "file": "clips/4b713c39be8c2b96cb4481e5716ba5a27a03dea35ffd1b5953333626d7c4e108.ogg",
       "bytes": 3080,
@@ -1239,6 +1179,28 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.989
+      }
+    },
+    "4e02279f099dd41a8d1bbd102ddd412f70265b2b4635e0214ea224d3420a664c": {
+      "file": "clips/4e02279f099dd41a8d1bbd102ddd412f70265b2b4635e0214ea224d3420a664c.ogg",
+      "bytes": 2155,
+      "sha256": "105071d1e957409f9ae6636ad176f8d55a810ec6d47dbb010b18793d386fb66a",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.656
+      }
+    },
+    "4fd088e97a88dbffad1325679109d69484920bedb978bdaee832aa3ac8955a0a": {
+      "file": "clips/4fd088e97a88dbffad1325679109d69484920bedb978bdaee832aa3ac8955a0a.ogg",
+      "bytes": 2247,
+      "sha256": "e66b1556b37aaa8c7fe47020c01681336158d91e46434e2327bc72d330f2c1d4",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.73
       }
     },
     "5413da300f74715ef77d2f7260365266ac9fef5334da365ec9f482e697189b05": {
@@ -1252,26 +1214,37 @@
         "durationSeconds": 1.208
       }
     },
-    "5567ef4696aff15c7eb0ebeb8d67b3216f4f616e7d32a527aefcf8f5f2248803": {
-      "file": "clips/5567ef4696aff15c7eb0ebeb8d67b3216f4f616e7d32a527aefcf8f5f2248803.ogg",
-      "bytes": 2952,
-      "sha256": "10c45b84068253879dee3eb2a4a6c02c255d38c3cbae4f42ceaea5435176d42b",
+    "548f221fbe717e5f20b206153142cc525f83e971ba32adf6a9caf405620b5173": {
+      "file": "clips/548f221fbe717e5f20b206153142cc525f83e971ba32adf6a9caf405620b5173.ogg",
+      "bytes": 2647,
+      "sha256": "9a2813ed24156046bcc9178c399193125ece5e3fdc0702004e017452ba644e22",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.965
+        "durationSeconds": 0.859
       }
     },
-    "55d19d492f4d218e9fbd0c9ba394b4ecd1f56f3df6640bf402afd60d48af8f8a": {
-      "file": "clips/55d19d492f4d218e9fbd0c9ba394b4ecd1f56f3df6640bf402afd60d48af8f8a.ogg",
-      "bytes": 2309,
-      "sha256": "e2faa42fd28e30f4cb570a307bbb92ae44866ecab386bb19ee35db2821ffeadc",
+    "5562501c9b52d88c327c72eb5107b07b7e4309649d1fe9794ecd966cb1bd63df": {
+      "file": "clips/5562501c9b52d88c327c72eb5107b07b7e4309649d1fe9794ecd966cb1bd63df.ogg",
+      "bytes": 2931,
+      "sha256": "49c4dcce7fceafc2d9ebdad3e780c6b8445684f75289ddc5997f0b17d82c38c6",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.767
+        "durationSeconds": 0.982
+      }
+    },
+    "57cfe1783a034c6601fd25205e27c6a6dedb1c87348c2f2a730972992f5f764a": {
+      "file": "clips/57cfe1783a034c6601fd25205e27c6a6dedb1c87348c2f2a730972992f5f764a.ogg",
+      "bytes": 3579,
+      "sha256": "27059bbb9972a0cfb2ed7252993db764582fa7a1d339d8273f1f668557b966c7",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.184
       }
     },
     "596e61638408852de9497a1af81e24749fa4af6d6a534d0cacf1146d7aab1941": {
@@ -1285,6 +1258,17 @@
         "durationSeconds": 1.643
       }
     },
+    "5a929501879f22aa01ef9c6e7f01df0117d2878bbab2b7c327f6512c6e5ac8f9": {
+      "file": "clips/5a929501879f22aa01ef9c6e7f01df0117d2878bbab2b7c327f6512c6e5ac8f9.ogg",
+      "bytes": 2729,
+      "sha256": "14cb286a666b73ba1f62665a1f0eddcac9a7c00c27d4686ce7708ccdd4b70a44",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.876
+      }
+    },
     "5ae54e051c314d95ff9bbebf12913ac60df51ad72d458c9b83993f10c856f8fc": {
       "file": "clips/5ae54e051c314d95ff9bbebf12913ac60df51ad72d458c9b83993f10c856f8fc.ogg",
       "bytes": 7048,
@@ -1296,15 +1280,26 @@
         "durationSeconds": 2.261
       }
     },
-    "5cb67dd8aa1fd4351cede196c8415c7623df7d5866fd7a478b78ffd91e0c1ee5": {
-      "file": "clips/5cb67dd8aa1fd4351cede196c8415c7623df7d5866fd7a478b78ffd91e0c1ee5.ogg",
-      "bytes": 2981,
-      "sha256": "d63eb0d86504d8eeff0e3ebadb0ced339af7efffb06656d0bcfb5b016847d643",
+    "5ba7b3796fccaa5be48e0ff1291b47a1bfe90b8e5273c3ca7b57a8d3a856f11d": {
+      "file": "clips/5ba7b3796fccaa5be48e0ff1291b47a1bfe90b8e5273c3ca7b57a8d3a856f11d.ogg",
+      "bytes": 2565,
+      "sha256": "f46d91d6b61e4aac821b00e8dee7f31b7c308229e807b4086744e224b51fcb36",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.989
+        "durationSeconds": 0.871
+      }
+    },
+    "5cfa016972a61e07268c3e1cb5f520e17f6886a5a4db170f82b25d00a52c632f": {
+      "file": "clips/5cfa016972a61e07268c3e1cb5f520e17f6886a5a4db170f82b25d00a52c632f.ogg",
+      "bytes": 2382,
+      "sha256": "96cf511ad74cb55b278499245a3f83e903a6b8371b5c6b1a8f0251369b0b1396",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.755
       }
     },
     "5d6cdeac183a40478899ceac6c512684b68e5b14999695b8022db682b7dc03d1": {
@@ -1329,17 +1324,6 @@
         "durationSeconds": 1.542
       }
     },
-    "65ea37ded48804f7becad3d21d5d96ee964b33ca6d339f40e1602a6ee0869432": {
-      "file": "clips/65ea37ded48804f7becad3d21d5d96ee964b33ca6d339f40e1602a6ee0869432.ogg",
-      "bytes": 7046,
-      "sha256": "bdf0bd55e7d80cf78cfa55e4ff07801271309c0f3031f62616fff9de83ec02c4",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 2.311
-      }
-    },
     "662e90940c2a58226b8222736b06619ccb9597702678a8c694c955afb14c8871": {
       "file": "clips/662e90940c2a58226b8222736b06619ccb9597702678a8c694c955afb14c8871.ogg",
       "bytes": 5031,
@@ -1351,59 +1335,15 @@
         "durationSeconds": 1.563
       }
     },
-    "695aa936df8573bf048aa635f55fb921876fe7175ec9b987200e4d04797f257a": {
-      "file": "clips/695aa936df8573bf048aa635f55fb921876fe7175ec9b987200e4d04797f257a.ogg",
-      "bytes": 1779,
-      "sha256": "e94cb83ab56cd7fb443e6611156cdc709bb0412e955902f1ebf346b430feed00",
+    "6b1755de3b08ae40f6af9b73fcc81aaea72142a4b716a111755b28f2a8655412": {
+      "file": "clips/6b1755de3b08ae40f6af9b73fcc81aaea72142a4b716a111755b28f2a8655412.ogg",
+      "bytes": 2496,
+      "sha256": "88084758902120959afcfd8ffc86dc355fbfdd7c642223a869e98f022b65dc8f",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.571
-      }
-    },
-    "6a0d10463ab68a1f83d93fcd1ef64adff7b23ee23f73b6da17478fff5a7aa920": {
-      "file": "clips/6a0d10463ab68a1f83d93fcd1ef64adff7b23ee23f73b6da17478fff5a7aa920.ogg",
-      "bytes": 1949,
-      "sha256": "08f244c04809ae5eb738fcf36d2c70fa505dc769b875581a19c7bc1f69ca420c",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.608
-      }
-    },
-    "6befbcc231fab7f63b907b855096019a89af49a7e0e1ef27de8d5207eb63bf2e": {
-      "file": "clips/6befbcc231fab7f63b907b855096019a89af49a7e0e1ef27de8d5207eb63bf2e.ogg",
-      "bytes": 3381,
-      "sha256": "df632e2ef8d14146188d770e9108994abe33e40786a9cd4b1772d7c8bafac352",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.085
-      }
-    },
-    "6ec4d4d7c454b08e9711386d0aad756027a4d74d1c50461b2ef2275cb3356904": {
-      "file": "clips/6ec4d4d7c454b08e9711386d0aad756027a4d74d1c50461b2ef2275cb3356904.ogg",
-      "bytes": 2222,
-      "sha256": "04a1147f4c0233dacf799df089a60ef5123abe78c4673c9618eef26f529f6718",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.7
-      }
-    },
-    "788c721f18fe13956000967cfa49030fb73af09517f0463059b73a573bb30831": {
-      "file": "clips/788c721f18fe13956000967cfa49030fb73af09517f0463059b73a573bb30831.ogg",
-      "bytes": 2536,
-      "sha256": "06ec2c002623eb3806cdbfb7cf8d04122425df1bf8ee9b125848a2d5cef47770",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.79
+        "durationSeconds": 0.821
       }
     },
     "79d698c419ba208fabc06a8295a6066d6535649bd3b3500c4115ec61a679e1be": {
@@ -1428,26 +1368,26 @@
         "durationSeconds": 1.067
       }
     },
-    "7cbdbf3bdfab1a2e2f900fd1de051bf10d66a67d2a8909a7e3ea5f2bfc6bba00": {
-      "file": "clips/7cbdbf3bdfab1a2e2f900fd1de051bf10d66a67d2a8909a7e3ea5f2bfc6bba00.ogg",
-      "bytes": 1678,
-      "sha256": "030f8254b0c02a0cd725aa596bec232cbc82bcd27c88453c3c7009bbe01afb9d",
+    "7caa89710bf71b48f3f2a81e1a118ac7fffd5aad48bfcf9294f607b3319dfc29": {
+      "file": "clips/7caa89710bf71b48f3f2a81e1a118ac7fffd5aad48bfcf9294f607b3319dfc29.ogg",
+      "bytes": 2044,
+      "sha256": "7f1f4c2de997a00bc97b2ca2ddfdac9cc7d3986434bc2fca023131ac563f1154",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.517
+        "durationSeconds": 0.621
       }
     },
-    "80adcb667593c1ebabfce3f973a8627546b180e42575893714640adecb584217": {
-      "file": "clips/80adcb667593c1ebabfce3f973a8627546b180e42575893714640adecb584217.ogg",
-      "bytes": 2181,
-      "sha256": "aae32083363d91631a59c30b9449d8e67d58e400bd33eb14d85a79aba4dd4e85",
+    "80a0a5ec45f6c1f772201ee8e171d5f89ca7eb027f38ec1b5b33505cdf15460d": {
+      "file": "clips/80a0a5ec45f6c1f772201ee8e171d5f89ca7eb027f38ec1b5b33505cdf15460d.ogg",
+      "bytes": 2401,
+      "sha256": "431803abf5ee1e124dfacef8ba15d4d9aa4076bc00c760972ec45030d16a184f",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.66
+        "durationSeconds": 0.759
       }
     },
     "8117b918a714e42d989bb4e0602ee486a90d7d91424329b2c827027cd6c9e2bc": {
@@ -1461,17 +1401,6 @@
         "durationSeconds": 2.449
       }
     },
-    "85aa0f438b4eecc7bc2befe9e6a538035ffe1490f08e120d2e7ea611213b995f": {
-      "file": "clips/85aa0f438b4eecc7bc2befe9e6a538035ffe1490f08e120d2e7ea611213b995f.ogg",
-      "bytes": 2265,
-      "sha256": "42450783fb2757e758005a22755deb3f4fb6f30e7de4d1053db245850feced68",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.702
-      }
-    },
     "85b83d94e2121ce1ee9ebaaa94ba83f663a561103413961906303fbac02dcff7": {
       "file": "clips/85b83d94e2121ce1ee9ebaaa94ba83f663a561103413961906303fbac02dcff7.ogg",
       "bytes": 3938,
@@ -1481,17 +1410,6 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.233
-      }
-    },
-    "86eb9f54dbf0af98c1b15155c55f413e4b0056b0e828c6a1bba2f08e3778b394": {
-      "file": "clips/86eb9f54dbf0af98c1b15155c55f413e4b0056b0e828c6a1bba2f08e3778b394.ogg",
-      "bytes": 3516,
-      "sha256": "9e977ea193d9645aa50de6249a4414a4c5bd18a719744aff613b5522c173a2aa",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.142
       }
     },
     "87e9ab6818fc8736e89419bb4bf04b1b4b8f626642bf75e4802c7ccb1276172f": {
@@ -1516,15 +1434,26 @@
         "durationSeconds": 2.112
       }
     },
-    "8f37db2ebe7c1e9276acb5b672a453bba73d9dbb90ea047109f6bd34052b31e4": {
-      "file": "clips/8f37db2ebe7c1e9276acb5b672a453bba73d9dbb90ea047109f6bd34052b31e4.ogg",
-      "bytes": 2018,
-      "sha256": "fd117c7f98b180e9db78b13ec3363954b0e0fd66e4fcb627480a65363c3375d6",
+    "8dec7af04fccf2e82e26ebb79a36531b2a614bfdd01845e433dd8b1ac0e3b6f0": {
+      "file": "clips/8dec7af04fccf2e82e26ebb79a36531b2a614bfdd01845e433dd8b1ac0e3b6f0.ogg",
+      "bytes": 3291,
+      "sha256": "fca85ec99860e162d004411e2d6873df48677b6fa0419405855a45295499a86b",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.673
+        "durationSeconds": 1.054
+      }
+    },
+    "8ecd9d313d55cfb4dc8c731533d83519e453e2f431394ffa36c4dadb19e07b64": {
+      "file": "clips/8ecd9d313d55cfb4dc8c731533d83519e453e2f431394ffa36c4dadb19e07b64.ogg",
+      "bytes": 2663,
+      "sha256": "3ec665e43e2f49f6d4d06f70f08d2af92cc4b4d9b42584dafb38390165f79589",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.895
       }
     },
     "8f92317aac817bec15135b6bb807817fe303b35f0f037ebd4d87b150464111b6": {
@@ -1549,15 +1478,26 @@
         "durationSeconds": 1.311
       }
     },
-    "915f448e31a036b1eb5fea907c7b519b33bf70153ac4edadc399d78d8fa2c876": {
-      "file": "clips/915f448e31a036b1eb5fea907c7b519b33bf70153ac4edadc399d78d8fa2c876.ogg",
-      "bytes": 2070,
-      "sha256": "b8dd033829733d0e40addf0fc4a899cdb2af4217e87a50b41e0df04c27505b84",
+    "91e959b6b4588668985979cde2fb774ad089b05e3ffa97538212b12a94c3ae89": {
+      "file": "clips/91e959b6b4588668985979cde2fb774ad089b05e3ffa97538212b12a94c3ae89.ogg",
+      "bytes": 2098,
+      "sha256": "804945fa0aef31b6e42c5d2064e81b26cc2525a114948e37035fcd73a6c4ee3d",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.662
+        "durationSeconds": 0.659
+      }
+    },
+    "9392a342da96bdc84687afcfb0bec76bafb41f91613aef7bb0d264f369328b42": {
+      "file": "clips/9392a342da96bdc84687afcfb0bec76bafb41f91613aef7bb0d264f369328b42.ogg",
+      "bytes": 2392,
+      "sha256": "27090e1634eec1d2b36d1b0d1a5421d6d315f8ee609fa541127b2a287f1bc817",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.804
       }
     },
     "94a7f1543dd9e062be7cd9924bab4dda516a28536564ee0dbe090a1e10420300": {
@@ -1571,15 +1511,15 @@
         "durationSeconds": 4
       }
     },
-    "9695a0a574ba1e537494b0e8369bc0361d3511acc5ca9bad67398acf1f06103a": {
-      "file": "clips/9695a0a574ba1e537494b0e8369bc0361d3511acc5ca9bad67398acf1f06103a.ogg",
-      "bytes": 2902,
-      "sha256": "132d46a27a2cdd991c323d95af309d08f51c1b67918cc9cdb1ad609f8fd5bdec",
+    "94e12a1ac74bdc26542ceb70671865d874e050b0376caf93fc9b0a866c768a54": {
+      "file": "clips/94e12a1ac74bdc26542ceb70671865d874e050b0376caf93fc9b0a866c768a54.ogg",
+      "bytes": 3122,
+      "sha256": "2569c9792784776cad444203c218ff2828f4c6db618e0da10f94d8a39366e7fd",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.912
+        "durationSeconds": 1.022
       }
     },
     "96bb6d1d0794b629911e68afde08e6eb6071bcf2ec691b1aad4f0aee30eb52ab": {
@@ -1593,17 +1533,6 @@
         "durationSeconds": 2.213
       }
     },
-    "97721f0f79e0aaeacb394970eb13143cc7f01d7b9fa62a1f3ee6c79a59dacbd8": {
-      "file": "clips/97721f0f79e0aaeacb394970eb13143cc7f01d7b9fa62a1f3ee6c79a59dacbd8.ogg",
-      "bytes": 2697,
-      "sha256": "7e54e38b4ba4523aa225ea809a50fbe4e5b8e4c0c67499df195388b02656532d",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.879
-      }
-    },
     "9a6a12bf9bc6ac61967097616ab61b628c016643540b0a7b23140c3a96bb2dc8": {
       "file": "clips/9a6a12bf9bc6ac61967097616ab61b628c016643540b0a7b23140c3a96bb2dc8.ogg",
       "bytes": 3846,
@@ -1613,6 +1542,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.243
+      }
+    },
+    "9b4d9066acc86c8bd516c498adb1f0b83fb3edff28301797252218c5354f1f8a": {
+      "file": "clips/9b4d9066acc86c8bd516c498adb1f0b83fb3edff28301797252218c5354f1f8a.ogg",
+      "bytes": 3380,
+      "sha256": "d9dee622f5dbbae9c383978096a5b348b0275d9aadb542fe6f7d48fec12cef52",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.116
       }
     },
     "9b516b81df953f1eb86e0a8aed3c531271962cd9ee85c2fb2aba709ca9215abe": {
@@ -1626,6 +1566,17 @@
         "durationSeconds": 1.628
       }
     },
+    "9b80a6f1a1d0f7049bf353481f0393565f8264dcf51c857e14dd796226cd92c1": {
+      "file": "clips/9b80a6f1a1d0f7049bf353481f0393565f8264dcf51c857e14dd796226cd92c1.ogg",
+      "bytes": 4037,
+      "sha256": "a4b7d8d8831ca99a2fb373e33e21b550090f1ae8b4f06ac3c2c6121a9ff958fb",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.276
+      }
+    },
     "9db6b3fc6c2215dcc4656ca597ade6fd53e9ee99ca83935f188f8c1851a7c337": {
       "file": "clips/9db6b3fc6c2215dcc4656ca597ade6fd53e9ee99ca83935f188f8c1851a7c337.ogg",
       "bytes": 7418,
@@ -1635,6 +1586,39 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 2.383
+      }
+    },
+    "9ecd28148446ff162576bfca0b57eac19aea315847d1b0a1ce044296b7c45a03": {
+      "file": "clips/9ecd28148446ff162576bfca0b57eac19aea315847d1b0a1ce044296b7c45a03.ogg",
+      "bytes": 3670,
+      "sha256": "ab0c7aeadb735f90e7ff27805cda1ceb5d08d24ad5ed2c942c4b2489d27a5b1b",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.195
+      }
+    },
+    "a13b2c8ff6eb6fc9a8c84a9420b8e2527fffd865163a30c8bc2927dbe0fd74d2": {
+      "file": "clips/a13b2c8ff6eb6fc9a8c84a9420b8e2527fffd865163a30c8bc2927dbe0fd74d2.ogg",
+      "bytes": 3217,
+      "sha256": "397f73437b1a7cc1f307f12445aea86de2a0f71c86cbd7ccac238cf2eae229a1",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.056
+      }
+    },
+    "a1b637877c1e5dccc8b68e146de06e38df66c091aeb26138217f9384813c5c80": {
+      "file": "clips/a1b637877c1e5dccc8b68e146de06e38df66c091aeb26138217f9384813c5c80.ogg",
+      "bytes": 2545,
+      "sha256": "12ba1607e9a42e543077fc0326209ac91fa1e68cc89764f56225d1ef98670ee2",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.841
       }
     },
     "a78bf4aaae0ade578845de151fa06ce3c900a5afc34d75300451fb48563d68ea": {
@@ -1648,17 +1632,6 @@
         "durationSeconds": 1.122
       }
     },
-    "a9f0884c77915943ba7891ac596e4d996b00d876a652248fe3a77e6497765ed5": {
-      "file": "clips/a9f0884c77915943ba7891ac596e4d996b00d876a652248fe3a77e6497765ed5.ogg",
-      "bytes": 2790,
-      "sha256": "4483e41988073a3c8d81707975f6ec7d02a7549382a1b879ae2d566e06488c42",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.913
-      }
-    },
     "ad75871ef2e05f8e3ba6f73e688a62860a554198744a61e15fea3f2613983984": {
       "file": "clips/ad75871ef2e05f8e3ba6f73e688a62860a554198744a61e15fea3f2613983984.ogg",
       "bytes": 3841,
@@ -1670,26 +1643,26 @@
         "durationSeconds": 1.228
       }
     },
-    "b15beaeb46b73774f98deada1194c109e11a0c770dd49b1b52b742599e4be579": {
-      "file": "clips/b15beaeb46b73774f98deada1194c109e11a0c770dd49b1b52b742599e4be579.ogg",
-      "bytes": 2666,
-      "sha256": "d1a53ea99be6191e8b401caa55c52ad9e80e62282457a04ec3b6c99e06f3c9d7",
+    "b0c069967c82d484657dc90b3c4113b67f8b792ca8c69a6dcedd16ac239c2774": {
+      "file": "clips/b0c069967c82d484657dc90b3c4113b67f8b792ca8c69a6dcedd16ac239c2774.ogg",
+      "bytes": 3223,
+      "sha256": "952d1cc6e6e24e65ca1bcc622d1ab4b308ffdb53c32bfdff735c5d789499263a",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.825
+        "durationSeconds": 0.973
       }
     },
-    "b1c9f739a110d7966adfce2fd0d9c2370a52d932fbe36c83afcf77b30ababc37": {
-      "file": "clips/b1c9f739a110d7966adfce2fd0d9c2370a52d932fbe36c83afcf77b30ababc37.ogg",
-      "bytes": 2868,
-      "sha256": "813bb839adc2101c2d5a38ff163744962572331579088f6b631345b69c30dd55",
+    "b2381242a20279885636fd80528153bdfddd42df550f3842e5f691c99add7718": {
+      "file": "clips/b2381242a20279885636fd80528153bdfddd42df550f3842e5f691c99add7718.ogg",
+      "bytes": 3894,
+      "sha256": "ced91a26db7d945a4ccb5d8344adc14a79b56b21a9f30abcf7fc2cdc598a3a9d",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.941
+        "durationSeconds": 1.273
       }
     },
     "b286f7464cafe58d9448577b4627f1262e8cd0bad14a6dd5895dbef8f9882d63": {
@@ -1725,37 +1698,48 @@
         "durationSeconds": 0.771
       }
     },
-    "b49ba2c1053e319b03b14637db1454fadf8be1ad1db7cafb4eb9b3a7be2a23f9": {
-      "file": "clips/b49ba2c1053e319b03b14637db1454fadf8be1ad1db7cafb4eb9b3a7be2a23f9.ogg",
-      "bytes": 3429,
-      "sha256": "25613bcb1fdaa132eef9d088cd3a2b327e5a86762b67241ec8769901a6992bec",
+    "b41aca7bcd2cf0830cdbd3d7597d83061f846d6f065c2f4b75795df711c741ac": {
+      "file": "clips/b41aca7bcd2cf0830cdbd3d7597d83061f846d6f065c2f4b75795df711c741ac.ogg",
+      "bytes": 2306,
+      "sha256": "b6f8528a152517fa6b34bdca01edb6228ad962da64adacbbe61d68b963991e14",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.113
+        "durationSeconds": 0.77
       }
     },
-    "b607d2b8428e6528b6cf4d47e641cf172a6233104cad05c97048f9da8b30218a": {
-      "file": "clips/b607d2b8428e6528b6cf4d47e641cf172a6233104cad05c97048f9da8b30218a.ogg",
-      "bytes": 1857,
-      "sha256": "713a7035b506751f8f5c8d88b03da6de8ecd9338a19d61c34e260a0d2d38a505",
+    "b4ab11764c89dc5d81403782a162b365ea487acd2fe351115f7040ef3db33a31": {
+      "file": "clips/b4ab11764c89dc5d81403782a162b365ea487acd2fe351115f7040ef3db33a31.ogg",
+      "bytes": 2819,
+      "sha256": "85cb85b92c2f87bd078f0c116cd14db77e2d3d5621c3b980e89aa5bdbc4e47d9",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.598
+        "durationSeconds": 0.973
       }
     },
-    "b6bb7b3cabeddb193fc4ae25ee785c40df7241e61914dc42da9efe51b373d865": {
-      "file": "clips/b6bb7b3cabeddb193fc4ae25ee785c40df7241e61914dc42da9efe51b373d865.ogg",
-      "bytes": 2353,
-      "sha256": "67a490cdd2c872d608ead0f237bd3280f27cd54760e5fd16a5f86493107d7197",
+    "b4e1389e06a6e1ab06ce4c9592148e95a0727f1775e63cbc4c28af3a27ee010b": {
+      "file": "clips/b4e1389e06a6e1ab06ce4c9592148e95a0727f1775e63cbc4c28af3a27ee010b.ogg",
+      "bytes": 2921,
+      "sha256": "65bc35726e1b8190c28e3f44ba8bd83931de2dfc445c743f6ffc240a1f5fc126",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.792
+        "durationSeconds": 0.929
+      }
+    },
+    "badedf504ef94a7374126374c46341a8c93e16e25b46fcef153979be9a9d3ac7": {
+      "file": "clips/badedf504ef94a7374126374c46341a8c93e16e25b46fcef153979be9a9d3ac7.ogg",
+      "bytes": 3017,
+      "sha256": "01faed801ffd4a88ee292aad58761370a93df79ef662942387135a2cdbb4e733",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.999
       }
     },
     "bdf61428ad8f83814fce1521b99abe667c08bec29e3a79c41dbdff890c1331f0": {
@@ -1769,15 +1753,26 @@
         "durationSeconds": 0.892
       }
     },
-    "c195634f8931e1f7c11c367d623e4fabddd950ef5bb9799fea09a2f5613b54c3": {
-      "file": "clips/c195634f8931e1f7c11c367d623e4fabddd950ef5bb9799fea09a2f5613b54c3.ogg",
-      "bytes": 3386,
-      "sha256": "660e773bf7d366b4fee2e4aa32e6b2dddd0cdb213a2558c2565863332d8282c0",
+    "bee704a578c01b4f366abd7cb4559ec58233091837d8b2969092ea53265cb47c": {
+      "file": "clips/bee704a578c01b4f366abd7cb4559ec58233091837d8b2969092ea53265cb47c.ogg",
+      "bytes": 3002,
+      "sha256": "be21892ebd80c0ef2e5ee9474e7991b511c1a8a303481cdcbb39043f44aa7b8a",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.071
+        "durationSeconds": 0.99
+      }
+    },
+    "c132e5068f0942639df1809a6558cfc7dfcc2e56125c96f4858fec29410af8d6": {
+      "file": "clips/c132e5068f0942639df1809a6558cfc7dfcc2e56125c96f4858fec29410af8d6.ogg",
+      "bytes": 2204,
+      "sha256": "b14374b5c00c6b2275949cc699acf636bdc373f814100290409cbb954504f7aa",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.67
       }
     },
     "c2271af3cfa0bd424ebcc090a784e3ff46aa0386b9eb9391910cf40eb55dba5b": {
@@ -1802,15 +1797,26 @@
         "durationSeconds": 1.778
       }
     },
-    "c56186369067984dfa1c52dd13db64ca4a4a4d6aad113a4e3349b8d16a4601e8": {
-      "file": "clips/c56186369067984dfa1c52dd13db64ca4a4a4d6aad113a4e3349b8d16a4601e8.ogg",
-      "bytes": 2542,
-      "sha256": "f6aae5e4a064735e192bb71b88ffaf6ae46448857c9cd993e33727be8294e82a",
+    "c4f1a566e1a8b0361a610a3239a1cd1e2f7f2a2dbdf53b1b9867fa77b77aba5d": {
+      "file": "clips/c4f1a566e1a8b0361a610a3239a1cd1e2f7f2a2dbdf53b1b9867fa77b77aba5d.ogg",
+      "bytes": 2190,
+      "sha256": "b2129dda83514990a487a2757eff808f4e44a67829e83eb0f424d8f6eadb7934",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.822
+        "durationSeconds": 0.728
+      }
+    },
+    "c5f085c2adbfa74aa00a113512ab387e751898e458ed86b4fbd9613b9ffe934c": {
+      "file": "clips/c5f085c2adbfa74aa00a113512ab387e751898e458ed86b4fbd9613b9ffe934c.ogg",
+      "bytes": 3029,
+      "sha256": "8ac9294b7b3fbe29d1358256b95de5abaf29a44358009709d670ee07737c0dde",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1
       }
     },
     "c6be3f8643adddcb48c3f7d886eba915c152730801f894a12c4ba9aad5110d01": {
@@ -1824,15 +1830,15 @@
         "durationSeconds": 0.984
       }
     },
-    "c7dcb9362b3daddff7b8b89978c0ef272e60d0698240e9cfb298e2baa1fbf8c0": {
-      "file": "clips/c7dcb9362b3daddff7b8b89978c0ef272e60d0698240e9cfb298e2baa1fbf8c0.ogg",
-      "bytes": 2116,
-      "sha256": "f0ca36ff7408796004f6481527e38ecf1d4ecae23d1c3f87356115a9be338f4c",
+    "c801b69fed158ed5e42f283797b426916155a76a05a7b44eb077610931586c34": {
+      "file": "clips/c801b69fed158ed5e42f283797b426916155a76a05a7b44eb077610931586c34.ogg",
+      "bytes": 2612,
+      "sha256": "192d1145fbc73469916dc6f55d20916631620067c0dd925edaf35cc0ae127e06",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.664
+        "durationSeconds": 0.804
       }
     },
     "c9befd19b94e1ff767bae3ca4d6d9e750fed3b6e93a34fc1ba3a7916d5460e06": {
@@ -1868,6 +1874,17 @@
         "durationSeconds": 1.39
       }
     },
+    "cc7db709f285d42eb6dc12f8fd49f3667db3acf688262d606ba12fa8119491a5": {
+      "file": "clips/cc7db709f285d42eb6dc12f8fd49f3667db3acf688262d606ba12fa8119491a5.ogg",
+      "bytes": 3401,
+      "sha256": "3f533003a359cfa767a633bf9d21109d5d464978997465ab015cb3f1b847c8b1",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.102
+      }
+    },
     "cc9ec55ba71203a09b1fc0eb52a062a7a940b50ddbf191e450de3487ba8da16d": {
       "file": "clips/cc9ec55ba71203a09b1fc0eb52a062a7a940b50ddbf191e450de3487ba8da16d.ogg",
       "bytes": 3588,
@@ -1879,37 +1896,59 @@
         "durationSeconds": 1.15
       }
     },
-    "ccebe92c8a65217cb0addf3466226b7a48a89dfec82551b2431f296640c822ee": {
-      "file": "clips/ccebe92c8a65217cb0addf3466226b7a48a89dfec82551b2431f296640c822ee.ogg",
-      "bytes": 3136,
-      "sha256": "d362d2663e0c2638e3c96a4ba2c3f54b3531013c8c915aaed7162da5f21e0727",
+    "cd3818226590f5b380f63d2703895c1bd81a74cad7be96785f5915d3c7bdc921": {
+      "file": "clips/cd3818226590f5b380f63d2703895c1bd81a74cad7be96785f5915d3c7bdc921.ogg",
+      "bytes": 2689,
+      "sha256": "a2c67a18a7c1e4570d0eacdc07f053ec89fa335c58dfb6064dd2405b0c41ab51",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.987
+        "durationSeconds": 0.893
       }
     },
-    "d248845728c5e7b5aecb4801db6204f823e869b51cecd145663580fb953d3a17": {
-      "file": "clips/d248845728c5e7b5aecb4801db6204f823e869b51cecd145663580fb953d3a17.ogg",
-      "bytes": 1707,
-      "sha256": "7bff67be9dd0288d7ebc34fb5e61745e02f39f319a88a09ccdd8b33a01210460",
+    "ce72860b7221488050bcc683a88b758a035c8f8eee66a4e38dc1cf341a706079": {
+      "file": "clips/ce72860b7221488050bcc683a88b758a035c8f8eee66a4e38dc1cf341a706079.ogg",
+      "bytes": 2495,
+      "sha256": "af360b2b89d2ae3d965d14a711e0f938182391da3926afdf66953c83b0a9499a",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.537
+        "durationSeconds": 0.798
       }
     },
-    "d7cab3a9776cca4388585cbe3dde5f6d5b881007a1e0dbaf5706104b18476d82": {
-      "file": "clips/d7cab3a9776cca4388585cbe3dde5f6d5b881007a1e0dbaf5706104b18476d82.ogg",
-      "bytes": 2450,
-      "sha256": "080929ce15402cfa976a77abd9d2e48bfc42577ad985ce27b6e945ef2d244f60",
+    "d0efc8ef25949d0d349f0d8145c318645e46015d12e57aacad0241613989bfd0": {
+      "file": "clips/d0efc8ef25949d0d349f0d8145c318645e46015d12e57aacad0241613989bfd0.ogg",
+      "bytes": 3199,
+      "sha256": "333a4d6c37bae3563bbcad9781ec86fa67209b4cefb8374b115b243fd910c248",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.778
+        "durationSeconds": 1.063
+      }
+    },
+    "d2816d4cfbc8389d1388380a3780d328c37d1b4c6b0ad237ceeec826cc7b6d23": {
+      "file": "clips/d2816d4cfbc8389d1388380a3780d328c37d1b4c6b0ad237ceeec826cc7b6d23.ogg",
+      "bytes": 3405,
+      "sha256": "a9171028cdda3cb9e25d1009a123f2c61ef90ab01f11793f0dfa6210c9b6f960",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.084
+      }
+    },
+    "d3d01d2f8af19691bef9a354d85f101e64e6acede8211db05e875f5ae990f217": {
+      "file": "clips/d3d01d2f8af19691bef9a354d85f101e64e6acede8211db05e875f5ae990f217.ogg",
+      "bytes": 2676,
+      "sha256": "4f8f4839e07a7e6856c2363091eff303ed834fa51bb2252938714a150e6fc95f",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.885
       }
     },
     "d802734748eab9ee8e58b5c6dd6778ce0f352292f03254e322699a017636179e": {
@@ -1923,70 +1962,103 @@
         "durationSeconds": 0.868
       }
     },
-    "d8eb1ac7e2a7ca79c861c69d9250ca511619fa260a53b602ae94db3eca2b0de5": {
-      "file": "clips/d8eb1ac7e2a7ca79c861c69d9250ca511619fa260a53b602ae94db3eca2b0de5.ogg",
-      "bytes": 2646,
-      "sha256": "88075b2a933f2b000a63088e05020f6818b48ee11412f2c457d8ac8d8a197349",
+    "d8b90b52bd677f6a284c02c09708654e81bce2f2c1b4a46960617a52dbb0a9a1": {
+      "file": "clips/d8b90b52bd677f6a284c02c09708654e81bce2f2c1b4a46960617a52dbb0a9a1.ogg",
+      "bytes": 3240,
+      "sha256": "a052d232f2dbf8d9ba75fd4544e999ac8b4233a9e9e18eea1118121cd4867053",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.852
+        "durationSeconds": 1.003
       }
     },
-    "dd14fdc39137a3907d9d95fff5fa7690e796f243fd62c8862a2f40bb37dcecc6": {
-      "file": "clips/dd14fdc39137a3907d9d95fff5fa7690e796f243fd62c8862a2f40bb37dcecc6.ogg",
-      "bytes": 4201,
-      "sha256": "c3504531ae4208baacb0799a9dde477e05c160f7423740af3552145e65368711",
+    "da4955d80e387931bb7cb64c6c6f0ac70907625c0fd53f7d2d0c18468c09a997": {
+      "file": "clips/da4955d80e387931bb7cb64c6c6f0ac70907625c0fd53f7d2d0c18468c09a997.ogg",
+      "bytes": 2622,
+      "sha256": "1eb0de72d43957d498e7eef7486a677660fec25249a17fa80ec59fc7dbf3d261",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.368
+        "durationSeconds": 0.857
       }
     },
-    "dd83f36155f771b7327a2daad167b436d492ec66be934bf01fa46c9f7a42b9b6": {
-      "file": "clips/dd83f36155f771b7327a2daad167b436d492ec66be934bf01fa46c9f7a42b9b6.ogg",
-      "bytes": 1960,
-      "sha256": "8ab07760243a2765526206ec8fe2f7072820c74e9de1c6b6b8057f1aa94c5a02",
+    "e083975f805064584eeb0e2dccffdb101e6caf8f7d088891538028765ed2b2a2": {
+      "file": "clips/e083975f805064584eeb0e2dccffdb101e6caf8f7d088891538028765ed2b2a2.ogg",
+      "bytes": 1701,
+      "sha256": "d44ef82bfb11117537a68ec8f23c6cb4514241f5c001257e0dada38b5eaa4708",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.615
+        "durationSeconds": 0.531
       }
     },
-    "de45b499651e21480af151563f9db57cc05cdd57102a357927fbc1b931833d07": {
-      "file": "clips/de45b499651e21480af151563f9db57cc05cdd57102a357927fbc1b931833d07.ogg",
-      "bytes": 1902,
-      "sha256": "d12eb03ccc6f71e2deddfc609c32f87e81ef6f59a81fe8e49b2555c4cc2a23e6",
+    "e21200215d8a2e61596b8ff02976ffdf0dcb52a96723f1afbccb2a7901c6b1ea": {
+      "file": "clips/e21200215d8a2e61596b8ff02976ffdf0dcb52a96723f1afbccb2a7901c6b1ea.ogg",
+      "bytes": 3444,
+      "sha256": "3e2c9c3215bfd8e266ba8e1d8a7a4ece61ef65f485e7e089bb49e4bd8a3688f6",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.603
+        "durationSeconds": 1.117
       }
     },
-    "e61f0b59897cb49485d4a739774caa2218235d3b0e32a88c3bd5cd8ea7331bc7": {
-      "file": "clips/e61f0b59897cb49485d4a739774caa2218235d3b0e32a88c3bd5cd8ea7331bc7.ogg",
-      "bytes": 2103,
-      "sha256": "5c04e181cdc2afa5f67eb280a16cc6afe816dc9d7987de6fb1b24a2e883ddcf6",
+    "e24ad7e7902a14cff32fbe351890c307d28d3f5e6b1102abf4ad6be3f01e8b7e": {
+      "file": "clips/e24ad7e7902a14cff32fbe351890c307d28d3f5e6b1102abf4ad6be3f01e8b7e.ogg",
+      "bytes": 2455,
+      "sha256": "bd482de4775ccae56e298935d8c9c708a0f499dc9a54a259f6b1c763fb31ba25",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.696
+        "durationSeconds": 0.756
       }
     },
-    "e911bce9825f64d473938bb26fb2f20045b87dbe9b1a0e291522362fa2b65c82": {
-      "file": "clips/e911bce9825f64d473938bb26fb2f20045b87dbe9b1a0e291522362fa2b65c82.ogg",
-      "bytes": 2738,
-      "sha256": "010f17e009fea1d37cd63d1b601dc810c2bfd9940b08e6c3373e49c70bc6f4a7",
+    "e2f81bc3d287d8a227a215ba71b38b684083938d8431d608ffdec10991c67f97": {
+      "file": "clips/e2f81bc3d287d8a227a215ba71b38b684083938d8431d608ffdec10991c67f97.ogg",
+      "bytes": 4070,
+      "sha256": "dd98517ffa14e09a976d63e320f05c15609980fc487a4c2cafa67bb4341f5ff5",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.866
+        "durationSeconds": 1.326
+      }
+    },
+    "e312862e2080ff46d5cd0d850e5796c7d943cd377fb550ac643a6f29e0e8537a": {
+      "file": "clips/e312862e2080ff46d5cd0d850e5796c7d943cd377fb550ac643a6f29e0e8537a.ogg",
+      "bytes": 2275,
+      "sha256": "dd7d24c118cdb40eff2ace08564b1a4eeaf6c85453ce846d188e76feb5f4e218",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.731
+      }
+    },
+    "e8bf2248c7dd7f7462541b43e8293eb8ddc5d83ea610751f57b2f57f189e94af": {
+      "file": "clips/e8bf2248c7dd7f7462541b43e8293eb8ddc5d83ea610751f57b2f57f189e94af.ogg",
+      "bytes": 2045,
+      "sha256": "4b15e737b7cdd62de3fb3fe0fe7b042ad7e73a6314ab3457b2e80ebaf07ee2b7",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.641
+      }
+    },
+    "e98ac6d9e968a83ed1b66d50b73c929f8ea9d7810fbeb2d204f69042110b378e": {
+      "file": "clips/e98ac6d9e968a83ed1b66d50b73c929f8ea9d7810fbeb2d204f69042110b378e.ogg",
+      "bytes": 2554,
+      "sha256": "999343138a2d66b4dd99bb8ef6d1cd2b96cc311bbbcd9763a43433cb3114cb9f",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.831
       }
     },
     "ecd47b60c791f723f5d5457e4e6166c54f9347c92084079de6106447d291208d": {
@@ -2000,26 +2072,15 @@
         "durationSeconds": 1.089
       }
     },
-    "f2d0621fe79369d72224e9815b0c3cce475695974ad19dcdcdb33fff19bae256": {
-      "file": "clips/f2d0621fe79369d72224e9815b0c3cce475695974ad19dcdcdb33fff19bae256.ogg",
-      "bytes": 3098,
-      "sha256": "1358ceb87a116009b5371527154a4ee65ed3042a743e3e0cfeca4dd9efa6395c",
+    "f14eb6ed79c371942ae82d50dc9c2b383b663283b33588a0fb0c10b980bd0d74": {
+      "file": "clips/f14eb6ed79c371942ae82d50dc9c2b383b663283b33588a0fb0c10b980bd0d74.ogg",
+      "bytes": 3118,
+      "sha256": "94bd875fc205cfa20f9a67bb8dc4266e35ecf73383d7462f488f8e756a5a150f",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.995
-      }
-    },
-    "f659eb9922c32739bff040eaa5a4c35f03bb79cf6cc274c9a8ab15f39a5336b1": {
-      "file": "clips/f659eb9922c32739bff040eaa5a4c35f03bb79cf6cc274c9a8ab15f39a5336b1.ogg",
-      "bytes": 2360,
-      "sha256": "1621fe59476b2e21511d2ae12ea734282c828533357424f6e123616e086317fe",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.783
+        "durationSeconds": 1.051
       }
     },
     "f889109d4a4ceac7fd712e87d55987c2a01efa74dc684754ace785ac5fe55816": {
@@ -2033,6 +2094,28 @@
         "durationSeconds": 1.064
       }
     },
+    "fc955dc85570ac639a5e330746e53b7c3c9d4186275205e1aba9aa0b95b3a2f4": {
+      "file": "clips/fc955dc85570ac639a5e330746e53b7c3c9d4186275205e1aba9aa0b95b3a2f4.ogg",
+      "bytes": 2324,
+      "sha256": "a32847e728dc3f7f7572b189d3498df019045b11df250a434f9c365e6e7c33e5",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.744
+      }
+    },
+    "fd95a9f6c88f40ff846a5d037dd02833f57e7686b6821633476d0389254f5ec5": {
+      "file": "clips/fd95a9f6c88f40ff846a5d037dd02833f57e7686b6821633476d0389254f5ec5.ogg",
+      "bytes": 2388,
+      "sha256": "3aa62d698abf6609f7934d90f9f651f23ed649687acd6dfe8efc7fc4b5f1afc9",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.786
+      }
+    },
     "fe49bc2c4da5621b32ae0d05dbc3c53a7eeb7392d2bf86c70cb4a570a0c665c4": {
       "file": "clips/fe49bc2c4da5621b32ae0d05dbc3c53a7eeb7392d2bf86c70cb4a570a0c665c4.ogg",
       "bytes": 2952,
@@ -2044,26 +2127,15 @@
         "durationSeconds": 0.932
       }
     },
-    "fe56db70c2a21a2c31db433a1414a46de42b2cb332d4aa8b313ef0eb0bda3793": {
-      "file": "clips/fe56db70c2a21a2c31db433a1414a46de42b2cb332d4aa8b313ef0eb0bda3793.ogg",
-      "bytes": 3273,
-      "sha256": "45beb2b1ec850c1c34adce6d5979116b5fd57f003e3feea5208b8d0e5436a04e",
+    "ff179fd5dc5958cd5a27a06c24b4d8fbd3be61a959877af8eb44aa8e04f8f96d": {
+      "file": "clips/ff179fd5dc5958cd5a27a06c24b4d8fbd3be61a959877af8eb44aa8e04f8f96d.ogg",
+      "bytes": 2491,
+      "sha256": "f700e6f831aa67817839ad9b69122f1e0eb4d87ad7cb77024c898b7196967a74",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.079
-      }
-    },
-    "fff00cb8ce10447b0a288d6155cb5a8c6542d07b0aa77f0f41f284fa1c43c87f": {
-      "file": "clips/fff00cb8ce10447b0a288d6155cb5a8c6542d07b0aa77f0f41f284fa1c43c87f.ogg",
-      "bytes": 2608,
-      "sha256": "fa7054c5dcb139e6f4aa97bbafa4c7ed313d5fda5fba5fceeba8c05fa220b88c",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 0.818
+        "durationSeconds": 0.822
       }
     }
   }

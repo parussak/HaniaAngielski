@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {mkdtemp,rm,readFile,writeFile,readdir,stat,utimes} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {createPlan,canonical,validateConfig} from '../scripts/audio/plan.mjs';
+import {createPlan,canonical,validateConfig,synthesisText} from '../scripts/audio/plan.mjs';
 import {generateFiles,checkGenerated,inside} from '../scripts/audio/files.mjs';
 import {inspectOpus,oggCRC} from '../scripts/audio/ogg.mjs';
 import {sceneModule} from './fixtures/scenes.ts';
@@ -74,4 +74,23 @@ test('audio: nieznane pliki i ścieżki spoza katalogu nie są automatycznie usu
 test('audio Food: wszystkie słowa i kwestie scen mają odwołania bez zmiany materiałów',()=>{
  const before=structuredClone(foodModules),plan=createPlan(foodModules,template),m=foodModules.find(v=>v.id==='unit-2-food')!,refs=plan.header.modules[0].references;
  assert.equal(refs.filter((r:any)=>r.kind==='word').length,m.words.length);assert.equal(refs.filter((r:any)=>r.kind==='scene-line').length,m.scenes!.reduce((n,s)=>n+s.lines.length,0));assert.ok(refs.every((r:any)=>r.text&&!r.text.includes('___')));assert.ok(refs.some((r:any)=>r.text==='an apple'));assert.deepEqual(foodModules,before);
+});
+
+test('audio: hasło z jednego słowa idzie do Pipera z przecinkiem, a tekst i klucz odtwarzacza się nie zmieniają (D-66)',()=>{
+ const rule={singleWordSuffix:',',articles:['a','an','the']};
+ assert.equal(synthesisText('an apple',rule),'an apple,');
+ assert.equal(synthesisText('Cool!',rule),'Cool,');
+ assert.equal(synthesisText('bread',rule),'bread,');
+ assert.equal(synthesisText('a bottle of water',rule),'a bottle of water');
+ assert.equal(synthesisText('Anything else?',rule),'Anything else?');
+ assert.equal(synthesisText('bread',undefined),'bread');
+ const m=material(),plain=config(),off=structuredClone(plain);delete off.profiles.cori.synthesis;
+ const with_=createPlan([m],plain),without=createPlan([m],off);
+ const apple=(p:any)=>p.header.modules[0].references.find((r:any)=>r.key.endsWith(':apple'));
+ assert.equal(apple(with_).text,'an apple');assert.equal(apple(with_).spoken,'an apple,');
+ assert.equal(with_.clips.find((c:any)=>c.id===apple(with_).clip).spoken,'an apple,');
+ assert.notEqual(apple(with_).clip,apple(without).clip);
+ const lines=(p:any)=>p.header.modules[0].references.filter((r:any)=>r.kind==='scene-line').map((r:any)=>r.clip);
+ assert.deepEqual(lines(with_),lines(without),'kwestie scen zachowują swoje nagrania');
+ const bad=config();bad.profiles.cori.synthesis={singleWordSuffix:'!!',articles:[]};assert.throws(()=>validateConfig(bad));
 });

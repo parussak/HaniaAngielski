@@ -75,6 +75,7 @@ Daty: D-01–D-40 ustalono do 10 listopada 2026 r.
 | D-63 | 13.11.2026 | Odsłuch odpowiedzi w klasycznych fiszkach i quizie po sprawdzeniu. | wdrożone | [Nauka](03-nauka.md) |
 | D-64 | 13.11.2026 | Każda luka wymaga próby; poprawki we wszystkich formach; ocena 0–3 kocich łapek. | wdrożone | [Nauka](03-nauka.md) |
 | D-65 | 13.11.2026 | Tempo słówek 0,95×, dialogów 0,90×. | do próby na telefonie | [Nauka](03-nauka.md) |
+| D-66 | 18.11.2026 | Hasło z jednego słowa (także z rodzajnikiem) generator podaje Piperowi z przecinkiem na końcu zamiast kropki lub wykrzyknika — w odsłuchu próbek brzmiało pewniej i bez przeciągania. Tekst w aplikacji bez zmian. | wdrożone w generatorze; brzmienie do odsłuchu | [Generowanie audio](generowanie-audio.md) |
 
 ## Pytania otwarte i rozstrzygnięte
 

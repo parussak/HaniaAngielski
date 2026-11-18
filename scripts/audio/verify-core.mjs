@@ -123,12 +123,34 @@ export function formatReport(assessed,{model,recognition=true,date=new Date().to
  const out=[`# Kontrola nagrań — ${date}`,'',
   `Sprawdzono ${assessed.length} klipów. Podejrzane: **${suspects.length}**. Tylko rodzajnik do odsłuchu: ${articles.length}.`,
   recognition?`Rozpoznawanie: ${model}. Próg różnicy tekstu: ${Math.round(thresholds.difference*100)}% znaków.`:'Rozpoznawanie mowy pominięte — tylko pomiary czasu, ciszy i przesterowania.',
-  'Decyzja dla każdego podejrzanego: wygenerować ponownie, zmienić tekst albo zostawić (po odsłuchu).',''];
+  'Decyzja dla każdego podejrzanego: wygenerować ponownie, zmienić tekst albo zostawić (po odsłuchu).',
+  'Odsłuch: otwórz audio/.verify/odsluch/index.html (numer pliku = numer w raporcie).',''];
  if(suspects.length){out.push('## Podejrzane',...suspects.map((c,i)=>entry(c,i+1)),'');}
  else out.push('Brak podejrzanych nagrań.','');
  if(articles.length){out.push('## Do odsłuchu: rodzajnik',...articles.map(c=>`- ${c.keys[0]}: oczekiwane ${quote(c.text)}, usłyszane ${quote(c.heard.trim())}`),'');}
  out.push('Ograniczenia: Whisper bywa niedokładny przy pojedynczych słowach i rodzajnikach; dobre rozpoznanie nie gwarantuje ładnego brzmienia. Raport wskazuje, co odsłuchać — nie zastępuje odsłuchu.');
  return out.join('\n')+'\n';
+}
+
+/** Klipy do odsłuchu z czytelnymi nazwami: numer z raportu + tekst („01-bread.ogg”, „r1-a-vegetable.ogg”). */
+export function listeningFiles(assessed){
+ const name=(prefix,c)=>`${prefix}-${normalizeWords(c.text).join('-').slice(0,40)||'klip'}.ogg`;
+ const suspects=assessed.filter(c=>c.suspect),articles=assessed.filter(c=>!c.suspect&&c.notes.length);
+ return [...suspects.map((c,i)=>({clip:c,name:name(String(i+1).padStart(2,'0'),c),group:'Podejrzane'})),
+  ...articles.map((c,i)=>({clip:c,name:name(`r${i+1}`,c),group:'Do odsłuchu: rodzajnik'}))];
+}
+
+const html=text=>String(text??'').replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[ch]);
+/** Prosta strona z odtwarzaczami (otwierana z dysku w przeglądarce). */
+export function listeningPage(files,{date=new Date().toISOString().slice(0,10)}={}){
+ const rows=files.map(f=>`<tr><td>${html(f.name.replace(/\.ogg$/,''))}</td><td><b>${html(f.clip.text)}</b></td><td>${f.clip.heard===undefined?'—':html(f.clip.heard)}</td><td>${html(f.clip.reasons.concat(f.clip.notes).join('; '))}</td><td><audio controls preload="none" src="${html(f.name)}"></audio></td></tr>`);
+ return `<!doctype html><meta charset="utf-8"><title>Odsłuch nagrań ${date}</title>
+<style>body{font:16px system-ui,sans-serif;margin:16px}table{border-collapse:collapse}td,th{border-bottom:1px solid #ccc;padding:6px 8px;text-align:left;vertical-align:middle}</style>
+<h1>Odsłuch nagrań — ${date}</h1><p>Numer = numer w raporcie <code>audio/.verify/raport.md</code>. To kopie; oryginały są w <code>audio/generated/clips/</code>.</p>
+<table><tr><th>Nr</th><th>Oczekiwane</th><th>Usłyszane</th><th>Powód</th><th>Odsłuch</th></tr>
+${rows.join('\n')||'<tr><td colspan="5">Brak nagrań do odsłuchu.</td></tr>'}
+</table>
+`;
 }
 
 /** Średnia pewność tokenów tekstowych z pełnego JSON-u whisper-cli (-ojf). */
