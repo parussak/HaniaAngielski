@@ -60,5 +60,6 @@
   "journeyPaths": [
     "02-food/sciezka.json",
     "02-food/sciezka-praktyka.json"
-  ]
+  ],
+  "houseRoom": "kitchen"
 }

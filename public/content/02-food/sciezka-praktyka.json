@@ -3,6 +3,9 @@
   "moduleId": "unit-2-food",
   "id": "food-w-praktyce",
   "title": "Kocia kuchnia — Food w praktyce",
+  "rewards": {
+    "decorations": ["fruit-bowl", "cat-toaster", "mugs", "table"]
+  },
   "stages": [
     {
       "id": "kuchnia",

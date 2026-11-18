@@ -2,6 +2,10 @@
   "version": 1,
   "moduleId": "unit-2-food",
   "title": "Przygotowania do kociego pikniku",
+  "rewards": {
+    "decorations": ["bowls", "lemonade", "picnic-basket", "picnic-blanket"],
+    "badge": "Odznaka kociego kucharza"
+  },
   "stages": [
     {
       "id": "food",
