@@ -3,6 +3,8 @@ import { heroArt } from './hero-art.ts';
 import type { NextStep } from '../next-step.ts';
 import type { PwaState } from '../pwa.ts';
 import { button, e, icon } from '../ui.ts';
+import type { courseProgressOverview } from '../learning/progress-overview.ts';
+import { weekDaysView } from './progress.ts';
 function pwaCard(pwa: PwaState) {
     const status = pwa.ready ? 'Materiały gotowe do nauki bez internetu.' : pwa.preparing ? 'Pobieramy materiały do nauki bez internetu…' : pwa.failed ? 'Nie udało się pobrać materiałów. Połącz się z internetem i spróbuj ponownie.' : 'Otwórz aplikację z internetem, aby przygotować naukę offline.';
     return `<section class="pwa-card" aria-label="Instalacja i nauka offline"><img src="./icons/cat-192.png" alt="" width="56" height="56"><div><h2>${pwa.installed ? 'Twoja aplikacja do nauki' : 'Małe kroki na Twoim telefonie'}</h2><p data-offline-status>${status}${!pwa.online ? ' Teraz jesteś offline.' : ''}</p><p>Bez internetu ćwiczenia i zapis wyników działają na urządzeniu. Zalogowane konto wyśle wyniki po połączeniu, gdy aplikacja jest otwarta lub przy kolejnym uruchomieniu.</p>${pwa.canInstall && !pwa.installed ? button('pwa-install', 'Zainstaluj aplikację') : ''}${pwa.failed ? button('pwa-prepare', 'Pobierz materiały ponownie', 'secondary') : ''}${!pwa.installed ? '<details><summary>Jak zainstalować na Androidzie?</summary><p>W Chrome otwórz menu ⋮ → Dodaj do ekranu głównego → Zainstaluj. Nazwa opcji może różnić się na telefonie. Jeśli masz już starszy skrót, instaluj z tego samego adresu i przeglądarki — nie czyść danych strony.</p></details>' : ''}</div></section>`;
@@ -53,18 +55,22 @@ function nextStepCard(step: NextStep, modules: Module[], cat: string) {
 }
 export interface HomeViewProps {
     courseContext?: string;
+    week?: Pick<ReturnType<typeof courseProgressOverview>, 'week' | 'archived'>;
+    unfinishedSession?: string;
     name: string | null | undefined;
     modules: Module[];
     step: NextStep;
     pwa: PwaState;
     cat: string;
 }
-export function homeView({ name, modules, step, pwa, cat, courseContext = '' }: HomeViewProps) {
+export function homeView({ name, modules, step, pwa, cat, courseContext = '', week, unfinishedSession = '' }: HomeViewProps) {
     return `<div class="home-start">${updateBanner(pwa)}<section class="welcome">
     <div>
     <h1>Dobrze Cię widzieć${name ? `, ${e(name)}` : ''}!</h1>
     <p>Na co masz dzisiaj ochotę?</p>
     ${courseContext}
+    ${week ? `<section class="home-week" aria-labelledby="home-week-heading"><h2 id="home-week-heading">Twój tydzień nauki</h2>${weekDaysView(week.week)}${week.archived ? '<small>Na podstawie dostępnej historii sesji.</small>' : ''}</section>` : ''}
+    ${unfinishedSession}
     </div>
     </section>${nextStepCard(step, modules, cat)}<section class="hero home-hero">
     <div>

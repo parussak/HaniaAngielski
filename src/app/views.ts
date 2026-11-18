@@ -23,6 +23,7 @@ import {warmupView} from '../views/warmup.ts';
 import { trainingPreparationView } from '../views/training-preparation.ts';
 import {catInvitation} from '../views/cat-invitation.ts';
 import {moduleFinished} from '../learning/recall.ts';
+import { courseProgressOverview } from '../learning/progress-overview.ts';
 export function createViews(state: AppState, sync: ProgressSync, syncLabel: () => string) {
     function decorativeCat(id: string) {
         const cat = state.catCatalog?.cats.find(c => c.id === id);
@@ -50,8 +51,10 @@ export function createViews(state: AppState, sync: ProgressSync, syncLabel: () =
     }
     function homeForCats() { return courseContext(state)+houseView(state.progress,currentCourse(state)!.id,state.chosenRoom,state.chosenDecoration,decorativeCat,state.modules,state.journeys,state.journeyIssues,state.houseTab,state.houseEditing); }
     function home() {
-        const step = getNextStep(state.modules, state.journeys, state.progress, currentCourse(state)?.id);
-        return homeView({ name: state.user ? state.user.displayName : 'Haniu', modules: state.modules, step, pwa, cat: decorativeCat(step.catId), courseContext: courseContext(state) + unfinishedCourseSession(state, true) });
+        const course = currentCourse(state);
+        const step = getNextStep(state.modules, state.journeys, state.progress, course?.id);
+        const week = course && courseProgressOverview(state.modules, state.journeys, state.journeyIssues, state.progress, course.id, state.olderSessions);
+        return homeView({ name: state.user ? state.user.displayName : 'Haniu', modules: state.modules, step, pwa, cat: decorativeCat(step.catId), courseContext: courseContext(state), week, unfinishedSession: unfinishedCourseSession(state, true) });
     }
     function journeyList() { return courseContext(state) + renderJourneyList(courseModules(state), courseJourneys(state), state.progress,state.journeyIssues,currentCourse(state)?.id); }
     function moduleList() { return courseContext(state) + renderModuleList(courseModules(state)) + button('course-practice','Ćwicz cały poznany materiał →','secondary'); }

@@ -16,6 +16,29 @@ async function show(page:Page){await page.getByRole('button',{name:'Moje postęp
 async function exported(page:Page){await openBackup(page);const wait=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).click();return JSON.parse(readFileSync((await(await wait).path())!,'utf8')).progress as Progress;}
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 
+test('ekran główny pokazuje dni nauki między kursem a kolejnym krokiem', async ({ page }) => {
+ await page.setViewportSize({ width: 320, height: 740 });
+ await page.clock.install({ time: new Date(2026, 10, 11, 12) });
+ const p = emptyProgress();
+ addSession(p, modules, m, 9, true);
+ addSession(p, modules, m, 11);
+ addSession(p, modules, m, 13);
+ await restore(page, p);
+ await page.getByRole('button', { name: 'Moja nauka', exact: true }).click();
+
+ const week = page.getByRole('region', { name: 'Twój tydzień nauki' });
+ await expect(week.getByRole('listitem')).toHaveCount(7);
+ await expect(week.getByRole('listitem', { name: 'poniedziałek, 9 listopada: dzień nauki' })).toBeVisible();
+ await expect(week.getByRole('listitem', { name: 'wtorek, 10 listopada: dzień bez zapisanej sesji' })).toBeVisible();
+ await expect(week.getByRole('listitem', { name: 'środa, 11 listopada: dzień nauki' })).toHaveAttribute('aria-current', 'date');
+ await expect(week.getByRole('listitem', { name: 'piątek, 13 listopada: przed Tobą' })).toBeVisible();
+ await expect(page.locator('.welcome .course-context + .home-week')).toBeVisible();
+ const nextStep = await page.locator('.next-step-card').boundingBox();
+ const calendar = await week.boundingBox();
+ expect(nextStep!.y).toBeGreaterThan(calendar!.y + calendar!.height);
+ expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+});
+
 test('telefon: spokojny pusty widok, tydzień i szczegóły bez presji; czytelność przy 320 px',async({page})=>{
  await page.goto('./');await show(page);await expect(page.getByText('Tu wyrosną Twoje postępy',{exact:true})).toBeVisible();await expect(page.locator('.progress-days li')).toHaveCount(7);await expect(page.locator('.progress-details')).not.toHaveAttribute('open');await expect(page.getByText('Dokładność pierwszych odpowiedzi:',{exact:false})).not.toBeVisible();
  for(const width of [320,390,430]){await page.setViewportSize({width,height:740});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);for(const b of await page.locator('.progress-page button').all())if(await b.isVisible())expect((await b.boundingBox())!.height).toBeGreaterThanOrEqual(44);}

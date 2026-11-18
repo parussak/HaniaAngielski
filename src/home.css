@@ -3,6 +3,12 @@
 .home-start .welcome{margin:0 0 24px;align-items:flex-start}
 .home-start .welcome h1{font-size:clamp(25px,3.5vw,34px);line-height:1.3;margin:0 0 8px}
 .home-start .welcome p{margin:0;font-size:14px!important}
+.home-start .welcome>div{width:100%;min-width:0}
+.home-week{max-width:440px;margin-top:12px;padding:12px;border:1px solid #e1d6ed;border-radius:14px;background:#fff;color:#523d78}
+.home-week h2{margin:0;font-size:16px;line-height:1.4}
+.home-week .progress-days{margin:8px 0 0}
+.home-week .progress-days li{gap:3px}
+.home-week>small{display:block;margin-top:8px}
 .home-start .home-hero{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:12px 28px;align-items:center;min-height:0;padding:30px;margin:0 0 22px}
 .home-hero>div:first-child{display:contents}
 .home-hero .tag,.home-hero h2,.home-hero p,.home-hero .primary{grid-column:1;justify-self:start}
