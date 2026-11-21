@@ -7,7 +7,7 @@ import {openBackup} from './navigation.ts';
 test('stacja za samą mapę Technology, link do zamkniętej mapy i zakupy po odświeżeniu',async({page})=>{
  const map:Journey=JSON.parse(readFileSync(new URL('../../public/content/03-technology/sciezka.json',import.meta.url),'utf8'));
  const p=emptyProgress();
- p.adventure=freshAdventure();p.adventure.earned=20;
+ p.adventure=freshAdventure();p.adventure.earned=30;
  for(const entry of lessons(map))p.adventure.completed[entry.key]={at:'2026-11-20T12:00:00Z'};
  await page.goto('./');await openBackup(page);
  await page.locator('#import-file').setInputFiles({name:'rooms.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
@@ -29,7 +29,18 @@ test('stacja za samą mapę Technology, link do zamkniętej mapy i zakupy po od�
  await page.getByRole('button',{name:'Domek',exact:true}).click();await station.click();
  await expect(page.locator('.room-background')).toHaveAttribute('src',/rover-station.svg$/);
  await page.getByRole('button',{name:'Kup za 8 ★'}).click();
+ for(const [id,price] of [['moon-rock',4],['toolbox',6],['helper-robot',12]] as const){
+  await page.locator(`.decoration-card[data-id="${id}"]`).click();
+  await page.getByRole('button',{name:`Kup za ${price} ★`,exact:true}).click();
+ }
+ await expect(page.locator('.star-wallet')).toHaveText('0 ★');
+ await page.getByRole('button',{name:'Na podłodze z boku',exact:true}).click();
  await page.reload();await expect(page.locator('.room-decoration[data-id="rover"]')).toBeVisible();
+ for(const [id,slot] of [['moon-rock','bench-left'],['toolbox','bench-right'],['helper-robot','floor-side']]){
+  const item=page.locator(`.room-decoration[data-id="${id}"]`);
+  await expect(item).toHaveClass(new RegExp('slot-'+slot));
+  await expect.poll(()=>item.locator('img').evaluate((img:HTMLImageElement)=>img.naturalWidth)).toBeGreaterThan(0);
+ }
  await page.locator('.cat-house').screenshot({path:'test-results/rover-station.png'});
  await page.getByRole('button',{name:'← Cały domek'}).click();await expect(station).toBeVisible();
 });

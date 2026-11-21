@@ -16,6 +16,8 @@ export const slots:{id:string;name:string;layer:HouseLayer;legacy?:boolean;rooms
  {id:'table-left',name:'Lewa strona stolika',layer:'objects',rooms:['kitchen'],support:'table'},
  {id:'table-right',name:'Prawa strona stolika',layer:'objects',rooms:['kitchen'],support:'table'},
  {id:'counter',name:'Na blacie',layer:'objects',rooms:['kitchen']},
+ {id:'bench-left',name:'Lewa strona blatu',layer:'objects',rooms:['rover-station']},
+ {id:'bench-right',name:'Prawa strona blatu',layer:'objects',rooms:['rover-station']},
  {id:'floor-side',name:'Na podłodze z boku',layer:'objects'},
 ];
 export const slotIds=slots.map(slot=>slot.id);
@@ -34,6 +36,9 @@ export const decorations:Decoration[]=[
  {id:'picnic-blanket',name:'Koc piknikowy',price:12,slot:'rug',rooms:['salon'],reward:true},
  {id:'fruit-bowl',name:'Misa owoców',price:6,slot:'shelf',rooms:['salon','kitchen'],reward:true},
  {id:'rover',name:'Łazik badawczy',price:8,slot:'front',rooms:['rover-station']},
+ {id:'moon-rock',name:'Skała księżycowa',price:4,slot:'bench-left',rooms:['rover-station']},
+ {id:'toolbox',name:'Skrzynka mechaniczki',price:6,slot:'bench-right',rooms:['rover-station']},
+ {id:'helper-robot',name:'Robot pomocnik',price:12,slot:'right',rooms:['rover-station']},
  {id:'lantern',name:'Lampion piknikowy',price:6,slot:'front',rooms:['picnic']},
  {id:'cat-toaster',name:'Toster z kocimi uszami',price:10,slot:'window',rooms:['kitchen'],reward:true},
  {id:'mugs',name:'Półeczka z kubkami',price:12,slot:'shelf',rooms:['kitchen'],reward:true},
@@ -54,7 +59,7 @@ export interface Room {id:string;name:string;inside:string;choose:string;image:s
 export const rooms:Room[]=[
  {id:'salon',name:'Koci salonik',inside:'W saloniku',choose:'Koci salonik',image:'room.svg',objectAreas:[{bottom:[3,5],center:[10,Infinity]},{bottom:[6,9],center:[-Infinity,9]}]},
  {id:'picnic',name:'Weranda piknikowa',inside:'Na werandzie',choose:'Werandę piknikową',image:'picnic.svg',objectAreas:[]},
- {id:'rover-station',name:'Stacja z warsztatem łazików',inside:'W stacji',choose:'Stację z warsztatem łazików',image:'rover-station.svg',objectAreas:[{bottom:[7,9],center:[12,22]}]},
+ {id:'rover-station',name:'Stacja z warsztatem łazików',inside:'W stacji',choose:'Stację z warsztatem łazików',image:'rover-station.svg',anchors:{'bench-left':{x:12,y:5},'bench-right':{x:16,y:5}},objectAreas:[{bottom:[7,9],center:[12,22]}]},
  {id:'kitchen',name:'Kocia kuchnia',inside:'W kuchni',choose:'Kocią kuchnię',image:'kitchen.svg',className:'kitchen-room',anchors:{window:{x:10,y:5},shelf:{x:16,y:5},rug:{x:9,y:9}},objectAreas:[{bottom:[7,9],center:[9,Infinity]}]},
 ];
 export const rewardRooms=rooms.filter(r=>r.id!=='salon');

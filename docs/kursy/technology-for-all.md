@@ -47,5 +47,6 @@ Wordlist na s. 47 podaje `be sick` jako „mieć mdłości”. W czytance na s. 
 - Moduł nie wymusza zapisu nazw urządzeń z `a/an`. Zasady rodzajników pozostają poza zakresem tego działu.
 - Mapa ma granatowy motyw stacji kosmicznej. Zapowiedź lekcji powiększa ilustrację etapu, a nagłówki sekcji pokazują tytuły czytanek. Fiszki mają ilustracje przedmiotów i scenek. Na zakończenie lekcji pojawia się jeden z pięciu kotków z kosmicznym wyposażeniem.
 - Etap „Technologia” ma ilustrację kota przy laptopie, a etap „Obóz kosmiczny” pokazuje kotki budujące rakietę. We wstępach do czytanek kosmicznych widać kotki w symulatorze i kota astronautę w śpiworze przymocowanym do ściany. Ukończenie mapy odkrywa stację z warsztatem łazików. Można w niej ustawiać łazik badawczy.
+- W sklepie stacji Hania może kupić skałę księżycową (4 ★), skrzynkę mechaniczki (6 ★), łazik badawczy (8 ★) i robota pomocnika (12 ★). Na blacie są dwa osobne miejsca na próbkę i narzędzia.
 
 Przed publikacją potrzebna jest recenzja językowa przez człowieka oraz sprawdzenie działania na telefonie i offline. Pełne dane wydania książki wymagają potwierdzenia.
