@@ -20,6 +20,9 @@
   },
   "modules": [
     {"id": "unit-2-food", "profile": "cori"},
-    {"id": "unit-3-technology", "profile": "cori"}
+    {"id": "unit-3-technology", "profile": "cori", "pronunciation": {
+      "word:go-to-bed": {"text": "go to bed", "spoken": "go-to-bed,"},
+      "word:tv": {"text": "TV", "spoken": "tee vee,"}
+    }}
   ]
 }

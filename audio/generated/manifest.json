@@ -1472,7 +1472,8 @@
           "key": "unit-3-technology@1:word:go-to-bed",
           "kind": "word",
           "text": "go to bed",
-          "clip": "1eea55d7e60ead8eff39ad242dc67e322afe867ae9d3b1476ce8fdd1ae87bb32"
+          "spoken": "go-to-bed,",
+          "clip": "782e0591d9b3df59adcc6685c3d516a108942022ec32b9b8572d6b0278cc82dc"
         },
         {
           "key": "unit-3-technology@1:word:good-at",
@@ -1839,8 +1840,8 @@
           "key": "unit-3-technology@1:word:tv",
           "kind": "word",
           "text": "TV",
-          "spoken": "TV,",
-          "clip": "a8c0b19a142f11d776fbd08d80796bad893ba93ac45d53cc1c09f33f7e6e5b3c"
+          "spoken": "tee vee,",
+          "clip": "196620f6bec548a207c8ca2a8729b3915ad42fe59a7a2ee893d497fe5adfa95a"
         },
         {
           "key": "unit-3-technology@1:word:wait-a-minute",
@@ -2203,6 +2204,17 @@
         "durationSeconds": 1.111
       }
     },
+    "196620f6bec548a207c8ca2a8729b3915ad42fe59a7a2ee893d497fe5adfa95a": {
+      "file": "clips/196620f6bec548a207c8ca2a8729b3915ad42fe59a7a2ee893d497fe5adfa95a.ogg",
+      "bytes": 2477,
+      "sha256": "82965bf819d577d92b5f9e86aeedeb82ef57d8aa86c3b97ecfbbf8fb2e8dfc1a",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.77
+      }
+    },
     "1ae860d7bd994c1f71470e9db5f55a288715ee65b5ad7beb0c271bc9e20c457a": {
       "file": "clips/1ae860d7bd994c1f71470e9db5f55a288715ee65b5ad7beb0c271bc9e20c457a.ogg",
       "bytes": 9182,
@@ -2234,17 +2246,6 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 4.6
-      }
-    },
-    "1eea55d7e60ead8eff39ad242dc67e322afe867ae9d3b1476ce8fdd1ae87bb32": {
-      "file": "clips/1eea55d7e60ead8eff39ad242dc67e322afe867ae9d3b1476ce8fdd1ae87bb32.ogg",
-      "bytes": 7766,
-      "sha256": "a0241f30476f5f8e785f08a50d9a11b635379e7bbc6e8095d9f67a1510265ede",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 2.641
       }
     },
     "1f0dfa87949e3f5d6c21b775e3be465a6fec13c4befa1cad0c9f1e174e325c4d": {
@@ -3083,6 +3084,17 @@
         "durationSeconds": 1.06
       }
     },
+    "782e0591d9b3df59adcc6685c3d516a108942022ec32b9b8572d6b0278cc82dc": {
+      "file": "clips/782e0591d9b3df59adcc6685c3d516a108942022ec32b9b8572d6b0278cc82dc.ogg",
+      "bytes": 2702,
+      "sha256": "688b40d530d566bc0848b129a0743a7269dcdd270999d40c965df38e2205234c",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.862
+      }
+    },
     "79d698c419ba208fabc06a8295a6066d6535649bd3b3500c4115ec61a679e1be": {
       "file": "clips/79d698c419ba208fabc06a8295a6066d6535649bd3b3500c4115ec61a679e1be.ogg",
       "bytes": 5580,
@@ -3576,17 +3588,6 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.925
-      }
-    },
-    "a8c0b19a142f11d776fbd08d80796bad893ba93ac45d53cc1c09f33f7e6e5b3c": {
-      "file": "clips/a8c0b19a142f11d776fbd08d80796bad893ba93ac45d53cc1c09f33f7e6e5b3c.ogg",
-      "bytes": 3236,
-      "sha256": "fe9a42a2f359eb9df35ca4fdf3f68a8528ba7528c4a74a7647fb29f8527163ff",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.049
       }
     },
     "aa81adb0e3787df19eba03fd8749cd156057fac583c6ebc49edda6793af793b0": {
