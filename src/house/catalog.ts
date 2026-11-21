@@ -15,6 +15,8 @@ export const slots:{id:string;name:string;layer:HouseLayer;legacy?:boolean;rooms
  {id:'shelf-right',name:'Prawa strona półki',layer:'objects'},
  {id:'table-left',name:'Lewa strona stolika',layer:'objects',rooms:['kitchen'],support:'table'},
  {id:'table-right',name:'Prawa strona stolika',layer:'objects',rooms:['kitchen'],support:'table'},
+ {id:'picnic-table-left',name:'Lewa strona stolika',layer:'objects',rooms:['picnic'],support:'picnic-table'},
+ {id:'picnic-table-right',name:'Prawa strona stolika',layer:'objects',rooms:['picnic'],support:'picnic-table'},
  {id:'counter',name:'Na blacie',layer:'objects',rooms:['kitchen']},
  {id:'bench-left',name:'Lewa strona blatu',layer:'objects',rooms:['rover-station']},
  {id:'bench-right',name:'Prawa strona blatu',layer:'objects',rooms:['rover-station']},
@@ -40,11 +42,14 @@ export const decorations:Decoration[]=[
  {id:'toolbox',name:'Skrzynka mechaniczki',price:6,slot:'bench-right',rooms:['rover-station']},
  {id:'helper-robot',name:'Robot pomocnik',price:12,slot:'right',rooms:['rover-station']},
  {id:'lantern',name:'Lampion piknikowy',price:6,slot:'front',rooms:['picnic']},
+ {id:'wild-strawberries',name:'Doniczka z poziomkami',price:4,slot:'right',rooms:['picnic']},
+ {id:'watermelon-tray',name:'Taca z arbuzem',price:6,slot:'floor-side',rooms:['picnic']},
+ {id:'picnic-table',name:'Niski stolik piknikowy',price:12,slot:'rug',rooms:['picnic']},
  {id:'cat-toaster',name:'Toster z kocimi uszami',price:10,slot:'window',rooms:['kitchen'],reward:true},
  {id:'mugs',name:'Półeczka z kubkami',price:12,slot:'shelf',rooms:['kitchen'],reward:true},
  {id:'table',name:'Stolik z krzesełkami',price:18,slot:'rug',rooms:['kitchen'],reward:true},
 ];
-export const decorationLayer=(id:string):HouseLayer=>['pillow','picnic-blanket'].includes(id)?'textiles':['scratcher','basket','picnic-basket','table'].includes(id)?'furniture':'objects';
+export const decorationLayer=(id:string):HouseLayer=>['pillow','picnic-blanket'].includes(id)?'textiles':['scratcher','basket','picnic-basket','table','picnic-table'].includes(id)?'furniture':'objects';
 // Existing positions remain readable and movable, including unusual old layouts.
 export const canUseSlot=(id:string,slot:string,room:string)=>{
  const target=slots.find(s=>s.id===slot);
@@ -58,7 +63,7 @@ export interface ObjectArea {bottom:[number,number];center:[number,number]}
 export interface Room {id:string;name:string;inside:string;choose:string;image:string;className?:string;anchors?:Record<string,{x:number;y:number}>;objectAreas:ObjectArea[]}
 export const rooms:Room[]=[
  {id:'salon',name:'Koci salonik',inside:'W saloniku',choose:'Koci salonik',image:'room.svg',objectAreas:[{bottom:[3,5],center:[10,Infinity]},{bottom:[6,9],center:[-Infinity,9]}]},
- {id:'picnic',name:'Weranda piknikowa',inside:'Na werandzie',choose:'Werandę piknikową',image:'picnic.svg',objectAreas:[]},
+ {id:'picnic',name:'Weranda piknikowa',inside:'Na werandzie',choose:'Werandę piknikową',image:'picnic.svg',className:'picnic-room',anchors:{rug:{x:7,y:9}},objectAreas:[]},
  {id:'rover-station',name:'Stacja z warsztatem łazików',inside:'W stacji',choose:'Stację z warsztatem łazików',image:'rover-station.svg',anchors:{'bench-left':{x:12,y:5},'bench-right':{x:16,y:5}},objectAreas:[{bottom:[7,9],center:[12,22]}]},
  {id:'kitchen',name:'Kocia kuchnia',inside:'W kuchni',choose:'Kocią kuchnię',image:'kitchen.svg',className:'kitchen-room',anchors:{window:{x:10,y:5},shelf:{x:16,y:5},rug:{x:9,y:9}},objectAreas:[{bottom:[7,9],center:[9,Infinity]}]},
 ];

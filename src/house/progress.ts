@@ -5,7 +5,7 @@ export {courseForModule} from '../learning/scope.ts';
 import {lessons,type Journey,type JourneyIssue} from '../learning/journey.ts';
 import {plannedJourney} from '../learning/section-plan.ts';
 import {decorations,legacyCourse,slots,canUseSlot} from './catalog.ts';
-import {placementError,itemRoom,supportingItem,boxFor,type Position} from './layout.ts';
+import {placementError,itemRoom,supportingItem,boxFor,displayed,type Position} from './layout.ts';
 export interface Home {
  earned:number;
  purchases:Record<string,{cost:number;slot:string|null;room?:string;position?:Position}>;
@@ -57,13 +57,19 @@ export function purchase(p:Progress,id:string,course=legacyCourse,room='salon'){
 }
 export function slotReady(h:Home|undefined,slot:string,room:string){
  const support=slots.find(s=>s.id===slot)?.support;
- return !support||!!h?.purchases[support]&&h.purchases[support].slot==='rug'&&(h.purchases[support].room??'salon')===room;
+ if(!support)return true;
+ const table=h?.purchases[support];
+ return !!table&&itemRoom(h,support)===room&&(support==='picnic-table'?displayed(table):table.slot==='rug');
 }
 export function place(p:Progress,id:string,slot:string|null,course=legacyCourse,room='salon'){
  const h=homeFor(p,course),item=h?.purchases[id],d=decorations.find(d=>d.id===id);
  if(!h||!item||!d||!roomAvailable(p,course,room)||itemRoom(h,id)!==room||(slot!==null&&(!canUseSlot(id,slot,room)||!slotReady(h,slot,room))))return false;
  const other=Object.entries(h.purchases).find(([key,v])=>key!==id&&slot!==null&&(v.room??'salon')===room&&v.slot===slot);
- const children=Object.entries(h.purchases).filter(([key,v])=>v.position&&(supportingItem(h,key,v.position,room)===id||!!other&&supportingItem(h,key,v.position,room)===other[0]));
+ const children=Object.entries(h.purchases).filter(([key,v])=>{
+  if((v.room??'salon')!==room)return false;
+  const support=v.position?supportingItem(h,key,v.position,room):slots.find(s=>s.id===v.slot)?.support;
+  return !!support&&(support===id&&(item.slot!==slot||!!item.position)||support===other?.[0]);
+ });
  if(other){other[1].slot=null;delete other[1].position;}
  delete item.position;
  item.slot=slot;if(room==='salon')delete item.room;else item.room=room;

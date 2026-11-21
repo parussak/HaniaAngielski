@@ -6,6 +6,23 @@ import {sizeFor,boxFor,placementError,inArea} from '../src/house/layout.ts';
 import {slots} from '../src/house/catalog.ts';
 import {engineModules} from './fixtures/engine.ts';
 const course='angielski-hani';
+test('weranda: blat działa po przestawieniu stolika, a jego schowanie odkłada oba drobiazgi',()=>{
+ const p=emptyProgress();creditStars(p,28);
+ const h=homeFor(p)!;h.rooms=['picnic'];
+ for(const id of ['wild-strawberries','watermelon-tray','lantern'])assert.ok(purchase(p,id,course,'picnic'));
+ assert.equal(place(p,'lantern','picnic-table-right',course,'picnic'),false);
+ assert.ok(purchase(p,'picnic-table',course,'picnic'));
+ assert.ok(moveOnGrid(p,'picnic-table',{x:3,y:8},course,'picnic'));
+ assert.ok(place(p,'lantern','picnic-table-right',course,'picnic'));
+ assert.ok(moveOnGrid(p,'watermelon-tray',{x:4,y:7},course,'picnic'));
+ assert.equal(boxFor(h,'lantern','picnic').x,7);
+ assert.deepEqual(validateBackup(backup(p)).progress,p);
+ assert.ok(place(p,'picnic-table',null,course,'picnic'));
+ for(const id of ['watermelon-tray','lantern']){
+  assert.equal(h.purchases[id].slot,null);assert.equal(h.purchases[id].position,undefined);
+ }
+ assert.equal(stars(p),0);
+});
 function setup(ids=['pillow']){
  const p=emptyProgress();creditStars(p,200);const h=homeFor(p)!;h.rooms=['kitchen'];h.unlockedItems=['fruit-bowl','table','bowls','picnic-blanket'];
  for(const id of ids){assert.ok(purchase(p,id,course,id==='table'?'kitchen':'salon'));h.purchases[id].slot=null;}

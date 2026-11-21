@@ -44,3 +44,31 @@ test('stacja za samą mapę Technology, link do zamkniętej mapy i zakupy po od�
  await page.locator('.cat-house').screenshot({path:'test-results/rover-station.png'});
  await page.getByRole('button',{name:'← Cały domek'}).click();await expect(station).toBeVisible();
 });
+
+test('weranda: zakupy i dwa osobne miejsca na stoliku po odświeżeniu',async({page})=>{
+ const p=emptyProgress();p.adventure={...freshAdventure(),earned:28,rooms:['picnic']};
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('./');await openBackup(page);
+ await page.locator('#import-file').setInputFiles({name:'weranda.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});
+ await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
+ await page.getByRole('button',{name:'Domek',exact:true}).click();
+ await page.getByRole('button',{name:'Weranda piknikowa',exact:true}).click();
+ for(const [id,price] of [['wild-strawberries',4],['watermelon-tray',6],['picnic-table',12],['lantern',6]] as const){
+  await page.locator(`.decoration-card[data-id="${id}"]`).click();
+  await page.getByRole('button',{name:`Kup za ${price} ★`,exact:true}).click();
+ }
+ await page.getByRole('button',{name:'Prawa strona stolika',exact:true}).click();
+ await page.locator('.decoration-card[data-id="watermelon-tray"]').click();
+ await page.getByRole('button',{name:'Lewa strona stolika',exact:true}).click();
+ await page.reload();
+ await expect(page.locator('.star-wallet')).toHaveText('0 ★');
+ const tray=page.locator('.room-decoration[data-id="watermelon-tray"]');
+ const lamp=page.locator('.room-decoration[data-id="lantern"]');
+ await expect(tray).toHaveClass(/slot-picnic-table-left/);
+ await expect(lamp).toHaveClass(/slot-picnic-table-right/);
+ const a=(await tray.boundingBox())!,b=(await lamp.boundingBox())!;
+ expect(a.x+a.width).toBeLessThanOrEqual(b.x+1);
+ const room=page.locator('.cat-house');
+ await room.locator('img').evaluateAll(images=>Promise.all(images.map(image=>(image as HTMLImageElement).decode())));
+ await room.screenshot({path:'test-results/picnic-veranda.png'});
+});

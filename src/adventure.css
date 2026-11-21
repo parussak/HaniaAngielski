@@ -63,6 +63,8 @@
 .kitchen-room .slot-shelf-left{left:48%;top:12%}
 .kitchen-room .slot-shelf-right{left:76%;top:12%}
 .kitchen-room .cat-olus{left:12%;top:62%}
+.picnic-room .cat-olus{left:5%;top:60%}
+.picnic-room .cat-maja{left:63%;top:56%}
 .kitchen-room .cat-maja{left:71%;top:63%}
 .house-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 16px}
 .house-tabs button{min-height:48px;flex:1}

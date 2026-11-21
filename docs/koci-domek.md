@@ -14,6 +14,8 @@ Pierwsze ukończenie mapy na stałe odkrywa jej pokój. Przycisk „Zajrzyj do n
 | Kocia kuchnia — Food w praktyce | Kocia kuchnia |
 | Technology for all | Stacja z warsztatem łazików |
 
+Na werandzie można kupić doniczkę z poziomkami (4 ★), tacę z arbuzem (6 ★), lampion (6 ★) i niski stolik piknikowy (12 ★). Na ustawionym stoliku są dwa miejsca. Po przesunięciu lub schowaniu stolika stojące na nim rzeczy wracają do schowka.
+
 ## Stan obecny — siatka i własne wyposażenie, D-44–D-45
 
 ### Nagrody i przypisanie wyposażenia
