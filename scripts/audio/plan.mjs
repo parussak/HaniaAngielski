@@ -15,11 +15,17 @@ export const normalizeText=normalizeSpeechText;
 const id=value=>typeof value==='string'&&/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
 const primary=lang=>lang.toLowerCase().split(/[-_]/)[0];
 const fail=message=>{throw Error(`Audio: ${message}`);};
+// Reference inside a module, without revision: word:<id>, scene:<id>:line:<n>, reading:<id>:sentence:<id>.
+const pronunciationKey=/^(?:word:[a-z0-9-]+|scene:[a-z0-9-]+:line:\d+|reading:[a-z0-9-]+:sentence:[a-z0-9-]+)$/;
 const file=value=>value&&typeof value.file==='string'&&/^[a-zA-Z0-9_.-]+(?:\/[a-zA-Z0-9_.-]+)*$/.test(value.file)&&!value.file.split('/').some(v=>v==='.'||v==='..')&&/^[a-f0-9]{64}$/.test(value.sha256);
 export function validateConfig(config){
  if(config?.version!==1||typeof config.defaultToolsDirectory!=='string'||!file(config.tools?.piper)||!file(config.tools?.ffmpeg)||!config.profiles||!Array.isArray(config.modules)||!config.modules.length)fail('niepoprawna konfiguracja generatora.');
  const seen=new Set();
- for(const target of config.modules){if(!id(target.id)||seen.has(target.id)||!id(target.profile)||!Object.hasOwn(config.profiles,target.profile))fail('niepoprawny lub powtórzony moduł/profil.');seen.add(target.id);}
+ for(const target of config.modules){
+  if(!id(target.id)||seen.has(target.id)||!id(target.profile)||!Object.hasOwn(config.profiles,target.profile))fail('niepoprawny lub powtórzony moduł/profil.');seen.add(target.id);
+  const o=target.pronunciation;
+  if(o!==undefined&&(!o||typeof o!=='object'||Array.isArray(o)||!Object.entries(o).every(([k,v])=>pronunciationKey.test(k)&&v&&typeof v==='object'&&Object.keys(v).length===2&&[v.text,v.spoken].every(t=>typeof t==='string'&&t.trim()&&t.length<=1000))))fail(`niepoprawne nadpisania wymowy: ${target.id}.`);
+ }
  for(const [key,p] of Object.entries(config.profiles)){
   if(!id(key)||!p||typeof p.voice!=='string'||!p.voice.trim()||typeof p.language!=='string'||!/^\w+(?:[-_]\w+)*$/.test(p.language)||!file(p.model)||!file(p.modelConfig)||typeof p.source!=='string')fail('niepoprawny głos.');
   const i=p.inference,e=p.encoding,f=p.processing;
@@ -48,25 +54,29 @@ export function createPlan(modules,input){
   const m=modules.find(m=>m.id===target.id),p=config.profiles[target.profile];
   if(!m?.languageCode||primary(m.languageCode)!==primary(p.language))fail(`brak modułu lub głos nie pasuje do języka: ${target.id}.`);
   profiles[target.profile]=p;
-  const references=[];
-  const add=(key,kind,text,extra={})=>{
+  const references=[],overrides=new Map(Object.entries(target.pronunciation??{}));
+  const add=(key,kind,text,extra,local)=>{
    text=normalizeText(text);if(!text||text.length>1000||text.includes('___'))fail(`niepełny tekst: ${key}.`);
+   const override=overrides.get(local);overrides.delete(local);
+   // The expected text guards against a stale override after the lesson text is edited.
+   if(override&&normalizeText(override.text)!==text)fail(`nadpisanie wymowy ${target.id} ${local} dotyczy tekstu „${override.text}”, a materiał ma „${text}”.`);
    const fingerprint={generatorVersion,language:m.languageCode,voice:p.voice,voiceLanguage:p.language,model:p.model.sha256,modelConfig:p.modelConfig.sha256,tools:{piper:config.tools.piper.sha256,ffmpeg:config.tools.ffmpeg.sha256},inference:p.inference,encoding:p.encoding,processing:p.processing};
-   const spoken=kind==='word'?synthesisText(text,p.synthesis):text,said=spoken!==text?{spoken}:{};
+   const spoken=override?normalizeText(override.spoken):kind==='word'?synthesisText(text,p.synthesis):text,said=spoken!==text?{spoken}:{};
    const clip=hash(canonical({text,...said,...fingerprint}));
    clips.set(clip,{id:clip,text,language:m.languageCode,profile:target.profile,...said});references.push({key,kind,text,...said,clip,...extra});
   };
-  for(const w of m.words){const key=keyFor(m,'word',w.id);add(key,'word',vocabularyFullAnswer(questionFor(modules,{key,moduleId:m.id,id:w.id,version:w.rev??1,type:'word',input:'text'})));}
+  for(const w of m.words){const key=keyFor(m,'word',w.id);add(key,'word',vocabularyFullAnswer(questionFor(modules,{key,moduleId:m.id,id:w.id,version:w.rev??1,type:'word',input:'text'})),{},`word:${w.id}`);}
   for(const scene of m.scenes??[]){
    let gap=0;
    scene.lines.forEach((line,index)=>{
     const text=line.text.replace(/___/g,()=>{const gapId=scene.gapIds[gap++],q=m.exercises.find(q=>q.id===gapId);if(!q?.answers?.[0])fail(`brak odpowiedzi sceny ${scene.id}.`);return q.answers[0];});
-    add(`${m.id}:scene:${scene.id}:line:${index}`,'scene-line',text,{sceneId:scene.id,line:index,speaker:line.speaker});
+    add(`${m.id}:scene:${scene.id}:line:${index}`,'scene-line',text,{sceneId:scene.id,line:index,speaker:line.speaker},`scene:${scene.id}:line:${index}`);
    });
    if(gap!==scene.gapIds.length)fail(`niezgodne luki sceny ${scene.id}.`);
   }
   // D-68: every sentence of a reading, as it is shown; questions and translations are not recorded.
-  for(const reading of m.readings??[])for(const sentence of reading.sentences)add(`${m.id}:reading:${reading.id}:sentence:${sentence.id}`,'reading-sentence',sentence.text,{readingId:reading.id,sentence:sentence.id});
+  for(const reading of m.readings??[])for(const sentence of reading.sentences)add(`${m.id}:reading:${reading.id}:sentence:${sentence.id}`,'reading-sentence',sentence.text,{readingId:reading.id,sentence:sentence.id},`reading:${reading.id}:sentence:${sentence.id}`);
+  if(overrides.size)fail(`nadpisanie wymowy bez hasła w module ${target.id}: ${[...overrides.keys()].join(', ')}.`);
   references.sort((a,b)=>a.key.localeCompare(b.key));
   plannedModules.push({moduleId:m.id,courseId:m.courseId,language:m.languageCode,profile:target.profile,references});
  }

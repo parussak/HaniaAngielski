@@ -13,7 +13,7 @@ Plan nagrań obejmuje pełne formy haseł, kwestie scen z lukami uzupełnionymi 
 ## Granice odpowiedzialności
 
 - `public/content/` pozostaje jedynym miejscem redakcji materiału. Generator korzysta ze wspólnego odczytu materiałów i istniejącej reguły pełnej odpowiedzi, zamiast kopiować słówka lub zasady a/an.
-- `audio/config.json` określa moduły, głos, parametry i wersje narzędzi poprzez sumy SHA-256. Nie zawiera kopii treści lekcji ani ścieżki konkretnego użytkownika.
+- `audio/config.json` określa moduły, głos, parametry i wersje narzędzi poprzez sumy SHA-256. Nie zawiera kopii treści lekcji ani ścieżki konkretnego użytkownika — wyjątkiem są pojedyncze nadpisania wymowy (punkt 6 niżej), które powtarzają tekst hasła jako zabezpieczenie.
 - `scripts/audio/` odpowiada za plan tekstów, generowanie, kontrolę i pliki wynikowe. Aplikacja nie importuje generatora.
 - `audio/generated/` zawiera gotowe nagrania i manifesty, przeznaczone do repozytorium. Źródło pozostaje **poza `public/`**. W D-60 budowanie kopiuje zweryfikowane klipy do `dist/audio/` wraz z lekkim indeksem; pełny manifest pozostaje poza publikacją.
 - Piper, jego biblioteki, modele głosu i ffmpeg pozostają poza projektem. Ścieżkę można podać lokalnie; nie kopiujemy setek MB narzędzi do repozytorium.
@@ -25,8 +25,17 @@ Plan nagrań obejmuje pełne formy haseł, kwestie scen z lukami uzupełnionymi 
 3. Przy kolejnym uruchomieniu sprawdza sumy istniejących plików, zachowuje prawidłowe i generuje tylko brakujące lub uszkodzone. Niezmieniony zestaw nie jest ponownie zapisywany.
 4. Zachowuje parametry zatwierdzonych próbek: długość fonemów 1,08; odstęp między zdaniami 0,25 s; przycięcie nadmiaru ciszy i wyrównanie głośności. Od D-65 słówka odtwarzają się próbnie z mnożnikiem 0,95, dialogi 0,90; dodatkowe „Wolniej” stosuje kolejne 0,7. Te mnożniki należą do odtwarzacza (`src/speech/tempo.ts`), a nie obróbki generatora. Wolniejsza wersja nie jest osobnym plikiem.
 5. **Pojedyncze słowa (D-66):** hasło z jednego słowa, także z rodzajnikiem z listy profilu (`a`, `an`, `the`), trafia do Pipera z przecinkiem zamiast końcowej kropki lub wykrzyknika („bread” → „bread,”, „Cool!” → „Cool,”). Bez tego Piper czasem przeciągał słowo do kilku sekund lub je zniekształcał; próba 18 listopada 2026 (10 podejrzanych słówek, po 5 wersji) i odsłuch Pauliny wskazały przecinek jako najlepszy wariant. Kropka pogarszała część słów („jam.”, „put.” do 1,5–3 s). Ustawienie: `synthesis` w profilu w `audio/config.json`. Manifest zapisuje tekst podany Piperowi jako `spoken`; wyświetlany tekst i klucz odtwarzacza się nie zmieniają, a kwestie scen zachowują swoje nagrania. Przecinek nie gwarantuje dobrej wymowy (np. „cool” nadal brzmi trochę jak „pool”).
-6. Przy błędzie nie zastępuje poprzedniego kompletnego zestawu. Po udanej aktualizacji usuwa wyłącznie stare pliki zarządzanego zestawu; nie czyści dowolnych katalogów ani nieznanych plików. Blokuje jednoczesne uruchomienia.
-7. Oddzielna kontrola `npm run audio:check` wykrywa brakujące, nieaktualne, uszkodzone i osierocone nagrania bez uruchamiania syntezatora. W pierwotnym D-59 kontrola była osobnym poleceniem. Od D-60 budowanie wykonuje tę kontrolę przed publikacją plików.
+6. **Nadpisanie wymowy:** gdy hasło, kwestia sceny lub zdanie czytanki brzmi źle przy każdej syntezie, a wyświetlanego tekstu nie wolno zmieniać, w `audio/config.json` przy module podaje się osobny tekst dla Pipera:
+
+   ```json
+   {"id": "unit-3-technology", "profile": "cori", "pronunciation": {
+     "word:tv": {"text": "TV", "spoken": "tee vee,"}
+   }}
+   ```
+
+   Klucz to odwołanie wewnątrz modułu, bez numeru wersji: `word:<id słówka>`, `scene:<id sceny>:line:<numer od 0>` albo `reading:<id czytanki>:sentence:<id zdania>`. `text` to tekst, który generator i tak by nagrał (dla słówek pełna odpowiedź, np. z rodzajnikiem); jeśli materiał zostanie poprawiony, generator zatrzyma się zamiast nagrać przestarzałe nadpisanie. Także klucz bez pasującego hasła zatrzymuje generator. `spoken` trafia do Pipera dosłownie — reguła przecinka z punktu 5 już się do niego nie dokłada, więc przecinek trzeba wpisać samodzielnie, jeśli jest potrzebny. Wyświetlany tekst, klucz odtwarzacza i treść kursu się nie zmieniają; nowy `spoken` daje nowy klip tylko tego odwołania (nie jest współdzielony z innymi hasłami o tym samym tekście). Nadpisania trzymamy w konfiguracji audio, nie w `public/content/`, bo dotyczą jednego głosu i narzędzia, a nie materiału dydaktycznego; po zmianie głosu warto je przejrzeć.
+7. Przy błędzie nie zastępuje poprzedniego kompletnego zestawu. Po udanej aktualizacji usuwa wyłącznie stare pliki zarządzanego zestawu; nie czyści dowolnych katalogów ani nieznanych plików. Blokuje jednoczesne uruchomienia.
+8. Oddzielna kontrola `npm run audio:check` wykrywa brakujące, nieaktualne, uszkodzone i osierocone nagrania bez uruchamiania syntezatora. W pierwotnym D-59 kontrola była osobnym poleceniem. Od D-60 budowanie wykonuje tę kontrolę przed publikacją plików.
 
 ## Głos i źródła
 

@@ -106,3 +106,19 @@ test('audio: zdania czytanek trafiają do planu jako osobne odwołania; pytania 
  assert.ok(refs.every((r:any)=>r.spoken===undefined));
  const all=JSON.stringify(createPlan([m],config()));assert.ok(!all.includes('Ala i Olek')&&!all.includes('Where are they sitting?'));
 });
+
+test('audio: nadpisanie wymowy zmienia tylko tekst dla Pipera i klip wskazanego hasła lub kwestii; bez nadpisań plan jest identyczny',()=>{
+ const m=material(),base=createPlan([m],config()),refs=(p:any)=>p.header.modules[0].references;
+ const apple=(p:any)=>refs(p).find((r:any)=>r.key.endsWith(':apple')),line=refs(base).find((r:any)=>r.kind==='scene-line');
+ const empty=config();empty.modules[0].pronunciation={};assert.equal(canonical(createPlan([m],empty)),canonical(base));
+ const c=config();c.modules[0].pronunciation={'word:apple':{text:'an apple',spoken:'an apple. '},[`scene:${line.sceneId}:line:${line.line}`]:{text:line.text,spoken:'Spoken differently.'}};
+ const plan=createPlan([m],c),changed=refs(plan).filter((r:any)=>!refs(base).some((b:any)=>b.clip===r.clip));
+ assert.deepEqual(changed.map((r:any)=>r.key).sort(),[apple(base).key,line.key].sort(),'pozostałe odwołania zachowują swoje klipy');
+ assert.equal(apple(plan).key,apple(base).key);assert.equal(apple(plan).text,'an apple');assert.equal(apple(plan).spoken,'an apple.');
+ assert.equal(plan.clips.find((v:any)=>v.id===apple(plan).clip).spoken,'an apple.');
+ const said=refs(plan).find((r:any)=>r.key===line.key);assert.equal(said.text,line.text);assert.equal(said.spoken,'Spoken differently.');
+ // A stale override (lesson text edited) or one without a matching entry stops the generator instead of being ignored.
+ m.words[0].back='pear';assert.throws(()=>createPlan([m],c),/nadpisanie wymowy.*an apple/);
+ const missing=config();missing.modules[0].pronunciation={'word:nope':{text:'x',spoken:'y'}};assert.throws(()=>createPlan([material()],missing),/word:nope/);
+ for(const bad of [[],{'apple':{text:'an apple',spoken:'x'}},{'word:apple':{text:'an apple'}},{'word:apple':{text:'an apple',spoken:' '}}]){const b=config();b.modules[0].pronunciation=bad;assert.throws(()=>validateConfig(b),/wymowy/);}
+});
