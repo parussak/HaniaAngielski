@@ -152,5 +152,393 @@
         "explanation": "Po locie robią zdjęcie swojej rakiety, czyli their rocket."
       }
     ]
+  },
+  {
+    "id": "who-is-in-the-photo",
+    "title": "Kto jest na zdjęciu?",
+    "questionLanguage": "en",
+    "source": "Tekst własny na poziomie A2. Wykorzystuje słownictwo o urządzeniach i robieniu zdjęć z działu 3.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "sentences": [
+      {
+        "id": "project",
+        "text": "Ella and Ben are taking a photo for their school project.",
+        "translation": "Ella i Ben robią zdjęcie do szkolnego projektu."
+      },
+      {
+        "id": "timer",
+        "text": "Ben puts the camera on a table and sets the timer.",
+        "translation": "Ben stawia aparat na stole i ustawia samowyzwalacz."
+      },
+      {
+        "id": "join",
+        "text": "Now he can be in the photo too.",
+        "translation": "Teraz on też może być na zdjęciu."
+      },
+      {
+        "id": "quick",
+        "text": "“Quick, Ben!”",
+        "translation": "„Szybko, Ben!”"
+      },
+      {
+        "id": "flashing",
+        "text": "“The camera is flashing!” says Ella.",
+        "translation": "„Aparat miga!” mówi Ella."
+      },
+      {
+        "id": "jump",
+        "text": "Ben runs to Ella, but their cat jumps onto the table.",
+        "translation": "Ben biegnie do Elli, ale ich kot wskakuje na stół."
+      },
+      {
+        "id": "click",
+        "text": "Click!",
+        "translation": "Klik!"
+      },
+      {
+        "id": "screen",
+        "text": "They look at the screen.",
+        "translation": "Patrzą na ekran."
+      },
+      {
+        "id": "eyes",
+        "text": "They can see two big green eyes and a little pink nose.",
+        "translation": "Widzą dwoje dużych zielonych oczu i mały różowy nos."
+      },
+      {
+        "id": "laugh",
+        "text": "Ella and Ben are laughing.",
+        "translation": "Ella i Ben się śmieją."
+      },
+      {
+        "id": "cat",
+        "text": "Now they have a photo for their project, but it’s a photo of the cat!",
+        "translation": "Teraz mają zdjęcie do projektu, ale to zdjęcie kota!"
+      }
+    ],
+    "glossary": {
+      "taking": "robią (zdjęcie)",
+      "project": "projekt",
+      "puts": "stawia",
+      "sets": "ustawia",
+      "timer": "samowyzwalacz",
+      "quick": "szybko",
+      "flashing": "miga",
+      "runs": "biegnie",
+      "jumps": "skacze",
+      "onto": "na (po wskoczeniu)",
+      "nose": "nos",
+      "laughing": "śmieją się"
+    },
+    "questions": [
+      {
+        "id": "purpose",
+        "after": "project",
+        "type": "choice",
+        "prompt": "Why are Ella and Ben taking a photo?",
+        "glossary": {
+          "why": "dlaczego",
+          "taking a photo": "robią zdjęcie"
+        },
+        "answers": [
+          "For their school project"
+        ],
+        "options": [
+          "For their school project",
+          "For a birthday card",
+          "For a photo game"
+        ],
+        "explanation": "Ella i Ben robią zdjęcie do szkolnego projektu. W zdaniu widzisz for their school project."
+      },
+      {
+        "id": "timer",
+        "after": "timer",
+        "type": "tap",
+        "prompt": "Tap the word that tells you what Ben sets.",
+        "glossary": {
+          "tap": "dotknij",
+          "tells you": "mówi ci",
+          "sets": "ustawia"
+        },
+        "sentence": "timer",
+        "options": [
+          "Ben",
+          "camera",
+          "table",
+          "sets",
+          "timer"
+        ],
+        "answers": [
+          "timer"
+        ],
+        "explanation": "Ben ustawia samowyzwalacz. Zdanie mówi sets the timer."
+      },
+      {
+        "id": "jump",
+        "after": "jump",
+        "type": "choice",
+        "prompt": "Where does the cat jump?",
+        "glossary": {
+          "where": "gdzie (dokąd)",
+          "jump": "skacze"
+        },
+        "answers": [
+          "Onto the table"
+        ],
+        "options": [
+          "Onto the table",
+          "Onto a chair",
+          "Onto Ben’s bag"
+        ],
+        "explanation": "Kot wskakuje na stół. Zwrot jumps onto the table łączy czynność z miejscem."
+      },
+      {
+        "id": "in-the-photo",
+        "after": "cat",
+        "type": "choice",
+        "prompt": "Who is in the photo?",
+        "glossary": {
+          "who": "kto",
+          "in the photo": "na zdjęciu"
+        },
+        "answers": [
+          "The cat"
+        ],
+        "options": [
+          "The cat",
+          "Ella and Ben",
+          "Ben and the cat"
+        ],
+        "explanation": "Na zdjęciu jest kot. Ostatnie zdanie mówi it’s a photo of the cat."
+      }
+    ]
+  },
+  {
+    "id": "a-bed-on-the-wall",
+    "title": "Łóżko na ścianie",
+    "illustration": "illustrations/technology-sleeping-astronaut.png",
+    "questionLanguage": "en",
+    "source": "Tekst własny na poziomie A2 na podstawie materiałów NASA o śnie na Międzynarodowej Stacji Kosmicznej: https://www.nasa.gov/missions/station/seven-ways-astronauts-improve-sleep-may-help-you-snooze-better-on-earth/ oraz https://www.nasa.gov/podcasts/houston-we-have-a-podcast/learning-to-fly/",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "sentences": [
+      {
+        "id": "bedroom",
+        "text": "What does your bedroom look like?",
+        "translation": "Jak wygląda twoja sypialnia?"
+      },
+      {
+        "id": "imagine",
+        "text": "Now imagine a room with a sleeping bag on the wall.",
+        "translation": "Teraz wyobraź sobie pokój ze śpiworem na ścianie."
+      },
+      {
+        "id": "station",
+        "text": "That’s where an astronaut can sleep on the International Space Station.",
+        "translation": "W takim miejscu może spać astronauta na Międzynarodowej Stacji Kosmicznej."
+      },
+      {
+        "id": "floor",
+        "text": "On Earth, your bed stays on the floor.",
+        "translation": "Na Ziemi twoje łóżko stoi na podłodze."
+      },
+      {
+        "id": "float",
+        "text": "On the space station, people and things can float.",
+        "translation": "Na stacji kosmicznej ludzie i przedmioty mogą się unosić."
+      },
+      {
+        "id": "attach",
+        "text": "An astronaut can fix a sleeping bag to the wall.",
+        "translation": "Astronauta może przymocować śpiwór do ściany."
+      },
+      {
+        "id": "stay",
+        "text": "The bag stays in one place, and so does the astronaut.",
+        "translation": "Śpiwór zostaje w jednym miejscu, a astronauta razem z nim."
+      },
+      {
+        "id": "surprise",
+        "text": "Here’s another surprise.",
+        "translation": "Oto kolejna niespodzianka."
+      },
+      {
+        "id": "orbit",
+        "text": "The space station goes around Earth very fast.",
+        "translation": "Stacja kosmiczna bardzo szybko krąży wokół Ziemi."
+      },
+      {
+        "id": "sunrises",
+        "text": "Astronauts can see about sixteen sunrises in one day.",
+        "translation": "Astronauci mogą zobaczyć około szesnastu wschodów słońca w ciągu jednego dnia."
+      },
+      {
+        "id": "clock",
+        "text": "They use a clock to know when to go to bed.",
+        "translation": "Korzystają z zegara, żeby wiedzieć, kiedy iść spać."
+      },
+      {
+        "id": "there",
+        "text": "Imagine you’re there now.",
+        "translation": "Wyobraź sobie, że teraz tam jesteś."
+      },
+      {
+        "id": "standing",
+        "text": "You’re getting into your sleeping bag, and it looks like you’re standing up.",
+        "translation": "Wchodzisz do śpiwora i wygląda to tak, jakbyś stała."
+      },
+      {
+        "id": "asleep",
+        "text": "Can you fall asleep like that?",
+        "translation": "Czy dasz radę tak zasnąć?"
+      }
+    ],
+    "glossary": {
+      "bedroom": "sypialnia",
+      "imagine": "wyobraź sobie",
+      "wall": "ściana",
+      "astronaut": "astronauta",
+      "station": "stacja (tu: stacja kosmiczna)",
+      "Earth": "Ziemia",
+      "floor": "podłoga",
+      "float": "unosić się",
+      "fix": "przymocować",
+      "stays": "pozostaje w miejscu",
+      "place": "miejsce",
+      "around": "wokół",
+      "about": "około",
+      "sunrises": "wschody słońca",
+      "clock": "zegar",
+      "standing": "stanie (tu: stojąc)",
+      "asleep": "śpiący (w fall asleep: zasnąć)"
+    },
+    "questions": [
+      {
+        "id": "where",
+        "after": "imagine",
+        "type": "tap",
+        "prompt": "Tap the word that tells you what the sleeping bag is on.",
+        "glossary": {
+          "tap": "dotknij",
+          "tells you": "mówi ci",
+          "sleeping bag": "śpiwór"
+        },
+        "sentence": "imagine",
+        "options": [
+          "room",
+          "sleeping",
+          "bag",
+          "wall"
+        ],
+        "answers": [
+          "wall"
+        ],
+        "explanation": "Śpiwór jest na ścianie. Zwrot on the wall znaczy „na ścianie”."
+      },
+      {
+        "id": "what-floats",
+        "after": "float",
+        "type": "choice",
+        "prompt": "What can float on the space station?",
+        "glossary": {
+          "float": "unosić się",
+          "space station": "stacja kosmiczna"
+        },
+        "answers": [
+          "People and things"
+        ],
+        "options": [
+          "People and things",
+          "Only people",
+          "Only small things"
+        ],
+        "explanation": "W tekście jest people and things can float. Unosić mogą się ludzie i przedmioty."
+      },
+      {
+        "id": "why-the-wall",
+        "after": "stay",
+        "type": "choice",
+        "prompt": "Why does an astronaut fix the sleeping bag to the wall?",
+        "glossary": {
+          "why": "dlaczego",
+          "fix the sleeping bag": "przymocowuje śpiwór",
+          "to the wall": "do ściany"
+        },
+        "answers": [
+          "To stay in one place"
+        ],
+        "options": [
+          "To stay in one place",
+          "To see the Sun",
+          "To read a book"
+        ],
+        "explanation": "Przymocowany śpiwór zostaje w jednym miejscu. Razem z nim zostaje tam astronauta."
+      },
+      {
+        "id": "how-many",
+        "after": "sunrises",
+        "type": "choice",
+        "prompt": "How many sunrises can astronauts see in one day?",
+        "glossary": {
+          "how many": "ile",
+          "sunrises": "wschodów słońca",
+          "in one day": "w ciągu jednego dnia"
+        },
+        "answers": [
+          "About sixteen"
+        ],
+        "options": [
+          "About sixteen",
+          "About six",
+          "About sixty"
+        ],
+        "explanation": "About sixteen to „około szesnastu”. Tyle wschodów słońca astronauci mogą zobaczyć w ciągu dnia."
+      },
+      {
+        "id": "clock",
+        "after": "clock",
+        "type": "tap",
+        "prompt": "Tap the word for the thing they use to know when to go to bed.",
+        "glossary": {
+          "tap": "dotknij",
+          "the thing they use": "rzecz, której używają",
+          "go to bed": "iść spać"
+        },
+        "sentence": "clock",
+        "options": [
+          "use",
+          "clock",
+          "know",
+          "go",
+          "bed"
+        ],
+        "answers": [
+          "clock"
+        ],
+        "explanation": "Do sprawdzenia godziny pójścia spać astronauci używają zegara, czyli clock."
+      },
+      {
+        "id": "standing",
+        "after": "standing",
+        "type": "choice",
+        "prompt": "What does it look like when you’re in the sleeping bag?",
+        "glossary": {
+          "what does it look like": "jak to wygląda",
+          "sleeping bag": "śpiwór"
+        },
+        "answers": [
+          "You’re standing up"
+        ],
+        "options": [
+          "You’re standing up",
+          "You’re sitting down",
+          "You’re running"
+        ],
+        "explanation": "W śpiworze na ścianie wygląda się, jakby się stało. O tym mówi it looks like you’re standing up."
+      }
+    ]
   }
 ]

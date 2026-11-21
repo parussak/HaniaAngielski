@@ -371,6 +371,21 @@
           "ruleIds": [],
           "role": "training",
           "targetCount": 8
+        },
+        {
+          "id": "bed-on-the-wall-reading",
+          "title": "Łóżko na ścianie",
+          "intro": "Przed czytaniem poznaj nowe słowa. Sleeping bag to śpiwór, a space station to stacja kosmiczna. Float znaczy „unosić się”, fix something to the wall — „przymocować coś do ściany”, a stay in one place — „pozostać w jednym miejscu”. Go around Earth oznacza „krążyć wokół Ziemi”, sunrise to wschód słońca, a fall asleep znaczy „zasnąć”.",
+          "wordIds": [],
+          "exerciseIds": [
+            "a-bed-on-the-wall--where",
+            "a-bed-on-the-wall--what-floats",
+            "a-bed-on-the-wall--why-the-wall",
+            "a-bed-on-the-wall--how-many",
+            "a-bed-on-the-wall--clock",
+            "a-bed-on-the-wall--standing"
+          ],
+          "ruleIds": []
         }
       ]
     },
@@ -428,6 +443,19 @@
           "ruleIds": [],
           "role": "training",
           "targetCount": 8
+        },
+        {
+          "id": "who-is-in-the-photo-reading",
+          "title": "Kto jest na zdjęciu?",
+          "intro": "Ella i Ben przygotowują zdjęcie do szkolnego projektu. Czytaj po jednym zdaniu i sprawdź, co się wydarzyło.",
+          "wordIds": [],
+          "exerciseIds": [
+            "who-is-in-the-photo--purpose",
+            "who-is-in-the-photo--timer",
+            "who-is-in-the-photo--jump",
+            "who-is-in-the-photo--in-the-photo"
+          ],
+          "ruleIds": []
         }
       ]
     },

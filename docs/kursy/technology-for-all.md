@@ -4,9 +4,9 @@
 
 **Kurs i moduł** — `angielski-hani`, `unit-3-technology`, `public/content/03-technology/`.
 
-**Odbiorca i języki** — Hania, angielski z polskimi objaśnieniami. Czytanka ma tekst, pytania i opcje po angielsku, a tłumaczenia, podpowiedzi i wyjaśnienia po polsku.
+**Odbiorca i języki** — Hania, klasa 5, angielski na poziomie A2 z polskimi objaśnieniami. Czytanki mają tekst, pytania i opcje po angielsku, a tłumaczenia, podpowiedzi i wyjaśnienia po polsku.
 
-**Zakres** — jedna mapa z siedmioma etapami. Ma 19 lekcji z przygotowanym materiałem (w tym koci dialog oraz czytankę) i sześć Kocich treningów. Zwykłe lekcje mają 7–10 zadań bazowych. Dialog i czytanka mają po pięć ocenianych odpowiedzi.
+**Zakres** — jedna mapa z siedmioma etapami. Ma 21 lekcji z przygotowanym materiałem, w tym koci dialog i trzy czytanki, oraz sześć Kocich treningów. Zwykłe lekcje mają 7–10 zadań bazowych, dialog ma pięć luk, a czytanki mają od czterech do sześciu pytań.
 
 ## Źródła
 
@@ -28,8 +28,10 @@ Wordlist ze s. 47 ma 95 pozycji. `Interested in` występuje w dwóch lekcjach, a
 | Siedem nazw uczuć | Podręcznik 43, 48, zeszyt 26 | Fiszki i sytuacje w trzech lekcjach etapu 3.3. Ponowna praktyka w 3.5 i `review-technology`. |
 | Rozmowa telefoniczna | Podręcznik 44, 47, 49, zeszyt 27, 30 | `pick-up` i `call-back`. Praktyka w `phone-scene` oraz w lukach `review-greeting` i `review-handover`. |
 | Przymiotniki z przyimkami i obóz kosmiczny | Podręcznik 45, 47, zeszyt 28 | `what-you-like`, `feelings-at-camp`, następnie `space-camp-reading`. Przyimki wracają w `review-technology`. |
+| Sen i życie astronautów na stacji kosmicznej | Tekst własny na podstawie relacji astronauty i opisu NASA | `bed-on-the-wall-reading` kończy etap 3.5. Wstęp wyjaśnia nowe zwroty związane ze snem, unoszeniem się i krążeniem wokół Ziemi. |
 | `Also` i `too`, opis zastosowań urządzenia | Podręcznik 46, zeszyt 29 | `also-and-too`, `describe-a-device` i `review-too`. Luki i wybór przygotowują do napisania opisu. |
-| Powtórki wcześniejszych map, w tym obu map Food | Poznane zadania z kursu Angielski Hani | Rozgrzewka przy wejściu na mapę oraz sześć lekcji `*-training` po etapach 3.1–3.6. Trening dobiera do ośmiu zadań i korzysta także z przećwiczonego zakresu Technology sprzed treningu. |
+| Aparat i robienie zdjęć w kontekście szkolnym | Tekst własny wykorzystujący słownictwo działu 3 | `who-is-in-the-photo-reading` kończy etap 3.6. Utrwala słownictwo o sprzęcie i formy Present Continuous w krótkiej historyjce. |
+| Powtórki wcześniejszych map, w tym obu map Food | Poznane zadania z kursu Angielski Hani | Rozgrzewka przy wejściu na mapę i po jednym Kocim treningu w etapach 3.1–3.6. Trening dobiera do ośmiu zadań i korzysta także z przećwiczonego zakresu Technology sprzed treningu. |
 
 W treningach mogą wracać np. jedzenie i napoje, `some/any`, `how much/how many` oraz zamawianie, jeśli Hania już rozwiązywała te zadania na materiale obecnym na wcześniejszych mapach. Pierwszeństwo mają zadania rzadziej ćwiczone i sprawiające trudność. Nie ma stałej liczby pytań z Food w pojedynczej sesji. Rozgrzewka przed poznaniem Technology może korzystać z samych zadań Food.
 
@@ -43,6 +45,6 @@ Wordlist na s. 47 podaje `be sick` jako „mieć mdłości”. W czytance na s. 
 
 - Zadania wymagające oryginalnego audio lub rozstrzygnięcia z nagrania, np. puenta dialogu z s. 40, oraz dyktando, piosenka, praca w parach, samodzielne wypracowanie, wykreślanka i projekt grupowy. „Tech Ted” wykorzystano jako podstawę praktyki przyimków. „Coding for Kids” i „Get Culture!” pozostają materiałem książkowym. „Word blog” może uzupełnić słownictwo później.
 - Moduł nie wymusza zapisu nazw urządzeń z `a/an`. Zasady rodzajników pozostają poza zakresem tego działu.
-- Etap „Technologia” ma ilustrację kota przy laptopie, etap „Obóz kosmiczny” pokazuje kotki budujące rakietę, a wstęp do czytanki pokazuje kotki w symulatorze. Osobne ilustracje fiszek pozostają do przygotowania. Fiszki z `illustration.symbol` korzystają z symboli, a wyposażenie i pokój za moduł pozostają do zaplanowania.
+- Etap „Technologia” ma ilustrację kota przy laptopie, a etap „Obóz kosmiczny” pokazuje kotki budujące rakietę. We wstępach do czytanek kosmicznych widać kotki w symulatorze i kota astronautę w śpiworze przymocowanym do ściany. Wyposażenie i pokój za moduł pozostają do zaplanowania.
 
 Przed publikacją potrzebna jest recenzja językowa przez człowieka oraz sprawdzenie działania na telefonie i offline. Pełne dane wydania książki wymagają potwierdzenia.
