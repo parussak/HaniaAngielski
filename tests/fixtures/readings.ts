@@ -13,8 +13,8 @@ export const readingEntry=(id='picnic',moduleId='reading-unit')=>({id,title:`Czy
  glossary:{garden:'ogród',Apples:'jabłka'},
  questions:[
   {id:'where',after:'s1',type:'choice',prompt:'Where are they sitting?',glossary:{where:'gdzie','are they sitting':'oni siedzą'},answers:['In the garden'],options:['In the garden','In the kitchen','At school'],refs:['s1'],explanation:'Zdanie mówi: in the garden.'},
-  {id:'fruit',after:'s2',type:'tap',prompt:'Tap the name of the fruit.',sentence:'s2',answers:['apples'],explanation:'Apples to jabłka.'},
-  {id:'book',after:'s3',type:'choice',prompt:'What does Ala read?',answers:['A book'],options:['A book','A newspaper'],refs:['s3'],explanation:'A book to książka.'}],
+  {id:'fruit',after:'s2',type:'tap',prompt:'Tap the name of the fruit.',glossary:{tap:'dotknij','name of the fruit':'nazwę owocu'},sentence:'s2',answers:['apples'],explanation:'Apples to jabłka.'},
+  {id:'book',after:'s3',type:'choice',prompt:'What does Ala read?',glossary:{what:'co',read:'czyta'},answers:['A book'],options:['A book','A newspaper'],refs:['s3'],explanation:'A book to książka.'}],
  requires:[moduleId],source:'Dane syntetyczne — tekst testowy.'});
 
 export const readingQuestionIds=(id='picnic')=>[`${id}--where`,`${id}--fruit`,`${id}--book`];

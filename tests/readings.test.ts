@@ -53,6 +53,9 @@ test('format: check:content odrzuca błędną czytankę z czytelnym komunikatem'
  assert.throws(broken(r=>r.glossary={garden:''}),/glossary/);
  assert.throws(broken(r=>r.questions[0].glossary={here:'tutaj'}),/glossary/);
  assert.throws(broken(r=>r.questions[0].glossary={'Where are they sitting':'Gdzie oni siedzą?'}),/glossary/);
+ // D-70: every question translates at least one word or phrase of its prompt.
+ assert.throws(broken(r=>delete r.questions[2].glossary),/pytanie book: pytanie wymaga glossary/);
+ assert.throws(broken(r=>r.questions[1].glossary={}),/pytanie fruit: pytanie wymaga glossary/);
  assert.throws(broken(r=>delete r.questions[0].explanation),/zadanie|wyjaśn/);
  // Questions always use the reading text's language, including when explanations are in Polish.
  const meta={languageCode:'en',explanationLanguageCode:'pl'};
@@ -163,7 +166,7 @@ test('zapis: odświeżenie wraca do ostatniego pytania z odpowiedzią, bez nowyc
 
 test('zapis: zmieniona później czytanka nie psuje rozpoczętej sesji — pytania wracają jako zwykłe zadania',()=>{
  const p=emptyProgress();p.active=started(p);const s=p.active;
- const longer=readingEntry();longer.questions.push({id:'sun',after:'s4',type:'choice',prompt:'Is the sun warm or cold?',answers:['Warm'],options:['Warm','Cold'],refs:['s4'],explanation:'Warm to ciepłe.'} as any);
+ const longer=readingEntry();longer.questions.push({id:'sun',after:'s4',type:'choice',prompt:'Is the sun warm or cold?',glossary:{sun:'słońce'},answers:['Warm'],options:['Warm','Cold'],refs:['s4'],explanation:'Warm to ciepłe.'} as any);
  const changed=readingModule('reading-unit','reading-course',[longer]);
  assert.equal(readingView([changed],s),undefined);assert.equal(questionFor([changed],s.items[0]).id,ids[0]);
 });

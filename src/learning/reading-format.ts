@@ -110,8 +110,9 @@ export function compileReading(entry:unknown,metadata:{languageCode?:string}={})
   const refs=q.refs===undefined?[sentence??script[after].id]:q.refs;
   if(!Array.isArray(refs)||!refs.length||new Set(refs).size!==refs.length||!refs.every(ref=>at(ref)>=0&&at(ref)<=after))return fail(`${ask}: refs mogą wskazywać tylko zdania do after włącznie.`);
   const questionGlossary=q.glossary;
-  if(questionGlossary!==undefined&&!validQuestionGlossary(q.prompt as string,questionGlossary))return fail(`${ask}: glossary musi tłumaczyć widoczne słowa lub zwroty z pytania.`);
-  const reading:ReadingQuestion={id:entry.id as string,question:index,type:q.type as 'choice'|'tap',after:script[after].id,...(sentence?{sentence}:{}),refs:refs as string[],...(questionGlossary?{glossary:{...questionGlossary}}:{})};
+  if(!obj(questionGlossary)||!Object.keys(questionGlossary).length)return fail(`${ask}: pytanie wymaga glossary z tłumaczeniem co najmniej jednego słowa lub zwrotu z polecenia (D-70).`);
+  if(!validQuestionGlossary(q.prompt as string,questionGlossary))return fail(`${ask}: glossary musi tłumaczyć widoczne słowa lub zwroty z pytania.`);
+  const reading:ReadingQuestion={id:entry.id as string,question:index,type:q.type as 'choice'|'tap',after:script[after].id,...(sentence?{sentence}:{}),refs:refs as string[],glossary:{...questionGlossary}};
   return {id:`${entry.id}--${q.id}`,kind:'reading',responseType:'choice',prompt:q.prompt as string,answers,options,explanation:q.explanation as string,requires:entry.requires as string[],caseSensitive:false,source:entry.source as string,
    ...(q.ruleId!==undefined?{ruleId:q.ruleId as string}:{}),...(q.rev!==undefined?{rev:q.rev as number}:{}),reading};
  });
