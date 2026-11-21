@@ -2,7 +2,7 @@ import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
 import {foodModules as modules} from '../materials.ts';
-import {backup,emptyProgress,makeSession,type Mode} from '../../src/core.ts';
+import {backup,emptyProgress,isCorrect,makeSession,questionFor,type Mode} from '../../src/core.ts';
 
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 
@@ -11,7 +11,7 @@ for(const [mode,input] of [['flashcards-basic','text'],['flashcards','choice'],[
     const p=emptyProgress(),m=modules[0];p.active=makeSession(modules,m,mode as Mode,input,false,p);
     const type=mode.startsWith('flashcards')?'word':'exercise';
     const id=type==='word'?'apple':'g-container-water';
-    const correct=type==='word'?'apple':'bottle';const displayed=type==='word'?'an apple':'bottle';
+    const displayed=type==='word'?'an apple':'bottle';
     p.active.items=[{key:`${m.id}@1:${type}:${id}`,moduleId:m.id,version:1,type,id,input}];
     await page.goto('./');
     await expect(page.locator('.home-hero')).toBeVisible();
@@ -25,7 +25,10 @@ for(const [mode,input] of [['flashcards-basic','text'],['flashcards','choice'],[
     }else{
       const options=page.locator('.option');
       await expect(options.first()).toBeVisible();
-      for(const option of await options.all())if(await option.getAttribute('data-answer')!==correct){given=(await option.getAttribute('data-answer'))!;await option.tap();break;}
+      // Options show full forms ("an apple"), so the wrong one is chosen by grading, not by comparing with "apple".
+      const q=questionFor(modules,p.active.items[0]);
+      for(const option of await options.all()){const answer=(await option.getAttribute('data-answer'))!;if(!isCorrect(q,answer)){given=answer;await option.tap();break;}}
+      expect(given).not.toBe('');
     }
     await expect(page.locator('.given-answer p')).toHaveText(given);
     await expect(page.locator('.expected-answer p')).toHaveText(displayed);
