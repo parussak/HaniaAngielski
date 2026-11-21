@@ -49,7 +49,7 @@ export function createViews(state: AppState, sync: ProgressSync, syncLabel: () =
         if(l.role==='training'&&state.progress.active?.lesson?.id!==`${journeyKey(j)}/${l.id}`&&!mapTrainingPool(state.modules,state.journeys,j,state.progress,l).length)return trainingPreparationView(state.modules,state.journeys,j,state.progress);
         return lessonIntro(j,l,m,state.progress);
     }
-    function homeForCats() { return courseContext(state)+houseView(state.progress,currentCourse(state)!.id,state.chosenRoom,state.chosenDecoration,decorativeCat,state.modules,state.journeys,state.journeyIssues,state.houseTab,state.houseEditing); }
+    function homeForCats() { return courseContext(state)+houseView(state.progress,currentCourse(state)!.id,state.chosenRoom,state.chosenDecoration,decorativeCat,state.modules,state.journeys,state.journeyIssues,state.houseTab,state.houseEditing,state.houseOverview); }
     function home() {
         const course = currentCourse(state);
         const step = getNextStep(state.modules, state.journeys, state.progress, course?.id);

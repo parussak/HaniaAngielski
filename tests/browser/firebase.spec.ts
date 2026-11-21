@@ -68,12 +68,12 @@ test('domek i gwiazdki synchronizują się na drugie urządzenie i nie przechodz
   const cloud=backend(),a=await browser.newContext({baseURL:test.info().project.use.baseURL,viewport:{width:390,height:844}}),b=await browser.newContext({baseURL:test.info().project.use.baseURL,viewport:{width:390,height:844}});
   try{
     await cloud.connect(a);await cloud.connect(b);const page=await a.newPage();await page.goto('./');await signIn(page);
-    const fixture={...emptyProgress(),adventure:{version:1 as const,earned:20,completed:{},purchases:{}}};
+    const fixture={...emptyProgress(),adventure:{version:1 as const,earned:20,rooms:['kitchen'],completed:{},purchases:{}}};
     await openBackup(page);await page.locator('#import-file').setInputFiles({name:'profile.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(fixture)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();
-    await page.getByRole('button',{name:'Domek',exact:true}).click();await page.getByRole('button',{name:'Kup za 6 ★',exact:true}).click();await page.getByRole('button',{name:'Pod oknem',exact:true}).click();
+    await page.getByRole('button',{name:'Domek',exact:true}).click();await page.getByRole('button',{name:'Koci salonik',exact:true}).click();await page.getByRole('button',{name:'Kup za 6 ★',exact:true}).click();await page.getByRole('button',{name:'Pod oknem',exact:true}).click();
     await page.getByRole('button',{name:'Ustawienia konta',exact:true}).click();await page.getByRole('button',{name:'Synchronizuj teraz'}).click();await expect(page.getByRole('status')).toContainText('Wyniki zapisane na koncie.');
-    const second=await b.newPage();await second.goto('./');await signIn(second);await second.getByRole('button',{name:'Domek',exact:true}).click();await expect(second.locator('.star-wallet')).toContainText('14');await expect(second.locator('.room-decoration')).toHaveClass(/slot-window/);
-    await page.getByRole('button',{name:'Wyloguj się',exact:true}).click();await signIn(page,'other-house@example.test');await page.getByRole('button',{name:'Domek',exact:true}).click();await expect(page.locator('.star-wallet')).toContainText('0');await expect(page.locator('.room-decoration')).toHaveCount(0);
+    const second=await b.newPage();await second.goto('./');await signIn(second);await second.getByRole('button',{name:'Domek',exact:true}).click();await expect(second.getByRole('button',{name:'Kocia kuchnia',exact:true})).toBeVisible();await second.getByRole('button',{name:'Koci salonik',exact:true}).click();await expect(second.locator('.star-wallet')).toContainText('14');await expect(second.locator('.room-decoration')).toHaveClass(/slot-window/);
+    await page.getByRole('button',{name:'Wyloguj się',exact:true}).click();await signIn(page,'other-house@example.test');await page.getByRole('button',{name:'Domek',exact:true}).click();await expect(page.getByRole('button',{name:'Kocia kuchnia',exact:true})).toHaveCount(0);await page.getByRole('button',{name:'Koci salonik',exact:true}).click();await expect(page.locator('.star-wallet')).toContainText('0');await expect(page.locator('.room-decoration')).toHaveCount(0);
   }finally{await a.close();await b.close();}
 });
 

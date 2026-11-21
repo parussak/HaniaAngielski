@@ -97,10 +97,11 @@ Stary katalog bez `coursesFile` jest nadal obsługiwany przez adapter zgodności
 
 Nagrody przypisuje treść kursu (D-67). Kod zna tylko wspólny katalog przedmiotów i pokoi (`src/house/catalog.ts`): nazwy, ceny, grafiki, miejsca. Przedmiot oznaczony tam jako nagroda (`reward: true`) można kupić dopiero po mapie, która go wymienia.
 
-Mapa (`sciezka*.json`) — oba pola opcjonalne:
+Mapa (`sciezka*.json`) ma opcjonalne pola nagród:
 
 ```json
 "rewards": {
+  "room": "picnic",
   "decorations": ["bowls", "lemonade", "picnic-basket", "picnic-blanket"],
   "badge": "Odznaka kociego kucharza"
 }
@@ -109,9 +110,9 @@ Mapa (`sciezka*.json`) — oba pola opcjonalne:
 - `decorations` — identyfikatory przedmiotów-nagród z katalogu, bez powtórzeń. Odblokowują się do kupienia za gwiazdki po ukończeniu wszystkich lekcji mapy.
 - `badge` — nazwa odznaki pokazywana na końcu mapy („Mapa ukończona! Zdobywasz: …”) i w domku.
 
-Moduł (`modul.json`) — pole opcjonalne `"houseRoom": "kitchen"`: pokój z katalogu (nie salonik), który odblokowuje ukończenie wszystkich map modułu. Moduł z `houseRoom` musi mieć mapy. W napisach pokoju używamy krótkiej nazwy modułu z `cover`, np. „Kocia kuchnia zdobyta za cały moduł Food!”.
+- `room` — opcjonalny identyfikator wnętrza z katalogu domku, np. `rover-station`. Każda mapa bez tego pola ma własny pokój z nazwą mapy i domyślnym wystrojem. Identyfikator przypisanego pokoju pozostaje stały. Dawne pliki modułów mogą zawierać `houseRoom`.
 
-W jednym kursie przedmiot może być nagrodą tylko jednej mapy, a pokój — tylko jednego modułu; `npm run check:content` to sprawdza. Zdobytych przedmiotów i pokoi nie odbieramy, gdy treść później zmieni przypisanie. Nowy pokój lub przedmiot (grafika, miejsca w pokoju) to zmiana mechaniki, nie treści.
+W jednym kursie przedmiot może być nagrodą tylko jednej mapy, a pokój — tylko jednej mapy; `npm run check:content` to sprawdza. Zdobytych przedmiotów i pokoi nie odbieramy, gdy treść później zmieni przypisanie. Nowy pokój lub przedmiot (grafika, miejsca w pokoju) to zmiana mechaniki, nie treści.
 
 ## Identyfikatory i postępy
 

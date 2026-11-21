@@ -5,7 +5,7 @@ import {journeyKey,journeyPaths,lessonKey,lessons,type Journey,type Lesson,type 
 export {journeyKey,journeyPaths,lessonKey,lessons} from './learning/journey.ts';
 export type {Journey,JourneyRewards,Lesson,Stage,JourneyIssue} from './learning/journey.ts';
 import type {Home} from './house/progress.ts';
-import {decorations} from './house/catalog.ts';
+import {decorations,rewardRooms} from './house/catalog.ts';
 export {decorations,slots} from './house/catalog.ts';
 export {stars,purchase,place} from './house/progress.ts';
 import { inputFor,keyFor,questionFor,type AnswerMode,type Item,type Module,type Progress,type Session } from './core.ts';
@@ -35,8 +35,8 @@ export function unlocked(journey:Journey,lesson:Lesson,_p:Progress){return lesso
 // D-67: mapa wymienia tylko przedmioty z katalogu oznaczone jako nagroda, bez powtórzeń.
 function validRewards(r:unknown){
   if(!r||typeof r!=='object'||Array.isArray(r))return false;
-  const {decorations:ids,badge,...rest}=r as Record<string,unknown>;
-  if(Object.keys(rest).length)return false;
+  const {decorations:ids,badge,room,...rest}=r as Record<string,unknown>;
+  if(Object.keys(rest).length||room!==undefined&&!rewardRooms.some(r=>r.id===room))return false;
   if(ids!==undefined&&(!Array.isArray(ids)||!ids.length||new Set(ids).size!==ids.length||!ids.every(id=>decorations.some(d=>d.id===id&&d.reward))))return false;
   return badge===undefined||typeof badge==='string'&&badge.trim().length>0;
 }

@@ -6,7 +6,7 @@ import {openBackup} from './navigation.ts';
 import {readFileSync} from 'node:fs';
 
 function sample(){const p=emptyProgress();creditStars(p,30);purchase(p,'pillow');p.active=makeSession(foodModules,foodModules[0],'grammar','text',false,p);return p;}
-async function restore(page:Page,p:Progress){await page.goto('./');await openBackup(page);await page.locator('#import-file').setInputFiles({name:'grid.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();await page.getByRole('button',{name:'Domek',exact:true}).click();}
+async function restore(page:Page,p:Progress){await page.goto('./');await openBackup(page);await page.locator('#import-file').setInputFiles({name:'grid.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();await page.getByRole('button',{name:'Domek',exact:true}).click();await page.getByRole('button',{name:'Koci salonik',exact:true}).click();}
 async function exported(page:Page){await openBackup(page);const next=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).click();return JSON.parse(readFileSync((await(await next).path())!,'utf8')).progress as Progress;}
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 
@@ -60,7 +60,7 @@ test.describe('siatka offline',()=>{
   await restore(page,sample());await page.getByRole('button',{name:'Urządź pokój',exact:true}).tap();
   await page.getByRole('button',{name:'Przesuń w prawo',exact:true}).tap();await expect(page.locator('.grid-item[data-id="pillow"]')).toHaveAttribute('data-x','11');
   await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');await page.close();await context.setOffline(true);
-  const second=await context.newPage();await second.goto('./');await second.getByRole('button',{name:'Domek',exact:true}).tap();
+  const second=await context.newPage();await second.goto('./');await second.getByRole('button',{name:'Domek',exact:true}).tap();await second.getByRole('button',{name:'Koci salonik',exact:true}).tap();
   await expect(second.locator('.grid-item[data-id="pillow"]')).toHaveAttribute('data-x','11');await expect(second.locator('.star-wallet')).toHaveText('24 ★');
  });
 });

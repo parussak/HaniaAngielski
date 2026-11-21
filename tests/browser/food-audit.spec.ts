@@ -30,11 +30,11 @@ test('telefon: dawna rozpoczęta sesja wznawia te same pytania i nie zmienia sal
  const prompt=questionFor(modules,p.active.items[0]).prompt;
  await restore(page,p);await page.reload();await resumeStudy(page);
  await expect(page.locator('.question')).toHaveText(prompt);await expect(page.locator('.study-heading .tag')).toHaveText('1 / 5');
- await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('144');
+ await page.getByRole('button',{name:'Domek',exact:true}).tap();await page.getByRole('button',{name:'Koci salonik',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('144');
 });
 
 test('telefon: po starej mapie kontynuacja otwiera nową, przyznaje trzy gwiazdki i zachowuje odznakę',async({page})=>{
- await restore(page,progress(true));await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.module-award')).toContainText('Odznaka kociego kucharza');
+ await restore(page,progress(true));await page.getByRole('button',{name:'Domek',exact:true}).tap();await page.getByRole('button',{name:'Koci salonik',exact:true}).tap();await expect(page.locator('.module-award')).toContainText('Odznaka kociego kucharza');
  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await expect(page.locator('.next-step-detail')).toContainText('Dzienniczek posiłków');
  await resumeStudy(page);await expect(page.getByRole('heading',{name:'Dzienniczek posiłków',exact:true})).toBeVisible();
  await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();
@@ -42,9 +42,9 @@ test('telefon: po starej mapie kontynuacja otwiera nową, przyznaje trzy gwiazdk
  await expect(page.locator('.lesson-reward')).toContainText('+3 ★');await page.reload();
  // D-51: a refresh restores the lesson summary; the next step is on the home screen.
  await expect(page.locator('.lesson-reward')).toContainText('+3 ★');await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
- await expect(page.locator('.next-step-detail')).toContainText('Naleśnik krok po kroku');await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('147');
+ await expect(page.locator('.next-step-detail')).toContainText('Naleśnik krok po kroku');await page.getByRole('button',{name:'Domek',exact:true}).tap();await page.getByRole('button',{name:'Koci salonik',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('147');
  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:/Wybierz przygodę/}).tap();await expect(page.locator('.adventure-invite')).toHaveCount(2);
- await page.getByRole('button',{name:`Otwórz mapę ${second.title}`,exact:true}).tap();await expect(page.locator('.lead')).toContainText('1 z 5');
+ await page.getByRole('button',{name:`Otwórz mapę ${second.title}`,exact:true}).tap();await expect(page.locator('.lead')).toContainText(`1 z ${lessons(second).length}`);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();await page.screenshot({path:'test-results/food-second-map-mobile.png',fullPage:true});
 });
 

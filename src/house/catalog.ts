@@ -33,6 +33,8 @@ export const decorations:Decoration[]=[
  {id:'picnic-basket',name:'Koszyk piknikowy',price:10,slot:'right',rooms:['salon','kitchen'],reward:true},
  {id:'picnic-blanket',name:'Koc piknikowy',price:12,slot:'rug',rooms:['salon'],reward:true},
  {id:'fruit-bowl',name:'Misa owoców',price:6,slot:'shelf',rooms:['salon','kitchen'],reward:true},
+ {id:'rover',name:'Łazik badawczy',price:8,slot:'front',rooms:['rover-station']},
+ {id:'lantern',name:'Lampion piknikowy',price:6,slot:'front',rooms:['picnic']},
  {id:'cat-toaster',name:'Toster z kocimi uszami',price:10,slot:'window',rooms:['kitchen'],reward:true},
  {id:'mugs',name:'Półeczka z kubkami',price:12,slot:'shelf',rooms:['kitchen'],reward:true},
  {id:'table',name:'Stolik z krzesełkami',price:18,slot:'rug',rooms:['kitchen'],reward:true},
@@ -43,7 +45,7 @@ export const canUseSlot=(id:string,slot:string,room:string)=>{
  const target=slots.find(s=>s.id===slot);
  return !!target&&(!target.rooms||target.rooms.includes(room))&&(target.legacy||target.layer===decorationLayer(id));
 };
-// Pokoje domku. Salonik ma każdy kurs; pozostałe daje moduł, który wskazuje je w `houseRoom` (modul.json, D-67).
+// Salonik ma każdy kurs. Wnętrze przypisane do mapy wskazuje rewards.room.
 // Nowy pokój to nowy wpis tutaj (plus grafika w public/game/ i ewentualne style `className`) — bez zmian w układzie i widokach.
 // `inside`/`choose`: napisy „W saloniku”, „wybierz Koci salonik”. `anchors`: miejsca gotowych skrótów inne niż domyślne.
 // `objectAreas`: gdzie (poza podłogą) mogą stać drobiazgi — zakres dolnej krawędzi i środka przedmiotu na siatce.
@@ -51,6 +53,8 @@ export interface ObjectArea {bottom:[number,number];center:[number,number]}
 export interface Room {id:string;name:string;inside:string;choose:string;image:string;className?:string;anchors?:Record<string,{x:number;y:number}>;objectAreas:ObjectArea[]}
 export const rooms:Room[]=[
  {id:'salon',name:'Koci salonik',inside:'W saloniku',choose:'Koci salonik',image:'room.svg',objectAreas:[{bottom:[3,5],center:[10,Infinity]},{bottom:[6,9],center:[-Infinity,9]}]},
+ {id:'picnic',name:'Weranda piknikowa',inside:'Na werandzie',choose:'Werandę piknikową',image:'picnic.svg',objectAreas:[]},
+ {id:'rover-station',name:'Stacja z warsztatem łazików',inside:'W stacji',choose:'Stację z warsztatem łazików',image:'rover-station.svg',objectAreas:[{bottom:[7,9],center:[12,22]}]},
  {id:'kitchen',name:'Kocia kuchnia',inside:'W kuchni',choose:'Kocią kuchnię',image:'kitchen.svg',className:'kitchen-room',anchors:{window:{x:10,y:5},shelf:{x:16,y:5},rug:{x:9,y:9}},objectAreas:[{bottom:[7,9],center:[9,Infinity]}]},
 ];
 export const rewardRooms=rooms.filter(r=>r.id!=='salon');

@@ -18,10 +18,10 @@ test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 
 test('więcej miejsc, warstwy i Moje rzeczy: telefon, schowanie, odtworzenie i zachowane saldo',async({page})=>{
  const p=fixture();p.adventure!.earned=250;settleHouseUnlocks(p,modules,maps);
- for(const d of decorations.filter(d=>!d.map||d.map.split('/')[0]==='unit-2-food'))if(!p.adventure!.purchases[d.id])purchase(p,d.id,'angielski-hani',d.rooms[0]);
+ for(const d of decorations.filter(d=>['salon','kitchen'].includes(d.rooms[0])))if(!p.adventure!.purchases[d.id])purchase(p,d.id,'angielski-hani',d.rooms[0]);
  const layout:Record<string,string>={pillow:'floor-cushion',yarn:'front',scratcher:'left',plant:'window',books:'shelf',basket:'right',bowls:'floor-side',lemonade:'shelf-left','picnic-basket':'rug','picnic-blanket':'floor-cover','fruit-bowl':'shelf-right'};
  for(const [id,slot] of Object.entries(layout))place(p,id,slot);
- const balance=stars(p);await restore(page,p);
+ const balance=stars(p);await restore(page,p);await page.getByRole('button',{name:'Koci salonik',exact:true}).tap();
  await expect(page.locator('.room-decoration')).toHaveCount(11);
  await expect(page.locator('.room-decoration[data-id="picnic-blanket"]')).toHaveClass(/layer-textiles/);
  await page.getByRole('button',{name:'Moje rzeczy (14)',exact:true}).tap();
@@ -43,7 +43,7 @@ test('więcej miejsc, warstwy i Moje rzeczy: telefon, schowanie, odtworzenie i z
  }
  await page.screenshot({path:'test-results/house-layers-storage-mobile.png',fullPage:true});
  const saved=await exported(page);expect(stars(saved)).toBe(balance);expect(saved.adventure!.completed).toEqual(p.adventure!.completed);
- expect(Object.keys(saved.adventure!.purchases)).toHaveLength(14);await restore(page,saved);
+ expect(Object.keys(saved.adventure!.purchases)).toHaveLength(14);await restore(page,saved);await page.getByRole('button',{name:'Koci salonik',exact:true}).tap();
  await expect(page.locator('.room-decoration[data-id="plant"]')).toHaveClass(/slot-shelf-right/);
  await page.getByRole('button',{name:'Moje rzeczy (14)',exact:true}).tap();
  await page.locator('.decoration-card[data-id="table"]').tap();
@@ -56,25 +56,25 @@ test('więcej miejsc, warstwy i Moje rzeczy: telefon, schowanie, odtworzenie i z
  await page.screenshot({path:'test-results/house-layered-kitchen-mobile.png',fullPage:true});
 });
 
-test('Food: jedna mapa daje wyposażenie, obie kuchnię; przenoszenie i kopia zachowują zakup oraz saldo',async({page})=>{
- await restore(page,fixture(1));await expect(page.getByRole('button',{name:/Kocia kuchnia · ukończ/})).toBeDisabled();
- await page.locator('.decoration-card[data-id="bowls"]').tap();await expect(page.getByRole('button',{name:'Kup za 6 ★',exact:true})).toBeEnabled();
+test('Food: jedna mapa daje wyposażenie, druga kuchnię; przenoszenie i kopia zachowują zakup oraz saldo',async({page})=>{
+ await restore(page,fixture(1));await expect(page.getByRole('link',{name:/Przejdź do mapy „Kocia kuchnia/})).toBeVisible();
+ await page.getByRole('button',{name:'Koci salonik',exact:true}).tap();await page.locator('.decoration-card[data-id="bowls"]').tap();await expect(page.getByRole('button',{name:'Kup za 6 ★',exact:true})).toBeEnabled();
  await expect(page.locator('.room-decoration')).toHaveClass(/slot-right/);
  await restore(page,fixture());await expect(page.locator('.star-wallet')).toHaveText('94 ★');
  await page.getByRole('button',{name:'Kocia kuchnia',exact:true}).tap();
  await expect(page.locator('.kitchen-room')).toBeVisible();await expect(page.getByRole('button',{name:'Kup za 10 ★',exact:true})).toBeEnabled();
  await page.getByRole('button',{name:'Kup za 10 ★',exact:true}).tap();await expect(page.locator('.star-wallet')).toHaveText('84 ★');
- await page.getByRole('button',{name:'Koci salonik',exact:true}).tap();await page.locator('.decoration-card[data-id="bowls"]').tap();await page.getByRole('button',{name:'Kup za 6 ★',exact:true}).tap();
- await page.getByRole('button',{name:'Koci salonik',exact:true}).tap();await page.locator('.decoration-card[data-id="bowls"]').tap();
+ await page.getByRole('button',{name:'← Cały domek',exact:true}).tap();await page.getByRole('button',{name:'Koci salonik',exact:true}).tap();await page.locator('.decoration-card[data-id="bowls"]').tap();await page.getByRole('button',{name:'Kup za 6 ★',exact:true}).tap();
+ await page.locator('.decoration-card[data-id="bowls"]').tap();
  await page.getByRole('button',{name:'Lewy kącik',exact:true}).tap();await expect(page.locator('.room-decoration[data-id="bowls"]')).toHaveClass(/slot-left/);
  await expect(page.locator('.star-wallet')).toHaveText('78 ★');
  for(const width of [320,390,430]){await page.setViewportSize({width,height:740});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();}
  await page.screenshot({path:'test-results/house-salon-mobile.png',fullPage:true});
- await page.getByRole('button',{name:'Kocia kuchnia',exact:true}).tap();await expect(page.locator('.room-decoration[data-id="bowls"]')).toHaveCount(0);
+ await page.getByRole('button',{name:'← Cały domek',exact:true}).tap();await page.getByRole('button',{name:'Kocia kuchnia',exact:true}).tap();await expect(page.locator('.room-decoration[data-id="bowls"]')).toHaveCount(0);
  await page.screenshot({path:'test-results/house-kitchen-mobile.png',fullPage:true});
  const saved=await exported(page);expect(saved.adventure!.purchases.pillow).toEqual({cost:6,slot:'right'});
  expect(saved.adventure!.purchases.bowls.room).toBeUndefined();expect(saved.adventure!.purchases['cat-toaster'].room).toBe('kitchen');
- expect(saved.adventure!.rooms).toEqual(['kitchen']);expect(saved.adventure!.unlockedItems).toHaveLength(8);
+ expect(saved.adventure!.rooms).toEqual(['picnic','kitchen']);expect(saved.adventure!.unlockedItems).toHaveLength(8);
  await restore(page,saved);await expect(page.locator('.star-wallet')).toHaveText('78 ★');
 });
 
@@ -85,23 +85,23 @@ test('wybór kursu zmienia domek i portfel; stare zakupy należą tylko do angie
  await restore(page,p);await expect(page.locator('.star-wallet')).toHaveText('94 ★');
  // D-51: the course frame lives only on the home screen.
  await expect(page.locator('.course-context')).toHaveCount(0);const chooseCourse=async()=>{await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await page.getByRole('button',{name:'Wybierz kurs',exact:true}).tap();};
- await chooseCourse();await page.getByRole('button',{name:'Wybierz kurs Test: french-book',exact:true}).tap();await page.getByRole('button',{name:'Domek',exact:true}).tap();
+ await chooseCourse();await page.getByRole('button',{name:'Wybierz kurs Test: french-book',exact:true}).tap();await page.getByRole('button',{name:'Domek',exact:true}).tap();await page.getByRole('button',{name:'Koci salonik',exact:true}).tap();
  await expect(page.locator('.star-wallet')).toHaveText('20 ★');await expect(page.locator('.room-decoration')).toHaveCount(0);await expect(page.getByRole('button',{name:/Kocia kuchnia/})).toHaveCount(0);
  await page.getByRole('button',{name:'Kup za 6 ★',exact:true}).tap();await expect(page.locator('.star-wallet')).toHaveText('14 ★');
- await chooseCourse();await page.getByRole('button',{name:'Wybierz kurs Test: english-book',exact:true}).tap();await page.getByRole('button',{name:'Domek',exact:true}).tap();
+ await chooseCourse();await page.getByRole('button',{name:'Wybierz kurs Test: english-book',exact:true}).tap();await page.getByRole('button',{name:'Domek',exact:true}).tap();await page.getByRole('button',{name:'Koci salonik',exact:true}).tap();
  await expect(page.locator('.star-wallet')).toHaveText('94 ★');await expect(page.locator('.room-decoration')).toHaveClass(/slot-right/);
  const saved=await exported(page);expect(saved.adventure!.courseHomes!['french-book'].purchases.pillow.cost).toBe(6);expect(saved.adventure!.purchases.pillow.slot).toBe('right');
 });
 
 test('ostatnia lekcja modułu odblokowuje kuchnię i pokazuje zachętę bez dodatkowych gwiazdek za pokój',async({page})=>{
- const p=fixture(),last=lessons(maps[1]).at(-1)!;delete p.adventure!.completed[last.key];
- await restore(page,p);await expect(page.getByRole('button',{name:/Kocia kuchnia · ukończ/})).toBeDisabled();
- await page.getByRole('button',{name:'Mapy',exact:true}).tap();await page.getByRole('button',{name:`Otwórz mapę ${maps[1].title}`,exact:true}).tap();
+ const p=fixture(),last=lessons(maps[1])[0];delete p.adventure!.completed[last.key];
+ await restore(page,p);await expect(page.getByRole('link',{name:/Przejdź do mapy „Kocia kuchnia/})).toBeVisible();
+ await page.getByRole('link',{name:/Przejdź do mapy „Kocia kuchnia/}).tap();
  await page.locator('.lesson-step').filter({hasText:last.lesson.title}).tap();await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();
  await expect(page.locator('.question')).toBeVisible();
  await finishCurrent(page,modules);
  await expect(page.locator('.lesson-reward')).toContainText('+3');await expect(page.getByRole('status')).toContainText('Nowy pokój: Kocia kuchnia');
- await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.getByRole('button',{name:'Kocia kuchnia',exact:true})).toBeEnabled();await expect(page.locator('.star-wallet')).toHaveText('97 ★');
+ await page.getByRole('button',{name:'Zajrzyj do nowego pokoju'}).tap();await expect(page.getByRole('heading',{name:'Kocia kuchnia',exact:true})).toBeVisible();await expect(page.locator('.star-wallet')).toHaveText('97 ★');
 });
 
 test.describe('domek offline',()=>{

@@ -1,10 +1,18 @@
 # Koci domek — rozbudowa za postępy w nauce
 
-Status: **wdrożone D-44–D-45: własne wyposażenie pokojów, siatka i stałe rozmiary**, 12 listopada 2026. Zakupy i postępy pozostają zachowane. Niżej oddzielono obecne zasady od wcześniejszego wariantu D-41–D-43.
+Stan na 21 listopada 2026. Przekrój domku pokazuje pokoje zdobywane za mapy. Zasady urządzania i zapisu zachowują zgodność z D-44–D-45.
 
 ## Cel
 
-Domek ma przede wszystkim motywować do nauki i pokazywać jej efekty. Ukończenie pojedynczej mapy poszerza dostępne wyposażenie do kupienia za gwiazdki, a przejście wszystkich map modułu pozwala zdobyć nowy pokój. Urządzanie wspiera ten mechanizm; samo przenoszenie wcześniejszych zakupów nie ma zastępować nagród za kolejny materiał.
+Po wejściu w „Domek” widać przekrój z salonikiem i pokojem za każdą mapę bieżącego kursu. Na telefonie pokoje stoją jeden pod drugim. Kolorowe wnętrze otwiera pokój. Szare pole z kłódką podaje nazwę wymaganej mapy i prowadzi wprost do niej.
+
+Pierwsze ukończenie mapy na stałe odkrywa jej pokój. Przycisk „Zajrzyj do nowego pokoju” na podsumowaniu otwiera zdobyte wnętrze. Nowe lekcje dopisane później nie zamykają pokoju. W starszej kopii wcześniejsze ukończenie można rozpoznać także po zapisanym odblokowaniu wyposażenia właściwego dla tej mapy.
+
+| Mapa | Pokój |
+| --- | --- |
+| Przygotowania do kociego pikniku | Weranda piknikowa |
+| Kocia kuchnia — Food w praktyce | Kocia kuchnia |
+| Technology for all | Stacja z warsztatem łazików |
 
 ## Stan obecny — siatka i własne wyposażenie, D-44–D-45
 
@@ -13,8 +21,8 @@ Domek ma przede wszystkim motywować do nauki i pokazywać jej efekty. Ukończen
 - Każdy pokój ma własne wyposażenie. Nowy zakup trafia do pierwszego pokoju wskazanego w katalogu dekoracji. Jedenaście obecnych dekoracji saloniku pozostaje wyposażeniem tego pokoju; toster, kubki i stolik należą do dotychczasowej kuchni.
 - Zakupione wcześniej rzeczy zachowują swój zapisany pokój, nawet jeśli stara wersja pozwoliła umieścić je gdzie indziej. Brak pokoju w starym zapisie nadal oznacza salonik. Niczego nie odbieramy ani nie duplikujemy.
 - Nie można teraz przenosić wyposażenia między pokojami. Wybranie rzeczy z kolekcji przełącza do pokoju, do którego należy; nie przenosi zakupu.
-- Food zachowuje dotychczasowy charakter pokoju i grafiki. Nie dodano nowego pomieszczenia ani nie usunięto istniejącej, zdobytej kuchni. Zachowano dotychczasowe odblokowania map, pokoi i wyposażenia, ceny oraz nagrody za naukę. Od D-67 przypisanie nagród zapisuje treść kursu ([format](format-materialow.md#nagrody-domku)); Food ma je w swoich plikach `sciezka*.json` i `modul.json`.
-- Mapa odblokowuje wyposażenie do zakupu, wszystkie mapy modułu odblokowują przypisany pokój, a gwiazdki z nauki służą do kupowania. Urządzanie samo nie daje gwiazdek ani nowych nagród.
+- Wcześniej zdobyta kuchnia zachowuje wyposażenie. Nowe przypisania pokoi zapisujemy w plikach map. [Format nagród](format-materialow.md#nagrody-domku).
+- Mapa odblokowuje swój pokój i przypisane wyposażenie do zakupu, a gwiazdki z nauki służą do kupowania. Urządzanie samo nie daje gwiazdek ani nowych nagród.
 
 ### Siatka i wygląd
 
@@ -48,11 +56,11 @@ Dotychczasowe nazwane miejsca pozostają jako skróty przy ustawianiu. Zachowuj�
 
 Dokładne wyposażenie i obszary nowych pokoi, nowe nagrody, swobodne skalowanie lub obracanie oraz bardziej zaawansowane kolizje nie są częścią tego wdrożenia. Nie zmieniono mechaniki nauki ani cen.
 
-## Wcześniejsze wdrożenie nagród Food — zachowane
+## Historia wcześniejszych nagród Food
 
 Każdy kurs każdego konta ma osobny salonik, zakupy i portfel. Obecny dorobek pozostaje w angielskim. Food odblokowuje cztery przedmioty za każdą z dwóch map, a po obu mapach kuchnię. Przedmioty kupuje się za gwiazdki; kuchnia i jej podstawowe tło są bezpłatne. Dotychczasowa odznaka kucharza za pierwszą mapę pozostaje zachowana. Mechanizm opisuje [logika domku](../src/house/progress.ts), a sposób zapisu [zapis](06-zapis.md).
 
-## Wcześniejsze zasady i obecne wdrożenie — D-41–D-43
+## Historia zasad D-41–D-43 (przed przekrojem domku)
 
 Poniższe części zachowują opis wariantu sprzed siatki. W kwestii przypisania wyposażenia do pokoju, rozmiarów i przesuwania obowiązuje wdrożone D-44–D-45 opisane powyżej; dawne opisy przenoszenia między pokojami są historyczne.
 
@@ -126,7 +134,7 @@ Wyposażenie pierwszej mapy można wykorzystać w saloniku jeszcze przed zdobyci
 
 - Przy kolejnych modułach trzeba zdefiniować pokój, wymagane mapy, nagrody, ceny i miejsca ustawienia w katalogu. Dalszy projekt nagród przy zmianach zakresu modułu pozostaje otwarty; implementacja nie odbiera już zapisanych odblokowań.
 
-## Kryteria odbioru
+## Kryteria odbioru wcześniejszego wdrożenia
 
 1. Ukończenie części map modułu daje wyposażenie za te mapy, ale nie pokój za cały moduł.
 2. Ukończenie ostatniej brakującej mapy daje dokładnie jeden pokój; zaległe błędy nie blokują go.
@@ -135,7 +143,7 @@ Wyposażenie pierwszej mapy można wykorzystać w saloniku jeszcze przed zdobyci
 5. Dotychczasowe ukończenia pozostają zachowane. Stare gwiazdki, zakupy i ustawienia trafiają dokładnie raz do angielskiego, bez zmiany dostępnego salda; przejście ze starego zapisu ma osobny test zgodności, również dla starszych kopii i synchronizacji.
 6. Odblokowanie, zakup i ustawienie przedmiotu działają offline i odtwarzają się po imporcie kopii lub synchronizacji.
 
-## Gdzie rozwijać i jak chroniony jest zapis
+## Implementacja wcześniejszego wdrożenia
 
 - [Katalog domku](../src/house/catalog.ts) zawiera dane przedmiotów, cen, zgodnych pokoi i wymaganych map oraz nagrody modułów. Nie kopiujemy ich do silnika nauki.
 - [Mechanizm domku](../src/house/progress.ts) obsługuje portfele, odblokowania, zakupy i ustawienia. [Widok](../src/views/house.ts) i [style](../src/adventure.css) odpowiadają za prezentację; [grafiki SVG](../public/game/kitchen.svg) są lekkimi plikami lokalnymi objętymi cache PWA.

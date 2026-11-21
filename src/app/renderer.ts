@@ -20,7 +20,8 @@ export function createRenderer(root: HTMLDivElement, state: AppState, renderScre
         const focused = document.activeElement as HTMLElement | null;
         const focusAction = focused?.dataset.action;
         const focusId = focused?.id;
-        const changedScreen = state.renderedScreen !== state.screen;
+        const viewKey=state.screen==='house'?`house/${state.houseOverview?'overview':state.chosenRoom}`:state.screen;
+        const changedScreen = state.renderedScreen !== viewKey;
         const nextSpeechContext=[state.user?.uid??'guest',state.screen,state.selectedCourseId,state.progress.active?.id,state.progress.active?.index].join(':');
         if(nextSpeechContext!==speechContext){speaker().stop();spoken='';speechContext=nextSpeechContext;}
         const helpOpen = !changedScreen && !!root.querySelector<HTMLDetailsElement>('.home-help')?.open;
@@ -83,7 +84,7 @@ export function createRenderer(root: HTMLDivElement, state: AppState, renderScre
         const task = listen ? listen.dataset.task ?? `${state.progress.active?.id}:${state.progress.active?.index}:${listen.dataset.key}` : '';
         if (listen && task !== spoken) speaker().speak(listen.dataset.say ?? '', listen.dataset.lang, false, listen.dataset.speechKind === 'dialogue' ? 'dialogue' : 'word');
         if (!state.busy) { if (!listen && spoken) speaker().stop(); spoken = task; }
-        state.renderedScreen = state.screen;
+        state.renderedScreen = viewKey;
         restoreViewContext(root);
     }
     async function run(task: () => Promise<void>) {

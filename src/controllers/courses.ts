@@ -21,6 +21,7 @@ export function createCourseController(state: AppState, ports: CoursePorts) {
         if (!state.selected || courseKey(state.selected) !== course.id) state.selected = module;
         state.selectedJourneyKey = '';
         state.introLessonId = '';
+        state.houseOverview = true;
         state.chosenRoom = 'salon';
         state.chosenDecoration = 'pillow';
         return true;

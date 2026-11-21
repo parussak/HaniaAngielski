@@ -4,6 +4,7 @@
   "id": "food-w-praktyce",
   "title": "Kocia kuchnia — Food w praktyce",
   "rewards": {
+    "room": "kitchen",
     "decorations": ["fruit-bowl", "cat-toaster", "mugs", "table"]
   },
   "stages": [

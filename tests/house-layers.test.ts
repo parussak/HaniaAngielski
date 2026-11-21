@@ -5,7 +5,7 @@ import {decorations,decorationLayer,canUseSlot} from '../src/house/catalog.ts';
 import {homeFor,creditStars,purchase,place,stars} from '../src/house/progress.ts';
 import {engineModules} from './fixtures/engine.ts';
 const course='angielski-hani';
-const foodDecorations=decorations.filter(d=>!d.map||d.map.split('/')[0]==='unit-2-food');
+const foodDecorations=decorations.filter(d=>['salon','kitchen'].includes(d.rooms[0]));
 function furnished(){
  const p=emptyProgress();creditStars(p,250);
  const h=homeFor(p)!;h.rooms=['kitchen'];h.unlockedItems=foodDecorations.map(d=>d.id);

@@ -27,11 +27,11 @@ export function createHouseController(state:AppState,{mutate}:HousePorts){
         }
         if(action==='select-room'){
             const room=el.dataset.id??'salon';
-            if(roomAvailable(state.progress,currentCourse(state)!.id,room)){state.chosenRoom=room;state.chosenDecoration=room==='salon'?'pillow':'cat-toaster';}
+            if(roomAvailable(state.progress,currentCourse(state)!.id,room)){state.screen='house';state.houseOverview=false;state.houseEditing=false;state.houseTab='shop';state.chosenRoom=room;state.chosenDecoration=decorations.find(d=>d.rooms[0]===room)?.id??'';}
             return true;
         }
         if(action==='house'){
-            state.screen='house';
+            state.screen='house';state.houseOverview=true;state.houseEditing=false;
             return true;
         }
         if(action==='house-tab'){

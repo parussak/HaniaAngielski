@@ -107,7 +107,7 @@ Na końcu ocenianej sesji pokazujemy **0–3 łapek z połówkami**: udział uni
 | Pierwsza mapa Food: ukończony etap z pełnym utrwaleniem jego kolejki | +3 ★ premii etapu (tylko ta mapa) |
 | Wznowienie, odświeżenie, przerwanie, ponowne przetworzenie tej samej sesji, globalne ćwiczenia | 0 |
 
-Gwiazdki są motywacją, nie dowodem znajomości. Zdobytych gwiazdek nie przeliczamy wstecz. Odznaka kociego kucharza jest związana z ukończeniem pierwszej mapy Food. Gwiazdki trafiają do portfela kursu i [kociego domku](koci-domek.md): ukończona mapa odblokowuje wyposażenie, ukończenie wszystkich map modułu — pokój.
+Gwiazdki są motywacją, nie dowodem znajomości. Zdobytych gwiazdek nie przeliczamy wstecz. Odznaka kociego kucharza jest związana z ukończeniem pierwszej mapy Food. Gwiazdki trafiają do portfela kursu i [kociego domku](koci-domek.md): ukończona mapa odblokowuje własny pokój i przypisane wyposażenie.
 
 ### Po lekcji mapowej (D-50, D-52)
 

@@ -37,23 +37,23 @@ test('nagrody lekcji, pełnej powtórki, dodatkowego treningu i etapu trafiają 
  assert.equal(settleStageRewards(p,[j],at,[m]),3);assert.equal(stars(p,'french-book'),8);assert.equal(stars(p),0);
 });
 
-test('każda mapa odblokowuje wyposażenie, obie mapy pokój; błędy nie blokują i nic się nie dubluje',()=>{
+test('każda mapa odblokowuje wyposażenie, własny pokój; błędy nie blokują i nic się nie dubluje',()=>{
  for(const order of [maps,[...maps].reverse()]){
   const p=emptyProgress();complete(p,order[0]);
-  assert.deepEqual(settleHouseUnlocks(p,modules,maps),[]);assert.equal(roomAvailable(p,'angielski-hani','kitchen'),false);
+  assert.deepEqual(settleHouseUnlocks(p,modules,maps),[order[0].rewards!.room]);assert.ok(roomAvailable(p,'angielski-hani',order[0].rewards!.room!));
   assert.equal(homeFor(p)!.unlockedItems!.length,4);p.difficult=['unit-2-food@1:word:apple'];
-  complete(p,order[1]);assert.deepEqual(settleHouseUnlocks(p,modules,maps),['Kocia kuchnia']);
-  assert.equal(homeFor(p)!.unlockedItems!.length,8);assert.equal(homeFor(p)!.rooms!.length,1);
+  complete(p,order[1]);assert.deepEqual(settleHouseUnlocks(p,modules,maps),[order[1].rewards!.room]);
+  assert.equal(homeFor(p)!.unlockedItems!.length,8);assert.equal(homeFor(p)!.rooms!.length,2);
   const saved=structuredClone(p);assert.deepEqual(settleHouseUnlocks(p,modules,maps),[]);assert.deepEqual(p,saved);
   assert.deepEqual(validateBackup(backup(p)).progress,p);assert.equal(stars(p),0);
   assert.equal(roomAvailable(p,'french-book','kitchen'),false);
  }
 });
 
-test('brak mapy lub błąd wczytania nie daje pokoju; zdobytego pokoju aktualizacja nie odbiera',()=>{
+test('błąd innej mapy nie blokuje dostępnej nagrody; zdobytego pokoju aktualizacja nie odbiera',()=>{
  const p=emptyProgress();for(const map of maps)complete(p,map);
- settleHouseUnlocks(p,modules,[maps[0]]);assert.equal(homeFor(p)?.rooms,undefined);
- settleHouseUnlocks(p,modules,maps,[{moduleId:'unit-2-food',path:'bad'}]);assert.equal(homeFor(p)?.rooms,undefined);
+ settleHouseUnlocks(p,modules,[maps[0]]);assert.deepEqual(homeFor(p)?.rooms,['picnic']);
+ settleHouseUnlocks(p,modules,maps,[{moduleId:'unit-2-food',path:'bad'}]);assert.deepEqual(homeFor(p)?.rooms,['picnic','kitchen']);
  settleHouseUnlocks(p,modules,maps);const saved=structuredClone(p);
  settleHouseUnlocks(p,modules,[],[{moduleId:'unit-2-food',path:'bad'}]);assert.deepEqual(p,saved);
 });

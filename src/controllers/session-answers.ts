@@ -1,4 +1,6 @@
 import {rewardStars} from '../learning/rewards.ts';
+import {mapRoom} from '../house/rewards.ts';
+import {lessonContext} from '../learning/lesson-flow.ts';
 import {homeFor,settleHouseUnlocks} from '../house/progress.ts';
 import { rewardCompletion } from '../adventure.ts';
 import { currentCourse } from '../app/selectors.ts';
@@ -85,7 +87,10 @@ export function createSessionAnswerController(state: AppState, { mutate }: Sessi
             }
         } });
         if (!state.progress.active) {
-            if(unlockedRooms.length)state.notice=`Nowy pokój: ${unlockedRooms.join(', ')}! Otwórz Domek, aby go urządzić.`;
+            const session=state.progress.sessions.at(-1)!;
+            const context=session.lesson&&lessonContext(state.journeys,state.progress,session);
+            const room=context&&mapRoom(context.journey);
+            state.roomDiscovery=room&&unlockedRooms.includes(room.id)?{session:session.id,room:room.id}:undefined;
             state.lastReward = (homeFor(state.progress,rewardCourse)?.earned ?? 0) - earned;
             state.lastStageReward = (Object.values(state.progress.adventure?.stageReviews ?? {}).filter(r => r.rewardedAt).length - bonuses) * rewardStars.stageMastery;
             state.lastSession = state.progress.sessions.at(-1)!;

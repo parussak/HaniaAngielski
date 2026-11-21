@@ -25,6 +25,8 @@ export class AppState {
     selectedJourneyKey = '';
     introLessonId = '';
     chosenDecoration = 'pillow';
+    houseOverview = true;
+    roomDiscovery?: {session:string;room:string};
     chosenRoom = 'salon';
     houseTab: 'shop' | 'storage' = 'shop';
     houseEditing = false;

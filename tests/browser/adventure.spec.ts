@@ -29,11 +29,11 @@ test('mapa: nauka, nagroda raz, dwa kroki, zakup i ustawienie domku po odśwież
   await expect(page.locator('.lesson-reward')).toContainText('+1');
   await page.getByRole('button',{name:'Wróć do mapy',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('4');
   await resumeStudy(page);await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await finishLesson(page);
-  await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('7');
+  await page.getByRole('button',{name:'Domek',exact:true}).tap();await page.getByRole('button',{name:'Koci salonik',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('7');
   await page.getByRole('button',{name:'Kup za 6 ★',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('1');
   await page.getByRole('button',{name:'Prawy kącik',exact:true}).tap();await expect(page.locator('.room-decoration')).toHaveClass(/slot-right/);
   await page.screenshot({path:'test-results/cat-house-mobile.png',fullPage:true});
-  await page.reload();await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.room-decoration')).toHaveCount(1);await expect(page.locator('.room-decoration')).toHaveClass(/slot-right/);
+  await page.reload();await page.getByRole('button',{name:'Domek',exact:true}).tap();await page.getByRole('button',{name:'Koci salonik',exact:true}).tap();await expect(page.locator('.room-decoration')).toHaveCount(1);await expect(page.locator('.room-decoration')).toHaveClass(/slot-right/);
   await expect(page.locator('.star-wallet')).toContainText('1');
   for(const width of [320,430]){await page.setViewportSize({width,height:740});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();}
 });
