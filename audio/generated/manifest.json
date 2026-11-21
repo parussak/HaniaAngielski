@@ -1100,8 +1100,8 @@
         {
           "key": "unit-3-technology:reading:space-camp:sentence:flying",
           "kind": "reading-sentence",
-          "text": "In the simulator, she is flying over the Moon.",
-          "clip": "96d3d9ca2c302544854e878a2a48e08f4281de393cef3d39f336dc00911eada4",
+          "text": "She is flying over the Moon in the simulator.",
+          "clip": "83c5a772b3109f3bd67635652ae753614548f8045f576ac19d06c30684932d9c",
           "readingId": "space-camp",
           "sentence": "flying"
         },
@@ -1952,13 +1952,13 @@
     },
     "055d055232601d0c1e80b09131d965bd4454d0bae4740fbb3e38cfe4567b6d77": {
       "file": "clips/055d055232601d0c1e80b09131d965bd4454d0bae4740fbb3e38cfe4567b6d77.ogg",
-      "bytes": 1980,
-      "sha256": "ab207fa2a85b50bf453bae3dd00df931b47acb6b8feae28e0666e96cba11d72e",
+      "bytes": 2080,
+      "sha256": "ee23494827723b6d46e3b65b1b9b5c8cf5ba1a58691d3380532f9fc19ab7157c",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.609
+        "durationSeconds": 0.655
       }
     },
     "059dfd7667ffd237d2b60261ffe1661e2d9071fafccc2f9f2319b04f32404d41": {
@@ -1985,13 +1985,13 @@
     },
     "08b00c6292262d1a5dd7a24139466646afdfec9d45923311443193ab6c6c2bd9": {
       "file": "clips/08b00c6292262d1a5dd7a24139466646afdfec9d45923311443193ab6c6c2bd9.ogg",
-      "bytes": 1800,
-      "sha256": "169aab3c6744d4bec6d0cf6676755ae3bbfad3ab1cd50be925dd8aa7c60287e1",
+      "bytes": 2239,
+      "sha256": "73925fac7c84c60ad1a123cfcba3f8e31b716725c17e1a52eac945f71945dff1",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.556
+        "durationSeconds": 0.728
       }
     },
     "09c291376cb1e7e7e6487e60ce590c864a4db09518389f7fd233b13a5e807ece": {
@@ -2018,13 +2018,13 @@
     },
     "0b8f6c5fbe92fd02e6dfe431261e24582cfa7b5db81e5c44efb31a5428ff62ce": {
       "file": "clips/0b8f6c5fbe92fd02e6dfe431261e24582cfa7b5db81e5c44efb31a5428ff62ce.ogg",
-      "bytes": 3202,
-      "sha256": "57a047bc3197bf13179fc35b316d909bbf4d8ae7dd907f7a3d2f129e4d14114f",
+      "bytes": 3135,
+      "sha256": "a9485096633ae4e963679a4baa17e6fdd93e0849aaa8cdaef1190a0e1a4dfc01",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.028
+        "durationSeconds": 1.012
       }
     },
     "0dc7c8e4162c93303735a8e2ca5d50301f9f926c9cc86480e8935977f481dc6e": {
@@ -2040,13 +2040,13 @@
     },
     "0e8df5dc36979f2a387392547a0a4db2e25a63f6fc08e327a6e93205607a1a09": {
       "file": "clips/0e8df5dc36979f2a387392547a0a4db2e25a63f6fc08e327a6e93205607a1a09.ogg",
-      "bytes": 3589,
-      "sha256": "771ec46749954607c14e873acba99fb7527c5533bdd02453d4c2315668bc558c",
+      "bytes": 3567,
+      "sha256": "cc3140afcfe16eca488d819770d8e5c4b557e47da558ec9d141c0923733aebc7",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.137
+        "durationSeconds": 1.14
       }
     },
     "0eacbbf14a92f47d7423b356b5aa91a56906b79fbc4cb9f2f3df47a55133b374": {
@@ -2139,13 +2139,13 @@
     },
     "14f50d064f40076d54f119d84711ddfb5d3da8f19ada67815ef31c71fb94d3d0": {
       "file": "clips/14f50d064f40076d54f119d84711ddfb5d3da8f19ada67815ef31c71fb94d3d0.ogg",
-      "bytes": 3172,
-      "sha256": "af19c35188e10b63e492412502726c8f609645cd29b0ff2def12bf9e0d88d203",
+      "bytes": 3138,
+      "sha256": "b918d98c4305487f8e132a38998eaa9283209272d79a68e11024c36992695cda",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.979
+        "durationSeconds": 0.98
       }
     },
     "155d19f36aec6e7f46e5cef7cbc039773eeb59ee861ade8db6d2a409234c4a10": {
@@ -2216,13 +2216,13 @@
     },
     "1eea55d7e60ead8eff39ad242dc67e322afe867ae9d3b1476ce8fdd1ae87bb32": {
       "file": "clips/1eea55d7e60ead8eff39ad242dc67e322afe867ae9d3b1476ce8fdd1ae87bb32.ogg",
-      "bytes": 5266,
-      "sha256": "ccd05c6a9614e2bc33997d0744280613dfaf39d4c72be2cb34c417d78191bf3e",
+      "bytes": 7766,
+      "sha256": "a0241f30476f5f8e785f08a50d9a11b635379e7bbc6e8095d9f67a1510265ede",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.711
+        "durationSeconds": 2.641
       }
     },
     "1f0dfa87949e3f5d6c21b775e3be465a6fec13c4befa1cad0c9f1e174e325c4d": {
@@ -2381,13 +2381,13 @@
     },
     "2ddf988185891356e84664b9a1929dda88ea0f93f07b30fcccb5a65803d29567": {
       "file": "clips/2ddf988185891356e84664b9a1929dda88ea0f93f07b30fcccb5a65803d29567.ogg",
-      "bytes": 2354,
-      "sha256": "3d02bf5da30ca76c6248922f83358d908fa98d0809a115dd25d39afc383e455a",
+      "bytes": 2516,
+      "sha256": "9b8d152d1a68016a245b9aa227042c7a1e4dd71243562722edd6a7448510988c",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.782
+        "durationSeconds": 0.848
       }
     },
     "2e05847d262f7f7c32fd98471bf32ccb4ca06ad94808ec573c1ac57fc765418b": {
@@ -2425,13 +2425,13 @@
     },
     "33345ead748e5b322f14779ef0f190ef728ead60381b427e97676933b870bd04": {
       "file": "clips/33345ead748e5b322f14779ef0f190ef728ead60381b427e97676933b870bd04.ogg",
-      "bytes": 2342,
-      "sha256": "48f936325867e173ec1a301bade0eaa671574b2bd9ac51c588b537c995913254",
+      "bytes": 2469,
+      "sha256": "9573073d1c886dce5438f68d5a33f2f6e5f48972d0ae3c407f2b2bff7ca1b2b5",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.749
+        "durationSeconds": 0.807
       }
     },
     "346ead7094d971a45043bcc069d8f3fba48fe4dd5b693a784afe1033cb3dcae5": {
@@ -2480,13 +2480,13 @@
     },
     "37e909404a81d8fcac978735ef3cacd7f0076a25e95f65ad097f38248da778a4": {
       "file": "clips/37e909404a81d8fcac978735ef3cacd7f0076a25e95f65ad097f38248da778a4.ogg",
-      "bytes": 3543,
-      "sha256": "dab0d6f217e65d8990335cb17bcaf44cfa6e6295c0999cd19ccd82968945a1b9",
+      "bytes": 3408,
+      "sha256": "89713a8c98b1cb72de9884d95109a5172fce5f9ab5919e32c112c79ee18203df",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.123
+        "durationSeconds": 1.084
       }
     },
     "37e92be3d276cd287e0b17a1207394119355e4ee99511456bab03b91b8469f8b": {
@@ -2546,13 +2546,13 @@
     },
     "3efdf0eadb3c043dcf7aec0af642dec978fd30db0307eb99f2f8168c58d96d28": {
       "file": "clips/3efdf0eadb3c043dcf7aec0af642dec978fd30db0307eb99f2f8168c58d96d28.ogg",
-      "bytes": 3102,
-      "sha256": "649e74962608d25f5efb36d4cb2be2cd1f8d14558a6d6a1df85f54a7252af396",
+      "bytes": 2653,
+      "sha256": "5fcc89721fc1ee522fc2f4589fc7ad790aaeb37a00f491e961ef13d0ef059548",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.008
+        "durationSeconds": 0.838
       }
     },
     "3fb4ab405a1d3bc68ffc94bea289025c79b109294c66ed1d3fe10e132c086225": {
@@ -2645,24 +2645,24 @@
     },
     "4cf97801f74e52656372c396733bc288f86ea20e6e6c8e6ec28a20807b134eac": {
       "file": "clips/4cf97801f74e52656372c396733bc288f86ea20e6e6c8e6ec28a20807b134eac.ogg",
-      "bytes": 3062,
-      "sha256": "bc2a381df1e1214eaf1d7519a645882d484a926d1da667c2743661a7fc1f63c1",
+      "bytes": 3150,
+      "sha256": "f434f36219127bfeaebde4fa070433e3e9c883452a6d552955685477dd460028",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.035
+        "durationSeconds": 1.045
       }
     },
     "4d363dee5c4890b9d6aa4cb3e565629c3dcf8fa9be343527c62163e63694f48f": {
       "file": "clips/4d363dee5c4890b9d6aa4cb3e565629c3dcf8fa9be343527c62163e63694f48f.ogg",
-      "bytes": 11645,
-      "sha256": "ea781a6aced1f756a2710bdb108dc661628c23ee746972e0acd0c906da3ce849",
+      "bytes": 11193,
+      "sha256": "ec50ce4115e317e7db12b69d8541576956da1d6304720e4d41676884f50d23b4",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 3.8
+        "durationSeconds": 3.7
       }
     },
     "4db54c83101860af5d47234989c6c62f60e8513abd54ea7cde2b35b1b03d6ad4": {
@@ -2733,13 +2733,13 @@
     },
     "548f221fbe717e5f20b206153142cc525f83e971ba32adf6a9caf405620b5173": {
       "file": "clips/548f221fbe717e5f20b206153142cc525f83e971ba32adf6a9caf405620b5173.ogg",
-      "bytes": 2647,
-      "sha256": "9a2813ed24156046bcc9178c399193125ece5e3fdc0702004e017452ba644e22",
+      "bytes": 2825,
+      "sha256": "784a64f372f5f324e7c5bc1082aa2b44b5cf893c76b15a0a9ee41946242c42f3",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.859
+        "durationSeconds": 0.885
       }
     },
     "54da4191a9c84a563c2ccfafb08ed2965757d77507bb73ad67b04e156f76d976": {
@@ -2832,13 +2832,13 @@
     },
     "5b96f143d449dc23fc1db3fef892c65ab80d01efc7ec74eba82eaa639ab0e0ee": {
       "file": "clips/5b96f143d449dc23fc1db3fef892c65ab80d01efc7ec74eba82eaa639ab0e0ee.ogg",
-      "bytes": 4098,
-      "sha256": "7d27449f48b3b420205a744d74779c4bdb985e925040b98364aea1a806176441",
+      "bytes": 4196,
+      "sha256": "c152f53a050d0f30040fa6342ad21085c695deb13748d6e28616cde5a21003b4",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.35
+        "durationSeconds": 1.306
       }
     },
     "5ba7b3796fccaa5be48e0ff1291b47a1bfe90b8e5273c3ca7b57a8d3a856f11d": {
@@ -2931,13 +2931,13 @@
     },
     "60e4d2bc895de251ca6cd0fbc4afb5fd61769565c0a20ed8e7f4ade47f03163e": {
       "file": "clips/60e4d2bc895de251ca6cd0fbc4afb5fd61769565c0a20ed8e7f4ade47f03163e.ogg",
-      "bytes": 1895,
-      "sha256": "204bd0daedba6563db5eb8d12ea75b4a122ee71f3d4e50aac90e45630a3de77a",
+      "bytes": 2265,
+      "sha256": "96be54d525373305878d7c96f9e953e91841df77572652e9809f2c26be70c4ad",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.599
+        "durationSeconds": 0.744
       }
     },
     "6419a4a1cf659f2c77d7e185b5d1ac16858fe1fe641e06742dde1804509ae907": {
@@ -3162,13 +3162,24 @@
     },
     "81d38e04242fe5261aac8bd5cc168f1bf012ac1ca7cf0751cee23bf2e521953d": {
       "file": "clips/81d38e04242fe5261aac8bd5cc168f1bf012ac1ca7cf0751cee23bf2e521953d.ogg",
-      "bytes": 2476,
-      "sha256": "4c5db3fd2b697ccce1687ea81d7f702cbccb87d3ac7b836ef317682d88688f55",
+      "bytes": 2045,
+      "sha256": "4dec1e5bdd28af70a97ce59d0208120fb0e07a5d0909e99218f9265655899a59",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.82
+        "durationSeconds": 0.621
+      }
+    },
+    "83c5a772b3109f3bd67635652ae753614548f8045f576ac19d06c30684932d9c": {
+      "file": "clips/83c5a772b3109f3bd67635652ae753614548f8045f576ac19d06c30684932d9c.ogg",
+      "bytes": 8036,
+      "sha256": "46e02b289731d646303d68f408453ec587a88163f41f1d567ec7b2b7e52d4029",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.588
       }
     },
     "840ef9f6ab47fb293a24394c822a1c46b2400386d9996cdaded216b9a8e01d38": {
@@ -3316,13 +3327,13 @@
     },
     "8fc87dfde7b6bb388501b87fd1eb253bffcb90f7cc12f833a7f00b9d9da4f7b8": {
       "file": "clips/8fc87dfde7b6bb388501b87fd1eb253bffcb90f7cc12f833a7f00b9d9da4f7b8.ogg",
-      "bytes": 4155,
-      "sha256": "42e1666dce15ee5c74eb1390ca19b2c888ecb8770df38b9ea20f7a451e67d943",
+      "bytes": 4219,
+      "sha256": "c789a90ffb9eb1364daa4da29503cc5852c0cb69d947e1b56df6f96c849ca098",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.311
+        "durationSeconds": 1.376
       }
     },
     "91e959b6b4588668985979cde2fb774ad089b05e3ffa97538212b12a94c3ae89": {
@@ -3400,17 +3411,6 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 2.213
-      }
-    },
-    "96d3d9ca2c302544854e878a2a48e08f4281de393cef3d39f336dc00911eada4": {
-      "file": "clips/96d3d9ca2c302544854e878a2a48e08f4281de393cef3d39f336dc00911eada4.ogg",
-      "bytes": 5878,
-      "sha256": "c10c715189847f5eaddf843c4624e62960c3e6b8e22fe5a4d019264aac409189",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 1.894
       }
     },
     "9904232d8d553ac86f178f016f0f85129f7b46028a01919092b85b1f3ad1ff3b": {
@@ -3503,46 +3503,46 @@
     },
     "9ecd28148446ff162576bfca0b57eac19aea315847d1b0a1ce044296b7c45a03": {
       "file": "clips/9ecd28148446ff162576bfca0b57eac19aea315847d1b0a1ce044296b7c45a03.ogg",
-      "bytes": 3670,
-      "sha256": "ab0c7aeadb735f90e7ff27805cda1ceb5d08d24ad5ed2c942c4b2489d27a5b1b",
+      "bytes": 3811,
+      "sha256": "ca5b7ce611af1b477bda76b473e2ce91270f16d58f6ce0dfc9c48dfac8f06ffc",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.195
+        "durationSeconds": 1.247
       }
     },
     "a13b2c8ff6eb6fc9a8c84a9420b8e2527fffd865163a30c8bc2927dbe0fd74d2": {
       "file": "clips/a13b2c8ff6eb6fc9a8c84a9420b8e2527fffd865163a30c8bc2927dbe0fd74d2.ogg",
-      "bytes": 3217,
-      "sha256": "397f73437b1a7cc1f307f12445aea86de2a0f71c86cbd7ccac238cf2eae229a1",
+      "bytes": 3255,
+      "sha256": "6018cdfad98e103f59a05b1ba8c2edd44b1e3e37bbbc3f379ffa68e625b14dab",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.056
+        "durationSeconds": 1.066
       }
     },
     "a1b637877c1e5dccc8b68e146de06e38df66c091aeb26138217f9384813c5c80": {
       "file": "clips/a1b637877c1e5dccc8b68e146de06e38df66c091aeb26138217f9384813c5c80.ogg",
-      "bytes": 2545,
-      "sha256": "12ba1607e9a42e543077fc0326209ac91fa1e68cc89764f56225d1ef98670ee2",
+      "bytes": 2725,
+      "sha256": "6f4d94f462264b5d15b35b934f547135f6482a93ffc0888cef61f2982684b48b",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.841
+        "durationSeconds": 0.905
       }
     },
     "a5841d780ce1b8360029e79e1e90bfebee98395f19d32bbb5e707d9da0b1bbf6": {
       "file": "clips/a5841d780ce1b8360029e79e1e90bfebee98395f19d32bbb5e707d9da0b1bbf6.ogg",
-      "bytes": 3035,
-      "sha256": "c4e13af01285b888bc3be3ea923bde976fdad93f8a4a5d94e7f734bbd19bc739",
+      "bytes": 2705,
+      "sha256": "a84e63eac4d50c9128f0d92d39fd77157f2ba497dc5f09bdcb000cc93a15e702",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.979
+        "durationSeconds": 0.875
       }
     },
     "a78bf4aaae0ade578845de151fa06ce3c900a5afc34d75300451fb48563d68ea": {
@@ -3558,24 +3558,24 @@
     },
     "a7c9d00c35adb132fbdd0562b9c73969a9ff06266a56f61b8a61ae1756bd0919": {
       "file": "clips/a7c9d00c35adb132fbdd0562b9c73969a9ff06266a56f61b8a61ae1756bd0919.ogg",
-      "bytes": 2538,
-      "sha256": "fcd4907bd9156d28c56fcfef97ff221889d088c069ac3832c115bb3ddd490eeb",
+      "bytes": 2749,
+      "sha256": "e13484d31d1bc5207e72e8a4363431cf2fcdef14fa4c133efe5408f7ddaa8ee9",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.796
+        "durationSeconds": 0.925
       }
     },
     "a8c0b19a142f11d776fbd08d80796bad893ba93ac45d53cc1c09f33f7e6e5b3c": {
       "file": "clips/a8c0b19a142f11d776fbd08d80796bad893ba93ac45d53cc1c09f33f7e6e5b3c.ogg",
-      "bytes": 3225,
-      "sha256": "e91907a58023a6733e59b26b7442ec012876c1d6f570bc5966675ff67cb16618",
+      "bytes": 3236,
+      "sha256": "fe9a42a2f359eb9df35ca4fdf3f68a8528ba7528c4a74a7647fb29f8527163ff",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.055
+        "durationSeconds": 1.049
       }
     },
     "aa81adb0e3787df19eba03fd8749cd156057fac583c6ebc49edda6793af793b0": {
@@ -3591,13 +3591,13 @@
     },
     "ac94d375322e2300c5c940e7457d8a4508ae1b66f2ac3036e347971ebe01ba4a": {
       "file": "clips/ac94d375322e2300c5c940e7457d8a4508ae1b66f2ac3036e347971ebe01ba4a.ogg",
-      "bytes": 2577,
-      "sha256": "203563ee49369e6a431dace4179c48906b30abd15528c923b505ba1554af3f97",
+      "bytes": 2276,
+      "sha256": "8fec85eeea0fcdcc4916249d4f989e7570fc081040a67eaaaf1009bf80d8d6ca",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.848
+        "durationSeconds": 0.696
       }
     },
     "ad75871ef2e05f8e3ba6f73e688a62860a554198744a61e15fea3f2613983984": {
@@ -3723,13 +3723,13 @@
     },
     "b4ab11764c89dc5d81403782a162b365ea487acd2fe351115f7040ef3db33a31": {
       "file": "clips/b4ab11764c89dc5d81403782a162b365ea487acd2fe351115f7040ef3db33a31.ogg",
-      "bytes": 2819,
-      "sha256": "85cb85b92c2f87bd078f0c116cd14db77e2d3d5621c3b980e89aa5bdbc4e47d9",
+      "bytes": 2619,
+      "sha256": "0d334cb5db74e8924487fde3fdaeea04ae1ec38e665c84848805cb0902556fef",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.973
+        "durationSeconds": 0.907
       }
     },
     "b4e1389e06a6e1ab06ce4c9592148e95a0727f1775e63cbc4c28af3a27ee010b": {
@@ -3756,24 +3756,24 @@
     },
     "b63157d868de67bf8bd193088129884ba325a6214250c853addb86bda9726d2a": {
       "file": "clips/b63157d868de67bf8bd193088129884ba325a6214250c853addb86bda9726d2a.ogg",
-      "bytes": 2283,
-      "sha256": "adb811eb0bb408becc32995b73cd2c7f7537d493b2fc958013125a1915b7a99e",
+      "bytes": 2213,
+      "sha256": "c1095a38a73faa72f0ae2bbd4add6167824ffd79148178ce4b16b4810bb48e12",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.752
+        "durationSeconds": 0.724
       }
     },
     "b7653119985c761dca6bf165175b0d31a716b086faf806037635442467b19062": {
       "file": "clips/b7653119985c761dca6bf165175b0d31a716b086faf806037635442467b19062.ogg",
-      "bytes": 3309,
-      "sha256": "49cc18b4a89dbf7966eafacb8d88fe9c4a1191ce68a7facecf1f786645172a92",
+      "bytes": 2753,
+      "sha256": "06a7fa5c68cebb144f3eea8db2ec5c23241793d09d83a30654bb2eb3c5741626",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.069
+        "durationSeconds": 0.884
       }
     },
     "b79c15d083590d7df371c66147c62838c010708c72574e21c61d43d61d2ce415": {
@@ -3822,13 +3822,13 @@
     },
     "badedf504ef94a7374126374c46341a8c93e16e25b46fcef153979be9a9d3ac7": {
       "file": "clips/badedf504ef94a7374126374c46341a8c93e16e25b46fcef153979be9a9d3ac7.ogg",
-      "bytes": 3017,
-      "sha256": "01faed801ffd4a88ee292aad58761370a93df79ef662942387135a2cdbb4e733",
+      "bytes": 2459,
+      "sha256": "cd757ef44bea3867224b926ecfe18c2335f3c0aeecf4ebcf01137d7809fd940f",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.999
+        "durationSeconds": 0.783
       }
     },
     "bb2eb32cf1f95e1e37e35f7a51dfe1bb9831cea355cfdcbd34bc423f7a5716c9": {
@@ -3877,24 +3877,24 @@
     },
     "c132e5068f0942639df1809a6558cfc7dfcc2e56125c96f4858fec29410af8d6": {
       "file": "clips/c132e5068f0942639df1809a6558cfc7dfcc2e56125c96f4858fec29410af8d6.ogg",
-      "bytes": 2204,
-      "sha256": "b14374b5c00c6b2275949cc699acf636bdc373f814100290409cbb954504f7aa",
+      "bytes": 2303,
+      "sha256": "f100df3b40f022b9b8e8536f0858c0c9a3221bb5c85c35dfda0c3c7acf162d20",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.67
+        "durationSeconds": 0.709
       }
     },
     "c2271af3cfa0bd424ebcc090a784e3ff46aa0386b9eb9391910cf40eb55dba5b": {
       "file": "clips/c2271af3cfa0bd424ebcc090a784e3ff46aa0386b9eb9391910cf40eb55dba5b.ogg",
-      "bytes": 1699,
-      "sha256": "ed1adda60519c9fb9589fc9a5face0dc52a7798f6a6d0fbeec55c0a35113d59a",
+      "bytes": 1774,
+      "sha256": "8b200c247fbb40732073355b480285d8e297e72c1e9b99a9f12819b5bfe85324",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.533
+        "durationSeconds": 0.562
       }
     },
     "c2483f75fa2c6d56a3b4968433503c31f9b37bf06dd04b7d744c3a33a50368b4": {
@@ -3965,13 +3965,13 @@
     },
     "c5cbeb07a443f4220ab6fa7d19e3946dbf3ac2704ae254c29617bddb851a68a6": {
       "file": "clips/c5cbeb07a443f4220ab6fa7d19e3946dbf3ac2704ae254c29617bddb851a68a6.ogg",
-      "bytes": 14734,
-      "sha256": "120e35bf6aa1222e28c77678e404c16f69994b65f610754003737190fead271c",
+      "bytes": 12611,
+      "sha256": "d1b3a85e15c9cc4991ba8e443ecd363084e0b0d989181ee022bcc8e3ce289bef",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 5.3
+        "durationSeconds": 4.5
       }
     },
     "c5f085c2adbfa74aa00a113512ab387e751898e458ed86b4fbd9613b9ffe934c": {
@@ -4163,13 +4163,13 @@
     },
     "d0efc8ef25949d0d349f0d8145c318645e46015d12e57aacad0241613989bfd0": {
       "file": "clips/d0efc8ef25949d0d349f0d8145c318645e46015d12e57aacad0241613989bfd0.ogg",
-      "bytes": 3199,
-      "sha256": "333a4d6c37bae3563bbcad9781ec86fa67209b4cefb8374b115b243fd910c248",
+      "bytes": 3143,
+      "sha256": "c23a70f484f6df1c0d3056baae2c3440739d51cc22746bb54b456d4023f6f711",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.063
+        "durationSeconds": 1.045
       }
     },
     "d17c8827efc0ef1dd0db2a6ef8cbcad69abe2765565f328b6560449f8f5b8617": {
@@ -4251,13 +4251,13 @@
     },
     "d7bf0f2d25befe9294d470b89cba72f60d056a20b14cbf0f523f079bdafbca57": {
       "file": "clips/d7bf0f2d25befe9294d470b89cba72f60d056a20b14cbf0f523f079bdafbca57.ogg",
-      "bytes": 2183,
-      "sha256": "1f9f0df43307f52b3a998eb54f7e949b72577e35d252e920614ca1f79c0861c8",
+      "bytes": 2416,
+      "sha256": "262f002b24c76df135742d6899a4c76168d13711abdd7ecbcc3adbd38f425d86",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.657
+        "durationSeconds": 0.756
       }
     },
     "d802734748eab9ee8e58b5c6dd6778ce0f352292f03254e322699a017636179e": {
@@ -4306,13 +4306,13 @@
     },
     "e083975f805064584eeb0e2dccffdb101e6caf8f7d088891538028765ed2b2a2": {
       "file": "clips/e083975f805064584eeb0e2dccffdb101e6caf8f7d088891538028765ed2b2a2.ogg",
-      "bytes": 1701,
-      "sha256": "d44ef82bfb11117537a68ec8f23c6cb4514241f5c001257e0dada38b5eaa4708",
+      "bytes": 1380,
+      "sha256": "d9a7d2fd6e340e1c1431dfa389ef87547686729a1c500dc6569e51f79bc559db",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.531
+        "durationSeconds": 0.412
       }
     },
     "e21200215d8a2e61596b8ff02976ffdf0dcb52a96723f1afbccb2a7901c6b1ea": {
@@ -4350,13 +4350,13 @@
     },
     "e2f61ca04444e712e1fafc241b8abcfc135a0803c25cce45b48ab0e7c23d6fd3": {
       "file": "clips/e2f61ca04444e712e1fafc241b8abcfc135a0803c25cce45b48ab0e7c23d6fd3.ogg",
-      "bytes": 2744,
-      "sha256": "ef152cfd6f941fadc34f507c4d1b0bb2b4c83d0f1e555ea40c139cd6051ecf98",
+      "bytes": 2239,
+      "sha256": "a0e1ed7aa9131e9eab5c462d3995a118c702c1a8ea3f12c2bb683c903b45a05f",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.937
+        "durationSeconds": 0.697
       }
     },
     "e2f81bc3d287d8a227a215ba71b38b684083938d8431d608ffdec10991c67f97": {
@@ -4383,13 +4383,13 @@
     },
     "e71f39c1c5b3d02fd491f6bbafa3baab2b263b81eb34f9e4a56ae53c689b8f47": {
       "file": "clips/e71f39c1c5b3d02fd491f6bbafa3baab2b263b81eb34f9e4a56ae53c689b8f47.ogg",
-      "bytes": 2752,
-      "sha256": "82d128231930463cb90eddcd7967ba0bbe853de216845f6b167c4a7db8dd1028",
+      "bytes": 2231,
+      "sha256": "0fcab045e2444ed7108658b69f6ff85bf685949af4209abed423abfaf9dddc67",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.897
+        "durationSeconds": 0.71
       }
     },
     "e8bf2248c7dd7f7462541b43e8293eb8ddc5d83ea610751f57b2f57f189e94af": {
@@ -4405,13 +4405,13 @@
     },
     "e98ac6d9e968a83ed1b66d50b73c929f8ea9d7810fbeb2d204f69042110b378e": {
       "file": "clips/e98ac6d9e968a83ed1b66d50b73c929f8ea9d7810fbeb2d204f69042110b378e.ogg",
-      "bytes": 2554,
-      "sha256": "999343138a2d66b4dd99bb8ef6d1cd2b96cc311bbbcd9763a43433cb3114cb9f",
+      "bytes": 2868,
+      "sha256": "357128857f099b8f6a2435044c7ae68f2607b8954a59958e148fc46986385bf0",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.831
+        "durationSeconds": 0.949
       }
     },
     "ea9dca3cfc523d14c4eb273fc8734d1932fb1e1326f159e86392eeaf4a2eefe2": {
@@ -4482,13 +4482,13 @@
     },
     "f14eb6ed79c371942ae82d50dc9c2b383b663283b33588a0fb0c10b980bd0d74": {
       "file": "clips/f14eb6ed79c371942ae82d50dc9c2b383b663283b33588a0fb0c10b980bd0d74.ogg",
-      "bytes": 3118,
-      "sha256": "94bd875fc205cfa20f9a67bb8dc4266e35ecf73383d7462f488f8e756a5a150f",
+      "bytes": 2542,
+      "sha256": "74b28bd549d7912c704b1ca6c81423ebf04d12167e95f2973ac586ae64af28d1",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.051
+        "durationSeconds": 0.807
       }
     },
     "f3915d76a104a37e171206e1128f182d987f873f64e676ee64312c188e1eb996": {
@@ -4504,24 +4504,24 @@
     },
     "f7b79a30074a8ae907537ec4b3ff3b352ee09c849288546bc9ae97d4a1c8579b": {
       "file": "clips/f7b79a30074a8ae907537ec4b3ff3b352ee09c849288546bc9ae97d4a1c8579b.ogg",
-      "bytes": 3992,
-      "sha256": "230c7b6cd0abe5a9a76a1ecd7ecd573cbbdd2da4c2548f5061b61c866e3dc0e9",
+      "bytes": 3909,
+      "sha256": "8815aee5969ccc516dcc408dd55a989a139c9d30e6f5b872ebe2a17db9208208",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 1.276
+        "durationSeconds": 1.257
       }
     },
     "f83fc7a3f14798dbb3d61ab70b787adb3797a99f69af54bc2bfed61d92fdf161": {
       "file": "clips/f83fc7a3f14798dbb3d61ab70b787adb3797a99f69af54bc2bfed61d92fdf161.ogg",
-      "bytes": 2449,
-      "sha256": "1979688b37753982c189b21c9d7bff893f66e9e823c313151996667e60f4d080",
+      "bytes": 2311,
+      "sha256": "bd3a6b05677ce8daf30b0f0a3edec4dc7017e77270a0bdf33f4b5d8ff2ab031d",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.809
+        "durationSeconds": 0.758
       }
     },
     "f889109d4a4ceac7fd712e87d55987c2a01efa74dc684754ace785ac5fe55816": {
@@ -4537,24 +4537,24 @@
     },
     "f8a1bb1ba1c77ae3390d39e8c03431de4252794a932b1bf63cf090de162c841b": {
       "file": "clips/f8a1bb1ba1c77ae3390d39e8c03431de4252794a932b1bf63cf090de162c841b.ogg",
-      "bytes": 2644,
-      "sha256": "cd615d3dbbfb99af3837776aabd925913e8c0d4f5f322446c2456eb91ef16187",
+      "bytes": 2285,
+      "sha256": "e422c44f415bbe17fcb1d680f4f9ebfdd67b2956deceb25c06cb7710850d7458",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.877
+        "durationSeconds": 0.765
       }
     },
     "fc955dc85570ac639a5e330746e53b7c3c9d4186275205e1aba9aa0b95b3a2f4": {
       "file": "clips/fc955dc85570ac639a5e330746e53b7c3c9d4186275205e1aba9aa0b95b3a2f4.ogg",
-      "bytes": 2324,
-      "sha256": "a32847e728dc3f7f7572b189d3498df019045b11df250a434f9c365e6e7c33e5",
+      "bytes": 2044,
+      "sha256": "bb5d3cbc7eceac8ed5274a283b20d55ebe8f538a19d8f7e70aa314906fa266ef",
       "audio": {
         "codec": "opus",
         "channels": 1,
         "inputSampleRate": 24000,
-        "durationSeconds": 0.744
+        "durationSeconds": 0.683
       }
     },
     "fcb11ff78ec024fbb6c63af60bb566157c98d260db0a9a72dee2804fe0ee61df": {
