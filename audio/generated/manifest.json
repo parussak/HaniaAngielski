@@ -1052,8 +1052,8 @@
         {
           "key": "unit-3-technology:reading:a-bed-on-the-wall:sentence:stay",
           "kind": "reading-sentence",
-          "text": "The bag stays in one place, and so does the astronaut.",
-          "clip": "4d363dee5c4890b9d6aa4cb3e565629c3dcf8fa9be343527c62163e63694f48f",
+          "text": "The bag stays in one place, and the astronaut stays there too.",
+          "clip": "1d91c3eaebc128c032c9ba22784cd601029dd33fb99b9ff1c60f28960fa64b14",
           "readingId": "a-bed-on-the-wall",
           "sentence": "stay"
         },
@@ -1237,8 +1237,8 @@
         {
           "key": "unit-3-technology:scene:phone-call-to-maja:line:1",
           "kind": "scene-line",
-          "text": "Hi, Oluś. Hang on. Maja, it's Oluś for you!",
-          "clip": "c5cbeb07a443f4220ab6fa7d19e3946dbf3ac2704ae254c29617bddb851a68a6",
+          "text": "Hi! Hang on, please. It's for you!",
+          "clip": "149e2bffc6f08c2982a1d4ee2bb576e11fe0a7ba465ec59b46f3e04229eaf503",
           "sceneId": "phone-call-to-maja",
           "line": 1,
           "speaker": "Albert"
@@ -2137,6 +2137,17 @@
         "durationSeconds": 2.375
       }
     },
+    "149e2bffc6f08c2982a1d4ee2bb576e11fe0a7ba465ec59b46f3e04229eaf503": {
+      "file": "clips/149e2bffc6f08c2982a1d4ee2bb576e11fe0a7ba465ec59b46f3e04229eaf503.ogg",
+      "bytes": 9720,
+      "sha256": "ad8b90f6c65981c98617c94e360cae38c75ff8c55edf9c6a3d93bbe5a2ce5a83",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 3.5
+      }
+    },
     "14f50d064f40076d54f119d84711ddfb5d3da8f19ada67815ef31c71fb94d3d0": {
       "file": "clips/14f50d064f40076d54f119d84711ddfb5d3da8f19ada67815ef31c71fb94d3d0.ogg",
       "bytes": 3138,
@@ -2212,6 +2223,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.796
+      }
+    },
+    "1d91c3eaebc128c032c9ba22784cd601029dd33fb99b9ff1c60f28960fa64b14": {
+      "file": "clips/1d91c3eaebc128c032c9ba22784cd601029dd33fb99b9ff1c60f28960fa64b14.ogg",
+      "bytes": 13792,
+      "sha256": "f761f517bc56f4f9c0e9493e8b81e5c393c5d4eab846ad564d8812a3f85e019a",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 4.6
       }
     },
     "1eea55d7e60ead8eff39ad242dc67e322afe867ae9d3b1476ce8fdd1ae87bb32": {
@@ -2652,17 +2674,6 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.045
-      }
-    },
-    "4d363dee5c4890b9d6aa4cb3e565629c3dcf8fa9be343527c62163e63694f48f": {
-      "file": "clips/4d363dee5c4890b9d6aa4cb3e565629c3dcf8fa9be343527c62163e63694f48f.ogg",
-      "bytes": 11193,
-      "sha256": "ec50ce4115e317e7db12b69d8541576956da1d6304720e4d41676884f50d23b4",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 3.7
       }
     },
     "4db54c83101860af5d47234989c6c62f60e8513abd54ea7cde2b35b1b03d6ad4": {
@@ -3961,17 +3972,6 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.196
-      }
-    },
-    "c5cbeb07a443f4220ab6fa7d19e3946dbf3ac2704ae254c29617bddb851a68a6": {
-      "file": "clips/c5cbeb07a443f4220ab6fa7d19e3946dbf3ac2704ae254c29617bddb851a68a6.ogg",
-      "bytes": 12611,
-      "sha256": "d1b3a85e15c9cc4991ba8e443ecd363084e0b0d989181ee022bcc8e3ce289bef",
-      "audio": {
-        "codec": "opus",
-        "channels": 1,
-        "inputSampleRate": 24000,
-        "durationSeconds": 4.5
       }
     },
     "c5f085c2adbfa74aa00a113512ab387e751898e458ed86b4fbd9613b9ffe934c": {

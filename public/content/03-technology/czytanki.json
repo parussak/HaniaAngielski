@@ -52,9 +52,11 @@
       "over": "nad",
       "the Moon": "Księżyc",
       "making": "robi, wykonuje",
-      "flying": "leci / latania",
+      "flying": "leci; latanie (scared of flying — boi się latać)",
       "watching": "ogląda",
       "taking a photo": "robią zdjęcie",
+      "photos": "zdjęcia",
+      "sitting": "siedzi",
       "next": "następny"
     },
     "questions": [
@@ -228,7 +230,7 @@
       "flashing": "miga",
       "runs": "biegnie",
       "jumps": "skacze",
-      "onto": "na (po wskoczeniu)",
+      "onto": "na (wskoczyć na coś)",
       "nose": "nos",
       "laughing": "śmieją się"
     },
@@ -357,7 +359,7 @@
       },
       {
         "id": "stay",
-        "text": "The bag stays in one place, and so does the astronaut.",
+        "text": "The bag stays in one place, and the astronaut stays there too.",
         "translation": "Śpiwór zostaje w jednym miejscu, a astronauta razem z nim."
       },
       {
@@ -412,8 +414,13 @@
       "about": "około",
       "sunrises": "wschody słońca",
       "clock": "zegar",
-      "standing": "stanie (tu: stojąc)",
-      "asleep": "śpiący (w fall asleep: zasnąć)"
+      "standing": "stoisz (standing up — stoisz prosto)",
+      "asleep": "śpiący (w fall asleep: zasnąć)",
+      "sleeping bag": "śpiwór",
+      "look like": "wyglądać (jak)",
+      "surprise": "niespodzianka",
+      "getting into": "wchodzisz do",
+      "fast": "szybko"
     },
     "questions": [
       {

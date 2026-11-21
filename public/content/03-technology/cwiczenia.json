@@ -310,7 +310,7 @@
       "no",
       "isn’t"
     ],
-    "explanation": "W tym ćwiczeniu tworzysz przeczenie do I'm chatting now. Po I'm wstaw not.",
+    "explanation": "W tym ćwiczeniu tworzysz przeczenie do I'm chatting online now. Po I'm wstaw not.",
     "requires": [
       "unit-3-technology"
     ],
@@ -1206,10 +1206,10 @@
     ],
     "options": [
       "I use my tablet to read books too.",
-      "I too use my tablet to read books.",
+      "I use too my tablet to read books.",
       "I use my tablet to too read books."
     ],
-    "explanation": "W ramce „Writing” too stoi na końcu, tutaj po books. I too use… też jest poprawne, gdy podkreślasz, że ty również używasz tabletu.",
+    "explanation": "W ramce „Writing” too stoi na końcu zdania, tutaj po books.",
     "requires": [
       "unit-3-technology"
     ],
@@ -1341,7 +1341,7 @@
   {
     "id": "review-hands",
     "kind": "grammar",
-    "prompt": "Wybierz: I click the little arrow with my ___.",
+    "prompt": "Wybierz: I move the little arrow with my ___.",
     "answers": [
       "mouse"
     ],
@@ -1350,7 +1350,7 @@
       "printer",
       "speakers"
     ],
-    "explanation": "Komputerowa myszka pozwala kliknąć strzałką kursora.",
+    "explanation": "Myszką komputerową przesuwasz małą strzałkę (kursor) na ekranie.",
     "requires": [
       "unit-3-technology"
     ],
@@ -1661,7 +1661,7 @@
   {
     "id": "feeling-tired",
     "kind": "grammar",
-    "prompt": "Wybierz: After a long day and very little sleep, I'm too ___ to play.",
+    "prompt": "Wybierz: After a long day and very little sleep, I'm very ___. I want to go to bed.",
     "answers": [
       "tired"
     ],
@@ -1670,7 +1670,7 @@
       "angry",
       "happy"
     ],
-    "explanation": "Po długim dniu i krótkim śnie możesz czuć zmęczenie. Pasuje tired.",
+    "explanation": "Po długim dniu i krótkim śnie chce ci się spać i chcesz iść do łóżka. Pasuje tired — zmęczony.",
     "requires": [
       "unit-3-technology"
     ],
