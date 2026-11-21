@@ -1089,7 +1089,7 @@
       "source": "Podręcznik, ramka Speaking, s. 44, i Wordlist, s. 47 (w ramce Amy, w Wordlist Eve).",
       "variants": {
         "pl": {
-          "text": "Czy mogę rozmawiać z Eve?"
+          "text": "Czy mogę rozmawiać z Eve, proszę?"
         },
         "en": {
           "text": "Can I speak to Eve, please?",
@@ -1100,7 +1100,7 @@
       },
       "illustration": {
         "symbol": "☎️",
-        "caption": "Can I speak to Eve, please? — Czy mogę rozmawiać z Eve?"
+        "caption": "Can I speak to Eve, please? — Czy mogę rozmawiać z Eve, proszę?"
       },
       "answers": {
         "en": [

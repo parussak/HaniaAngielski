@@ -47,7 +47,7 @@ Kod pokazuje, co działa dziś, ale nie unieważnia uzgodnionego kierunku. Rozbi
 
 ## Stan treści
 
-Kurs angielski Hani ma moduł **Food**: dwie mapy (siedem etapów z 41 lekcjami oraz „Kocia kuchnia” z pięcioma lekcjami), w tym cztery historyjki-sceny i nagrania głosem Cori. Francuski i włoski nie mają jeszcze materiałów; kolejne rozdziały podręcznika to dalszy zakres.
+Kurs angielski Hani ma dwa moduły. [Food](materialy-food.md) obejmuje dwie mapy, cztery kocie historyjki i nagrania głosem Cori. [Technology for all](kursy/technology-for-all.md) jest szkicem działu 3 z jedną mapą, rozmową telefoniczną i czytanką o obozie kosmicznym. Francuski i włoski czekają na materiały.
 
 ## Kontrola
 

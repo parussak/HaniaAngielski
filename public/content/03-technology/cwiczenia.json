@@ -789,14 +789,15 @@
     "kind": "grammar",
     "prompt": "Uzupełnij: Hello, it's Felix ___.",
     "answers": [
-      "here"
+      "here",
+      "speaking"
     ],
     "options": [
       "here",
       "out",
       "soon"
     ],
-    "explanation": "It's Felix here mówi rozmówcy, kto dzwoni.",
+    "explanation": "It's Felix here i It's Felix speaking znaczą „Mówi Felix”. Oba zwroty pasują przy przedstawianiu się przez telefon.",
     "requires": [
       "unit-3-technology"
     ],
@@ -1563,14 +1564,15 @@
     "kind": "grammar",
     "prompt": "Uzupełnij: Hello, it's Maja ___. Can I speak to Felix?",
     "answers": [
-      "here"
+      "here",
+      "speaking"
     ],
     "options": [
       "here",
       "for",
       "out"
     ],
-    "explanation": "It's Maja here to sposób, w jaki Maja przedstawia się przez telefon.",
+    "explanation": "Maja przedstawia się przez telefon. It's Maja here i It's Maja speaking znaczą „Mówi Maja”.",
     "requires": [
       "unit-3-technology"
     ],

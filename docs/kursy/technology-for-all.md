@@ -44,6 +44,5 @@ Wordlist na s. 47 podaje `be sick` jako „mieć mdłości”. W czytance na s. 
 - Zadania wymagające oryginalnego audio lub rozstrzygnięcia z nagrania, np. puenta dialogu z s. 40, oraz dyktando, piosenka, praca w parach, samodzielne wypracowanie, wykreślanka i projekt grupowy. „Tech Ted” wykorzystano jako podstawę praktyki przyimków. „Coding for Kids” i „Get Culture!” pozostają materiałem książkowym. „Word blog” może uzupełnić słownictwo później.
 - Moduł nie wymusza zapisu nazw urządzeń z `a/an`. Zasady rodzajników pozostają poza zakresem tego działu.
 - Ilustracje do przygotowania w pierwszej kolejności obejmują urządzenia ze s. 39, siedem emocji, robienie zdjęcia i selfie, rozmowę telefoniczną, rakietę, symulator, podróż i spacer kosmiczny. Fiszki oznaczone polem `illustration.symbol` mają symbole zastępcze. Etapy korzystają z dostępnych rysunków ogólnych. Tematyczne ilustracje etapów oraz wyposażenie i pokój za nowy moduł wymagają osobnej zmiany oprawy lub katalogu domku.
-- W opisie kafelka „Rozmówki” ekran modułu nadal wyświetla tekst o jedzeniu, napojach i zakupach. Dotyczy to wspólnego opisu w interfejsie. Rozmówka Technology jest o telefonowaniu.
 
 Przed publikacją potrzebna jest recenzja językowa przez człowieka oraz sprawdzenie działania na telefonie i offline. Pełne dane wydania książki wymagają potwierdzenia.
