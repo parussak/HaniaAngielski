@@ -27,7 +27,18 @@ test.describe('telefon',()=>{
   await expect(page.locator('.exercise-label')).toContainText('CZYTANKA PICNIC');await expect(page.locator('.study-heading .tag')).toHaveText('1 / 3');
   // A choice question holds „Dalej”, but the displayed text stays interactive.
   await expect(reading(page)).toHaveAttribute('data-visible','1');await expect(reading(page).locator('.reading-sentence')).toHaveCount(1);
-  await expect(page.getByRole('heading',{name:'Where are they sitting?'})).toHaveAttribute('lang','en');await expect(next(page)).toBeDisabled();
+  const question=reading(page).locator('.reading-open');
+  await expect(question.getByRole('heading')).toHaveAttribute('lang','en');await expect(next(page)).toBeDisabled();
+  const phrase=question.getByRole('button',{name:'are they sitting',exact:true});
+  await phrase.tap();await idle(page);
+  await expect(question.getByRole('status')).toHaveText('„are they sitting” — oni siedzą');
+  await expect(question.locator('.option')).toHaveCount(3);
+  await expect(next(page)).toBeDisabled();
+  await phrase.tap();await idle(page);
+  await expect(question.getByRole('status')).toHaveCount(0);
+  await question.getByRole('button',{name:'Where',exact:true}).tap();await idle(page);
+  await expect(question.getByRole('status')).toHaveText('„where” — gdzie');
+  await question.getByRole('button',{name:'Where',exact:true}).tap();await idle(page);
   await page.getByRole('button',{name:'Przetłumacz: garden'}).tap();await idle(page);
   await expect(page.locator('.reading-translation')).toHaveText('„garden” — ogród');
   await expect(next(page)).toBeDisabled();

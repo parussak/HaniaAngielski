@@ -13,6 +13,7 @@ export class AppState {
     readingShown?: {sessionId:string;count:number};
     /** D-68: the translation the learner tapped; a preview changes no progress. */
     readingPeek?: {sessionId:string;sentence:string;word?:string};
+    readingQuestionPeek?: {sessionId:string;key:string;term:string};
     courses: Course[] = [];
     selectedCourseId = '';
     modules: Module[] = [];

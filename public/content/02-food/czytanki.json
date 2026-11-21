@@ -52,6 +52,11 @@
         "after": "ingredients",
         "type": "choice",
         "prompt": "What do Mia and Ben still need to make pancakes?",
+        "glossary": {
+          "What": "czego",
+          "still need": "jeszcze potrzebują",
+          "to make pancakes": "żeby zrobić naleśniki"
+        },
         "answers": ["milk"],
         "options": ["Flour", "Milk", "Eggs"],
         "explanation": "„There isn’t any milk” znaczy „nie ma mleka”. Brakuje więc mleka, czyli „milk”."
@@ -61,6 +66,11 @@
         "after": "shop",
         "type": "choice",
         "prompt": "How much milk does Ben buy?",
+        "glossary": {
+          "How much": "ile",
+          "milk": "mleko",
+          "buy": "kupować"
+        },
         "answers": ["One bottle", "Jedną butelkę"],
         "options": ["Two bottles", "One bottle", "Three bottles"],
         "explanation": "Ben kupuje „a bottle of milk”, czyli jedną butelkę mleka."
@@ -70,6 +80,10 @@
         "after": "cat-food",
         "type": "choice",
         "prompt": "What does Mia give the cat?",
+        "glossary": {
+          "What": "co",
+          "give the cat": "daje kotu"
+        },
         "answers": ["Cat food", "Jego karmę"],
         "options": ["A pancake", "Milk", "Cat food"],
         "explanation": "„Mia gives the cat its food” znaczy, że Mia daje kotu jego karmę."

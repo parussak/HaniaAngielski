@@ -3,7 +3,7 @@ import {pairsView,bankView,bankExplanationView,boardSummaryView,sceneScriptView,
 import {sceneActor} from './scene-actors.ts';
 import {sceneView} from '../learning/scenes.ts';
 import {readingView} from '../learning/readings.ts';
-import {readingCard,readingContextView} from './reading.ts';
+import {readingCard,readingContextView,readingQuestionPrompt} from './reading.ts';
 import {listeningTask,vocabularyPlayback} from '../learning/listening.ts';
 import {speaker} from '../speech.ts';
 import {speechButtons} from './speech-controls.ts';
@@ -76,8 +76,10 @@ export function studyView(state: Readonly<AppState>) {
         return page(readingCard(state, reading, s, {say, autoplay: speaker().available(language, newest), feedback: (current, question) => feedbackView(state, s, current, question, '') + (s.lastCorrect === false ? '<button class="secondary reading-retry" data-action="retry">Popraw odpowiedź</button>' : '')}));
     }
     let card = '';
+    const prompt = q.reading ? readingQuestionPrompt(state,s,item,q) : {text:e(q.prompt),translation:''};
+    const promptLanguage = q.reading && language ? ` lang="${e(language)}"` : '';
     if(asking)card=`<div class="exercise-label">${icon('sound')} POSŁUCHAJ</div><h2 class="question">${listen!.choices?'Posłuchaj i wybierz, co to znaczy.':'Posłuchaj i wpisz to, co słyszysz.'}</h2>${listenButtons(listen!,item.key,true)}`;
-    else card = `<div class="exercise-label">${icon(item.type === 'word' ? 'cards' : q.kind === 'grammar' || q.kind === 'reading' ? 'book' : 'spark')} ${item.type === 'word' ? 'FISZKA · '+translationPrompt(state.modules.find(m=>m.id===item.moduleId)!).toLocaleUpperCase('pl') : q.kind === 'dialogue' ? 'POROZMAWIAJMY'+(scene?' · '+e(scene.scene.title.toLocaleUpperCase('pl')):'') : q.kind === 'reading' ? 'CZYTANKA' : q.kind === 'grammar' ? 'MAŁY KROK W GRAMATYCE' : 'SŁÓWKO PO SŁÓWKU'}</div><h2 class="question">${e(q.prompt)}</h2>`;
+    else card = `<div class="exercise-label">${icon(item.type === 'word' ? 'cards' : q.kind === 'grammar' || q.kind === 'reading' ? 'book' : 'spark')} ${item.type === 'word' ? 'FISZKA · '+translationPrompt(state.modules.find(m=>m.id===item.moduleId)!).toLocaleUpperCase('pl') : q.kind === 'dialogue' ? 'POROZMAWIAJMY'+(scene?' · '+e(scene.scene.title.toLocaleUpperCase('pl')):'') : q.kind === 'reading' ? 'CZYTANKA' : q.kind === 'grammar' ? 'MAŁY KROK W GRAMATYCE' : 'SŁÓWKO PO SŁÓWKU'}</div><h2 class="question"${promptLanguage}>${prompt.text}</h2>${prompt.translation}`;
     if (scene)
         card += sceneScriptView(state.modules, scene,false,actor,s,say);
     else if (q.reading)

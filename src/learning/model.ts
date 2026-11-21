@@ -57,6 +57,7 @@ export interface ReadingQuestion {
     sentence?: string;
     /** Sentences shown with the question outside the reading, e.g. in a review. */
     refs: string[];
+    glossary?: Record<string, string>;
 }
 /** D-68: a reading shown sentence by sentence; every question is an ordinary exercise. */
 export interface Reading {

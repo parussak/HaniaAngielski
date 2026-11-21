@@ -1,7 +1,7 @@
 import type {AppState} from '../app/state.ts';
 import {optionsFor,type Exercise,type Item,type Module,type Session} from '../core.ts';
 import {readingContext,translateInReading,type readingView} from '../learning/readings.ts';
-import {readingParts} from '../learning/reading-format.ts';
+import {questionGlossaryParts,readingParts} from '../learning/reading-format.ts';
 import {e,icon} from '../ui.ts';
 
 type ReadingOnScreen=NonNullable<ReturnType<typeof readingView>>;
@@ -27,18 +27,31 @@ function sentenceView(view:ReadingOnScreen,s:Session,peek:AppState['readingPeek'
  return `<div class="reading-sentence ${sentence.id===view.newest?'reading-new':''} ${tapping?'reading-tap':''}" data-sentence="${e(sentence.id)}"><p ${language?`lang="${e(language)}"`:''}>${words}</p>${tools}${translation}</div>`;
 }
 
-function questionView(view:ReadingOnScreen,s:Session,index:number,parts:ReadingParts){
+export function readingQuestionPrompt(state:Readonly<AppState>,s:Session,item:Item,question:Exercise){
+ const glossary=question.reading?.glossary,peek=state.readingQuestionPeek;
+ const active=peek?.sessionId===s.id&&peek.key===item.key?peek.term:undefined;
+ const text=questionGlossaryParts(question.prompt,glossary).map(part=>part.term
+  ?`<button type="button" class="reading-word" data-action="reading-question-peek" data-key="${e(item.key)}" data-term="${e(part.term)}" aria-pressed="${part.term===active}">${e(part.text)}</button>`
+  :e(part.text)).join('');
+ const translation=active&&glossary&&Object.hasOwn(glossary,active)
+  ?`<p class="reading-translation" role="status">„${e(active)}” — <b>${e(glossary[active])}</b></p>`:'';
+ return {text,translation};
+}
+
+function questionView(state:Readonly<AppState>,view:ReadingOnScreen,s:Session,index:number,parts:ReadingParts){
  const {item,question,status}=view.questions[index],lang=`lang="${e(view.reading.questionLanguage)}"`;
  if(status==='hidden')return '';
+ const {text,translation}=readingQuestionPrompt(state,s,item,question);
+ const heading=`<h2 class="question" ${lang}>${text}</h2>${translation}`;
  if(status==='open'){
   const answer=question.reading.type==='tap'
    ?`<p class="reading-hint">Dotknij słowa w zaznaczonym zdaniu.</p>`
    :`<div class="answer-options" ${lang}>${optionsFor(question,s).map((o,i)=>`<button class="option" data-action="answer" data-answer="${e(o)}"><span aria-hidden="true">${String.fromCharCode(65+i)}</span>${e(o)}</button>`).join('')}</div>`;
-  return `<section class="reading-question reading-open" aria-label="Pytanie do czytanki"><h2 class="question" ${lang}>${e(question.prompt)}</h2>${s.phase==='retry'?'<p class="retry-note">Teraz spróbuj ponownie. Pierwszy wynik pozostanie zapisany osobno.</p>':''}${answer}</section>`;
+  return `<section class="reading-question reading-open" aria-label="Pytanie do czytanki">${heading}${s.phase==='retry'?'<p class="retry-note">Teraz spróbuj ponownie. Pierwszy wynik pozostanie zapisany osobno.</p>':''}${answer}</section>`;
  }
- if(index===view.position)return `<section class="reading-question reading-current"><h2 class="question" ${lang}>${e(question.prompt)}</h2>${parts.feedback(item,question)}</section>`;
+ if(index===view.position)return `<section class="reading-question reading-current">${heading}${parts.feedback(item,question)}</section>`;
  const attempt=s.attempts.find(a=>a.key===item.key)!,ok=attempt.first||attempt.corrected;
- return `<div class="reading-question reading-done ${ok?'correct':'incorrect'}"><p><span ${lang}>${e(question.prompt)}</span> <b>${ok?'✓':'✗'} ${e(attempt.lastAnswer??attempt.answer)}</b></p>${ok?'':`<button class="secondary" data-action="retry" data-key="${e(item.key)}">Popraw odpowiedź</button>`}</div>`;
+ return `<div class="reading-question reading-done ${ok?'correct':'incorrect'}"><p><span ${lang}>${text}</span> <b>${ok?'✓':'✗'} ${e(attempt.lastAnswer??attempt.answer)}</b></p>${translation}${ok?'':`<button class="secondary" data-action="retry" data-key="${e(item.key)}">Popraw odpowiedź</button>`}</div>`;
 }
 
 /** D-68: the text so far, sentence by sentence, with its questions in place. */
@@ -46,7 +59,7 @@ export function readingCard(state:Readonly<AppState>,view:ReadingOnScreen,s:Sess
  const blocks:string[]=[];
  for(let index=0;index<view.visible;index++){
   blocks.push(sentenceView(view,s,state.readingPeek,index,parts));
-  view.questions.forEach((q,question)=>{if(view.reading.sentences.findIndex(x=>x.id===q.question.reading.after)===index)blocks.push(questionView(view,s,question,parts));});
+  view.questions.forEach((q,question)=>{if(view.reading.sentences.findIndex(x=>x.id===q.question.reading.after)===index)blocks.push(questionView(state,view,s,question,parts));});
  }
  const newest=view.reading.sentences[view.visible-1],language=view.module.languageCode;
  const autoplay=parts.autoplay&&language?`<span class="reading-autoplay" hidden data-autoplay="true" data-task="${e(`${s.id}:reading:${view.reading.id}:${newest.id}`)}" data-say="${e(newest.text)}" data-lang="${e(language)}" data-speech-kind="dialogue"></span>`:'';

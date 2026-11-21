@@ -1,6 +1,6 @@
 import type {AppState} from '../app/state.ts';
 import type {Progress} from '../core.ts';
-import {advanceReading,readingView} from '../learning/readings.ts';
+import {advanceReading,readingOf,readingView} from '../learning/readings.ts';
 interface ReadingPorts {
     mutate: (change: (p: Progress) => void) => Promise<void>;
 }
@@ -28,6 +28,21 @@ export function createReadingController(state: AppState, { mutate }: ReadingPort
             if (index < 0 || index >= view.visible) return true;
             const word = el.dataset.word || undefined, same = state.readingPeek?.sessionId === s.id && state.readingPeek.sentence === sentence && state.readingPeek.word === word;
             state.readingPeek = same ? undefined : {sessionId: s.id, sentence, ...(word ? {word} : {})};
+            return true;
+        }
+        if (action === 'reading-question-peek') {
+            const s = state.progress.active;
+            if (!s) return true;
+            const {key,term} = el.dataset, view = readingView(state.modules, s, readingShown(state));
+            const current = s.items[s.index];
+            const question = view
+                ? view.questions.find(q => q.status !== 'hidden' && q.item.key === key)?.question
+                : current?.key === key && current ? readingOf(state.modules, current)?.question : undefined;
+            const glossary = question?.reading?.glossary;
+            if (!key || !term || !glossary || !Object.hasOwn(glossary, term)) return true;
+            const peek = state.readingQuestionPeek;
+            state.readingQuestionPeek = peek?.sessionId === s.id && peek.key === key && peek.term === term
+                ? undefined : {sessionId:s.id,key,term};
             return true;
         }
         return false;

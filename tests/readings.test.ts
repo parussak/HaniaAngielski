@@ -30,6 +30,7 @@ test('format: czytanka staje się zwykłymi zadaniami wyboru, po jednym na pytan
  // A tap question chooses among the words of its sentence; exactly one of them is right.
  assert.deepEqual(tap.options,readingTokens('Olek has got some apples.'));assert.deepEqual(tap.options,['Olek','has','got','some','apples']);
  assert.deepEqual(exercises[0].reading!.refs,['s1']);assert.deepEqual(tap.reading!.refs,['s2']);
+ assert.deepEqual(exercises[0].reading!.glossary,{where:'gdzie','are they sitting':'oni siedzą'});
  assert.equal(m.readings!.length,1);assert.equal(m.exercises.filter(q=>q.reading).length,3);
 });
 
@@ -50,6 +51,8 @@ test('format: check:content odrzuca błędną czytankę z czytelnym komunikatem'
  assert.throws(broken(r=>r.questions[0].refs=['s4']),/refs/);
  assert.throws(broken(r=>r.questionLanguage='polski'),/język/);
  assert.throws(broken(r=>r.glossary={garden:''}),/glossary/);
+ assert.throws(broken(r=>r.questions[0].glossary={here:'tutaj'}),/glossary/);
+ assert.throws(broken(r=>r.questions[0].glossary={'Where are they sitting':'Gdzie oni siedzą?'}),/glossary/);
  assert.throws(broken(r=>delete r.questions[0].explanation),/zadanie|wyjaśn/);
  // Questions always use the reading text's language, including when explanations are in Polish.
  const meta={languageCode:'en',explanationLanguageCode:'pl'};
@@ -206,6 +209,11 @@ test('kontroler: tłumaczenie zostaje po „Dalej”, podgląd niczego nie zapis
  const controller=createLearningController(state,{courses:{select:async()=>false,restore:async()=>{},followSession:async()=>{}} as any,scheduleReviewMigration:()=>{},
   mutate:async(change:(p:Progress)=>void)=>{const draft=structuredClone(state.progress);change(draft);state.progress=draft;saves++;}});
  const press=(action:string,data:Record<string,string>={})=>controller.handleAction(action,{dataset:data} as unknown as HTMLElement);
+ const key=state.progress.active!.items[0].key;
+ await press('reading-question-peek',{key,term:'are they sitting'});
+ assert.deepEqual(state.readingQuestionPeek,{sessionId:state.progress.active!.id,key,term:'are they sitting'});
+ await press('reading-question-peek',{key,term:'Where are they sitting?'});
+ assert.equal(state.readingQuestionPeek?.term,'are they sitting');
  const peek={sessionId:state.progress.active!.id,sentence:'s1',word:'garden'};
  await press('reading-next');await press('reading-peek',{sentence:'s1',word:'garden'});await press('next');
  assert.equal(saves,0);assert.equal(state.readingShown,undefined);assert.deepEqual(state.readingPeek,peek);assert.equal(state.progress.active!.index,0);

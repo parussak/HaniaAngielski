@@ -39,6 +39,36 @@ export function readingParts(sentence:string){
  return parts;
 }
 
+/** Split a prompt at glossary terms, preferring the longest phrase at each position. */
+export function questionGlossaryParts(prompt:string,glossary:Record<string,string>={}){
+ const terms=Object.keys(glossary).sort((a,b)=>b.length-a.length);
+ const parts:{text:string;term?:string}[]=[];
+ if(!terms.length)return [{text:prompt}];
+ const byText=new Map(terms.map(term=>[term.toLowerCase(),term]));
+ const alternatives=terms.map(term=>term.replace(/[.*+?^{}()|[\]\\]/g,'\\$&')).join('|');
+ const pattern=new RegExp('(?<![\\p{L}\\p{M}\\p{N}])(?:'+alternatives+')(?![\\p{L}\\p{M}\\p{N}])','giu');
+ let last=0;
+ for(const match of prompt.matchAll(pattern)){
+  if(match.index>last)parts.push({text:prompt.slice(last,match.index)});
+  parts.push({text:match[0],term:byText.get(match[0].toLowerCase())});
+  last=match.index+match[0].length;
+ }
+ if(last<prompt.length)parts.push({text:prompt.slice(last)});
+ return parts;
+}
+
+function validQuestionGlossary(prompt:string,glossary:unknown):glossary is Record<string,string>{
+ if(!obj(glossary))return false;
+ const terms=Object.keys(glossary);
+ const promptWords=prompt.match(word)?.length??0;
+ if(!terms.every(term=>{
+  const words=term.match(word)?.length??0;
+  return text(glossary[term])&&term===term.trim()&&words>0&&words<promptWords;
+ }))return false;
+ const shown=new Set(questionGlossaryParts(prompt,glossary as Record<string,string>).map(part=>part.term));
+ return terms.every(term=>shown.has(term));
+}
+
 /** Turns one authored reading into its text and one exercise per question. */
 export function compileReading(entry:unknown,metadata:{languageCode?:string}={}):{reading:Reading;exercises:Exercise[]}{
  if(!obj(entry)||!id(entry.id))return fail('czytanka wymaga identyfikatora z małych liter, cyfr i myślników.');
@@ -79,7 +109,9 @@ export function compileReading(entry:unknown,metadata:{languageCode?:string}={})
   }
   const refs=q.refs===undefined?[sentence??script[after].id]:q.refs;
   if(!Array.isArray(refs)||!refs.length||new Set(refs).size!==refs.length||!refs.every(ref=>at(ref)>=0&&at(ref)<=after))return fail(`${ask}: refs mogą wskazywać tylko zdania do after włącznie.`);
-  const reading:ReadingQuestion={id:entry.id as string,question:index,type:q.type as 'choice'|'tap',after:script[after].id,...(sentence?{sentence}:{}),refs:refs as string[]};
+  const questionGlossary=q.glossary;
+  if(questionGlossary!==undefined&&!validQuestionGlossary(q.prompt as string,questionGlossary))return fail(`${ask}: glossary musi tłumaczyć widoczne słowa lub zwroty z pytania.`);
+  const reading:ReadingQuestion={id:entry.id as string,question:index,type:q.type as 'choice'|'tap',after:script[after].id,...(sentence?{sentence}:{}),refs:refs as string[],...(questionGlossary?{glossary:{...questionGlossary}}:{})};
   return {id:`${entry.id}--${q.id}`,kind:'reading',responseType:'choice',prompt:q.prompt as string,answers,options,explanation:q.explanation as string,requires:entry.requires as string[],caseSensitive:false,source:entry.source as string,
    ...(q.ruleId!==undefined?{ruleId:q.ruleId as string}:{}),...(q.rev!==undefined?{rev:q.rev as number}:{}),reading};
  });

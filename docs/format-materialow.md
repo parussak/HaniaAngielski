@@ -222,6 +222,7 @@ Status: wdrożone (D-68). Plik `czytanki.json` to tablica czytanek; włącza go 
 | `questions[].after` | Zdanie, po którym pojawia się pytanie; po jednym zdaniu może być kilka pytań |
 | `questions[].type` | `choice` — wybór z `options` (co najmniej dwie, dokładnie jedna poprawna); `tap` — dotknięcie słowa z `answers` w zdaniu `sentence` (to zdanie lub wcześniejsze). Przy `tap` opcjami są słowa zdania, więc `answers` muszą być jego słowami i dokładnie jedno słowo zdania jest poprawne; `options` nie podajemy |
 | `questions[].refs` | Zdania pokazywane z pytaniem w powtórce, tylko do `after` włącznie; domyślnie `after` (przy `tap`: `sentence`) |
+| `questions[].glossary` | Opcjonalna mapa tłumaczeń pojedynczych słów lub zwrotów występujących w poleceniu. Wielkość liter nie ma znaczenia. Kliknięcie pokazuje tłumaczenie fragmentu (D-70). |
 | `prompt`, `answers`, `explanation`, `ruleId`, `rev` | Jak w zwykłym zadaniu; `explanation` jest wymagane |
 | `requires` | Wspólne dla całej czytanki, jak w scenie |
 | `source` | Wymagane: adaptacja i strony podręcznika albo informacja, że tekst powstał ze słownictwa modułu |
