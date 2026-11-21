@@ -46,6 +46,20 @@ Każde zadanie powinno mieć jednoznaczną odpowiedź w podanym kontekście, źr
 
 Dla nowego języka określ w karcie kursu wymagania dotyczące akcentów, rodzajników i wariantów. Nie wprowadzaj globalnej tolerancji w mechanice przy okazji dodawania modułu. Nierozstrzygniętą zasadę oznacz do uzgodnienia.
 
+### Czytanka (opcjonalna, D-68)
+
+Czytanka to krótki tekst czytany zdanie po zdaniu, z 1–6 pytaniami w trakcie. Pełny format: [czytanka](format-materialow.md#czytanka); zasady nauki: [czytanki](03-nauka.md#czytanki-d-68). Lista kontrolna:
+
+1. **Tekst:** adaptacja inspirowana czytanką z podręcznika albo tekst ze słownictwa i gramatyki modułu — nie kopia (D-68). Długość i słownictwo na poziomie modułu; każde zdanie z polskim `translation`. `source` podaje strony albo informację, że tekst powstał ze słownictwa modułu.
+2. **Pytania:** `choice` sprawdza zrozumienie (dokładnie jedna poprawna opcja, sensowne błędne); `tap` każe dotknąć jednego słowa w już przeczytanym zdaniu `sentence` — słowo z `answers` musi stać w tym zdaniu dokładnie w tej formie, a inne słowa zdania nie mogą być poprawne. Pytanie pojawia się po zdaniu `after` i musi dać się rozstrzygnąć z tekstu do tego miejsca. Każde pytanie ma polskie `explanation` odwołujące się do zdania.
+3. **Język pytań** (`questionLanguage`): polski albo język kursu — wybierz według poziomu i zapisz wybór w karcie modułu.
+4. **Tłumaczenia słów:** słowa ze słownictwa modułu tłumaczą się same, gdy forma w tekście równa się `back` lub `answers` hasła. Inne ważne słowa i formy (np. liczba mnoga `apples`) dopisz do `glossary`; reszta pokaże tłumaczenie całego zdania.
+5. **Pliki:** `czytanki.json` w folderze modułu i `"readingsFile": "czytanki.json"` w `modul.json`.
+6. **Mapa:** czytanka jest całą lekcją — `wordIds: []`, a `exerciseIds` zawiera **wszystkie** pytania jako `<id czytanki>--<id pytania>`. Postaw ją w etapie po lekcjach, które wprowadzają jej słownictwo.
+7. **Nagrania:** zdania czytanki trafiają do generatora (`npm run audio`) dopiero po zatwierdzeniu treści; potem `npm run audio:verify` i odsłuch podejrzanych.
+
+Po publikacji nie usuwamy czytanki, zdania ani pytania i nie zmieniamy ich identyfikatorów (D-52).
+
 Zachowaj podręcznikową formę odpowiedzi i poziom wymagań (D-35). Przy luce kluczem jest brakujące słowo lub wyrażenie; nie zamieniaj jej na tłumaczenie albo przepisywanie całego zdania. Pełne zdanie wymagane jest tylko przy takim celu ćwiczenia źródłowego. Ta sama jednostka odpowiedzi pozostaje w poprawce i obu powtórkach. [Szczegóły](04-merytoryka.md#forma-odpowiedzi-a-poziom-nauki--d-35).
 
 Dla modułu objętego `audio/config.json` po zmianie odczytywanego tekstu uruchom `npm run audio`, sprawdź wymowę i dodaj zaktualizowane `audio/generated/` do Git. Budowanie sprawdza kompletność i publikuje audio do PWA; nie uruchamia generatora. Nowy język wymaga osobnego wybrania głosu i sprawdzenia licencji — nie kopiuj konfiguracji Cori do francuskiego czy włoskiego. [Instrukcja audio](../audio/README.md).

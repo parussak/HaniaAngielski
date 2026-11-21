@@ -24,7 +24,7 @@ Stan repozytorium:
 2. **Forma ćwiczeń (D-35).** Luka w zeszycie = w aplikacji kluczem jest brakujące słowo, nie całe zdanie. Zadanie z wariantami ma warianty. Poziom jak w podręczniku.
 3. **Odpowiedzi.** Każda jest jednoznaczna w swoim kontekście. Błędne opcje są sensowne, ale na pewno błędne. Akceptowane warianty (np. formy skrócone) są kompletne.
 4. **Wyjaśnienia.** Po polsku, dla jedenastolatki, odnoszą się do konkretnego zdania i mówią, dlaczego odpowiedź pasuje.
-5. **Poprawność językowa** w języku kursu i po polsku. Najdokładniej treści pisane do odsłuchu: sceny-adaptacje i kwestie dialogów. Nie pochodzą wprost z podręcznika, a Piper przeczyta każdy błąd.
+5. **Poprawność językowa** w języku kursu i po polsku. Najdokładniej treści pisane do odsłuchu: sceny-adaptacje, kwestie dialogów i zdania czytanek (oraz ich polskie tłumaczenia). W czytance sprawdź też, czy każde pytanie da się rozstrzygnąć z tekstu do zdania `after`, czy przy `tap` poprawne jest tylko jedno słowo zdania i czy `glossary` obejmuje ważne słowa spoza słownictwa modułu. Nie pochodzą wprost z podręcznika, a Piper przeczyta każdy błąd.
 6. **Lista niepewności** z karty pokrycia: przy każdej pozycji napisz, co proponujesz, albo że rozstrzyga Paulina.
 7. **Nagrania**, jeśli istnieje `audio/.verify/raport.md` z datą po wygenerowaniu nagrań tego modułu. Czytaj tylko raport, według akapitu „Jak czytać raport” w `docs/generowanie-audio.md`. Dla każdego podejrzanego nagrania tego modułu zaproponuj: wygenerować ponownie, zmienić tekst albo zostawić. Przy pojedynczych słówkach pamiętaj, że „inny tekst” to zwykle pomyłka Whispera; ważniejsze są pomiary. Jeśli raportu nie ma lub jest starszy, napisz to.
 
