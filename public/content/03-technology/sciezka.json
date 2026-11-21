@@ -8,7 +8,7 @@
       "id": "technology",
       "title": "3.1 · Technologia",
       "cat": "olus",
-      "illustration": "illustrations/word-look.svg",
+      "illustration": "illustrations/technology-desk.png",
       "lessons": [
         {
           "id": "devices",
@@ -310,7 +310,7 @@
       "id": "camp",
       "title": "3.5 · Obóz kosmiczny",
       "cat": "krzywolap",
-      "illustration": "illustrations/word-can-t-wait.svg",
+      "illustration": "illustrations/technology-space-camp.png",
       "lessons": [
         {
           "id": "what-you-like",

@@ -34,6 +34,24 @@ test('format: czytanka staje się zwykłymi zadaniami wyboru, po jednym na pytan
  assert.equal(m.readings!.length,1);assert.equal(m.exercises.filter(q=>q.reading).length,3);
 });
 
+test('format: pytanie tap zachowuje odpowiedź przy limicie pięciu słów i sprawdza dobór autora',()=>{
+ const entry=readingEntry(),fruit=entry.questions[1];
+ entry.sentences[1].text='In the garden, Olek has got apples and pears for the picnic.';
+ const options=()=>compileReading(entry).exercises[1].options;
+ assert.deepEqual(options(),['In','the','garden','Olek','apples']);
+ fruit.options=['apples','pears','garden'];
+ assert.deepEqual(options(),fruit.options);
+ for(const invalid of [
+  ['apples','pears','garden','picnic','Olek','In'],
+  ['apples','Apples'],
+  ['apples','oranges'],
+  ['pears','garden'],
+ ]){
+  fruit.options=invalid;
+  assert.throws(options,/options.*najwyżej pięć/);
+ }
+});
+
 test('format: check:content odrzuca błędną czytankę z czytelnym komunikatem',()=>{
  const broken=(edit:(r:any)=>void)=>{const r:any=readingEntry();edit(r);return ()=>readingModule('reading-unit','reading-course',[r]);};
  assert.throws(broken(r=>delete r.source),/source/);

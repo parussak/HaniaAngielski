@@ -43,6 +43,6 @@ Wordlist na s. 47 podaje `be sick` jako „mieć mdłości”. W czytance na s. 
 
 - Zadania wymagające oryginalnego audio lub rozstrzygnięcia z nagrania, np. puenta dialogu z s. 40, oraz dyktando, piosenka, praca w parach, samodzielne wypracowanie, wykreślanka i projekt grupowy. „Tech Ted” wykorzystano jako podstawę praktyki przyimków. „Coding for Kids” i „Get Culture!” pozostają materiałem książkowym. „Word blog” może uzupełnić słownictwo później.
 - Moduł nie wymusza zapisu nazw urządzeń z `a/an`. Zasady rodzajników pozostają poza zakresem tego działu.
-- Ilustracje do przygotowania w pierwszej kolejności obejmują urządzenia ze s. 39, siedem emocji, robienie zdjęcia i selfie, rozmowę telefoniczną, rakietę, symulator, podróż i spacer kosmiczny. Fiszki oznaczone polem `illustration.symbol` mają symbole zastępcze. Etapy korzystają z dostępnych rysunków ogólnych. Tematyczne ilustracje etapów oraz wyposażenie i pokój za nowy moduł wymagają osobnej zmiany oprawy lub katalogu domku.
+- Etap „Technologia” ma ilustrację kota przy laptopie, etap „Obóz kosmiczny” pokazuje kotki budujące rakietę, a wstęp do czytanki pokazuje kotki w symulatorze. Osobne ilustracje fiszek pozostają do przygotowania. Fiszki z `illustration.symbol` korzystają z symboli, a wyposażenie i pokój za moduł pozostają do zaplanowania.
 
 Przed publikacją potrzebna jest recenzja językowa przez człowieka oraz sprawdzenie działania na telefonie i offline. Pełne dane wydania książki wymagają potwierdzenia.

@@ -2,6 +2,7 @@
   {
     "id": "space-camp",
     "title": "Dzień na obozie kosmicznym",
+    "illustration": "illustrations/technology-flight-simulator.png",
     "questionLanguage": "en",
     "source": "Adaptacja inspirowana czytanką Space Adventure USA, podręcznik s. 45. Tekst własny.",
     "requires": [
@@ -120,6 +121,13 @@
           "feels": "czuje się"
         },
         "sentence": "scared",
+        "options": [
+          "Leo",
+          "scared",
+          "flying",
+          "watching",
+          "screen"
+        ],
         "answers": [
           "scared"
         ],

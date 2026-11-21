@@ -63,6 +63,7 @@ export interface ReadingQuestion {
 export interface Reading {
     id: string;
     title: string;
+    illustration?: string;
     questionLanguage: string;
     sentences: { id: string; text: string; translation: string }[];
     glossary?: Record<string, string>;

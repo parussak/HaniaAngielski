@@ -13,9 +13,12 @@ const text=(v:unknown):v is string=>typeof v==='string'&&v.trim().length>0;
 const texts=(v:unknown):v is string[]=>Array.isArray(v)&&v.length>0&&v.every(text);
 const id=(v:unknown):v is string=>typeof v==='string'&&/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(v);
 const language=languageCode;
+const readingIllustration=/^illustrations\/[a-z0-9-]+\.(?:svg|png)$/;
 const word=/[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu;
 
-/** Words of a sentence, each once, in reading order — the choices of a tap question. */
+const maxTapOptions=5;
+
+/** Words of a sentence, each once, in reading order. */
 export function readingTokens(sentence:string){
  const seen=new Set<string>(),tokens:string[]=[];
  for(const token of sentence.match(word)??[]){
@@ -74,6 +77,8 @@ export function compileReading(entry:unknown,metadata:{languageCode?:string}={})
  if(!obj(entry)||!id(entry.id))return fail('czytanka wymaga identyfikatora z małych liter, cyfr i myślników.');
  const where=`czytanka ${entry.id}`;
  if(!text(entry.title)||entry.title.length>80)return fail(`${where}: wymagany tytuł do 80 znaków.`);
+ const illustration=entry.illustration;
+ if(illustration!==undefined&&(!text(illustration)||!readingIllustration.test(illustration)))return fail(`${where}: illustration musi wskazywać plik SVG lub PNG w illustrations/.`);
  if(!language(entry.questionLanguage)||metadata.languageCode!==undefined&&entry.questionLanguage!==metadata.languageCode)return fail(`${where}: język pytań (questionLanguage) musi być językiem tekstu czytanki, czyli językiem kursu.`);
  const sentences=entry.sentences;
  if(!Array.isArray(sentences)||sentences.length<2||sentences.length>40)return fail(`${where}: czytanka wymaga od 2 do 40 zdań.`);
@@ -101,8 +106,20 @@ export function compileReading(entry:unknown,metadata:{languageCode?:string}={})
    const target=at(q.sentence);
    if(target<0||target>after)return fail(`${ask}: sentence musi wskazywać zdanie przeczytane przed pytaniem.`);
    sentence=script[target].id;
-   options=readingTokens(script[target].text);
-   if(!answers.every(answer=>options.some(token=>normalizeAnswer(token)===normalizeAnswer(answer))))return fail(`${ask}: każde słowo z answers musi występować w zdaniu sentence.`);
+   const tokens=readingTokens(script[target].text),words=new Set(tokens.map(token=>normalizeAnswer(token)));
+   const correct=new Set(answers.map(answer=>normalizeAnswer(answer)));
+   if(![...correct].every(answer=>words.has(answer)))return fail(`${ask}: każde słowo z answers musi występować w zdaniu sentence.`);
+   if(q.options===undefined){
+    // Older texts have no authored options. Keep the answer and preserve sentence order.
+    const others=tokens.filter(token=>!correct.has(normalizeAnswer(token))).slice(0,Math.max(0,maxTapOptions-correct.size));
+    const selected=new Set([...correct,...others.map(token=>normalizeAnswer(token))]);
+    options=tokens.filter(token=>selected.has(normalizeAnswer(token)));
+   }else{
+    if(!texts(q.options))return fail(`${ask}: options musi zawierać słowa ze zdania sentence.`);
+    options=q.options;
+   }
+   const selected=new Set(options.map(option=>normalizeAnswer(option)));
+   if(options.length>maxTapOptions||selected.size!==options.length||[...selected].some(option=>!words.has(option))||[...correct].some(answer=>!selected.has(answer)))return fail(`${ask}: options musi zawierać najwyżej pięć różnych słów ze zdania sentence, w tym poprawną odpowiedź.`);
   }else{
    if(!texts(q.options)||q.options.length<2)return fail(`${ask}: pytanie wyboru wymaga co najmniej dwóch opcji.`);
    options=q.options as string[];
@@ -117,7 +134,7 @@ export function compileReading(entry:unknown,metadata:{languageCode?:string}={})
    ...(q.ruleId!==undefined?{ruleId:q.ruleId as string}:{}),...(q.rev!==undefined?{rev:q.rev as number}:{}),reading};
  });
  if(new Set(exercises.map(q=>q.id)).size!==exercises.length)return fail(`${where}: powtórzony identyfikator pytania.`);
- return {reading:{id:entry.id,title:entry.title,questionLanguage:entry.questionLanguage,sentences:script.map(s=>({id:s.id,text:s.text,translation:s.translation})),...(glossary?{glossary:{...glossary} as Record<string,string>}:{}),questionIds:exercises.map(q=>q.id)},exercises};
+ return {reading:{id:entry.id,title:entry.title,...(illustration===undefined?{}:{illustration}),questionLanguage:entry.questionLanguage,sentences:script.map(s=>({id:s.id,text:s.text,translation:s.translation})),...(glossary?{glossary:{...glossary} as Record<string,string>}:{}),questionIds:exercises.map(q=>q.id)},exercises};
 }
 
 /** Structural check of compiled readings; the question exercises are checked like any exercise. */
@@ -128,6 +145,7 @@ export function validateReadings(m:{id:unknown;readings?:unknown;exercises:unkno
  if(new Set(readings.map(r=>r?.id)).size!==readings.length)return fail(`powtórzony identyfikator czytanki (${m.id}).`);
  for(const r of readings){
   if(!obj(r)||!id(r.id)||!text(r.title)||!language(r.questionLanguage)||!Array.isArray(r.sentences)||r.sentences.length<2||!r.sentences.every(s=>obj(s)&&id(s.id)&&text(s.text)&&text(s.translation))||!Array.isArray(r.questionIds)||r.questionIds.length<1||r.questionIds.length>6)return fail(`niepoprawna czytanka (${m.id}/${(r as Reading)?.id??'?'}).`);
+  if(r.illustration!==undefined&&(!text(r.illustration)||!readingIllustration.test(r.illustration)))return fail(`niepoprawna ilustracja czytanki ${r.id}.`);
   r.questionIds.forEach((questionId,index)=>{
    const q=exercises.find(q=>q.id===questionId),known=(sentenceId:unknown)=>r.sentences.some(s=>s.id===sentenceId);
    if(!q||q.kind!=='reading'||q.reading?.id!==r.id||q.reading.question!==index||!known(q.reading.after)||!q.reading.refs.every(known)||q.reading.type==='tap'&&!known(q.reading.sentence))fail(`czytanka ${r.id}: brak zadania dla pytania ${questionId}.`);

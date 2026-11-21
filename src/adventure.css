@@ -147,8 +147,10 @@
 .listening-settings input{width:22px;height:22px}
 .scene-message{display:flex;align-items:flex-start;gap:8px;min-width:0}.scene-message-reply{flex-direction:row-reverse}.scene-message>.dialogue-line{flex:1;min-width:0;margin:2px 0}.scene-line-avatar{flex:0 0 44px;width:44px;height:48px;display:grid;place-items:center;background:#eee5fa;border:1px solid #d9c9ec;border-radius:50%;overflow:hidden}.scene-line-avatar .scene-actor,.scene-summary .scene-line-avatar .scene-actor{width:40px}.studying .scene-line-avatar .scene-actor .cat-mascot .cat-artwork{height:44px}.scene-line-retry{margin-top:8px;min-height:44px;width:100%}
 .lesson-resume-actions{display:grid;gap:12px}.lesson-resume-actions button{min-height:48px;width:100%}
-.lesson-scene-badge,.stage-scene-count{display:inline-flex;align-items:center;gap:4px;max-width:100%;padding:3px 8px;border:1px solid #d8c3eb;border-radius:10px;background:#f5e9fa;color:#65437d;font-size:12px;font-weight:600;line-height:1.5;white-space:normal}
-.lesson-step .lesson-scene-badge{display:flex;width:fit-content;margin:5px 0 2px}.journey-stage .stage-scene-count{margin-top:5px}.story-map-note{font-size:13px;line-height:1.6;color:#684e7b;margin:10px 0 16px}
+.lesson-scene-badge,.lesson-reading-badge,.stage-scene-count{display:inline-flex;align-items:center;gap:4px;max-width:100%;padding:3px 8px;border:1px solid #d8c3eb;border-radius:10px;background:#f5e9fa;color:#65437d;font-size:12px;font-weight:600;line-height:1.5;white-space:normal}
+.lesson-step :is(.lesson-scene-badge,.lesson-reading-badge){display:flex;width:fit-content;margin:5px 0 2px}.journey-stage .stage-scene-count{margin-top:5px}.story-map-note{font-size:13px;line-height:1.6;color:#684e7b;margin:10px 0 16px}
+.lesson-reading-badge{border-color:#b8cee7;background:#edf5ff;color:#365779}
+.reading-cover{display:block;width:min(100%,480px);height:auto;margin:16px auto;border-radius:16px}
 .scene-actor{display:block;width:70px;max-width:100%}.scene-actor .cat-mascot{width:100%;margin:0}.studying .scene-actor .cat-mascot .cat-artwork{display:block;width:100%;max-width:100%;height:75px}
 .scene-summary .scene-actor{width:54px}.studying .scene-summary .scene-actor .cat-artwork{height:58px}
 @media(max-width:380px),(max-height:700px){.studying:has(.scene-message) .question-illustration img{height:60px;width:110px}}
@@ -164,8 +166,9 @@
 .reading-sentence>p{margin:0;font-size:18px;line-height:1.9;overflow-wrap:anywhere}
 .reading-new{border-color:#b79fd8;box-shadow:0 0 0 1px #d8c6ed}
 .reading-word{display:inline;min-height:0;padding:2px 1px;margin:0;border:0;border-bottom:1px dotted #b79fd8;border-radius:4px;background:none;color:inherit;font:inherit;line-height:inherit;cursor:pointer}
-.reading-tap{border-color:#7851b3;background:#f6f0fd}
-.reading-answer{display:inline-flex;align-items:center;min-height:44px;padding:4px 8px;margin:2px 1px;border:1px solid #cdb8e8;border-radius:10px;background:#fff;color:#513a70}
+.reading-tap{border-color:#d0b9ea;background:#fff}
+.reading-open .reading-tap{margin-top:8px}
+.reading-answer{display:inline-flex;align-items:center;min-width:44px;min-height:44px;justify-content:center;padding:3px 7px;margin:2px 0;border:1px solid #ac8bd1;border-radius:8px;background:#f0e7fb;color:#493267;font-weight:600}
 .reading-tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
 .reading-translate{min-width:44px;min-height:44px;margin-top:6px;padding:6px 10px;font-size:12px}
 .reading-translation{margin:8px 0 0;padding:8px 10px;border-radius:10px;background:#eef6ec;color:#2f5a3e;font-size:14px;line-height:1.6}

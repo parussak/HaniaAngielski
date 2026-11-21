@@ -10,6 +10,9 @@ for(const module of modules){
   for(const element of [...module.words,...module.exercises]){
     if(element.illustration?.src&&!existsSync(new URL(`../public/${element.illustration.src}`,import.meta.url)))throw new Error(`Brak ilustracji: ${module.id}/${element.id}.`);
   }
+  for(const reading of module.readings??[]){
+    if(reading.illustration&&!existsSync(new URL(`../public/${reading.illustration}`,import.meta.url)))throw new Error(`Brak ilustracji czytanki: ${module.id}/${reading.id}.`);
+  }
 }
 if(new Set(journeys.map(journeyKey)).size!==journeys.length)throw new Error('Powtórzony identyfikator mapy.');
 validateTrainingPlan(modules,journeys);

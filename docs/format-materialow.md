@@ -197,6 +197,7 @@ Status: wdrożone (D-68). Plik `czytanki.json` to tablica czytanek; włącza go 
 {
   "id": "reading-picnic",
   "title": "Piknik kotków",
+  "illustration": "illustrations/piknik-kotkow.png",
   "questionLanguage": "en",
   "sentences": [
     {"id": "s1", "text": "Olus and Maja have a picnic in the garden.", "translation": "Oluś i Maja mają piknik w ogrodzie."},
@@ -204,8 +205,8 @@ Status: wdrożone (D-68). Plik `czytanki.json` to tablica czytanek; włącza go 
   ],
   "glossary": {"garden": "ogród", "bottle": "butelka"},
   "questions": [
-    {"id": "where", "after": "s1", "type": "choice", "prompt": "Where is the picnic?", "answers": ["In the garden"], "options": ["In the garden", "In the kitchen", "At school"], "refs": ["s1"], "explanation": "…"},
-    {"id": "fruit", "after": "s2", "type": "tap", "prompt": "Tap the name of the fruit.", "sentence": "s2", "answers": ["apples"], "explanation": "…"}
+    {"id": "where", "after": "s1", "type": "choice", "prompt": "Where is the picnic?", "glossary": {"where": "gdzie"}, "answers": ["In the garden"], "options": ["In the garden", "In the kitchen", "At school"], "refs": ["s1"], "explanation": "…"},
+    {"id": "fruit", "after": "s2", "type": "tap", "prompt": "Tap the name of the fruit.", "glossary": {"fruit": "owoc"}, "sentence": "s2", "answers": ["apples"], "options": ["apples", "bottle", "water"], "explanation": "…"}
   ],
   "requires": ["unit-2-food"],
   "source": "Adaptacja inspirowana modułem 2: podręcznik, s. 32. Nie jest cytatem."
@@ -215,12 +216,13 @@ Status: wdrożone (D-68). Plik `czytanki.json` to tablica czytanek; włącza go 
 | Pole | Zasada |
 | --- | --- |
 | `id`, `title` | Identyfikator z małych liter, cyfr i myślników; polski tytuł do 80 znaków |
+| `illustration` | Opcjonalny plik SVG lub PNG z `illustrations/` pokazywany we wstępie do lekcji |
 | `sentences` | 2–40 zdań w kolejności czytania, każde z `id` (niepowtarzalnym w czytance), tekstem do 300 znaków bez `___` i polskim `translation`; długość tekstu dobrana do poziomu modułu |
 | `questionLanguage` | Kod języka tekstu czytanki, zgodny z językiem nauki kursu. Walidator odrzuca inny kod. Pytania, polecenia i opcje mają być w tym języku i na poziomie tekstu (D-69). |
 | `glossary` | Opcjonalne tłumaczenia słów spoza słownictwa modułu; kluczem jest słowo w formie z tekstu (np. `apples`, wielkość liter bez znaczenia). Słowo ze `slownictwo.json` tłumaczy się samo, gdy równa się `back` lub jednej z `answers` hasła |
 | `questions` | 1–6 pytań w kolejności czytania (`after` nie może się cofać); `id` niepowtarzalne w czytance |
 | `questions[].after` | Zdanie, po którym pojawia się pytanie; po jednym zdaniu może być kilka pytań |
-| `questions[].type` | `choice` — wybór z `options` (co najmniej dwie, dokładnie jedna poprawna); `tap` — dotknięcie słowa z `answers` w zdaniu `sentence` (to zdanie lub wcześniejsze). Przy `tap` opcjami są słowa zdania, więc `answers` muszą być jego słowami i dokładnie jedno słowo zdania jest poprawne; `options` nie podajemy |
+| `questions[].type` | `choice` — wybór z `options` (co najmniej dwie, dokładnie jedna poprawna). Przy `tap` pod pytaniem wyświetla się całe zdanie `sentence` (bieżące lub wcześniejsze). `options` wybiera maksymalnie pięć różnych słów z tego zdania, w tym poprawną odpowiedź z `answers`. Aplikacja pokazuje je w kolejności zdania i wyróżnia tylko pierwsze wystąpienie każdego z nich. Dla starszych danych bez `options` dobiera poprawne słowo i pierwsze pozostałe słowa zdania do limitu pięciu (D-71). |
 | `questions[].refs` | Zdania pokazywane z pytaniem w powtórce, tylko do `after` włącznie; domyślnie `after` (przy `tap`: `sentence`) |
 | `questions[].glossary` | Wymagana mapa tłumaczeń (co najmniej jedna pozycja) pojedynczych słów lub zwrotów występujących w poleceniu; nie może obejmować całego polecenia. Wielkość liter nie ma znaczenia. Kliknięcie pokazuje tłumaczenie fragmentu (D-70). |
 | `prompt`, `answers`, `explanation`, `ruleId`, `rev` | Jak w zwykłym zadaniu; `explanation` jest wymagane |

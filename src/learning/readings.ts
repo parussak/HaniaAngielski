@@ -78,7 +78,8 @@ export function readingContext(modules:Module[],item:Item){
  const found=readingOf(modules,item);
  if(!found)return;
  const {reading,question}=found,meta=question.reading!;
- return {reading,sentences:meta.refs.map(ref=>reading.sentences.find(s=>s.id===ref)!),...(meta.type==='tap'?{tapSentence:meta.sentence!}:{})};
+ const refs=meta.type==='tap'?new Set([...meta.refs,meta.sentence!]):new Set(meta.refs);
+ return {reading,sentences:[...refs].map(ref=>reading.sentences.find(s=>s.id===ref)!),question,...(meta.type==='tap'?{tapSentence:meta.sentence!}:{})};
 }
 
 /** Tap translation: the word from the module vocabulary, then from the reading's list, otherwise the whole sentence. */

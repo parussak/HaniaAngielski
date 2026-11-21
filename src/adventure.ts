@@ -47,7 +47,7 @@ export function validateJourney(value:unknown,m:Module):Journey {
   if(j.rewards!==undefined&&!validRewards(j.rewards))return fail();
   const ids=new Set<string>(),stageIds=new Set<string>();
   for(const stage of j.stages){
-    if(!stage || !/^[a-z0-9-]+$/.test(stage.id) || stageIds.has(stage.id) || typeof stage.title!=='string'||!['albert','olus','felix','maja','krzywolap'].includes(stage.cat)||!/^illustrations\/[a-z0-9-]+\.svg$/.test(stage.illustration)||!Array.isArray(stage.lessons)||!stage.lessons.length)return fail();
+    if(!stage || !/^[a-z0-9-]+$/.test(stage.id) || stageIds.has(stage.id) || typeof stage.title!=='string'||!['albert','olus','felix','maja','krzywolap'].includes(stage.cat)||!/^illustrations\/[a-z0-9-]+\.(?:svg|png)$/.test(stage.illustration)||!Array.isArray(stage.lessons)||!stage.lessons.length)return fail();
     stageIds.add(stage.id);
     if(stage.adaptiveReviews!==undefined&&(stage.adaptiveReviews!==true||stage.lessons.length!==7||stage.lessons.some(l=>l.id.startsWith(`${stage.id}-recall-`))))return fail();
     for(const l of stage.lessons){

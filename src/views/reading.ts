@@ -2,6 +2,7 @@ import type {AppState} from '../app/state.ts';
 import {optionsFor,type Exercise,type Item,type Module,type Session} from '../core.ts';
 import {readingContext,translateInReading,type readingView} from '../learning/readings.ts';
 import {questionGlossaryParts,readingParts} from '../learning/reading-format.ts';
+import {normalizeAnswer} from '../answers.ts';
 import {e,icon} from '../ui.ts';
 
 type ReadingOnScreen=NonNullable<ReturnType<typeof readingView>>;
@@ -14,17 +15,23 @@ interface ReadingParts {
  autoplay:boolean;
 }
 
-/** One sentence: tappable words for a translation, or answer buttons while it is the open tap question. */
+/** One sentence in the text. While it is repeated as an answer, leave this copy as plain text. */
 function sentenceView(view:ReadingOnScreen,s:Session,peek:AppState['readingPeek'],index:number,parts:ReadingParts){
  const sentence=view.reading.sentences[index],language=view.module.languageCode;
- const tapping=view.tapSentence===sentence.id;
- const words=readingParts(sentence.text).map(part=>!part.word?e(part.text)
-  :tapping?`<button class="reading-word reading-answer" data-action="answer" data-answer="${e(part.text)}">${e(part.text)}</button>`
+ const isTarget=sentence.id===view.tapSentence;
+ const words=readingParts(sentence.text).map(part=>!part.word||isTarget?e(part.text)
   :`<button class="reading-word" data-action="reading-peek" data-sentence="${e(sentence.id)}" data-word="${e(part.text)}" aria-label="${e(`Przetłumacz: ${part.text}`)}">${e(part.text)}</button>`).join('');
- const shown=!tapping&&peek?.sessionId===s.id&&peek.sentence===sentence.id?translateInReading(view.module,view.reading,sentence.id,peek.word):undefined;
+ const shown=!isTarget&&peek?.sessionId===s.id&&peek.sentence===sentence.id?translateInReading(view.module,view.reading,sentence.id,peek.word):undefined;
  const translation=shown?`<p class="reading-translation" role="status">${shown.from==='sentence'?`<span>${peek!.word?`„${e(peek!.word)}” — tłumaczenie całego zdania:`:'Tłumaczenie zdania:'}</span> `:`<span>„${e(peek!.word)}” —</span> `}<b>${e(shown.text)}</b></p>`:'';
- const tools=`<div class="reading-tools">${parts.say(sentence.text)}${tapping?'':`<button class="secondary reading-translate" data-action="reading-peek" data-sentence="${e(sentence.id)}" aria-label="Pokaż tłumaczenie zdania">PL</button>`}</div>`;
- return `<div class="reading-sentence ${sentence.id===view.newest?'reading-new':''} ${tapping?'reading-tap':''}" data-sentence="${e(sentence.id)}"><p ${language?`lang="${e(language)}"`:''}>${words}</p>${tools}${translation}</div>`;
+ const tools=`<div class="reading-tools">${parts.say(sentence.text)}${isTarget?'':`<button class="secondary reading-translate" data-action="reading-peek" data-sentence="${e(sentence.id)}" aria-label="Pokaż tłumaczenie zdania">PL</button>`}</div>`;
+ return `<div class="reading-sentence ${sentence.id===view.newest?'reading-new':''}" data-sentence="${e(sentence.id)}"><p ${language?`lang="${e(language)}"`:''}>${words}</p>${tools}${translation}</div>`;
+}
+
+function tapWords(sentence:string,options:string[]){
+ const unused=new Set(options.map(option=>normalizeAnswer(option)));
+ return readingParts(sentence).map(part=>part.word&&unused.delete(normalizeAnswer(part.text))
+  ?`<button type="button" class="reading-word reading-answer" data-action="answer" data-answer="${e(part.text)}">${e(part.text)}</button>`
+  :e(part.text)).join('');
 }
 
 export function readingQuestionPrompt(state:Readonly<AppState>,s:Session,item:Item,question:Exercise){
@@ -43,13 +50,15 @@ function questionView(state:Readonly<AppState>,view:ReadingOnScreen,s:Session,in
  if(status==='hidden')return '';
  const {text,translation}=readingQuestionPrompt(state,s,item,question);
  const heading=`<h2 class="question" ${lang}>${text}</h2>${translation}`;
+ const target=question.reading.type==='tap'?view.reading.sentences.find(sentence=>sentence.id===question.reading.sentence):undefined;
+ const repeated=target?`<div class="reading-sentence reading-tap"><p ${lang}>${tapWords(target.text,status==='open'?question.options:[])}</p></div>`:'';
  if(status==='open'){
-  const answer=question.reading.type==='tap'
-   ?`<p class="reading-hint">Dotknij słowa w zaznaczonym zdaniu.</p>`
+  const answer=target
+   ?`<p class="reading-hint">Dotknij jednego z wyróżnionych słów.</p>${repeated}`
    :`<div class="answer-options" ${lang}>${optionsFor(question,s).map((o,i)=>`<button class="option" data-action="answer" data-answer="${e(o)}"><span aria-hidden="true">${String.fromCharCode(65+i)}</span>${e(o)}</button>`).join('')}</div>`;
   return `<section class="reading-question reading-open" aria-label="Pytanie do czytanki">${heading}${s.phase==='retry'?'<p class="retry-note">Teraz spróbuj ponownie. Pierwszy wynik pozostanie zapisany osobno.</p>':''}${answer}</section>`;
  }
- if(index===view.position)return `<section class="reading-question reading-current">${heading}${parts.feedback(item,question)}</section>`;
+ if(index===view.position)return `<section class="reading-question reading-current">${heading}${repeated}${parts.feedback(item,question)}</section>`;
  const attempt=s.attempts.find(a=>a.key===item.key)!,ok=attempt.first||attempt.corrected;
  return `<div class="reading-question reading-done ${ok?'correct':'incorrect'}"><p><span ${lang}>${text}</span> <b>${ok?'✓':'✗'} ${e(attempt.lastAnswer??attempt.answer)}</b></p>${translation}${ok?'':`<button class="secondary" data-action="retry" data-key="${e(item.key)}">Popraw odpowiedź</button>`}</div>`;
 }
@@ -76,5 +85,5 @@ export function readingContextView(modules:Module[],item:Item,s:Session){
  const context=readingContext(modules,item);
  if(!context)return '';
  const language=modules.find(m=>m.id===item.moduleId)?.languageCode,tapping=s.phase!=='feedback';
- return `<div class="reading reading-context" aria-label="${e(`Fragment czytanki: ${context.reading.title}`)}">${context.sentences.map(sentence=>`<div class="reading-sentence ${sentence.id===context.tapSentence?'reading-tap':''}"><p ${language?`lang="${e(language)}"`:''}>${readingParts(sentence.text).map(part=>part.word&&tapping&&sentence.id===context.tapSentence?`<button class="reading-word reading-answer" data-action="answer" data-answer="${e(part.text)}">${e(part.text)}</button>`:e(part.text)).join('')}</p></div>`).join('')}</div>`;
+ return `<div class="reading reading-context" aria-label="${e(`Fragment czytanki: ${context.reading.title}`)}">${context.sentences.map(sentence=>`<div class="reading-sentence ${sentence.id===context.tapSentence?'reading-tap':''}"><p ${language?`lang="${e(language)}"`:''}>${tapping&&sentence.id===context.tapSentence?tapWords(sentence.text,context.question.options):e(sentence.text)}</p></div>`).join('')}</div>`;
 }

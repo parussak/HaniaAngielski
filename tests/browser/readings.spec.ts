@@ -9,9 +9,9 @@ import {readingEntry,readingQuestionIds} from '../fixtures/readings.ts';
 const read=(file:string)=>JSON.parse(readFileSync(new URL(`../../public/content/02-food/${file}`,import.meta.url),'utf8'));
 /** The first lesson of the published map becomes the whole reading (D-54). */
 function withReading(){const j=read('sciezka.json'),l=j.stages[0].lessons[0];l.wordIds=[];l.exerciseIds=readingQuestionIds();return j;}
-async function serve(page:Page){
+async function serve(page:Page,entry=readingEntry('picnic',food.id)){
  await page.route('**/content/02-food/modul.json',r=>r.fulfill({json:{...read('modul.json'),readingsFile:'czytanki.json'}}));
- await page.route('**/content/02-food/czytanki.json',r=>r.fulfill({json:[...read('czytanki.json'),readingEntry('picnic',food.id)]}));
+ await page.route('**/content/02-food/czytanki.json',r=>r.fulfill({json:[...read('czytanki.json'),entry]}));
  await page.route('**/content/02-food/sciezka.json',r=>r.fulfill({json:withReading()}));
 }
 const idle=(page:Page)=>expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
@@ -22,6 +22,40 @@ async function startReading(page:Page){await serve(page);await page.goto('./');a
 
 test.describe('telefon',()=>{
  test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+ test('mapa oznacza czytankę, a pod pytaniem tap tylko wybrane słowa są odpowiedziami',async({page})=>{
+  await page.setViewportSize({width:320,height:700});
+  const entry={...readingEntry('picnic',food.id),illustration:'illustrations/word-look.svg'};
+  const text='In the garden, Olek has got some apples, and Ala has some sandwiches.';
+  entry.sentences[1].text=text;
+  entry.questions[1].options=['Ala','apples','some','Olek','garden'];
+  await serve(page,entry);await page.goto('./');await openMap(page);
+  await expect(page.locator('.lesson-step').first().locator('.lesson-reading-badge')).toHaveText('📖 Czytanka');
+  await resumeStudy(page);
+  await expect(page.locator('.lesson-reading-badge')).toBeVisible();
+  await expect.poll(()=>page.locator('.reading-cover').evaluate((img:HTMLImageElement)=>img.naturalWidth)).toBeGreaterThan(0);
+  await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await idle(page);
+  await page.getByRole('button',{name:'In the garden',exact:true}).tap();await idle(page);
+  await next(page).tap();await idle(page);
+  const original=reading(page).locator('.reading-sentence[data-sentence="s2"]');
+  const question=reading(page).locator('.reading-open');
+  const repeated=question.locator('.reading-tap');
+  await expect(original.locator('p').first()).toHaveText(text);
+  await expect(original.locator('.reading-answer')).toHaveCount(0);
+  await expect(original.locator('[data-action="reading-peek"]')).toHaveCount(0);
+  await expect(question.locator('h2')).toHaveText('Tap the name of the fruit.');
+  await expect(repeated.locator('p')).toHaveText(text);
+  await expect(repeated.getByRole('button')).toHaveText(['garden','Olek','some','apples','Ala']);
+  expect(await original.evaluate(node=>node.nextElementSibling?.classList.contains('reading-open'))).toBe(true);
+  await expect(question.locator('h2 ~ .reading-tap')).toBeVisible();
+  await expect(next(page)).toBeDisabled();
+  await noScroll(page);
+  await expect(repeated.getByRole('button',{name:'apples'})).toBeInViewport();
+  await page.screenshot({path:'test-results/reading-tap-320.png'});
+  await repeated.getByRole('button',{name:'apples'}).tap();await idle(page);
+  await expect(reading(page).locator('.feedback.correct')).toBeVisible();
+  await original.getByRole('button',{name:'Przetłumacz: apples'}).tap();await idle(page);
+  await expect(original.getByRole('status')).toHaveText('„apples” — jabłka');
+ });
  test('czytanka w lekcji: zdania po „Dalej”, pytania blokują przejście, tłumaczenie na dotknięcie, wznowienie i ponowne czytanie',async({page})=>{
   await startReading(page);
   await expect(page.locator('.exercise-label')).toContainText('CZYTANKA PICNIC');await expect(page.locator('.study-heading .tag')).toHaveText('1 / 3');
