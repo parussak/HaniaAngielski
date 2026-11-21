@@ -1,4 +1,5 @@
 import type {Exercise,Item,Module,Progress,Scene,Session} from './model.ts';
+import {readingOf} from './readings.ts';
 
 /**
  * D-53: a dialogue scene with several gaps. Content authors write the scene once;
@@ -62,26 +63,37 @@ export function validateScenes(m:{id:unknown;scenes?:unknown;exercises:unknown[]
 /** Exercise ids of the listed scenes, in script order — what a lesson puts into exerciseIds. */
 export function sceneGapIds(m:Pick<Module,'scenes'>,sceneIds:string[]){return sceneIds.flatMap(sceneId=>m.scenes?.find(s=>s.id===sceneId)?.gapIds??[]);}
 
+/** D-53, D-68: exercise groups a lesson takes whole — the gaps of a scene and the questions of a reading. */
+export const storyGroups=(m:Pick<Module,'scenes'|'readings'>)=>[...(m.scenes??[]).map(s=>s.gapIds),...(m.readings??[]).map(r=>r.questionIds)];
+
 function gapOf(modules:Module[],item:Item){
  if(item.type!=='exercise')return;
  const m=modules.find(m=>m.id===item.moduleId),q=m?.exercises.find(q=>q.id===item.id&&(q.rev??1)===item.version);
  const scene=q?.scene&&m!.scenes?.find(s=>s.id===q.scene!.id);
  return scene?{scene,gap:q!.scene!}:undefined;
 }
+/** A scene gap answers the authored way; a reading question (D-68) is always a choice. */
+function storyOf(modules:Module[],item:Item):{story:object;ids:string[];input:Item['input']}|undefined{
+ const gap=gapOf(modules,item);
+ if(gap)return {story:gap.scene,ids:gap.scene.gapIds,input:gap.gap.input==='bank'?'choice':'text'};
+ const reading=readingOf(modules,item);
+ if(reading)return {story:reading.reading,ids:reading.reading.questionIds,input:'choice'};
+}
 /**
  * Marks every scene whose gaps are all in the session as one group: together, in
  * script order, each gap with its authored way of answering. A lone gap stays an
- * ordinary single-gap dialogue.
+ * ordinary single-gap dialogue. A reading whose questions are all in the session
+ * is grouped the same way (D-68); a lone question stays an ordinary task.
  */
 export function groupScenes(modules:Module[],s:Pick<Session,'items'>,place:'keep'|'end'='keep'){
  for(const item of s.items)delete item.sceneGroup;
- const found=new Map<Scene,Item[]>();
- for(const item of s.items){const entry=gapOf(modules,item);if(entry)found.set(entry.scene,[...(found.get(entry.scene)??[]),item]);}
- for(const [scene,items] of found){
-  const ordered=scene.gapIds.map(gapId=>items.find(i=>i.id===gapId));
-  if(items.length!==scene.gapIds.length||ordered.some(i=>!i))continue;
+ const found=new Map<object,{ids:string[];items:Item[]}>();
+ for(const item of s.items){const entry=storyOf(modules,item);if(entry)found.set(entry.story,{ids:entry.ids,items:[...(found.get(entry.story)?.items??[]),item]});}
+ for(const {ids,items} of found.values()){
+  const ordered=ids.map(gapId=>items.find(i=>i.id===gapId));
+  if(items.length!==ids.length||ordered.some(i=>!i))continue;
   const group=ordered as Item[],start=Math.min(...group.map(i=>s.items.indexOf(i)));
-  for(const item of group){delete item.pairGroup;delete item.gapGroup;delete item.presentation;delete item.options;item.sceneGroup=group[0].key;item.input=gapOf(modules,item)!.gap.input==='bank'?'choice':'text';}
+  for(const item of group){delete item.pairGroup;delete item.gapGroup;delete item.presentation;delete item.options;item.sceneGroup=group[0].key;item.input=storyOf(modules,item)!.input;}
   const before=s.items.slice(0,start).filter(i=>!group.includes(i)),after=s.items.slice(start).filter(i=>!group.includes(i));
   s.items=place==='end'?[...before,...after,...group]:[...before,...group,...after];
  }

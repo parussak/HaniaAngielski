@@ -22,10 +22,12 @@ export interface Exercise {
     illustration?: Illustration;
     /** D-53: this exercise is one gap of a dialogue scene. */
     scene?: { id: string; gap: number; input: 'bank' | 'text' };
+    /** D-68: this exercise is one question of a reading. */
+    reading?: ReadingQuestion;
     responseType?: 'choice';
     id: string;
     wordId?: string;
-    kind: 'vocabulary' | 'grammar' | 'dialogue';
+    kind: 'vocabulary' | 'grammar' | 'dialogue' | 'reading';
     prompt: string;
     answers: string[];
     options: string[];
@@ -43,6 +45,27 @@ export interface Scene {
     prompt: string;
     lines: { speaker: string; text: string }[];
     gapIds: string[];
+}
+/** D-68: where a reading question sits in its text and how it is answered. */
+export interface ReadingQuestion {
+    id: string;
+    question: number;
+    type: 'choice' | 'tap';
+    /** The sentence after which the question appears. */
+    after: string;
+    /** Tap: the sentence whose word is the answer. */
+    sentence?: string;
+    /** Sentences shown with the question outside the reading, e.g. in a review. */
+    refs: string[];
+}
+/** D-68: a reading shown sentence by sentence; every question is an ordinary exercise. */
+export interface Reading {
+    id: string;
+    title: string;
+    questionLanguage: string;
+    sentences: { id: string; text: string; translation: string }[];
+    glossary?: Record<string, string>;
+    questionIds: string[];
 }
 export interface GrammarRule {
     id: string;
@@ -77,9 +100,10 @@ export interface Module {
     exercises: Exercise[];
     grammar: GrammarRule[];
     scenes?: Scene[];
+    readings?: Reading[];
     basicFlashcardIds?: string[];
 }
-export type Mode = 'flashcards' | 'flashcards-basic' | 'quiz' | 'grammar' | 'dialogue' | 'review' | 'lesson' | 'training';
+export type Mode = 'flashcards' | 'flashcards-basic' | 'quiz' | 'grammar' | 'dialogue' | 'reading' | 'review' | 'lesson' | 'training';
 export const isFlashcardMode = (mode: Mode) => mode === 'flashcards' || mode === 'flashcards-basic';
 export type AnswerMode = 'choice' | 'text' | 'mixed';
 export interface Item {

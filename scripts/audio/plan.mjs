@@ -65,6 +65,8 @@ export function createPlan(modules,input){
    });
    if(gap!==scene.gapIds.length)fail(`niezgodne luki sceny ${scene.id}.`);
   }
+  // D-68: every sentence of a reading, as it is shown; questions and translations are not recorded.
+  for(const reading of m.readings??[])for(const sentence of reading.sentences)add(`${m.id}:reading:${reading.id}:sentence:${sentence.id}`,'reading-sentence',sentence.text,{readingId:reading.id,sentence:sentence.id});
   references.sort((a,b)=>a.key.localeCompare(b.key));
   plannedModules.push({moduleId:m.id,courseId:m.courseId,language:m.languageCode,profile:target.profile,references});
  }

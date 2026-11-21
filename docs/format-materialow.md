@@ -21,7 +21,7 @@ Status: **wdrożony format etapu 2**. To instrukcja edycji dla człowieka. Typy 
 | `<folder>/gramatyka.json` | Reguły, objaśnienia, przykłady, źródła |
 | `<folder>/cwiczenia.json` | Konkretne zadania i ich własne odpowiedzi oraz wyjaśnienia |
 | `<folder>/rozmowki.json` | Opcjonalne dialogi z jedną luką i [sceny z kilkoma lukami](#scena-dialogowa-z-kilkoma-lukami) |
-| `<folder>/czytanki.json` | Opcjonalne [czytanki](#czytanka) z pytaniami (D-68, do wdrożenia) |
+| `<folder>/czytanki.json` | Opcjonalne [czytanki](#czytanka) z pytaniami (D-68); włącza je `readingsFile: "czytanki.json"` w `modul.json` |
 
 Folder modułu, np. `02-food`, jest adresem plików. `unit-2-food` to identyfikator materiału i zapisu postępów. **To dwie różne rzeczy.** W `katalog.modules` wpisujemy foldery, a w `course.moduleIds` identyfikatory z `modul.json`.
 
@@ -191,7 +191,7 @@ Scena nie zależy od kursu: każdy moduł dowolnego kursu może mieć własne sc
 
 ## Czytanka
 
-Status: zatwierdzone (D-68), do wdrożenia — szczegóły pól mogą się doprecyzować przy implementacji. Plik `czytanki.json` wskazuje `modul.json` (tak jak `rozmowki.json`). Zasady nauki: [czytanki](03-nauka.md#czytanki-d-68).
+Status: wdrożone (D-68). Plik `czytanki.json` to tablica czytanek; włącza go pole `readingsFile: "czytanki.json"` w `modul.json` (tak jak `dialoguesFile` dla rozmówek). Inna nazwa pliku jest odrzucana. Zasady nauki: [czytanki](03-nauka.md#czytanki-d-68).
 
 ```json
 {
@@ -214,16 +214,19 @@ Status: zatwierdzone (D-68), do wdrożenia — szczegóły pól mogą się dopre
 
 | Pole | Zasada |
 | --- | --- |
-| `sentences` | Zdania w kolejności czytania, każde z `id` i polskim `translation`; długość tekstu dobrana do poziomu modułu |
-| `questionLanguage` | Język pytań i poleceń czytanki: `pl` albo kod języka kursu — wybiera autor przy tworzeniu |
-| `glossary` | Opcjonalne tłumaczenia słów spoza słownictwa modułu; słowa ze `slownictwo.json` tłumaczą się same |
-| `questions[].after` | Zdanie, po którym pojawia się pytanie |
-| `questions[].type` | `choice` — wybór z `options` (co najmniej dwie, dokładnie jedna poprawna); `tap` — dotknięcie słowa z `answers` w zdaniu `sentence` |
-| `questions[].refs` | Zdania pokazywane z pytaniem w powtórce |
-| `explanation`, `rev` | Jak w zwykłym zadaniu |
+| `id`, `title` | Identyfikator z małych liter, cyfr i myślników; polski tytuł do 80 znaków |
+| `sentences` | 2–40 zdań w kolejności czytania, każde z `id` (niepowtarzalnym w czytance), tekstem do 300 znaków bez `___` i polskim `translation`; długość tekstu dobrana do poziomu modułu |
+| `questionLanguage` | Język pytań i poleceń czytanki: język objaśnień kursu (`pl`) albo kod języka kursu — wybiera autor przy tworzeniu; inny kod jest odrzucany |
+| `glossary` | Opcjonalne tłumaczenia słów spoza słownictwa modułu; kluczem jest słowo w formie z tekstu (np. `apples`, wielkość liter bez znaczenia). Słowo ze `slownictwo.json` tłumaczy się samo, gdy równa się `back` lub jednej z `answers` hasła |
+| `questions` | 1–6 pytań w kolejności czytania (`after` nie może się cofać); `id` niepowtarzalne w czytance |
+| `questions[].after` | Zdanie, po którym pojawia się pytanie; po jednym zdaniu może być kilka pytań |
+| `questions[].type` | `choice` — wybór z `options` (co najmniej dwie, dokładnie jedna poprawna); `tap` — dotknięcie słowa z `answers` w zdaniu `sentence` (to zdanie lub wcześniejsze). Przy `tap` opcjami są słowa zdania, więc `answers` muszą być jego słowami i dokładnie jedno słowo zdania jest poprawne; `options` nie podajemy |
+| `questions[].refs` | Zdania pokazywane z pytaniem w powtórce, tylko do `after` włącznie; domyślnie `after` (przy `tap`: `sentence`) |
+| `prompt`, `answers`, `explanation`, `ruleId`, `rev` | Jak w zwykłym zadaniu; `explanation` jest wymagane |
+| `requires` | Wspólne dla całej czytanki, jak w scenie |
 | `source` | Wymagane: adaptacja i strony podręcznika albo informacja, że tekst powstał ze słownictwa modułu |
 
-Każde pytanie jest zadaniem `<id czytanki>--<id pytania>`. Lekcja bierze czytankę, wymieniając **wszystkie jej pytania** w `exerciseIds`, tak jak historyjka (D-54). Po publikacji obowiązuje [reguła edycji treści](#aktualizacja-wydanej-lekcji): nie usuwamy czytanki, zdania ani pytania i nie zmieniamy ich identyfikatorów.
+Każde pytanie jest zwykłym zadaniem wyboru `<id czytanki>--<id pytania>` z `kind: "reading"`; nie trafia do quizu, gramatyki ani „Rozmówek”, wraca w powtórkach błędów razem ze zdaniami z `refs`. Lekcja bierze czytankę, wymieniając **wszystkie jej pytania** w `exerciseIds`, tak jak historyjka (D-54); cała czytanka jest wyjątkiem od minimum sześciu zadań, a `check:content` odrzuca lekcję z częścią pytań. Nagrania zdań przygotowuje generator ([audio](generowanie-audio.md)). Po publikacji obowiązuje [reguła edycji treści](#aktualizacja-wydanej-lekcji): nie usuwamy czytanki, zdania ani pytania i nie zmieniamy ich identyfikatorów.
 
 ## Jawna wskazówka a/an dla słówka
 

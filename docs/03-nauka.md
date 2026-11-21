@@ -52,14 +52,15 @@ Powtórki są zaproszeniem do krótkiego ćwiczenia („Poćwiczymy przez chwil�
 
 ### Czytanki (D-68)
 
-Status: zatwierdzone, do wdrożenia. Format: [czytanka](format-materialow.md#czytanka).
+Status: wdrożone w mechanice; w kursach nie ma jeszcze czytanek. Format: [czytanka](format-materialow.md#czytanka).
 
 - **Tekst po kawałku:** zdania pojawiają się po kolei po „Dalej” (na komputerze także →); wcześniejsze zostają widoczne. Nowe zdanie jest odczytywane raz automatycznie, jeśli włączone jest „Ćwiczenia ze słuchu”; potem na żądanie, z „Wolniej”, w tempie dialogów (D-65).
 - **Pytania w trakcie:** po wskazanym zdaniu pojawia się pytanie — `choice` (zrozumienie, wybór z opcji) albo `tap` (dotknij właściwego słowa w zdaniu). Dopóki nie ma odpowiedzi, „Dalej” jest nieaktywne. Pytanie jest zwykłym zadaniem: ocena, poprawka, kocie łapki (D-64), powtórka błędów. W powtórce wraca razem ze zdaniami, których dotyczy.
-- **Tłumaczenie na dotknięcie:** zdanie → polskie tłumaczenie zdania; słowo → tłumaczenie ze słownictwa modułu albo z listy słów czytanki, a gdy go brak — tłumaczenie całego zdania. Podgląd tłumaczenia niczego nie zapisuje, nie obniża oceny i nie odsłania odpowiedzi na otwarte pytanie.
+- **Tłumaczenie na dotknięcie:** zdanie (przycisk „PL” przy zdaniu) → polskie tłumaczenie zdania; słowo → tłumaczenie ze słownictwa modułu albo z listy słów czytanki, a gdy go brak — tłumaczenie całego zdania. Podgląd tłumaczenia niczego nie zapisuje, nie obniża oceny i nie odsłania odpowiedzi na otwarte pytanie: dopóki pytanie czeka na odpowiedź, tłumaczenia są niedostępne.
 - **Język pytań i poleceń** wybiera autor czytanki: polski albo język kursu, zależnie od poziomu i odbiorcy.
 - **Miejsce:** czytanka to cała lekcja mapy (jak historyjka, D-54) — gwiazdki i ukończenie jak w lekcji. Po jej poznaniu można ją przeczytać ponownie w trybie „Czytanki”, jak sceny w „Rozmówkach”.
-- **Zapis:** bez nowych pól postępów; po odświeżeniu czytanka wraca do ostatniego pytania z odpowiedzią.
+- **Zapis:** bez nowych pól postępów; po odświeżeniu czytanka wraca do ostatniego pytania z odpowiedzią (przy włączonym słuchaniu najnowsze widoczne zdanie zostaje odczytane ponownie).
+- **Koniec:** po ostatnim zdaniu błędne odpowiedzi można jeszcze poprawić; „Zakończ czytankę” zamyka sesję. W trybie „Czytanki” (ekran modułu) są czytanki z odpowiedzią na co najmniej jedno pytanie; pozostałe czekają na lekcję mapy.
 
 ## 3. Wielkość i skład sesji
 

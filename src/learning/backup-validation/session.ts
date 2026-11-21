@@ -25,7 +25,7 @@ export const validSession = (v: unknown, completed: boolean): boolean => {
         }
     }
     if(obj(v)&&(v.fixedLength!==undefined&&v.fixedLength!==true||v.lessonRewarded!==undefined&&(v.lessonRewarded!==true||!completed||!v.lesson)))return false;
-    if (!obj(v) || !str(v.id) || !str(v.moduleId) || !['flashcards', 'flashcards-basic', 'quiz', 'grammar', 'dialogue', 'review', 'lesson', 'training'].includes(v.mode as string) || !['choice', 'text', 'mixed'].includes(v.answerMode as string) || typeof v.previous !== 'boolean' || !date(v.startedAt) || !(completed ? date(v.completedAt) : v.completedAt === null) || !['question', 'revealed', 'feedback', 'retry'].includes(v.phase as string) || !(v.lastCorrect === null || typeof v.lastCorrect === 'boolean'))
+    if (!obj(v) || !str(v.id) || !str(v.moduleId) || !['flashcards', 'flashcards-basic', 'quiz', 'grammar', 'dialogue', 'reading', 'review', 'lesson', 'training'].includes(v.mode as string) || !['choice', 'text', 'mixed'].includes(v.answerMode as string) || typeof v.previous !== 'boolean' || !date(v.startedAt) || !(completed ? date(v.completedAt) : v.completedAt === null) || !['question', 'revealed', 'feedback', 'retry'].includes(v.phase as string) || !(v.lastCorrect === null || typeof v.lastCorrect === 'boolean'))
         return false;
     if (v.training !== undefined && (!obj(v.training) || !['map','extra'].includes(v.training.kind as string) || (v.training.kind === 'map' ? v.mode !== 'lesson' || v.training.rewarded !== undefined : v.mode !== 'training' || v.lesson !== undefined || v.stageReview !== undefined || v.training.rewarded !== undefined && (v.training.rewarded !== true || !completed))))
         return false;

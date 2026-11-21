@@ -6,6 +6,7 @@ import { compileVocabulary } from './materials/vocabulary.ts';
 import { languageCode } from './materials/validation.ts';
 import { wordExplanation } from './materials/presentation.ts';
 import { compileScene, isSceneEntry, validateScenes } from './learning/scenes.ts';
+import { compileReading, validateReadings } from './learning/reading-format.ts';
 import { rewardRooms } from './house/catalog.ts';
 
 // Opis modułu przed walidacją: pola, z których korzysta składanie. Całość sprawdza dopiero `validateModules`.
@@ -18,7 +19,7 @@ const isQuizEntry = (v: unknown): v is QuizEntry => {
 };
 
 // Pytania słownikowe wskazują słówka, zamiast dublować ich tekst i odpowiedzi.
-export function assembleModule(input: unknown, inputWords: unknown, quiz: unknown, exercises: unknown, grammar: unknown, dialogues: unknown = [], course?: Course) {
+export function assembleModule(input: unknown, inputWords: unknown, quiz: unknown, exercises: unknown, grammar: unknown, dialogues: unknown = [], course?: Course, readingEntries: unknown = []) {
   if (!input || typeof input !== 'object' || Array.isArray(input) || typeof (input as Record<string, unknown>).id !== 'string' || !Array.isArray(quiz) || !Array.isArray(exercises) || !Array.isArray(grammar)) throw new Error('Niepoprawne pliki modułu.');
   let metadata = input as RawMetadata;
   if(course){
@@ -39,9 +40,12 @@ export function assembleModule(input: unknown, inputWords: unknown, quiz: unknow
   if(!Array.isArray(dialogues))throw new Error('Niepoprawny plik rozmówek.');
   // D-53: a scene is authored once and becomes one ordinary exercise per gap.
   const scenes=dialogues.filter(isSceneEntry).map(compileScene);
-  // Scenes come only from this module's own dialogue file, never from the metadata.
-  const {scenes:_inherited,...description}=metadata;
-  return {...description, words, meanings, exercises:[...compiled,...exercises,...dialogues.filter(entry=>!isSceneEntry(entry)),...scenes.flatMap(s=>s.exercises)], grammar, ...(scenes.length?{scenes:scenes.map(s=>s.scene)}:{})};
+  if(!Array.isArray(readingEntries))throw new Error('Niepoprawny plik czytanek.');
+  // D-68: a reading is authored once and becomes one ordinary exercise per question.
+  const readings=readingEntries.map(entry=>compileReading(entry,metadata));
+  // Scenes and readings come only from this module's own files, never from the metadata.
+  const {scenes:_inherited,readings:_inheritedReadings,...description}=metadata;
+  return {...description, words, meanings, exercises:[...compiled,...exercises,...dialogues.filter(entry=>!isSceneEntry(entry)),...scenes.flatMap(s=>s.exercises),...readings.flatMap(r=>r.exercises)], grammar, ...(scenes.length?{scenes:scenes.map(s=>s.scene)}:{}), ...(readings.length?{readings:readings.map(r=>r.reading)}:{})};
 }
 
 export function validateModules(input: unknown): Module[] {
@@ -69,7 +73,7 @@ export function validateModules(input: unknown): Module[] {
     if (!Array.isArray(m.grammar) || !m.grammar.every(r=>obj(r) && text(r.id) && text(r.title) && text(r.explanation) && texts(r.examples) && text(r.source))) return fail(`sprawdź gramatyka.json (${m.id}).`);
     if (!Array.isArray(m.exercises) || !m.exercises.length) return fail(`brak zadań (${m.id}).`);
     for (const q of m.exercises) {
-      if (!obj(q) || !text(q.id) || !['grammar','vocabulary','dialogue'].includes(q.kind as string) || !text(q.prompt) || !texts(q.answers) || !texts(q.options) || q.options.length<2 || new Set(q.options).size!==q.options.length || !text(q.explanation) || !texts(q.requires) || !q.requires.includes(m.id as string) || typeof q.caseSensitive!=='boolean' || !text(q.source)) return fail(`niepoprawne zadanie (${m.id}/${q?.id ?? '?'}).`);
+      if (!obj(q) || !text(q.id) || !['grammar','vocabulary','dialogue','reading'].includes(q.kind as string) || !text(q.prompt) || !texts(q.answers) || !texts(q.options) || q.options.length<2 || new Set(q.options).size!==q.options.length || !text(q.explanation) || !texts(q.requires) || !q.requires.includes(m.id as string) || typeof q.caseSensitive!=='boolean' || !text(q.source)) return fail(`niepoprawne zadanie (${m.id}/${q?.id ?? '?'}).`);
       if(q.kind==='dialogue' && (!Array.isArray(q.dialogue) || q.dialogue.length<2 || q.dialogue.length>6 || !q.dialogue.every(line=>obj(line)&&text(line.speaker)&&text(line.text)&&line.speaker.length<=40&&line.text.length<=300) || q.dialogue.reduce((n,line)=>n+(line.text.match(/___/g)?.length??0),0)!==1))return fail(`rozmówka wymaga krótkiego dialogu z jedną luką (${q.id}).`);
       if(q.dialogue!==undefined && q.kind!=='dialogue')return fail(`dialog jest dozwolony tylko w rozmówkach (${q.id}).`);
       const normalized = (s: string) => normalizeAnswer(s,q.caseSensitive as boolean);
@@ -78,6 +82,7 @@ export function validateModules(input: unknown): Module[] {
       if (q.ruleId !== undefined && !m.grammar.some(r=>r.id===q.ruleId)) return fail(`brak reguły dla ${q.id}.`);
     }
     validateScenes(m as {id:unknown;scenes?:unknown;exercises:unknown[]});
+    validateReadings(m as {id:unknown;readings?:unknown;exercises:unknown[]});
     unique(m.words,`${m.id}/słówka`); unique(m.exercises,`${m.id}/zadania`); unique(m.grammar,`${m.id}/gramatyka`);
     for(const word of m.words)if(word.answers && new Set(word.answers.map((a: string)=>normalizeAnswer(a))).size!==word.answers.length)return fail(`powtórzona odpowiedź: ${word.id}.`);
     for(const element of [...m.words,...m.exercises]){

@@ -94,3 +94,14 @@ test('audio: hasło z jednego słowa idzie do Pipera z przecinkiem, a tekst i kl
  assert.deepEqual(lines(with_),lines(without),'kwestie scen zachowują swoje nagrania');
  const bad=config();bad.profiles.cori.synthesis={singleWordSuffix:'!!',articles:[]};assert.throws(()=>validateConfig(bad));
 });
+
+test('audio: zdania czytanek trafiają do planu jako osobne odwołania; pytania i tłumaczenia nie są nagrywane',async()=>{
+ const {readingModule}=await import('./fixtures/readings.ts');
+ const m=readingModule('scene-unit');m.languageCode='en';m.words=m.words.slice(0,1);
+ const refs=createPlan([m],config()).header.modules[0].references.filter((r:any)=>r.kind==='reading-sentence');
+ assert.deepEqual(refs.map((r:any)=>r.text),['Ala and Olek sit in the garden.','Olek has got some apples.','Ala reads a book.','The sun is warm.']);
+ assert.equal(refs[0].key,'scene-unit:reading:picnic:sentence:s1');assert.equal(refs[0].readingId,'picnic');assert.equal(refs[0].sentence,'s1');
+ // A sentence is spoken as written: no single-word comma (D-66) and no Polish text.
+ assert.ok(refs.every((r:any)=>r.spoken===undefined));
+ const all=JSON.stringify(createPlan([m],config()));assert.ok(!all.includes('Ala i Olek')&&!all.includes('Gdzie siedzą'));
+});

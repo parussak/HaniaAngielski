@@ -74,7 +74,7 @@ Gdzie aplikacja przechowuje wyniki, jakie pola mają znaczenie i jak chronimy do
 | `pairGroup` / `presentation: bank` | Element planszy par lub luki z bankiem; w kolejce błędów zapisywany bez oprawy |
 | `options` | Migawka 2–4 opcji słownictwa globalnego, by wznowienie miało ten sam zestaw |
 | `listen` | Zadanie może być pokazane jako słuchanie; decyduje urządzenie przy wyświetleniu (D-58) |
-| `sceneGroup` | Klucz pierwszej luki sceny; luki sceny stoją obok siebie, rozerwana grupa jest odrzucana (D-53) |
+| `sceneGroup` | Klucz pierwszej luki sceny albo pierwszego pytania czytanki; zadania grupy stoją obok siebie, rozerwana grupa jest odrzucana (D-53, D-68). Czytanka nie ma własnych pól: widoczne zdania wynikają z odpowiedzi, a tryb „Czytanki” to wartość `mode: "reading"` |
 
 Każda luka sceny ma własny wpis w `attempts` pod kluczem zwykłego zadania (`moduł@rewizja:exercise:<scena>--<luka>`); pozycję w scenie wyznacza `index` sesji. Poprawki zachowują `first` i pierwotną `answer` (D-64).
 

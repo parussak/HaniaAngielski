@@ -21,6 +21,7 @@ public/content/
     gramatyka.json             zasady i przykłady w rozwijanej ściądze
     cwiczenia.json             zadania, odpowiedzi i wyjaśnienia
     rozmowki.json              krótkie dialogi z jedną luką i sceny z kilkoma lukami
+    czytanki.json              opcjonalne czytanki z pytaniami (format: docs/format-materialow.md#czytanka)
     sciezka.json               siedem etapów Food, 41 lekcji i chronione aktualizacje
     sciezka-praktyka.json      druga mapa Food: posiłki, przepis i śniadanie
 ```

@@ -156,3 +156,26 @@
 .scene-slow{padding:6px 10px;font:inherit;font-size:13px}
 
 .board-required{color:#78532a;font-size:14px}.board-retry{min-height:44px;margin:6px 0}.lesson-rating{text-align:center;margin:20px 0}.rating-paws{display:flex;justify-content:center;gap:12px}.rating-paw{position:relative;display:block;width:52px;height:52px;color:#ded2eb}.rating-paw>svg,.rating-paw>span svg{width:52px;height:52px;fill:currentColor;stroke-width:1}.rating-paw>span{position:absolute;inset:0 auto 0 0;overflow:hidden;color:#8d64bf}.rating-value{font-size:24px;font-weight:700;color:#65438d}.lesson-rating p{margin:8px 0}
+/* D-68: czytanki — tekst zdanie po zdaniu, słowa do dotknięcia, pytania w tekście. */
+.studying .study-card:has(>.reading){overflow-y:auto}.studying .study-card:has(>.reading)>.actions,.studying .study-card .reading .feedback{flex:none;overflow:visible;min-height:auto}
+.reading{display:grid;gap:10px;margin:0 0 12px;text-align:left;flex-shrink:0}
+.reading-help{font-size:12px;color:#7d6a92;margin:0 0 12px}
+.reading-sentence{padding:10px 12px;border:1px solid #e6dcf2;border-radius:12px;background:#fdfbff}
+.reading-sentence>p{margin:0;font-size:18px;line-height:1.9;overflow-wrap:anywhere}
+.reading-new{border-color:#b79fd8;box-shadow:0 0 0 1px #d8c6ed}
+.reading-word{display:inline;min-height:0;padding:2px 1px;margin:0;border:0;border-bottom:1px dotted #b79fd8;border-radius:4px;background:none;color:inherit;font:inherit;line-height:inherit;cursor:pointer}
+.reading-tap{border-color:#7851b3;background:#f6f0fd}
+.reading-answer{display:inline-flex;align-items:center;min-height:44px;padding:4px 8px;margin:2px 1px;border:1px solid #cdb8e8;border-radius:10px;background:#fff;color:#513a70}
+.reading-tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.reading-translate{min-width:44px;min-height:44px;margin-top:6px;padding:6px 10px;font-size:12px}
+.reading-translation{margin:8px 0 0;padding:8px 10px;border-radius:10px;background:#eef6ec;color:#2f5a3e;font-size:14px;line-height:1.6}
+.reading-question{padding:12px;border-radius:12px;background:#faf6ff;border:1px solid #e6dcf2}
+.reading-question .question{font-size:20px;margin:0 0 8px}
+.reading-question .answer-options{margin-top:12px}
+.reading-question .feedback{margin:12px 0 0}
+.reading-done{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;font-size:14px}.reading-done p{margin:0}.reading-done.correct b{color:#2f6243}.reading-done.incorrect b{color:#852b45}
+.reading-retry{margin-top:10px;min-height:44px;width:100%}
+.reading-hint,.reading-wait,.reading-end{font-size:13px;color:#7d6a92;margin:6px 0}
+.reading-actions{flex-direction:column;align-items:stretch}.reading-actions .primary{min-height:48px}
+.reading-context{margin:8px 0 12px}
+.reading-choices{display:grid;gap:10px}.reading-choices .secondary{min-height:48px;justify-content:flex-start}.reading-locked{margin:0;color:#8a8297;font-size:13px}

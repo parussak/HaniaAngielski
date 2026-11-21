@@ -9,6 +9,8 @@ import {finishRetention,rememberError} from '../learning/retention.ts';
 import {answerOnBoard,gapTokens,placeGap,closeBoard,boardReady} from '../learning/boards.ts';
 import {retryAnswer} from '../learning/retry.ts';
 import {continueScene} from '../learning/scenes.ts';
+import {readingOf,readingView} from '../learning/readings.ts';
+import {readingShown} from './reading.ts';
 interface SessionAnswerPorts {
     mutate: (change: (p: Progress) => void) => Promise<void>;
 }
@@ -45,7 +47,8 @@ export function createSessionAnswerController(state: AppState, { mutate }: Sessi
                 rememberError(p,session.items[session.index]);
                 recordStageError(p, session, session.items[session.index], state.journeys);
             }
-                else continueScene(p);
+                // D-68: a reading question keeps its feedback until „Dalej”; a scene gap continues at once.
+                else if(!readingOf(state.modules,session.items[session.index]))continueScene(p);
             });
             return true;
         }
@@ -62,6 +65,9 @@ export function createSessionAnswerController(state: AppState, { mutate }: Sessi
     async function finishItem() {
         const active=state.progress.active,current=active?.items[active.index];
         if(active&&(current?.pairGroup||current?.presentation==='bank')&&!boardReady(active))return;
+        // D-68: a reading ends only after its last sentence and question.
+        const reading=active&&readingView(state.modules,active,readingShown(state));
+        if(reading&&reading.next!=='finish')return;
         const rewardCourse=currentCourse(state)!.id;
         const earned = homeFor(state.progress,rewardCourse)?.earned ?? 0, bonuses = Object.values(state.progress.adventure?.stageReviews ?? {}).filter(r => r.rewardedAt).length;
         state.lastReward = 0;

@@ -9,6 +9,10 @@ export type Screen = typeof screens[number];
 // Transient application state only. Stored Progress and Backup formats are unchanged.
 export class AppState {
     boardError?: {key:string;answer:string;keys?:string[]};
+    /** D-68: sentences of the reading on screen; not saved — a refresh returns to the last answered question. */
+    readingShown?: {sessionId:string;count:number};
+    /** D-68: the translation the learner tapped; a preview changes no progress. */
+    readingPeek?: {sessionId:string;sentence:string;word?:string};
     courses: Course[] = [];
     selectedCourseId = '';
     modules: Module[] = [];

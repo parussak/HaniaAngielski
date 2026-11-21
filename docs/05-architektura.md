@@ -41,6 +41,7 @@ Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zal
 | Ekran ćwiczenia, błąd, poprawka | `views/study.ts` |
 | Podsumowanie zakończonej sesji | `views/summary.ts` |
 | Plansze par i luk, sceny | `views/lesson-activities.ts` |
+| Czytanka i pytanie czytanki poza nią (zdania z `refs`) | `views/reading.ts` |
 | Trzy akcje po lekcji, kocie łapki | `views/lesson-summary-actions.ts`, `views/lesson-rating.ts` |
 | Kocie rozmówcy w scenach, przydział kotów | `views/scene-actors.ts`, `cats.ts` |
 | Zaproszenia (rozgrzewka, finał), ekran rozgrzewek, przygotowanie treningu | `views/cat-invitation.ts`, `views/warmup.ts`, `views/training-preparation.ts` |
@@ -56,13 +57,16 @@ Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zal
 | Odpowiedzialność | Pliki |
 | --- | --- |
 | Typy sesji, wyników i ćwiczeń | `learning/model.ts` |
-| Rozpoczęcie sesji, zastąpienie aktywnej sesji (`confirmReplacement`, `openSession`) | `controllers/learning.ts` |
+| Nawigacja między ekranami nauki (mapa, wprowadzenie lekcji, następny krok, wznowienie) | `controllers/learning.ts` |
+| Rozpoczęcie sesji, zastąpienie aktywnej sesji (`confirmReplacement`, `openSession`), tryb „Czytanki” | `controllers/session-start.ts` |
 | Odpowiedzi w trwającej sesji, plansze par i luk, przejście dalej i nagrody | `controllers/session-answers.ts` |
 | Przebieg sesji, pierwsza próba | `learning/session.ts` |
 | Pytania, warianty i ocenianie; a/an słówek; porównanie odpowiedzi | `learning/questions.ts`, `answers.ts`, `learning/vocabulary-answer.ts`, `answer-comparison.ts` |
 | Plansze: kompletność, zamknięcie, rozmieszczanie słów | `learning/boards.ts` |
 | Poprawka po błędzie | `learning/retry.ts` |
-| Sceny dialogowe | `learning/scenes.ts` |
+| Sceny dialogowe; grupy zadań brane przez lekcję w całości (`storyGroups`) | `learning/scenes.ts` |
+| Czytanki (D-68): format i walidacja; przebieg zdanie po zdaniu, tłumaczenie słowa, poznane czytanki | `learning/reading-format.ts`, `learning/readings.ts` |
+| „Dalej” w czytance i podgląd tłumaczenia (stan ekranu; zapisywane jest tylko przejście do kolejnego pytania) | `controllers/reading.ts` |
 | Skład nowych sesji, kolejna lekcja, poziom legendarny | `learning/lesson-variety.ts`, `learning/lesson-flow.ts` |
 | Klucze map, wersja lekcji dla postępów | `learning/journey.ts`, `adventure.ts` (`lessonForProgress`, `journeyForProgress`) |
 | Procent ukończenia | `learning/map-progress.ts` |

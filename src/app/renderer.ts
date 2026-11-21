@@ -4,6 +4,7 @@ import {speaker} from '../speech.ts';
 export function createRenderer(root: HTMLDivElement, state: AppState, renderScreen: () => string) {
     let spoken = '';
     let speechContext='';
+    let readingPlace='';
     function render() {
         saveNavigation(state);
         const historyContext = `${state.user?.uid ?? 'guest'}:${state.progress.history?.head ?? 'none'}`;
@@ -72,9 +73,15 @@ export function createRenderer(root: HTMLDivElement, state: AppState, renderScre
             target?.focus({ preventScroll: true });
         }
         // D-58: a listening task is read out once when it appears; the buttons repeat it without limit.
-        const listen = state.busy ? null : root.querySelector<HTMLElement>('.listen[data-autoplay]');
-        const task = listen ? `${state.progress.active?.id}:${state.progress.active?.index}:${listen.dataset.key}` : '';
-        if (listen && task !== spoken) speaker().speak(listen.dataset.say ?? '', listen.dataset.lang);
+        // D-68: a new sentence or question of a reading comes into view; a translation preview does not move the text.
+        const text = state.screen === 'study' ? root.querySelector<HTMLElement>('.reading[data-visible]') : null;
+        const place = text ? `${state.progress.active?.id}:${state.progress.active?.index}:${state.progress.active?.phase}:${text.dataset.visible}` : '';
+        if (text && place !== readingPlace) (root.querySelector('.reading-open,.reading-current') ?? root.querySelector('.reading-new'))?.scrollIntoView({ block: 'nearest' });
+        readingPlace = place;
+        // D-68: a new reading sentence names its own task, so moving to the next question does not repeat it.
+        const listen = state.busy ? null : root.querySelector<HTMLElement>('[data-autoplay]');
+        const task = listen ? listen.dataset.task ?? `${state.progress.active?.id}:${state.progress.active?.index}:${listen.dataset.key}` : '';
+        if (listen && task !== spoken) speaker().speak(listen.dataset.say ?? '', listen.dataset.lang, false, listen.dataset.speechKind === 'dialogue' ? 'dialogue' : 'word');
         if (!state.busy) { if (!listen && spoken) speaker().stop(); spoken = task; }
         state.renderedScreen = state.screen;
         restoreViewContext(root);

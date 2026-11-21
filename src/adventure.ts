@@ -12,7 +12,7 @@ import { inputFor,keyFor,questionFor,type AnswerMode,type Item,type Module,type 
 import type { StageReview } from './stage-review.ts';
 import { compareModules } from './learning/scope.ts';
 import {plannedStage,type SectionPlan} from './learning/section-plan.ts';
-import {groupScenes} from './learning/scenes.ts';
+import {groupScenes,storyGroups} from './learning/scenes.ts';
 export interface Adventure extends Home {
   courseHomes?:Record<string,Home>;
   version:1;completed:Record<string,{at:string;edition?:2}>;
@@ -52,10 +52,10 @@ export function validateJourney(value:unknown,m:Module):Journey {
     if(stage.adaptiveReviews!==undefined&&(stage.adaptiveReviews!==true||stage.lessons.length!==7||stage.lessons.some(l=>l.id.startsWith(`${stage.id}-recall-`))))return fail();
     for(const l of stage.lessons){
       if(!l || !/^[a-z0-9-]+$/.test(l.id)||ids.has(l.id)||typeof l.title!=='string'||typeof l.intro!=='string'||![l.wordIds,l.exerciseIds,l.ruleIds].every(Array.isArray)||l.wordIds.length+l.exerciseIds.length<(l.role==='training'?0:1)||l.wordIds.length+l.exerciseIds.length>10)return fail();
-      // D-53: a lesson takes a dialogue scene whole — all of its gaps or none.
-      for(const scene of m.scenes??[]){const listed=scene.gapIds.filter(id=>l.exerciseIds.includes(id)).length;if(listed&&listed!==scene.gapIds.length)return fail();}
+      // D-53, D-68: a lesson takes a dialogue scene or a reading whole — all of its tasks or none.
+      for(const group of storyGroups(m)){const listed=group.filter(id=>l.exerciseIds.includes(id)).length;if(listed&&listed!==group.length)return fail();}
       if(l.role!==undefined&&l.role!=='training'||l.targetCount!==undefined&&(!Number.isInteger(l.targetCount)||l.targetCount<6||l.targetCount>10)||l.role==='training'&&(l.wordIds.length+l.exerciseIds.length+l.ruleIds.length>0))return fail();
-      const wholeStory=l.wordIds.length===0&&m.scenes?.some(scene=>scene.gapIds.length===l.exerciseIds.length&&scene.gapIds.every(id=>l.exerciseIds.includes(id)));
+      const wholeStory=l.wordIds.length===0&&storyGroups(m).some(group=>group.length===l.exerciseIds.length&&group.every(id=>l.exerciseIds.includes(id)));
       if(j.id&&l.role!=='training'&&!wholeStory&&l.wordIds.length+l.exerciseIds.length<6)return fail();
       ids.add(l.id);
       if(new Set([...l.wordIds,...l.exerciseIds]).size!==l.wordIds.length+l.exerciseIds.length || !l.wordIds.every(id=>m.words.some(w=>w.id===id))||!l.exerciseIds.every(id=>m.exercises.some(q=>q.id===id&&q.requires.every(id=>id===m.id)))||!l.ruleIds.every(id=>m.grammar.some(r=>r.id===id)))return fail();

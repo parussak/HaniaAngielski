@@ -8,7 +8,7 @@
 
 Wybrany głos: **Cori high, brytyjski angielski**, po odsłuchaniu próbek przez Paulinę. Pliki: **Ogg Opus, mono, docelowo 24 kb/s** (zmiana z 16 kb/s w D-61). Generator uruchamiamy jednym poleceniem `npm run audio`. Nie pobiera narzędzi i nie korzysta z usług sieciowych podczas generowania.
 
-W tym etapie przygotowujemy nagrania dla Food: pełne formy wszystkich haseł z wymaganymi a/an oraz wszystkie kwestie czterech scen, z lukami uzupełnionymi pierwszą akceptowaną odpowiedzią. Nie nagrywamy polskich poleceń, objaśnień ani wszystkich wariantów odpowiedzi. Nie zmieniamy materiału podręcznikowego, identyfikatorów, wyników ani gwiazdek.
+Plan nagrań obejmuje także zdania czytanek (D-68, odwołania `reading-sentence`, tekst jak na ekranie); polecenia, pytania i tłumaczenia czytanek nie są nagrywane. W tym etapie przygotowujemy nagrania dla Food: pełne formy wszystkich haseł z wymaganymi a/an oraz wszystkie kwestie czterech scen, z lukami uzupełnionymi pierwszą akceptowaną odpowiedzią. Nie nagrywamy polskich poleceń, objaśnień ani wszystkich wariantów odpowiedzi. Nie zmieniamy materiału podręcznikowego, identyfikatorów, wyników ani gwiazdek.
 
 ## Granice odpowiedzialności
 
