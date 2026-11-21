@@ -96,6 +96,18 @@
             "ordering",
             "so-because"
           ]
+        },
+        {
+          "id": "food-reading-pancakes",
+          "title": "Naleśniki na lunch",
+          "intro": "Przeczytaj, jak Mia i Ben przygotowują lunch, i odpowiedz na trzy pytania.",
+          "wordIds": [],
+          "exerciseIds": [
+            "food-pancakes-for-lunch--missing-ingredient",
+            "food-pancakes-for-lunch--milk-quantity",
+            "food-pancakes-for-lunch--what-the-cat-gets"
+          ],
+          "ruleIds": []
         }
       ]
     }

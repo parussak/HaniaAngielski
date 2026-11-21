@@ -38,8 +38,8 @@ test('sceny Food używają wyłącznie słów, które moduł już zawiera',()=>{
  }
 });
 
-test('sceny są w czterech istniejących lekcjach; mapy mają te same lekcje, a ukończona zostaje ukończona',()=>{
- assert.equal(lessons(j).length,41);assert.equal(lessons(second).length,5);assert.doesNotThrow(()=>validateJourney(j,m));
+test('sceny są w czterech istniejących lekcjach pierwszej mapy, a ukończona lekcja zostaje ukończona',()=>{
+ assert.equal(lessons(j).length,41);assert.doesNotThrow(()=>validateJourney(j,m));
  const p=emptyProgress();p.adventure=freshAdventure();
  for(const e of lessons(j))p.adventure.completed[e.key]={at:'2026-11-01T12:00:00.000Z'};
  assert.equal(nextLesson(j,p),undefined);

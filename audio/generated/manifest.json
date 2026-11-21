@@ -61,6 +61,54 @@
       "profile": "cori",
       "references": [
         {
+          "key": "unit-2-food:reading:food-pancakes-for-lunch:sentence:cat-food",
+          "kind": "reading-sentence",
+          "text": "Mia gives the cat its food, and Ben starts making pancakes.",
+          "clip": "852edcbbf5882e3c3d5cc1f7cac234f8a79be050e023b84956331f2af9d98fbb",
+          "readingId": "food-pancakes-for-lunch",
+          "sentence": "cat-food"
+        },
+        {
+          "key": "unit-2-food:reading:food-pancakes-for-lunch:sentence:cat-lunch",
+          "kind": "reading-sentence",
+          "text": "The cat is waiting for its lunch, too!",
+          "clip": "146b66efcb6b89bc1672980ad6fb3236d422ac4a374c62ddd42ebe5554ac6d3b",
+          "readingId": "food-pancakes-for-lunch",
+          "sentence": "cat-lunch"
+        },
+        {
+          "key": "unit-2-food:reading:food-pancakes-for-lunch:sentence:chair",
+          "kind": "reading-sentence",
+          "text": "When he comes back, there is a cat on his chair.",
+          "clip": "b5f1c50637d03a9088a55730ab3bacdfbe4803b2f7e321a50af567ae50d9f742",
+          "readingId": "food-pancakes-for-lunch",
+          "sentence": "chair"
+        },
+        {
+          "key": "unit-2-food:reading:food-pancakes-for-lunch:sentence:ingredients",
+          "kind": "reading-sentence",
+          "text": "There is some flour and there are two eggs, but there isn’t any milk.",
+          "clip": "461072564dd574114e5dcec2fe588e7b17dfbbcf4dd4c9b3794a9ad6520bb293",
+          "readingId": "food-pancakes-for-lunch",
+          "sentence": "ingredients"
+        },
+        {
+          "key": "unit-2-food:reading:food-pancakes-for-lunch:sentence:lunch",
+          "kind": "reading-sentence",
+          "text": "Mia and Ben want to make pancakes for lunch.",
+          "clip": "f3915d76a104a37e171206e1128f182d987f873f64e676ee64312c188e1eb996",
+          "readingId": "food-pancakes-for-lunch",
+          "sentence": "lunch"
+        },
+        {
+          "key": "unit-2-food:reading:food-pancakes-for-lunch:sentence:shop",
+          "kind": "reading-sentence",
+          "text": "Ben goes to the shop and buys a bottle of milk.",
+          "clip": "20d98ff244d6895c59036c95fd548fe00c183288d42a4191af95e3be0ca67670",
+          "readingId": "food-pancakes-for-lunch",
+          "sentence": "shop"
+        },
+        {
           "key": "unit-2-food:scene:food-scene-drinks:line:0",
           "kind": "scene-line",
           "text": "Would you like anything to drink?",
@@ -1005,6 +1053,17 @@
         "durationSeconds": 0.796
       }
     },
+    "146b66efcb6b89bc1672980ad6fb3236d422ac4a374c62ddd42ebe5554ac6d3b": {
+      "file": "clips/146b66efcb6b89bc1672980ad6fb3236d422ac4a374c62ddd42ebe5554ac6d3b.ogg",
+      "bytes": 7492,
+      "sha256": "e6d3bf50fb2602c0c0a382c7d4ffcd3d81be4d6b29d4112ebe8ac95f79109613",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.375
+      }
+    },
     "155d19f36aec6e7f46e5cef7cbc039773eeb59ee861ade8db6d2a409234c4a10": {
       "file": "clips/155d19f36aec6e7f46e5cef7cbc039773eeb59ee861ade8db6d2a409234c4a10.ogg",
       "bytes": 5960,
@@ -1047,6 +1106,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.097
+      }
+    },
+    "20d98ff244d6895c59036c95fd548fe00c183288d42a4191af95e3be0ca67670": {
+      "file": "clips/20d98ff244d6895c59036c95fd548fe00c183288d42a4191af95e3be0ca67670.ogg",
+      "bytes": 8304,
+      "sha256": "8037453ae29ed473057a253ae0626ee7696cf67f3a280f01a21b7370320678ef",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.711
       }
     },
     "21e7be4628ba245fc5603062a02d148ceb816aa4924376e4dcf6c8a75c1fcb01": {
@@ -1168,6 +1238,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.249
+      }
+    },
+    "461072564dd574114e5dcec2fe588e7b17dfbbcf4dd4c9b3794a9ad6520bb293": {
+      "file": "clips/461072564dd574114e5dcec2fe588e7b17dfbbcf4dd4c9b3794a9ad6520bb293.ogg",
+      "bytes": 10937,
+      "sha256": "96182ffeb8c42f2571a704dce479e0a08263b916c224780e11e71702d0da3b27",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 3.7
       }
     },
     "4b713c39be8c2b96cb4481e5716ba5a27a03dea35ffd1b5953333626d7c4e108": {
@@ -1399,6 +1480,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 2.449
+      }
+    },
+    "852edcbbf5882e3c3d5cc1f7cac234f8a79be050e023b84956331f2af9d98fbb": {
+      "file": "clips/852edcbbf5882e3c3d5cc1f7cac234f8a79be050e023b84956331f2af9d98fbb.ogg",
+      "bytes": 11960,
+      "sha256": "47fab9e153031227b07464d8c491bb1bd185cc5d09b36aa2cd5975148ca5d2f0",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 4
       }
     },
     "85b83d94e2121ce1ee9ebaaa94ba83f663a561103413961906303fbac02dcff7": {
@@ -1729,6 +1821,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.929
+      }
+    },
+    "b5f1c50637d03a9088a55730ab3bacdfbe4803b2f7e321a50af567ae50d9f742": {
+      "file": "clips/b5f1c50637d03a9088a55730ab3bacdfbe4803b2f7e321a50af567ae50d9f742.ogg",
+      "bytes": 9510,
+      "sha256": "e62f975dc20d9f0588ec6dbd3ec2a9b8ce1e06318bb7b4901b6b12e0eb568d29",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 3.1
       }
     },
     "badedf504ef94a7374126374c46341a8c93e16e25b46fcef153979be9a9d3ac7": {
@@ -2081,6 +2184,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.051
+      }
+    },
+    "f3915d76a104a37e171206e1128f182d987f873f64e676ee64312c188e1eb996": {
+      "file": "clips/f3915d76a104a37e171206e1128f182d987f873f64e676ee64312c188e1eb996.ogg",
+      "bytes": 8748,
+      "sha256": "f568257700c7bbdd15e490961a89ce5b38629de4d23c3e1aa51fb809ced905a2",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.851
       }
     },
     "f889109d4a4ceac7fd712e87d55987c2a01efa74dc684754ace785ac5fe55816": {

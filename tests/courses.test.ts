@@ -20,11 +20,12 @@ test('Food ma jawny kurs z nieustalonymi danymi podręcznika; materiały i stare
     assert.equal(c.id, 'angielski-hani'); assert.equal(c.targetLanguage, 'en'); assert.equal(c.explanationLanguage, 'pl');
     assert.ok(c.moduleIds.includes('unit-2-food')); assert.deepEqual(c.textbook, { title: null, authors: null, edition: null });
     const legacy = assembleModule(raw('modul.json'), raw('slownictwo.json'), raw('quiz.json'), raw('cwiczenia.json'), raw('gramatyka.json'), raw('rozmowki.json'));
-    assert.deepEqual(m.words, legacy.words); assert.deepEqual(m.exercises, legacy.exercises); assert.deepEqual(m.grammar, legacy.grammar);
+    const existingExercises = m.exercises.filter(q => q.kind !== 'reading');
+    assert.deepEqual(m.words, legacy.words); assert.deepEqual(existingExercises, legacy.exercises); assert.deepEqual(m.grammar, legacy.grammar);
     assert.deepEqual(m.basicFlashcardIds, legacy.basicFlashcardIds);
     assert.equal(m.meanings!.length, 97);
     for (const w of m.words) assert.equal(keyFor(m, 'word', w.id), keyFor(legacy, 'word', w.id));
-    for (const q of m.exercises) assert.equal(keyFor(m, 'exercise', q.id), keyFor(legacy, 'exercise', q.id));
+    for (const q of existingExercises) assert.equal(keyFor(m, 'exercise', q.id), keyFor(legacy, 'exercise', q.id));
 });
 
 test('ten sam format znaczenia wczytuje angielski, francuski i włoski bez wyjątków w silniku', async () => {

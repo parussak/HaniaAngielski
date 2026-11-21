@@ -1,0 +1,81 @@
+[
+  {
+    "id": "food-pancakes-for-lunch",
+    "title": "Naleśniki na lunch",
+    "questionLanguage": "pl",
+    "sentences": [
+      {
+        "id": "lunch",
+        "text": "Mia and Ben want to make pancakes for lunch.",
+        "translation": "Mia i Ben chcą zrobić naleśniki na lunch."
+      },
+      {
+        "id": "ingredients",
+        "text": "There is some flour and there are two eggs, but there isn’t any milk.",
+        "translation": "Jest trochę mąki i są dwa jajka, ale nie ma mleka."
+      },
+      {
+        "id": "shop",
+        "text": "Ben goes to the shop and buys a bottle of milk.",
+        "translation": "Ben idzie do sklepu i kupuje butelkę mleka."
+      },
+      {
+        "id": "chair",
+        "text": "When he comes back, there is a cat on his chair.",
+        "translation": "Kiedy wraca, na jego krześle siedzi kot."
+      },
+      {
+        "id": "cat-lunch",
+        "text": "The cat is waiting for its lunch, too!",
+        "translation": "Kot też czeka na swój lunch!"
+      },
+      {
+        "id": "cat-food",
+        "text": "Mia gives the cat its food, and Ben starts making pancakes.",
+        "translation": "Mia daje kotu jego karmę, a Ben zaczyna robić naleśniki."
+      }
+    ],
+    "glossary": {
+      "pancakes": "naleśniki",
+      "eggs": "jajka",
+      "buys": "kupuje",
+      "bottle": "butelka",
+      "chair": "krzesło",
+      "waiting": "czeka",
+      "too": "też",
+      "gives": "daje",
+      "starts": "zaczyna"
+    },
+    "questions": [
+      {
+        "id": "missing-ingredient",
+        "after": "ingredients",
+        "type": "tap",
+        "prompt": "Dotknij słowa, które mówi, czego brakuje.",
+        "sentence": "ingredients",
+        "answers": ["milk"],
+        "explanation": "„There isn’t any milk” znaczy „nie ma mleka”. Brakuje więc mleka, czyli „milk”."
+      },
+      {
+        "id": "milk-quantity",
+        "after": "shop",
+        "type": "choice",
+        "prompt": "Ile mleka kupuje Ben?",
+        "answers": ["Jedną butelkę"],
+        "options": ["Dwie butelki", "Jedną butelkę", "Trzy butelki"],
+        "explanation": "Ben kupuje „a bottle of milk”, czyli jedną butelkę mleka."
+      },
+      {
+        "id": "what-the-cat-gets",
+        "after": "cat-food",
+        "type": "choice",
+        "prompt": "Co Mia daje kotu?",
+        "answers": ["Jego karmę"],
+        "options": ["Naleśnika", "Mleko", "Jego karmę"],
+        "explanation": "„Mia gives the cat its food” znaczy, że Mia daje kotu jego karmę."
+      }
+    ],
+    "requires": ["unit-2-food"],
+    "source": "Tekst autorski oparty na słownictwie i gramatyce modułu Food."
+  }
+]

@@ -90,11 +90,26 @@ test('nowa wersja zapisuje wydanie przy ukończeniu, wznawia się i przyznaje je
  const invalid=backup(restored);invalid.progress.adventure!.completed[s.lesson!.id].edition=3 as 2;assert.throws(()=>validateBackup(invalid));
 });
 
-test('druga mapa ma krótkie lekcje kontekstowe, trening po trzech lekcjach i komplet nowych zadań',()=>{
- validateTrainingPlan(modules,[j,second]);assert.equal(lessons(second)[3].lesson.role,'training');
- const ids=new Set([...lessons(j).flatMap(e=>[...e.lesson.exerciseIds,...e.lesson.update?.exerciseIds??[]]),...lessons(second).flatMap(e=>e.lesson.exerciseIds)]);
+test('druga mapa zachowuje lekcje i trening oraz kończy się całą czytanką',()=>{
+ validateTrainingPlan(modules,[j,second]);
+ const practiceLessons=lessons(second).map(({lesson})=>lesson);
+ const originalLessons=practiceLessons.slice(0,-1);
+ assert.deepEqual(originalLessons.map(lesson=>lesson.id),[
+  'food-diary','food-recipe','food-breakfast','food-training','food-practice-finale'
+ ]);
+ assert.equal(originalLessons[3].role,'training');
+ for(const lesson of originalLessons.filter(lesson=>lesson.role!=='training'))assert.equal(lesson.exerciseIds.length,6);
+
+ const finalLesson=practiceLessons.at(-1)!;
+ const reading=m.readings?.find(reading=>reading.id==='food-pancakes-for-lunch');
+ assert.ok(reading);
+ assert.equal(finalLesson.id,'food-reading-pancakes');
+ assert.deepEqual(finalLesson.wordIds,[]);
+ assert.equal(reading.questionIds.length,3);
+ assert.deepEqual(finalLesson.exerciseIds,reading.questionIds);
+
+ const ids=new Set([...lessons(j).flatMap(e=>[...e.lesson.exerciseIds,...e.lesson.update?.exerciseIds??[]]),...practiceLessons.flatMap(lesson=>lesson.exerciseIds)]);
  for(const q of m.exercises.filter(q=>q.kind!=='vocabulary'))assert.ok(ids.has(q.id),q.id);
- for(const {lesson} of lessons(second).filter(e=>e.lesson.role!=='training'))assert.equal(lesson.exerciseIds.length,6);
  const p=unlockedRestaurant();for(const e of lessons(j))p.adventure!.completed[e.key]={at};
  const before=structuredClone(p.adventure);
  const step=getNextStep(modules,[j,second],p);assert.equal(step.kind,'lesson');assert.equal(step.journeyId,`${m.id}/food-w-praktyce`);

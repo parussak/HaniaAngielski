@@ -56,6 +56,7 @@
     "a-packet-of-biscuits"
   ],
   "dialoguesFile": "rozmowki.json",
+  "readingsFile": "czytanki.json",
   "level": "A2",
   "journeyPaths": [
     "02-food/sciezka.json",
