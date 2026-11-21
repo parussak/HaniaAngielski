@@ -25,6 +25,7 @@ Obowiązujące zasady prowadzenia przez materiał, ćwiczeń, oceniania, nagród
 | Dodatkowy trening na żądanie | Kocia rozgrzewka | Poznany zakres kursu, modułu lub trudniejszego tematu; dobrowolny, także kilka razy dziennie (D-27) |
 | Powtórka w sekcji 7 + 2 | Kocia powtórka | Wcześniejsze trudności (D-48) |
 | Historyjka | Historyjka | Jedna pełna scena dialogowa jako cała lekcja (D-54) |
+| Czytanka | Czytanka | Jeden tekst z wplecionymi pytaniami jako cała lekcja (D-68, do wdrożenia) |
 
 Rola nie wyznacza formy pytań: lekcja może łączyć słownictwo, gramatykę i różne sposoby odpowiadania.
 
@@ -48,6 +49,17 @@ Początek i finał są też dostępne w ekranie modułu; dają 1 ★ za nową pe
 ### Ton powtórek (D-46)
 
 Powtórki są zaproszeniem do krótkiego ćwiczenia („Poćwiczymy przez chwilę?”), a nie spłacaniem zaległości. Każda sesja ma skończony zestaw i wyraźne, pozytywne zakończenie, nawet gdy materiał wróci później. Wewnętrzne liczniki utrwalenia nie są pokazywane jako dług. Można ćwiczyć wiele krótkich sesji pod rząd; nie ma limitu dziennego.
+
+### Czytanki (D-68)
+
+Status: zatwierdzone, do wdrożenia. Format: [czytanka](format-materialow.md#czytanka).
+
+- **Tekst po kawałku:** zdania pojawiają się po kolei po „Dalej” (na komputerze także →); wcześniejsze zostają widoczne. Nowe zdanie jest odczytywane raz automatycznie, jeśli włączone jest „Ćwiczenia ze słuchu”; potem na żądanie, z „Wolniej”, w tempie dialogów (D-65).
+- **Pytania w trakcie:** po wskazanym zdaniu pojawia się pytanie — `choice` (zrozumienie, wybór z opcji) albo `tap` (dotknij właściwego słowa w zdaniu). Dopóki nie ma odpowiedzi, „Dalej” jest nieaktywne. Pytanie jest zwykłym zadaniem: ocena, poprawka, kocie łapki (D-64), powtórka błędów. W powtórce wraca razem ze zdaniami, których dotyczy.
+- **Tłumaczenie na dotknięcie:** zdanie → polskie tłumaczenie zdania; słowo → tłumaczenie ze słownictwa modułu albo z listy słów czytanki, a gdy go brak — tłumaczenie całego zdania. Podgląd tłumaczenia niczego nie zapisuje, nie obniża oceny i nie odsłania odpowiedzi na otwarte pytanie.
+- **Język pytań i poleceń** wybiera autor czytanki: polski albo język kursu, zależnie od poziomu i odbiorcy.
+- **Miejsce:** czytanka to cała lekcja mapy (jak historyjka, D-54) — gwiazdki i ukończenie jak w lekcji. Po jej poznaniu można ją przeczytać ponownie w trybie „Czytanki”, jak sceny w „Rozmówkach”.
+- **Zapis:** bez nowych pól postępów; po odświeżeniu czytanka wraca do ostatniego pytania z odpowiedzią.
 
 ## 3. Wielkość i skład sesji
 
