@@ -3,7 +3,7 @@ import { heroArt } from './hero-art.ts';
 import type { NextStep } from '../next-step.ts';
 import type { PwaState } from '../pwa.ts';
 import { button, e, icon } from '../ui.ts';
-import type { courseProgressOverview } from '../learning/progress-overview.ts';
+import type { courseWeek } from '../learning/progress-overview.ts';
 import { weekDaysView } from './progress.ts';
 function pwaCard(pwa: PwaState) {
     const status = pwa.ready ? 'Materiały gotowe do nauki bez internetu.' : pwa.preparing ? 'Pobieramy materiały do nauki bez internetu…' : pwa.failed ? 'Nie udało się pobrać materiałów. Połącz się z internetem i spróbuj ponownie.' : 'Otwórz aplikację z internetem, aby przygotować naukę offline.';
@@ -55,7 +55,7 @@ function nextStepCard(step: NextStep, modules: Module[], cat: string) {
 }
 export interface HomeViewProps {
     courseContext?: string;
-    week?: Pick<ReturnType<typeof courseProgressOverview>, 'week' | 'archived'>;
+    week?: Pick<ReturnType<typeof courseWeek>, 'week' | 'archived'>;
     unfinishedSession?: string;
     name: string | null | undefined;
     modules: Module[];

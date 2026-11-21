@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {backup,emptyProgress,validateBackup,makeSession} from '../src/core.ts';
 import {creditStars,homeFor,purchase,moveOnGrid,place,stars} from '../src/house/progress.ts';
-import {sizeFor,boxFor,placementError} from '../src/house/layout.ts';
+import {sizeFor,boxFor,placementError,inArea} from '../src/house/layout.ts';
 import {slots} from '../src/house/catalog.ts';
 import {engineModules} from './fixtures/engine.ts';
 const course='angielski-hani';
@@ -61,4 +61,14 @@ test('walidacja kopii odrzuca współrzędne poza pokojem i duplikaty w tej same
   const b=backup(p);b.progress.adventure!.purchases.pillow.position=position;assert.throws(()=>validateBackup(b));
  }
  h.purchases['picnic-blanket'].position={x:2,y:12};assert.throws(()=>validateBackup(backup(p)));
+});
+test('układ pokoju pochodzi z katalogu: kuchnia ma własne skróty i obszar drobiazgów, nieznany pokój działa jak salonik',()=>{
+ const {h}=setup(['fruit-bowl']);h.purchases['fruit-bowl'].slot='shelf';
+ assert.deepEqual([boxFor(h,'fruit-bowl','kitchen').x,boxFor(h,'fruit-bowl','kitchen').y],[16,5]);
+ assert.deepEqual([boxFor(h,'fruit-bowl','salon').x,boxFor(h,'fruit-bowl','salon').y],[13,1]);
+ // Ta sama pozycja (dół 8, środek 11.5) to blat w kuchni, ale w saloniku nie ma tu półki.
+ const box={x:10,y:6,...sizeFor('fruit-bowl')};
+ assert.equal(inArea('fruit-bowl',box,'kitchen'),true);
+ assert.equal(inArea('fruit-bowl',box,'salon'),false);
+ assert.equal(inArea('fruit-bowl',box,'unknown-room'),inArea('fruit-bowl',box,'salon'));
 });

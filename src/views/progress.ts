@@ -3,7 +3,7 @@ import {AppState} from '../app/state.ts';
 import {score,sessionCompatible,type Session} from '../core.ts';
 import {sessionTitle} from '../learning-labels.ts';
 import {coursePracticeLabels,type CoursePracticeMode} from '../learning/course-practice.ts';
-import {courseProgressOverview} from '../learning/progress-overview.ts';
+import {courseProgressOverview,type courseWeek} from '../learning/progress-overview.ts';
 import {currentStats} from '../learning/statistics.ts';
 import {getNextStep} from '../next-step.ts';
 import {homeFor,stars} from '../house/progress.ts';
@@ -15,7 +15,7 @@ function historyRow(state:Readonly<AppState>,s:Session){
  const result=score(s),m=state.modules.find(m=>m.id===s.moduleId);
  return `<div class="history-row"><div><strong>${e(s.scope?coursePracticeLabels[s.mode as CoursePracticeMode]:sessionTitle(s))} · ${e(s.scope?state.courses.find(c=>c.id===s.scope!.courseId)?.name??'Kurs spoza biblioteczki':m?.name??'Moduł spoza biblioteczki')}</strong><span>${date(s.completedAt!)}${!m||!sessionCompatible(state.modules,s)?' · archiwalny materiał':''}</span></div><div class="history-score">${!s.attempts.length?`${new Set(s.items.map(i=>i.key)).size} fiszek`:`${result.correct}/${result.total}`}<small>${!s.attempts.length?'przećwiczonych':`pierwsze próby · ${result.corrections} poprawionych`}</small></div></div>`;
 }
-export function weekDaysView(week: ReturnType<typeof courseProgressOverview>['week']) {
+export function weekDaysView(week: ReturnType<typeof courseWeek>['week']) {
  const labels = ['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Nd'];
  const days = week.map((day, i) => {
   const dateLabel = day.date.toLocaleDateString('pl-PL', { weekday: 'long', day: 'numeric', month: 'long' });

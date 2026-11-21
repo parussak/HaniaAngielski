@@ -22,6 +22,7 @@ Domek ma przede wszystkim motywować do nauki i pokazywać jej efekty. Ukończen
 - Każdy przedmiot ma stałą szerokość i wysokość w siatce, określoną w danych układu. Miejsce nie zmienia jego rozmiaru. Cały pokój skaluje się proporcjonalnie do ekranu; grafiki zachowują proporcje. Nie ma sterowania rozmiarem ani obrotem.
 - Tekstylia są pod meblami, a drobiazgi nad nimi. W siatce przedmioty różnych warstw mogą się nakładać; prostokąty dwóch przedmiotów tej samej warstwy nie mogą się przecinać. Samo stykanie krawędzi jest dozwolone.
 - Meble i tekstylia stoją na podłodze. Drobiazgi mogą stać na podłodze, półce, pod oknem, a w kuchni także na blacie lub stoliku. Obszar określa dolna krawędź i środek przedmiotu; cały jego prostokąt musi mieścić się w pokoju.
+- Pokój opisuje jeden wpis w `rooms` ([katalog](../src/house/catalog.ts)): nazwy do napisów, tło, własne miejsca skrótów i obszary drobiazgów. Nowy pokój to nowy wpis i grafika, bez zmian w układzie i widokach.
 - Po ustawieniu drobiazgu na powierzchni stolika przesunięcie lub schowanie tego stolika odkłada drobiazg do schowka. Nie usuwa własności ani nie pobiera gwiazdek. Przedmiot nie wędruje sam razem ze stolikiem.
 
 ### Obsługa na telefonie i komputerze

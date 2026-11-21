@@ -1,4 +1,4 @@
-import {decorations,decorationLayer} from '../house/catalog.ts';
+import {decorations,decorationLayer,roomFor} from '../house/catalog.ts';
 import {boxFor,displayed,grid,itemRoom} from '../house/layout.ts';
 import type {Home} from '../house/progress.ts';
 import {e} from '../ui.ts';
@@ -7,7 +7,7 @@ export function houseRoom(h:Home|undefined,room:string,roomName:string,image:str
  const items=decorations.filter(d=>itemRoom(h,d.id)===room&&h?.purchases[d.id]&&(displayed(h.purchases[d.id])||editing&&d.id===selected));
  return `<button class="secondary house-edit" data-action="house-edit" aria-pressed="${editing}">${editing?'Gotowe — zakończ urządzanie':'Urządź pokój'}</button>
  <p class="house-edit-hint">${editing?'Przeciągnij wybraną rzecz po siatce. Rozmiar pozostaje stały. Błędne upuszczenie cofniemy; poprawny ruch zapisuje się od razu.':'Każdy pokój ma własne wyposażenie. Włącz urządzanie, aby przesuwać rzeczy.'}</p>
- <figure class="cat-house ${room==='kitchen'?'kitchen-room':''}" data-grid-room="${room}" data-editing="${editing}" tabindex="-1" aria-label="Twój koci pokój"><img class="room-background" src="${e(image)}" alt="${e(roomName)} — pokój z oknem" width="620" height="380" draggable="false">
+ <figure class="cat-house ${roomFor(room).className??''}" data-grid-room="${room}" data-editing="${editing}" tabindex="-1" aria-label="Twój koci pokój"><img class="room-background" src="${e(image)}" alt="${e(roomName)} — pokój z oknem" width="620" height="380" draggable="false">
  ${editing?'<div class="room-grid" aria-hidden="true"></div><div class="room-floor-area" aria-hidden="true"></div>':''}
  ${items.map(d=>{const b=boxFor(h,d.id,room),stored=h!.purchases[d.id],visible=displayed(stored);return `<button class="room-decoration grid-item layer-${decorationLayer(d.id)} ${stored.slot?'slot-'+e(stored.slot):'grid-position'} ${d.id===selected?'is-selected':''} ${visible?'':'unplaced'}" style="left:${b.x/grid.columns*100}%;top:${b.y/grid.rows*100}%;width:${b.w/grid.columns*100}%;height:${b.h/grid.rows*100}%" data-action="select-decoration" data-id="${d.id}" data-x="${b.x}" data-y="${b.y}" data-w="${b.w}" data-h="${b.h}" aria-label="${e(d.name)}${visible?'':', do ustawienia'}" aria-pressed="${d.id===selected}"><img src="${e(new URL('game/'+d.id+'.svg',document.baseURI).href)}" alt="" width="100" height="100" draggable="false"></button>`;}).join('')}
  <div class="house-cat cat-olus">${cat('olus')}</div><div class="house-cat cat-maja">${cat('maja')}</div></figure><p class="grid-message" role="status" data-grid-message></p>

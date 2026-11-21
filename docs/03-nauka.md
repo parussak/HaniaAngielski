@@ -143,7 +143,7 @@ Globalne fiszki obejmują też znane słówka; globalny quiz — poznane znaczen
 
 - **Przygoda:** ukończone lekcje w aktualnych mapach; powtórzenie nie dodaje ukończenia, błędy nie zmniejszają wyniku. Brakujące mapy są sygnalizowane.
 - **Gwiazdki:** zdobyte i dostępne po zakupach; odczyt niczego nie przyznaje.
-- **Tydzień:** poniedziałek–niedziela czasu lokalnego; dzień liczy się po zakończonej sesji z niepustą odpowiedzią.
+- **Tydzień:** poniedziałek–niedziela czasu lokalnego; dzień liczy się po zakończonej sesji z niepustą odpowiedzią. Te same dni wybranego kursu pokazuje też ekran główny, nad kolejnym krokiem.
 - **Ostatnie sukcesy:** trafne powroty, poprawki po błędzie, różne ćwiczone hasła, ukończone historyjki — to dowody ćwiczenia, nie deklaracja biegłości.
 - Bez procentu opanowania, nowego algorytmu ani tygodniowych celów — to wymagałoby osobnej decyzji.
 

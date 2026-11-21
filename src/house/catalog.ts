@@ -44,7 +44,14 @@ export const canUseSlot=(id:string,slot:string,room:string)=>{
  return !!target&&(!target.rooms||target.rooms.includes(room))&&(target.legacy||target.layer===decorationLayer(id));
 };
 // Pokoje domku. Salonik ma każdy kurs; pozostałe daje moduł, który wskazuje je w `houseRoom` (modul.json, D-67).
-export interface Room {id:string;name:string;image:string}
-export const rooms:Room[]=[{id:'salon',name:'Koci salonik',image:'room.svg'},{id:'kitchen',name:'Kocia kuchnia',image:'kitchen.svg'}];
+// Nowy pokój to nowy wpis tutaj (plus grafika w public/game/ i ewentualne style `className`) — bez zmian w układzie i widokach.
+// `inside`/`choose`: napisy „W saloniku”, „wybierz Koci salonik”. `anchors`: miejsca gotowych skrótów inne niż domyślne.
+// `objectAreas`: gdzie (poza podłogą) mogą stać drobiazgi — zakres dolnej krawędzi i środka przedmiotu na siatce.
+export interface ObjectArea {bottom:[number,number];center:[number,number]}
+export interface Room {id:string;name:string;inside:string;choose:string;image:string;className?:string;anchors?:Record<string,{x:number;y:number}>;objectAreas:ObjectArea[]}
+export const rooms:Room[]=[
+ {id:'salon',name:'Koci salonik',inside:'W saloniku',choose:'Koci salonik',image:'room.svg',objectAreas:[{bottom:[3,5],center:[10,Infinity]},{bottom:[6,9],center:[-Infinity,9]}]},
+ {id:'kitchen',name:'Kocia kuchnia',inside:'W kuchni',choose:'Kocią kuchnię',image:'kitchen.svg',className:'kitchen-room',anchors:{window:{x:10,y:5},shelf:{x:16,y:5},rug:{x:9,y:9}},objectAreas:[{bottom:[7,9],center:[9,Infinity]}]},
+];
 export const rewardRooms=rooms.filter(r=>r.id!=='salon');
 export const roomFor=(id:string)=>rooms.find(r=>r.id===id)??rooms[0];

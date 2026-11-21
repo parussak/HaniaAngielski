@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {engineModule} from './fixtures/engine.ts';
 import {emptyProgress,makeSession,questionFor,recordAnswer,next,keyFor,backup,validateBackup,type Module,type Progress} from '../src/core.ts';
-import {courseProgressOverview} from '../src/learning/progress-overview.ts';
+import {courseProgressOverview,courseWeek} from '../src/learning/progress-overview.ts';
 import {journeyKey,lessons,type Journey} from '../src/adventure.ts';
 import {AppState} from '../src/app/state.ts';
 import {progressView} from '../src/views/progress.ts';
@@ -60,4 +60,14 @@ test('rozpoczęta sesja innego kursu nie ukrywa następnego kroku wybranego kurs
  const p=emptyProgress();p.active=makeSession(all,m,'flashcards','text',false,p);const before=structuredClone(p),state=new AppState();
  Object.assign(state,{modules:all,courses:courseFixture().courses,selectedCourseId:'french-book',selected:fr,journeys:[map(),map(fr.id)],progress:p});
  assert.match(progressView(state,now),/data-action="next-step"/);assert.deepEqual(p,before);
+});
+test('tydzień na ekranie głównym: te same dni co w Postępach, bez sesji innego kursu, z informacją o archiwum',()=>{
+ const p=emptyProgress();session(p,m,9);session(p,fr,11);
+ const week=courseWeek(all,p,'english-book',[],now);
+ assert.deepEqual(week.week,overview(p).week);
+ assert.deepEqual(week.week.filter(d=>d.active).map(d=>d.date.getDate()),[9]);
+ assert.equal(week.archived,0);
+ p.history={head:null,sessions:3,items:{},modules:{[m.id]:{sessions:3,total:3,correct:3}}};
+ assert.equal(courseWeek(all,p,'english-book',[],now).archived,3);
+ assert.equal(courseWeek(all,p,'french-book',[],now).archived,0);
 });

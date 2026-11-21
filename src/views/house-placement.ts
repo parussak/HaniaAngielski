@@ -1,9 +1,9 @@
-import {decorations,slots,layers,decorationLayer,canUseSlot,type Decoration} from '../house/catalog.ts';
+import {decorations,slots,layers,decorationLayer,canUseSlot,roomFor,type Decoration} from '../house/catalog.ts';
 import {slotReady,type Home} from '../house/progress.ts';
 import {e} from '../ui.ts';
 import {displayed} from '../house/layout.ts';
 
-export const roomLabel=(room:string)=>room==='salon'?'W saloniku':'W kuchni';
+export const roomLabel=(room:string)=>roomFor(room).inside;
 export function ownedLocation(h:Home|undefined,id:string){
  const v=h?.purchases[id];
  return !v?'':v.position?`${roomLabel(v.room??'salon')} · siatka ${v.position.x+1}, ${v.position.y+1}`:v.slot?`${roomLabel(v.room??'salon')} · ${slots.find(s=>s.id===v.slot)?.name??v.slot}`:'W schowku';
