@@ -182,3 +182,56 @@
 .reading-actions{flex-direction:column;align-items:stretch}.reading-actions .primary{min-height:48px}
 .reading-context{margin:8px 0 12px}
 .reading-choices{display:grid;gap:10px}.reading-choices .secondary{min-height:48px;justify-content:flex-start}.reading-locked{margin:0;color:#8a8297;font-size:13px}
+
+.journey-stage .stage-reading-count {
+  display: flex;
+  width: fit-content;
+  margin-top: 5px;
+  overflow-wrap: anywhere;
+}
+.lesson-stage-cover {
+  display: block;
+  width: min(100%, 480px);
+  height: clamp(145px, 36vw, 280px);
+  object-fit: contain;
+  margin: 16px auto;
+}
+.station-map {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(12px, 3vw, 32px);
+  border-radius: 24px;
+  background: linear-gradient(155deg, #414571, #30365d 52%, #454870);
+}
+.station-map::before, .station-map::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+}
+.station-map::before {
+  inset: 0;
+  background:
+    radial-gradient(circle at 3% 18px, #f9e3b9 1px, transparent 2px),
+    radial-gradient(circle at 5% 58px, #c9d9f5 1px, transparent 2px),
+    radial-gradient(circle at 97% 94px, #ead8f4 1.5px, transparent 2.5px),
+    radial-gradient(circle at 95% 110px, #c9d9f5 1px, transparent 2px);
+  background-size: 100% 173px;
+}
+.station-map::after {
+  top: -64px;
+  right: -60px;
+  width: 162px;
+  height: 162px;
+  border: 8px double #888ab0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 76%, #f8d7af 2px, transparent 3px), #343959;
+}
+.content > .station-map > :is(h1,.eyebrow,.lead,.retention-overview,.story-map-note),
+.station-map .journey-top .back { color: #f2eeff !important; }
+.station-map .journey-stage { background: #e6eff9; border-color: #c5d4e9; box-shadow: 0 3px 0 #252b4b; }
+.station-map .lesson-step { background: #f4f8ff; }
+.station-map .lesson-next, .station-map .journey-continue { background: #ffdcbb; color: #493454; border-color: #cf9875; }
+.station-map .stage-current { border-color: #f4ba90; }
+.station-map .lesson-next .lesson-dot { background: #ffe7cd; color: #58394a; }

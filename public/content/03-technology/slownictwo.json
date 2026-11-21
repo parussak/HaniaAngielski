@@ -14,7 +14,7 @@
         }
       },
       "illustration": {
-        "symbol": "📷",
+        "src": "illustrations/tech-camera.png",
         "caption": "camera — aparat fotograficzny"
       }
     },
@@ -31,7 +31,7 @@
         }
       },
       "illustration": {
-        "symbol": "🖥️",
+        "src": "illustrations/tech-computer.png",
         "caption": "computer — komputer"
       }
     },
@@ -48,7 +48,7 @@
         }
       },
       "illustration": {
-        "symbol": "🎧",
+        "src": "illustrations/tech-headphones.png",
         "caption": "headphones — słuchawki"
       }
     },
@@ -65,7 +65,7 @@
         }
       },
       "illustration": {
-        "symbol": "⌨️",
+        "src": "illustrations/tech-keyboard.png",
         "caption": "keyboard — klawiatura"
       }
     },
@@ -82,7 +82,7 @@
         }
       },
       "illustration": {
-        "symbol": "💻",
+        "src": "illustrations/tech-laptop.png",
         "caption": "laptop — laptop"
       }
     },
@@ -102,7 +102,7 @@
         }
       },
       "illustration": {
-        "symbol": "📱",
+        "src": "illustrations/tech-mobile-phone.png",
         "caption": "mobile phone — telefon komórkowy"
       },
       "answers": {
@@ -125,7 +125,7 @@
         }
       },
       "illustration": {
-        "symbol": "🖱️",
+        "src": "illustrations/tech-mouse.png",
         "caption": "mouse — myszka komputerowa"
       }
     },
@@ -142,7 +142,7 @@
         }
       },
       "illustration": {
-        "symbol": "🖨️",
+        "src": "illustrations/tech-printer.png",
         "caption": "printer — drukarka"
       }
     },
@@ -159,7 +159,7 @@
         }
       },
       "illustration": {
-        "symbol": "🖥️",
+        "src": "illustrations/tech-screen.png",
         "caption": "screen — ekran (np. laptopa)"
       }
     },
@@ -176,7 +176,7 @@
         }
       },
       "illustration": {
-        "symbol": "🔊",
+        "src": "illustrations/tech-speakers.png",
         "caption": "speakers — głośniki"
       }
     },
@@ -193,7 +193,7 @@
         }
       },
       "illustration": {
-        "symbol": "📱",
+        "src": "illustrations/tech-tablet.png",
         "caption": "tablet — tablet"
       }
     },
@@ -210,7 +210,7 @@
         }
       },
       "illustration": {
-        "symbol": "📺",
+        "src": "illustrations/tech-tv.png",
         "caption": "TV — telewizor"
       }
     },
@@ -227,7 +227,7 @@
         }
       },
       "illustration": {
-        "symbol": "💬",
+        "src": "illustrations/tech-chat-online.png",
         "caption": "chat online — rozmawiać na czacie"
       }
     },
@@ -244,7 +244,7 @@
         }
       },
       "illustration": {
-        "symbol": "⬇️",
+        "src": "illustrations/tech-download-a-song.png",
         "caption": "download a song — pobrać piosenkę z internetu"
       }
     },
@@ -264,7 +264,7 @@
         }
       },
       "illustration": {
-        "symbol": "📧",
+        "src": "illustrations/tech-send-an-email.png",
         "caption": "send an email — wysłać e-mail"
       },
       "answers": {
@@ -290,7 +290,7 @@
         }
       },
       "illustration": {
-        "symbol": "🌐",
+        "src": "illustrations/tech-surf-the-internet.png",
         "caption": "surf the Internet — surfować po internecie"
       },
       "answers": {
@@ -316,7 +316,7 @@
         }
       },
       "illustration": {
-        "symbol": "📷",
+        "src": "illustrations/tech-take-a-photo.png",
         "caption": "take a photo — zrobić zdjęcie"
       },
       "answers": {
@@ -339,7 +339,7 @@
         }
       },
       "illustration": {
-        "symbol": "🤳",
+        "src": "illustrations/tech-take-a-selfie.png",
         "caption": "take a selfie — zrobić sobie selfie"
       }
     },
@@ -359,7 +359,7 @@
         }
       },
       "illustration": {
-        "symbol": "📞",
+        "src": "illustrations/tech-talk-on-the-phone.png",
         "caption": "talk on the phone — rozmawiać przez telefon"
       },
       "answers": {
@@ -382,7 +382,7 @@
         }
       },
       "illustration": {
-        "symbol": "📲",
+        "src": "illustrations/tech-text-a-friend.png",
         "caption": "text a friend — wysłać SMS do znajomego"
       }
     },
@@ -399,7 +399,7 @@
         }
       },
       "illustration": {
-        "symbol": "↔️",
+        "src": "illustrations/tech-between.png",
         "caption": "between — pomiędzy"
       }
     },
@@ -416,7 +416,7 @@
         }
       },
       "illustration": {
-        "symbol": "🛏️",
+        "src": "illustrations/tech-go-to-bed.png",
         "caption": "go to bed — iść do łóżka"
       }
     },
@@ -433,7 +433,7 @@
         }
       },
       "illustration": {
-        "symbol": "🔢",
+        "src": "illustrations/tech-how-many-times.png",
         "caption": "How many times ...? — Ile razy…?"
       }
     },
@@ -450,7 +450,7 @@
         }
       },
       "illustration": {
-        "symbol": "📅",
+        "src": "illustrations/tech-how-often.png",
         "caption": "How often ...? — Jak często…?"
       }
     },
@@ -467,7 +467,7 @@
         }
       },
       "illustration": {
-        "symbol": "➕",
+        "src": "illustrations/tech-more.png",
         "caption": "more — więcej"
       }
     },
@@ -484,7 +484,7 @@
         }
       },
       "illustration": {
-        "symbol": "⏳",
+        "src": "illustrations/tech-spend-time.png",
         "caption": "spend time — spędzać czas"
       }
     },
@@ -501,7 +501,7 @@
         }
       },
       "illustration": {
-        "symbol": "🙌",
+        "src": "illustrations/tech-go-on.png",
         "caption": "Go on! — Śmiało!"
       }
     },
@@ -518,7 +518,7 @@
         }
       },
       "illustration": {
-        "symbol": "😮",
+        "src": "illustrations/tech-thats-a-surprise.png",
         "caption": "That's a surprise! — A to niespodzianka!"
       }
     },
@@ -535,7 +535,7 @@
         }
       },
       "illustration": {
-        "symbol": "⏳",
+        "src": "illustrations/tech-wait-a-minute.png",
         "caption": "Wait a minute. — Poczekaj chwilę. (wait…)"
       }
     },
@@ -552,7 +552,7 @@
         }
       },
       "illustration": {
-        "symbol": "🙋",
+        "src": "illustrations/tech-ask-for.png",
         "caption": "ask for — prosić o"
       }
     },
@@ -569,7 +569,7 @@
         }
       },
       "illustration": {
-        "symbol": "⏱️",
+        "src": "illustrations/tech-at-the-moment.png",
         "caption": "at the moment — w tej chwili"
       }
     },
@@ -586,7 +586,7 @@
         }
       },
       "illustration": {
-        "symbol": "💬",
+        "src": "illustrations/tech-chat.png",
         "caption": "chat — czat (rzeczownik)"
       }
     },
@@ -603,7 +603,7 @@
         }
       },
       "illustration": {
-        "symbol": "⬇️",
+        "src": "illustrations/tech-downstairs.png",
         "caption": "downstairs — na dole, na niższym piętrze"
       }
     },
@@ -620,7 +620,7 @@
         }
       },
       "illustration": {
-        "symbol": "😄",
+        "src": "illustrations/tech-laugh.png",
         "caption": "laugh — śmiać się"
       }
     },
@@ -637,7 +637,7 @@
         }
       },
       "illustration": {
-        "src": "illustrations/word-look.svg",
+        "src": "illustrations/tech-lets-see.png",
         "caption": "Let's see! — Zobaczmy!"
       }
     },
@@ -654,7 +654,7 @@
         }
       },
       "illustration": {
-        "symbol": "👉",
+        "src": "illustrations/tech-over-there.png",
         "caption": "over there — tam (wskazując miejsce)"
       }
     },
@@ -671,7 +671,7 @@
         }
       },
       "illustration": {
-        "symbol": "📄",
+        "src": "illustrations/tech-paper.png",
         "caption": "paper — papier"
       }
     },
@@ -688,7 +688,7 @@
         }
       },
       "illustration": {
-        "symbol": "😟",
+        "src": "illustrations/tech-poor.png",
         "caption": "poor — biedny, godny współczucia"
       }
     },
@@ -705,7 +705,7 @@
         }
       },
       "illustration": {
-        "symbol": "🪑",
+        "src": "illustrations/tech-sit.png",
         "caption": "sit — siedzieć"
       }
     },
@@ -722,7 +722,7 @@
         }
       },
       "illustration": {
-        "symbol": "🪑",
+        "src": "illustrations/tech-sit-down.png",
         "caption": "sit down — usiąść"
       }
     },
@@ -739,7 +739,7 @@
         }
       },
       "illustration": {
-        "symbol": "📝",
+        "src": "illustrations/tech-take-an-order.png",
         "caption": "take an order — przyjąć zamówienie"
       }
     },
@@ -756,7 +756,7 @@
         }
       },
       "illustration": {
-        "symbol": "❌",
+        "src": "illustrations/tech-wrong.png",
         "caption": "wrong — niepoprawny"
       }
     },
@@ -773,7 +773,7 @@
         }
       },
       "illustration": {
-        "symbol": "😠",
+        "src": "illustrations/tech-angry.png",
         "caption": "angry — rozgniewany"
       }
     },
@@ -790,7 +790,7 @@
         }
       },
       "illustration": {
-        "symbol": "😑",
+        "src": "illustrations/tech-bored.png",
         "caption": "bored — znudzony"
       }
     },
@@ -807,7 +807,7 @@
         }
       },
       "illustration": {
-        "symbol": "😊",
+        "src": "illustrations/tech-happy.png",
         "caption": "happy — szczęśliwy"
       }
     },
@@ -824,7 +824,7 @@
         }
       },
       "illustration": {
-        "symbol": "😢",
+        "src": "illustrations/tech-sad.png",
         "caption": "sad — smutny"
       }
     },
@@ -841,7 +841,7 @@
         }
       },
       "illustration": {
-        "symbol": "😨",
+        "src": "illustrations/tech-scared.png",
         "caption": "scared — przestraszony"
       }
     },
@@ -858,7 +858,7 @@
         }
       },
       "illustration": {
-        "symbol": "🥱",
+        "src": "illustrations/tech-tired.png",
         "caption": "tired — zmęczony"
       }
     },
@@ -875,7 +875,7 @@
         }
       },
       "illustration": {
-        "symbol": "😟",
+        "src": "illustrations/tech-worried.png",
         "caption": "worried — zmartwiony"
       }
     },
@@ -892,7 +892,7 @@
         }
       },
       "illustration": {
-        "symbol": "👋",
+        "src": "illustrations/tech-come-on.png",
         "caption": "Come on! — Chodź!"
       }
     },
@@ -909,7 +909,7 @@
         }
       },
       "illustration": {
-        "symbol": "💃",
+        "src": "illustrations/tech-dance.png",
         "caption": "dance — tańczyć"
       }
     },
@@ -926,7 +926,7 @@
         }
       },
       "illustration": {
-        "symbol": "🛣️",
+        "src": "illustrations/tech-down-north-street.png",
         "caption": "down North Street — wzdłuż North Street"
       }
     },
@@ -943,7 +943,7 @@
         }
       },
       "illustration": {
-        "symbol": "🚗",
+        "src": "illustrations/tech-drive.png",
         "caption": "drive — prowadzić samochód"
       }
     },
@@ -960,7 +960,7 @@
         }
       },
       "illustration": {
-        "symbol": "☝️",
+        "src": "illustrations/tech-finger.png",
         "caption": "finger — palec u ręki"
       }
     },
@@ -977,7 +977,7 @@
         }
       },
       "illustration": {
-        "symbol": "🥱",
+        "src": "illustrations/tech-look-tired.png",
         "caption": "look tired — wyglądać na zmęczonego"
       }
     },
@@ -994,7 +994,7 @@
         }
       },
       "illustration": {
-        "symbol": "🔎",
+        "src": "illustrations/tech-look-for.png",
         "caption": "look for — szukać czegoś"
       }
     },
@@ -1011,7 +1011,7 @@
         }
       },
       "illustration": {
-        "symbol": "🚛",
+        "src": "illustrations/tech-rubbish-lorry.png",
         "caption": "rubbish lorry — śmieciarka"
       }
     },
@@ -1028,7 +1028,7 @@
         }
       },
       "illustration": {
-        "symbol": "👉",
+        "src": "illustrations/tech-there-he-is.png",
         "caption": "There he is! — Tam jest! (o chłopcu lub mężczyźnie)"
       }
     },
@@ -1045,7 +1045,7 @@
         }
       },
       "illustration": {
-        "symbol": "🔊",
+        "src": "illustrations/tech-whats-that-noise.png",
         "caption": "What's that noise? — Co to za hałas?"
       }
     },
@@ -1062,7 +1062,7 @@
         }
       },
       "illustration": {
-        "symbol": "❓",
+        "src": "illustrations/tech-whats-the-matter.png",
         "caption": "What's the matter? — Co się stało? (pytanie o problem)"
       }
     },
@@ -1079,7 +1079,7 @@
         }
       },
       "illustration": {
-        "symbol": "👋",
+        "src": "illustrations/tech-bye.png",
         "caption": "Bye. — Pa! (krótkie pożegnanie)"
       }
     },
@@ -1099,7 +1099,7 @@
         }
       },
       "illustration": {
-        "symbol": "☎️",
+        "src": "illustrations/tech-can-i-speak.png",
         "caption": "Can I speak to Eve, please? — Czy mogę rozmawiać z Eve, proszę?"
       },
       "answers": {
@@ -1125,7 +1125,7 @@
         }
       },
       "illustration": {
-        "symbol": "📞",
+        "src": "illustrations/tech-hello-its-elena.png",
         "caption": "Hello, it's Elena here. — Halo, mówi Elena."
       },
       "answers": {
@@ -1155,7 +1155,7 @@
         }
       },
       "illustration": {
-        "symbol": "🚪",
+        "src": "illustrations/tech-im-afraid-hes-out.png",
         "caption": "I'm afraid he's out. — Niestety nie ma go w domu."
       },
       "answers": {
@@ -1178,7 +1178,7 @@
         }
       },
       "illustration": {
-        "symbol": "📲",
+        "src": "illustrations/tech-its-elena-for-you.png",
         "caption": "It's Elena for you. — To Elena do ciebie. (przekazując telefon)"
       }
     },
@@ -1199,7 +1199,7 @@
         }
       },
       "illustration": {
-        "symbol": "⏳",
+        "src": "illustrations/tech-just-a-moment.png",
         "caption": "Just a moment. — Chwileczkę. (just…)"
       },
       "answers": {
@@ -1226,7 +1226,7 @@
         }
       },
       "illustration": {
-        "symbol": "✋",
+        "src": "illustrations/tech-hang-on.png",
         "caption": "Hang on. — Poczekaj chwilę."
       },
       "answers": {
@@ -1257,7 +1257,7 @@
         }
       },
       "illustration": {
-        "symbol": "👋",
+        "src": "illustrations/tech-see-you-soon.png",
         "caption": "See you soon. — Do zobaczenia wkrótce."
       }
     },
@@ -1274,7 +1274,7 @@
         }
       },
       "illustration": {
-        "symbol": "📰",
+        "src": "illustrations/tech-magazine.png",
         "caption": "magazine — czasopismo"
       }
     },
@@ -1291,7 +1291,7 @@
         }
       },
       "illustration": {
-        "symbol": "🤩",
+        "src": "illustrations/tech-excited-about.png",
         "caption": "excited about — podekscytowany czymś"
       }
     },
@@ -1308,7 +1308,7 @@
         }
       },
       "illustration": {
-        "symbol": "😟",
+        "src": "illustrations/tech-worried-about.png",
         "caption": "worried about — zmartwiony czymś"
       }
     },
@@ -1325,7 +1325,7 @@
         }
       },
       "illustration": {
-        "symbol": "👎",
+        "src": "illustrations/tech-bad-at.png",
         "caption": "bad at — kiepski w czymś"
       }
     },
@@ -1342,7 +1342,7 @@
         }
       },
       "illustration": {
-        "symbol": "👍",
+        "src": "illustrations/tech-good-at.png",
         "caption": "good at — dobry w czymś"
       }
     },
@@ -1359,7 +1359,7 @@
         }
       },
       "illustration": {
-        "symbol": "👀",
+        "src": "illustrations/tech-interested-in.png",
         "caption": "interested in — zainteresowany czymś"
       }
     },
@@ -1376,7 +1376,7 @@
         }
       },
       "illustration": {
-        "symbol": "😨",
+        "src": "illustrations/tech-scared-of.png",
         "caption": "scared of — przestraszony czymś, bojący się czegoś"
       }
     },
@@ -1393,7 +1393,7 @@
         }
       },
       "illustration": {
-        "symbol": "🤏",
+        "src": "illustrations/tech-a-bit.png",
         "caption": "a bit — trochę, odrobinę"
       }
     },
@@ -1410,7 +1410,7 @@
         }
       },
       "illustration": {
-        "symbol": "🎯",
+        "src": "illustrations/tech-activities.png",
         "caption": "activities — aktywności, zajęcia"
       }
     },
@@ -1427,7 +1427,7 @@
         }
       },
       "illustration": {
-        "symbol": "🧭",
+        "src": "illustrations/tech-adventure.png",
         "caption": "adventure — przygoda"
       }
     },
@@ -1444,7 +1444,7 @@
         }
       },
       "illustration": {
-        "symbol": "👽",
+        "src": "illustrations/tech-alien.png",
         "caption": "alien — kosmita, istota z innej planety"
       }
     },
@@ -1467,7 +1467,7 @@
         }
       },
       "illustration": {
-        "symbol": "🤢",
+        "src": "illustrations/tech-be-sick.png",
         "caption": "be sick — zwymiotować (tu: w symulatorze)"
       }
     },
@@ -1484,7 +1484,7 @@
         }
       },
       "illustration": {
-        "symbol": "📍",
+        "src": "illustrations/tech-do-you-like-it-here.png",
         "caption": "Do you like it here? — Czy ci się tu podoba?"
       }
     },
@@ -1501,7 +1501,7 @@
         }
       },
       "illustration": {
-        "symbol": "😊",
+        "src": "illustrations/tech-enjoy.png",
         "caption": "enjoy — cieszyć się czymś"
       }
     },
@@ -1518,7 +1518,7 @@
         }
       },
       "illustration": {
-        "symbol": "🛫",
+        "src": "illustrations/tech-fly.png",
         "caption": "fly — latać"
       }
     },
@@ -1535,7 +1535,7 @@
         }
       },
       "illustration": {
-        "symbol": "🤷",
+        "src": "illustrations/tech-not-really.png",
         "caption": "not really — nie bardzo"
       }
     },
@@ -1552,7 +1552,7 @@
         }
       },
       "illustration": {
-        "symbol": "🔄",
+        "src": "illustrations/tech-other.png",
         "caption": "other — inny"
       }
     },
@@ -1569,7 +1569,7 @@
         }
       },
       "illustration": {
-        "symbol": "✔️",
+        "src": "illustrations/tech-real.png",
         "caption": "real — prawdziwy"
       }
     },
@@ -1586,7 +1586,7 @@
         }
       },
       "illustration": {
-        "symbol": "🚀",
+        "src": "illustrations/tech-rocket.png",
         "caption": "rocket — rakieta kosmiczna"
       }
     },
@@ -1603,7 +1603,7 @@
         }
       },
       "illustration": {
-        "symbol": "🎮",
+        "src": "illustrations/tech-simulator.png",
         "caption": "simulator — symulator"
       }
     },
@@ -1620,7 +1620,7 @@
         }
       },
       "illustration": {
-        "symbol": "🌌",
+        "src": "illustrations/tech-space-travel.png",
         "caption": "space travel — podróże kosmiczne"
       }
     },
@@ -1637,7 +1637,7 @@
         }
       },
       "illustration": {
-        "symbol": "👩‍🚀",
+        "src": "illustrations/tech-space-walking.png",
         "caption": "space walking — spacerowanie w kosmosie"
       }
     },
@@ -1654,7 +1654,7 @@
         }
       },
       "illustration": {
-        "symbol": "🕷️",
+        "src": "illustrations/tech-spider.png",
         "caption": "spider — pająk"
       }
     },
@@ -1671,7 +1671,7 @@
         }
       },
       "illustration": {
-        "symbol": "➕",
+        "src": "illustrations/tech-also.png",
         "caption": "also — też, także (zwykle przed głównym czasownikiem)"
       }
     },
@@ -1688,7 +1688,7 @@
         }
       },
       "illustration": {
-        "symbol": "⭐",
+        "src": "illustrations/tech-own.png",
         "caption": "own — własny"
       }
     },
@@ -1705,7 +1705,7 @@
         }
       },
       "illustration": {
-        "symbol": "➕",
+        "src": "illustrations/tech-too.png",
         "caption": "too — też, także (zwykle na końcu zdania)"
       }
     }

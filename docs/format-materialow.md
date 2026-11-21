@@ -79,7 +79,7 @@ Nowy format `slownictwo.json` ma `version: 2` i tablicę `entries`. Przykład te
 }
 ```
 
-Każdy wpis ma własne `id`, źródło, ilustrację i warianty językowe. Wariant zawiera `text` oraz opcjonalne `forms` i `examples`, obie jako tablice tekstów. Potrzebne są warianty języka nauki i języka objaśnień kursu. Ilustracja może mieć istniejące `src` SVG zamiast `symbol`; jej zgodność ze znaczeniem oceniamy merytorycznie.
+Każdy wpis ma własne `id`, źródło, ilustrację i warianty językowe. Wariant zawiera `text` oraz opcjonalne `forms` i `examples`, obie jako tablice tekstów. Potrzebne są warianty języka nauki i języka objaśnień kursu. Ilustracja może mieć istniejące `src` SVG lub PNG zamiast `symbol`; jej zgodność ze znaczeniem oceniamy merytorycznie.
 
 `forms` opisują realizacje językowe, **nie rozszerzają automatycznie listy poprawnych odpowiedzi**. `answers` wskazuje jawnie akceptowane odpowiedzi w danym języku. Bez takiej listy domyślną odpowiedzią jest `variants[język nauki].text`. Jeśli lista istnieje, musi obejmować tę podstawową formę. Odpowiedzi konkretnego zadania mogą być węższe — zapisujemy je w definicji tego zadania.
 

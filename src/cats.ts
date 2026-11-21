@@ -2,7 +2,7 @@ import type { Session,Scene } from './core.ts';
 
 export type CatMood='teacher'|'happy'|'celebrating'|'funny';
 export interface CatFrame { sheet:string; x:number; y:number; width:number; height:number; clip?:number[][] }
-export interface Cat { id:string; name:string; teacher:CatFrame; happy:CatFrame; celebrating:CatFrame; funny:CatFrame[] }
+export interface Cat { id:string; name:string; teacher:CatFrame; happy:CatFrame; celebrating:CatFrame; funny:CatFrame[]; stationCelebration?:CatFrame }
 export interface CatCatalog { version:1; sheets:Record<string,{src:string;width:number;height:number}>; cats:Cat[] }
 export interface CatReaction { cat:Cat; mood:CatMood; frame:CatFrame }
 
@@ -15,7 +15,7 @@ export function validateCats(value:unknown):CatCatalog {
   for(const cat of c.cats){
     if(!cat || !/^[a-z0-9-]+$/.test(cat.id) || ids.has(cat.id) || typeof cat.name!=='string' || !cat.name.trim() || cat.name.length>50 || !Array.isArray(cat.funny) || !cat.funny.length)return fail();
     ids.add(cat.id);
-    for(const frame of [cat.teacher,cat.happy,cat.celebrating,...cat.funny]){
+    for(const frame of [cat.teacher,cat.happy,cat.celebrating,...cat.funny,...(cat.stationCelebration===undefined?[]:[cat.stationCelebration])]){
       const sheet=frame && Object.hasOwn(c.sheets,frame.sheet)?c.sheets[frame.sheet]:undefined;
       if(!sheet || ![frame.x,frame.y,frame.width,frame.height].every(Number.isSafeInteger) || frame.x<0 || frame.y<0 || frame.width<1 || frame.height<1 || frame.x+frame.width>sheet.width || frame.y+frame.height>sheet.height)return fail();
       if(frame.clip && (!Array.isArray(frame.clip) || frame.clip.length<3 || !frame.clip.every(p=>Array.isArray(p) && p.length===2 && p.every(Number.isSafeInteger) && p[0]>=frame.x && p[0]<=frame.x+frame.width && p[1]>=frame.y && p[1]<=frame.y+frame.height)))return fail();
@@ -47,7 +47,8 @@ export function responseCat(catalog:CatCatalog,session:Session):CatReaction {
   const mood=session.lastCorrect?(hash(`${session.id}:${session.index}:${attempt?.corrections??0}`)%2?'happy':'celebrating'):'teacher';
   return {cat,mood,frame:cat[mood]};
 }
-export function endingCat(catalog:CatCatalog,session:Pick<Session,'id'>):CatReaction {
+export function endingCat(catalog:CatCatalog,session:Pick<Session,'id'>,theme?:import('./learning/journey.ts').Journey['theme']):CatReaction {
   const cats=order(catalog,session.id),cat=cats[hash(`${session.id}:ending`)%cats.length];
+  if(theme==='space-station'&&cat.stationCelebration)return {cat,mood:'celebrating',frame:cat.stationCelebration};
   return {cat,mood:'funny',frame:cat.funny[hash(`${session.id}:scene`)%cat.funny.length]};
 }

@@ -3,7 +3,7 @@ export interface Lesson {id:string;title:string;intro:string;wordIds:string[];ex
 export interface Stage {id:string;title:string;cat:string;illustration:string;lessons:Lesson[];adaptiveReviews?:true}
 // D-67: nagrody za ukończenie mapy — przedmioty do kupienia w domku i opcjonalna odznaka.
 export interface JourneyRewards {decorations?:string[];badge?:string}
-export interface Journey {version:1;moduleId:string;id?:string;title:string;rewards?:JourneyRewards;stages:Stage[]}
+export interface Journey {version:1;moduleId:string;id?:string;theme?:'space-station';title:string;rewards?:JourneyRewards;stages:Stage[]}
 export interface JourneyIssue {moduleId:string;path:string}
 export const journeyKey=(journey:Journey)=>journey.id?`${journey.moduleId}/${journey.id}`:journey.moduleId;
 export const lessonKey=(journey:Journey,lesson:Lesson)=>`${journeyKey(journey)}/${lesson.id}`;

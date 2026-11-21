@@ -88,7 +88,7 @@ export function validateModules(input: unknown): Module[] {
     for(const element of [...m.words,...m.exercises]){
       if(element.article!==undefined&&(!obj(element.article)||!['a','an',null].includes(element.article.expected as 'a'|'an'|null)||!text(element.article.explanation)||('kind' in element&&element.kind!=='vocabulary')))return fail(`niepoprawne objaśnienie rodzajnika ${element.id}.`);
       if(element.illustration && element.illustration.scene!==undefined && typeof element.illustration.scene!=='boolean')return fail(`niepoprawny typ scenki ${element.id}.`);
-      if(element.illustration!==undefined && (!obj(element.illustration) || !((text(element.illustration.symbol) && element.illustration.symbol.length<=24 && element.illustration.src===undefined) || (text(element.illustration.src) && /^illustrations\/[a-z0-9-]+\.svg$/.test(element.illustration.src) && element.illustration.symbol===undefined)) || !text(element.illustration.caption)))return fail(`niepoprawna ilustracja ${element.id}.`);
+      if(element.illustration!==undefined && (!obj(element.illustration) || !((text(element.illustration.symbol) && element.illustration.symbol.length<=24 && element.illustration.src===undefined) || (text(element.illustration.src) && /^illustrations\/[a-z0-9-]+\.(?:svg|png)$/.test(element.illustration.src) && element.illustration.symbol===undefined)) || !text(element.illustration.caption)))return fail(`niepoprawna ilustracja ${element.id}.`);
     }
     for(const element of [...m.words,...m.exercises])if(element.rev!==undefined && (!Number.isSafeInteger(element.rev)||element.rev<1))return fail(`niepoprawna rewizja ${element.id}.`);
   }

@@ -45,6 +45,7 @@ Wordlist na s. 47 podaje `be sick` jako „mieć mdłości”. W czytance na s. 
 
 - Zadania wymagające oryginalnego audio lub rozstrzygnięcia z nagrania, np. puenta dialogu z s. 40, oraz dyktando, piosenka, praca w parach, samodzielne wypracowanie, wykreślanka i projekt grupowy. „Tech Ted” wykorzystano jako podstawę praktyki przyimków. „Coding for Kids” i „Get Culture!” pozostają materiałem książkowym. „Word blog” może uzupełnić słownictwo później.
 - Moduł nie wymusza zapisu nazw urządzeń z `a/an`. Zasady rodzajników pozostają poza zakresem tego działu.
+- Mapa ma granatowy motyw stacji kosmicznej. Zapowiedź lekcji powiększa ilustrację etapu, a nagłówki sekcji pokazują tytuły czytanek. Fiszki mają ilustracje przedmiotów i scenek. Na zakończenie lekcji pojawia się jeden z pięciu kotków z kosmicznym wyposażeniem.
 - Etap „Technologia” ma ilustrację kota przy laptopie, a etap „Obóz kosmiczny” pokazuje kotki budujące rakietę. We wstępach do czytanek kosmicznych widać kotki w symulatorze i kota astronautę w śpiworze przymocowanym do ściany. Wyposażenie i pokój za moduł pozostają do zaplanowania.
 
 Przed publikacją potrzebna jest recenzja językowa przez człowieka oraz sprawdzenie działania na telefonie i offline. Pełne dane wydania książki wymagają potwierdzenia.

@@ -22,6 +22,28 @@ async function startReading(page:Page){await serve(page);await page.goto('./');a
 
 test.describe('telefon',()=>{
  test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+ test('stacja pokazuje tytuł czytanki w zwiniętej sekcji i powiększa ilustrację etapu',async({page})=>{
+  await page.setViewportSize({width:320,height:700});
+  const entry=readingEntry('picnic',food.id);
+  await serve(page,entry);
+  const map={...withReading(),theme:'space-station'};
+  await page.route('**/content/02-food/sciezka.json',route=>route.fulfill({json:map}));
+  await page.goto('./');await openMap(page);
+  const stage=page.locator('.station-map .journey-stage').first();
+  await stage.locator('summary').click();
+  await expect(stage.locator('summary .stage-reading-count')).toContainText(entry.title);
+  await noScroll(page);
+  await stage.locator('summary').click();
+  const thumbnail=stage.locator('summary img');
+  const source=await thumbnail.getAttribute('src');
+  const width=await thumbnail.evaluate(img=>img.clientWidth);
+  await stage.locator('.lesson-step').first().click();
+  const cover=page.locator('.lesson-stage-cover');
+  await expect(cover).toHaveAttribute('src',source!);
+  await expect.poll(()=>cover.evaluate((img:HTMLImageElement)=>img.naturalWidth)).toBeGreaterThan(0);
+  expect(await cover.evaluate(img=>img.clientWidth)).toBeGreaterThan(width);
+  await noScroll(page);
+ });
  test('mapa oznacza czytankę, a pod pytaniem tap tylko wybrane słowa są odpowiedziami',async({page})=>{
   await page.setViewportSize({width:320,height:700});
   const entry={...readingEntry('picnic',food.id),illustration:'illustrations/word-look.svg'};

@@ -43,6 +43,7 @@ function validRewards(r:unknown){
 export function validateJourney(value:unknown,m:Module):Journey {
   const j=value as Journey,fail=():never=>{throw new Error('Niepoprawna mapa modułu.');};
   if(!j || j.version!==1 || j.moduleId!==m.id || !/^[a-z0-9-]+$/.test(j.moduleId) || typeof j.title!=='string' || !Array.isArray(j.stages)||!j.stages.length)return fail();
+  if(j.theme!==undefined&&j.theme!=='space-station')return fail();
   if(j.id!==undefined&&!/^[a-z0-9-]+$/.test(j.id))return fail();
   if(j.rewards!==undefined&&!validRewards(j.rewards))return fail();
   const ids=new Set<string>(),stageIds=new Set<string>();

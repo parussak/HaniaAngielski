@@ -53,3 +53,12 @@ test('na końcu lekcji losowane są obie zabawne scenki wszystkich kotków',()=>
   }
   assert.equal(seen.size,10);
 });
+
+test('kosmiczna nagroda dobiera wyposażenie kotka i obsługuje starszy katalog',()=>{
+ const s={id:'station-test'},reward=endingCat(catalog,s,'space-station');
+ assert.equal(reward.frame.sheet,'station');
+ assert.equal(reward.frame,reward.cat.stationCelebration);
+ const classic=structuredClone(catalog);
+ for(const cat of classic.cats)delete cat.stationCelebration;
+ assert.deepEqual(endingCat(classic,s,'space-station'),endingCat(classic,s));
+});
