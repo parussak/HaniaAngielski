@@ -2,7 +2,7 @@
   {
     "id": "food-pancakes-for-lunch",
     "title": "Naleśniki na lunch",
-    "questionLanguage": "pl",
+    "questionLanguage": "en",
     "sentences": [
       {
         "id": "lunch",
@@ -50,28 +50,28 @@
       {
         "id": "missing-ingredient",
         "after": "ingredients",
-        "type": "tap",
-        "prompt": "Dotknij słowa, które mówi, czego brakuje.",
-        "sentence": "ingredients",
+        "type": "choice",
+        "prompt": "What do Mia and Ben still need to make pancakes?",
         "answers": ["milk"],
+        "options": ["Flour", "Milk", "Eggs"],
         "explanation": "„There isn’t any milk” znaczy „nie ma mleka”. Brakuje więc mleka, czyli „milk”."
       },
       {
         "id": "milk-quantity",
         "after": "shop",
         "type": "choice",
-        "prompt": "Ile mleka kupuje Ben?",
-        "answers": ["Jedną butelkę"],
-        "options": ["Dwie butelki", "Jedną butelkę", "Trzy butelki"],
+        "prompt": "How much milk does Ben buy?",
+        "answers": ["One bottle", "Jedną butelkę"],
+        "options": ["Two bottles", "One bottle", "Three bottles"],
         "explanation": "Ben kupuje „a bottle of milk”, czyli jedną butelkę mleka."
       },
       {
         "id": "what-the-cat-gets",
         "after": "cat-food",
         "type": "choice",
-        "prompt": "Co Mia daje kotu?",
-        "answers": ["Jego karmę"],
-        "options": ["Naleśnika", "Mleko", "Jego karmę"],
+        "prompt": "What does Mia give the cat?",
+        "answers": ["Cat food", "Jego karmę"],
+        "options": ["A pancake", "Milk", "Cat food"],
         "explanation": "„Mia gives the cat its food” znaczy, że Mia daje kotu jego karmę."
       }
     ],

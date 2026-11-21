@@ -11,7 +11,7 @@ const read=(file:string)=>JSON.parse(readFileSync(new URL(`../../public/content/
 function withReading(){const j=read('sciezka.json'),l=j.stages[0].lessons[0];l.wordIds=[];l.exerciseIds=readingQuestionIds();return j;}
 async function serve(page:Page){
  await page.route('**/content/02-food/modul.json',r=>r.fulfill({json:{...read('modul.json'),readingsFile:'czytanki.json'}}));
- await page.route('**/content/02-food/czytanki.json',r=>r.fulfill({json:[readingEntry('picnic',food.id)]}));
+ await page.route('**/content/02-food/czytanki.json',r=>r.fulfill({json:[...read('czytanki.json'),readingEntry('picnic',food.id)]}));
  await page.route('**/content/02-food/sciezka.json',r=>r.fulfill({json:withReading()}));
 }
 const idle=(page:Page)=>expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
@@ -25,17 +25,17 @@ test.describe('telefon',()=>{
  test('czytanka w lekcji: zdania po „Dalej”, pytania blokują przejście, tłumaczenie na dotknięcie, wznowienie i ponowne czytanie',async({page})=>{
   await startReading(page);
   await expect(page.locator('.exercise-label')).toContainText('CZYTANKA PICNIC');await expect(page.locator('.study-heading .tag')).toHaveText('1 / 3');
-  // The first question follows the first sentence: open, so „Dalej” waits and no translation can give the answer away.
+  // A choice question holds „Dalej”, but the displayed text stays interactive.
   await expect(reading(page)).toHaveAttribute('data-visible','1');await expect(reading(page).locator('.reading-sentence')).toHaveCount(1);
-  await expect(page.getByRole('heading',{name:'Gdzie siedzą?'})).toBeVisible();await expect(next(page)).toBeDisabled();
-  await expect(reading(page).locator('.reading-word')).toHaveCount(0);await expect(page.getByRole('button',{name:'Pokaż tłumaczenie zdania'})).toHaveCount(0);
-  expect((await page.locator('.reading .option').evaluateAll(els=>els.map(el=>el.getBoundingClientRect().height))).every(h=>h>=44)).toBeTruthy();
-  // A mistake: ordinary feedback with the explanation and a voluntary correction.
-  await page.getByRole('button',{name:'w kuchni'}).tap();await idle(page);
-  await expect(page.locator('.reading .feedback.incorrect')).toContainText('Zdanie mówi: in the garden.');await expect(page.getByRole('button',{name:'Popraw odpowiedź'})).toBeVisible();await expect(next(page)).toBeEnabled();
-  // Now translations: a word from the reading's list, then the whole sentence.
+  await expect(page.getByRole('heading',{name:'Where are they sitting?'})).toHaveAttribute('lang','en');await expect(next(page)).toBeDisabled();
   await page.getByRole('button',{name:'Przetłumacz: garden'}).tap();await idle(page);
   await expect(page.locator('.reading-translation')).toHaveText('„garden” — ogród');
+  await expect(next(page)).toBeDisabled();
+  expect((await page.locator('.reading .option').evaluateAll(els=>els.map(el=>el.getBoundingClientRect().height))).every(h=>h>=44)).toBeTruthy();
+  // A mistake: ordinary feedback with the explanation and a voluntary correction.
+  await page.getByRole('button',{name:'In the kitchen'}).tap();await idle(page);
+  await expect(page.locator('.reading .feedback.incorrect')).toContainText('Zdanie mówi: in the garden.');await expect(page.getByRole('button',{name:'Popraw odpowiedź'})).toBeVisible();await expect(next(page)).toBeEnabled();
+  // A word outside the glossary shows the whole sentence.
   await page.getByRole('button',{name:'Przetłumacz: sit'}).tap();await idle(page);
   await expect(page.locator('.reading-translation')).toContainText('Ala i Olek siedzą w ogrodzie.');
   await page.getByRole('button',{name:'Pokaż tłumaczenie zdania'}).tap();await idle(page);
@@ -43,8 +43,13 @@ test.describe('telefon',()=>{
   await noScroll(page);
   // „Dalej”: the next sentence, and the tap question about it.
   await next(page).tap();await idle(page);
-  await expect(reading(page)).toHaveAttribute('data-visible','2');await expect(page.locator('.reading-translation')).toHaveCount(0);
-  await expect(page.locator('.reading-done.incorrect')).toContainText('w kuchni');await expect(page.locator('.study-heading .tag')).toHaveText('2 / 3');
+  await expect(reading(page)).toHaveAttribute('data-visible','2');
+  const earlier=reading(page).locator('[data-sentence="s1"].reading-sentence');
+  await expect(earlier.locator('.reading-translation')).toHaveText('Tłumaczenie zdania: Ala i Olek siedzą w ogrodzie.');
+  await earlier.getByRole('button',{name:'Przetłumacz: garden'}).tap();await idle(page);
+  await expect(earlier.locator('.reading-translation')).toHaveText('„garden” — ogród');
+  await expect(reading(page).locator('.reading-tap .reading-translate')).toHaveCount(0);
+  await expect(page.locator('.reading-done.incorrect')).toContainText('In the kitchen');await expect(page.locator('.study-heading .tag')).toHaveText('2 / 3');
   await expect(page.locator('.reading-tap .reading-answer')).toHaveText(['Olek','has','got','some','apples']);await expect(next(page)).toBeDisabled();
   await page.locator('.reading-answer',{hasText:'apples'}).tap();await idle(page);await expect(page.locator('.reading .feedback.correct')).toContainText('Apples to jabłka.');
   await page.setViewportSize({width:320,height:640});await noScroll(page);await page.screenshot({path:'test-results/reading-middle-320.png',fullPage:true});await page.setViewportSize({width:390,height:844});
@@ -53,11 +58,11 @@ test.describe('telefon',()=>{
   await expect(reading(page)).toHaveAttribute('data-visible','2');await expect(page.locator('.reading .feedback.correct')).toContainText('Apples to jabłka.');
   // On a computer → works like „Dalej”.
   await page.keyboard.press('ArrowRight');await idle(page);await expect(reading(page)).toHaveAttribute('data-visible','3');
-  await page.getByRole('button',{name:'książkę'}).tap();await idle(page);await next(page).tap();await idle(page);
+  await page.getByRole('button',{name:'A book',exact:true}).tap();await idle(page);await next(page).tap();await idle(page);
   await expect(reading(page)).toHaveAttribute('data-visible','4');
   // The end: the earlier mistake can still be corrected, then the reading closes.
   await page.getByRole('button',{name:'Popraw odpowiedź'}).tap();await idle(page);await expect(next(page)).toBeDisabled();
-  await page.getByRole('button',{name:'w ogrodzie'}).tap();await idle(page);await next(page).tap();await idle(page);
+  await page.getByRole('button',{name:'In the garden'}).tap();await idle(page);await next(page).tap();await idle(page);
   await expect(page.getByRole('button',{name:/Zakończ czytankę/})).toBeVisible();await page.screenshot({path:'test-results/reading-end-mobile.png',fullPage:true});
   await page.getByRole('button',{name:/Zakończ czytankę/}).tap();await idle(page);
   await expect(page.locator('.study-heading')).toHaveCount(0);
@@ -80,7 +85,7 @@ test('słuchanie: każde nowe zdanie jest odczytane raz, w tempie dialogów; wy�
  await startReading(page);
  await expect.poll(()=>spoken(page)).toEqual(['Ala and Olek sit in the garden.@0.9']);
  // Answering and a translation do not repeat the sentence.
- await page.getByRole('button',{name:'w ogrodzie'}).click();await idle(page);await page.getByRole('button',{name:'Przetłumacz: garden'}).click();await idle(page);
+ await page.getByRole('button',{name:'In the garden'}).click();await idle(page);await page.getByRole('button',{name:'Przetłumacz: garden'}).click();await idle(page);
  expect(await spoken(page)).toEqual(['Ala and Olek sit in the garden.@0.9']);
  await next(page).click();await idle(page);
  await expect.poll(()=>spoken(page)).toEqual(['Ala and Olek sit in the garden.@0.9','Olek has got some apples.@0.9']);

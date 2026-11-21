@@ -197,15 +197,15 @@ Status: wdrożone (D-68). Plik `czytanki.json` to tablica czytanek; włącza go 
 {
   "id": "reading-picnic",
   "title": "Piknik kotków",
-  "questionLanguage": "pl",
+  "questionLanguage": "en",
   "sentences": [
     {"id": "s1", "text": "Olus and Maja have a picnic in the garden.", "translation": "Oluś i Maja mają piknik w ogrodzie."},
     {"id": "s2", "text": "Maja has got some apples and a bottle of water.", "translation": "Maja ma trochę jabłek i butelkę wody."}
   ],
   "glossary": {"garden": "ogród", "bottle": "butelka"},
   "questions": [
-    {"id": "where", "after": "s1", "type": "choice", "prompt": "Gdzie jest piknik?", "answers": ["w ogrodzie"], "options": ["w ogrodzie", "w kuchni", "w szkole"], "refs": ["s1"], "explanation": "…"},
-    {"id": "fruit", "after": "s2", "type": "tap", "prompt": "Dotknij nazwy owocu.", "sentence": "s2", "answers": ["apples"], "explanation": "…"}
+    {"id": "where", "after": "s1", "type": "choice", "prompt": "Where is the picnic?", "answers": ["In the garden"], "options": ["In the garden", "In the kitchen", "At school"], "refs": ["s1"], "explanation": "…"},
+    {"id": "fruit", "after": "s2", "type": "tap", "prompt": "Tap the name of the fruit.", "sentence": "s2", "answers": ["apples"], "explanation": "…"}
   ],
   "requires": ["unit-2-food"],
   "source": "Adaptacja inspirowana modułem 2: podręcznik, s. 32. Nie jest cytatem."
@@ -216,7 +216,7 @@ Status: wdrożone (D-68). Plik `czytanki.json` to tablica czytanek; włącza go 
 | --- | --- |
 | `id`, `title` | Identyfikator z małych liter, cyfr i myślników; polski tytuł do 80 znaków |
 | `sentences` | 2–40 zdań w kolejności czytania, każde z `id` (niepowtarzalnym w czytance), tekstem do 300 znaków bez `___` i polskim `translation`; długość tekstu dobrana do poziomu modułu |
-| `questionLanguage` | Język pytań i poleceń czytanki: język objaśnień kursu (`pl`) albo kod języka kursu — wybiera autor przy tworzeniu; inny kod jest odrzucany |
+| `questionLanguage` | Kod języka tekstu czytanki, zgodny z językiem nauki kursu. Walidator odrzuca inny kod. Pytania, polecenia i opcje mają być w tym języku i na poziomie tekstu (D-69). |
 | `glossary` | Opcjonalne tłumaczenia słów spoza słownictwa modułu; kluczem jest słowo w formie z tekstu (np. `apples`, wielkość liter bez znaczenia). Słowo ze `slownictwo.json` tłumaczy się samo, gdy równa się `back` lub jednej z `answers` hasła |
 | `questions` | 1–6 pytań w kolejności czytania (`after` nie może się cofać); `id` niepowtarzalne w czytance |
 | `questions[].after` | Zdanie, po którym pojawia się pytanie; po jednym zdaniu może być kilka pytań |

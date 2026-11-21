@@ -19,12 +19,11 @@ export function createReadingController(state: AppState, { mutate }: ReadingPort
             const {advance, shown} = view.next;
             if (advance) await mutate(p => { advanceReading(p, state.modules); });
             state.readingShown = {sessionId: s.id, count: shown};
-            state.readingPeek = undefined;
             return true;
         }
         if (action === 'reading-peek') {
             const s = state.progress.active, view = s && readingView(state.modules, s, readingShown(state)), sentence = el.dataset.sentence ?? '';
-            if (!s || !view || view.questionOpen) return true;
+            if (!s || !view || sentence === view.tapSentence) return true;
             const index = view.reading.sentences.findIndex(x => x.id === sentence);
             if (index < 0 || index >= view.visible) return true;
             const word = el.dataset.word || undefined, same = state.readingPeek?.sessionId === s.id && state.readingPeek.sentence === sentence && state.readingPeek.word === word;

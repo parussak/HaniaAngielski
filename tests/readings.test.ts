@@ -42,7 +42,7 @@ test('format: check:content odrzuca błędną czytankę z czytelnym komunikatem'
  assert.throws(broken(r=>r.questions[0].after='s9'),/after/);
  assert.throws(broken(r=>r.questions[1].answers=['pears']),/słowo/);
  assert.throws(broken(r=>r.questions[1].sentence='s3'),/sentence/);
- assert.throws(broken(r=>r.questions[0].options=['w ogrodzie','w ogrodzie ']),/wariant|jeden/);
+ assert.throws(broken(r=>r.questions[0].options=['In the garden','In the garden ']),/wariant|jeden/);
  assert.throws(broken(r=>r.questions=[]),/pyta/);
  assert.throws(broken(r=>r.questions=Array.from({length:7},(_,i)=>({...r.questions[0],id:`q${i}`}))),/pyta/);
  assert.throws(broken(r=>r.questions[2].id='where'),/powtórzony/);
@@ -51,9 +51,10 @@ test('format: check:content odrzuca błędną czytankę z czytelnym komunikatem'
  assert.throws(broken(r=>r.questionLanguage='polski'),/język/);
  assert.throws(broken(r=>r.glossary={garden:''}),/glossary/);
  assert.throws(broken(r=>delete r.questions[0].explanation),/zadanie|wyjaśn/);
- // Course languages: questions in Polish (the explanation language) or in the course language — nothing else.
+ // Questions always use the reading text's language, including when explanations are in Polish.
  const meta={languageCode:'en',explanationLanguageCode:'pl'};
- assert.doesNotThrow(()=>compileReading({...readingEntry(),questionLanguage:'en'},meta));
+ assert.equal(compileReading(readingEntry(),meta).reading.questionLanguage,'en');
+ assert.throws(()=>compileReading({...readingEntry(),questionLanguage:'pl'},meta),/język pytań.*językiem tekstu/);
  assert.throws(()=>compileReading({...readingEntry(),questionLanguage:'de'},meta),/język/);
 });
 
@@ -68,6 +69,9 @@ test('format: moduł wskazuje czytanki.json w modul.json; inna nazwa pliku jest 
  assert.deepEqual(library.modules[0].readings!.map(r=>r.id),['picnic']);
  assert.deepEqual(library.modules[0].exercises.filter(q=>q.kind==='reading').map(q=>q.id),ids);
  assert.equal((await readLibrary(read(files()))).modules[0].readings,undefined);
+ const wrongLanguage=files('czytanki.json');
+ wrongLanguage['01-unit/czytanki.json']=[{...readingEntry('picnic',base.id),questionLanguage:'pl'}];
+ await assert.rejects(readLibrary(read(wrongLanguage)),/język pytań.*językiem tekstu/);
  await assert.rejects(readLibrary(read(files('teksty.json'))),/czytanek/);
  // The reading list comes only from the module's own file, never from the metadata.
  const raw:any=files()['01-unit/modul.json'];
@@ -89,7 +93,7 @@ test('przebieg: zdania pojawiają się po „Dalej”, pytanie blokuje przejści
  assert.equal(v.reading.id,'picnic');assert.equal(v.visible,1);assert.equal(v.newest,'s1');
  // The first question follows the first sentence, so it is already open and „Dalej” waits for an answer.
  assert.equal(v.questionOpen,true);assert.equal(v.next,null);
- assert.equal(answer(p,'w kuchni'),false);v=readingView(modules,s)!;
+ assert.equal(answer(p,'In the kitchen'),false);v=readingView(modules,s)!;
  assert.equal(v.questionOpen,false);assert.deepEqual(v.next,{advance:true,shown:2});
  let shown=dalej(p,undefined);assert.equal(s.index,1);assert.equal(s.phase,'question');
  v=readingView(modules,s,shown)!;assert.equal(v.visible,2);assert.equal(v.newest,'s2');assert.equal(v.questionOpen,true);
@@ -107,7 +111,7 @@ test('przebieg: zdania pojawiają się po „Dalej”, pytanie blokuje przejści
 
 test('poprawka: błędne pytanie można poprawić od razu albo z końca czytanki; pierwszy wynik zostaje',()=>{
  const p=emptyProgress();p.active=started(p);const s=p.active;
- answer(p,'w kuchni');assert.equal(retryAnswer(p),true);assert.equal(s.phase,'retry');
+ answer(p,'In the kitchen');assert.equal(retryAnswer(p),true);assert.equal(s.phase,'retry');
  assert.equal(readingView(modules,s)!.questionOpen,true);assert.equal(right(p),true);
  let shown=dalej(p,undefined);answer(p,'some');shown=dalej(p,shown);right(p);shown=dalej(p,shown);
  const first=s.items[1];
@@ -121,7 +125,7 @@ test('poprawka: błędne pytanie można poprawić od razu albo z końca czytanki
 
 test('powtórka: błąd z czytanki wraca jako zwykłe zadanie wyboru razem ze swoimi zdaniami',()=>{
  const p=emptyProgress();p.active=started(p);
- answer(p,'w szkole');let shown=dalej(p,undefined);answer(p,'Olek');shown=dalej(p,shown);right(p);dalej(p,shown);next(p);
+ answer(p,'At school');let shown=dalej(p,undefined);answer(p,'Olek');shown=dalej(p,shown);right(p);dalej(p,shown);next(p);
  const review=makeSession(modules,m,'review','text',false,p);
  const errors=review.items.filter(i=>ids.includes(i.id));
  assert.deepEqual(errors.map(i=>i.id).sort(),[ids[0],ids[1]].sort());
@@ -156,7 +160,7 @@ test('zapis: odświeżenie wraca do ostatniego pytania z odpowiedzią, bez nowyc
 
 test('zapis: zmieniona później czytanka nie psuje rozpoczętej sesji — pytania wracają jako zwykłe zadania',()=>{
  const p=emptyProgress();p.active=started(p);const s=p.active;
- const longer=readingEntry();longer.questions.push({id:'sun',after:'s4',type:'choice',prompt:'Jakie jest słońce?',answers:['ciepłe'],options:['ciepłe','zimne'],refs:['s4'],explanation:'Warm to ciepłe.'} as any);
+ const longer=readingEntry();longer.questions.push({id:'sun',after:'s4',type:'choice',prompt:'Is the sun warm or cold?',answers:['Warm'],options:['Warm','Cold'],refs:['s4'],explanation:'Warm to ciepłe.'} as any);
  const changed=readingModule('reading-unit','reading-course',[longer]);
  assert.equal(readingView([changed],s),undefined);assert.equal(questionFor([changed],s.items[0]).id,ids[0]);
 });
@@ -191,7 +195,7 @@ test('mechanika nie zna kursu: czytanka w innym module i kursie działa tak samo
  assert.ok(validateModules([other]));
 });
 
-test('kontroler: „Dalej” i tłumaczenie nie działają przy otwartym pytaniu; podgląd niczego nie zapisuje',async()=>{
+test('kontroler: tłumaczenie zostaje po „Dalej”, podgląd niczego nie zapisuje',async()=>{
  const {AppState}=await import('../src/app/state.ts');
  const {createLearningController}=await import('../src/controllers/learning.ts');
  const {courseFixture}=await import('./fixtures/course-materials.ts');
@@ -202,15 +206,17 @@ test('kontroler: „Dalej” i tłumaczenie nie działają przy otwartym pytaniu
  const controller=createLearningController(state,{courses:{select:async()=>false,restore:async()=>{},followSession:async()=>{}} as any,scheduleReviewMigration:()=>{},
   mutate:async(change:(p:Progress)=>void)=>{const draft=structuredClone(state.progress);change(draft);state.progress=draft;saves++;}});
  const press=(action:string,data:Record<string,string>={})=>controller.handleAction(action,{dataset:data} as unknown as HTMLElement);
+ const peek={sessionId:state.progress.active!.id,sentence:'s1',word:'garden'};
  await press('reading-next');await press('reading-peek',{sentence:'s1',word:'garden'});await press('next');
- assert.equal(saves,0);assert.equal(state.readingShown,undefined);assert.equal(state.readingPeek,undefined);assert.equal(state.progress.active!.index,0);
- await press('answer',{answer:'w ogrodzie'});assert.equal(saves,1);assert.equal(state.progress.active!.phase,'feedback','poprawna odpowiedź zostaje z wyjaśnieniem');
- await press('reading-peek',{sentence:'s1',word:'garden'});assert.deepEqual(state.readingPeek,{sessionId:state.progress.active!.id,sentence:'s1',word:'garden'});
- await press('reading-peek',{sentence:'s3'});assert.deepEqual(state.readingPeek,{sessionId:state.progress.active!.id,sentence:'s1',word:'garden'},'zdanie jeszcze niewidoczne');
+ assert.equal(saves,0);assert.equal(state.readingShown,undefined);assert.deepEqual(state.readingPeek,peek);assert.equal(state.progress.active!.index,0);
+ await press('answer',{answer:'In the garden'});assert.equal(saves,1);assert.equal(state.progress.active!.phase,'feedback','poprawna odpowiedź zostaje z wyjaśnieniem');
+ await press('reading-peek',{sentence:'s3'});assert.deepEqual(state.readingPeek,peek,'zdanie jeszcze niewidoczne');
  assert.equal(saves,1);
  await press('next');assert.ok(state.progress.active,'„Zakończ” nie działa w środku czytanki');
- await press('reading-next');assert.equal(saves,2);assert.equal(state.progress.active!.index,1);assert.equal(state.readingShown!.count,2);assert.equal(state.readingPeek,undefined);
- await press('answer',{answer:'apples'});await press('reading-next');await press('answer',{answer:'książkę'});await press('reading-next');
+ await press('reading-next');assert.equal(saves,2);assert.equal(state.progress.active!.index,1);assert.equal(state.readingShown!.count,2);assert.deepEqual(state.readingPeek,peek);
+ await press('reading-peek',{sentence:'s2',word:'apples'});assert.deepEqual(state.readingPeek,peek,'słowa zdania z zadaniem tap służą do odpowiedzi');
+ await press('reading-peek',{sentence:'s1'});assert.deepEqual(state.readingPeek,{sessionId:peek.sessionId,sentence:'s1'});assert.equal(saves,2);
+ await press('answer',{answer:'apples'});await press('reading-next');await press('answer',{answer:'A book'});await press('reading-next');
  assert.equal(state.readingShown!.count,4);await press('next');
  assert.equal(state.progress.active,null);assert.equal(state.screen,'summary');
  // „Czytanki”: the known reading starts again as its own session.

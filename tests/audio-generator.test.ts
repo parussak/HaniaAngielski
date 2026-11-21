@@ -103,5 +103,5 @@ test('audio: zdania czytanek trafiają do planu jako osobne odwołania; pytania 
  assert.equal(refs[0].key,'scene-unit:reading:picnic:sentence:s1');assert.equal(refs[0].readingId,'picnic');assert.equal(refs[0].sentence,'s1');
  // A sentence is spoken as written: no single-word comma (D-66) and no Polish text.
  assert.ok(refs.every((r:any)=>r.spoken===undefined));
- const all=JSON.stringify(createPlan([m],config()));assert.ok(!all.includes('Ala i Olek')&&!all.includes('Gdzie siedzą'));
+ const all=JSON.stringify(createPlan([m],config()));assert.ok(!all.includes('Ala i Olek')&&!all.includes('Where are they sitting?'));
 });

@@ -52,7 +52,7 @@ Czytanka to krótki tekst czytany zdanie po zdaniu, z 1–6 pytaniami w trakcie.
 
 1. **Tekst:** adaptacja inspirowana czytanką z podręcznika albo tekst ze słownictwa i gramatyki modułu — nie kopia (D-68). Długość i słownictwo na poziomie modułu; każde zdanie z polskim `translation`. `source` podaje strony albo informację, że tekst powstał ze słownictwa modułu.
 2. **Pytania:** `choice` sprawdza zrozumienie (dokładnie jedna poprawna opcja, sensowne błędne); `tap` każe dotknąć jednego słowa w już przeczytanym zdaniu `sentence` — słowo z `answers` musi stać w tym zdaniu dokładnie w tej formie, a inne słowa zdania nie mogą być poprawne. Pytanie pojawia się po zdaniu `after` i musi dać się rozstrzygnąć z tekstu do tego miejsca. Każde pytanie ma polskie `explanation` odwołujące się do zdania.
-3. **Język pytań** (`questionLanguage`): polski albo język kursu — wybierz według poziomu i zapisz wybór w karcie modułu.
+3. **Język pytań** (`questionLanguage`): pytania, polecenia i opcje napisz w języku tekstu, na poziomie czytanki (D-69). Dobierz słownictwo i konstrukcje tak, aby pytanie sprawdzało rozumienie przeczytanego fragmentu.
 4. **Tłumaczenia słów:** słowa ze słownictwa modułu tłumaczą się same, gdy forma w tekście równa się `back` lub `answers` hasła. Inne ważne słowa i formy (np. liczba mnoga `apples`) dopisz do `glossary`; reszta pokaże tłumaczenie całego zdania.
 5. **Pliki:** `czytanki.json` w folderze modułu i `"readingsFile": "czytanki.json"` w `modul.json`.
 6. **Mapa:** czytanka jest całą lekcją — `wordIds: []`, a `exerciseIds` zawiera **wszystkie** pytania jako `<id czytanki>--<id pytania>`. Postaw ją w etapie po lekcjach, które wprowadzają jej słownictwo.

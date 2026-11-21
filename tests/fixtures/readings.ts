@@ -4,7 +4,7 @@ import type {Journey} from '../../src/adventure.ts';
 import {engineModule} from './engine.ts';
 
 /** D-68: a synthetic reading in the authored format — four sentences, two choice questions and one tap question. */
-export const readingEntry=(id='picnic',moduleId='reading-unit')=>({id,title:`Czytanka ${id}`,questionLanguage:'pl',
+export const readingEntry=(id='picnic',moduleId='reading-unit')=>({id,title:`Czytanka ${id}`,questionLanguage:'en',
  sentences:[
   {id:'s1',text:'Ala and Olek sit in the garden.',translation:'Ala i Olek siedzą w ogrodzie.'},
   {id:'s2',text:'Olek has got some apples.',translation:'Olek ma trochę jabłek.'},
@@ -12,9 +12,9 @@ export const readingEntry=(id='picnic',moduleId='reading-unit')=>({id,title:`Czy
   {id:'s4',text:'The sun is warm.',translation:'Słońce jest ciepłe.'}],
  glossary:{garden:'ogród',Apples:'jabłka'},
  questions:[
-  {id:'where',after:'s1',type:'choice',prompt:'Gdzie siedzą?',answers:['w ogrodzie'],options:['w ogrodzie','w kuchni','w szkole'],refs:['s1'],explanation:'Zdanie mówi: in the garden.'},
-  {id:'fruit',after:'s2',type:'tap',prompt:'Dotknij nazwy owocu.',sentence:'s2',answers:['apples'],explanation:'Apples to jabłka.'},
-  {id:'book',after:'s3',type:'choice',prompt:'Co czyta Ala?',answers:['książkę'],options:['książkę','gazetę'],refs:['s3'],explanation:'A book to książka.'}],
+  {id:'where',after:'s1',type:'choice',prompt:'Where are they sitting?',answers:['In the garden'],options:['In the garden','In the kitchen','At school'],refs:['s1'],explanation:'Zdanie mówi: in the garden.'},
+  {id:'fruit',after:'s2',type:'tap',prompt:'Tap the name of the fruit.',sentence:'s2',answers:['apples'],explanation:'Apples to jabłka.'},
+  {id:'book',after:'s3',type:'choice',prompt:'What does Ala read?',answers:['A book'],options:['A book','A newspaper'],refs:['s3'],explanation:'A book to książka.'}],
  requires:[moduleId],source:'Dane syntetyczne — tekst testowy.'});
 
 export const readingQuestionIds=(id='picnic')=>[`${id}--where`,`${id}--fruit`,`${id}--book`];

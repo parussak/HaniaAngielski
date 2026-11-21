@@ -40,12 +40,11 @@ export function readingParts(sentence:string){
 }
 
 /** Turns one authored reading into its text and one exercise per question. */
-export function compileReading(entry:unknown,languages:{languageCode?:string;explanationLanguageCode?:string}={}):{reading:Reading;exercises:Exercise[]}{
+export function compileReading(entry:unknown,metadata:{languageCode?:string}={}):{reading:Reading;exercises:Exercise[]}{
  if(!obj(entry)||!id(entry.id))return fail('czytanka wymaga identyfikatora z małych liter, cyfr i myślników.');
  const where=`czytanka ${entry.id}`;
  if(!text(entry.title)||entry.title.length>80)return fail(`${where}: wymagany tytuł do 80 znaków.`);
- const allowed=[languages.explanationLanguageCode,languages.languageCode].filter(language);
- if(!language(entry.questionLanguage)||allowed.length>0&&!allowed.includes(entry.questionLanguage))return fail(`${where}: język pytań (questionLanguage) musi być językiem objaśnień albo językiem kursu.`);
+ if(!language(entry.questionLanguage)||metadata.languageCode!==undefined&&entry.questionLanguage!==metadata.languageCode)return fail(`${where}: język pytań (questionLanguage) musi być językiem tekstu czytanki, czyli językiem kursu.`);
  const sentences=entry.sentences;
  if(!Array.isArray(sentences)||sentences.length<2||sentences.length>40)return fail(`${where}: czytanka wymaga od 2 do 40 zdań.`);
  if(!sentences.every(s=>obj(s)&&id(s.id)&&text(s.text)&&s.text.length<=300&&!s.text.includes('___')&&text(s.translation)))return fail(`${where}: każde zdanie wymaga id i tekstu do 300 znaków; tłumaczenie (translation) jest obowiązkowe.`);

@@ -43,6 +43,8 @@ export function readingView(modules:Module[],s:Session,shown?:number){
  const limit=!tried(position)||pending>=0?at(position)+1:total;
  const visible=Math.min(Math.max(answeredUpTo,shown??0),Math.max(limit,answeredUpTo));
  const open=s.phase!=='feedback',questionOpen=open&&at(position)<visible;
+ const currentQuestion=asked[position].reading;
+ const tapSentence=questionOpen&&currentQuestion.type==='tap'?currentQuestion.sentence:undefined;
  const status=(index:number):ReadingStatus=>index===position?(open?(questionOpen?'open':'hidden'):'answered'):tried(index)?'answered':'hidden';
  let next:Next;
  if(questionOpen)next=null;
@@ -51,7 +53,7 @@ export function readingView(modules:Module[],s:Session,shown?:number){
  else if(visible<total)next={advance:false,shown:visible+1};
  else if(position<items.length-1)next={advance:true,shown:visible};
  else next='finish';
- return {reading,module,items,position,visible,newest:reading.sentences[visible-1].id,questionOpen,next,
+ return {reading,module,items,position,visible,newest:reading.sentences[visible-1].id,questionOpen,tapSentence,next,
   questions:asked.map((q,index)=>({item:items[index],question:q,status:status(index)}))};
 }
 

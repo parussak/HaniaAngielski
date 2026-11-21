@@ -8,7 +8,7 @@ W rejestrze jest kurs `angielski-hani` (`en` / `pl`) z modułem Food, `unit-2-fo
 
 Nagrody domku Food są zapisane w treści (D-67): pierwsza mapa odblokowuje miseczki, lemoniadę, koszyk i koc piknikowy oraz odznakę kociego kucharza, druga — misę owoców, toster, kubki i stolik, a obie mapy razem — Kocią kuchnię (`houseRoom` w `modul.json`).
 
-Szóstą lekcją „Kociej kuchni” jest „Naleśniki na lunch” (D-68). Tekst po angielsku wykorzystuje słownictwo Food. Każde zdanie ma polskie tłumaczenie, a trzy pytania sprawdzające zrozumienie są po polsku.
+Szóstą lekcją „Kociej kuchni” jest „Naleśniki na lunch” (D-68). Tekst wykorzystuje słownictwo Food. Pytania i odpowiedzi do wyboru są po angielsku. Każde zdanie ma polskie tłumaczenie, a każde pytanie ma polskie wyjaśnienie.
 
 Źródła: [metadane](../../public/content/02-food/modul.json), [opis opracowania Food](../materialy-food.md), [aktualny format materiałów](../format-materialow.md).
 
