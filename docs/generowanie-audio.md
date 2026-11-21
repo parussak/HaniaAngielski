@@ -1,6 +1,6 @@
 # Lokalne generowanie audio — D-59
 
-**Stan obecny (D-61):** generator i zestaw Food są gotowe, obecnie **24 kb/s** zamiast pierwotnych 16 kb/s. 111 nowych klipów zajmuje 375 669 bajtów (366,9 KiB); poprzedni pomiar poniżej dotyczy zestawu 16 kb/s. Uruchamianie i lokalizację narzędzi opisuje [instrukcja audio](../audio/README.md). Od D-60 gotowe klipy są podłączone do aplikacji i PWA offline, z syntezą przeglądarki jako źródłem zapasowym — [reguły słuchania](03-nauka.md), [architektura](05-architektura.md).
+**Stan obecny (D-60, D-61):** Food i Technology for all korzystają z gotowych nagrań Cori **24 kb/s** w aplikacji i PWA offline. Synteza przeglądarki jest źródłem zapasowym. [Instrukcja audio](../audio/README.md), [reguły słuchania](03-nauka.md), [architektura](05-architektura.md).
 
 **Pomiar 13 listopada 2026:** 97 haseł i 23 kwestie scen dają 120 odwołań do 111 różnych klipów. Nagrania zajmują 266 115 bajtów (259,9 KiB), manifest 76 404 bajty; razem około 335 KiB. To pomiar tego zestawu, nie limit przyszłych modułów. Gotowe pliki sprawdzono przez pełne dekodowanie ffmpeg; nie wykonano nowego odsłuchu każdego słowa ani próby na telefonie.
 
@@ -8,7 +8,7 @@
 
 Wybrany głos: **Cori high, brytyjski angielski**, po odsłuchaniu próbek przez Paulinę. Pliki: **Ogg Opus, mono, docelowo 24 kb/s** (zmiana z 16 kb/s w D-61). Generator uruchamiamy jednym poleceniem `npm run audio`. Nie pobiera narzędzi i nie korzysta z usług sieciowych podczas generowania.
 
-Plan nagrań obejmuje także zdania czytanek (D-68, odwołania `reading-sentence`, tekst jak na ekranie); polecenia, pytania i tłumaczenia czytanek nie są nagrywane. W tym etapie przygotowujemy nagrania dla Food: pełne formy wszystkich haseł z wymaganymi a/an oraz wszystkie kwestie czterech scen, z lukami uzupełnionymi pierwszą akceptowaną odpowiedzią. Nie nagrywamy polskich poleceń, objaśnień ani wszystkich wariantów odpowiedzi. Nie zmieniamy materiału podręcznikowego, identyfikatorów, wyników ani gwiazdek.
+Plan nagrań obejmuje pełne formy haseł, kwestie scen z lukami uzupełnionymi pierwszą akceptowaną odpowiedzią oraz zdania czytanek (D-68, odwołania `reading-sentence`). Zakres Technology for all obejmuje także rozmówkę telefoniczną i trzy czytanki. Pytania do czytanek, polecenia, objaśnienia, tłumaczenia i pozostałe warianty odpowiedzi są dostępne w tekście.
 
 ## Granice odpowiedzialności
 

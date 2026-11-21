@@ -18,5 +18,8 @@
       "processing": {"silenceThresholdDb": -50, "startSilence": 0.05, "endSilence": 0.12, "loudness": -18, "truePeak": -2, "loudnessRange": 11}
     }
   },
-  "modules": [{"id": "unit-2-food", "profile": "cori"}]
+  "modules": [
+    {"id": "unit-2-food", "profile": "cori"},
+    {"id": "unit-3-technology", "profile": "cori"}
+  ]
 }

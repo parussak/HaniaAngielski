@@ -962,9 +962,1005 @@
           "clip": "d0efc8ef25949d0d349f0d8145c318645e46015d12e57aacad0241613989bfd0"
         }
       ]
+    },
+    {
+      "moduleId": "unit-3-technology",
+      "courseId": "angielski-hani",
+      "language": "en",
+      "profile": "cori",
+      "references": [
+        {
+          "key": "unit-3-technology:reading:a-bed-on-the-wall:sentence:asleep",
+          "kind": "reading-sentence",
+          "text": "Can you fall asleep like that?",
+          "clip": "88619198c4f1dc25059c99cc1477c119c9cc5482e25b59783c70c5e2fe0c0661",
+          "readingId": "a-bed-on-the-wall",
+          "sentence": "asleep"
+        },
+        {
+          "key": "unit-3-technology:reading:a-bed-on-the-wall:sentence:attach",
+          "kind": "reading-sentence",
+          "text": "An astronaut can fix a sleeping bag to the wall.",
+          "clip": "00bc36302f1039c7ca56d9453866c42619fba661e969e6fc84042643589c21a9",
+          "readingId": "a-bed-on-the-wall",
+          "sentence": "attach"
+        },
+        {
+          "key": "unit-3-technology:reading:a-bed-on-the-wall:sentence:bedroom",
+          "kind": "reading-sentence",
+          "text": "What does your bedroom look like?",
+          "clip": "2af7445427f2454f9feae41367dcc2b4f96ec94cfdb91202e24397f4109dc33e",
+          "readingId": "a-bed-on-the-wall",
+          "sentence": "bedroom"
+        },
+        {
+          "key": "unit-3-technology:reading:a-bed-on-the-wall:sentence:clock",
+          "kind": "reading-sentence",
+          "text": "They use a clock to know when to go to bed.",
+          "clip": "2e05847d262f7f7c32fd98471bf32ccb4ca06ad94808ec573c1ac57fc765418b",
+          "readingId": "a-bed-on-the-wall",
+          "sentence": "clock"
+        },
+        {
+          "key": "unit-3-technology:reading:a-bed-on-the-wall:sentence:float",
+          "kind": "reading-sentence",
+          "text": "On the space station, people and things can float.",
+          "clip": "ea9dca3cfc523d14c4eb273fc8734d1932fb1e1326f159e86392eeaf4a2eefe2",
+          "readingId": "a-bed-on-the-wall",
+          "sentence": "float"
+        },
+        {
+          "key": "unit-3-technology:reading:a-bed-on-the-wall:sentence:floor",
+          "kind": "reading-sentence",
+          "text": "On Earth, your bed stays on the floor.",
+          "clip": "c2b78fb1ee6de9b7d94362f6cd9ba333302553792776fdf72ad3fe38e8f2d83b",
+          "readingId": "a-bed-on-the-wall",
+          "sentence": "floor"
+        },
+        {
+          "key": "unit-3-technology:reading:a-bed-on-the-wall:sentence:imagine",
+          "kind": "reading-sentence",
+          "text": "Now imagine a room with a sleeping bag on the wall.",
+          "clip": "053e1071419b33067eba846da128f0b7d817b6876056e5b4a4cab89703fb974b",
+          "readingId": "a-bed-on-the-wall",
+          "sentence": "imagine"
+        },
+        {
+          "key": "unit-3-technology:reading:a-bed-on-the-wall:sentence:orbit",
+          "kind": "reading-sentence",
+          "text": "The space station goes around Earth very fast.",
+          "clip": "993ca27bfcb842cce68c5c32fdb9ca1bce49de11d18764dbf044eef4e6710135",
+          "readingId": "a-bed-on-the-wall",
+          "sentence": "orbit"
+        },
+        {
+          "key": "unit-3-technology:reading:a-bed-on-the-wall:sentence:standing",
+          "kind": "reading-sentence",
+          "text": "You’re getting into your sleeping bag, and it looks like you’re standing up.",
+          "clip": "8b903f4011fa45ac2599d695f697731780dc830fce89d0d28c5e0a7be7e442b6",
+          "readingId": "a-bed-on-the-wall",
+          "sentence": "standing"
+        },
+        {
+          "key": "unit-3-technology:reading:a-bed-on-the-wall:sentence:station",
+          "kind": "reading-sentence",
+          "text": "That’s where an astronaut can sleep on the International Space Station.",
+          "clip": "4db54c83101860af5d47234989c6c62f60e8513abd54ea7cde2b35b1b03d6ad4",
+          "readingId": "a-bed-on-the-wall",
+          "sentence": "station"
+        },
+        {
+          "key": "unit-3-technology:reading:a-bed-on-the-wall:sentence:stay",
+          "kind": "reading-sentence",
+          "text": "The bag stays in one place, and so does the astronaut.",
+          "clip": "4d363dee5c4890b9d6aa4cb3e565629c3dcf8fa9be343527c62163e63694f48f",
+          "readingId": "a-bed-on-the-wall",
+          "sentence": "stay"
+        },
+        {
+          "key": "unit-3-technology:reading:a-bed-on-the-wall:sentence:sunrises",
+          "kind": "reading-sentence",
+          "text": "Astronauts can see about sixteen sunrises in one day.",
+          "clip": "490bc61497bad05d9954fa688d49ce8d0a47822239f89927ea29c7a991657074",
+          "readingId": "a-bed-on-the-wall",
+          "sentence": "sunrises"
+        },
+        {
+          "key": "unit-3-technology:reading:a-bed-on-the-wall:sentence:surprise",
+          "kind": "reading-sentence",
+          "text": "Here’s another surprise.",
+          "clip": "5d5c15d2d0be7373c0016de5b05452dd7abb04d60dba07b8ba2e552f0358c4ac",
+          "readingId": "a-bed-on-the-wall",
+          "sentence": "surprise"
+        },
+        {
+          "key": "unit-3-technology:reading:a-bed-on-the-wall:sentence:there",
+          "kind": "reading-sentence",
+          "text": "Imagine you’re there now.",
+          "clip": "9ab642029f8946647344437a74b1b09173aa15213c8b722ae4b1f2ffbedb7fee",
+          "readingId": "a-bed-on-the-wall",
+          "sentence": "there"
+        },
+        {
+          "key": "unit-3-technology:reading:space-camp:sentence:camp",
+          "kind": "reading-sentence",
+          "text": "Here are some photos of Mia and Leo at a space camp.",
+          "clip": "68a06808287be3591efe56f5cf8dd9e7e9fe79c1eafda46890a195e94b500fd1",
+          "readingId": "space-camp",
+          "sentence": "camp"
+        },
+        {
+          "key": "unit-3-technology:reading:space-camp:sentence:excited",
+          "kind": "reading-sentence",
+          "text": "Mia is excited about space travel.",
+          "clip": "d0170a2d4d78963dd0d9dcca28056a758a600b5c03026e251c1dd8e87a50cd64",
+          "readingId": "space-camp",
+          "sentence": "excited"
+        },
+        {
+          "key": "unit-3-technology:reading:space-camp:sentence:flying",
+          "kind": "reading-sentence",
+          "text": "In the simulator, she is flying over the Moon.",
+          "clip": "96d3d9ca2c302544854e878a2a48e08f4281de393cef3d39f336dc00911eada4",
+          "readingId": "space-camp",
+          "sentence": "flying"
+        },
+        {
+          "key": "unit-3-technology:reading:space-camp:sentence:photo",
+          "kind": "reading-sentence",
+          "text": "After the flight, they are taking a photo of their rocket.",
+          "clip": "015f034d123019555d0be5189b9465a883f63635189ef910366020d595a173ad",
+          "readingId": "space-camp",
+          "sentence": "photo"
+        },
+        {
+          "key": "unit-3-technology:reading:space-camp:sentence:rocket",
+          "kind": "reading-sentence",
+          "text": "Leo is making a small rocket with his friend Mia.",
+          "clip": "2a0ae1ffbb8911838113186de9cf723d13e30ffdff5b66bd56154c9e5227f8be",
+          "readingId": "space-camp",
+          "sentence": "rocket"
+        },
+        {
+          "key": "unit-3-technology:reading:space-camp:sentence:scared",
+          "kind": "reading-sentence",
+          "text": "Leo is a bit scared of flying, so he is watching Mia on a big screen.",
+          "clip": "5cf3e965b6cf45ca88ed7cc309acda3b5b2275b4388d415a77ec223592028658",
+          "readingId": "space-camp",
+          "sentence": "scared"
+        },
+        {
+          "key": "unit-3-technology:reading:space-camp:sentence:simulator",
+          "kind": "reading-sentence",
+          "text": "In the next photo, Mia is sitting in a simulator.",
+          "clip": "346ead7094d971a45043bcc069d8f3fba48fe4dd5b693a784afe1033cb3dcae5",
+          "readingId": "space-camp",
+          "sentence": "simulator"
+        },
+        {
+          "key": "unit-3-technology:reading:who-is-in-the-photo:sentence:cat",
+          "kind": "reading-sentence",
+          "text": "Now they have a photo for their project, but it’s a photo of the cat!",
+          "clip": "ba73f3b2ffdc2fad9bcadef48ab6c0000d566d5f68aea226d8cbffa197530a5a",
+          "readingId": "who-is-in-the-photo",
+          "sentence": "cat"
+        },
+        {
+          "key": "unit-3-technology:reading:who-is-in-the-photo:sentence:click",
+          "kind": "reading-sentence",
+          "text": "Click!",
+          "clip": "74b4826cb9275782a11d21a5219d9852dfc5c288e1d70dbf3212ce7915b3de82",
+          "readingId": "who-is-in-the-photo",
+          "sentence": "click"
+        },
+        {
+          "key": "unit-3-technology:reading:who-is-in-the-photo:sentence:eyes",
+          "kind": "reading-sentence",
+          "text": "They can see two big green eyes and a little pink nose.",
+          "clip": "5dff0a92ca2c60c04144831195598f0f1342f5b3becfc9358edd71b98bd46cdb",
+          "readingId": "who-is-in-the-photo",
+          "sentence": "eyes"
+        },
+        {
+          "key": "unit-3-technology:reading:who-is-in-the-photo:sentence:flashing",
+          "kind": "reading-sentence",
+          "text": "“The camera is flashing!” says Ella.",
+          "clip": "b1afe9796e22550317f1a2492ba85f61c4d9a87be8fda4c2ce15387ada74c34d",
+          "readingId": "who-is-in-the-photo",
+          "sentence": "flashing"
+        },
+        {
+          "key": "unit-3-technology:reading:who-is-in-the-photo:sentence:join",
+          "kind": "reading-sentence",
+          "text": "Now he can be in the photo too.",
+          "clip": "fe83483b8cf4d864621e63266c93f76a69fcdff30c43912389e56599326ecccc",
+          "readingId": "who-is-in-the-photo",
+          "sentence": "join"
+        },
+        {
+          "key": "unit-3-technology:reading:who-is-in-the-photo:sentence:jump",
+          "kind": "reading-sentence",
+          "text": "Ben runs to Ella, but their cat jumps onto the table.",
+          "clip": "3c875b79560c61cb085d53ee8a01fb1e85d551136ff4f6d7059748805f4ac9a8",
+          "readingId": "who-is-in-the-photo",
+          "sentence": "jump"
+        },
+        {
+          "key": "unit-3-technology:reading:who-is-in-the-photo:sentence:laugh",
+          "kind": "reading-sentence",
+          "text": "Ella and Ben are laughing.",
+          "clip": "550c7536b03f859676fda2a6f84fbb5a79e365605b791e3558eed970c64f89f6",
+          "readingId": "who-is-in-the-photo",
+          "sentence": "laugh"
+        },
+        {
+          "key": "unit-3-technology:reading:who-is-in-the-photo:sentence:project",
+          "kind": "reading-sentence",
+          "text": "Ella and Ben are taking a photo for their school project.",
+          "clip": "66c7057413b9915b6ef62f067171954a424f64c34dc79b62f19749bbb34ddc05",
+          "readingId": "who-is-in-the-photo",
+          "sentence": "project"
+        },
+        {
+          "key": "unit-3-technology:reading:who-is-in-the-photo:sentence:quick",
+          "kind": "reading-sentence",
+          "text": "“Quick, Ben!”",
+          "clip": "b7653119985c761dca6bf165175b0d31a716b086faf806037635442467b19062",
+          "readingId": "who-is-in-the-photo",
+          "sentence": "quick"
+        },
+        {
+          "key": "unit-3-technology:reading:who-is-in-the-photo:sentence:screen",
+          "kind": "reading-sentence",
+          "text": "They look at the screen.",
+          "clip": "467bd6313451b86fd9f9cfcae94cc1a0516dfce32ccacdea5a844baf7c7e7b77",
+          "readingId": "who-is-in-the-photo",
+          "sentence": "screen"
+        },
+        {
+          "key": "unit-3-technology:reading:who-is-in-the-photo:sentence:timer",
+          "kind": "reading-sentence",
+          "text": "Ben puts the camera on a table and sets the timer.",
+          "clip": "1ae860d7bd994c1f71470e9db5f55a288715ee65b5ad7beb0c271bc9e20c457a",
+          "readingId": "who-is-in-the-photo",
+          "sentence": "timer"
+        },
+        {
+          "key": "unit-3-technology:scene:phone-call-to-maja:line:0",
+          "kind": "scene-line",
+          "text": "Hello, it's Oluś here. Can I speak to Maja, please?",
+          "clip": "12ee4d507a9147cee7048c8de5d53c9fa92e203d404485837d926eacee81fc70",
+          "sceneId": "phone-call-to-maja",
+          "line": 0,
+          "speaker": "Oluś"
+        },
+        {
+          "key": "unit-3-technology:scene:phone-call-to-maja:line:1",
+          "kind": "scene-line",
+          "text": "Hi, Oluś. Hang on. Maja, it's Oluś for you!",
+          "clip": "c5cbeb07a443f4220ab6fa7d19e3946dbf3ac2704ae254c29617bddb851a68a6",
+          "sceneId": "phone-call-to-maja",
+          "line": 1,
+          "speaker": "Albert"
+        },
+        {
+          "key": "unit-3-technology:scene:phone-call-to-maja:line:2",
+          "kind": "scene-line",
+          "text": "Hi, Oluś. What are you doing right now?",
+          "clip": "37e92be3d276cd287e0b17a1207394119355e4ee99511456bab03b91b8469f8b",
+          "sceneId": "phone-call-to-maja",
+          "line": 2,
+          "speaker": "Maja"
+        },
+        {
+          "key": "unit-3-technology:scene:phone-call-to-maja:line:3",
+          "kind": "scene-line",
+          "text": "I’m taking photos in the garden. Do you want to take a photo with me?",
+          "clip": "9904232d8d553ac86f178f016f0f85129f7b46028a01919092b85b1f3ad1ff3b",
+          "sceneId": "phone-call-to-maja",
+          "line": 3,
+          "speaker": "Oluś"
+        },
+        {
+          "key": "unit-3-technology:scene:phone-call-to-maja:line:4",
+          "kind": "scene-line",
+          "text": "Yes, great idea! See you soon!",
+          "clip": "24998c3f066293b9395341befbca85ee4612f5c11783e892b6a72656be251380",
+          "sceneId": "phone-call-to-maja",
+          "line": 4,
+          "speaker": "Maja"
+        },
+        {
+          "key": "unit-3-technology@1:word:a-bit",
+          "kind": "word",
+          "text": "a bit",
+          "spoken": "a bit,",
+          "clip": "055d055232601d0c1e80b09131d965bd4454d0bae4740fbb3e38cfe4567b6d77"
+        },
+        {
+          "key": "unit-3-technology@1:word:activities",
+          "kind": "word",
+          "text": "activities",
+          "spoken": "activities,",
+          "clip": "184988c7eb06247b7459da09d0386298515f95c7f93e01fa7c8ca375202cf8f5"
+        },
+        {
+          "key": "unit-3-technology@1:word:adventure",
+          "kind": "word",
+          "text": "adventure",
+          "spoken": "adventure,",
+          "clip": "d24203bb22b73315f53dc648b9e69237569780013ad6fccf864f2be04726ecfe"
+        },
+        {
+          "key": "unit-3-technology@1:word:alien",
+          "kind": "word",
+          "text": "alien",
+          "spoken": "alien,",
+          "clip": "301064c6308fbf5aa8437f8d0290a134926c55009d3952f99effd0fdd5264efd"
+        },
+        {
+          "key": "unit-3-technology@1:word:also",
+          "kind": "word",
+          "text": "also",
+          "spoken": "also,",
+          "clip": "0eacbbf14a92f47d7423b356b5aa91a56906b79fbc4cb9f2f3df47a55133b374"
+        },
+        {
+          "key": "unit-3-technology@1:word:angry",
+          "kind": "word",
+          "text": "angry",
+          "spoken": "angry,",
+          "clip": "840ef9f6ab47fb293a24394c822a1c46b2400386d9996cdaded216b9a8e01d38"
+        },
+        {
+          "key": "unit-3-technology@1:word:ask-for",
+          "kind": "word",
+          "text": "ask for",
+          "clip": "647b8729ee021244a217abfd6f8ba0005a397c0f24a19d5c8e04ec5e026b5c84"
+        },
+        {
+          "key": "unit-3-technology@1:word:at-the-moment",
+          "kind": "word",
+          "text": "at the moment",
+          "clip": "10590074fa5907f403105f0d057439a34b52a0d5104209b948611190dc71812b"
+        },
+        {
+          "key": "unit-3-technology@1:word:bad-at",
+          "kind": "word",
+          "text": "bad at",
+          "clip": "e71f39c1c5b3d02fd491f6bbafa3baab2b263b81eb34f9e4a56ae53c689b8f47"
+        },
+        {
+          "key": "unit-3-technology@1:word:be-sick",
+          "kind": "word",
+          "text": "be sick",
+          "clip": "cb68cf375cf1433dbf634ad036ae586c93f53d3cde3362df1a0eb64a4be11a65"
+        },
+        {
+          "key": "unit-3-technology@1:word:between",
+          "kind": "word",
+          "text": "between",
+          "spoken": "between,",
+          "clip": "528a1d25422f30e5aa7a60c43d83b08db890954649f288edb8ca14008d8750c8"
+        },
+        {
+          "key": "unit-3-technology@1:word:bored",
+          "kind": "word",
+          "text": "bored",
+          "spoken": "bored,",
+          "clip": "f8a1bb1ba1c77ae3390d39e8c03431de4252794a932b1bf63cf090de162c841b"
+        },
+        {
+          "key": "unit-3-technology@1:word:bye",
+          "kind": "word",
+          "text": "Bye.",
+          "spoken": "Bye,",
+          "clip": "6aeda4a94741810ce022664084e12f283e67f8330cb5ed9e8e7dda5c45f61fa8"
+        },
+        {
+          "key": "unit-3-technology@1:word:camera",
+          "kind": "word",
+          "text": "camera",
+          "spoken": "camera,",
+          "clip": "a7c9d00c35adb132fbdd0562b9c73969a9ff06266a56f61b8a61ae1756bd0919"
+        },
+        {
+          "key": "unit-3-technology@1:word:can-i-speak",
+          "kind": "word",
+          "text": "Can I speak to Eve, please?",
+          "clip": "dd3d0f8d6e20cb3e23b14244ff42f5baa7e904a98f686065d63ee6131e1c7570"
+        },
+        {
+          "key": "unit-3-technology@1:word:chat",
+          "kind": "word",
+          "text": "chat",
+          "spoken": "chat,",
+          "clip": "6f4af4b445f8351f5f59d663f2c0e772c7cff2bc16b613f1ef376bf95359ffc5"
+        },
+        {
+          "key": "unit-3-technology@1:word:chat-online",
+          "kind": "word",
+          "text": "chat online",
+          "clip": "1f0dfa87949e3f5d6c21b775e3be465a6fec13c4befa1cad0c9f1e174e325c4d"
+        },
+        {
+          "key": "unit-3-technology@1:word:come-on",
+          "kind": "word",
+          "text": "Come on!",
+          "clip": "d17c8827efc0ef1dd0db2a6ef8cbcad69abe2765565f328b6560449f8f5b8617"
+        },
+        {
+          "key": "unit-3-technology@1:word:computer",
+          "kind": "word",
+          "text": "computer",
+          "spoken": "computer,",
+          "clip": "8d3d550423aee3e25d2dc284574f778687353cf7af3afdf9be8a4086dd46bfb2"
+        },
+        {
+          "key": "unit-3-technology@1:word:dance",
+          "kind": "word",
+          "text": "dance",
+          "spoken": "dance,",
+          "clip": "3efdf0eadb3c043dcf7aec0af642dec978fd30db0307eb99f2f8168c58d96d28"
+        },
+        {
+          "key": "unit-3-technology@1:word:do-you-like-it-here",
+          "kind": "word",
+          "text": "Do you like it here?",
+          "clip": "1636ffa8936d512059d3d10794bd73ae705298632498207491af4b7614669f91"
+        },
+        {
+          "key": "unit-3-technology@1:word:down-north-street",
+          "kind": "word",
+          "text": "down North Street",
+          "clip": "f7b79a30074a8ae907537ec4b3ff3b352ee09c849288546bc9ae97d4a1c8579b"
+        },
+        {
+          "key": "unit-3-technology@1:word:download-a-song",
+          "kind": "word",
+          "text": "download a song",
+          "clip": "c79f1add15696fc36e25afc4033935b08564ab16da7595956989454e46639054"
+        },
+        {
+          "key": "unit-3-technology@1:word:downstairs",
+          "kind": "word",
+          "text": "downstairs",
+          "spoken": "downstairs,",
+          "clip": "54da4191a9c84a563c2ccfafb08ed2965757d77507bb73ad67b04e156f76d976"
+        },
+        {
+          "key": "unit-3-technology@1:word:drive",
+          "kind": "word",
+          "text": "drive",
+          "spoken": "drive,",
+          "clip": "b3bc1734ac2300a4b9da93df6a0600fa0ee96673db6ba8cfef5a44896364ff6f"
+        },
+        {
+          "key": "unit-3-technology@1:word:enjoy",
+          "kind": "word",
+          "text": "enjoy",
+          "spoken": "enjoy,",
+          "clip": "016ade2369a0dfb0109db74571ba6edc47744ebf9f5ad9c39b09581f5efd65a6"
+        },
+        {
+          "key": "unit-3-technology@1:word:excited-about",
+          "kind": "word",
+          "text": "excited about",
+          "clip": "3adefc128e830bc62c6bf5819dd71be4a3a6e83d4992782f7438b6dff6844ded"
+        },
+        {
+          "key": "unit-3-technology@1:word:finger",
+          "kind": "word",
+          "text": "finger",
+          "spoken": "finger,",
+          "clip": "ba6e7d030a8e22e081b8852648c77638f4f04c2398512874409e74043d1a89b9"
+        },
+        {
+          "key": "unit-3-technology@1:word:fly",
+          "kind": "word",
+          "text": "fly",
+          "spoken": "fly,",
+          "clip": "7400ffcb17121390c55455a3f9f32eec35fa790e20f76fc76d61379a8a71207f"
+        },
+        {
+          "key": "unit-3-technology@1:word:go-on",
+          "kind": "word",
+          "text": "Go on!",
+          "clip": "36f54800f3f75e88339d58f0ee22ea8c63f60bdb6bfd757a9de346dd69e478cf"
+        },
+        {
+          "key": "unit-3-technology@1:word:go-to-bed",
+          "kind": "word",
+          "text": "go to bed",
+          "clip": "1eea55d7e60ead8eff39ad242dc67e322afe867ae9d3b1476ce8fdd1ae87bb32"
+        },
+        {
+          "key": "unit-3-technology@1:word:good-at",
+          "kind": "word",
+          "text": "good at",
+          "clip": "ac94d375322e2300c5c940e7457d8a4508ae1b66f2ac3036e347971ebe01ba4a"
+        },
+        {
+          "key": "unit-3-technology@1:word:hang-on",
+          "kind": "word",
+          "text": "Hang on.",
+          "clip": "7cda99383306e39dfd3a5b0c60306185e34e4f5c8e69b4e27a99761e4c885ad3"
+        },
+        {
+          "key": "unit-3-technology@1:word:happy",
+          "kind": "word",
+          "text": "happy",
+          "spoken": "happy,",
+          "clip": "216b332b3f8669e8068350cc17692a67ea54351057b259e60a1017199be95d14"
+        },
+        {
+          "key": "unit-3-technology@1:word:headphones",
+          "kind": "word",
+          "text": "headphones",
+          "spoken": "headphones,",
+          "clip": "fcb11ff78ec024fbb6c63af60bb566157c98d260db0a9a72dee2804fe0ee61df"
+        },
+        {
+          "key": "unit-3-technology@1:word:hello-its-elena",
+          "kind": "word",
+          "text": "Hello, it's Elena here.",
+          "clip": "f0300949c314d2819a57a11b0be6c5ac8acf1ee9e2de922d8302ccc77f0db75d"
+        },
+        {
+          "key": "unit-3-technology@1:word:how-many-times",
+          "kind": "word",
+          "text": "How many times ...?",
+          "clip": "4f2b58ba5b58e096eb970355269f777b488247723d07f043f1b4ac4390b0b6a4"
+        },
+        {
+          "key": "unit-3-technology@1:word:how-often",
+          "kind": "word",
+          "text": "How often ...?",
+          "clip": "601dab37e623d42de55e7e109996e5731e9e649c66c842e205f35bcc9e3d13e9"
+        },
+        {
+          "key": "unit-3-technology@1:word:im-afraid-hes-out",
+          "kind": "word",
+          "text": "I'm afraid he's out.",
+          "clip": "5b96f143d449dc23fc1db3fef892c65ab80d01efc7ec74eba82eaa639ab0e0ee"
+        },
+        {
+          "key": "unit-3-technology@1:word:interested-in",
+          "kind": "word",
+          "text": "interested in",
+          "clip": "bb8ed3380e7d43cc5aa3df328b2b5869ddcb7fbec81ae5e3905701e08aa67c51"
+        },
+        {
+          "key": "unit-3-technology@1:word:its-elena-for-you",
+          "kind": "word",
+          "text": "It's Elena for you.",
+          "clip": "9323100651eaf47d8d3ffc343a3e201c57cb6a8075210832615725027d5a9eb4"
+        },
+        {
+          "key": "unit-3-technology@1:word:just-a-moment",
+          "kind": "word",
+          "text": "Just a moment.",
+          "clip": "072e5e66f27803309b0eb272e240306a71c0b687b7870f97d691de5caa2684b4"
+        },
+        {
+          "key": "unit-3-technology@1:word:keyboard",
+          "kind": "word",
+          "text": "keyboard",
+          "spoken": "keyboard,",
+          "clip": "b63157d868de67bf8bd193088129884ba325a6214250c853addb86bda9726d2a"
+        },
+        {
+          "key": "unit-3-technology@1:word:laptop",
+          "kind": "word",
+          "text": "laptop",
+          "spoken": "laptop,",
+          "clip": "d3b5154d213ffd4cd9be556dbd457d7203b3217e6a92eee66b1549ef12b786ab"
+        },
+        {
+          "key": "unit-3-technology@1:word:laugh",
+          "kind": "word",
+          "text": "laugh",
+          "spoken": "laugh,",
+          "clip": "027b9e907f771e5da5a2b2373b819937f948b4e56dc97d456b515cc2fcd6219a"
+        },
+        {
+          "key": "unit-3-technology@1:word:lets-see",
+          "kind": "word",
+          "text": "Let's see!",
+          "clip": "23128450f2b82b49e06d1e20a19e654dd80f18fb74dbffb8cf2f86df337c5b64"
+        },
+        {
+          "key": "unit-3-technology@1:word:look-for",
+          "kind": "word",
+          "text": "look for",
+          "clip": "89728744c2d0888ea6f18bfbe241983ef5915f237194060cf1de93e765ad69d7"
+        },
+        {
+          "key": "unit-3-technology@1:word:look-tired",
+          "kind": "word",
+          "text": "look tired",
+          "clip": "b45c05710222aeff208fe9dd191d071ce690977e732944a92623ecf7e1dc28dd"
+        },
+        {
+          "key": "unit-3-technology@1:word:magazine",
+          "kind": "word",
+          "text": "magazine",
+          "spoken": "magazine,",
+          "clip": "0b8f6c5fbe92fd02e6dfe431261e24582cfa7b5db81e5c44efb31a5428ff62ce"
+        },
+        {
+          "key": "unit-3-technology@1:word:mobile-phone",
+          "kind": "word",
+          "text": "mobile phone",
+          "clip": "8180eb0e2d07e4336080b63fe5ce9a3c6d567ffd93eea2723c749f75e5c2f754"
+        },
+        {
+          "key": "unit-3-technology@1:word:more",
+          "kind": "word",
+          "text": "more",
+          "spoken": "more,",
+          "clip": "04b77dbd10b1c9b71f8d36509c2575ed86974c15a35f6339653236b6d965a877"
+        },
+        {
+          "key": "unit-3-technology@1:word:mouse",
+          "kind": "word",
+          "text": "mouse",
+          "spoken": "mouse,",
+          "clip": "b7d5b95970dc32d3af17d109d2de4c3a75e23ff954eacc8e5c27f9572e7ae224"
+        },
+        {
+          "key": "unit-3-technology@1:word:not-really",
+          "kind": "word",
+          "text": "not really",
+          "clip": "d30dcbfb180a0306e98a725c345f644c304daaae461226efed39f5f53205d521"
+        },
+        {
+          "key": "unit-3-technology@1:word:other",
+          "kind": "word",
+          "text": "other",
+          "spoken": "other,",
+          "clip": "81d38e04242fe5261aac8bd5cc168f1bf012ac1ca7cf0751cee23bf2e521953d"
+        },
+        {
+          "key": "unit-3-technology@1:word:over-there",
+          "kind": "word",
+          "text": "over there",
+          "clip": "c2483f75fa2c6d56a3b4968433503c31f9b37bf06dd04b7d744c3a33a50368b4"
+        },
+        {
+          "key": "unit-3-technology@1:word:own",
+          "kind": "word",
+          "text": "own",
+          "spoken": "own,",
+          "clip": "f83fc7a3f14798dbb3d61ab70b787adb3797a99f69af54bc2bfed61d92fdf161"
+        },
+        {
+          "key": "unit-3-technology@1:word:paper",
+          "kind": "word",
+          "text": "paper",
+          "spoken": "paper,",
+          "clip": "9274cd8b8061013d82e0137530734923da3f01916043464125b8f54e70568eca"
+        },
+        {
+          "key": "unit-3-technology@1:word:poor",
+          "kind": "word",
+          "text": "poor",
+          "spoken": "poor,",
+          "clip": "3fb4ab405a1d3bc68ffc94bea289025c79b109294c66ed1d3fe10e132c086225"
+        },
+        {
+          "key": "unit-3-technology@1:word:printer",
+          "kind": "word",
+          "text": "printer",
+          "spoken": "printer,",
+          "clip": "2bb17077696a55dbe0171bf8a5dcba58f6826146698f48b635840c8c7b28d099"
+        },
+        {
+          "key": "unit-3-technology@1:word:real",
+          "kind": "word",
+          "text": "real",
+          "spoken": "real,",
+          "clip": "58205d6092094f81d86bee650019710f72b47bf4b045a16f7e208fb6a095f5df"
+        },
+        {
+          "key": "unit-3-technology@1:word:rocket",
+          "kind": "word",
+          "text": "rocket",
+          "spoken": "rocket,",
+          "clip": "d45a6dd45d554064037a69a24fb60b9665385dea0ad458a59506c87d1e808dd0"
+        },
+        {
+          "key": "unit-3-technology@1:word:rubbish-lorry",
+          "kind": "word",
+          "text": "rubbish lorry",
+          "clip": "3175b61bd145802138aa16834025b6b564caa9ba557a8d519476684036fa6f35"
+        },
+        {
+          "key": "unit-3-technology@1:word:sad",
+          "kind": "word",
+          "text": "sad",
+          "spoken": "sad,",
+          "clip": "89d551d821ecab2b37248c6b10e2ba083b80a7f73f1702ca85755d65241c2cc9"
+        },
+        {
+          "key": "unit-3-technology@1:word:scared",
+          "kind": "word",
+          "text": "scared",
+          "spoken": "scared,",
+          "clip": "22dbc096ccd0b11b290b155138fc6be7ff1e2ef25e9286e510c107e7243b17d3"
+        },
+        {
+          "key": "unit-3-technology@1:word:scared-of",
+          "kind": "word",
+          "text": "scared of",
+          "clip": "a5841d780ce1b8360029e79e1e90bfebee98395f19d32bbb5e707d9da0b1bbf6"
+        },
+        {
+          "key": "unit-3-technology@1:word:screen",
+          "kind": "word",
+          "text": "screen",
+          "spoken": "screen,",
+          "clip": "7d8127219efa9bd9c1b74cfa0efc0512870a7ce19e84ad102bac99ba8da9bf2f"
+        },
+        {
+          "key": "unit-3-technology@1:word:see-you-soon",
+          "kind": "word",
+          "text": "See you soon.",
+          "clip": "3dee4d6e4a6095914ae1044d88eb3844725f52344cfc740df8eb101f45094292"
+        },
+        {
+          "key": "unit-3-technology@1:word:send-an-email",
+          "kind": "word",
+          "text": "send an email",
+          "clip": "c59442865685ca17235ab1c96676ba8ce534eae2d0021786579477a1b63fc7e2"
+        },
+        {
+          "key": "unit-3-technology@1:word:simulator",
+          "kind": "word",
+          "text": "simulator",
+          "spoken": "simulator,",
+          "clip": "bb2eb32cf1f95e1e37e35f7a51dfe1bb9831cea355cfdcbd34bc423f7a5716c9"
+        },
+        {
+          "key": "unit-3-technology@1:word:sit",
+          "kind": "word",
+          "text": "sit",
+          "spoken": "sit,",
+          "clip": "10ab5056edad008af3f2983b1aba27192980a2ee81309e0c017b8be6945fca7e"
+        },
+        {
+          "key": "unit-3-technology@1:word:sit-down",
+          "kind": "word",
+          "text": "sit down",
+          "clip": "6419a4a1cf659f2c77d7e185b5d1ac16858fe1fe641e06742dde1804509ae907"
+        },
+        {
+          "key": "unit-3-technology@1:word:space-travel",
+          "kind": "word",
+          "text": "space travel",
+          "clip": "f13a2f6d2a87f962dba6c94891f96382be46e60331ef8364bb3c0103aea3d449"
+        },
+        {
+          "key": "unit-3-technology@1:word:space-walking",
+          "kind": "word",
+          "text": "space walking",
+          "clip": "e212bc5ddfa7be0d88d8b71c69ecd03392ce37e5edbbb639541042e5c53353f3"
+        },
+        {
+          "key": "unit-3-technology@1:word:speakers",
+          "kind": "word",
+          "text": "speakers",
+          "spoken": "speakers,",
+          "clip": "4cf97801f74e52656372c396733bc288f86ea20e6e6c8e6ec28a20807b134eac"
+        },
+        {
+          "key": "unit-3-technology@1:word:spend-time",
+          "kind": "word",
+          "text": "spend time",
+          "clip": "0dc7c8e4162c93303735a8e2ca5d50301f9f926c9cc86480e8935977f481dc6e"
+        },
+        {
+          "key": "unit-3-technology@1:word:spider",
+          "kind": "word",
+          "text": "spider",
+          "spoken": "spider,",
+          "clip": "6a5163e12643dca8e6f06bccc337961dbc398d7903da225a3b5c26254fd2f263"
+        },
+        {
+          "key": "unit-3-technology@1:word:surf-the-internet",
+          "kind": "word",
+          "text": "surf the Internet",
+          "clip": "c33435f82e51f1cb1d7cf64984cc1270913154d671b632cdcd5943d49965eeb3"
+        },
+        {
+          "key": "unit-3-technology@1:word:tablet",
+          "kind": "word",
+          "text": "tablet",
+          "spoken": "tablet,",
+          "clip": "e2f61ca04444e712e1fafc241b8abcfc135a0803c25cce45b48ab0e7c23d6fd3"
+        },
+        {
+          "key": "unit-3-technology@1:word:take-a-photo",
+          "kind": "word",
+          "text": "take a photo",
+          "clip": "ecbe29df2b81e5135bce330d8ff3334aec086d0a00d87fe7059e5a192410a8fb"
+        },
+        {
+          "key": "unit-3-technology@1:word:take-a-selfie",
+          "kind": "word",
+          "text": "take a selfie",
+          "clip": "cff6b9e848753450d78183e59696f35aa99fa9a2a8f23eec9484adc8fe6be78b"
+        },
+        {
+          "key": "unit-3-technology@1:word:take-an-order",
+          "kind": "word",
+          "text": "take an order",
+          "clip": "14f50d064f40076d54f119d84711ddfb5d3da8f19ada67815ef31c71fb94d3d0"
+        },
+        {
+          "key": "unit-3-technology@1:word:talk-on-the-phone",
+          "kind": "word",
+          "text": "talk on the phone",
+          "clip": "aa81adb0e3787df19eba03fd8749cd156057fac583c6ebc49edda6793af793b0"
+        },
+        {
+          "key": "unit-3-technology@1:word:text-a-friend",
+          "kind": "word",
+          "text": "text a friend",
+          "clip": "d0388f803a757c8bc8b92bfd8e3d90d04682a90d587f97d1ec627f6c4fbcb13f"
+        },
+        {
+          "key": "unit-3-technology@1:word:thats-a-surprise",
+          "kind": "word",
+          "text": "That's a surprise!",
+          "clip": "ce522332a0849d6cf20f1e62d269f0a4f81ddb76bac769d2a486e3cca0150d12"
+        },
+        {
+          "key": "unit-3-technology@1:word:there-he-is",
+          "kind": "word",
+          "text": "There he is!",
+          "clip": "37e909404a81d8fcac978735ef3cacd7f0076a25e95f65ad097f38248da778a4"
+        },
+        {
+          "key": "unit-3-technology@1:word:tired",
+          "kind": "word",
+          "text": "tired",
+          "spoken": "tired,",
+          "clip": "b79c15d083590d7df371c66147c62838c010708c72574e21c61d43d61d2ce415"
+        },
+        {
+          "key": "unit-3-technology@1:word:too",
+          "kind": "word",
+          "text": "too",
+          "spoken": "too,",
+          "clip": "60e4d2bc895de251ca6cd0fbc4afb5fd61769565c0a20ed8e7f4ade47f03163e"
+        },
+        {
+          "key": "unit-3-technology@1:word:tv",
+          "kind": "word",
+          "text": "TV",
+          "spoken": "TV,",
+          "clip": "a8c0b19a142f11d776fbd08d80796bad893ba93ac45d53cc1c09f33f7e6e5b3c"
+        },
+        {
+          "key": "unit-3-technology@1:word:wait-a-minute",
+          "kind": "word",
+          "text": "Wait a minute.",
+          "clip": "b21ab8abd6d0854f9ac8a005a500360ba09d173bdacbcdf895754f196fd71246"
+        },
+        {
+          "key": "unit-3-technology@1:word:whats-that-noise",
+          "kind": "word",
+          "text": "What's that noise?",
+          "clip": "34adccbe2b605d928e5960dda8c56ed28060ee7ca2946a669313ac21a114e9e8"
+        },
+        {
+          "key": "unit-3-technology@1:word:whats-the-matter",
+          "kind": "word",
+          "text": "What's the matter?",
+          "clip": "ceaef24d0d3c628d7448fb9989a4c506dea344790eb7c57b0d5ce629d5c5e51a"
+        },
+        {
+          "key": "unit-3-technology@1:word:worried",
+          "kind": "word",
+          "text": "worried",
+          "spoken": "worried,",
+          "clip": "ec0ee859ee2d0831565faa6de6bd44ec3e11cff32b2eac4068edd2646f5168f5"
+        },
+        {
+          "key": "unit-3-technology@1:word:worried-about",
+          "kind": "word",
+          "text": "worried about",
+          "clip": "74fdf9051ef473eeccab99f3d9d4a034dd5febb1264e02947a449b8a37cf28aa"
+        },
+        {
+          "key": "unit-3-technology@1:word:wrong",
+          "kind": "word",
+          "text": "wrong",
+          "spoken": "wrong,",
+          "clip": "d7bf0f2d25befe9294d470b89cba72f60d056a20b14cbf0f523f079bdafbca57"
+        }
+      ]
     }
   ],
   "clips": {
+    "00bc36302f1039c7ca56d9453866c42619fba661e969e6fc84042643589c21a9": {
+      "file": "clips/00bc36302f1039c7ca56d9453866c42619fba661e969e6fc84042643589c21a9.ogg",
+      "bytes": 9675,
+      "sha256": "82961a9d9051f365f4d3efcdbf803b964d22088adcd1e6237a9ce28f3e60db05",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 3.2
+      }
+    },
+    "015f034d123019555d0be5189b9465a883f63635189ef910366020d595a173ad": {
+      "file": "clips/015f034d123019555d0be5189b9465a883f63635189ef910366020d595a173ad.ogg",
+      "bytes": 10701,
+      "sha256": "96c5541518d54628d65aeddfbddaa1e8bc01bfbcb8cf6afdd335b0977b87f0e8",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 3.5
+      }
+    },
+    "016ade2369a0dfb0109db74571ba6edc47744ebf9f5ad9c39b09581f5efd65a6": {
+      "file": "clips/016ade2369a0dfb0109db74571ba6edc47744ebf9f5ad9c39b09581f5efd65a6.ogg",
+      "bytes": 3214,
+      "sha256": "a3e7a196d7a73992c382506b2623dc24a3965686fd8f3ee2242b7410d675e0f7",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.047
+      }
+    },
+    "027b9e907f771e5da5a2b2373b819937f948b4e56dc97d456b515cc2fcd6219a": {
+      "file": "clips/027b9e907f771e5da5a2b2373b819937f948b4e56dc97d456b515cc2fcd6219a.ogg",
+      "bytes": 2308,
+      "sha256": "cf9a0aba5724f98c7479ff81aa500528ffe5b8b630710de53f3cd9c09ab68415",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.767
+      }
+    },
+    "04b77dbd10b1c9b71f8d36509c2575ed86974c15a35f6339653236b6d965a877": {
+      "file": "clips/04b77dbd10b1c9b71f8d36509c2575ed86974c15a35f6339653236b6d965a877.ogg",
+      "bytes": 2105,
+      "sha256": "288c442a6b69657f66e0cf67ed3067470af61615633eb6b1bf33733e188b2c92",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.676
+      }
+    },
+    "053e1071419b33067eba846da128f0b7d817b6876056e5b4a4cab89703fb974b": {
+      "file": "clips/053e1071419b33067eba846da128f0b7d817b6876056e5b4a4cab89703fb974b.ogg",
+      "bytes": 8881,
+      "sha256": "03e6df352fe6734d7a139dd8520fca4e188b1e54626f2fa2b81dd8256329a214",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.842
+      }
+    },
+    "055d055232601d0c1e80b09131d965bd4454d0bae4740fbb3e38cfe4567b6d77": {
+      "file": "clips/055d055232601d0c1e80b09131d965bd4454d0bae4740fbb3e38cfe4567b6d77.ogg",
+      "bytes": 1980,
+      "sha256": "ab207fa2a85b50bf453bae3dd00df931b47acb6b8feae28e0666e96cba11d72e",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.609
+      }
+    },
     "059dfd7667ffd237d2b60261ffe1661e2d9071fafccc2f9f2319b04f32404d41": {
       "file": "clips/059dfd7667ffd237d2b60261ffe1661e2d9071fafccc2f9f2319b04f32404d41.ogg",
       "bytes": 4728,
@@ -974,6 +1970,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.521
+      }
+    },
+    "072e5e66f27803309b0eb272e240306a71c0b687b7870f97d691de5caa2684b4": {
+      "file": "clips/072e5e66f27803309b0eb272e240306a71c0b687b7870f97d691de5caa2684b4.ogg",
+      "bytes": 4076,
+      "sha256": "acd6196046227e79ec5af6a284ac20603c40c30727873b637102372f036b1df8",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.299
       }
     },
     "08b00c6292262d1a5dd7a24139466646afdfec9d45923311443193ab6c6c2bd9": {
@@ -1009,6 +2016,28 @@
         "durationSeconds": 2.213
       }
     },
+    "0b8f6c5fbe92fd02e6dfe431261e24582cfa7b5db81e5c44efb31a5428ff62ce": {
+      "file": "clips/0b8f6c5fbe92fd02e6dfe431261e24582cfa7b5db81e5c44efb31a5428ff62ce.ogg",
+      "bytes": 3202,
+      "sha256": "57a047bc3197bf13179fc35b316d909bbf4d8ae7dd907f7a3d2f129e4d14114f",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.028
+      }
+    },
+    "0dc7c8e4162c93303735a8e2ca5d50301f9f926c9cc86480e8935977f481dc6e": {
+      "file": "clips/0dc7c8e4162c93303735a8e2ca5d50301f9f926c9cc86480e8935977f481dc6e.ogg",
+      "bytes": 3409,
+      "sha256": "98771d67209c2d05580903f3cd34ee17163441635564858c702c0a5a1ad16cce",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.087
+      }
+    },
     "0e8df5dc36979f2a387392547a0a4db2e25a63f6fc08e327a6e93205607a1a09": {
       "file": "clips/0e8df5dc36979f2a387392547a0a4db2e25a63f6fc08e327a6e93205607a1a09.ogg",
       "bytes": 3589,
@@ -1018,6 +2047,39 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.137
+      }
+    },
+    "0eacbbf14a92f47d7423b356b5aa91a56906b79fbc4cb9f2f3df47a55133b374": {
+      "file": "clips/0eacbbf14a92f47d7423b356b5aa91a56906b79fbc4cb9f2f3df47a55133b374.ogg",
+      "bytes": 2304,
+      "sha256": "e7901ca29500e5bdd7c1c12b9b29bb4185af5a029b40694233fd18056908d093",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.708
+      }
+    },
+    "10590074fa5907f403105f0d057439a34b52a0d5104209b948611190dc71812b": {
+      "file": "clips/10590074fa5907f403105f0d057439a34b52a0d5104209b948611190dc71812b.ogg",
+      "bytes": 3177,
+      "sha256": "979dd797df3059ca04d0c87f7c963466494775b3f03981ec1a4120f6f97749e5",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.019
+      }
+    },
+    "10ab5056edad008af3f2983b1aba27192980a2ee81309e0c017b8be6945fca7e": {
+      "file": "clips/10ab5056edad008af3f2983b1aba27192980a2ee81309e0c017b8be6945fca7e.ogg",
+      "bytes": 1956,
+      "sha256": "16b2e0c2eec6ccd2c1cd5c076fea864aae28e519e9c7fc9cde296121230bf307",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.648
       }
     },
     "1137e3c0fad5799da0c3257b79cb88f7ccc26b05e35d289902641e850e64e0b0": {
@@ -1042,6 +2104,17 @@
         "durationSeconds": 1.236
       }
     },
+    "12ee4d507a9147cee7048c8de5d53c9fa92e203d404485837d926eacee81fc70": {
+      "file": "clips/12ee4d507a9147cee7048c8de5d53c9fa92e203d404485837d926eacee81fc70.ogg",
+      "bytes": 11999,
+      "sha256": "091a57bbe72858dcc5860a8dfe2a57216bddca8da1a322a48c208b1f5b554236",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 4
+      }
+    },
     "133e454710405a63fa30520e2016b3a56070808fb05405bfd9209d10ece4fa61": {
       "file": "clips/133e454710405a63fa30520e2016b3a56070808fb05405bfd9209d10ece4fa61.ogg",
       "bytes": 2484,
@@ -1064,6 +2137,17 @@
         "durationSeconds": 2.375
       }
     },
+    "14f50d064f40076d54f119d84711ddfb5d3da8f19ada67815ef31c71fb94d3d0": {
+      "file": "clips/14f50d064f40076d54f119d84711ddfb5d3da8f19ada67815ef31c71fb94d3d0.ogg",
+      "bytes": 3172,
+      "sha256": "af19c35188e10b63e492412502726c8f609645cd29b0ff2def12bf9e0d88d203",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.979
+      }
+    },
     "155d19f36aec6e7f46e5cef7cbc039773eeb59ee861ade8db6d2a409234c4a10": {
       "file": "clips/155d19f36aec6e7f46e5cef7cbc039773eeb59ee861ade8db6d2a409234c4a10.ogg",
       "bytes": 5960,
@@ -1073,6 +2157,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 2.042
+      }
+    },
+    "1636ffa8936d512059d3d10794bd73ae705298632498207491af4b7614669f91": {
+      "file": "clips/1636ffa8936d512059d3d10794bd73ae705298632498207491af4b7614669f91.ogg",
+      "bytes": 4176,
+      "sha256": "12b8e24789a370fe934381eb7bec1cab862649379515df401954bdfb42458683",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.325
       }
     },
     "16f6914626a3c220a08956f79742d0c4c7792a8ac4638a8d79da03f26fa8332e": {
@@ -1086,6 +2181,28 @@
         "durationSeconds": 0.841
       }
     },
+    "184988c7eb06247b7459da09d0386298515f95c7f93e01fa7c8ca375202cf8f5": {
+      "file": "clips/184988c7eb06247b7459da09d0386298515f95c7f93e01fa7c8ca375202cf8f5.ogg",
+      "bytes": 3492,
+      "sha256": "a24377a2eb63a8fd27880e8c2935bde247b84dcaec2465dfc74b1f7eacc77909",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.111
+      }
+    },
+    "1ae860d7bd994c1f71470e9db5f55a288715ee65b5ad7beb0c271bc9e20c457a": {
+      "file": "clips/1ae860d7bd994c1f71470e9db5f55a288715ee65b5ad7beb0c271bc9e20c457a.ogg",
+      "bytes": 9182,
+      "sha256": "18d62ebc1270d9c44ed8a0e8174c5fc60f871449c48168b141873e0e1cdc3954",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.938
+      }
+    },
     "1b8efa1acdcd4e371b2d3841e5e2174b7d94dcd89c9197e7ff9d223f866f039d": {
       "file": "clips/1b8efa1acdcd4e371b2d3841e5e2174b7d94dcd89c9197e7ff9d223f866f039d.ogg",
       "bytes": 2425,
@@ -1095,6 +2212,28 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.796
+      }
+    },
+    "1eea55d7e60ead8eff39ad242dc67e322afe867ae9d3b1476ce8fdd1ae87bb32": {
+      "file": "clips/1eea55d7e60ead8eff39ad242dc67e322afe867ae9d3b1476ce8fdd1ae87bb32.ogg",
+      "bytes": 5266,
+      "sha256": "ccd05c6a9614e2bc33997d0744280613dfaf39d4c72be2cb34c417d78191bf3e",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.711
+      }
+    },
+    "1f0dfa87949e3f5d6c21b775e3be465a6fec13c4befa1cad0c9f1e174e325c4d": {
+      "file": "clips/1f0dfa87949e3f5d6c21b775e3be465a6fec13c4befa1cad0c9f1e174e325c4d.ogg",
+      "bytes": 4176,
+      "sha256": "6e6d445510ccd08d5f4bb28e6a3e19aff5af6ea24d75355a0da3d21c88a4e26f",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.33
       }
     },
     "1f7992845d40249d133a40b3d6a5c8296e160ebd0af07ab4a1284856cc1e5a47": {
@@ -1119,6 +2258,17 @@
         "durationSeconds": 2.711
       }
     },
+    "216b332b3f8669e8068350cc17692a67ea54351057b259e60a1017199be95d14": {
+      "file": "clips/216b332b3f8669e8068350cc17692a67ea54351057b259e60a1017199be95d14.ogg",
+      "bytes": 2361,
+      "sha256": "47c3043dd5c879075adb64ed81116f5482db92102ce751758800041addbbb03f",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.776
+      }
+    },
     "21e7be4628ba245fc5603062a02d148ceb816aa4924376e4dcf6c8a75c1fcb01": {
       "file": "clips/21e7be4628ba245fc5603062a02d148ceb816aa4924376e4dcf6c8a75c1fcb01.ogg",
       "bytes": 3564,
@@ -1128,6 +2278,28 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.093
+      }
+    },
+    "22dbc096ccd0b11b290b155138fc6be7ff1e2ef25e9286e510c107e7243b17d3": {
+      "file": "clips/22dbc096ccd0b11b290b155138fc6be7ff1e2ef25e9286e510c107e7243b17d3.ogg",
+      "bytes": 2903,
+      "sha256": "a411a750967f0d7b08a80cca208e01dea379caea677e25890174b0df2fad38e1",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.965
+      }
+    },
+    "23128450f2b82b49e06d1e20a19e654dd80f18fb74dbffb8cf2f86df337c5b64": {
+      "file": "clips/23128450f2b82b49e06d1e20a19e654dd80f18fb74dbffb8cf2f86df337c5b64.ogg",
+      "bytes": 3362,
+      "sha256": "6325e953e4776a4a9a26287e0d0a5c90e41c2f3820795747e75fa054afb9280c",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.045
       }
     },
     "23a1ad7e88cdac0065584efa8e92493f904408e3b11aefa819a66f3bfc6fe5b0": {
@@ -1141,6 +2313,17 @@
         "durationSeconds": 0.5
       }
     },
+    "24998c3f066293b9395341befbca85ee4612f5c11783e892b6a72656be251380": {
+      "file": "clips/24998c3f066293b9395341befbca85ee4612f5c11783e892b6a72656be251380.ogg",
+      "bytes": 8266,
+      "sha256": "27f45f5234eadfdaefb224c5b066809b22f06774279cc9c68f998538b0c2a3a4",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.846
+      }
+    },
     "26138097013baeadf942da91edd666f7e48bd241e7e4eb41d148f9b9062de8b3": {
       "file": "clips/26138097013baeadf942da91edd666f7e48bd241e7e4eb41d148f9b9062de8b3.ogg",
       "bytes": 3868,
@@ -1150,6 +2333,39 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.204
+      }
+    },
+    "2a0ae1ffbb8911838113186de9cf723d13e30ffdff5b66bd56154c9e5227f8be": {
+      "file": "clips/2a0ae1ffbb8911838113186de9cf723d13e30ffdff5b66bd56154c9e5227f8be.ogg",
+      "bytes": 9028,
+      "sha256": "7fdef27d6d7330ce89e99ca23e68aac988bafb71685137502f7cbab130e7ae72",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.902
+      }
+    },
+    "2af7445427f2454f9feae41367dcc2b4f96ec94cfdb91202e24397f4109dc33e": {
+      "file": "clips/2af7445427f2454f9feae41367dcc2b4f96ec94cfdb91202e24397f4109dc33e.ogg",
+      "bytes": 5020,
+      "sha256": "9bbfd88b18f49813a63183853be7b9b638325d839e361a3d928f902ac6679214",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.592
+      }
+    },
+    "2bb17077696a55dbe0171bf8a5dcba58f6826146698f48b635840c8c7b28d099": {
+      "file": "clips/2bb17077696a55dbe0171bf8a5dcba58f6826146698f48b635840c8c7b28d099.ogg",
+      "bytes": 2172,
+      "sha256": "b48ff9b079769d7c94603465af9e3bbe9d95e717ab4a0ea9b413a862b8600f17",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.658
       }
     },
     "2dcd3ba547355a83485bb7de5c543dcb98f1740fd1601829491d2d7c30bd6721": {
@@ -1174,6 +2390,39 @@
         "durationSeconds": 0.782
       }
     },
+    "2e05847d262f7f7c32fd98471bf32ccb4ca06ad94808ec573c1ac57fc765418b": {
+      "file": "clips/2e05847d262f7f7c32fd98471bf32ccb4ca06ad94808ec573c1ac57fc765418b.ogg",
+      "bytes": 6748,
+      "sha256": "4711fcc75d8171018bdeea31fb6b8a1f8187f6ca85c51a2500f7785357c6daa0",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.18
+      }
+    },
+    "301064c6308fbf5aa8437f8d0290a134926c55009d3952f99effd0fdd5264efd": {
+      "file": "clips/301064c6308fbf5aa8437f8d0290a134926c55009d3952f99effd0fdd5264efd.ogg",
+      "bytes": 2470,
+      "sha256": "825f18e1de9bdb602b2fe08cf2df9576ac76ecde25dbd460e594b75a7453565a",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.773
+      }
+    },
+    "3175b61bd145802138aa16834025b6b564caa9ba557a8d519476684036fa6f35": {
+      "file": "clips/3175b61bd145802138aa16834025b6b564caa9ba557a8d519476684036fa6f35.ogg",
+      "bytes": 3660,
+      "sha256": "29d7400069d74db7136e42a959955cc587cb25b40f2aa4e381b534a129fb0b82",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.15
+      }
+    },
     "33345ead748e5b322f14779ef0f190ef728ead60381b427e97676933b870bd04": {
       "file": "clips/33345ead748e5b322f14779ef0f190ef728ead60381b427e97676933b870bd04.ogg",
       "bytes": 2342,
@@ -1183,6 +2432,39 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.749
+      }
+    },
+    "346ead7094d971a45043bcc069d8f3fba48fe4dd5b693a784afe1033cb3dcae5": {
+      "file": "clips/346ead7094d971a45043bcc069d8f3fba48fe4dd5b693a784afe1033cb3dcae5.ogg",
+      "bytes": 8337,
+      "sha256": "b63423311291fabc4c4be2b273a5158b959816c9f122d93788877dcef74b8c67",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.724
+      }
+    },
+    "34adccbe2b605d928e5960dda8c56ed28060ee7ca2946a669313ac21a114e9e8": {
+      "file": "clips/34adccbe2b605d928e5960dda8c56ed28060ee7ca2946a669313ac21a114e9e8.ogg",
+      "bytes": 4644,
+      "sha256": "c56a6568ebb1d0382fa5e7be4e864b76670feee2bd012fd7c866aa8bf18c865b",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.48
+      }
+    },
+    "36f54800f3f75e88339d58f0ee22ea8c63f60bdb6bfd757a9de346dd69e478cf": {
+      "file": "clips/36f54800f3f75e88339d58f0ee22ea8c63f60bdb6bfd757a9de346dd69e478cf.ogg",
+      "bytes": 2262,
+      "sha256": "cb812ef918c7bbfafc233a1e22baa02fa88a85fba5f8bd745b58067c3fc0872d",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.721
       }
     },
     "3732ab01c9f20bc85dd3cab94db12dfd6497748fbe5cd411aa598a907f102f0b": {
@@ -1196,6 +2478,50 @@
         "durationSeconds": 1.41
       }
     },
+    "37e909404a81d8fcac978735ef3cacd7f0076a25e95f65ad097f38248da778a4": {
+      "file": "clips/37e909404a81d8fcac978735ef3cacd7f0076a25e95f65ad097f38248da778a4.ogg",
+      "bytes": 3543,
+      "sha256": "dab0d6f217e65d8990335cb17bcaf44cfa6e6295c0999cd19ccd82968945a1b9",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.123
+      }
+    },
+    "37e92be3d276cd287e0b17a1207394119355e4ee99511456bab03b91b8469f8b": {
+      "file": "clips/37e92be3d276cd287e0b17a1207394119355e4ee99511456bab03b91b8469f8b.ogg",
+      "bytes": 8986,
+      "sha256": "079b371722efeb6c6d5e1aa6243efdaeb6ed70d3c3ce83cf160269f410e6f404",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 3.1
+      }
+    },
+    "3adefc128e830bc62c6bf5819dd71be4a3a6e83d4992782f7438b6dff6844ded": {
+      "file": "clips/3adefc128e830bc62c6bf5819dd71be4a3a6e83d4992782f7438b6dff6844ded.ogg",
+      "bytes": 4142,
+      "sha256": "e7599a78dcaa7abbf486c2c815a242e50060d0ade9d71222e999aa52dc5dddec",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.348
+      }
+    },
+    "3c875b79560c61cb085d53ee8a01fb1e85d551136ff4f6d7059748805f4ac9a8": {
+      "file": "clips/3c875b79560c61cb085d53ee8a01fb1e85d551136ff4f6d7059748805f4ac9a8.ogg",
+      "bytes": 11249,
+      "sha256": "cc8d0873fae1a6335e5a3194ba606f4b03e8b7cf8f043d5d3fb9c687ac079838",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 3.7
+      }
+    },
     "3d0673506ae06d0bc6ea30bfd02a04ebd657592fdb8b1198a302f5e3cb0ea1ad": {
       "file": "clips/3d0673506ae06d0bc6ea30bfd02a04ebd657592fdb8b1198a302f5e3cb0ea1ad.ogg",
       "bytes": 3303,
@@ -1205,6 +2531,39 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.077
+      }
+    },
+    "3dee4d6e4a6095914ae1044d88eb3844725f52344cfc740df8eb101f45094292": {
+      "file": "clips/3dee4d6e4a6095914ae1044d88eb3844725f52344cfc740df8eb101f45094292.ogg",
+      "bytes": 3242,
+      "sha256": "116b93427b093ae08d228a0d3d45067b70477c24b72c89934f16e29ca47fc353",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.043
+      }
+    },
+    "3efdf0eadb3c043dcf7aec0af642dec978fd30db0307eb99f2f8168c58d96d28": {
+      "file": "clips/3efdf0eadb3c043dcf7aec0af642dec978fd30db0307eb99f2f8168c58d96d28.ogg",
+      "bytes": 3102,
+      "sha256": "649e74962608d25f5efb36d4cb2be2cd1f8d14558a6d6a1df85f54a7252af396",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.008
+      }
+    },
+    "3fb4ab405a1d3bc68ffc94bea289025c79b109294c66ed1d3fe10e132c086225": {
+      "file": "clips/3fb4ab405a1d3bc68ffc94bea289025c79b109294c66ed1d3fe10e132c086225.ogg",
+      "bytes": 1894,
+      "sha256": "c0d74a1dffa2eddfd4d9d350d592539884507c646d1f40a6bd45e77127fc49a9",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.584
       }
     },
     "41309b7e305738466d2098f618ae8c1df967e779e342eeb087259220e961638b": {
@@ -1251,6 +2610,28 @@
         "durationSeconds": 3.7
       }
     },
+    "467bd6313451b86fd9f9cfcae94cc1a0516dfce32ccacdea5a844baf7c7e7b77": {
+      "file": "clips/467bd6313451b86fd9f9cfcae94cc1a0516dfce32ccacdea5a844baf7c7e7b77.ogg",
+      "bytes": 4861,
+      "sha256": "6afdc830a35d0de34ff09dec4d416e56ebb317f069ef902c6ce420bda063736f",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.554
+      }
+    },
+    "490bc61497bad05d9954fa688d49ce8d0a47822239f89927ea29c7a991657074": {
+      "file": "clips/490bc61497bad05d9954fa688d49ce8d0a47822239f89927ea29c7a991657074.ogg",
+      "bytes": 10851,
+      "sha256": "b9ec23989a69c46c24ea4495ce7561ed9abd130bfa02076a3bc00abc74f11b7f",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 3.5
+      }
+    },
     "4b713c39be8c2b96cb4481e5716ba5a27a03dea35ffd1b5953333626d7c4e108": {
       "file": "clips/4b713c39be8c2b96cb4481e5716ba5a27a03dea35ffd1b5953333626d7c4e108.ogg",
       "bytes": 3080,
@@ -1260,6 +2641,39 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.989
+      }
+    },
+    "4cf97801f74e52656372c396733bc288f86ea20e6e6c8e6ec28a20807b134eac": {
+      "file": "clips/4cf97801f74e52656372c396733bc288f86ea20e6e6c8e6ec28a20807b134eac.ogg",
+      "bytes": 3062,
+      "sha256": "bc2a381df1e1214eaf1d7519a645882d484a926d1da667c2743661a7fc1f63c1",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.035
+      }
+    },
+    "4d363dee5c4890b9d6aa4cb3e565629c3dcf8fa9be343527c62163e63694f48f": {
+      "file": "clips/4d363dee5c4890b9d6aa4cb3e565629c3dcf8fa9be343527c62163e63694f48f.ogg",
+      "bytes": 11645,
+      "sha256": "ea781a6aced1f756a2710bdb108dc661628c23ee746972e0acd0c906da3ce849",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 3.8
+      }
+    },
+    "4db54c83101860af5d47234989c6c62f60e8513abd54ea7cde2b35b1b03d6ad4": {
+      "file": "clips/4db54c83101860af5d47234989c6c62f60e8513abd54ea7cde2b35b1b03d6ad4.ogg",
+      "bytes": 11278,
+      "sha256": "1a08f5296aa8821df9811ecccb228fb3affe41ec1a78a8c752fc8ffbe8731ec6",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 3.7
       }
     },
     "4e02279f099dd41a8d1bbd102ddd412f70265b2b4635e0214ea224d3420a664c": {
@@ -1273,6 +2687,17 @@
         "durationSeconds": 0.656
       }
     },
+    "4f2b58ba5b58e096eb970355269f777b488247723d07f043f1b4ac4390b0b6a4": {
+      "file": "clips/4f2b58ba5b58e096eb970355269f777b488247723d07f043f1b4ac4390b0b6a4.ogg",
+      "bytes": 5586,
+      "sha256": "966b6217289cba1635ab2ac3f8dd75bab3d980f3f4488bf03f4f64db88876c87",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.801
+      }
+    },
     "4fd088e97a88dbffad1325679109d69484920bedb978bdaee832aa3ac8955a0a": {
       "file": "clips/4fd088e97a88dbffad1325679109d69484920bedb978bdaee832aa3ac8955a0a.ogg",
       "bytes": 2247,
@@ -1282,6 +2707,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.73
+      }
+    },
+    "528a1d25422f30e5aa7a60c43d83b08db890954649f288edb8ca14008d8750c8": {
+      "file": "clips/528a1d25422f30e5aa7a60c43d83b08db890954649f288edb8ca14008d8750c8.ogg",
+      "bytes": 2707,
+      "sha256": "7555f216e680b70d11f1fd2feba2ef70f936689658f791f0f5c1aca9051f9a8c",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.889
       }
     },
     "5413da300f74715ef77d2f7260365266ac9fef5334da365ec9f482e697189b05": {
@@ -1306,6 +2742,28 @@
         "durationSeconds": 0.859
       }
     },
+    "54da4191a9c84a563c2ccfafb08ed2965757d77507bb73ad67b04e156f76d976": {
+      "file": "clips/54da4191a9c84a563c2ccfafb08ed2965757d77507bb73ad67b04e156f76d976.ogg",
+      "bytes": 3890,
+      "sha256": "c1366d64dcd946d62f87ff4c0f27d25a500efcb3f3df19fe4e610f11ac759b4d",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.266
+      }
+    },
+    "550c7536b03f859676fda2a6f84fbb5a79e365605b791e3558eed970c64f89f6": {
+      "file": "clips/550c7536b03f859676fda2a6f84fbb5a79e365605b791e3558eed970c64f89f6.ogg",
+      "bytes": 5753,
+      "sha256": "f27ad0133938ab020776ec7059b6bd6c1e8813cbbf8b6bbc81825378cb9908c0",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.816
+      }
+    },
     "5562501c9b52d88c327c72eb5107b07b7e4309649d1fe9794ecd966cb1bd63df": {
       "file": "clips/5562501c9b52d88c327c72eb5107b07b7e4309649d1fe9794ecd966cb1bd63df.ogg",
       "bytes": 2931,
@@ -1326,6 +2784,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.184
+      }
+    },
+    "58205d6092094f81d86bee650019710f72b47bf4b045a16f7e208fb6a095f5df": {
+      "file": "clips/58205d6092094f81d86bee650019710f72b47bf4b045a16f7e208fb6a095f5df.ogg",
+      "bytes": 2284,
+      "sha256": "aa00545ab0b6d6b43bb3c2abfba842552973081af0c4ceea39bdf0b6c268e8fc",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.707
       }
     },
     "596e61638408852de9497a1af81e24749fa4af6d6a534d0cacf1146d7aab1941": {
@@ -1361,6 +2830,17 @@
         "durationSeconds": 2.261
       }
     },
+    "5b96f143d449dc23fc1db3fef892c65ab80d01efc7ec74eba82eaa639ab0e0ee": {
+      "file": "clips/5b96f143d449dc23fc1db3fef892c65ab80d01efc7ec74eba82eaa639ab0e0ee.ogg",
+      "bytes": 4098,
+      "sha256": "7d27449f48b3b420205a744d74779c4bdb985e925040b98364aea1a806176441",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.35
+      }
+    },
     "5ba7b3796fccaa5be48e0ff1291b47a1bfe90b8e5273c3ca7b57a8d3a856f11d": {
       "file": "clips/5ba7b3796fccaa5be48e0ff1291b47a1bfe90b8e5273c3ca7b57a8d3a856f11d.ogg",
       "bytes": 2565,
@@ -1370,6 +2850,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.871
+      }
+    },
+    "5cf3e965b6cf45ca88ed7cc309acda3b5b2275b4388d415a77ec223592028658": {
+      "file": "clips/5cf3e965b6cf45ca88ed7cc309acda3b5b2275b4388d415a77ec223592028658.ogg",
+      "bytes": 13946,
+      "sha256": "02fde934cac75c1cc1535e45e924cb5bf8b1598eda729d754aadd34e89bafcce",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 4.6
       }
     },
     "5cfa016972a61e07268c3e1cb5f520e17f6886a5a4db170f82b25d00a52c632f": {
@@ -1383,6 +2874,17 @@
         "durationSeconds": 0.755
       }
     },
+    "5d5c15d2d0be7373c0016de5b05452dd7abb04d60dba07b8ba2e552f0358c4ac": {
+      "file": "clips/5d5c15d2d0be7373c0016de5b05452dd7abb04d60dba07b8ba2e552f0358c4ac.ogg",
+      "bytes": 5123,
+      "sha256": "562fa43bc2e7b83b927aeae111903200fe7e17d9c4c0c534796914a7d98694fa",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.618
+      }
+    },
     "5d6cdeac183a40478899ceac6c512684b68e5b14999695b8022db682b7dc03d1": {
       "file": "clips/5d6cdeac183a40478899ceac6c512684b68e5b14999695b8022db682b7dc03d1.ogg",
       "bytes": 4019,
@@ -1392,6 +2894,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.266
+      }
+    },
+    "5dff0a92ca2c60c04144831195598f0f1342f5b3becfc9358edd71b98bd46cdb": {
+      "file": "clips/5dff0a92ca2c60c04144831195598f0f1342f5b3becfc9358edd71b98bd46cdb.ogg",
+      "bytes": 9168,
+      "sha256": "6db1776997621473d083a03d943076b87ed81f6dd898387dcde8bd943201f2d1",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.945
       }
     },
     "5e3b967828a61d5cef59ea839512268b4ba9cde95aa861471aab2d1563a9301a": {
@@ -1405,6 +2918,50 @@
         "durationSeconds": 1.542
       }
     },
+    "601dab37e623d42de55e7e109996e5731e9e649c66c842e205f35bcc9e3d13e9": {
+      "file": "clips/601dab37e623d42de55e7e109996e5731e9e649c66c842e205f35bcc9e3d13e9.ogg",
+      "bytes": 3017,
+      "sha256": "9a0ecc28f64dca09d61c72696dc4b800c287a548519b009ff5e75893eb5fb1a7",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.953
+      }
+    },
+    "60e4d2bc895de251ca6cd0fbc4afb5fd61769565c0a20ed8e7f4ade47f03163e": {
+      "file": "clips/60e4d2bc895de251ca6cd0fbc4afb5fd61769565c0a20ed8e7f4ade47f03163e.ogg",
+      "bytes": 1895,
+      "sha256": "204bd0daedba6563db5eb8d12ea75b4a122ee71f3d4e50aac90e45630a3de77a",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.599
+      }
+    },
+    "6419a4a1cf659f2c77d7e185b5d1ac16858fe1fe641e06742dde1804509ae907": {
+      "file": "clips/6419a4a1cf659f2c77d7e185b5d1ac16858fe1fe641e06742dde1804509ae907.ogg",
+      "bytes": 3216,
+      "sha256": "3dcf5bffc24d685fbdb9ba23bedfdf352b515d90633ddfcdbf5a27bf3254a24d",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.034
+      }
+    },
+    "647b8729ee021244a217abfd6f8ba0005a397c0f24a19d5c8e04ec5e026b5c84": {
+      "file": "clips/647b8729ee021244a217abfd6f8ba0005a397c0f24a19d5c8e04ec5e026b5c84.ogg",
+      "bytes": 2927,
+      "sha256": "bea73276f4fa247c14063c023fbb80b970e99b5244d2edd1a1d9721df12a6df7",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.91
+      }
+    },
     "662e90940c2a58226b8222736b06619ccb9597702678a8c694c955afb14c8871": {
       "file": "clips/662e90940c2a58226b8222736b06619ccb9597702678a8c694c955afb14c8871.ogg",
       "bytes": 5031,
@@ -1416,6 +2973,50 @@
         "durationSeconds": 1.563
       }
     },
+    "66c7057413b9915b6ef62f067171954a424f64c34dc79b62f19749bbb34ddc05": {
+      "file": "clips/66c7057413b9915b6ef62f067171954a424f64c34dc79b62f19749bbb34ddc05.ogg",
+      "bytes": 9198,
+      "sha256": "5346fe75f279d915d0bd5ce824ab6708fd7ff5c3eab0378fd9c5be7763a2060f",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.939
+      }
+    },
+    "68a06808287be3591efe56f5cf8dd9e7e9fe79c1eafda46890a195e94b500fd1": {
+      "file": "clips/68a06808287be3591efe56f5cf8dd9e7e9fe79c1eafda46890a195e94b500fd1.ogg",
+      "bytes": 10245,
+      "sha256": "a5591bd453e01295a5817c396736ec6f3fde262e50367e67dae5da414013658c",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 3.3
+      }
+    },
+    "6a5163e12643dca8e6f06bccc337961dbc398d7903da225a3b5c26254fd2f263": {
+      "file": "clips/6a5163e12643dca8e6f06bccc337961dbc398d7903da225a3b5c26254fd2f263.ogg",
+      "bytes": 3055,
+      "sha256": "512d8b24b811fc93a4d1efffa472d5b0d99817599305d42f3fcaf35811e53554",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.999
+      }
+    },
+    "6aeda4a94741810ce022664084e12f283e67f8330cb5ed9e8e7dda5c45f61fa8": {
+      "file": "clips/6aeda4a94741810ce022664084e12f283e67f8330cb5ed9e8e7dda5c45f61fa8.ogg",
+      "bytes": 2589,
+      "sha256": "ed6bb62dad166e39950441a61c36ed88d18ee964af29d815badad2c7884bc7c2",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.844
+      }
+    },
     "6b1755de3b08ae40f6af9b73fcc81aaea72142a4b716a111755b28f2a8655412": {
       "file": "clips/6b1755de3b08ae40f6af9b73fcc81aaea72142a4b716a111755b28f2a8655412.ogg",
       "bytes": 2496,
@@ -1425,6 +3026,50 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.821
+      }
+    },
+    "6f4af4b445f8351f5f59d663f2c0e772c7cff2bc16b613f1ef376bf95359ffc5": {
+      "file": "clips/6f4af4b445f8351f5f59d663f2c0e772c7cff2bc16b613f1ef376bf95359ffc5.ogg",
+      "bytes": 2390,
+      "sha256": "853061ecfa2e80a482b0da1c4ac61d26ce6dbad37106fd1096776f8292815f3e",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.806
+      }
+    },
+    "7400ffcb17121390c55455a3f9f32eec35fa790e20f76fc76d61379a8a71207f": {
+      "file": "clips/7400ffcb17121390c55455a3f9f32eec35fa790e20f76fc76d61379a8a71207f.ogg",
+      "bytes": 2089,
+      "sha256": "c2438c920295b803201c64c6ebc6c175c2c2776d8d377d951db14baeb8707375",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.629
+      }
+    },
+    "74b4826cb9275782a11d21a5219d9852dfc5c288e1d70dbf3212ce7915b3de82": {
+      "file": "clips/74b4826cb9275782a11d21a5219d9852dfc5c288e1d70dbf3212ce7915b3de82.ogg",
+      "bytes": 1535,
+      "sha256": "2af829343d6a03fbf69eee4629b3fd5f070f60141c9a706fede8d8aa2a014295",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.489
+      }
+    },
+    "74fdf9051ef473eeccab99f3d9d4a034dd5febb1264e02947a449b8a37cf28aa": {
+      "file": "clips/74fdf9051ef473eeccab99f3d9d4a034dd5febb1264e02947a449b8a37cf28aa.ogg",
+      "bytes": 3409,
+      "sha256": "24942143be744c149c894edbe1b3cdcaf2d3ca61495f318e045e7bdf3e67ca57",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.06
       }
     },
     "79d698c419ba208fabc06a8295a6066d6535649bd3b3500c4115ec61a679e1be": {
@@ -1460,6 +3105,28 @@
         "durationSeconds": 0.621
       }
     },
+    "7cda99383306e39dfd3a5b0c60306185e34e4f5c8e69b4e27a99761e4c885ad3": {
+      "file": "clips/7cda99383306e39dfd3a5b0c60306185e34e4f5c8e69b4e27a99761e4c885ad3.ogg",
+      "bytes": 2200,
+      "sha256": "5d0992b0418153d8001f28f206b77951aad32e7cda0a3bcd3e5c0414b95f80f6",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.682
+      }
+    },
+    "7d8127219efa9bd9c1b74cfa0efc0512870a7ce19e84ad102bac99ba8da9bf2f": {
+      "file": "clips/7d8127219efa9bd9c1b74cfa0efc0512870a7ce19e84ad102bac99ba8da9bf2f.ogg",
+      "bytes": 3136,
+      "sha256": "bb467ea6dc7cc6d6bbea6c45adcddf29a67c32e9f2b6e2d3154b052a6fc616c4",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.018
+      }
+    },
     "80a0a5ec45f6c1f772201ee8e171d5f89ca7eb027f38ec1b5b33505cdf15460d": {
       "file": "clips/80a0a5ec45f6c1f772201ee8e171d5f89ca7eb027f38ec1b5b33505cdf15460d.ogg",
       "bytes": 2401,
@@ -1480,6 +3147,39 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 2.449
+      }
+    },
+    "8180eb0e2d07e4336080b63fe5ce9a3c6d567ffd93eea2723c749f75e5c2f754": {
+      "file": "clips/8180eb0e2d07e4336080b63fe5ce9a3c6d567ffd93eea2723c749f75e5c2f754.ogg",
+      "bytes": 4574,
+      "sha256": "af3f55e0158acb0cb11e4a21bfca3c83b2ca864c5731c62f54afa782245b8ee9",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.473
+      }
+    },
+    "81d38e04242fe5261aac8bd5cc168f1bf012ac1ca7cf0751cee23bf2e521953d": {
+      "file": "clips/81d38e04242fe5261aac8bd5cc168f1bf012ac1ca7cf0751cee23bf2e521953d.ogg",
+      "bytes": 2476,
+      "sha256": "4c5db3fd2b697ccce1687ea81d7f702cbccb87d3ac7b836ef317682d88688f55",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.82
+      }
+    },
+    "840ef9f6ab47fb293a24394c822a1c46b2400386d9996cdaded216b9a8e01d38": {
+      "file": "clips/840ef9f6ab47fb293a24394c822a1c46b2400386d9996cdaded216b9a8e01d38.ogg",
+      "bytes": 2705,
+      "sha256": "16a193b1681813c866d12b4da0dee47d9bbc927df42be0b1d6fd18269f967675",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.88
       }
     },
     "852edcbbf5882e3c3d5cc1f7cac234f8a79be050e023b84956331f2af9d98fbb": {
@@ -1515,6 +3215,50 @@
         "durationSeconds": 1.423
       }
     },
+    "88619198c4f1dc25059c99cc1477c119c9cc5482e25b59783c70c5e2fe0c0661": {
+      "file": "clips/88619198c4f1dc25059c99cc1477c119c9cc5482e25b59783c70c5e2fe0c0661.ogg",
+      "bytes": 5411,
+      "sha256": "0ae9278202ac02188703225ecdb3ebd8ecc7a3dc35587c1780726a74d7f2dcce",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.779
+      }
+    },
+    "89728744c2d0888ea6f18bfbe241983ef5915f237194060cf1de93e765ad69d7": {
+      "file": "clips/89728744c2d0888ea6f18bfbe241983ef5915f237194060cf1de93e765ad69d7.ogg",
+      "bytes": 3005,
+      "sha256": "5de89c3ab09e8caa656e6d8e672dbb92a95d24a47ec00f4b104a5849cd053e86",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.946
+      }
+    },
+    "89d551d821ecab2b37248c6b10e2ba083b80a7f73f1702ca85755d65241c2cc9": {
+      "file": "clips/89d551d821ecab2b37248c6b10e2ba083b80a7f73f1702ca85755d65241c2cc9.ogg",
+      "bytes": 2306,
+      "sha256": "07c634cb9824f46865e2679e33da8f932c097018153302389977456ce36f4979",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.765
+      }
+    },
+    "8b903f4011fa45ac2599d695f697731780dc830fce89d0d28c5e0a7be7e442b6": {
+      "file": "clips/8b903f4011fa45ac2599d695f697731780dc830fce89d0d28c5e0a7be7e442b6.ogg",
+      "bytes": 12198,
+      "sha256": "775f4cad11c5b3afed7faa8a44e5a0181bad07fc0bd6d8430fdc81b1c0874bf2",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 4
+      }
+    },
     "8baf4ae944c9dae6987440ed6d3be62f344f53c927e6ef38e19d2f12dc371386": {
       "file": "clips/8baf4ae944c9dae6987440ed6d3be62f344f53c927e6ef38e19d2f12dc371386.ogg",
       "bytes": 6569,
@@ -1524,6 +3268,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 2.112
+      }
+    },
+    "8d3d550423aee3e25d2dc284574f778687353cf7af3afdf9be8a4086dd46bfb2": {
+      "file": "clips/8d3d550423aee3e25d2dc284574f778687353cf7af3afdf9be8a4086dd46bfb2.ogg",
+      "bytes": 3086,
+      "sha256": "80d069256ddcf3247c66615bfa2d8e43228ea462725555cc5591a2f95ff0f5a8",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.012
       }
     },
     "8dec7af04fccf2e82e26ebb79a36531b2a614bfdd01845e433dd8b1ac0e3b6f0": {
@@ -1581,6 +3336,28 @@
         "durationSeconds": 0.659
       }
     },
+    "9274cd8b8061013d82e0137530734923da3f01916043464125b8f54e70568eca": {
+      "file": "clips/9274cd8b8061013d82e0137530734923da3f01916043464125b8f54e70568eca.ogg",
+      "bytes": 2387,
+      "sha256": "2010b811c0a2291c9f66ab891ed053a68663ac890dc624514665bce34774a4f4",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.789
+      }
+    },
+    "9323100651eaf47d8d3ffc343a3e201c57cb6a8075210832615725027d5a9eb4": {
+      "file": "clips/9323100651eaf47d8d3ffc343a3e201c57cb6a8075210832615725027d5a9eb4.ogg",
+      "bytes": 4157,
+      "sha256": "4ab20fa709419dcf9543954d3014335dfc61e2cf30440d8d3c2865e2fac87858",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.324
+      }
+    },
     "9392a342da96bdc84687afcfb0bec76bafb41f91613aef7bb0d264f369328b42": {
       "file": "clips/9392a342da96bdc84687afcfb0bec76bafb41f91613aef7bb0d264f369328b42.ogg",
       "bytes": 2392,
@@ -1625,6 +3402,39 @@
         "durationSeconds": 2.213
       }
     },
+    "96d3d9ca2c302544854e878a2a48e08f4281de393cef3d39f336dc00911eada4": {
+      "file": "clips/96d3d9ca2c302544854e878a2a48e08f4281de393cef3d39f336dc00911eada4.ogg",
+      "bytes": 5878,
+      "sha256": "c10c715189847f5eaddf843c4624e62960c3e6b8e22fe5a4d019264aac409189",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.894
+      }
+    },
+    "9904232d8d553ac86f178f016f0f85129f7b46028a01919092b85b1f3ad1ff3b": {
+      "file": "clips/9904232d8d553ac86f178f016f0f85129f7b46028a01919092b85b1f3ad1ff3b.ogg",
+      "bytes": 12026,
+      "sha256": "955c038892415c20621ba36cb1952e18d223c6800dae3e69c29f5299dcd5b627",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 4.1
+      }
+    },
+    "993ca27bfcb842cce68c5c32fdb9ca1bce49de11d18764dbf044eef4e6710135": {
+      "file": "clips/993ca27bfcb842cce68c5c32fdb9ca1bce49de11d18764dbf044eef4e6710135.ogg",
+      "bytes": 8300,
+      "sha256": "8647f7f46709b220dba086713ef001b74df682a503860fc81f1e7b50134e9973",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.683
+      }
+    },
     "9a6a12bf9bc6ac61967097616ab61b628c016643540b0a7b23140c3a96bb2dc8": {
       "file": "clips/9a6a12bf9bc6ac61967097616ab61b628c016643540b0a7b23140c3a96bb2dc8.ogg",
       "bytes": 3846,
@@ -1634,6 +3444,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.243
+      }
+    },
+    "9ab642029f8946647344437a74b1b09173aa15213c8b722ae4b1f2ffbedb7fee": {
+      "file": "clips/9ab642029f8946647344437a74b1b09173aa15213c8b722ae4b1f2ffbedb7fee.ogg",
+      "bytes": 4643,
+      "sha256": "d5b273dffafed7b188eae8481d14466a90d797f3622536b26df61dadf26e4082",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.458
       }
     },
     "9b4d9066acc86c8bd516c498adb1f0b83fb3edff28301797252218c5354f1f8a": {
@@ -1713,6 +3534,17 @@
         "durationSeconds": 0.841
       }
     },
+    "a5841d780ce1b8360029e79e1e90bfebee98395f19d32bbb5e707d9da0b1bbf6": {
+      "file": "clips/a5841d780ce1b8360029e79e1e90bfebee98395f19d32bbb5e707d9da0b1bbf6.ogg",
+      "bytes": 3035,
+      "sha256": "c4e13af01285b888bc3be3ea923bde976fdad93f8a4a5d94e7f734bbd19bc739",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.979
+      }
+    },
     "a78bf4aaae0ade578845de151fa06ce3c900a5afc34d75300451fb48563d68ea": {
       "file": "clips/a78bf4aaae0ade578845de151fa06ce3c900a5afc34d75300451fb48563d68ea.ogg",
       "bytes": 3416,
@@ -1722,6 +3554,50 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.122
+      }
+    },
+    "a7c9d00c35adb132fbdd0562b9c73969a9ff06266a56f61b8a61ae1756bd0919": {
+      "file": "clips/a7c9d00c35adb132fbdd0562b9c73969a9ff06266a56f61b8a61ae1756bd0919.ogg",
+      "bytes": 2538,
+      "sha256": "fcd4907bd9156d28c56fcfef97ff221889d088c069ac3832c115bb3ddd490eeb",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.796
+      }
+    },
+    "a8c0b19a142f11d776fbd08d80796bad893ba93ac45d53cc1c09f33f7e6e5b3c": {
+      "file": "clips/a8c0b19a142f11d776fbd08d80796bad893ba93ac45d53cc1c09f33f7e6e5b3c.ogg",
+      "bytes": 3225,
+      "sha256": "e91907a58023a6733e59b26b7442ec012876c1d6f570bc5966675ff67cb16618",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.055
+      }
+    },
+    "aa81adb0e3787df19eba03fd8749cd156057fac583c6ebc49edda6793af793b0": {
+      "file": "clips/aa81adb0e3787df19eba03fd8749cd156057fac583c6ebc49edda6793af793b0.ogg",
+      "bytes": 4270,
+      "sha256": "3c3bc789578933e98ac4aba3608d94d394cf2ab8652008b10712b6f80613faf4",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.353
+      }
+    },
+    "ac94d375322e2300c5c940e7457d8a4508ae1b66f2ac3036e347971ebe01ba4a": {
+      "file": "clips/ac94d375322e2300c5c940e7457d8a4508ae1b66f2ac3036e347971ebe01ba4a.ogg",
+      "bytes": 2577,
+      "sha256": "203563ee49369e6a431dace4179c48906b30abd15528c923b505ba1554af3f97",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.848
       }
     },
     "ad75871ef2e05f8e3ba6f73e688a62860a554198744a61e15fea3f2613983984": {
@@ -1744,6 +3620,28 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.973
+      }
+    },
+    "b1afe9796e22550317f1a2492ba85f61c4d9a87be8fda4c2ce15387ada74c34d": {
+      "file": "clips/b1afe9796e22550317f1a2492ba85f61c4d9a87be8fda4c2ce15387ada74c34d.ogg",
+      "bytes": 8008,
+      "sha256": "49e7320908e8442c084c6b2e37489f54b6bc69ceb7672945234945aa3a9c913c",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.733
+      }
+    },
+    "b21ab8abd6d0854f9ac8a005a500360ba09d173bdacbcdf895754f196fd71246": {
+      "file": "clips/b21ab8abd6d0854f9ac8a005a500360ba09d173bdacbcdf895754f196fd71246.ogg",
+      "bytes": 3140,
+      "sha256": "8585e73d123125ada59358d8c241c44ec5cb9ea242bdbcbd41ec1cc943ca506a",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.969
       }
     },
     "b2381242a20279885636fd80528153bdfddd42df550f3842e5f691c99add7718": {
@@ -1790,6 +3688,17 @@
         "durationSeconds": 0.771
       }
     },
+    "b3bc1734ac2300a4b9da93df6a0600fa0ee96673db6ba8cfef5a44896364ff6f": {
+      "file": "clips/b3bc1734ac2300a4b9da93df6a0600fa0ee96673db6ba8cfef5a44896364ff6f.ogg",
+      "bytes": 2691,
+      "sha256": "ad7d043442a932a026d3c07499688f24c57376eef659311498284c94dcb2f03f",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.894
+      }
+    },
     "b41aca7bcd2cf0830cdbd3d7597d83061f846d6f065c2f4b75795df711c741ac": {
       "file": "clips/b41aca7bcd2cf0830cdbd3d7597d83061f846d6f065c2f4b75795df711c741ac.ogg",
       "bytes": 2306,
@@ -1799,6 +3708,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.77
+      }
+    },
+    "b45c05710222aeff208fe9dd191d071ce690977e732944a92623ecf7e1dc28dd": {
+      "file": "clips/b45c05710222aeff208fe9dd191d071ce690977e732944a92623ecf7e1dc28dd.ogg",
+      "bytes": 3213,
+      "sha256": "2ec430bfa8493fef7dcba306cd3b6a073af9774ee1dc796975f0bb7bdc2475db",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.011
       }
     },
     "b4ab11764c89dc5d81403782a162b365ea487acd2fe351115f7040ef3db33a31": {
@@ -1834,6 +3754,72 @@
         "durationSeconds": 3.1
       }
     },
+    "b63157d868de67bf8bd193088129884ba325a6214250c853addb86bda9726d2a": {
+      "file": "clips/b63157d868de67bf8bd193088129884ba325a6214250c853addb86bda9726d2a.ogg",
+      "bytes": 2283,
+      "sha256": "adb811eb0bb408becc32995b73cd2c7f7537d493b2fc958013125a1915b7a99e",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.752
+      }
+    },
+    "b7653119985c761dca6bf165175b0d31a716b086faf806037635442467b19062": {
+      "file": "clips/b7653119985c761dca6bf165175b0d31a716b086faf806037635442467b19062.ogg",
+      "bytes": 3309,
+      "sha256": "49cc18b4a89dbf7966eafacb8d88fe9c4a1191ce68a7facecf1f786645172a92",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.069
+      }
+    },
+    "b79c15d083590d7df371c66147c62838c010708c72574e21c61d43d61d2ce415": {
+      "file": "clips/b79c15d083590d7df371c66147c62838c010708c72574e21c61d43d61d2ce415.ogg",
+      "bytes": 2766,
+      "sha256": "e3707381e1a2135a36c574ab14bb469b924ea6d59bd69fedd89844a3d4d1f276",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.914
+      }
+    },
+    "b7d5b95970dc32d3af17d109d2de4c3a75e23ff954eacc8e5c27f9572e7ae224": {
+      "file": "clips/b7d5b95970dc32d3af17d109d2de4c3a75e23ff954eacc8e5c27f9572e7ae224.ogg",
+      "bytes": 2736,
+      "sha256": "bb382f06c8285770ff669c58cfeff686ccf2756ae68c0fd7f042598338885409",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.847
+      }
+    },
+    "ba6e7d030a8e22e081b8852648c77638f4f04c2398512874409e74043d1a89b9": {
+      "file": "clips/ba6e7d030a8e22e081b8852648c77638f4f04c2398512874409e74043d1a89b9.ogg",
+      "bytes": 2477,
+      "sha256": "a654faae336d0b932819951f209af8b2f10e1567d24749b91e12550a43690ef9",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.82
+      }
+    },
+    "ba73f3b2ffdc2fad9bcadef48ab6c0000d566d5f68aea226d8cbffa197530a5a": {
+      "file": "clips/ba73f3b2ffdc2fad9bcadef48ab6c0000d566d5f68aea226d8cbffa197530a5a.ogg",
+      "bytes": 11550,
+      "sha256": "111edde3728759041052b76d31a5245d764f4a860734eec9c3ff8d2193818df0",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 3.8
+      }
+    },
     "badedf504ef94a7374126374c46341a8c93e16e25b46fcef153979be9a9d3ac7": {
       "file": "clips/badedf504ef94a7374126374c46341a8c93e16e25b46fcef153979be9a9d3ac7.ogg",
       "bytes": 3017,
@@ -1843,6 +3829,28 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.999
+      }
+    },
+    "bb2eb32cf1f95e1e37e35f7a51dfe1bb9831cea355cfdcbd34bc423f7a5716c9": {
+      "file": "clips/bb2eb32cf1f95e1e37e35f7a51dfe1bb9831cea355cfdcbd34bc423f7a5716c9.ogg",
+      "bytes": 3516,
+      "sha256": "220f4c9fc476b9518823d2136ebea75e0d49d8cd59d26004b7ac178134e30160",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.155
+      }
+    },
+    "bb8ed3380e7d43cc5aa3df328b2b5869ddcb7fbec81ae5e3905701e08aa67c51": {
+      "file": "clips/bb8ed3380e7d43cc5aa3df328b2b5869ddcb7fbec81ae5e3905701e08aa67c51.ogg",
+      "bytes": 3295,
+      "sha256": "00d542b9d48d888799f9a2a3263e4b2c9576be7b120cdb495317e4b33c445030",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.068
       }
     },
     "bdf61428ad8f83814fce1521b99abe667c08bec29e3a79c41dbdff890c1331f0": {
@@ -1889,6 +3897,17 @@
         "durationSeconds": 0.533
       }
     },
+    "c2483f75fa2c6d56a3b4968433503c31f9b37bf06dd04b7d744c3a33a50368b4": {
+      "file": "clips/c2483f75fa2c6d56a3b4968433503c31f9b37bf06dd04b7d744c3a33a50368b4.ogg",
+      "bytes": 3142,
+      "sha256": "ae0b15d0a60450886bcfed6e7a1c5c4f62dc8014feaa8cc85765462b37df3177",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.957
+      }
+    },
     "c2b3f9f2a1a54133a3a3c92575e1874c74a5d054d99d3ef2c7810ab5e3eb8b5f": {
       "file": "clips/c2b3f9f2a1a54133a3a3c92575e1874c74a5d054d99d3ef2c7810ab5e3eb8b5f.ogg",
       "bytes": 5616,
@@ -1900,6 +3919,28 @@
         "durationSeconds": 1.778
       }
     },
+    "c2b78fb1ee6de9b7d94362f6cd9ba333302553792776fdf72ad3fe38e8f2d83b": {
+      "file": "clips/c2b78fb1ee6de9b7d94362f6cd9ba333302553792776fdf72ad3fe38e8f2d83b.ogg",
+      "bytes": 9413,
+      "sha256": "832a6864b86af2eb5301b36295af2761c0256fd2fa185a1e9ae9d1c4d995712f",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 3.1
+      }
+    },
+    "c33435f82e51f1cb1d7cf64984cc1270913154d671b632cdcd5943d49965eeb3": {
+      "file": "clips/c33435f82e51f1cb1d7cf64984cc1270913154d671b632cdcd5943d49965eeb3.ogg",
+      "bytes": 4135,
+      "sha256": "eb16c352d79d77ff5b970524d4fbdbba0bf2310de830809434951d6a3cc9773b",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.312
+      }
+    },
     "c4f1a566e1a8b0361a610a3239a1cd1e2f7f2a2dbdf53b1b9867fa77b77aba5d": {
       "file": "clips/c4f1a566e1a8b0361a610a3239a1cd1e2f7f2a2dbdf53b1b9867fa77b77aba5d.ogg",
       "bytes": 2190,
@@ -1909,6 +3950,28 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.728
+      }
+    },
+    "c59442865685ca17235ab1c96676ba8ce534eae2d0021786579477a1b63fc7e2": {
+      "file": "clips/c59442865685ca17235ab1c96676ba8ce534eae2d0021786579477a1b63fc7e2.ogg",
+      "bytes": 3852,
+      "sha256": "76454e7b8c91d95ff72dfc49bff6a8c6c071d81d5d5b10aa86af5e90e8004590",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.196
+      }
+    },
+    "c5cbeb07a443f4220ab6fa7d19e3946dbf3ac2704ae254c29617bddb851a68a6": {
+      "file": "clips/c5cbeb07a443f4220ab6fa7d19e3946dbf3ac2704ae254c29617bddb851a68a6.ogg",
+      "bytes": 14734,
+      "sha256": "120e35bf6aa1222e28c77678e404c16f69994b65f610754003737190fead271c",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 5.3
       }
     },
     "c5f085c2adbfa74aa00a113512ab387e751898e458ed86b4fbd9613b9ffe934c": {
@@ -1933,6 +3996,17 @@
         "durationSeconds": 0.984
       }
     },
+    "c79f1add15696fc36e25afc4033935b08564ab16da7595956989454e46639054": {
+      "file": "clips/c79f1add15696fc36e25afc4033935b08564ab16da7595956989454e46639054.ogg",
+      "bytes": 4130,
+      "sha256": "9933f46af5a391e098720aadef34629b22f12f07491341c3318637f044f48c13",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.303
+      }
+    },
     "c801b69fed158ed5e42f283797b426916155a76a05a7b44eb077610931586c34": {
       "file": "clips/c801b69fed158ed5e42f283797b426916155a76a05a7b44eb077610931586c34.ogg",
       "bytes": 2612,
@@ -1953,6 +4027,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.414
+      }
+    },
+    "cb68cf375cf1433dbf634ad036ae586c93f53d3cde3362df1a0eb64a4be11a65": {
+      "file": "clips/cb68cf375cf1433dbf634ad036ae586c93f53d3cde3362df1a0eb64a4be11a65.ogg",
+      "bytes": 2178,
+      "sha256": "3f23703ad929d3fe702de004af9af16cd98075c62464c88b598c461e23b445d5",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.726
       }
     },
     "cbfa2ec0fe5fd769bf395684fc139103f24d6fdb84bfb4b13c1c5920d41b2738": {
@@ -2010,6 +4095,17 @@
         "durationSeconds": 0.893
       }
     },
+    "ce522332a0849d6cf20f1e62d269f0a4f81ddb76bac769d2a486e3cca0150d12": {
+      "file": "clips/ce522332a0849d6cf20f1e62d269f0a4f81ddb76bac769d2a486e3cca0150d12.ogg",
+      "bytes": 4266,
+      "sha256": "b23048342404f9802ff4aac501c2e77e63ec7aed4b677f19b4e17d9da0fbf24a",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.342
+      }
+    },
     "ce72860b7221488050bcc683a88b758a035c8f8eee66a4e38dc1cf341a706079": {
       "file": "clips/ce72860b7221488050bcc683a88b758a035c8f8eee66a4e38dc1cf341a706079.ogg",
       "bytes": 2495,
@@ -2019,6 +4115,50 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.798
+      }
+    },
+    "ceaef24d0d3c628d7448fb9989a4c506dea344790eb7c57b0d5ce629d5c5e51a": {
+      "file": "clips/ceaef24d0d3c628d7448fb9989a4c506dea344790eb7c57b0d5ce629d5c5e51a.ogg",
+      "bytes": 3498,
+      "sha256": "8232a9e280c08aded4892583a5f6ff6fc757c60e7bd8f5f41939de219b0f2820",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.083
+      }
+    },
+    "cff6b9e848753450d78183e59696f35aa99fa9a2a8f23eec9484adc8fe6be78b": {
+      "file": "clips/cff6b9e848753450d78183e59696f35aa99fa9a2a8f23eec9484adc8fe6be78b.ogg",
+      "bytes": 3462,
+      "sha256": "f542d87955d178147042f8382d457b39c44690dedf5d0be9daf9890ed45150de",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.088
+      }
+    },
+    "d0170a2d4d78963dd0d9dcca28056a758a600b5c03026e251c1dd8e87a50cd64": {
+      "file": "clips/d0170a2d4d78963dd0d9dcca28056a758a600b5c03026e251c1dd8e87a50cd64.ogg",
+      "bytes": 7171,
+      "sha256": "8253a54f4e6c6c7ecbd837013452a49b8a7136eb3ae6e389d2c78e5cda61a10f",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.282
+      }
+    },
+    "d0388f803a757c8bc8b92bfd8e3d90d04682a90d587f97d1ec627f6c4fbcb13f": {
+      "file": "clips/d0388f803a757c8bc8b92bfd8e3d90d04682a90d587f97d1ec627f6c4fbcb13f.ogg",
+      "bytes": 4243,
+      "sha256": "ac47833ad7eabe9496323156e7da805eb4101624e1597cb586fc931a81e1137e",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.367
       }
     },
     "d0efc8ef25949d0d349f0d8145c318645e46015d12e57aacad0241613989bfd0": {
@@ -2032,6 +4172,28 @@
         "durationSeconds": 1.063
       }
     },
+    "d17c8827efc0ef1dd0db2a6ef8cbcad69abe2765565f328b6560449f8f5b8617": {
+      "file": "clips/d17c8827efc0ef1dd0db2a6ef8cbcad69abe2765565f328b6560449f8f5b8617.ogg",
+      "bytes": 2277,
+      "sha256": "e7d40157a7ec2e2175fb75edd6721f40c2e3a2a494f768f46036e073bf7e9e76",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.728
+      }
+    },
+    "d24203bb22b73315f53dc648b9e69237569780013ad6fccf864f2be04726ecfe": {
+      "file": "clips/d24203bb22b73315f53dc648b9e69237569780013ad6fccf864f2be04726ecfe.ogg",
+      "bytes": 3113,
+      "sha256": "95928908d069cfce388a5ef935d18040ab48645148a5b112c8b83dec7afa58b2",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.013
+      }
+    },
     "d2816d4cfbc8389d1388380a3780d328c37d1b4c6b0ad237ceeec826cc7b6d23": {
       "file": "clips/d2816d4cfbc8389d1388380a3780d328c37d1b4c6b0ad237ceeec826cc7b6d23.ogg",
       "bytes": 3405,
@@ -2043,6 +4205,28 @@
         "durationSeconds": 1.084
       }
     },
+    "d30dcbfb180a0306e98a725c345f644c304daaae461226efed39f5f53205d521": {
+      "file": "clips/d30dcbfb180a0306e98a725c345f644c304daaae461226efed39f5f53205d521.ogg",
+      "bytes": 2820,
+      "sha256": "fbf4f04bebd85909f5a2e5c3ee474b27e9bdc1ef9b332a5bf3139e8178e13d94",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.875
+      }
+    },
+    "d3b5154d213ffd4cd9be556dbd457d7203b3217e6a92eee66b1549ef12b786ab": {
+      "file": "clips/d3b5154d213ffd4cd9be556dbd457d7203b3217e6a92eee66b1549ef12b786ab.ogg",
+      "bytes": 2783,
+      "sha256": "3385b73bb9d3630a8cb4901cea5eaccb08f9e6bc219bc84d1f158537c4d6f075",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.911
+      }
+    },
     "d3d01d2f8af19691bef9a354d85f101e64e6acede8211db05e875f5ae990f217": {
       "file": "clips/d3d01d2f8af19691bef9a354d85f101e64e6acede8211db05e875f5ae990f217.ogg",
       "bytes": 2676,
@@ -2052,6 +4236,28 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.885
+      }
+    },
+    "d45a6dd45d554064037a69a24fb60b9665385dea0ad458a59506c87d1e808dd0": {
+      "file": "clips/d45a6dd45d554064037a69a24fb60b9665385dea0ad458a59506c87d1e808dd0.ogg",
+      "bytes": 2880,
+      "sha256": "f9fe7a2a27a69cde7ffcb0e97451097560e27d45cb341bde5177be3fa056710d",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.95
+      }
+    },
+    "d7bf0f2d25befe9294d470b89cba72f60d056a20b14cbf0f523f079bdafbca57": {
+      "file": "clips/d7bf0f2d25befe9294d470b89cba72f60d056a20b14cbf0f523f079bdafbca57.ogg",
+      "bytes": 2183,
+      "sha256": "1f9f0df43307f52b3a998eb54f7e949b72577e35d252e920614ca1f79c0861c8",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.657
       }
     },
     "d802734748eab9ee8e58b5c6dd6778ce0f352292f03254e322699a017636179e": {
@@ -2087,6 +4293,17 @@
         "durationSeconds": 0.857
       }
     },
+    "dd3d0f8d6e20cb3e23b14244ff42f5baa7e904a98f686065d63ee6131e1c7570": {
+      "file": "clips/dd3d0f8d6e20cb3e23b14244ff42f5baa7e904a98f686065d63ee6131e1c7570.ogg",
+      "bytes": 6341,
+      "sha256": "ec418e747ee8d23d243b3c6f095d57a9f0237687ca802f0a2604535d33a913b2",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.034
+      }
+    },
     "e083975f805064584eeb0e2dccffdb101e6caf8f7d088891538028765ed2b2a2": {
       "file": "clips/e083975f805064584eeb0e2dccffdb101e6caf8f7d088891538028765ed2b2a2.ogg",
       "bytes": 1701,
@@ -2109,6 +4326,17 @@
         "durationSeconds": 1.117
       }
     },
+    "e212bc5ddfa7be0d88d8b71c69ecd03392ce37e5edbbb639541042e5c53353f3": {
+      "file": "clips/e212bc5ddfa7be0d88d8b71c69ecd03392ce37e5edbbb639541042e5c53353f3.ogg",
+      "bytes": 3742,
+      "sha256": "032a8f05d8bca90504793b0e05f7bfeb36019000265f632ff108431599364134",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.18
+      }
+    },
     "e24ad7e7902a14cff32fbe351890c307d28d3f5e6b1102abf4ad6be3f01e8b7e": {
       "file": "clips/e24ad7e7902a14cff32fbe351890c307d28d3f5e6b1102abf4ad6be3f01e8b7e.ogg",
       "bytes": 2455,
@@ -2118,6 +4346,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.756
+      }
+    },
+    "e2f61ca04444e712e1fafc241b8abcfc135a0803c25cce45b48ab0e7c23d6fd3": {
+      "file": "clips/e2f61ca04444e712e1fafc241b8abcfc135a0803c25cce45b48ab0e7c23d6fd3.ogg",
+      "bytes": 2744,
+      "sha256": "ef152cfd6f941fadc34f507c4d1b0bb2b4c83d0f1e555ea40c139cd6051ecf98",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.937
       }
     },
     "e2f81bc3d287d8a227a215ba71b38b684083938d8431d608ffdec10991c67f97": {
@@ -2142,6 +4381,17 @@
         "durationSeconds": 0.731
       }
     },
+    "e71f39c1c5b3d02fd491f6bbafa3baab2b263b81eb34f9e4a56ae53c689b8f47": {
+      "file": "clips/e71f39c1c5b3d02fd491f6bbafa3baab2b263b81eb34f9e4a56ae53c689b8f47.ogg",
+      "bytes": 2752,
+      "sha256": "82d128231930463cb90eddcd7967ba0bbe853de216845f6b167c4a7db8dd1028",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.897
+      }
+    },
     "e8bf2248c7dd7f7462541b43e8293eb8ddc5d83ea610751f57b2f57f189e94af": {
       "file": "clips/e8bf2248c7dd7f7462541b43e8293eb8ddc5d83ea610751f57b2f57f189e94af.ogg",
       "bytes": 2045,
@@ -2164,6 +4414,39 @@
         "durationSeconds": 0.831
       }
     },
+    "ea9dca3cfc523d14c4eb273fc8734d1932fb1e1326f159e86392eeaf4a2eefe2": {
+      "file": "clips/ea9dca3cfc523d14c4eb273fc8734d1932fb1e1326f159e86392eeaf4a2eefe2.ogg",
+      "bytes": 10329,
+      "sha256": "2ba07fa31579a28f77842da5cee40bc5dce361f40521c0469f941a5506ac3207",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 3.4
+      }
+    },
+    "ec0ee859ee2d0831565faa6de6bd44ec3e11cff32b2eac4068edd2646f5168f5": {
+      "file": "clips/ec0ee859ee2d0831565faa6de6bd44ec3e11cff32b2eac4068edd2646f5168f5.ogg",
+      "bytes": 2794,
+      "sha256": "2ae59e6740e834ce3af3bf33b6bbcd8cfae790e008ab2f57e678834f261b3e58",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.923
+      }
+    },
+    "ecbe29df2b81e5135bce330d8ff3334aec086d0a00d87fe7059e5a192410a8fb": {
+      "file": "clips/ecbe29df2b81e5135bce330d8ff3334aec086d0a00d87fe7059e5a192410a8fb.ogg",
+      "bytes": 3395,
+      "sha256": "828267dbc010f6b2f377b9f5b0bf867fd21d941b59aabebd0511a62c2c517a4c",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.065
+      }
+    },
     "ecd47b60c791f723f5d5457e4e6166c54f9347c92084079de6106447d291208d": {
       "file": "clips/ecd47b60c791f723f5d5457e4e6166c54f9347c92084079de6106447d291208d.ogg",
       "bytes": 3489,
@@ -2173,6 +4456,28 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 1.089
+      }
+    },
+    "f0300949c314d2819a57a11b0be6c5ac8acf1ee9e2de922d8302ccc77f0db75d": {
+      "file": "clips/f0300949c314d2819a57a11b0be6c5ac8acf1ee9e2de922d8302ccc77f0db75d.ogg",
+      "bytes": 6358,
+      "sha256": "404130482da055a8fa4dd2f155a1b48de1d8bfaa581d081030b45ae5c103a4f9",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 2.085
+      }
+    },
+    "f13a2f6d2a87f962dba6c94891f96382be46e60331ef8364bb3c0103aea3d449": {
+      "file": "clips/f13a2f6d2a87f962dba6c94891f96382be46e60331ef8364bb3c0103aea3d449.ogg",
+      "bytes": 3578,
+      "sha256": "0133c6458e6bdd17cd41162d0c19b9f3245e9005200157616cb0c973668236ca",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.135
       }
     },
     "f14eb6ed79c371942ae82d50dc9c2b383b663283b33588a0fb0c10b980bd0d74": {
@@ -2197,6 +4502,28 @@
         "durationSeconds": 2.851
       }
     },
+    "f7b79a30074a8ae907537ec4b3ff3b352ee09c849288546bc9ae97d4a1c8579b": {
+      "file": "clips/f7b79a30074a8ae907537ec4b3ff3b352ee09c849288546bc9ae97d4a1c8579b.ogg",
+      "bytes": 3992,
+      "sha256": "230c7b6cd0abe5a9a76a1ecd7ecd573cbbdd2da4c2548f5061b61c866e3dc0e9",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.276
+      }
+    },
+    "f83fc7a3f14798dbb3d61ab70b787adb3797a99f69af54bc2bfed61d92fdf161": {
+      "file": "clips/f83fc7a3f14798dbb3d61ab70b787adb3797a99f69af54bc2bfed61d92fdf161.ogg",
+      "bytes": 2449,
+      "sha256": "1979688b37753982c189b21c9d7bff893f66e9e823c313151996667e60f4d080",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.809
+      }
+    },
     "f889109d4a4ceac7fd712e87d55987c2a01efa74dc684754ace785ac5fe55816": {
       "file": "clips/f889109d4a4ceac7fd712e87d55987c2a01efa74dc684754ace785ac5fe55816.ogg",
       "bytes": 3410,
@@ -2208,6 +4535,17 @@
         "durationSeconds": 1.064
       }
     },
+    "f8a1bb1ba1c77ae3390d39e8c03431de4252794a932b1bf63cf090de162c841b": {
+      "file": "clips/f8a1bb1ba1c77ae3390d39e8c03431de4252794a932b1bf63cf090de162c841b.ogg",
+      "bytes": 2644,
+      "sha256": "cd615d3dbbfb99af3837776aabd925913e8c0d4f5f322446c2456eb91ef16187",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 0.877
+      }
+    },
     "fc955dc85570ac639a5e330746e53b7c3c9d4186275205e1aba9aa0b95b3a2f4": {
       "file": "clips/fc955dc85570ac639a5e330746e53b7c3c9d4186275205e1aba9aa0b95b3a2f4.ogg",
       "bytes": 2324,
@@ -2217,6 +4555,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.744
+      }
+    },
+    "fcb11ff78ec024fbb6c63af60bb566157c98d260db0a9a72dee2804fe0ee61df": {
+      "file": "clips/fcb11ff78ec024fbb6c63af60bb566157c98d260db0a9a72dee2804fe0ee61df.ogg",
+      "bytes": 3425,
+      "sha256": "d085da0893b15d4b7bb2902b48d11f920bb67725866a009e8aa8272f2dffa4d2",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.12
       }
     },
     "fd95a9f6c88f40ff846a5d037dd02833f57e7686b6821633476d0389254f5ec5": {
@@ -2239,6 +4588,17 @@
         "channels": 1,
         "inputSampleRate": 24000,
         "durationSeconds": 0.932
+      }
+    },
+    "fe83483b8cf4d864621e63266c93f76a69fcdff30c43912389e56599326ecccc": {
+      "file": "clips/fe83483b8cf4d864621e63266c93f76a69fcdff30c43912389e56599326ecccc.ogg",
+      "bytes": 6274,
+      "sha256": "7434605be3906d5335a5f50769e94fe61118b48e24132bbaa75e56cd6f9eee26",
+      "audio": {
+        "codec": "opus",
+        "channels": 1,
+        "inputSampleRate": 24000,
+        "durationSeconds": 1.981
       }
     },
     "ff179fd5dc5958cd5a27a06c24b4d8fbd3be61a959877af8eb44aa8e04f8f96d": {

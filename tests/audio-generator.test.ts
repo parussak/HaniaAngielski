@@ -8,7 +8,7 @@ import {createPlan,canonical,validateConfig,synthesisText} from '../scripts/audi
 import {generateFiles,checkGenerated,inside} from '../scripts/audio/files.mjs';
 import {inspectOpus,oggCRC} from '../scripts/audio/ogg.mjs';
 import {sceneModule} from './fixtures/scenes.ts';
-import {foodModules} from './materials.ts';
+import {foodModules,modules} from './materials.ts';
 const template=JSON.parse(readFileSync(new URL('../audio/config.json',import.meta.url),'utf8'));
 function material(){const m=sceneModule();m.languageCode='en';m.words=m.words.slice(0,2);m.words[0]={id:'apple',front:'jabłko',back:'apple',article:{expected:'an',explanation:'Jedno jabłko.'}};return m;}
 function config(id='scene-unit'){const c=structuredClone(template);c.modules=[{id,profile:'cori'}];return c;}
@@ -72,7 +72,8 @@ test('audio: nieznane pliki i ścieżki spoza katalogu nie są automatycznie usu
 });
 
 test('audio Food: wszystkie słowa i kwestie scen mają odwołania bez zmiany materiałów',()=>{
- const before=structuredClone(foodModules),plan=createPlan(foodModules,template),m=foodModules.find(v=>v.id==='unit-2-food')!,refs=plan.header.modules[0].references;
+ const before=structuredClone(foodModules),plan=createPlan(modules,template),m=foodModules.find(v=>v.id==='unit-2-food')!;
+ const refs=plan.header.modules.find(entry=>entry.moduleId===m.id)!.references;
  assert.equal(refs.filter((r:any)=>r.kind==='word').length,m.words.length);assert.equal(refs.filter((r:any)=>r.kind==='scene-line').length,m.scenes!.reduce((n,s)=>n+s.lines.length,0));assert.ok(refs.every((r:any)=>r.text&&!r.text.includes('___')));assert.ok(refs.some((r:any)=>r.text==='an apple'));assert.deepEqual(foodModules,before);
 });
 

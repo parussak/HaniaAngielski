@@ -8,7 +8,7 @@ Z katalogu głównego projektu:
 npm run audio
 ```
 
-Generator czyta aktualne materiały Food i tworzy lub aktualizuje nagrania. Nie trzeba ręcznie przepisywać słów, zmieniać kodu strony ani wskazywać każdego pliku. Zmień treść w `public/content/02-food/`, zapisz ją i ponownie uruchom polecenie.
+Generator czyta materiały modułów ustawionych w [konfiguracji](config.json). Głos Cori jest przypisany do Food i Technology for all. Po zmianie tekstu w `public/content/` ponownie uruchom polecenie, aby uaktualnić potrzebne klipy.
 
 Wyniki są w [generated/manifest.json](generated/manifest.json) i katalogu `generated/clips/`. Manifest jest indeksem: przy każdym haśle, wypowiedzi sceny i zdaniu czytanki (D-68) zawiera tekst oraz identyfikator klipu. Identyczne teksty współdzielą nagranie. Pliki `.ogg` zawierają **Opus mono 24 kb/s**, nie Vorbis. Model Cori i ustawienia są w [config.json](config.json).
 
