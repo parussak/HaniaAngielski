@@ -1,0 +1,148 @@
+[
+  {
+    "id": "space-camp",
+    "title": "Dzień na obozie kosmicznym",
+    "questionLanguage": "en",
+    "source": "Adaptacja inspirowana czytanką Space Adventure USA, podręcznik s. 45. Tekst własny.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "sentences": [
+      {
+        "id": "camp",
+        "text": "Here are some photos of Mia and Leo at a space camp.",
+        "translation": "Oto zdjęcia Mii i Leo z obozu kosmicznego."
+      },
+      {
+        "id": "rocket",
+        "text": "Leo is making a small rocket with his friend Mia.",
+        "translation": "Leo robi małą rakietę ze swoją koleżanką Mią."
+      },
+      {
+        "id": "excited",
+        "text": "Mia is excited about space travel.",
+        "translation": "Mia jest podekscytowana podróżami kosmicznymi."
+      },
+      {
+        "id": "simulator",
+        "text": "In the next photo, Mia is sitting in a simulator.",
+        "translation": "Na następnym zdjęciu Mia siedzi w symulatorze."
+      },
+      {
+        "id": "flying",
+        "text": "In the simulator, she is flying over the Moon.",
+        "translation": "W symulatorze leci nad Księżycem."
+      },
+      {
+        "id": "scared",
+        "text": "Leo is a bit scared of flying, so he is watching Mia on a big screen.",
+        "translation": "Leo trochę boi się latać, więc ogląda Mię na dużym ekranie."
+      },
+      {
+        "id": "photo",
+        "text": "After the flight, they are taking a photo of their rocket.",
+        "translation": "Po locie robią zdjęcie swojej rakiety."
+      }
+    ],
+    "glossary": {
+      "space camp": "obóz kosmiczny",
+      "small": "mały",
+      "flight": "lot",
+      "over": "nad",
+      "the Moon": "Księżyc",
+      "making": "robi, wykonuje",
+      "flying": "leci / latania",
+      "watching": "ogląda",
+      "taking a photo": "robią zdjęcie",
+      "next": "następny"
+    },
+    "questions": [
+      {
+        "id": "make",
+        "after": "rocket",
+        "type": "choice",
+        "prompt": "What is Leo making?",
+        "glossary": {
+          "making": "robi"
+        },
+        "answers": [
+          "A small rocket"
+        ],
+        "options": [
+          "A small rocket",
+          "A big screen",
+          "A simulator"
+        ],
+        "explanation": "Leo i Mia robią małą rakietę. Mówi o tym drugie zdanie."
+      },
+      {
+        "id": "excited",
+        "after": "excited",
+        "type": "choice",
+        "prompt": "What is Mia excited about?",
+        "glossary": {
+          "excited about": "podekscytowana czymś"
+        },
+        "answers": [
+          "Space travel"
+        ],
+        "options": [
+          "Space travel",
+          "Computer games",
+          "Taking photos"
+        ],
+        "explanation": "Mia jest podekscytowana podróżami kosmicznymi. To właśnie space travel."
+      },
+      {
+        "id": "fly-over",
+        "after": "flying",
+        "type": "choice",
+        "prompt": "Where is Mia flying in the simulator?",
+        "glossary": {
+          "flying": "leci"
+        },
+        "answers": [
+          "Over the Moon"
+        ],
+        "options": [
+          "Over the Moon",
+          "Over her school",
+          "Over the camp"
+        ],
+        "explanation": "W symulatorze Mia przelatuje nad Księżycem. Over oznacza tu „nad”."
+      },
+      {
+        "id": "feel",
+        "after": "scared",
+        "type": "tap",
+        "prompt": "Tap the word that shows how Leo feels.",
+        "glossary": {
+          "feels": "czuje się"
+        },
+        "sentence": "scared",
+        "answers": [
+          "scared"
+        ],
+        "explanation": "Scared nazywa uczucie Leo. Trochę boi się latać."
+      },
+      {
+        "id": "of-what",
+        "after": "photo",
+        "type": "choice",
+        "prompt": "What are they taking a photo of?",
+        "glossary": {
+          "taking a photo": "robią zdjęcie"
+        },
+        "answers": [
+          "Their rocket"
+        ],
+        "options": [
+          "Their rocket",
+          "The Moon",
+          "The screen"
+        ],
+        "explanation": "Po locie robią zdjęcie swojej rakiety, czyli their rocket."
+      }
+    ]
+  }
+]

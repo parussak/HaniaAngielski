@@ -1,0 +1,372 @@
+[
+  {
+    "id": "v-camera",
+    "wordId": "camera",
+    "distractorIds": [
+      "computer",
+      "headphones",
+      "keyboard"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-computer",
+    "wordId": "computer",
+    "distractorIds": [
+      "headphones",
+      "keyboard",
+      "laptop"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-headphones",
+    "wordId": "headphones",
+    "distractorIds": [
+      "keyboard",
+      "laptop",
+      "mobile-phone"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-keyboard",
+    "wordId": "keyboard",
+    "distractorIds": [
+      "laptop",
+      "mobile-phone",
+      "mouse"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-laptop",
+    "wordId": "laptop",
+    "distractorIds": [
+      "mobile-phone",
+      "mouse",
+      "printer"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-mobile-phone",
+    "wordId": "mobile-phone",
+    "distractorIds": [
+      "mouse",
+      "printer",
+      "screen"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47 (mobile phone w 3.1, mobile w 3.4)."
+  },
+  {
+    "id": "v-mouse",
+    "wordId": "mouse",
+    "distractorIds": [
+      "printer",
+      "screen",
+      "speakers"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-printer",
+    "wordId": "printer",
+    "distractorIds": [
+      "screen",
+      "speakers",
+      "tablet"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-screen",
+    "wordId": "screen",
+    "distractorIds": [
+      "speakers",
+      "tablet",
+      "tv"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-speakers",
+    "wordId": "speakers",
+    "distractorIds": [
+      "tablet",
+      "tv",
+      "camera"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-tablet",
+    "wordId": "tablet",
+    "distractorIds": [
+      "tv",
+      "camera",
+      "computer"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-tv",
+    "wordId": "tv",
+    "distractorIds": [
+      "camera",
+      "computer",
+      "headphones"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-chat-online",
+    "wordId": "chat-online",
+    "distractorIds": [
+      "download-a-song",
+      "send-an-email",
+      "surf-the-internet"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-download-a-song",
+    "wordId": "download-a-song",
+    "distractorIds": [
+      "send-an-email",
+      "surf-the-internet",
+      "take-a-photo"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-send-an-email",
+    "wordId": "send-an-email",
+    "distractorIds": [
+      "surf-the-internet",
+      "take-a-photo",
+      "take-a-selfie"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-surf-the-internet",
+    "wordId": "surf-the-internet",
+    "distractorIds": [
+      "take-a-photo",
+      "take-a-selfie",
+      "talk-on-the-phone"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-take-a-photo",
+    "wordId": "take-a-photo",
+    "distractorIds": [
+      "take-a-selfie",
+      "talk-on-the-phone",
+      "text-a-friend"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-take-a-selfie",
+    "wordId": "take-a-selfie",
+    "distractorIds": [
+      "talk-on-the-phone",
+      "text-a-friend",
+      "chat-online"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-talk-on-the-phone",
+    "wordId": "talk-on-the-phone",
+    "distractorIds": [
+      "text-a-friend",
+      "chat-online",
+      "download-a-song"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-text-a-friend",
+    "wordId": "text-a-friend",
+    "distractorIds": [
+      "chat-online",
+      "download-a-song",
+      "send-an-email"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-angry",
+    "wordId": "angry",
+    "distractorIds": [
+      "bored",
+      "happy",
+      "sad"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-bored",
+    "wordId": "bored",
+    "distractorIds": [
+      "happy",
+      "sad",
+      "scared"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-happy",
+    "wordId": "happy",
+    "distractorIds": [
+      "sad",
+      "scared",
+      "tired"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-sad",
+    "wordId": "sad",
+    "distractorIds": [
+      "scared",
+      "tired",
+      "worried"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-scared",
+    "wordId": "scared",
+    "distractorIds": [
+      "tired",
+      "worried",
+      "angry"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-tired",
+    "wordId": "tired",
+    "distractorIds": [
+      "worried",
+      "angry",
+      "bored"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-worried",
+    "wordId": "worried",
+    "distractorIds": [
+      "angry",
+      "bored",
+      "happy"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-excited-about",
+    "wordId": "excited-about",
+    "distractorIds": [
+      "worried-about",
+      "bad-at",
+      "good-at"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-worried-about",
+    "wordId": "worried-about",
+    "distractorIds": [
+      "bad-at",
+      "good-at",
+      "interested-in"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-bad-at",
+    "wordId": "bad-at",
+    "distractorIds": [
+      "good-at",
+      "interested-in",
+      "scared-of"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-good-at",
+    "wordId": "good-at",
+    "distractorIds": [
+      "interested-in",
+      "scared-of",
+      "excited-about"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-interested-in",
+    "wordId": "interested-in",
+    "distractorIds": [
+      "scared-of",
+      "excited-about",
+      "worried-about"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47 (lekcje 3.2 i 3.5)."
+  },
+  {
+    "id": "v-scared-of",
+    "wordId": "scared-of",
+    "distractorIds": [
+      "excited-about",
+      "worried-about",
+      "bad-at"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-rocket",
+    "wordId": "rocket",
+    "distractorIds": [
+      "simulator",
+      "space-travel",
+      "space-walking"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-simulator",
+    "wordId": "simulator",
+    "distractorIds": [
+      "space-travel",
+      "space-walking",
+      "rocket"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-space-travel",
+    "wordId": "space-travel",
+    "distractorIds": [
+      "space-walking",
+      "rocket",
+      "simulator"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  },
+  {
+    "id": "v-space-walking",
+    "wordId": "space-walking",
+    "distractorIds": [
+      "rocket",
+      "simulator",
+      "space-travel"
+    ],
+    "source": "Podręcznik, Wordlist, s. 47."
+  }
+]

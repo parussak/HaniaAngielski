@@ -1,0 +1,1719 @@
+[
+  {
+    "id": "keys-g",
+    "kind": "grammar",
+    "prompt": "Uzupełnij nazwą urządzenia z klawiszami: The letter G is on the ___.",
+    "answers": [
+      "keyboard"
+    ],
+    "options": [
+      "keyboard",
+      "printer",
+      "camera"
+    ],
+    "explanation": "Literę G znajdziesz na klawiszu klawiatury, czyli keyboard.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Zeszyt ćwiczeń, s. 24, ćw. 2–3."
+  },
+  {
+    "id": "wear-listen",
+    "kind": "grammar",
+    "prompt": "Wybierz: I can listen to music without waking my sister. I put on my ___.",
+    "answers": [
+      "headphones"
+    ],
+    "options": [
+      "headphones",
+      "speakers",
+      "printer"
+    ],
+    "explanation": "Słuchawki zakładasz na uszy. Dzięki nim muzyka nie obudzi siostry.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Zeszyt ćwiczeń, s. 24, ćw. 2–3.",
+    "responseType": "choice"
+  },
+  {
+    "id": "paper-in",
+    "kind": "grammar",
+    "prompt": "Wybierz: To print my homework, I put paper in the ___.",
+    "answers": [
+      "printer"
+    ],
+    "options": [
+      "printer",
+      "mouse",
+      "speakers"
+    ],
+    "explanation": "Papier wkładasz do drukarki, czyli printer.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Zeszyt ćwiczeń, s. 24, ćw. 2–3.",
+    "responseType": "choice"
+  },
+  {
+    "id": "arrow-on",
+    "kind": "grammar",
+    "prompt": "Wybierz: The little arrow moves across the ___.",
+    "answers": [
+      "screen"
+    ],
+    "options": [
+      "screen",
+      "keyboard",
+      "printer"
+    ],
+    "explanation": "Strzałkę kursora widzisz na ekranie, czyli na screen.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Zeszyt ćwiczeń, s. 24, ćw. 2–3.",
+    "responseType": "choice"
+  },
+  {
+    "id": "send-email",
+    "kind": "grammar",
+    "prompt": "Wpisz czasownik z wyrażenia „wysłać e-mail”. I ___ an email to my teacher every Friday.",
+    "answers": [
+      "send"
+    ],
+    "options": [
+      "send",
+      "text",
+      "take"
+    ],
+    "explanation": "E-mail wysyłamy. Mówimy send an email.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 39, ćw. 6; zeszyt ćwiczeń, s. 24, ćw. 5."
+  },
+  {
+    "id": "download-song",
+    "kind": "grammar",
+    "prompt": "Wpisz czasownik oznaczający „pobrać z internetu”. I ___ songs to my phone, so I can listen to them offline.",
+    "answers": [
+      "download"
+    ],
+    "options": [
+      "download",
+      "chat",
+      "surf"
+    ],
+    "explanation": "Pobierasz piosenki na telefon. Download oznacza pobrać plik.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 39, ćw. 6; zeszyt ćwiczeń, s. 24, ćw. 5."
+  },
+  {
+    "id": "now-i-am",
+    "kind": "grammar",
+    "prompt": "Wpisz formę am, is albo are. I ___ listening to music on my laptop.",
+    "answers": [
+      "am"
+    ],
+    "options": [
+      "am",
+      "is",
+      "are"
+    ],
+    "explanation": "Przy I potrzebujesz am. Listening mówi, co robisz teraz.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ćw. 6; zeszyt ćwiczeń, s. 25, ćw. 1.",
+    "ruleId": "now-positive"
+  },
+  {
+    "id": "now-she-is",
+    "kind": "grammar",
+    "prompt": "Wpisz formę am, is albo are. She ___ taking a photo of her cat.",
+    "answers": [
+      "is"
+    ],
+    "options": [
+      "is",
+      "am",
+      "are"
+    ],
+    "explanation": "Przy she pasuje is. Cała forma to is taking.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ćw. 6; zeszyt ćwiczeń, s. 25, ćw. 1.",
+    "ruleId": "now-positive"
+  },
+  {
+    "id": "now-they-are",
+    "kind": "grammar",
+    "prompt": "Wpisz formę am, is albo are. My friends ___ chatting online now.",
+    "answers": [
+      "are"
+    ],
+    "options": [
+      "are",
+      "is",
+      "am"
+    ],
+    "explanation": "My friends to „oni”, czyli they. Pasuje are chatting.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ćw. 6; zeszyt ćwiczeń, s. 25, ćw. 1.",
+    "ruleId": "now-positive"
+  },
+  {
+    "id": "now-you-are",
+    "kind": "grammar",
+    "prompt": "Wpisz formę am, is albo are. You ___ using my mouse!",
+    "answers": [
+      "are"
+    ],
+    "options": [
+      "are",
+      "am",
+      "is"
+    ],
+    "explanation": "Po you wstawiamy are, także gdy zwracasz się do jednej osoby.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ćw. 6; zeszyt ćwiczeń, s. 25, ćw. 1.",
+    "ruleId": "now-positive"
+  },
+  {
+    "id": "now-tom-is",
+    "kind": "grammar",
+    "prompt": "Wpisz formę am, is albo are. Tom ___ watching a film on his tablet.",
+    "answers": [
+      "is"
+    ],
+    "options": [
+      "is",
+      "are",
+      "am"
+    ],
+    "explanation": "Tom to jedna osoba. Możesz zastąpić imię przez he, więc wybierz is.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ćw. 6; zeszyt ćwiczeń, s. 25, ćw. 1.",
+    "ruleId": "now-positive"
+  },
+  {
+    "id": "now-we-are",
+    "kind": "grammar",
+    "prompt": "Wpisz formę am, is albo are. We ___ learning English now.",
+    "answers": [
+      "are"
+    ],
+    "options": [
+      "are",
+      "am",
+      "is"
+    ],
+    "explanation": "Przy we wstawiamy are. We are learning znaczy „uczymy się teraz”.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ćw. 6; zeszyt ćwiczeń, s. 25, ćw. 1.",
+    "ruleId": "now-positive"
+  },
+  {
+    "id": "not-i",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: I ___ (not use) the laptop now.",
+    "answers": [
+      "am not using"
+    ],
+    "options": [
+      "am not using",
+      "isn't using",
+      "am not use"
+    ],
+    "explanation": "Przy I użyj am not. Use traci końcowe e przed -ing, więc masz am not using.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ramka Get Grammar! i ćw. 8; zeszyt ćwiczeń, s. 25, ćw. 4.",
+    "ruleId": "now-negative"
+  },
+  {
+    "id": "not-friend",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: My friend ___ (not take) a selfie now.",
+    "answers": [
+      "isn't taking",
+      "is not taking"
+    ],
+    "options": [
+      "isn't taking",
+      "aren't taking",
+      "doesn't taking"
+    ],
+    "explanation": "My friend to jedna osoba, dlatego użyj is not albo isn't. Take zmienia się w taking.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ramka Get Grammar! i ćw. 8; zeszyt ćwiczeń, s. 25, ćw. 4.",
+    "ruleId": "now-negative"
+  },
+  {
+    "id": "not-parents",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: My parents ___ (not watch) TV now.",
+    "answers": [
+      "aren't watching",
+      "are not watching"
+    ],
+    "options": [
+      "aren't watching",
+      "isn't watching",
+      "not watching"
+    ],
+    "explanation": "My parents to they. W przeczeniu pasuje are not watching lub aren't watching.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ramka Get Grammar! i ćw. 8; zeszyt ćwiczeń, s. 25, ćw. 4.",
+    "ruleId": "now-negative"
+  },
+  {
+    "id": "not-am",
+    "kind": "grammar",
+    "prompt": "Uzupełnij przeczenie do I’m chatting online now: I’m ___ chatting online now.",
+    "answers": [
+      "not"
+    ],
+    "options": [
+      "not",
+      "no",
+      "isn’t"
+    ],
+    "explanation": "W tym ćwiczeniu tworzysz przeczenie do I'm chatting now. Po I'm wstaw not.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ramka Get Grammar! i ćw. 8; zeszyt ćwiczeń, s. 25, ćw. 4.",
+    "ruleId": "now-negative"
+  },
+  {
+    "id": "not-we",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: We ___ (not send) an email at the moment.",
+    "answers": [
+      "aren't sending",
+      "are not sending"
+    ],
+    "options": [
+      "aren't sending",
+      "isn't sending",
+      "don't sending"
+    ],
+    "explanation": "Po we potrzebujesz are not albo aren't, potem sending.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ramka Get Grammar! i ćw. 8; zeszyt ćwiczeń, s. 25, ćw. 4.",
+    "ruleId": "now-negative"
+  },
+  {
+    "id": "not-camera",
+    "kind": "grammar",
+    "prompt": "Wybierz przeczenie: The camera ___ working now.",
+    "answers": [
+      "isn't"
+    ],
+    "options": [
+      "isn't",
+      "aren't",
+      "am not"
+    ],
+    "explanation": "The camera to it. Dla it przeczenie ma formę isn't working.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ramka Get Grammar! i ćw. 8; zeszyt ćwiczeń, s. 25, ćw. 4.",
+    "ruleId": "now-negative",
+    "responseType": "choice"
+  },
+  {
+    "id": "ing-surf",
+    "kind": "grammar",
+    "prompt": "Wpisz formę z -ing: surf → ___",
+    "answers": [
+      "surfing"
+    ],
+    "options": [
+      "surfing",
+      "surffing",
+      "surfeing"
+    ],
+    "explanation": "Do surf dopisujesz -ing bez podwajania, bo na końcu masz dwie spółgłoski: r i f.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ramka LOOK!; zeszyt ćwiczeń, s. 25, ćw. 3.",
+    "ruleId": "ing-spelling"
+  },
+  {
+    "id": "ing-dance",
+    "kind": "grammar",
+    "prompt": "Wpisz formę z -ing: dance → ___",
+    "answers": [
+      "dancing"
+    ],
+    "options": [
+      "dancing",
+      "danceing",
+      "dancinng"
+    ],
+    "explanation": "Opuść końcowe nieme e i dopisz -ing: dancing.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ramka LOOK!; zeszyt ćwiczeń, s. 25, ćw. 3.",
+    "ruleId": "ing-spelling"
+  },
+  {
+    "id": "ing-chat",
+    "kind": "grammar",
+    "prompt": "Wpisz formę z -ing: chat → ___",
+    "answers": [
+      "chatting"
+    ],
+    "options": [
+      "chatting",
+      "chating",
+      "chattingg"
+    ],
+    "explanation": "W chat po krótkim a stoi jedno t. Podwój t przed -ing.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ramka LOOK!; zeszyt ćwiczeń, s. 25, ćw. 3.",
+    "ruleId": "ing-spelling"
+  },
+  {
+    "id": "ing-have",
+    "kind": "grammar",
+    "prompt": "Wpisz formę z -ing: have → ___",
+    "answers": [
+      "having"
+    ],
+    "options": [
+      "having",
+      "haveing",
+      "havving"
+    ],
+    "explanation": "W have opuszczasz końcowe nieme e, więc piszesz having.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ramka LOOK!; zeszyt ćwiczeń, s. 25, ćw. 3.",
+    "ruleId": "ing-spelling"
+  },
+  {
+    "id": "ing-run",
+    "kind": "grammar",
+    "prompt": "Wpisz formę z -ing: run → ___",
+    "answers": [
+      "running"
+    ],
+    "options": [
+      "running",
+      "runing",
+      "runeing"
+    ],
+    "explanation": "Podwój n po krótkim u: running.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ramka LOOK!; zeszyt ćwiczeń, s. 25, ćw. 3.",
+    "ruleId": "ing-spelling"
+  },
+  {
+    "id": "ing-write",
+    "kind": "grammar",
+    "prompt": "Wpisz formę z -ing: write → ___",
+    "answers": [
+      "writing"
+    ],
+    "options": [
+      "writing",
+      "writeing",
+      "writting"
+    ],
+    "explanation": "Write traci nieme e. Do writ- dopisujesz -ing.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 41, ramka LOOK!; zeszyt ćwiczeń, s. 25, ćw. 3.",
+    "ruleId": "ing-spelling"
+  },
+  {
+    "id": "ask-you",
+    "kind": "grammar",
+    "prompt": "Wpisz formę am, is albo are. ___ you using the computer?",
+    "answers": [
+      "Are"
+    ],
+    "options": [
+      "Are",
+      "Is",
+      "Am"
+    ],
+    "explanation": "Przy you użyj are i postaw je na początku pytania.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 43, ramka i ćw. 3; zeszyt ćwiczeń, s. 26, ćw. 1.",
+    "ruleId": "now-yes-no"
+  },
+  {
+    "id": "ask-felix",
+    "kind": "grammar",
+    "prompt": "Wpisz formę am, is albo are. ___ Felix taking a photo?",
+    "answers": [
+      "Is"
+    ],
+    "options": [
+      "Is",
+      "Are",
+      "Am"
+    ],
+    "explanation": "Felix to jedna osoba, więc pytanie rozpoczynasz od is.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 43, ramka i ćw. 3; zeszyt ćwiczeń, s. 26, ćw. 1.",
+    "ruleId": "now-yes-no"
+  },
+  {
+    "id": "ask-friends",
+    "kind": "grammar",
+    "prompt": "Wpisz formę am, is albo are. ___ your friends texting you?",
+    "answers": [
+      "Are"
+    ],
+    "options": [
+      "Are",
+      "Is",
+      "Am"
+    ],
+    "explanation": "Your friends to they. W pytaniu wstaw are przed your friends.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 43, ramka i ćw. 3; zeszyt ćwiczeń, s. 26, ćw. 1.",
+    "ruleId": "now-yes-no"
+  },
+  {
+    "id": "ask-dreaming",
+    "kind": "grammar",
+    "prompt": "Wpisz formę am, is albo are. ___ I dreaming?",
+    "answers": [
+      "Am"
+    ],
+    "options": [
+      "Am",
+      "Is",
+      "Are"
+    ],
+    "explanation": "Dla I użyj am. W pytaniu Am I dreaming? stoi na początku.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 43, ramka i ćw. 3; zeszyt ćwiczeń, s. 26, ćw. 1.",
+    "ruleId": "now-yes-no"
+  },
+  {
+    "id": "ask-playing",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Are we ___ (play) a game now?",
+    "answers": [
+      "playing"
+    ],
+    "options": [
+      "playing",
+      "play",
+      "plaing"
+    ],
+    "explanation": "Are jest już na początku. Teraz potrzebujesz czasownika play z -ing.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 43, ramka i ćw. 3; zeszyt ćwiczeń, s. 26, ćw. 1.",
+    "ruleId": "now-yes-no"
+  },
+  {
+    "id": "detail-what",
+    "kind": "grammar",
+    "prompt": "Wpisz formę am, is albo are. What ___ you doing now?",
+    "answers": [
+      "are"
+    ],
+    "options": [
+      "are",
+      "is",
+      "am"
+    ],
+    "explanation": "Po What wstaw are, bo pytasz you. Dopiero potem jest doing.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 42–43; zeszyt ćwiczeń, s. 26, ćw. 1 i 3.",
+    "ruleId": "now-wh"
+  },
+  {
+    "id": "detail-where",
+    "kind": "grammar",
+    "prompt": "Wpisz formę am, is albo are. Where ___ the bus going?",
+    "answers": [
+      "is"
+    ],
+    "options": [
+      "is",
+      "are",
+      "am"
+    ],
+    "explanation": "The bus to jedna rzecz, czyli it. Dlatego po Where daj is.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 42–43; zeszyt ćwiczeń, s. 26, ćw. 1 i 3.",
+    "ruleId": "now-wh"
+  },
+  {
+    "id": "detail-why",
+    "kind": "grammar",
+    "prompt": "Wpisz formę am, is albo are. Why ___ those children running?",
+    "answers": [
+      "are"
+    ],
+    "options": [
+      "are",
+      "is",
+      "am"
+    ],
+    "explanation": "Those children to they. Pytanie zaczyna się od Why are.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 42–43; zeszyt ćwiczeń, s. 26, ćw. 1 i 3.",
+    "ruleId": "now-wh"
+  },
+  {
+    "id": "detail-place",
+    "kind": "grammar",
+    "prompt": "Wybierz: ___ are you going? — To the sports centre.",
+    "answers": [
+      "Where"
+    ],
+    "options": [
+      "Where",
+      "What",
+      "Why"
+    ],
+    "explanation": "Odpowiedź mówi, dokąd ktoś idzie, więc pytanie zaczyna się od Where.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 42–43; zeszyt ćwiczeń, s. 26, ćw. 1 i 3.",
+    "ruleId": "now-wh",
+    "responseType": "choice"
+  },
+  {
+    "id": "detail-reason",
+    "kind": "grammar",
+    "prompt": "Wybierz: ___ is Leo laughing? — Because the cat is dancing.",
+    "answers": [
+      "Why"
+    ],
+    "options": [
+      "Why",
+      "Where",
+      "What"
+    ],
+    "explanation": "Odpowiedź zaczyna się od Because i podaje powód. Pasuje Why.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 42–43; zeszyt ćwiczeń, s. 26, ćw. 1 i 3.",
+    "ruleId": "now-wh",
+    "responseType": "choice"
+  },
+  {
+    "id": "reply-i",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Are you sending an email? — Yes, I ___.",
+    "answers": [
+      "am"
+    ],
+    "options": [
+      "am",
+      "is",
+      "are"
+    ],
+    "explanation": "W odpowiedzi o sobie użyj I am. W krótkim potwierdzeniu nie skracaj am.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 43, ramka Get Grammar!; zeszyt ćwiczeń, s. 26, ćw. 2.",
+    "ruleId": "now-short"
+  },
+  {
+    "id": "reply-she",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Is she watching TV? — No, she ___.",
+    "answers": [
+      "isn't",
+      "is not"
+    ],
+    "options": [
+      "isn't",
+      "aren't",
+      "is"
+    ],
+    "explanation": "She wymaga is. Odpowiedź zaczyna się od No, więc użyj isn't lub is not.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 43, ramka Get Grammar!; zeszyt ćwiczeń, s. 26, ćw. 2.",
+    "ruleId": "now-short"
+  },
+  {
+    "id": "reply-they",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Are they taking a photo? — Yes, they ___.",
+    "answers": [
+      "are"
+    ],
+    "options": [
+      "are",
+      "is",
+      "am"
+    ],
+    "explanation": "Po they użyj are. W krótkim potwierdzeniu jest pełne Yes, they are.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 43, ramka Get Grammar!; zeszyt ćwiczeń, s. 26, ćw. 2.",
+    "ruleId": "now-short"
+  },
+  {
+    "id": "reply-he",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Is he using your printer? — Yes, he ___.",
+    "answers": [
+      "is"
+    ],
+    "options": [
+      "is",
+      "are",
+      "am"
+    ],
+    "explanation": "He łączy się z is. W krótkiej odpowiedzi pomijasz using your printer.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 43, ramka Get Grammar!; zeszyt ćwiczeń, s. 26, ćw. 2.",
+    "ruleId": "now-short"
+  },
+  {
+    "id": "reply-we",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Are you and Maja talking on the phone? — No, we ___.",
+    "answers": [
+      "aren't",
+      "are not"
+    ],
+    "options": [
+      "aren't",
+      "isn't",
+      "are"
+    ],
+    "explanation": "Odpowiadasz za siebie i Maję, więc użyj we. No wymaga przeczenia aren't lub are not.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 43, ramka Get Grammar!; zeszyt ćwiczeń, s. 26, ćw. 2.",
+    "ruleId": "now-short"
+  },
+  {
+    "id": "phone-here",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Hello, it's Felix ___.",
+    "answers": [
+      "here"
+    ],
+    "options": [
+      "here",
+      "out",
+      "soon"
+    ],
+    "explanation": "It's Felix here mówi rozmówcy, kto dzwoni.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, ramka Speaking, s. 44; zeszyt ćwiczeń, s. 27, ćw. 1 i 3."
+  },
+  {
+    "id": "phone-speak",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Can I ___ to Maja, please?",
+    "answers": [
+      "speak",
+      "talk"
+    ],
+    "options": [
+      "speak",
+      "text",
+      "send"
+    ],
+    "explanation": "Can I speak to…? to zwrot z ramki „Speaking”. Możesz też użyć talk w tej samej prośbie.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, ramka Speaking, s. 44; zeszyt ćwiczeń, s. 27, ćw. 1 i 3."
+  },
+  {
+    "id": "phone-moment",
+    "kind": "grammar",
+    "prompt": "Wybierz: Can I speak to Albert, please? — Yes. Just a ___.",
+    "answers": [
+      "moment"
+    ],
+    "options": [
+      "moment",
+      "photo",
+      "phone"
+    ],
+    "explanation": "Rozmówca ma chwilę poczekać. Moment tworzy tu zwrot Just a moment.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, ramka Speaking, s. 44; zeszyt ćwiczeń, s. 27, ćw. 1 i 3.",
+    "responseType": "choice"
+  },
+  {
+    "id": "phone-for",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Maja! It's Felix ___ you.",
+    "answers": [
+      "for"
+    ],
+    "options": [
+      "for",
+      "at",
+      "of"
+    ],
+    "explanation": "It's Felix for you mówi Mai, że połączenie jest do niej.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, ramka Speaking, s. 44; zeszyt ćwiczeń, s. 27, ćw. 1 i 3."
+  },
+  {
+    "id": "phone-out",
+    "kind": "grammar",
+    "prompt": "Wybierz: Is Felix at home? — No, I'm afraid he's ___.",
+    "answers": [
+      "out"
+    ],
+    "options": [
+      "out",
+      "here",
+      "in"
+    ],
+    "explanation": "Out w tym zdaniu znaczy, że Feliksa nie ma w domu.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, ramka Speaking, s. 44; zeszyt ćwiczeń, s. 27, ćw. 1 i 3.",
+    "responseType": "choice"
+  },
+  {
+    "id": "phone-hang",
+    "kind": "grammar",
+    "prompt": "Uzupełnij prośbę o chwilę cierpliwości. ___ on. I’ll get Maja.",
+    "answers": [
+      "Hang",
+      "Hold"
+    ],
+    "options": [
+      "Hang",
+      "Talk",
+      "Look"
+    ],
+    "explanation": "Hang on to zwrot z podręcznika. Hold on także znaczy „Poczekaj chwilę”.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, ramka Speaking, s. 44; zeszyt ćwiczeń, s. 27, ćw. 1 i 3."
+  },
+  {
+    "id": "phone-bye",
+    "kind": "grammar",
+    "prompt": "Wybierz zakończenie: Thanks for calling. ___!",
+    "answers": [
+      "Bye"
+    ],
+    "options": [
+      "Bye",
+      "Speak",
+      "Wait"
+    ],
+    "explanation": "Bye to krótkie pożegnanie na koniec rozmowy.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, ramka Speaking, s. 44; zeszyt ćwiczeń, s. 27, ćw. 1 i 3.",
+    "responseType": "choice"
+  },
+  {
+    "id": "phone-see",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: ___ you soon!",
+    "answers": [
+      "See"
+    ],
+    "options": [
+      "See",
+      "Speak",
+      "Talk"
+    ],
+    "explanation": "See you soon znaczy „Do zobaczenia wkrótce”.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, ramka Speaking, s. 44; zeszyt ćwiczeń, s. 27, ćw. 1 i 3."
+  },
+  {
+    "id": "camp-interested",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Are you interested ___ space travel?",
+    "answers": [
+      "in"
+    ],
+    "options": [
+      "in",
+      "at",
+      "of"
+    ],
+    "explanation": "Przy zainteresowaniu czymś łączysz interested z in.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 45, ramka Vocabulary i ćw. 5; zeszyt ćwiczeń, s. 28, ćw. 4."
+  },
+  {
+    "id": "camp-good",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Lou is good ___ using the simulator.",
+    "answers": [
+      "at"
+    ],
+    "options": [
+      "at",
+      "in",
+      "of"
+    ],
+    "explanation": "Gdy mówisz, że Lou w czymś dobrze sobie radzi, użyj good at.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 45, ramka Vocabulary i ćw. 5; zeszyt ćwiczeń, s. 28, ćw. 4."
+  },
+  {
+    "id": "camp-bad",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: I'm bad ___ computer games.",
+    "answers": [
+      "at"
+    ],
+    "options": [
+      "at",
+      "about",
+      "in"
+    ],
+    "explanation": "Bad at określa, z czym kiepsko sobie radzisz. Tutaj chodzi o gry.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 45, ramka Vocabulary i ćw. 5; zeszyt ćwiczeń, s. 28, ćw. 4."
+  },
+  {
+    "id": "camp-excited",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: She's excited ___ the space camp.",
+    "answers": [
+      "about"
+    ],
+    "options": [
+      "about",
+      "at",
+      "of"
+    ],
+    "explanation": "Excited about mówi, czym jest podekscytowana. Tu chodzi o obóz.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 45, ramka Vocabulary i ćw. 5; zeszyt ćwiczeń, s. 28, ćw. 4."
+  },
+  {
+    "id": "camp-worried",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: He's worried ___ his first trip in the simulator.",
+    "answers": [
+      "about"
+    ],
+    "options": [
+      "about",
+      "at",
+      "of"
+    ],
+    "explanation": "Worried about wskazuje, co go martwi. Tutaj to pierwsza wyprawa w symulatorze.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 45, ramka Vocabulary i ćw. 5; zeszyt ćwiczeń, s. 28, ćw. 4."
+  },
+  {
+    "id": "camp-scared",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: I'm scared ___ spiders.",
+    "answers": [
+      "of"
+    ],
+    "options": [
+      "of",
+      "in",
+      "at"
+    ],
+    "explanation": "To, czego się boisz, wprowadzasz przez scared of.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 45, ramka Vocabulary i ćw. 5; zeszyt ćwiczeń, s. 28, ćw. 4."
+  },
+  {
+    "id": "also-chat",
+    "kind": "grammar",
+    "prompt": "Wybierz also lub too według typowego szyku z ramki „Writing”. I send emails. I ___ chat online.",
+    "answers": [
+      "also"
+    ],
+    "options": [
+      "also",
+      "too"
+    ],
+    "explanation": "Luka jest przed głównym czasownikiem chat. W tym ćwiczeniu pasuje also.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 46, ramka Writing; zeszyt ćwiczeń, s. 29, ćw. 4.",
+    "ruleId": "also-too",
+    "responseType": "choice"
+  },
+  {
+    "id": "too-read",
+    "kind": "grammar",
+    "prompt": "Wybierz also lub too według typowego szyku z ramki „Writing”. I watch videos on my tablet. I read books on it ___.",
+    "answers": [
+      "too"
+    ],
+    "options": [
+      "too",
+      "also"
+    ],
+    "explanation": "Luka jest na końcu zdania. W ćwiczeniu używamy tu typowego szyku z too.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 46, ramka Writing; zeszyt ćwiczeń, s. 29, ćw. 4.",
+    "ruleId": "also-too",
+    "responseType": "choice"
+  },
+  {
+    "id": "also-can",
+    "kind": "grammar",
+    "prompt": "Wybierz also lub too według typowego szyku z ramki „Writing”. I can download songs. I can ___ take photos.",
+    "answers": [
+      "also"
+    ],
+    "options": [
+      "also",
+      "too"
+    ],
+    "explanation": "Po can, a przed take, wstaw also. W tym zdaniu too zwykle dałabyś na końcu.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 46, ramka Writing; zeszyt ćwiczeń, s. 29, ćw. 4.",
+    "ruleId": "also-too",
+    "responseType": "choice"
+  },
+  {
+    "id": "too-tired",
+    "kind": "grammar",
+    "prompt": "Wybierz also lub too według typowego szyku z ramki „Writing”. My friend is tired. I'm tired ___.",
+    "answers": [
+      "too"
+    ],
+    "options": [
+      "too",
+      "also"
+    ],
+    "explanation": "Końcowe too dodaje informację, że ty także czujesz zmęczenie.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 46, ramka Writing; zeszyt ćwiczeń, s. 29, ćw. 4.",
+    "ruleId": "also-too",
+    "responseType": "choice"
+  },
+  {
+    "id": "also-phone",
+    "kind": "grammar",
+    "prompt": "Wybierz also lub too według typowego szyku z ramki „Writing”. I've got a laptop. I've ___ got a phone.",
+    "answers": [
+      "also"
+    ],
+    "options": [
+      "also",
+      "too"
+    ],
+    "explanation": "Also stawiasz po I've i przed got. Mówisz, że oprócz laptopa masz również telefon.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 46, ramka Writing; zeszyt ćwiczeń, s. 29, ćw. 4.",
+    "ruleId": "also-too",
+    "responseType": "choice"
+  },
+  {
+    "id": "too-games",
+    "kind": "grammar",
+    "prompt": "Wybierz also lub too według typowego szyku z ramki „Writing”. I surf the Internet on my laptop. I play games on it ___.",
+    "answers": [
+      "too"
+    ],
+    "options": [
+      "too",
+      "also"
+    ],
+    "explanation": "Na końcu zdania użyj too, żeby dodać drugą czynność.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 46, ramka Writing; zeszyt ćwiczeń, s. 29, ćw. 4.",
+    "ruleId": "also-too",
+    "responseType": "choice"
+  },
+  {
+    "id": "device-editor-also",
+    "kind": "grammar",
+    "prompt": "Wybierz zdanie z typowym szykiem also.",
+    "answers": [
+      "I also use my phone to take photos."
+    ],
+    "options": [
+      "I also use my phone to take photos.",
+      "I use also my phone to take photos.",
+      "I use my also phone to take photos."
+    ],
+    "explanation": "Also zwykle stoi przed głównym czasownikiem. Tutaj tym czasownikiem jest use.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 46, ćw. 4–6; zeszyt ćwiczeń, s. 29, ćw. 4–6.",
+    "ruleId": "also-too",
+    "responseType": "choice"
+  },
+  {
+    "id": "device-editor-too",
+    "kind": "grammar",
+    "prompt": "Wybierz zdanie z typowym końcowym too.",
+    "answers": [
+      "I use my tablet to read books too."
+    ],
+    "options": [
+      "I use my tablet to read books too.",
+      "I too use my tablet to read books.",
+      "I use my tablet to too read books."
+    ],
+    "explanation": "W ramce „Writing” too stoi na końcu, tutaj po books. I too use… też jest poprawne, gdy podkreślasz, że ty również używasz tabletu.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 46, ćw. 4–6; zeszyt ćwiczeń, s. 29, ćw. 4–6.",
+    "ruleId": "also-too",
+    "responseType": "choice"
+  },
+  {
+    "id": "device-send",
+    "kind": "grammar",
+    "prompt": "Wybierz: I use my laptop to ___ emails to my friends.",
+    "answers": [
+      "send"
+    ],
+    "options": [
+      "send",
+      "take",
+      "surf"
+    ],
+    "explanation": "Z emails połącz send, bo opisujesz wysyłanie wiadomości.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 46, ćw. 4–6; zeszyt ćwiczeń, s. 29, ćw. 4–6.",
+    "responseType": "choice"
+  },
+  {
+    "id": "device-talk",
+    "kind": "grammar",
+    "prompt": "Wybierz: My grandad lives far away, so we talk ___ the phone every Sunday.",
+    "answers": [
+      "on"
+    ],
+    "options": [
+      "on",
+      "at",
+      "in"
+    ],
+    "explanation": "Jeśli mówisz o rozmowie głosowej przez telefon, użyj talk on the phone.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 46, ćw. 4–6; zeszyt ćwiczeń, s. 29, ćw. 4–6.",
+    "responseType": "choice"
+  },
+  {
+    "id": "device-download",
+    "kind": "grammar",
+    "prompt": "Wybierz: I use my tablet to ___ songs and listen to them offline.",
+    "answers": [
+      "download"
+    ],
+    "options": [
+      "download",
+      "send",
+      "text"
+    ],
+    "explanation": "Pobierasz piosenki na urządzenie, by odtwarzać je bez internetu. Pasuje download.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 46, ćw. 4–6; zeszyt ćwiczeń, s. 29, ćw. 4–6.",
+    "responseType": "choice"
+  },
+  {
+    "id": "device-photos",
+    "kind": "grammar",
+    "prompt": "Wybierz: I've got a camera. I use it to ___ photos.",
+    "answers": [
+      "take"
+    ],
+    "options": [
+      "take",
+      "surf",
+      "chat"
+    ],
+    "explanation": "Z photos łączymy take. Cały zwrot to take photos.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 46, ćw. 4–6; zeszyt ćwiczeń, s. 29, ćw. 4–6.",
+    "responseType": "choice"
+  },
+  {
+    "id": "device-also-uses",
+    "kind": "grammar",
+    "prompt": "Wybierz also lub too według typowego szyku z ramki „Writing”. Maja watches videos on her tablet. She ___ uses it to read books.",
+    "answers": [
+      "also"
+    ],
+    "options": [
+      "also",
+      "too"
+    ],
+    "explanation": "Also stoi przed uses i łączy dwie rzeczy, do których Maja używa tabletu.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 46, ćw. 4–6; zeszyt ćwiczeń, s. 29, ćw. 4–6.",
+    "ruleId": "also-too",
+    "responseType": "choice"
+  },
+  {
+    "id": "device-too-tv",
+    "kind": "grammar",
+    "prompt": "Wybierz also lub too według typowego szyku z ramki „Writing”. I watch films on my laptop. I watch them on TV ___.",
+    "answers": [
+      "too"
+    ],
+    "options": [
+      "too",
+      "also"
+    ],
+    "explanation": "Na końcu zdania użyj too, żeby powiedzieć, że oglądasz filmy także w telewizji.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 46, ćw. 4–6; zeszyt ćwiczeń, s. 29, ćw. 4–6.",
+    "ruleId": "also-too",
+    "responseType": "choice"
+  },
+  {
+    "id": "review-hands",
+    "kind": "grammar",
+    "prompt": "Wybierz: I click the little arrow with my ___.",
+    "answers": [
+      "mouse"
+    ],
+    "options": [
+      "mouse",
+      "printer",
+      "speakers"
+    ],
+    "explanation": "Komputerowa myszka pozwala kliknąć strzałką kursora.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 48, ćw. 1–4; zeszyt ćwiczeń, s. 30, ćw. 1–2.",
+    "responseType": "choice"
+  },
+  {
+    "id": "review-selfie",
+    "kind": "grammar",
+    "prompt": "Wybierz: Let's ___ a selfie together.",
+    "answers": [
+      "take"
+    ],
+    "options": [
+      "take",
+      "send",
+      "surf"
+    ],
+    "explanation": "Kiedy robisz sobie zdjęcie, mówisz take a selfie.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 48, ćw. 1–4; zeszyt ćwiczeń, s. 30, ćw. 1–2.",
+    "responseType": "choice"
+  },
+  {
+    "id": "review-worry",
+    "kind": "grammar",
+    "prompt": "Wybierz: I can't find my new phone. I'm ___.",
+    "answers": [
+      "worried"
+    ],
+    "options": [
+      "worried",
+      "bored",
+      "happy"
+    ],
+    "explanation": "Jeśli zgubiłaś nowy telefon, możesz się martwić. Tę emocję nazywamy worried.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 48, ćw. 1–4; zeszyt ćwiczeń, s. 30, ćw. 1–2.",
+    "responseType": "choice"
+  },
+  {
+    "id": "review-angry",
+    "kind": "grammar",
+    "prompt": "Wybierz: I'm really ___ because someone broke my new tablet on purpose.",
+    "answers": [
+      "angry"
+    ],
+    "options": [
+      "angry",
+      "happy",
+      "bored"
+    ],
+    "explanation": "Celowe zniszczenie tabletu może zezłościć. Angry znaczy „rozgniewany”.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 48, ćw. 1–4; zeszyt ćwiczeń, s. 30, ćw. 1–2.",
+    "responseType": "choice"
+  },
+  {
+    "id": "review-at",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: She's very good ___ taking photos.",
+    "answers": [
+      "at"
+    ],
+    "options": [
+      "at",
+      "about",
+      "of"
+    ],
+    "explanation": "Jeśli dobrze sobie z czymś radzi, użyj good at.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 48, ćw. 1–4; zeszyt ćwiczeń, s. 30, ćw. 1–2."
+  },
+  {
+    "id": "review-about",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: My brother's excited ___ his new laptop.",
+    "answers": [
+      "about"
+    ],
+    "options": [
+      "about",
+      "of",
+      "at"
+    ],
+    "explanation": "O tym, co go ekscytuje, mówi wyrażenie excited about.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 48, ćw. 1–4; zeszyt ćwiczeń, s. 30, ćw. 1–2."
+  },
+  {
+    "id": "review-affirm",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: I ___ (watch) a film on my tablet right now.",
+    "answers": [
+      "am watching"
+    ],
+    "options": [
+      "am watching",
+      "is watching",
+      "watching"
+    ],
+    "explanation": "Po I użyj am, potem watching. Luka obejmuje te dwie części.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 48–49, ćw. 5–6 i 9; zeszyt ćwiczeń, s. 30, ćw. 3–5.",
+    "ruleId": "now-positive"
+  },
+  {
+    "id": "review-negative",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Maja ___ (not write) an email right now.",
+    "answers": [
+      "isn't writing",
+      "is not writing"
+    ],
+    "options": [
+      "isn't writing",
+      "aren't writing",
+      "isn't writeing"
+    ],
+    "explanation": "Maja to she, więc pasuje isn't lub is not. Write traci e przed -ing.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 48–49, ćw. 5–6 i 9; zeszyt ćwiczeń, s. 30, ćw. 3–5.",
+    "ruleId": "now-negative"
+  },
+  {
+    "id": "review-question",
+    "kind": "grammar",
+    "prompt": "Wpisz formę am, is albo are. ___ Maja using the laptop now?",
+    "answers": [
+      "Is"
+    ],
+    "options": [
+      "Is",
+      "Am",
+      "Are"
+    ],
+    "explanation": "Przed Maja w pytaniu wstaw is, bo pytasz o jedną osobę.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 48–49, ćw. 5–6 i 9; zeszyt ćwiczeń, s. 30, ćw. 3–5.",
+    "ruleId": "now-yes-no"
+  },
+  {
+    "id": "review-detail",
+    "kind": "grammar",
+    "prompt": "Wybierz: ___ are the cats doing? — They're taking a photo.",
+    "answers": [
+      "What"
+    ],
+    "options": [
+      "What",
+      "Where",
+      "Why"
+    ],
+    "explanation": "Odpowiedź nazywa czynność. Pytanie zaczyna się od What.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 48–49, ćw. 5–6 i 9; zeszyt ćwiczeń, s. 30, ćw. 3–5.",
+    "ruleId": "now-wh",
+    "responseType": "choice"
+  },
+  {
+    "id": "review-short",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Is Felix talking on the phone? — No, he ___.",
+    "answers": [
+      "isn't",
+      "is not"
+    ],
+    "options": [
+      "isn't",
+      "is",
+      "aren't"
+    ],
+    "explanation": "O Feliksie odpowiadasz he. W przeczeniu pasuje isn't lub is not.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 48–49, ćw. 5–6 i 9; zeszyt ćwiczeń, s. 30, ćw. 3–5.",
+    "ruleId": "now-short"
+  },
+  {
+    "id": "review-greeting",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Hello, it's Maja ___. Can I speak to Felix?",
+    "answers": [
+      "here"
+    ],
+    "options": [
+      "here",
+      "for",
+      "out"
+    ],
+    "explanation": "It's Maja here to sposób, w jaki Maja przedstawia się przez telefon.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 48–49, ćw. 5–6 i 9; zeszyt ćwiczeń, s. 30, ćw. 3–5."
+  },
+  {
+    "id": "review-handover",
+    "kind": "grammar",
+    "prompt": "Uzupełnij: Felix, it's Maja ___ you!",
+    "answers": [
+      "for"
+    ],
+    "options": [
+      "for",
+      "at",
+      "of"
+    ],
+    "explanation": "For you znaczy tutaj „do ciebie”. Ktoś przekazuje Feliksowi telefon.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 48–49, ćw. 5–6 i 9; zeszyt ćwiczeń, s. 30, ćw. 3–5."
+  },
+  {
+    "id": "review-too",
+    "kind": "grammar",
+    "prompt": "Wybierz also lub too według typowego szyku z ramki „Writing”. I read comics on my tablet. I read them on my phone ___.",
+    "answers": [
+      "too"
+    ],
+    "options": [
+      "too",
+      "also"
+    ],
+    "explanation": "W schemacie z podręcznika too ląduje na końcu zdania i znaczy „też”.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 48–49, ćw. 5–6 i 9; zeszyt ćwiczeń, s. 30, ćw. 3–5.",
+    "ruleId": "also-too",
+    "responseType": "choice"
+  },
+  {
+    "id": "feeling-happy",
+    "kind": "grammar",
+    "prompt": "Wybierz: Leo has just got the game he really wanted. He's ___ about his present.",
+    "answers": [
+      "happy"
+    ],
+    "options": [
+      "happy",
+      "sad",
+      "angry"
+    ],
+    "explanation": "Leo się cieszy z prezentu. Happy oznacza „szczęśliwy”.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 43, ramka Feelings; s. 48, ćw. 3.",
+    "responseType": "choice"
+  },
+  {
+    "id": "feeling-scared",
+    "kind": "grammar",
+    "prompt": "Wybierz: The big dog is coming towards me. I want to hide. I’m ___.",
+    "answers": [
+      "scared"
+    ],
+    "options": [
+      "scared",
+      "bored",
+      "happy"
+    ],
+    "explanation": "Gdy boisz się zbliżającego psa, możesz powiedzieć I'm scared.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 43, ramka Feelings; s. 48, ćw. 3.",
+    "responseType": "choice"
+  },
+  {
+    "id": "feeling-tired",
+    "kind": "grammar",
+    "prompt": "Wybierz: After a long day and very little sleep, I'm too ___ to play.",
+    "answers": [
+      "tired"
+    ],
+    "options": [
+      "tired",
+      "angry",
+      "happy"
+    ],
+    "explanation": "Po długim dniu i krótkim śnie możesz czuć zmęczenie. Pasuje tired.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 43, ramka Feelings; s. 48, ćw. 3.",
+    "responseType": "choice"
+  },
+  {
+    "id": "feeling-bored",
+    "kind": "grammar",
+    "prompt": "Wybierz: I'm reading the same page again and again. It isn't interesting. I'm ___.",
+    "answers": [
+      "bored"
+    ],
+    "options": [
+      "bored",
+      "scared",
+      "happy"
+    ],
+    "explanation": "Jeśli coś cię nudzi, mówisz I'm bored.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 43, ramka Feelings; s. 48, ćw. 3.",
+    "responseType": "choice"
+  },
+  {
+    "id": "feeling-sad",
+    "kind": "grammar",
+    "prompt": "Wybierz: My best friend is moving away. I’ll miss her. I feel ___.",
+    "answers": [
+      "sad"
+    ],
+    "options": [
+      "sad",
+      "happy",
+      "bored"
+    ],
+    "explanation": "Jej wyjazd sprawia, że jest ci smutno. Sad to „smutny”.",
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja. Podręcznik, s. 43, ramka Feelings; s. 48, ćw. 3.",
+    "responseType": "choice"
+  }
+]

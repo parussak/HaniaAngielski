@@ -1,0 +1,1713 @@
+{
+  "version": 2,
+  "entries": [
+    {
+      "id": "camera",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "aparat fotograficzny"
+        },
+        "en": {
+          "text": "camera"
+        }
+      },
+      "illustration": {
+        "symbol": "📷",
+        "caption": "camera — aparat fotograficzny"
+      }
+    },
+    {
+      "id": "computer",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "komputer"
+        },
+        "en": {
+          "text": "computer"
+        }
+      },
+      "illustration": {
+        "symbol": "🖥️",
+        "caption": "computer — komputer"
+      }
+    },
+    {
+      "id": "headphones",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "słuchawki"
+        },
+        "en": {
+          "text": "headphones"
+        }
+      },
+      "illustration": {
+        "symbol": "🎧",
+        "caption": "headphones — słuchawki"
+      }
+    },
+    {
+      "id": "keyboard",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "klawiatura"
+        },
+        "en": {
+          "text": "keyboard"
+        }
+      },
+      "illustration": {
+        "symbol": "⌨️",
+        "caption": "keyboard — klawiatura"
+      }
+    },
+    {
+      "id": "laptop",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "laptop"
+        },
+        "en": {
+          "text": "laptop"
+        }
+      },
+      "illustration": {
+        "symbol": "💻",
+        "caption": "laptop — laptop"
+      }
+    },
+    {
+      "id": "mobile-phone",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47 (mobile phone w 3.1, mobile w 3.4).",
+      "variants": {
+        "pl": {
+          "text": "telefon komórkowy"
+        },
+        "en": {
+          "text": "mobile phone",
+          "forms": [
+            "mobile"
+          ]
+        }
+      },
+      "illustration": {
+        "symbol": "📱",
+        "caption": "mobile phone — telefon komórkowy"
+      },
+      "answers": {
+        "en": [
+          "mobile phone",
+          "mobile"
+        ]
+      }
+    },
+    {
+      "id": "mouse",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "myszka komputerowa"
+        },
+        "en": {
+          "text": "mouse"
+        }
+      },
+      "illustration": {
+        "symbol": "🖱️",
+        "caption": "mouse — myszka komputerowa"
+      }
+    },
+    {
+      "id": "printer",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "drukarka"
+        },
+        "en": {
+          "text": "printer"
+        }
+      },
+      "illustration": {
+        "symbol": "🖨️",
+        "caption": "printer — drukarka"
+      }
+    },
+    {
+      "id": "screen",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "ekran (np. laptopa)"
+        },
+        "en": {
+          "text": "screen"
+        }
+      },
+      "illustration": {
+        "symbol": "🖥️",
+        "caption": "screen — ekran (np. laptopa)"
+      }
+    },
+    {
+      "id": "speakers",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "głośniki"
+        },
+        "en": {
+          "text": "speakers"
+        }
+      },
+      "illustration": {
+        "symbol": "🔊",
+        "caption": "speakers — głośniki"
+      }
+    },
+    {
+      "id": "tablet",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "tablet"
+        },
+        "en": {
+          "text": "tablet"
+        }
+      },
+      "illustration": {
+        "symbol": "📱",
+        "caption": "tablet — tablet"
+      }
+    },
+    {
+      "id": "tv",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "telewizor"
+        },
+        "en": {
+          "text": "TV"
+        }
+      },
+      "illustration": {
+        "symbol": "📺",
+        "caption": "TV — telewizor"
+      }
+    },
+    {
+      "id": "chat-online",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "rozmawiać na czacie"
+        },
+        "en": {
+          "text": "chat online"
+        }
+      },
+      "illustration": {
+        "symbol": "💬",
+        "caption": "chat online — rozmawiać na czacie"
+      }
+    },
+    {
+      "id": "download-a-song",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "pobrać piosenkę z internetu"
+        },
+        "en": {
+          "text": "download a song"
+        }
+      },
+      "illustration": {
+        "symbol": "⬇️",
+        "caption": "download a song — pobrać piosenkę z internetu"
+      }
+    },
+    {
+      "id": "send-an-email",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "wysłać e-mail"
+        },
+        "en": {
+          "text": "send an email",
+          "forms": [
+            "send an e-mail"
+          ]
+        }
+      },
+      "illustration": {
+        "symbol": "📧",
+        "caption": "send an email — wysłać e-mail"
+      },
+      "answers": {
+        "en": [
+          "send an email",
+          "send an e-mail"
+        ]
+      }
+    },
+    {
+      "id": "surf-the-internet",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "surfować po internecie"
+        },
+        "en": {
+          "text": "surf the Internet",
+          "forms": [
+            "browse the internet"
+          ]
+        }
+      },
+      "illustration": {
+        "symbol": "🌐",
+        "caption": "surf the Internet — surfować po internecie"
+      },
+      "answers": {
+        "en": [
+          "surf the Internet",
+          "browse the internet"
+        ]
+      }
+    },
+    {
+      "id": "take-a-photo",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "zrobić zdjęcie"
+        },
+        "en": {
+          "text": "take a photo",
+          "forms": [
+            "take a photograph"
+          ]
+        }
+      },
+      "illustration": {
+        "symbol": "📷",
+        "caption": "take a photo — zrobić zdjęcie"
+      },
+      "answers": {
+        "en": [
+          "take a photo",
+          "take a photograph"
+        ]
+      }
+    },
+    {
+      "id": "take-a-selfie",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "zrobić sobie selfie"
+        },
+        "en": {
+          "text": "take a selfie"
+        }
+      },
+      "illustration": {
+        "symbol": "🤳",
+        "caption": "take a selfie — zrobić sobie selfie"
+      }
+    },
+    {
+      "id": "talk-on-the-phone",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "rozmawiać przez telefon"
+        },
+        "en": {
+          "text": "talk on the phone",
+          "forms": [
+            "speak on the phone"
+          ]
+        }
+      },
+      "illustration": {
+        "symbol": "📞",
+        "caption": "talk on the phone — rozmawiać przez telefon"
+      },
+      "answers": {
+        "en": [
+          "talk on the phone",
+          "speak on the phone"
+        ]
+      }
+    },
+    {
+      "id": "text-a-friend",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "wysłać SMS do znajomego"
+        },
+        "en": {
+          "text": "text a friend"
+        }
+      },
+      "illustration": {
+        "symbol": "📲",
+        "caption": "text a friend — wysłać SMS do znajomego"
+      }
+    },
+    {
+      "id": "between",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "pomiędzy"
+        },
+        "en": {
+          "text": "between"
+        }
+      },
+      "illustration": {
+        "symbol": "↔️",
+        "caption": "between — pomiędzy"
+      }
+    },
+    {
+      "id": "go-to-bed",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "iść do łóżka"
+        },
+        "en": {
+          "text": "go to bed"
+        }
+      },
+      "illustration": {
+        "symbol": "🛏️",
+        "caption": "go to bed — iść do łóżka"
+      }
+    },
+    {
+      "id": "how-many-times",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "Ile razy…?"
+        },
+        "en": {
+          "text": "How many times ...?"
+        }
+      },
+      "illustration": {
+        "symbol": "🔢",
+        "caption": "How many times ...? — Ile razy…?"
+      }
+    },
+    {
+      "id": "how-often",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "Jak często…?"
+        },
+        "en": {
+          "text": "How often ...?"
+        }
+      },
+      "illustration": {
+        "symbol": "📅",
+        "caption": "How often ...? — Jak często…?"
+      }
+    },
+    {
+      "id": "more",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "więcej"
+        },
+        "en": {
+          "text": "more"
+        }
+      },
+      "illustration": {
+        "symbol": "➕",
+        "caption": "more — więcej"
+      }
+    },
+    {
+      "id": "spend-time",
+      "group": "Lekcja 3.1",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "spędzać czas"
+        },
+        "en": {
+          "text": "spend time"
+        }
+      },
+      "illustration": {
+        "symbol": "⏳",
+        "caption": "spend time — spędzać czas"
+      }
+    },
+    {
+      "id": "go-on",
+      "group": "Lekcja 3.2",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "Śmiało!"
+        },
+        "en": {
+          "text": "Go on!"
+        }
+      },
+      "illustration": {
+        "symbol": "🙌",
+        "caption": "Go on! — Śmiało!"
+      }
+    },
+    {
+      "id": "thats-a-surprise",
+      "group": "Lekcja 3.2",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "A to niespodzianka!"
+        },
+        "en": {
+          "text": "That's a surprise!"
+        }
+      },
+      "illustration": {
+        "symbol": "😮",
+        "caption": "That's a surprise! — A to niespodzianka!"
+      }
+    },
+    {
+      "id": "wait-a-minute",
+      "group": "Lekcja 3.2",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "Poczekaj chwilę. (wait…)"
+        },
+        "en": {
+          "text": "Wait a minute."
+        }
+      },
+      "illustration": {
+        "symbol": "⏳",
+        "caption": "Wait a minute. — Poczekaj chwilę. (wait…)"
+      }
+    },
+    {
+      "id": "ask-for",
+      "group": "Lekcja 3.2",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "prosić o"
+        },
+        "en": {
+          "text": "ask for"
+        }
+      },
+      "illustration": {
+        "symbol": "🙋",
+        "caption": "ask for — prosić o"
+      }
+    },
+    {
+      "id": "at-the-moment",
+      "group": "Lekcja 3.2",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "w tej chwili"
+        },
+        "en": {
+          "text": "at the moment"
+        }
+      },
+      "illustration": {
+        "symbol": "⏱️",
+        "caption": "at the moment — w tej chwili"
+      }
+    },
+    {
+      "id": "chat",
+      "group": "Lekcja 3.2",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "czat (rzeczownik)"
+        },
+        "en": {
+          "text": "chat"
+        }
+      },
+      "illustration": {
+        "symbol": "💬",
+        "caption": "chat — czat (rzeczownik)"
+      }
+    },
+    {
+      "id": "downstairs",
+      "group": "Lekcja 3.2",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "na dole, na niższym piętrze"
+        },
+        "en": {
+          "text": "downstairs"
+        }
+      },
+      "illustration": {
+        "symbol": "⬇️",
+        "caption": "downstairs — na dole, na niższym piętrze"
+      }
+    },
+    {
+      "id": "laugh",
+      "group": "Lekcja 3.2",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "śmiać się"
+        },
+        "en": {
+          "text": "laugh"
+        }
+      },
+      "illustration": {
+        "symbol": "😄",
+        "caption": "laugh — śmiać się"
+      }
+    },
+    {
+      "id": "lets-see",
+      "group": "Lekcja 3.2",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "Zobaczmy!"
+        },
+        "en": {
+          "text": "Let's see!"
+        }
+      },
+      "illustration": {
+        "src": "illustrations/word-look.svg",
+        "caption": "Let's see! — Zobaczmy!"
+      }
+    },
+    {
+      "id": "over-there",
+      "group": "Lekcja 3.2",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "tam (wskazując miejsce)"
+        },
+        "en": {
+          "text": "over there"
+        }
+      },
+      "illustration": {
+        "symbol": "👉",
+        "caption": "over there — tam (wskazując miejsce)"
+      }
+    },
+    {
+      "id": "paper",
+      "group": "Lekcja 3.2",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "papier"
+        },
+        "en": {
+          "text": "paper"
+        }
+      },
+      "illustration": {
+        "symbol": "📄",
+        "caption": "paper — papier"
+      }
+    },
+    {
+      "id": "poor",
+      "group": "Lekcja 3.2",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "biedny, godny współczucia"
+        },
+        "en": {
+          "text": "poor"
+        }
+      },
+      "illustration": {
+        "symbol": "😟",
+        "caption": "poor — biedny, godny współczucia"
+      }
+    },
+    {
+      "id": "sit",
+      "group": "Lekcja 3.2",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "siedzieć"
+        },
+        "en": {
+          "text": "sit"
+        }
+      },
+      "illustration": {
+        "symbol": "🪑",
+        "caption": "sit — siedzieć"
+      }
+    },
+    {
+      "id": "sit-down",
+      "group": "Lekcja 3.2",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "usiąść"
+        },
+        "en": {
+          "text": "sit down"
+        }
+      },
+      "illustration": {
+        "symbol": "🪑",
+        "caption": "sit down — usiąść"
+      }
+    },
+    {
+      "id": "take-an-order",
+      "group": "Lekcja 3.2",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "przyjąć zamówienie"
+        },
+        "en": {
+          "text": "take an order"
+        }
+      },
+      "illustration": {
+        "symbol": "📝",
+        "caption": "take an order — przyjąć zamówienie"
+      }
+    },
+    {
+      "id": "wrong",
+      "group": "Lekcja 3.2",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "niepoprawny"
+        },
+        "en": {
+          "text": "wrong"
+        }
+      },
+      "illustration": {
+        "symbol": "❌",
+        "caption": "wrong — niepoprawny"
+      }
+    },
+    {
+      "id": "angry",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "rozgniewany"
+        },
+        "en": {
+          "text": "angry"
+        }
+      },
+      "illustration": {
+        "symbol": "😠",
+        "caption": "angry — rozgniewany"
+      }
+    },
+    {
+      "id": "bored",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "znudzony"
+        },
+        "en": {
+          "text": "bored"
+        }
+      },
+      "illustration": {
+        "symbol": "😑",
+        "caption": "bored — znudzony"
+      }
+    },
+    {
+      "id": "happy",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "szczęśliwy"
+        },
+        "en": {
+          "text": "happy"
+        }
+      },
+      "illustration": {
+        "symbol": "😊",
+        "caption": "happy — szczęśliwy"
+      }
+    },
+    {
+      "id": "sad",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "smutny"
+        },
+        "en": {
+          "text": "sad"
+        }
+      },
+      "illustration": {
+        "symbol": "😢",
+        "caption": "sad — smutny"
+      }
+    },
+    {
+      "id": "scared",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "przestraszony"
+        },
+        "en": {
+          "text": "scared"
+        }
+      },
+      "illustration": {
+        "symbol": "😨",
+        "caption": "scared — przestraszony"
+      }
+    },
+    {
+      "id": "tired",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "zmęczony"
+        },
+        "en": {
+          "text": "tired"
+        }
+      },
+      "illustration": {
+        "symbol": "🥱",
+        "caption": "tired — zmęczony"
+      }
+    },
+    {
+      "id": "worried",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "zmartwiony"
+        },
+        "en": {
+          "text": "worried"
+        }
+      },
+      "illustration": {
+        "symbol": "😟",
+        "caption": "worried — zmartwiony"
+      }
+    },
+    {
+      "id": "come-on",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "Chodź!"
+        },
+        "en": {
+          "text": "Come on!"
+        }
+      },
+      "illustration": {
+        "symbol": "👋",
+        "caption": "Come on! — Chodź!"
+      }
+    },
+    {
+      "id": "dance",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "tańczyć"
+        },
+        "en": {
+          "text": "dance"
+        }
+      },
+      "illustration": {
+        "symbol": "💃",
+        "caption": "dance — tańczyć"
+      }
+    },
+    {
+      "id": "down-north-street",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "wzdłuż North Street"
+        },
+        "en": {
+          "text": "down North Street"
+        }
+      },
+      "illustration": {
+        "symbol": "🛣️",
+        "caption": "down North Street — wzdłuż North Street"
+      }
+    },
+    {
+      "id": "drive",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "prowadzić samochód"
+        },
+        "en": {
+          "text": "drive"
+        }
+      },
+      "illustration": {
+        "symbol": "🚗",
+        "caption": "drive — prowadzić samochód"
+      }
+    },
+    {
+      "id": "finger",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "palec u ręki"
+        },
+        "en": {
+          "text": "finger"
+        }
+      },
+      "illustration": {
+        "symbol": "☝️",
+        "caption": "finger — palec u ręki"
+      }
+    },
+    {
+      "id": "look-tired",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "wyglądać na zmęczonego"
+        },
+        "en": {
+          "text": "look tired"
+        }
+      },
+      "illustration": {
+        "symbol": "🥱",
+        "caption": "look tired — wyglądać na zmęczonego"
+      }
+    },
+    {
+      "id": "look-for",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "szukać czegoś"
+        },
+        "en": {
+          "text": "look for"
+        }
+      },
+      "illustration": {
+        "symbol": "🔎",
+        "caption": "look for — szukać czegoś"
+      }
+    },
+    {
+      "id": "rubbish-lorry",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "śmieciarka"
+        },
+        "en": {
+          "text": "rubbish lorry"
+        }
+      },
+      "illustration": {
+        "symbol": "🚛",
+        "caption": "rubbish lorry — śmieciarka"
+      }
+    },
+    {
+      "id": "there-he-is",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "Tam jest! (o chłopcu lub mężczyźnie)"
+        },
+        "en": {
+          "text": "There he is!"
+        }
+      },
+      "illustration": {
+        "symbol": "👉",
+        "caption": "There he is! — Tam jest! (o chłopcu lub mężczyźnie)"
+      }
+    },
+    {
+      "id": "whats-that-noise",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "Co to za hałas?"
+        },
+        "en": {
+          "text": "What's that noise?"
+        }
+      },
+      "illustration": {
+        "symbol": "🔊",
+        "caption": "What's that noise? — Co to za hałas?"
+      }
+    },
+    {
+      "id": "whats-the-matter",
+      "group": "Lekcja 3.3",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "Co się stało? (pytanie o problem)"
+        },
+        "en": {
+          "text": "What's the matter?"
+        }
+      },
+      "illustration": {
+        "symbol": "❓",
+        "caption": "What's the matter? — Co się stało? (pytanie o problem)"
+      }
+    },
+    {
+      "id": "bye",
+      "group": "Lekcja 3.4",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "Pa! (krótkie pożegnanie)"
+        },
+        "en": {
+          "text": "Bye."
+        }
+      },
+      "illustration": {
+        "symbol": "👋",
+        "caption": "Bye. — Pa! (krótkie pożegnanie)"
+      }
+    },
+    {
+      "id": "can-i-speak",
+      "group": "Lekcja 3.4",
+      "source": "Podręcznik, ramka Speaking, s. 44, i Wordlist, s. 47 (w ramce Amy, w Wordlist Eve).",
+      "variants": {
+        "pl": {
+          "text": "Czy mogę rozmawiać z Eve?"
+        },
+        "en": {
+          "text": "Can I speak to Eve, please?",
+          "forms": [
+            "Can I talk to Eve, please?"
+          ]
+        }
+      },
+      "illustration": {
+        "symbol": "☎️",
+        "caption": "Can I speak to Eve, please? — Czy mogę rozmawiać z Eve?"
+      },
+      "answers": {
+        "en": [
+          "Can I speak to Eve, please?",
+          "Can I talk to Eve, please?"
+        ]
+      }
+    },
+    {
+      "id": "hello-its-elena",
+      "group": "Lekcja 3.4",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "Halo, mówi Elena."
+        },
+        "en": {
+          "text": "Hello, it's Elena here.",
+          "forms": [
+            "Hello, it’s Elena."
+          ]
+        }
+      },
+      "illustration": {
+        "symbol": "📞",
+        "caption": "Hello, it's Elena here. — Halo, mówi Elena."
+      },
+      "answers": {
+        "en": [
+          "Hello, it's Elena here.",
+          "Hello, it’s Elena."
+        ]
+      }
+    },
+    {
+      "id": "im-afraid-hes-out",
+      "group": "Lekcja 3.4",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "Niestety nie ma go w domu."
+        },
+        "en": {
+          "text": "I'm afraid he's out.",
+          "examples": [
+            "I'm afraid he's out.",
+            "I'm afraid she's out."
+          ],
+          "forms": [
+            "I’m afraid he is out."
+          ]
+        }
+      },
+      "illustration": {
+        "symbol": "🚪",
+        "caption": "I'm afraid he's out. — Niestety nie ma go w domu."
+      },
+      "answers": {
+        "en": [
+          "I'm afraid he's out.",
+          "I’m afraid he is out."
+        ]
+      }
+    },
+    {
+      "id": "its-elena-for-you",
+      "group": "Lekcja 3.4",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "To Elena do ciebie. (przekazując telefon)"
+        },
+        "en": {
+          "text": "It's Elena for you."
+        }
+      },
+      "illustration": {
+        "symbol": "📲",
+        "caption": "It's Elena for you. — To Elena do ciebie. (przekazując telefon)"
+      }
+    },
+    {
+      "id": "just-a-moment",
+      "group": "Lekcja 3.4",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "Chwileczkę. (just…)"
+        },
+        "en": {
+          "text": "Just a moment.",
+          "forms": [
+            "Just a minute.",
+            "Just one moment."
+          ]
+        }
+      },
+      "illustration": {
+        "symbol": "⏳",
+        "caption": "Just a moment. — Chwileczkę. (just…)"
+      },
+      "answers": {
+        "en": [
+          "Just a moment.",
+          "Just a minute.",
+          "Just one moment."
+        ]
+      }
+    },
+    {
+      "id": "hang-on",
+      "group": "Lekcja 3.4",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "Poczekaj chwilę. (krótki zwrot przez telefon)"
+        },
+        "en": {
+          "text": "Hang on.",
+          "forms": [
+            "Hold on."
+          ]
+        }
+      },
+      "illustration": {
+        "symbol": "✋",
+        "caption": "Hang on. — Poczekaj chwilę."
+      },
+      "answers": {
+        "en": [
+          "Hang on.",
+          "Hold on."
+        ]
+      }
+    },
+    {
+      "id": "see-you-soon",
+      "group": "Lekcja 3.4",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "Do zobaczenia wkrótce.",
+          "examples": [
+            "Do zobaczenia wkrótce!",
+            "Do zobaczenia później!"
+          ]
+        },
+        "en": {
+          "text": "See you soon.",
+          "examples": [
+            "See you soon!",
+            "See you later!"
+          ]
+        }
+      },
+      "illustration": {
+        "symbol": "👋",
+        "caption": "See you soon. — Do zobaczenia wkrótce."
+      }
+    },
+    {
+      "id": "magazine",
+      "group": "Lekcja 3.4",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "czasopismo"
+        },
+        "en": {
+          "text": "magazine"
+        }
+      },
+      "illustration": {
+        "symbol": "📰",
+        "caption": "magazine — czasopismo"
+      }
+    },
+    {
+      "id": "excited-about",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "podekscytowany czymś"
+        },
+        "en": {
+          "text": "excited about"
+        }
+      },
+      "illustration": {
+        "symbol": "🤩",
+        "caption": "excited about — podekscytowany czymś"
+      }
+    },
+    {
+      "id": "worried-about",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "zmartwiony czymś"
+        },
+        "en": {
+          "text": "worried about"
+        }
+      },
+      "illustration": {
+        "symbol": "😟",
+        "caption": "worried about — zmartwiony czymś"
+      }
+    },
+    {
+      "id": "bad-at",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "kiepski w czymś"
+        },
+        "en": {
+          "text": "bad at"
+        }
+      },
+      "illustration": {
+        "symbol": "👎",
+        "caption": "bad at — kiepski w czymś"
+      }
+    },
+    {
+      "id": "good-at",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "dobry w czymś"
+        },
+        "en": {
+          "text": "good at"
+        }
+      },
+      "illustration": {
+        "symbol": "👍",
+        "caption": "good at — dobry w czymś"
+      }
+    },
+    {
+      "id": "interested-in",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47 (lekcje 3.2 i 3.5).",
+      "variants": {
+        "pl": {
+          "text": "zainteresowany czymś"
+        },
+        "en": {
+          "text": "interested in"
+        }
+      },
+      "illustration": {
+        "symbol": "👀",
+        "caption": "interested in — zainteresowany czymś"
+      }
+    },
+    {
+      "id": "scared-of",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "przestraszony czymś, bojący się czegoś"
+        },
+        "en": {
+          "text": "scared of"
+        }
+      },
+      "illustration": {
+        "symbol": "😨",
+        "caption": "scared of — przestraszony czymś, bojący się czegoś"
+      }
+    },
+    {
+      "id": "a-bit",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "trochę, odrobinę"
+        },
+        "en": {
+          "text": "a bit"
+        }
+      },
+      "illustration": {
+        "symbol": "🤏",
+        "caption": "a bit — trochę, odrobinę"
+      }
+    },
+    {
+      "id": "activities",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "aktywności, zajęcia"
+        },
+        "en": {
+          "text": "activities"
+        }
+      },
+      "illustration": {
+        "symbol": "🎯",
+        "caption": "activities — aktywności, zajęcia"
+      }
+    },
+    {
+      "id": "adventure",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "przygoda"
+        },
+        "en": {
+          "text": "adventure"
+        }
+      },
+      "illustration": {
+        "symbol": "🧭",
+        "caption": "adventure — przygoda"
+      }
+    },
+    {
+      "id": "alien",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "kosmita, istota z innej planety"
+        },
+        "en": {
+          "text": "alien"
+        }
+      },
+      "illustration": {
+        "symbol": "👽",
+        "caption": "alien — kosmita, istota z innej planety"
+      }
+    },
+    {
+      "id": "be-sick",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, czytanka Space Adventure USA, s. 45, i Wordlist, s. 47. Znaczenie doprecyzowane według kontekstu.",
+      "variants": {
+        "pl": {
+          "text": "zwymiotować (w brytyjskim angielskim, np. w symulatorze)",
+          "examples": [
+            "Nie chcę zwymiotować."
+          ]
+        },
+        "en": {
+          "text": "be sick",
+          "examples": [
+            "I don’t want to be sick."
+          ]
+        }
+      },
+      "illustration": {
+        "symbol": "🤢",
+        "caption": "be sick — zwymiotować (tu: w symulatorze)"
+      }
+    },
+    {
+      "id": "do-you-like-it-here",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "Czy ci się tu podoba?"
+        },
+        "en": {
+          "text": "Do you like it here?"
+        }
+      },
+      "illustration": {
+        "symbol": "📍",
+        "caption": "Do you like it here? — Czy ci się tu podoba?"
+      }
+    },
+    {
+      "id": "enjoy",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "cieszyć się czymś"
+        },
+        "en": {
+          "text": "enjoy"
+        }
+      },
+      "illustration": {
+        "symbol": "😊",
+        "caption": "enjoy — cieszyć się czymś"
+      }
+    },
+    {
+      "id": "fly",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "latać"
+        },
+        "en": {
+          "text": "fly"
+        }
+      },
+      "illustration": {
+        "symbol": "🛫",
+        "caption": "fly — latać"
+      }
+    },
+    {
+      "id": "not-really",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "nie bardzo"
+        },
+        "en": {
+          "text": "not really"
+        }
+      },
+      "illustration": {
+        "symbol": "🤷",
+        "caption": "not really — nie bardzo"
+      }
+    },
+    {
+      "id": "other",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "inny"
+        },
+        "en": {
+          "text": "other"
+        }
+      },
+      "illustration": {
+        "symbol": "🔄",
+        "caption": "other — inny"
+      }
+    },
+    {
+      "id": "real",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "prawdziwy"
+        },
+        "en": {
+          "text": "real"
+        }
+      },
+      "illustration": {
+        "symbol": "✔️",
+        "caption": "real — prawdziwy"
+      }
+    },
+    {
+      "id": "rocket",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "rakieta kosmiczna"
+        },
+        "en": {
+          "text": "rocket"
+        }
+      },
+      "illustration": {
+        "symbol": "🚀",
+        "caption": "rocket — rakieta kosmiczna"
+      }
+    },
+    {
+      "id": "simulator",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "symulator"
+        },
+        "en": {
+          "text": "simulator"
+        }
+      },
+      "illustration": {
+        "symbol": "🎮",
+        "caption": "simulator — symulator"
+      }
+    },
+    {
+      "id": "space-travel",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "podróże kosmiczne"
+        },
+        "en": {
+          "text": "space travel"
+        }
+      },
+      "illustration": {
+        "symbol": "🌌",
+        "caption": "space travel — podróże kosmiczne"
+      }
+    },
+    {
+      "id": "space-walking",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "spacerowanie w kosmosie"
+        },
+        "en": {
+          "text": "space walking"
+        }
+      },
+      "illustration": {
+        "symbol": "👩‍🚀",
+        "caption": "space walking — spacerowanie w kosmosie"
+      }
+    },
+    {
+      "id": "spider",
+      "group": "Lekcja 3.5",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "pająk"
+        },
+        "en": {
+          "text": "spider"
+        }
+      },
+      "illustration": {
+        "symbol": "🕷️",
+        "caption": "spider — pająk"
+      }
+    },
+    {
+      "id": "also",
+      "group": "Lekcja 3.6",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "też, także (zwykle przed głównym czasownikiem)"
+        },
+        "en": {
+          "text": "also"
+        }
+      },
+      "illustration": {
+        "symbol": "➕",
+        "caption": "also — też, także (zwykle przed głównym czasownikiem)"
+      }
+    },
+    {
+      "id": "own",
+      "group": "Lekcja 3.6",
+      "source": "Podręcznik, Wordlist, s. 47.",
+      "variants": {
+        "pl": {
+          "text": "własny"
+        },
+        "en": {
+          "text": "own"
+        }
+      },
+      "illustration": {
+        "symbol": "⭐",
+        "caption": "own — własny"
+      }
+    },
+    {
+      "id": "too",
+      "group": "Lekcja 3.6",
+      "source": "Podręcznik, ramka Writing, s. 46; zeszyt ćwiczeń, s. 29.",
+      "variants": {
+        "pl": {
+          "text": "też, także (zwykle na końcu zdania)"
+        },
+        "en": {
+          "text": "too"
+        }
+      },
+      "illustration": {
+        "symbol": "➕",
+        "caption": "too — też, także (zwykle na końcu zdania)"
+      }
+    }
+  ]
+}

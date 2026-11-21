@@ -1,0 +1,485 @@
+{
+  "version": 1,
+  "moduleId": "unit-3-technology",
+  "id": "technology-for-all",
+  "title": "Technology for all",
+  "stages": [
+    {
+      "id": "technology",
+      "title": "3.1 · Technologia",
+      "cat": "olus",
+      "illustration": "illustrations/word-look.svg",
+      "lessons": [
+        {
+          "id": "devices",
+          "title": "Urządzenia, których używasz",
+          "intro": "Nazwij przedmioty, którymi robisz zdjęcia, słuchasz muzyki albo pracujesz.",
+          "wordIds": [
+            "camera",
+            "mobile-phone",
+            "laptop",
+            "tablet",
+            "headphones",
+            "keyboard"
+          ],
+          "exerciseIds": [
+            "keys-g",
+            "wear-listen"
+          ],
+          "ruleIds": []
+        },
+        {
+          "id": "at-the-desk",
+          "title": "Przy komputerze",
+          "intro": "Zobacz, co stoi na biurku i do czego służy.",
+          "wordIds": [
+            "computer",
+            "mouse",
+            "printer",
+            "screen",
+            "speakers",
+            "tv"
+          ],
+          "exerciseIds": [
+            "paper-in",
+            "arrow-on"
+          ],
+          "ruleIds": []
+        },
+        {
+          "id": "online-actions",
+          "title": "Co robisz w internecie?",
+          "intro": "Użyj zwrotów o wysyłaniu wiadomości, zdjęciach i rozmowach.",
+          "wordIds": [
+            "chat-online",
+            "download-a-song",
+            "send-an-email",
+            "surf-the-internet",
+            "take-a-photo",
+            "take-a-selfie",
+            "talk-on-the-phone",
+            "text-a-friend"
+          ],
+          "exerciseIds": [
+            "send-email",
+            "download-song"
+          ],
+          "ruleIds": []
+        },
+        {
+          "id": "technology-training",
+          "title": "Koci trening",
+          "intro": "Wróć do przećwiczonych zadań z tej mapy i wcześniejszych map kursu. Wśród nich mogą pojawić się zadania z Food.",
+          "wordIds": [],
+          "exerciseIds": [],
+          "ruleIds": [],
+          "role": "training",
+          "targetCount": 8
+        }
+      ]
+    },
+    {
+      "id": "now",
+      "title": "3.2 · Co się teraz dzieje?",
+      "cat": "maja",
+      "illustration": "illustrations/word-look.svg",
+      "lessons": [
+        {
+          "id": "happening-now",
+          "title": "Właśnie robię zdjęcie",
+          "intro": "Dopasuj am, is albo are do osoby. Przyjrzyj się temu, co właśnie robią kotki.",
+          "wordIds": [
+            "take-a-photo",
+            "chat-online"
+          ],
+          "exerciseIds": [
+            "now-i-am",
+            "now-she-is",
+            "now-they-are",
+            "now-you-are",
+            "now-tom-is",
+            "now-we-are"
+          ],
+          "ruleIds": [
+            "now-positive"
+          ]
+        },
+        {
+          "id": "what-isnt-happening",
+          "title": "Czego teraz nie robię?",
+          "intro": "Zbuduj przeczenia z not. Przećwicz także krótkie formy isn’t i aren’t.",
+          "wordIds": [
+            "take-a-selfie",
+            "tv"
+          ],
+          "exerciseIds": [
+            "not-i",
+            "not-friend",
+            "not-parents",
+            "not-am",
+            "not-we",
+            "not-camera"
+          ],
+          "ruleIds": [
+            "now-negative"
+          ]
+        },
+        {
+          "id": "spell-ing",
+          "title": "Od take do taking",
+          "intro": "Dopisz -ing. Sprawdź, kiedy zniknie e, a kiedy pojawi się podwójna litera.",
+          "wordIds": [
+            "surf-the-internet"
+          ],
+          "exerciseIds": [
+            "ing-surf",
+            "ing-dance",
+            "ing-chat",
+            "ing-have",
+            "ing-run",
+            "ing-write"
+          ],
+          "ruleIds": [
+            "ing-spelling"
+          ]
+        },
+        {
+          "id": "now-training",
+          "title": "Koci trening",
+          "intro": "Wróć do przećwiczonych zadań z tej mapy i wcześniejszych map kursu. Wśród nich mogą pojawić się zadania z Food.",
+          "wordIds": [],
+          "exerciseIds": [],
+          "ruleIds": [],
+          "role": "training",
+          "targetCount": 8
+        }
+      ]
+    },
+    {
+      "id": "questions-and-feelings",
+      "title": "3.3 · Pytania i uczucia",
+      "cat": "felix",
+      "illustration": "illustrations/word-good-luck.svg",
+      "lessons": [
+        {
+          "id": "ask-yes-no",
+          "title": "Czy to właśnie robisz?",
+          "intro": "Zacznij pytanie od am, is lub are. Poznaj pierwsze nazwy uczuć.",
+          "wordIds": [
+            "happy",
+            "scared",
+            "worried"
+          ],
+          "exerciseIds": [
+            "ask-you",
+            "ask-felix",
+            "ask-friends",
+            "ask-dreaming",
+            "ask-playing",
+            "feeling-happy",
+            "feeling-scared"
+          ],
+          "ruleIds": [
+            "now-yes-no"
+          ]
+        },
+        {
+          "id": "ask-for-detail",
+          "title": "Co, gdzie i dlaczego?",
+          "intro": "Dodaj what, where lub why przed am, is albo are.",
+          "wordIds": [
+            "bored",
+            "tired"
+          ],
+          "exerciseIds": [
+            "detail-what",
+            "detail-where",
+            "detail-why",
+            "detail-place",
+            "detail-reason",
+            "feeling-tired",
+            "feeling-bored"
+          ],
+          "ruleIds": [
+            "now-wh"
+          ]
+        },
+        {
+          "id": "short-replies",
+          "title": "Tak, robię. Nie, nie robię.",
+          "intro": "Udziel krótkich odpowiedzi na pytania o bieżące czynności.",
+          "wordIds": [
+            "angry",
+            "sad"
+          ],
+          "exerciseIds": [
+            "reply-i",
+            "reply-she",
+            "reply-they",
+            "reply-he",
+            "reply-we",
+            "feeling-sad"
+          ],
+          "ruleIds": [
+            "now-short"
+          ]
+        },
+        {
+          "id": "questions-and-feelings-training",
+          "title": "Koci trening",
+          "intro": "Wróć do przećwiczonych zadań z tej mapy i wcześniejszych map kursu. Wśród nich mogą pojawić się zadania z Food.",
+          "wordIds": [],
+          "exerciseIds": [],
+          "ruleIds": [],
+          "role": "training",
+          "targetCount": 8
+        }
+      ]
+    },
+    {
+      "id": "phone",
+      "title": "3.4 · Rozmowa przez telefon",
+      "cat": "albert",
+      "illustration": "illustrations/word-good-idea.svg",
+      "lessons": [
+        {
+          "id": "pick-up",
+          "title": "Halo, kto mówi?",
+          "intro": "Przedstaw się, poproś o rozmowę i przekaż telefon.",
+          "wordIds": [
+            "hello-its-elena",
+            "can-i-speak",
+            "just-a-moment",
+            "its-elena-for-you"
+          ],
+          "exerciseIds": [
+            "phone-here",
+            "phone-speak",
+            "phone-moment",
+            "phone-for"
+          ],
+          "ruleIds": []
+        },
+        {
+          "id": "call-back",
+          "title": "Czy zastanę Maję?",
+          "intro": "Powiedz, że kogoś nie ma, poproś o chwilę lub zakończ rozmowę.",
+          "wordIds": [
+            "im-afraid-hes-out",
+            "hang-on",
+            "bye",
+            "see-you-soon"
+          ],
+          "exerciseIds": [
+            "phone-out",
+            "phone-hang",
+            "phone-bye",
+            "phone-see"
+          ],
+          "ruleIds": []
+        },
+        {
+          "id": "phone-scene",
+          "title": "Telefon do Mai",
+          "intro": "Przeprowadź Olusia przez rozmowę telefoniczną z Albertem i Mają.",
+          "wordIds": [],
+          "exerciseIds": [
+            "phone-call-to-maja--here",
+            "phone-call-to-maja--speak",
+            "phone-call-to-maja--for",
+            "phone-call-to-maja--are",
+            "phone-call-to-maja--soon"
+          ],
+          "ruleIds": [
+            "now-wh"
+          ]
+        },
+        {
+          "id": "phone-training",
+          "title": "Koci trening",
+          "intro": "Wróć do przećwiczonych zadań z tej mapy i wcześniejszych map kursu. Wśród nich mogą pojawić się zadania z Food.",
+          "wordIds": [],
+          "exerciseIds": [],
+          "ruleIds": [],
+          "role": "training",
+          "targetCount": 8
+        }
+      ]
+    },
+    {
+      "id": "camp",
+      "title": "3.5 · Obóz kosmiczny",
+      "cat": "krzywolap",
+      "illustration": "illustrations/word-can-t-wait.svg",
+      "lessons": [
+        {
+          "id": "what-you-like",
+          "title": "Interesuję się kosmosem",
+          "intro": "Połącz interested, good i bad z odpowiednimi przyimkami. Poznaj też rakietę i symulator.",
+          "wordIds": [
+            "interested-in",
+            "good-at",
+            "bad-at",
+            "rocket",
+            "simulator"
+          ],
+          "exerciseIds": [
+            "camp-interested",
+            "camp-good",
+            "camp-bad"
+          ],
+          "ruleIds": []
+        },
+        {
+          "id": "feelings-at-camp",
+          "title": "Ekscytacja i trema",
+          "intro": "Dobierz przyimki po excited, worried i scared. Poznaj dwa zwroty o kosmosie.",
+          "wordIds": [
+            "excited-about",
+            "worried-about",
+            "scared-of",
+            "space-travel",
+            "space-walking"
+          ],
+          "exerciseIds": [
+            "camp-excited",
+            "camp-worried",
+            "camp-scared"
+          ],
+          "ruleIds": []
+        },
+        {
+          "id": "space-camp-reading",
+          "title": "Dzień na obozie kosmicznym",
+          "intro": "Czytaj po angielsku, zdanie po zdaniu. Dotknij podkreślonego słowa w pytaniu, jeśli chcesz zobaczyć jego tłumaczenie.",
+          "wordIds": [],
+          "exerciseIds": [
+            "space-camp--make",
+            "space-camp--excited",
+            "space-camp--fly-over",
+            "space-camp--feel",
+            "space-camp--of-what"
+          ],
+          "ruleIds": []
+        },
+        {
+          "id": "camp-training",
+          "title": "Koci trening",
+          "intro": "Wróć do przećwiczonych zadań z tej mapy i wcześniejszych map kursu. Wśród nich mogą pojawić się zadania z Food.",
+          "wordIds": [],
+          "exerciseIds": [],
+          "ruleIds": [],
+          "role": "training",
+          "targetCount": 8
+        }
+      ]
+    },
+    {
+      "id": "my-device",
+      "title": "3.6 · Mój ulubiony gadżet",
+      "cat": "maja",
+      "illustration": "illustrations/word-good-idea.svg",
+      "lessons": [
+        {
+          "id": "also-and-too",
+          "title": "Dwa sposoby, żeby powiedzieć „też”",
+          "intro": "Znajdź typowe miejsce dla also oraz too.",
+          "wordIds": [
+            "also",
+            "too"
+          ],
+          "exerciseIds": [
+            "also-chat",
+            "too-read",
+            "also-can",
+            "too-tired",
+            "also-phone",
+            "too-games"
+          ],
+          "ruleIds": [
+            "also-too"
+          ]
+        },
+        {
+          "id": "describe-a-device",
+          "title": "Do czego go używam?",
+          "intro": "Przećwicz słowa i szyk zdań przydatne w krótkim opisie gadżetu.",
+          "wordIds": [],
+          "exerciseIds": [
+            "device-editor-also",
+            "device-editor-too",
+            "device-send",
+            "device-talk",
+            "device-download",
+            "device-photos",
+            "device-also-uses",
+            "device-too-tv"
+          ],
+          "ruleIds": [
+            "also-too"
+          ]
+        },
+        {
+          "id": "my-device-training",
+          "title": "Koci trening",
+          "intro": "Wróć do przećwiczonych zadań z tej mapy i wcześniejszych map kursu. Wśród nich mogą pojawić się zadania z Food.",
+          "wordIds": [],
+          "exerciseIds": [],
+          "ruleIds": [],
+          "role": "training",
+          "targetCount": 8
+        }
+      ]
+    },
+    {
+      "id": "revision",
+      "title": "3.7 · Powtórka działu",
+      "cat": "olus",
+      "illustration": "illustrations/word-look.svg",
+      "lessons": [
+        {
+          "id": "review-technology",
+          "title": "Urządzenia i emocje",
+          "intro": "Sprawdź słówka o technologii i uczuciach. Wróć do połączeń z przyimkami.",
+          "wordIds": [
+            "speakers",
+            "text-a-friend"
+          ],
+          "exerciseIds": [
+            "review-hands",
+            "review-selfie",
+            "review-worry",
+            "review-angry",
+            "review-at",
+            "review-about"
+          ],
+          "ruleIds": []
+        },
+        {
+          "id": "review-right-now",
+          "title": "Co robimy w tej chwili?",
+          "intro": "Utrwal pytania, przeczenia i krótkie odpowiedzi. Odbierz telefon i wróć do końcowego too.",
+          "wordIds": [],
+          "exerciseIds": [
+            "review-affirm",
+            "review-negative",
+            "review-question",
+            "review-detail",
+            "review-short",
+            "review-greeting",
+            "review-handover",
+            "review-too"
+          ],
+          "ruleIds": [
+            "now-positive",
+            "now-negative",
+            "now-yes-no",
+            "now-wh",
+            "now-short",
+            "also-too"
+          ]
+        }
+      ]
+    }
+  ]
+}

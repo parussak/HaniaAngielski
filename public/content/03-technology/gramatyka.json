@@ -1,0 +1,79 @@
+[
+  {
+    "id": "now-positive",
+    "title": "Present Continuous — twierdzenia",
+    "explanation": "Gdy mówisz, co dzieje się teraz, wybierz am dla I, is dla he, she i it, a are dla you, we i they. Potem daj czasownik z końcówką -ing.",
+    "examples": [
+      "I am reading.",
+      "She's taking a photo.",
+      "They are chatting online."
+    ],
+    "source": "Podręcznik, s. 40–41; zeszyt ćwiczeń, s. 25."
+  },
+  {
+    "id": "now-negative",
+    "title": "Present Continuous — przeczenia",
+    "explanation": "Postaw not po am, is albo are. Możesz powiedzieć I'm not, isn't albo aren't. Końcówka -ing zostaje.",
+    "examples": [
+      "I'm not texting.",
+      "He isn't watching TV.",
+      "We aren't playing."
+    ],
+    "source": "Podręcznik, s. 41; zeszyt ćwiczeń, s. 25."
+  },
+  {
+    "id": "ing-spelling",
+    "title": "Pisownia końcówki -ing",
+    "explanation": "Zwykle dopisujesz -ing. Gdy czasownik kończy się na nieme -e, zwykle je opuszczasz. W przykładach sit, run i chat podwajasz ostatnią spółgłoskę: te czasowniki mają jedną sylabę, krótką samogłoskę i pojedynczą spółgłoskę na końcu.",
+    "examples": [
+      "look → looking",
+      "take → taking",
+      "sit → sitting"
+    ],
+    "source": "Podręcznik, ramka LOOK!, s. 41; zeszyt ćwiczeń, s. 25."
+  },
+  {
+    "id": "now-yes-no",
+    "title": "Present Continuous — pytania ogólne",
+    "explanation": "W pytaniu, na które odpowiadasz tak albo nie, przesuń am, is lub are przed osobę lub rzecz. Potem użyj czasownika z -ing.",
+    "examples": [
+      "Are you talking on the phone?",
+      "Is she taking a selfie?"
+    ],
+    "source": "Podręcznik, s. 43; zeszyt ćwiczeń, s. 26."
+  },
+  {
+    "id": "now-wh",
+    "title": "Present Continuous — pytania szczegółowe",
+    "explanation": "Zacznij od słowa pytającego, np. what, where albo why. Następnie daj am, is lub are, osobę lub rzecz i czasownik z -ing.",
+    "examples": [
+      "What are you doing?",
+      "Where is the bus going?",
+      "Why are they running?"
+    ],
+    "source": "Podręcznik, s. 43; zeszyt ćwiczeń, s. 26."
+  },
+  {
+    "id": "now-short",
+    "title": "Present Continuous — krótkie odpowiedzi",
+    "explanation": "W krótkiej odpowiedzi użyj zaimka i odpowiedniej formy am, is lub are. W twierdzeniu zostaw pełną formę. W przeczeniu możesz użyć I'm not, isn't lub aren't. Kiedy ktoś pyta Are you…?, o sobie odpowiadasz I, a o grupie, do której należysz, we.",
+    "examples": [
+      "Yes, I am.",
+      "No, she isn't.",
+      "Yes, we are."
+    ],
+    "source": "Podręcznik, s. 43; zeszyt ćwiczeń, s. 26 i 30."
+  },
+  {
+    "id": "also-too",
+    "title": "Szyk w zdaniu z also i too",
+    "explanation": "Oba słowa znaczą „też”. W typowym szyku z ramki „Writing” too stoi na końcu zdania, a also przed głównym czasownikiem. Jeśli be jest głównym czasownikiem, also zwykle stoi po am, is lub are. Gdy przed czasownikiem jest can albo czasownik pomocniczy, also zwykle stoi po can lub po pierwszym czasowniku pomocniczym. W innych kontekstach położenie tych słów może się zmieniać.",
+    "examples": [
+      "I also send emails.",
+      "I send emails too.",
+      "I can also take photos.",
+      "I am also tired."
+    ],
+    "source": "Podręcznik, s. 46; zeszyt ćwiczeń, s. 29."
+  }
+]

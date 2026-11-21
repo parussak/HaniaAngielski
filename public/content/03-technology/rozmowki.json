@@ -1,0 +1,105 @@
+[
+  {
+    "id": "phone-call-to-maja",
+    "kind": "dialogue",
+    "title": "Telefon do Mai",
+    "prompt": "Uzupełnij rozmowę przez telefon. W każdej luce brakuje jednego słowa.",
+    "dialogue": [
+      {
+        "speaker": "Oluś",
+        "text": "Hello, it's Oluś ___. Can I ___ to Maja, please?"
+      },
+      {
+        "speaker": "Albert",
+        "text": "Hi, Oluś. Hang on. Maja, it's Oluś ___ you!"
+      },
+      {
+        "speaker": "Maja",
+        "text": "Hi, Oluś. What ___ you doing right now?"
+      },
+      {
+        "speaker": "Oluś",
+        "text": "I’m taking photos in the garden. Do you want to take a photo with me?"
+      },
+      {
+        "speaker": "Maja",
+        "text": "Yes, great idea! See you ___!"
+      }
+    ],
+    "requires": [
+      "unit-3-technology"
+    ],
+    "caseSensitive": false,
+    "source": "Adaptacja na podstawie ramki Speaking, podręcznik s. 44, i zeszytu ćwiczeń s. 27, ćw. 3.",
+    "gaps": [
+      {
+        "id": "here",
+        "input": "bank",
+        "answers": [
+          "here"
+        ],
+        "options": [
+          "here",
+          "out",
+          "later"
+        ],
+        "explanation": "It's Oluś here to sposób przedstawienia się przez telefon."
+      },
+      {
+        "id": "speak",
+        "input": "text",
+        "answers": [
+          "speak",
+          "talk"
+        ],
+        "options": [
+          "speak",
+          "send",
+          "download"
+        ],
+        "explanation": "Can I speak to…? to zwrot z podręcznika. Can I talk to…? też jest poprawną prośbą o rozmowę."
+      },
+      {
+        "id": "for",
+        "input": "text",
+        "answers": [
+          "for"
+        ],
+        "options": [
+          "for",
+          "out",
+          "about"
+        ],
+        "explanation": "It's Oluś for you znaczy „To Oluś do ciebie”."
+      },
+      {
+        "id": "are",
+        "input": "text",
+        "answers": [
+          "are"
+        ],
+        "options": [
+          "are",
+          "am",
+          "is"
+        ],
+        "explanation": "Maja pyta o to, co Oluś robi w tej chwili. W Present Continuous po What i przed you stawiamy are.",
+        "ruleId": "now-wh"
+      },
+      {
+        "id": "soon",
+        "input": "text",
+        "answers": [
+          "soon",
+          "later"
+        ],
+        "options": [
+          "soon",
+          "please",
+          "out"
+        ],
+        "explanation": "Oba pożegnania pasują do rozmowy. See you soon! znaczy „Do zobaczenia wkrótce!”, a See you later! — „Do zobaczenia później!”."
+      }
+    ]
+  }
+]
