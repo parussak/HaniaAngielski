@@ -35,7 +35,7 @@ async function restore(page: Page, p: Progress) {
     await page.getByRole('button', { name: 'Zastąp postępy', exact: true }).tap(); await expect(page.locator('#app')).toHaveAttribute('aria-busy', 'false');
     await page.getByRole('button', { name: 'Moja nauka', exact: true }).tap();
 }
-const open = (page: Page) => page.getByRole('button', { name: 'Gramatyka →', exact: true }).tap();
+const open = (page: Page) => page.getByRole('button', { name: /Otwórz gramatykę/ }).tap();
 
 test('Gramatyka: bez prób jest wyjaśnienie, bez przewijania w poziomie', async ({ page }) => {
     await materials(page); await page.setViewportSize({ width: 320, height: 640 }); await page.goto('./'); await open(page);

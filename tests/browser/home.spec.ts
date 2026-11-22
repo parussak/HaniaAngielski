@@ -5,7 +5,7 @@ import {foodModules as modules} from '../materials.ts';
 import {backup,emptyProgress,makeSession} from '../../src/core.ts';
 
 test.use({isMobile:true,hasTouch:true});
-for(const width of [320,390])test(`strona startowa ${width}px: dwa wejścia, kotek, pomoc i osobne katalogi`,async({page})=>{
+for(const width of [320,390])test(`strona startowa ${width}px: trzy wejścia, kotek, pomoc i osobne katalogi`,async({page})=>{
   await page.setViewportSize({width,height:844});await page.goto('./');
   await expect(page.getByRole('heading',{name:'Dobrze Cię widzieć, Haniu!'})).toBeVisible();
   await expect(page.locator('.cat-illustration')).toBeVisible();
@@ -16,7 +16,7 @@ for(const width of [320,390])test(`strona startowa ${width}px: dwa wejścia, kot
   // D-51: the home screen keeps an empty slot for the update banner and shows the course frame under the greeting.
   await expect(page.locator('.home-start>[data-update-banner]')).toBeEmpty();await expect(page.locator('.welcome .course-context')).toBeVisible();
   const order=await page.locator('.home-start').evaluate(el=>Array.from(el.children).filter(c=>!c.hasAttribute('data-update-banner')).map(c=>c.className));
-  expect(order).toEqual(['welcome','next-step-card','hero home-hero','practice-entry','home-help']);
+  expect(order).toEqual(['welcome','next-step-card','hero home-hero','practice-entry grammar-entry','practice-entry','home-help']);
   const check=async()=>expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
   await check();
   const hero=await page.locator('.home-hero').boundingBox(),art=await page.locator('.cat-illustration').boundingBox();

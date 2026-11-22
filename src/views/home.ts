@@ -77,11 +77,17 @@ export function homeView({ name, modules, step, pwa, cat, courseContext = '', we
     <span class="tag">TWOJA JĘZYKOWA PRZYGODA</span>
     <h2>Wielkie rzeczy zaczynają się od małych kroków.</h2>
     <p>Wybierz przygodę, ucz się małymi krokami i zdobywaj gwiazdki do kociego domku.</p>${button('journeys', `Wybierz przygodę ${icon('arrow')}`)}</div>${heroArt()}</section>
+    <section class="practice-entry grammar-entry">
+    <span class="practice-icon" aria-hidden="true">${icon('book')}</span>
+    <div>
+    <h2>Gramatyka</h2>
+    <p>Zasady, które już poznajesz, zebrane tematami. Stąd możesz je przeczytać i poćwiczyć.</p>${button('grammar', `Otwórz gramatykę ${icon('arrow')}`, 'secondary')}</div>
+    </section>
     <section class="practice-entry">
     <span class="practice-icon" aria-hidden="true">${icon('cards')}</span>
     <div>
     <h2>A może wolisz poćwiczyć po swojemu?</h2>
-    <p>Fiszki, quizy, gramatyka, rozmówki i powtórki.</p>${button('module-list', `Przejdź do modułów ${icon('arrow')}`, 'secondary')}${button('course-practice', 'Ćwicz cały poznany materiał →', 'text-button')}${button('grammar', 'Gramatyka →', 'text-button')}${button('warmup','Kocia rozgrzewka →','secondary')}</div>
+    <p>Fiszki, quizy, gramatyka, rozmówki i powtórki.</p>${button('module-list', `Przejdź do modułów ${icon('arrow')}`, 'secondary')}${button('course-practice', 'Ćwicz cały poznany materiał →', 'text-button')}${button('warmup','Kocia rozgrzewka →','secondary')}</div>
     </section>
     <details class="home-help">
     <summary>${icon('book')} Jak korzystać z aplikacji?</summary>

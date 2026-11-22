@@ -166,7 +166,7 @@ Globalne fiszki obejmują też znane słówka; globalny quiz — poznane znaczen
 - **Przy temacie:** „ćwiczone N×, X% poprawnych” (próby zadań z `ruleId` tematu), lista lekcji, które reguły ćwiczą (`ruleIds`), oraz „Poćwicz ten temat”.
 - **Sesja „Poćwicz”:** z próbowanych zadań całego tematu (także z przycisku po lekcji), do 10 zadań; nie zalicza map i nie daje gwiazdek, jak inne sesje globalne.
 - **Walidator treści:** reguła bez tematu albo bez zadania z jej `ruleId` jest błędem. Nowe pola są opcjonalne w odczycie, żeby stare treści i zapisy działały do czasu przypisania tematów.
-- **Wejście:** przycisk „Gramatyka →” w karcie „A może wolisz poćwiczyć po swojemu?” na ekranie głównym. Sesja „Poćwicz” jest zwykłą sesją gramatyczną kursu (`mode: grammar`, zakres kursu), więc zapis i kopie zapasowe się nie zmieniają.
+- **Wejście:** osobny kafelek „Gramatyka” na ekranie głównym, pod kafelkiem „Wielkie rzeczy zaczynają się od małych kroków”. Sesja „Poćwicz” jest zwykłą sesją gramatyczną kursu (`mode: grammar`, zakres kursu), więc zapis i kopie zapasowe się nie zmieniają.
 - **Nowy moduł kursu:** każda nowa reguła dostaje `grammarTopicId`. Rozwinięcie wcześniejszej reguły trafia do jej tematu; nowy temat dopisujemy do pliku tematów kursu.
 
 ## 10. Widok postępów (D-57)
