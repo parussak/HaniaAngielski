@@ -41,7 +41,7 @@ export function bankExplanationView(modules:Module[],s:Session){
  const group=boardItems(s).slice().sort((a,b)=>a.key.localeCompare(b.key));
  if(!s.boardSummary&&!group.every(i=>s.gapPlacements?.[i.key]))return '';
  const complete=group.every(i=>solved(s,i.key));
- return `<div class="feedback ${complete?'correct':'incorrect'} board-explanation" role="status"><h2>${complete?'Tak jest! Dobra robota ✦':'Sprawdźmy zdania'}</h2><p>${complete?'Plansza ukończona.':'Możesz poprawić luki albo przejść dalej — błędy poćwiczymy w powtórkach.'}</p>${group.map((i,index)=>{const q=questionFor(modules,i);return `<section class="gap-explanation"><strong>Zdanie ${index+1}: <span class="scene-filled">${e(vocabularyFullAnswer(q))}</span></strong><p>${e(q.explanation)}</p>${q.source?`<small>${e(q.source)}</small>`:''}</section>`;}).join('')}</div>`;
+ return `<div class="feedback ${complete?'correct':'incorrect'} board-explanation" role="status"><h2>${complete?'Tak jest! Dobra robota ✦':'Sprawdźmy zdania'}</h2><p>${complete?'Plansza ukończona.':'Możesz poprawić luki albo przejść dalej — błędy poćwiczymy w powtórkach.'}</p>${group.map((i,index)=>{const q=questionFor(modules,i);return `<section class="gap-explanation"><strong>Zdanie ${index+1}: <span class="scene-filled">${e(vocabularyFullAnswer(q))}</span></strong><p>${e(q.explanation)}</p></section>`;}).join('')}</div>`;
 }
 export function boardSummaryView(modules:Module[],s:Session){
  if(s.items[s.index].presentation==='bank')return `<div class="board-summary">${bankView(modules,s)}${bankExplanationView(modules,s)}</div>${boardNextButton(s)}`;

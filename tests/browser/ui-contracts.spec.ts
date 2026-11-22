@@ -21,10 +21,12 @@ test('strona ładuje lokalną ikonę, manifest i systemową czcionkę',async({pa
  expect(externalFonts).toEqual([]);
 });
 
-test('ustawienia, pole odpowiedzi, źródło i podsumowanie poprawki są dostępne w interfejsie',async({page})=>{
+test('ustawienia, pole odpowiedzi i podsumowanie poprawki są dostępne, a odwołania do podręcznika ukryte (D-73)',async({page})=>{
  const module=modules[0],q=module.exercises.find(q=>q.id==='g-there-milk')!;
  await page.goto('./');await openModule(page);
  await expect(page.getByText('Trochę wybieram, trochę wpisuję',{exact:true})).toBeVisible();
+ await expect(page.locator('.grammar-guide details').first()).toBeAttached();
+ for(const text of [module.source,...module.grammar.map(r=>r.source)])await expect(page.getByText(text,{exact:true})).toHaveCount(0);
  const p=emptyProgress();p.active=makeSession(modules,module,'grammar','text',false,p);
  p.active.items=[{key:keyFor(module,'exercise',q.id),moduleId:module.id,id:q.id,type:'exercise',version:q.rev??1,input:'text'}];
  await openBackup(page);
@@ -37,7 +39,8 @@ test('ustawienia, pole odpowiedzi, źródło i podsumowanie poprawki są dostęp
  await expect(answer).toHaveAttribute('autocapitalize','off');await expect(answer).toHaveAttribute('spellcheck','false');
  await expect(page.getByRole('button',{name:/Sprawdź/}).locator('svg')).toHaveAttribute('aria-hidden','true');
  await answer.fill('are');await page.getByRole('button',{name:/Sprawdź/}).click();
- await expect(page.locator('.source-reference')).toHaveText(`Źródło: ${q.source}`);
+ await expect(page.locator('.feedback')).toBeVisible();
+ await expect(page.locator('.feedback')).not.toContainText(q.source!);await expect(page.locator('.feedback')).not.toContainText('Źródło');
  await page.getByRole('button',{name:'Spróbuję jeszcze raz',exact:true}).click();
  await answer.fill(q.answers[0]);await page.getByRole('button',{name:/Sprawdź/}).click();
  await page.getByRole('button',{name:/^Dalej/}).click();

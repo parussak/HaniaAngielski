@@ -36,6 +36,7 @@ Pisz pliki w `public/content/<folder>/` w formacie z dokumentacji (dla nowych mo
 
 - Każdy element ma `source` ze stroną. Zadania własne oznacz jako adaptację, tak jak w Food.
 - Objaśnienia po polsku, dla jedenastolatki: odnieś się do konkretnego zdania, powiedz, dlaczego odpowiedź pasuje.
+- Zakres jak w podręczniku, bez pomysłów autora (D-73): słówka, struktury, zwroty i krótkie uniwersalne zdania z ćwiczeń mogą zostać, także dosłownie. Imiona i postacie zamień na kotki aplikacji, zmień charakterystyczne miejsca i sytuacje. Czytanki, opowiadania i dialogi fabularne pisz od nowa (te same słowa i struktury, podobna długość, te same typy pytań). Nie przenoś rymowanek, piosenek ani wierszyków. [Szczegóły](../../../docs/04-merytoryka.md#inspiracja-podręcznikiem-własny-tekst--d-73).
 - Zachowaj podręcznikową formę odpowiedzi (D-35): luka pozostaje luką, nie tłumaczeniem całego zdania. Zadanie z wariantami dostaje odpowiedzi do wyboru.
 - Ilustracje: użyj pasującej z `public/illustrations/`; gdy jej nie ma, wpisz `symbol` (emoji) i dopisz hasło do listy ilustracji do zrobienia. Nie wskazuj plików, które nie istnieją, bo kontrola treści to odrzuci.
 - Nie ruszaj identyfikatorów, rewizji ani map modułów już opublikowanych (D-52). Jeśli nowy materiał wymaga zmiany w starym module, opisz ją osobno i nie wykonuj bez zgody.

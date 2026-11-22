@@ -38,7 +38,7 @@ function feedbackView(state: Readonly<AppState>, s: Session, item: Session['item
     const given=s.attempts.find(a=>a.key===item.key)?.lastAnswer;
     const article=given===undefined?null:vocabularyAssessment(q,given);
     const articleNote=article?.note?`<aside class="article-note"><strong>${ok?'Warto zapamiętać':'Rodzajnik w tym haśle'}</strong><p>Pełna forma: <b>${e(vocabularyFullAnswer(q))}</b>. ${e(article.note)}</p></aside>`:'';
-    return `<div class="feedback ${ok ? 'correct' : 'incorrect'}" role="status"><div class="feedback-lead"><strong>${ok ? 'Tak jest! Dobra robota ✦' : 'Spokojnie, tak właśnie się uczymy.'}</strong>${state.catCatalog ? catView(state.catCatalog, responseCat(state.catCatalog, s)) : ''}</div>${!ok ? answerComparison(q, s) : ''}${articleNote}${explanationView(q,state,item.moduleId)}${q.source ? `<p class="source-reference">Źródło: ${e(q.source)}</p>` : ''}${illustrationView(q.illustration, true)}${audio}</div>`;
+    return `<div class="feedback ${ok ? 'correct' : 'incorrect'}" role="status"><div class="feedback-lead"><strong>${ok ? 'Tak jest! Dobra robota ✦' : 'Spokojnie, tak właśnie się uczymy.'}</strong>${state.catCatalog ? catView(state.catCatalog, responseCat(state.catCatalog, s)) : ''}</div>${!ok ? answerComparison(q, s) : ''}${articleNote}${explanationView(q,state,item.moduleId)}${illustrationView(q.illustration, true)}${audio}</div>`;
 }
 /** "Listen again" and "slower" are always there, as often as the learner likes. */
 function listenButtons(task: {text:string;language:string}, key: string, autoplay: boolean,playLabel='Posłuchaj jeszcze raz') {

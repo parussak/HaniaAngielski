@@ -87,7 +87,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
 .grammar-guide summary{cursor:pointer;min-height:46px;padding:12px 0;font-weight:650;color:#78549f;line-height:1.6}
 .grammar-guide details p,.grammar-guide li{font-size:14px;line-height:1.9;color:#716280}
 .grammar-guide li{padding-bottom:5px}
-.source-reference{font-size:11px!important;line-height:1.7!important;color:#79678e!important}
+
 .nav-item,.text-button{min-height:44px}
 .file-label{min-height:48px}
 @media(min-width:601px) and (max-width:1050px){.hero-art.cat-art{width:210px;height:210px;right:0;top:50px;opacity:.5}.hero>div:first-child{z-index:1}}
@@ -166,8 +166,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
 @media(max-width:360px){.stats-grid{grid-template-columns:1fr}.stats-grid article{display:flex;align-items:center;gap:13px}.stats-grid .stat-icon{margin:0}.stats-grid article div{display:flex;gap:12px;align-items:center}.hero h2{font-size:23px}.demo-badge{font-size:7px}.nav-item{font-size:10px}}
 
 /* Podczas nauki pytanie i działania zajmują ekran, bez ozdobnego nagłówka. */
-:is(.brand-sub,.profile .profile-details>span,.nav-label,.nav-item,.local-note,.local-note span,.topbar,.local-chip,.eyebrow,.tag,.date-pill,.welcome p,.hero p,.hero .tag,.hero .primary,.stats-grid article div>span,.stats-grid strong small,.section-heading p,.count,.section-hint,.module-number,.demo-badge,.module-meta,.module-body p,.topic-tags>span,.soft-tag,.module-bottom>span,.coming-card p,.coming-card .soft-tag,.demo-note,footer,.mode-card>span:last-child,.mode-card>strong,.segmented label span,.checkbox,.muted,.back,.text-button,.exercise-label,.option>span,.under-card,.history-row span,.history-row strong,.history-score small,.source-reference,.note-panel p,.alert){font-size:12px!important}
-:is(.brand-sub,.profile .profile-details>span,.nav-label,.nav-item,.local-note,.local-note span,.topbar,.topbar b,.eyebrow,.date-pill,.welcome p,.hero p,.stats-grid article div>span,.stats-grid strong small,.section-heading p,.count,.section-hint,.module-number,.demo-badge,.module-meta,.module-body p,.topic-tags>span,.soft-tag,.module-bottom>span,.coming-card h3,.coming-card p,.coming-card .soft-tag,.demo-note,footer,.lead,.panel>p,.study-card>p,.mode-card>span:last-child,.segmented label span,.muted,.back,.text-button,.exercise-label,.option>span,.under-card,.history-row span,.history-score small,.source-reference,.note-panel p,.resume p){color:#684e7b!important}
+:is(.brand-sub,.profile .profile-details>span,.nav-label,.nav-item,.local-note,.local-note span,.topbar,.local-chip,.eyebrow,.tag,.date-pill,.welcome p,.hero p,.hero .tag,.hero .primary,.stats-grid article div>span,.stats-grid strong small,.section-heading p,.count,.section-hint,.module-number,.demo-badge,.module-meta,.module-body p,.topic-tags>span,.soft-tag,.module-bottom>span,.coming-card p,.coming-card .soft-tag,.demo-note,footer,.mode-card>span:last-child,.mode-card>strong,.segmented label span,.checkbox,.muted,.back,.text-button,.exercise-label,.option>span,.under-card,.history-row span,.history-row strong,.history-score small,.note-panel p,.alert){font-size:12px!important}
+:is(.brand-sub,.profile .profile-details>span,.nav-label,.nav-item,.local-note,.local-note span,.topbar,.topbar b,.eyebrow,.date-pill,.welcome p,.hero p,.stats-grid article div>span,.stats-grid strong small,.section-heading p,.count,.section-hint,.module-number,.demo-badge,.module-meta,.module-body p,.topic-tags>span,.soft-tag,.module-bottom>span,.coming-card h3,.coming-card p,.coming-card .soft-tag,.demo-note,footer,.lead,.panel>p,.study-card>p,.mode-card>span:last-child,.segmented label span,.muted,.back,.text-button,.exercise-label,.option>span,.under-card,.history-row span,.history-score small,.note-panel p,.resume p){color:#684e7b!important}
 .brand-sub{font-size:9px!important;letter-spacing:1px}
 .feedback.correct{color:#304c7e}
 .feedback.incorrect{color:#823b68}
@@ -204,7 +204,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
   .studying .study-card:has(.feedback) .exercise-label{display:none}
   .studying .feedback{flex:1;overflow-y:auto;min-height:40px;width:100%;margin:0;padding:12px;font-size:14px;line-height:1.6}
   .studying .feedback p{margin-top:7px}
-  .studying .feedback .source-reference{font-size:12px!important}
   .studying .actions{flex-shrink:0;display:flex;flex-direction:row;gap:8px;margin:12px 0 0;padding:0;background:white}
   .studying .actions>button{width:auto;flex:1;min-height:44px;font-size:13px;padding:9px}
   .studying #answer-form{margin:4px 0 0;width:100%;gap:10px}

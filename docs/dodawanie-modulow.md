@@ -62,6 +62,8 @@ Po publikacji nie usuwamy czytanki, zdania ani pytania i nie zmieniamy ich ident
 
 Zachowaj podręcznikową formę odpowiedzi i poziom wymagań (D-35). Przy luce kluczem jest brakujące słowo lub wyrażenie; nie zamieniaj jej na tłumaczenie albo przepisywanie całego zdania. Pełne zdanie wymagane jest tylko przy takim celu ćwiczenia źródłowego. Ta sama jednostka odpowiedzi pozostaje w poprawce i obu powtórkach. [Szczegóły](04-merytoryka.md#forma-odpowiedzi-a-poziom-nauki--d-35).
 
+Treść ćwiczy to samo co podręcznik, ale bez przenoszenia pomysłów autora (D-73). Słówka, struktury, zwroty i krótkie uniwersalne zdania z ćwiczeń mogą zostać, także dosłownie. Imiona i postacie zastąp kotkami aplikacji, zmień miejsca i sytuacje charakterystyczne dla książki. Czytanki, opowiadania i dialogi fabularne pisz od nowa: te same słowa i struktury, podobna długość, te same typy pytań. Nie przenoś rymowanek, piosenek, wierszyków ani ilustracji. Pole `source` wskazuje strony dla recenzji; aplikacja go nie pokazuje. [Szczegóły](04-merytoryka.md#inspiracja-podręcznikiem-własny-tekst--d-73).
+
 Dla modułu objętego `audio/config.json` po zmianie odczytywanego tekstu uruchom `npm run audio`, sprawdź wymowę i dodaj zaktualizowane `audio/generated/` do Git. Budowanie sprawdza kompletność i publikuje audio do PWA; nie uruchamia generatora. Nowy język wymaga osobnego wybrania głosu i sprawdzenia licencji — nie kopiuj konfiguracji Cori do francuskiego czy włoskiego. [Instrukcja audio](../audio/README.md).
 
 ## 5. Sprawdź treść i działanie
