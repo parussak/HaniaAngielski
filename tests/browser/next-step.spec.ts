@@ -36,11 +36,11 @@ test('ramka rozpoczyna lekcję, wznawia ją po odświeżeniu i wskazuje następn
 
 test('kolejna mapa z plików treści jest proponowana po Food, pomimo zaległej powtórki',async({page})=>{
   const folder=new URL('../../public/content/angielski-hani/02-food/',import.meta.url);
-  const files=Object.fromEntries(['modul.json','slownictwo.json','quiz.json','cwiczenia.json','gramatyka.json','rozmowki.json','sciezka.json'].map(file=>[file,JSON.parse(readFileSync(new URL(file,folder),'utf8'))]));
+  const files=Object.fromEntries(['modul.json','slownictwo.json','quiz.json','cwiczenia.json','gramatyka.json','rozmowki.json','czytanki.json','sciezka.json'].map(file=>[file,JSON.parse(readFileSync(new URL(file,folder),'utf8'))]));
   const id='unit-3-test';Object.assign(files['modul.json'],{id,order:3,name:'Moduł testowy',cover:'Test',journeyPath:'angielski-hani/03-test/sciezka.json'});
   delete files['modul.json'].journeyPaths;
   files['sciezka.json'].moduleId=id;files['sciezka.json'].title='Następna przygoda testowa';
-  for(const file of ['cwiczenia.json','rozmowki.json'])for(const q of files[file])q.requires=[id];
+  for(const file of ['cwiczenia.json','rozmowki.json','czytanki.json'])for(const q of files[file])q.requires=[id];
   await page.route('**/content/angielski-hani/kurs.json',async r=>{const j=await(await r.fetch()).json();await r.fulfill({json:{...j,modules:['02-food','03-test']}});});
   await page.route('**/content/angielski-hani/03-test/*.json',r=>r.fulfill({json:files[new URL(r.request().url()).pathname.split('/').at(-1)!]}));
   const p=emptyProgress();complete(p);const item={key:keyFor(m,'word','apple'),moduleId:m.id,version:1,type:'word' as const,id:'apple',input:'text' as const};

@@ -15,3 +15,7 @@
 .course-empty{line-height:1.7;margin-top:20px}
 .course-global-label{font-size:12px;color:#735790}
 @media(max-width:420px){.course-context{align-items:flex-start;flex-wrap:wrap;padding:12px}.course-context>div{flex:1 1 150px}.course-context .text-button{padding:6px 4px}.course-resume .text-button{white-space:normal;text-align:left}.courses-grid{gap:14px}}
+.grammar-search{display:grid;gap:6px;max-width:36rem;margin:0 0 16px;font-weight:650}
+.grammar-search input{box-sizing:border-box;width:100%;min-height:44px;padding:10px 14px;border:1px solid #a898b0;border-radius:10px;background:white;color:inherit;font-size:16px}
+.grammar-search-status:empty{margin:0}
+.grammar-topic[hidden]{display:none}

@@ -27,7 +27,7 @@
   padding:24px 52px 24px 28px;
   border-left:7px solid #b9a0c9;
   border-radius:6px 18px 18px 6px;
-  background:repeating-linear-gradient(transparent 0 23px,#e9dfd6 24px),#fff9eb;
+  background:repeating-linear-gradient(#fff9eb 0 23px,#e9dfd6 24px),#fff9eb;
 }
 .grammar-entry::before{
   content:"";

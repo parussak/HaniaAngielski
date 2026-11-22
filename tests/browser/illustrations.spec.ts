@@ -5,11 +5,11 @@ import {test,expect} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
 import {foodModules as modules} from '../materials.ts';
 import {backup,emptyProgress,makeSession} from '../../src/core.ts';
-const tasks=JSON.parse(readFileSync(new URL('../../public/content/angielski-hani/02-food/cwiczenia.json',import.meta.url),'utf8'));
+import {serveSingleTask} from './single-task.ts';
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 
 test('gramatyka: nawias wymusza wybór, obrazek od początku, poprawa i wznowienie',async({page})=>{
-  await page.route('**/content/angielski-hani/02-food/cwiczenia.json',r=>r.fulfill({json:tasks.filter((q:any)=>q.id==='g-because-sport')}));
+  await serveSingleTask(page,'g-because-sport');
   await page.goto('./');await openModule(page);
   await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();
   await page.getByRole('button',{name:'Gramatyka',exact:true}).tap();

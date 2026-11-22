@@ -24,7 +24,7 @@ test('pusty trening prowadzi do przygotowania, a potem działa i daje trzy gwiaz
  await expect(page.getByRole('heading',{name:first.stages[0].lessons[0].title,exact:true})).toBeVisible();
  await page.getByRole('button',{name:'Zaczynam ćwiczenia →',exact:true}).tap();
  await finish(page,first.stages[0].lessons[0].wordIds,'word');await expect(page.locator('.lesson-reward')).toContainText('+3 ★');
- await open(page,second);await expect(page.locator('.lead')).toContainText('3 z 5');await resumeStudy(page);
+ await open(page,second);await expect(page.locator('.lead')).toContainText('3 z 6');await resumeStudy(page);
  await expect(page.getByRole('heading',{name:'Koci trening',exact:true})).toBeVisible();
  await page.getByRole('button',{name:'Zaczynam ćwiczenia →',exact:true}).tap();
  await expect(page.locator('.question')).toBeVisible();

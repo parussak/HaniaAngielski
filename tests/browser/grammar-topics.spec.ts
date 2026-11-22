@@ -37,6 +37,22 @@ async function restore(page: Page, p: Progress) {
 }
 const open = (page: Page) => page.getByRole('button', { name: /Otwórz gramatykę/ }).tap();
 
+test('Wyszukiwanie filtruje poznane tematy i po wyczyszczeniu przywraca listę', async ({ page }) => {
+    await materials(page);
+    await restore(page, seed([[unit('en-unit-1'), 'g-pc-1', true], [unit('en-unit-1'), 'g-art-1', true]]));
+    await open(page);
+    const search = page.getByRole('searchbox', { name: 'Szukaj w poznanej gramatyce' });
+    const visible = page.locator('.grammar-topic:visible summary');
+    await search.fill(' WYJASNIENIE PC-BASIC ');
+    await expect(visible).toHaveCount(1);
+    await expect(visible).toContainText('Present Continuous');
+    await search.fill('pc-more');
+    await expect(visible).toHaveCount(0);
+    await expect(page.getByText('Brak pasujących tematów.', { exact: false })).toBeVisible();
+    await search.fill('');
+    await expect(visible).toHaveCount(2);
+});
+
 test('Dotknięcie okładki zeszytu poza napisem otwiera gramatykę', async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 640 });
     await page.goto('./');

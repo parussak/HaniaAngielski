@@ -11,6 +11,7 @@ import {currentCourse} from './selectors.ts';
 import {bindNavigation} from './navigation.ts';
 import {bindGapDrag} from './gap-drag.ts';
 import {speaker} from '../speech.ts';
+const searchText = (value: string) => value.trim().toLowerCase().normalize('NFD').replace(/\p{M}/gu, '').replaceAll('ł', 'l');
 interface EventPorts {
     accounts: ReturnType<typeof createAccountController>;
     house: ReturnType<typeof createHouseController>;
@@ -23,6 +24,18 @@ interface EventPorts {
 }
 export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts, learning, house, backups, sync, scheduleSync, scheduleReviewMigration, run }: EventPorts) {
     bindNavigation(state,run);
+    root.addEventListener('input', ev => {
+        const input = ev.target;
+        if (!(input instanceof HTMLInputElement) || input.id !== 'grammar-search') return;
+        const query = searchText(input.value);
+        let count = 0;
+        for (const topic of root.querySelectorAll<HTMLElement>('[data-grammar-text]')) {
+            topic.hidden = !searchText(topic.dataset.grammarText!).includes(query);
+            if (!topic.hidden) count++;
+        }
+        const status = root.querySelector<HTMLElement>('.grammar-search-status')!;
+        status.textContent = !query ? '' : count ? `Znalezione tematy: ${count}` : 'Brak pasujących tematów. Spróbuj innego słowa.';
+    });
     async function action(action: string, el: HTMLElement) {
         state.notice = '';
         if (await house.handleAction(action, el))

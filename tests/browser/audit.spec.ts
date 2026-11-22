@@ -3,9 +3,9 @@ import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
-const tasks=JSON.parse(readFileSync(new URL('../../public/content/angielski-hani/02-food/cwiczenia.json',import.meta.url),'utf8'));
+import {serveSingleTask} from './single-task.ts';
 async function oneQuestion(page:any,id='g-count-milk'){
-  await page.route('**/content/angielski-hani/02-food/cwiczenia.json',(r:any)=>r.fulfill({json:tasks.filter((q:any)=>q.id===id)}));
+  await serveSingleTask(page,id);
   await page.route('**/content/angielski-hani/02-food/quiz.json',(r:any)=>r.fulfill({json:[]}));
   await page.goto('./');await openModule(page);
 }
