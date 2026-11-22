@@ -8,7 +8,8 @@
       "She's taking a photo.",
       "They are chatting online."
     ],
-    "source": "Podręcznik, s. 40–41; zeszyt ćwiczeń, s. 25."
+    "source": "Podręcznik, s. 40–41; zeszyt ćwiczeń, s. 25.",
+    "grammarTopicId": "present-continuous"
   },
   {
     "id": "now-negative",
@@ -19,7 +20,8 @@
       "He isn't watching TV.",
       "We aren't playing."
     ],
-    "source": "Podręcznik, s. 41; zeszyt ćwiczeń, s. 25."
+    "source": "Podręcznik, s. 41; zeszyt ćwiczeń, s. 25.",
+    "grammarTopicId": "present-continuous"
   },
   {
     "id": "ing-spelling",
@@ -30,7 +32,8 @@
       "take → taking",
       "sit → sitting"
     ],
-    "source": "Podręcznik, ramka LOOK!, s. 41; zeszyt ćwiczeń, s. 25."
+    "source": "Podręcznik, ramka LOOK!, s. 41; zeszyt ćwiczeń, s. 25.",
+    "grammarTopicId": "present-continuous"
   },
   {
     "id": "now-yes-no",
@@ -40,7 +43,8 @@
       "Are you talking on the phone?",
       "Is she taking a selfie?"
     ],
-    "source": "Podręcznik, s. 43; zeszyt ćwiczeń, s. 26."
+    "source": "Podręcznik, s. 43; zeszyt ćwiczeń, s. 26.",
+    "grammarTopicId": "present-continuous"
   },
   {
     "id": "now-wh",
@@ -51,7 +55,8 @@
       "Where is the bus going?",
       "Why are they running?"
     ],
-    "source": "Podręcznik, s. 43; zeszyt ćwiczeń, s. 26."
+    "source": "Podręcznik, s. 43; zeszyt ćwiczeń, s. 26.",
+    "grammarTopicId": "present-continuous"
   },
   {
     "id": "now-short",
@@ -62,7 +67,8 @@
       "No, she isn't.",
       "Yes, we are."
     ],
-    "source": "Podręcznik, s. 43; zeszyt ćwiczeń, s. 26 i 30."
+    "source": "Podręcznik, s. 43; zeszyt ćwiczeń, s. 26 i 30.",
+    "grammarTopicId": "present-continuous"
   },
   {
     "id": "also-too",
@@ -74,6 +80,7 @@
       "I can also take photos.",
       "I am also tired."
     ],
-    "source": "Podręcznik, s. 46; zeszyt ćwiczeń, s. 29."
+    "source": "Podręcznik, s. 46; zeszyt ćwiczeń, s. 29.",
+    "grammarTopicId": "also-too"
   }
 ]

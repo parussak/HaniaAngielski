@@ -57,7 +57,7 @@ Każdy moduł należy dokładnie do jednego kursu, a wszystkie wpisy rejestru mu
 
 Kurs może wskazać plik tematów: `"grammarTopicsFile": "tematy-gramatyki/<id-kursu>.json"` w jego wpisie w `kursy.json`. Plik to tablica `{"id", "title", "summary"?}` (`id` małymi literami z myślnikami, `summary` opcjonalne). Reguła w `gramatyka.json` wskazuje temat polem `grammarTopicId`; reguły z różnych modułów kursu mogą dzielić temat, a kolejność wynika z kolejności `moduleIds`. Treść reguły zostaje tylko w `gramatyka.json`.
 
-`check:content` i wczytanie biblioteki odrzucają: regułę bez zadania `kind: "grammar"` z jej `ruleId` (w każdym kursie), a w kursie z plikiem tematów także regułę bez tematu lub z nieznanym tematem, temat bez reguł i powtórzone `id` tematu. Kurs bez pliku tematów nie może mieć reguł z `grammarTopicId`.
+`check:content` i wczytanie biblioteki odrzucają: regułę bez zadania `kind: "grammar"` z jej `ruleId` (w każdym kursie), a w kursie z plikiem tematów także regułę bez tematu lub z nieznanym tematem i powtórzone `id` tematu. Temat bez reguł jest dozwolony (moduły kursu mogą być wczytane częściowo) i po prostu się nie pokazuje. Kurs bez pliku tematów nie może mieć reguł z `grammarTopicId`.
 
 Języki i polecenia nie muszą być powtarzane w `modul.json`; są przypisywane przy wczytywaniu. Jeżeli wpisano też `courseId` lub `languageCode`, muszą zgadzać się z rejestrem. Sprzeczność jest błędem, nie powodem automatycznego przepinania wyników.
 

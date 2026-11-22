@@ -8,7 +8,8 @@
       "a strawberry → some strawberries",
       "some milk; some sugar"
     ],
-    "source": "Podręcznik, s. 27 i 34; zeszyt ćwiczeń, s. 15."
+    "source": "Podręcznik, s. 27 i 34; zeszyt ćwiczeń, s. 15.",
+    "grammarTopicId": "countable-uncountable"
   },
   {
     "id": "articles",
@@ -18,7 +19,8 @@
       "an apple; an egg; a sandwich",
       "I have milk with my cereal."
     ],
-    "source": "Podręcznik, s. 27, ćw. 8; zeszyt ćwiczeń, s. 15 i 20."
+    "source": "Podręcznik, s. 27, ćw. 8; zeszyt ćwiczeń, s. 15 i 20.",
+    "grammarTopicId": "countable-uncountable"
   },
   {
     "id": "some-any",
@@ -30,7 +32,8 @@
       "Are there any eggs?",
       "Can I have some chips, please?"
     ],
-    "source": "Podręcznik, s. 27, 30 i 34; notatki do modułu 2."
+    "source": "Podręcznik, s. 27, 30 i 34; notatki do modułu 2.",
+    "grammarTopicId": "quantity"
   },
   {
     "id": "there",
@@ -42,7 +45,8 @@
       "Is there any milk? Yes, there is.",
       "Are there any strawberries? No, there aren't."
     ],
-    "source": "Podręcznik, s. 27; przesłane notatki."
+    "source": "Podręcznik, s. 27; przesłane notatki.",
+    "grammarTopicId": "there-is-are"
   },
   {
     "id": "much-many",
@@ -53,7 +57,8 @@
       "How many apples are there?",
       "How many bottles of water are there?"
     ],
-    "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 16 i 20; notatki."
+    "source": "Podręcznik, s. 29 i 34; zeszyt ćwiczeń, s. 16 i 20; notatki.",
+    "grammarTopicId": "quantity"
   },
   {
     "id": "a-lot-of",
@@ -63,7 +68,8 @@
       "There is a lot of water.",
       "There are a lot of apples."
     ],
-    "source": "Podręcznik, s. 29; notatki do modułu 2."
+    "source": "Podręcznik, s. 29; notatki do modułu 2.",
+    "grammarTopicId": "quantity"
   },
   {
     "id": "containers",
@@ -73,7 +79,8 @@
       "a carton of juice → two cartons of juice",
       "a jar of jam; a packet of biscuits; a can of cola"
     ],
-    "source": "Podręcznik, s. 29 i 33; zeszyt ćwiczeń, s. 16 i 20."
+    "source": "Podręcznik, s. 29 i 33; zeszyt ćwiczeń, s. 16 i 20.",
+    "grammarTopicId": "quantity"
   },
   {
     "id": "ordering",
@@ -84,7 +91,8 @@
       "I'd like a lemonade, please.",
       "Would you like anything to drink?"
     ],
-    "source": "Podręcznik, s. 30 i 33; zeszyt ćwiczeń, s. 17 i 20."
+    "source": "Podręcznik, s. 30 i 33; zeszyt ćwiczeń, s. 17 i 20.",
+    "grammarTopicId": "food-talk"
   },
   {
     "id": "so-because",
@@ -94,7 +102,8 @@
       "I play a lot of sport so I'm always hungry.",
       "I'm always hungry because I play a lot of sport."
     ],
-    "source": "Podręcznik, s. 32; zeszyt ćwiczeń, s. 19."
+    "source": "Podręcznik, s. 32; zeszyt ćwiczeń, s. 19.",
+    "grammarTopicId": "because-so"
   },
   {
     "id": "meals",
@@ -106,6 +115,7 @@
       "On a school day I have a quick breakfast.",
       "At the weekend I have eggs and toast."
     ],
-    "source": "Podręcznik, s. 25, ćw. 8–9; s. 32, blog i Writing Time. Objaśnienie opracowane do aplikacji."
+    "source": "Podręcznik, s. 25, ćw. 8–9; s. 32, blog i Writing Time. Objaśnienie opracowane do aplikacji.",
+    "grammarTopicId": "food-talk"
   }
 ]

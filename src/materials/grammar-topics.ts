@@ -14,19 +14,17 @@ export function validateGrammarTopics(input: unknown): GrammarTopic[] {
 /**
  * D-74: every rule of a course has a topic and at least one grammar exercise.
  * Topics are required only for courses that declare `grammarTopicsFile`, so
- * content without topics keeps working until a course opts in.
+ * content without topics keeps working until a course opts in. A topic
+ * without rules is allowed: modules of a course may be loaded in part.
  */
 export function checkGrammarTopics(course: Course, modules: Module[]) {
     const fail = (message: string): never => { throw new Error(`Błąd gramatyki kursu ${course.id}: ${message}`); };
     const own = modules.filter(m => course.moduleIds.includes(m.id));
     const topics = course.grammarTopics;
-    const used = new Set<string>();
     for (const m of own) for (const rule of m.grammar) {
         if (!m.exercises.some(q => q.kind === 'grammar' && q.ruleId === rule.id)) fail(`reguła ${m.id}/${rule.id} nie ma żadnego zadania gramatycznego.`);
         if (!topics) { if (rule.grammarTopicId !== undefined) fail(`reguła ${m.id}/${rule.id} wskazuje temat, a kurs nie ma pliku tematów.`); continue; }
         if (!rule.grammarTopicId) fail(`reguła ${m.id}/${rule.id} nie ma tematu.`);
         if (!topics.some(t => t.id === rule.grammarTopicId)) fail(`reguła ${m.id}/${rule.id} wskazuje nieznany temat ${rule.grammarTopicId}.`);
-        used.add(rule.grammarTopicId!);
     }
-    for (const t of topics ?? []) if (!used.has(t.id)) fail(`temat ${t.id} nie ma żadnej reguły.`);
 }

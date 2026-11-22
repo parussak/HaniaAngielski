@@ -13,6 +13,7 @@
       },
       "levels": null,
       "moduleIds": ["unit-2-food", "unit-3-technology"],
+      "grammarTopicsFile": "tematy-gramatyki/angielski-hani.json",
       "instructions": {
         "translationPrompt": "Podaj po angielsku",
         "wordExplanationTemplate": "„{answer}” oznacza „{cue}”."

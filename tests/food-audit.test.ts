@@ -42,7 +42,7 @@ test('audyt Food: oryginalne mapy, słówka, pytania i objaśnienia nie są podm
   ['slownictwo','d1d1acf441ed69ceec80b77fca4db467e855f193197fc2d91d6d8aa9e25aaed1',97],
   ['quiz','0774aac6af4605bb56b27afaaa52380934283dab889e0614e274438a3a9ea2be',97],
   ['cwiczenia','d66b03a4be6101d8d63e201329abc2a843089ff1399cefa2af14f483b929b759',59],
-  ['gramatyka','69c0e2c3fb263b5e2c2e6f0b40554a0d23e773ebf7c921f2aa5bd5d10173728c',9],
+  ['gramatyka','baf22376c07fdacd9ff5e3645a7da01554e72ba98ad03664a38d01204c3660e5',9],
   ['rozmowki','67f8ff8812e829a7538b67c22479f177d6e4f79ae1bd8124fd489a0c9db66b2b',12]
  ] as const)assert.equal(hash((name==='slownictwo'?originalWords():read(name)).slice(0,count)),expected,name);
  assert.ok(j.stages.slice(0,4).every(s=>s.lessons.every(l=>!l.update)));

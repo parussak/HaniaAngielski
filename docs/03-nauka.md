@@ -156,7 +156,7 @@ Globalne fiszki obejmują też znane słówka; globalny quiz — poznane znaczen
 
 ### Zakładka Gramatyka (D-74)
 
-**Stan: mechanika wdrożona; żaden kurs nie ma jeszcze tematów.** Kod i testy z fikstur są gotowe, ale produkcyjny kurs nie deklaruje `grammarTopicsFile` i reguły nie mają `grammarTopicId`, więc zakładka pokazuje komunikat, że kurs nie ma jeszcze tematów (osobne zadanie na torze treści). Ekran nie był oglądany na telefonie.
+**Stan: wdrożone.** Kurs angielski ma 7 tematów (plik `tematy-gramatyki/angielski-hani.json`) i wszystkie 17 reguł ma przypisany temat. Kurs bez `grammarTopicsFile` pokazuje komunikat, że nie ma jeszcze tematów. Ekran nie był oglądany na telefonie.
 
 - **Miejsce i zakres:** sekcja w Nauce, tylko dla wybranego kursu. Dodatkowo przycisk „Poćwicz gramatykę” na końcu ukończonej lekcji mapowej, która ma `ruleIds`; lekcja bez reguł go nie pokazuje.
 - **Tematy:** temat to „parasol” nad regułami z różnych modułów kursu, np. „Present Continuous”. Reguła wskazuje temat polem `grammarTopicId` (nie mylić z polem `topics` modułu, które opisuje okładkę). Kolejność w temacie wynika z kolejności modułów w kursie; późniejsza reguła rozwija wcześniejszą. Lista tematów kursu jest osobnym plikiem z identyfikatorem kursu (patrz [U-11](decyzje.md#u-11)).
@@ -167,7 +167,7 @@ Globalne fiszki obejmują też znane słówka; globalny quiz — poznane znaczen
 - **Sesja „Poćwicz”:** z próbowanych zadań całego tematu (także z przycisku po lekcji), do 10 zadań; nie zalicza map i nie daje gwiazdek, jak inne sesje globalne.
 - **Walidator treści:** reguła bez tematu albo bez zadania z jej `ruleId` jest błędem. Nowe pola są opcjonalne w odczycie, żeby stare treści i zapisy działały do czasu przypisania tematów.
 - **Wejście:** przycisk „Gramatyka →” w karcie „A może wolisz poćwiczyć po swojemu?” na ekranie głównym. Sesja „Poćwicz” jest zwykłą sesją gramatyczną kursu (`mode: grammar`, zakres kursu), więc zapis i kopie zapasowe się nie zmieniają.
-- **Kolejność prac:** mechanika jest gotowa; teraz osobna zmiana treści: plik tematów kursu, `grammarTopicsFile` w `kursy.json`, `grammarTopicId` przy istniejących regułach oraz `meals` z Food, którego żadna lekcja jeszcze nie wskazuje w `ruleIds`.
+- **Nowy moduł kursu:** każda nowa reguła dostaje `grammarTopicId`. Rozwinięcie wcześniejszej reguły trafia do jej tematu; nowy temat dopisujemy do pliku tematów kursu.
 
 ## 10. Widok postępów (D-57)
 

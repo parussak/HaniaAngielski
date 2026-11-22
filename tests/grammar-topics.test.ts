@@ -39,11 +39,10 @@ test('kurs bez pliku tematów nadal działa, ale reguła nie może wskazywać te
     await failsWith(files => { delete (files['kursy.json'] as { courses: { grammarTopicsFile?: string }[] }).courses[1].grammarTopicsFile; }, /nie ma pliku tematów/);
 });
 
-test('walidator odrzuca regułę bez tematu, z nieznanym tematem, bez ćwiczeń oraz temat bez reguł', async () => {
+test('walidator odrzuca regułę bez tematu, z nieznanym tematem, bez ćwiczeń oraz powtórzony temat', async () => {
     await failsWith(files => { delete (files['en-1/gramatyka.json'] as { grammarTopicId?: string }[])[1].grammarTopicId; }, /nie ma tematu/);
     await failsWith(files => { (files['en-1/gramatyka.json'] as { grammarTopicId?: string }[])[1].grammarTopicId = 'nie-ma'; }, /nieznany temat/);
     await failsWith(files => { files['en-1/cwiczenia.json'] = (files['en-1/cwiczenia.json'] as { ruleId: string }[]).filter(q => q.ruleId !== 'art'); }, /nie ma żadnego zadania/);
-    await failsWith(files => { (files['tematy-gramatyki/english-book.json'] as unknown[]).push({ id: 'pusty', title: 'Pusty' }); }, /nie ma żadnej reguły/);
     await failsWith(files => { (files['tematy-gramatyki/english-book.json'] as unknown[]).push({ id: 'articles', title: 'Duplikat' }); }, /tematów gramatyki/);
 });
 
