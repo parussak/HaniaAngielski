@@ -78,10 +78,11 @@ export function homeView({ name, modules, step, pwa, cat, courseContext = '', we
     <h2>Wielkie rzeczy zaczynają się od małych kroków.</h2>
     <p>Wybierz przygodę, ucz się małymi krokami i zdobywaj gwiazdki do kociego domku.</p>${button('journeys', `Wybierz przygodę ${icon('arrow')}`)}</div>${heroArt()}</section>
     <section class="practice-entry grammar-entry">
-    <span class="practice-icon" aria-hidden="true">${icon('book')}</span>
+    <span class="grammar-paw" aria-hidden="true">${icon('paw')}</span>
     <div>
     <h2>Gramatyka</h2>
-    <p>Zasady, które już poznajesz, zebrane tematami. Stąd możesz je przeczytać i poćwiczyć.</p>${button('grammar', `Otwórz gramatykę ${icon('arrow')}`, 'secondary')}</div>
+    <p>Wróć do zasad z Twoich lekcji i poćwicz wybrany temat.</p>
+    <button type="button" class="grammar-open" data-action="grammar" aria-label="Zobacz moje tematy — Otwórz gramatykę">Zobacz moje tematy ${icon('arrow')}</button></div>
     </section>
     <section class="practice-entry">
     <span class="practice-icon" aria-hidden="true">${icon('cards')}</span>

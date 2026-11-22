@@ -22,6 +22,32 @@
 .practice-entry h2{font-size:21px;line-height:1.4;margin:0 0 8px}
 .practice-entry p{font-size:14px;color:#684e7b;line-height:1.7;margin:0 0 16px}
 .practice-entry .secondary{min-height:48px}
+.practice-entry.grammar-entry{
+  position:relative;
+  padding:24px 52px 24px 28px;
+  border-left:7px solid #b9a0c9;
+  border-radius:6px 18px 18px 6px;
+  background:repeating-linear-gradient(transparent 0 23px,#e9dfd6 24px),#fff9eb;
+}
+.grammar-entry::before{
+  content:"";
+  position:absolute;
+  right:0;
+  top:24px;
+  width:15px;
+  height:17px;
+  border-radius:5px 0 0 5px;
+  background:#c5b2da;
+  box-shadow:0 24px #9ccdc0,0 48px #f1bd9b;
+}
+.grammar-entry .grammar-paw{position:absolute;bottom:16px;right:16px;color:#a58096;transform:rotate(14deg)}
+.grammar-paw svg{display:block;width:22px;height:22px}
+.grammar-entry>div{flex:auto;min-width:0}
+.grammar-open{display:inline-flex;align-items:center;gap:8px;padding:0;border:0;background:transparent;color:#583b74;font:inherit;font-weight:700;cursor:pointer}
+.grammar-open svg{width:19px;height:19px}
+.grammar-open::after{content:"";position:absolute;inset:0;border-radius:6px 18px 18px 6px}
+.grammar-open:hover{text-decoration:underline}
+.grammar-open:focus-visible::after{outline:3px solid #624582;outline-offset:3px}
 .home-help{border-top:1px solid #e1d6ed;padding-top:8px;color:#684e7b}
 .home-help>summary{display:flex;align-items:center;gap:10px;cursor:pointer;min-height:52px;font-size:14px;font-weight:600;list-style:none}
 .home-help>summary::-webkit-details-marker{display:none}

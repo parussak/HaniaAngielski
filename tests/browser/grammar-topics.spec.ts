@@ -37,6 +37,13 @@ async function restore(page: Page, p: Progress) {
 }
 const open = (page: Page) => page.getByRole('button', { name: /Otwórz gramatykę/ }).tap();
 
+test('Dotknięcie okładki zeszytu poza napisem otwiera gramatykę', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 640 });
+    await page.goto('./');
+    await page.locator('.grammar-entry').tap({ position: { x: 16, y: 12 } });
+    await expect(page.getByRole('heading', { name: 'Gramatyka', level: 1 })).toBeVisible();
+});
+
 test('Gramatyka: bez prób jest wyjaśnienie, bez przewijania w poziomie', async ({ page }) => {
     await materials(page); await page.setViewportSize({ width: 320, height: 640 }); await page.goto('./'); await open(page);
     await expect(page.getByRole('heading', { name: 'Gramatyka', exact: true })).toBeVisible();
