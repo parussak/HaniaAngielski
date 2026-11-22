@@ -35,6 +35,26 @@ Zasada obowiązuje również po błędzie oraz w powtórce ogólnej i etapowej: 
 
 Przegląd aktualnych plików Food wykazał 104 zadania gramatyczne i dialogowe z krótkimi odpowiedziami; nie znaleziono kluczy wymagających pisania całych zdań. Nie zmieniono ich identyfikatorów, odpowiedzi ani rewizji. Podstawowe formy ćwiczeń porównano ze zdjęciami podręcznika s. 27 i 29; nie jest to nowa recenzja wszystkich treści językowych modułu.
 
+### Inspiracja podręcznikiem, własny tekst — D-73 (propozycja)
+
+Aplikacja jest publiczna (GitHub Pages), choć korzystają z niej tylko Hania i Paulina. Dlatego treść ma realizować ten sam zakres co podręcznik, ale własnymi słowami.
+
+**Przejmujemy z podręcznika**, bo to zakres podstawy programowej, a nie tekst autora:
+
+- słówka i wyrażenia z listy działu,
+- struktury gramatyczne i typowe zwroty funkcyjne spotykane w każdym podręczniku na tym poziomie (np. *What's your favourite…?*, *I like… because…*),
+- typ i poziom ćwiczenia (luka, dopasowanie, wybór) zgodnie z D-35.
+
+**Piszemy od nowa:** zdania przykładowe i zdania z lukami (słowo w luce zostaje, kontekst jest własny), dialogi, sceny i czytanki z postaciami-kotkami aplikacji, polecenia i wyjaśnienia.
+
+**Nie przenosimy:** postaci, ich imion i charakterystycznych historii z podręcznika, rymowanek, piosenek, czytanek, ilustracji ani układu ćwiczenia (ta sama kolejność zdań, tylko z innymi słowami).
+
+**Test zdania:** czy mogłoby się znaleźć w dowolnym podręczniku na tym poziomie? Jeśli tak, to zwykły język. Jeśli jest charakterystyczne dla tej książki, piszemy własne. Poza zwrotami z listy słówek nie powtarzamy dłuższego ciągu kolejnych słów z oryginału.
+
+**Źródła:** pole `source` i karty w `docs/materialy/` dalej wskazują strony podręcznika. To narzędzie pracy i recenzji. Aplikacja nie pokazuje tych odwołań użytkownikowi (dziś pokazuje je m.in. informacja zwrotna po odpowiedzi, ściąga gramatyki i ustawienia modułu). Ukrycie ich to osobne zadanie mechaniki. Odwołania nadal są widoczne w publicznym repozytorium i w plikach treści.
+
+**Istniejąca treść:** nie przerabiamy jej. Wyjątkiem są zadania z nazwami postaci z podręcznika albo wyraźnie skopiowanym fragmentem. Poprawiamy wtedy tekst i zachowujemy `id` i `rev` (D-52).
+
 ### Warianty i znaczenia
 
 Zgodnie z D-16 w [rejestrze](decyzje.md) jedno hasło opisuje jedno konkretne znaczenie, z własną przypisaną ilustracją i wariantami językowymi. Przy opracowywaniu materiału trzeba rozdzielić różne znaczenia tego samego zapisu, zamiast dobierać jeden obrazek i wspólną listę tłumaczeń dla wszystkich.
