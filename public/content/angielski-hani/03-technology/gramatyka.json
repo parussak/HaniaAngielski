@@ -1,12 +1,15 @@
 [
   {
     "id": "now-positive",
-    "title": "Present Continuous — twierdzenia",
-    "explanation": "Gdy mówisz, co dzieje się teraz, wybierz am dla I, is dla he, she i it, a are dla you, we i they. Potem daj czasownik z końcówką -ing.",
+    "title": "Present Continuous — co dzieje się teraz?",
+    "explanation": "Używasz czasu Present Continuous, gdy mówisz, co ktoś robi właśnie teraz, w chwili, gdy o tym opowiadasz. Wyobraź sobie, że czytasz książkę. Ktoś pyta: „Co robisz?”. Odpowiadasz: „I am reading a book.” Czytam książkę. Czytanie nadal trwa. Jak zbudować zdanie? Kto? + am / is / are + czasownik z końcówką -ing. Z I użyj am, z he, she i it użyj is, a z you, we i they użyj are. Zapamiętaj: po polsku wystarczy „Czytam”. Po angielsku potrzebujesz obu części: I am reading.",
     "examples": [
-      "I am reading.",
-      "She's taking a photo.",
-      "They are chatting online."
+      "I am reading a book. — Czytam książkę.",
+      "You are driving a car. — Prowadzisz samochód.",
+      "She is drawing a cat. — Ona rysuje kota.",
+      "We are playing a game. — Gramy w grę.",
+      "You are watching a film. — Oglądacie film.",
+      "They are riding bikes. — Oni jeżdżą na rowerach."
     ],
     "source": "Podręcznik, s. 40–41; zeszyt ćwiczeń, s. 25.",
     "grammarTopicId": "present-continuous"
