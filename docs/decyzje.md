@@ -83,6 +83,7 @@ Daty: D-01–D-40 ustalono do 10 listopada 2026 r.
 | D-71 | 21.11.2026 | Na mapie i we wstępie lekcja ma oznaczenie „Czytanka”. Zadanie `tap` pokazuje najpierw zdanie w czytance, potem pytanie, a pod nim powtórzone zdanie z maksymalnie pięcioma słowami do wyboru. Podgląd tłumaczenia zdania wraca po odpowiedzi. W powtórce pod pytaniem obowiązuje ten sam limit. | wdrożone | [Nauka](03-nauka.md#czytanki-d-68), [Format materiałów](format-materialow.md#czytanka) |
 | D-72 | 21.11.2026 | Gdy hasło, kwestia sceny lub zdanie czytanki źle brzmi w Piperze, a tekstu w aplikacji nie zmieniamy, osobny tekst do wymówienia wpisuje się przy module w `audio/config.json` (`pronunciation`), a nie w treści kursu. Wpis powtarza oczekiwany tekst; jeśli materiał się zmieni, generator się zatrzymuje. Tekst i klucz odtwarzacza bez zmian; zmienia się tylko klip tego odwołania. | wdrożone; `go-to-bed` → „go-to-bed,”, `tv` → „tee vee,” wybrane po odsłuchu próbek 21.11.2026 | [Generowanie audio](generowanie-audio.md) |
 | D-73 | 22.11.2026 | Treść ćwiczy to samo co podręcznik: słówka, struktury, zwroty, typ ćwiczenia i krótkie uniwersalne zdania zostają, także dosłownie. Zmieniamy imiona i postacie (na kotki), charakterystyczne miejsca oraz dłuższe teksty (czytanki, opowiadania, dialogi fabularne); nie przenosimy rymowanek, piosenek ani ilustracji. Aplikacja nie pokazuje odwołań do stron podręcznika (zostają w `source` i kartach). Istniejącą treść poprawiamy tylko przy nazwach postaci z książki lub wyraźnym kopiowaniu, z zachowaniem `id` i `rev`. | obowiązuje; ukrycie źródeł w aplikacji wdrożone; istniejąca treść bez przeglądu | [Merytoryka](04-merytoryka.md#inspiracja-podręcznikiem-własny-tekst--d-73) |
+| D-74 | 22.11.2026 | W Nauce jest zakładka **Gramatyka** wybranego kursu (bez dostępu do innych kursów): zbiera reguły z modułów **pod tematami** (np. „Present Continuous”), a reguła z późniejszego modułu rozwija wcześniejszą w tym samym temacie. Zakładka czyta reguły z `gramatyka.json` modułów — nie kopiuje ich. Temat i jego reguły pokazują się dopiero po próbie choć jednego zadania z `ruleId`; przy temacie widać „ćwiczone N×, X% poprawnych”, przycisk „Poćwicz ten temat” (do 10 próbowanych zadań, bez map i gwiazdek) i lekcje, które regułę ćwiczą. Po ukończonej lekcji z regułami na dole jest „Poćwicz gramatykę” (cały temat). Reguła bez tematu lub bez zadań z jej `ruleId` to błąd walidatora treści. Najpierw mechanika (fikstury), potem przypisanie tematów istniejącym regułom. | uzgodnione; niewdrożone | [Nauka](03-nauka.md#zakładka-gramatyka-d-74) |
 
 ## Pytania otwarte i rozstrzygnięte
 
@@ -127,6 +128,10 @@ Pytania U-xx zaparkowano 10 listopada 2026 r. na prośbę Pauliny. Wdrożenie cz
 ### U-10
 
 **Podręczniki i recenzja — otwarte.** Tytuły, wydania i pierwsze zakresy FR/IT; oznaczanie niepewnego odczytu i zatwierdzanie poprawności językowej; które elementy modułu są obowiązkowe. Procedurę redakcyjną opisują [dodawanie modułu](dodawanie-modulow.md) i [szablon karty](szablon-modulu.md).
+
+### U-11
+
+**Struktura folderów a kursy — otwarte.** Moduły leżą płasko w `public/content/` (np. `02-food`), a do kursu przypisuje je tylko `moduleIds` w `kursy.json`; grafiki w `public/illustrations/` i `public/game/` też są płaskie. Czy przed dodaniem drugiego kursu przenieść treść i grafiki do `public/content/<kurs>/<moduł>/` (dotyka katalogu, generatora audio, testów, PWA i walidatora)? Do czasu decyzji nowe pliki kursowe, np. tematy gramatyczne (D-74), powstają jako osobne pliki z identyfikatorem kursu.
 
 ## Propozycje techniczne
 

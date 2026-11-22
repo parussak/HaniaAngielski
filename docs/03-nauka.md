@@ -154,6 +154,19 @@ Wybór algorytmu (prosty harmonogram, SM-2, FSRS) jest świadomie odłożony. Ob
 
 Globalne fiszki obejmują też znane słówka; globalny quiz — poznane znaczenia i próbowane pytania; globalna gramatyka — tylko próbowane zadania. Przy zbyt małej puli opcji wymagane jest wpisanie. Globalne sesje nie zaliczają map i nie dają gwiazdek.
 
+### Zakładka Gramatyka (D-74)
+
+**Stan: uzgodnione, niewdrożone.** Poniższe to docelowa zasada, nie opis działającej funkcji.
+
+- **Miejsce i zakres:** sekcja w Nauce, tylko dla wybranego kursu. Dodatkowo przycisk „Poćwicz gramatykę” na końcu ukończonej lekcji mapowej, która ma `ruleIds`; lekcja bez reguł go nie pokazuje.
+- **Tematy:** temat to „parasol” nad regułami z różnych modułów kursu, np. „Present Continuous”. Reguła wskazuje temat polem `grammarTopicId` (nie mylić z polem `topics` modułu, które opisuje okładkę). Kolejność w temacie wynika z kolejności modułów w kursie; późniejsza reguła rozwija wcześniejszą. Lista tematów kursu jest osobnym plikiem z identyfikatorem kursu (patrz [U-11](decyzje.md#u-11)).
+- **Referencja, nie kopia:** treść reguły żyje tylko w `gramatyka.json` modułu; zakładka ją czyta. Zmiana `id` ani `rev` opublikowanej reguły nie jest potrzebna.
+- **Widoczność:** temat pojawia się po próbie choć jednego zadania z `ruleId` którejkolwiek jego reguły; w temacie widać tylko reguły, z których coś próbowano, więc rozwinięcie z dalszego modułu niczego nie zdradza.
+- **Przy temacie:** „ćwiczone N×, X% poprawnych” (próby zadań z `ruleId` tematu), lista lekcji, które reguły ćwiczą (`ruleIds`), oraz „Poćwicz ten temat”.
+- **Sesja „Poćwicz”:** z próbowanych zadań całego tematu (także z przycisku po lekcji), do 10 zadań; nie zalicza map i nie daje gwiazdek, jak inne sesje globalne.
+- **Walidator treści:** reguła bez tematu albo bez zadania z jej `ruleId` jest błędem. Nowe pola są opcjonalne w odczycie, żeby stare treści i zapisy działały do czasu przypisania tematów.
+- **Kolejność prac:** najpierw mechanika (fikstury w `tests/fixtures/`), potem osobna zmiana treści: tematy dla istniejących reguł oraz `meals` z Food, którego żadna lekcja jeszcze nie wskazuje w `ruleIds`.
+
 ## 10. Widok postępów (D-57)
 
 - **Przygoda:** ukończone lekcje w aktualnych mapach; powtórzenie nie dodaje ukończenia, błędy nie zmniejszają wyniku. Brakujące mapy są sygnalizowane.
@@ -167,3 +180,4 @@ Globalne fiszki obejmują też znane słówka; globalny quiz — poznane znaczen
 - [U-03](decyzje.md#u-03) — szczegóły poprawek Food i ochrony danych.
 - [U-05](decyzje.md#u-05) — algorytm treningu i wpływ dodatkowej sesji na harmonogram.
 - [U-07](decyzje.md#u-07) — poziom agregacji liczników na ekranach i przyszłe premie za utrwalenie nowych map.
+- [U-11](decyzje.md#u-11) — struktura folderów kursów (dotyczy m.in. pliku tematów gramatyki).
