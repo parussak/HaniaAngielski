@@ -160,6 +160,7 @@ Globalne fiszki obejmują też znane słówka; globalny quiz — poznane znaczen
 
 - **Miejsce i zakres:** sekcja w Nauce, tylko dla wybranego kursu. Dodatkowo przycisk „Poćwicz gramatykę” na końcu ukończonej lekcji mapowej, która ma `ruleIds`; lekcja bez reguł go nie pokazuje.
 - **Tematy:** temat to „parasol” nad regułami z różnych modułów kursu, np. „Present Continuous”. Reguła wskazuje temat polem `grammarTopicId` (nie mylić z polem `topics` modułu, które opisuje okładkę). Kolejność w temacie wynika z kolejności modułów w kursie; późniejsza reguła rozwija wcześniejszą. Lista tematów kursu jest osobnym plikiem z identyfikatorem kursu (patrz [U-11](decyzje.md#u-11)).
+- **Istniejąca karta:** „Gramatyka z poznanego materiału” w „Całym poznanym materiale” ([§9](#9-ćwiczenia-swobodne)) zostaje bez zmian; zakładka Gramatyka jest dodatkiem obok niej.
 - **Referencja, nie kopia:** treść reguły żyje tylko w `gramatyka.json` modułu; zakładka ją czyta. Zmiana `id` ani `rev` opublikowanej reguły nie jest potrzebna.
 - **Widoczność:** temat pojawia się po próbie choć jednego zadania z `ruleId` którejkolwiek jego reguły; w temacie widać tylko reguły, z których coś próbowano, więc rozwinięcie z dalszego modułu niczego nie zdradza.
 - **Przy temacie:** „ćwiczone N×, X% poprawnych” (próby zadań z `ruleId` tematu), lista lekcji, które reguły ćwiczą (`ruleIds`), oraz „Poćwicz ten temat”.

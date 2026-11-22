@@ -25,6 +25,9 @@ export interface Meaning {
     rev?: number;
 }
 
+/** D-74: a "parasol" over grammar rules of several modules of one course. */
+export interface GrammarTopic { id: string; title: string; summary?: string }
+
 export interface Course {
     id: string;
     name: string;
@@ -34,6 +37,9 @@ export interface Course {
     levels: string[] | null;
     moduleIds: string[];
     instructions: { translationPrompt: string; wordExplanationTemplate: string };
+    /** D-74: file with the course's grammar topics; `grammarTopics` is filled in when the library is read. */
+    grammarTopicsFile?: string;
+    grammarTopics?: GrammarTopic[];
 }
 
 export interface MaterialLibrary { courses: Course[]; modules: Module[] }

@@ -1,7 +1,7 @@
 import type { Adventure } from '../adventure.ts';
 import type { HistoryPage, HistorySummary } from '../history.ts';
 import type { Illustration, Meaning } from '../materials/model.ts';
-export type { Illustration, Meaning, LanguageVariant, Course, MaterialLibrary } from '../materials/model.ts';
+export type { Illustration, Meaning, LanguageVariant, Course, GrammarTopic, MaterialLibrary } from '../materials/model.ts';
 export interface Word {
     article?: ArticleGuidance;
     illustration?: Illustration;
@@ -75,6 +75,8 @@ export interface GrammarRule {
     explanation: string;
     examples: string[];
     source: string;
+    /** D-74: the topic of the course this rule belongs to. */
+    grammarTopicId?: string;
 }
 export interface Module {
     courseId?: string;

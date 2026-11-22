@@ -38,8 +38,8 @@ function knownOptions(q: Exercise, labels: string[]) {
     return options;
 }
 
-export function makeCoursePracticeSession(modules: Module[], anchor: Module, p: Progress, mode: CoursePracticeMode, answerMode: AnswerMode): Session | null {
-    const pool = coursePracticePool(modules, anchor, p, mode);
+/** `pool` narrows the session to a part of the known material (D-74: one grammar topic). */
+export function makeCoursePracticeSession(modules: Module[], anchor: Module, p: Progress, mode: CoursePracticeMode, answerMode: AnswerMode, pool: Item[] = coursePracticePool(modules, anchor, p, mode)): Session | null {
     const difficult = new Set(p.difficult);
     const items = shuffle(pool).sort((a, b) => Number(difficult.has(b.key) || p.words[b.key] === 'review') - Number(difficult.has(a.key) || p.words[a.key] === 'review')).slice(0, 10);
     if (!items.length) return null;

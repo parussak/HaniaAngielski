@@ -27,7 +27,8 @@ export function validateCourses(input: unknown): Course[] {
             !(c.levels === null || texts(c.levels) && unique(c.levels) && c.levels.every(level => ['A1','A2','B1','B2','C1','C2'].includes(level))) ||
             !Array.isArray(c.moduleIds) || !c.moduleIds.length || !c.moduleIds.every(identifier) || !unique(c.moduleIds) ||
             !object(c.instructions) || !text(c.instructions.translationPrompt) || !text(c.instructions.wordExplanationTemplate) ||
-            !c.instructions.wordExplanationTemplate.includes('{answer}') || !c.instructions.wordExplanationTemplate.includes('{cue}')) return fail();
+            !c.instructions.wordExplanationTemplate.includes('{answer}') || !c.instructions.wordExplanationTemplate.includes('{cue}') ||
+            c.grammarTopicsFile !== undefined && !(typeof c.grammarTopicsFile === 'string' && /^[a-z0-9-]+(?:\/[a-z0-9-]+)*\.json$/.test(c.grammarTopicsFile))) return fail();
     }
     if (!unique(input.courses.map(c => (c as unknown as Course).id))) return fail();
     const ids = input.courses.flatMap(c => (c as unknown as Course).moduleIds);
