@@ -62,6 +62,14 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             return true;
         }
         if (action === 'course-practice') { state.screen = 'course-practice'; return true; }
+        if (action === 'grammar') { state.screen = 'grammar'; return true; }
+        if (action === 'grammar-lesson') {
+            const j = state.journeys.find(j => j.moduleId === el.dataset.module && journeyKey(j) === el.dataset.journey), m = state.modules.find(m => m.id === el.dataset.module);
+            if (j && m && courseModules(state).includes(m) && lessons(j).some(l => l.lesson.id === el.dataset.id)) {
+                state.selected = m; state.selectedJourneyKey = journeyKey(j); state.introLessonId = el.dataset.id!; state.answerMode = 'mixed'; state.screen = 'lesson-intro';
+            }
+            return true;
+        }
         if (action === 'next-step') {
             await starts.preparePlans();
             const step = getNextStep(state.modules, state.journeys, state.progress, currentCourse(state)?.id);

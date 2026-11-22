@@ -7,6 +7,7 @@ import { makeStageReviewSession } from '../stage-review.ts';
 import {makeRecallSession,makeRitualSession} from '../learning/recall.ts';
 import {needsSectionPlans,prepareSectionPlans} from '../learning/section-plan.ts';
 import { makeCoursePracticeSession, type CoursePracticeMode } from '../learning/course-practice.ts';
+import { makeGrammarTopicSession } from '../learning/grammar-topics.ts';
 import {followingLesson,lessonContext,legendarySession} from '../learning/lesson-flow.ts';
 import {varyLesson} from '../learning/lesson-variety.ts';
 import {makeReadingSession} from '../learning/readings.ts';
@@ -82,6 +83,17 @@ export function createSessionStartController(state: AppState, { mutate }: Sessio
             const anchor = courseModules(state)[0]; if (!anchor) return true;
             const session = makeCoursePracticeSession(state.modules, anchor, state.progress, el.dataset.mode as CoursePracticeMode, state.answerMode);
             if (!session) { state.notice = 'Nie ma jeszcze poznanego materiału dla tego ćwiczenia. Zacznij od mapy lub modułu.'; return true; }
+            if (!confirmReplacement('Nowa sesja zastąpi niedokończoną sesję. Zakończone wyniki pozostaną zachowane. Kontynuować?')) return true;
+            await openSession(session);
+            return true;
+        }
+        if (action === 'grammar-practice') {
+            // D-74: a course grammar session limited to the given topics (several ids are separated by commas).
+            const anchor = courseModules(state)[0]; if (!anchor) return true;
+            const known = new Set(state.courses.find(c => c.id === state.selectedCourseId)?.grammarTopics?.map(t => t.id));
+            const ids = (el.dataset.id ?? '').split(',').filter(id => known.has(id));
+            const session = ids.length ? makeGrammarTopicSession(state.modules, anchor, state.progress, ids, state.answerMode) : null;
+            if (!session) { state.notice = 'Nie ma jeszcze poznanych zadań z tej gramatyki. Spróbuj najpierw lekcji.'; return true; }
             if (!confirmReplacement('Nowa sesja zastąpi niedokończoną sesję. Zakończone wyniki pozostaną zachowane. Kontynuować?')) return true;
             await openSession(session);
             return true;

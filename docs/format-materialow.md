@@ -53,6 +53,12 @@ Kody języków są niezależne od polskiego napisu wyświetlanego na kafelku: `e
 
 Każdy moduł należy dokładnie do jednego kursu, a wszystkie wpisy rejestru muszą odpowiadać modułom katalogu. Kolejność `moduleIds` wyznacza kolejność nauki. Numer `order` w `modul.json` nadal oznacza numer działu widoczny w aplikacji — Food pozostaje modułem 2, choć jest pierwszym dostępnym modułem kursu.
 
+### Tematy gramatyki (D-74)
+
+Kurs może wskazać plik tematów: `"grammarTopicsFile": "tematy-gramatyki/<id-kursu>.json"` w jego wpisie w `kursy.json`. Plik to tablica `{"id", "title", "summary"?}` (`id` małymi literami z myślnikami, `summary` opcjonalne). Reguła w `gramatyka.json` wskazuje temat polem `grammarTopicId`; reguły z różnych modułów kursu mogą dzielić temat, a kolejność wynika z kolejności `moduleIds`. Treść reguły zostaje tylko w `gramatyka.json`.
+
+`check:content` i wczytanie biblioteki odrzucają: regułę bez zadania `kind: "grammar"` z jej `ruleId` (w każdym kursie), a w kursie z plikiem tematów także regułę bez tematu lub z nieznanym tematem, temat bez reguł i powtórzone `id` tematu. Kurs bez pliku tematów nie może mieć reguł z `grammarTopicId`.
+
 Języki i polecenia nie muszą być powtarzane w `modul.json`; są przypisywane przy wczytywaniu. Jeżeli wpisano też `courseId` lub `languageCode`, muszą zgadzać się z rejestrem. Sprzeczność jest błędem, nie powodem automatycznego przepinania wyników.
 
 ## Hasło opisuje jedno znaczenie

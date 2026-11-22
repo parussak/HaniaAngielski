@@ -99,3 +99,20 @@ test('inny kurs ma osobne tematy, także gdy reguły mają te same identyfikator
     assert.deepEqual(view.map(t => t.topic.id), ['passe']);
     assert.deepEqual(grammarTopicPool(modules, anchor, p, 'passe'), []);
 });
+
+test('po lekcji z regułami tematu jest przycisk „Poćwicz gramatykę”, tylko gdy są próbowane zadania', async () => {
+    const { AppState } = await import('../src/app/state.ts');
+    const { lessonSummaryActions } = await import('../src/views/lesson-summary-actions.ts');
+    const { lessonTopicIds } = await import('../src/learning/grammar-topics.ts');
+    const state = new AppState();
+    state.courses = library.courses; state.modules = modules; state.journeys = fixture.journeys; state.selectedCourseId = 'english-book'; state.selected = anchor;
+    const finished = (lessonId: string) => ({ ...makeSession(modules, anchor, 'quiz', 'text', false, state.progress), lesson: { id: `en-unit-1/${lessonId}`, title: lessonId }, completedAt: new Date().toISOString() });
+    assert.doesNotMatch(lessonSummaryActions(state, finished('l-pc')), /grammar-practice/);
+    tryItem(state.progress, item(anchor, 'g-pc-1'));
+    tryItem(state.progress, item(unit('en-unit-2'), 'g-pcm-1'));
+    assert.match(lessonSummaryActions(state, finished('l-pc')), /data-action="grammar-practice" data-id="present-continuous"/);
+    // The lesson about articles has no tried article exercise, so there is nothing to practise yet.
+    assert.doesNotMatch(lessonSummaryActions(state, finished('l-art')), /grammar-practice/);
+    assert.deepEqual(lessonTopicIds(anchor, fixture.journeys[0].stages[0].lessons[0]), ['present-continuous']);
+    assert.deepEqual(lessonTopicIds(anchor, { id: 'x', title: 'x', intro: 'x', wordIds: [], exerciseIds: [], ruleIds: [] }), []);
+});

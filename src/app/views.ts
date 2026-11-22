@@ -17,6 +17,7 @@ import { studyView } from '../views/study.ts';
 import { summaryView } from '../views/summary.ts';
 import { ProgressSync } from '../sync.ts';
 import { button, icon } from '../ui.ts';
+import { grammarView } from '../views/grammar.ts';
 import { coursesView, coursePracticeView, courseContext, unfinishedCourseSession } from '../views/courses.ts';
 import { mapTrainingPool } from '../learning/training.ts';
 import {warmupView} from '../views/warmup.ts';
@@ -65,6 +66,6 @@ export function createViews(state: AppState, sync: ProgressSync, syncLabel: () =
     function backupView() { return renderBackupView(state); }
     function accountView() { return renderAccountView(state, sync, syncLabel()) + listeningSettingsView(courseModules(state)); }
     function shell(content: string) { return shellView(content, state, syncLabel()); }
-    const views: Record<AppState['screen'], () => string> = { home, warmup:()=>courseContext(state)+warmupView(state), journeys: journeyList, 'module-list': moduleList, setup, study, progress: progressView, backup: backupView, account: accountView, summary, map: mapView, 'lesson-intro': introView, house: homeForCats, courses: () => coursesView(state), 'course-practice': () => coursePracticeView(state) };
+    const views: Record<AppState['screen'], () => string> = { home, warmup:()=>courseContext(state)+warmupView(state), journeys: journeyList, 'module-list': moduleList, setup, study, progress: progressView, backup: backupView, account: accountView, summary, map: mapView, 'lesson-intro': introView, house: homeForCats, courses: () => coursesView(state), 'course-practice': () => coursePracticeView(state), grammar: () => grammarView(state) };
     return () => shell((state.screen!=='home'&&state.screen!=='study'?updateBanner(pwa):'')+views[state.screen]());
 }

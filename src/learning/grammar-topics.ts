@@ -1,7 +1,7 @@
 import type { AnswerMode, GrammarRule, GrammarTopic, Item, Module, Progress, Session } from './model.ts';
 import { keyFor } from './model.ts';
 import { coursePracticePool, makeCoursePracticeSession } from './course-practice.ts';
-import { journeyKey, lessons, type Journey } from './journey.ts';
+import { journeyKey, lessons, type Journey, type Lesson } from './journey.ts';
 import { knownMaterial } from './known-material.ts';
 import { compareModules, sameCourse } from './scope.ts';
 
@@ -48,9 +48,10 @@ export function grammarTopics(modules: Module[], anchor: Module, topics: Grammar
     return result;
 }
 
-/** Tried grammar exercises of one topic; rule ids repeat between modules, so rules are matched by module too. */
-export function grammarTopicPool(modules: Module[], anchor: Module, p: Progress, topicId: string): Item[] {
-    const wanted = new Set(modules.filter(m => sameCourse(m, anchor)).flatMap(m => m.grammar.filter(r => r.grammarTopicId === topicId).map(r => ruleRef(m.id, r.id))));
+/** Tried grammar exercises of the given topics; rule ids repeat between modules, so rules are matched by module too. */
+export function grammarTopicPool(modules: Module[], anchor: Module, p: Progress, topicIds: string | string[]): Item[] {
+    const topics = new Set(typeof topicIds === 'string' ? [topicIds] : topicIds);
+    const wanted = new Set(modules.filter(m => sameCourse(m, anchor)).flatMap(m => m.grammar.filter(r => r.grammarTopicId && topics.has(r.grammarTopicId)).map(r => ruleRef(m.id, r.id))));
     return coursePracticePool(modules, anchor, p, 'grammar').filter(item => {
         const q = modules.find(m => m.id === item.moduleId)?.exercises.find(q => q.id === item.id);
         return !!q?.ruleId && wanted.has(ruleRef(item.moduleId, q.ruleId));
@@ -58,6 +59,12 @@ export function grammarTopicPool(modules: Module[], anchor: Module, p: Progress,
 }
 
 /** An ordinary course grammar session limited to one topic: the saved format does not change. */
-export function makeGrammarTopicSession(modules: Module[], anchor: Module, p: Progress, topicId: string, answerMode: AnswerMode): Session | null {
-    return makeCoursePracticeSession(modules, anchor, p, 'grammar', answerMode, grammarTopicPool(modules, anchor, p, topicId));
+export function makeGrammarTopicSession(modules: Module[], anchor: Module, p: Progress, topicIds: string | string[], answerMode: AnswerMode): Session | null {
+    return makeCoursePracticeSession(modules, anchor, p, 'grammar', answerMode, grammarTopicPool(modules, anchor, p, topicIds));
+}
+
+/** Topics of the rules a lesson teaches (its current content, D-52); empty for lessons without rules. */
+export function lessonTopicIds(module: Module, lesson: Lesson): string[] {
+    const ruleIds = (lesson.update ?? lesson).ruleIds;
+    return [...new Set(module.grammar.filter(r => ruleIds.includes(r.id) && r.grammarTopicId).map(r => r.grammarTopicId!))];
 }
