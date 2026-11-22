@@ -1,4 +1,5 @@
 import { openBackup } from './navigation.ts';
+import { finishCurrent } from './helpers.ts';
 import { test, expect, type Page } from './fixtures.ts';
 import { grammarTopicsFixture } from '../fixtures/grammar-topics.ts';
 import { readLibrary } from '../../src/materials/library.ts';
@@ -83,6 +84,10 @@ test('Gramatyka: temat pojawia się po próbie, pokazuje tylko próbowane reguł
     await expect(page.locator('.study-heading .tag')).toHaveText('1 / 2');
     await page.reload();
     await expect(page.locator('.study-heading')).toBeVisible();
+    await finishCurrent(page, modules);
+    await page.getByRole('button', { name: 'Wróć do gramatyki', exact: true }).tap();
+    await expect(page.getByRole('heading', { name: 'Gramatyka', exact: true })).toBeVisible();
+    await expect(topic.locator('summary')).toContainText('ćwiczone 4×');
 });
 
 test('Gramatyka: po odświeżeniu na ekranie Gramatyka widok wraca', async ({ page }) => {
