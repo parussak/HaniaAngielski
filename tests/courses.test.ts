@@ -12,7 +12,7 @@ import { practicedItems } from '../src/learning/training.ts';
 import { getNextStep } from '../src/next-step.ts';
 import type { Journey } from '../src/adventure.ts';
 
-const raw = (file: string) => JSON.parse(readFileSync(new URL(`../public/content/02-food/${file}`, import.meta.url), 'utf8'));
+const raw = (file: string) => JSON.parse(readFileSync(new URL(`../public/content/angielski-hani/02-food/${file}`, import.meta.url), 'utf8'));
 const item = (m: typeof modules[number], id = 'coffee-drink'): Item => ({ key: keyFor(m, 'word', id), moduleId: m.id, version: 1, type: 'word', id, input: 'text' });
 
 test('Food ma jawny kurs z nieustalonymi danymi podręcznika; materiały i stare klucze są identyczne', () => {

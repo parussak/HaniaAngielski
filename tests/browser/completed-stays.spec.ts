@@ -6,11 +6,11 @@ import {readFileSync} from 'node:fs';
 import {foodModules as modules} from '../materials.ts';
 import {backup,emptyProgress,questionFor,type Progress} from '../../src/core.ts';
 import {freshAdventure,lessons,makeLessonSession,type Journey} from '../../src/adventure.ts';
-const read=():Journey=>JSON.parse(readFileSync(new URL('../../public/content/02-food/sciezka.json',import.meta.url),'utf8'));
+const read=():Journey=>JSON.parse(readFileSync(new URL('../../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8'));
 const j=read(),at='2026-11-01T12:00:00.000Z',firstKey=`${j.moduleId}/food-words-1`;
 /** The published map with its first, long completed lesson edited in place: 7 tasks instead of 5. */
 function changed(){const next=read(),l=next.stages[0].lessons[0];l.intro='Nowy wstęp po poprawce lekcji.';l.wordIds=['apple','biscuit','bread','cereal','cheese','milkshake'];l.exerciseIds=['food-can-pizza'];return next;}
-const serveChanged=(page:Page)=>page.route('**/content/02-food/sciezka.json',r=>r.fulfill({json:changed()}));
+const serveChanged=(page:Page)=>page.route('**/content/angielski-hani/02-food/sciezka.json',r=>r.fulfill({json:changed()}));
 function finishedMap(){const p=emptyProgress();p.adventure=freshAdventure();p.adventure.earned=144;p.adventure.reviewSchema=1;p.adventure.stageReviews={};
  for(const s of j.stages)p.adventure.stageReviews[`${j.moduleId}/${s.id}`]={round:0,items:{},rewardedAt:at};for(const e of lessons(j))p.adventure.completed[e.key]={at};return p;}
 async function restore(page:Page,p:Progress){await page.goto('./');await openBackup(page);await page.locator('#import-file').setInputFiles({name:'hania.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');await page.getByRole('button',{name:'Moja nauka',exact:true}).click();}

@@ -57,14 +57,14 @@ export function validateModules(input: unknown): Module[] {
   if (!Array.isArray(input) || !input.length) return fail('katalog modułów jest pusty.');
   for (const m of input) {
     if (!obj(m) || !['id','name','subtitle','language','source','label','cover'].every(k=>text(m[k])) || !Number.isSafeInteger(m.version) || (m.version as number)<1 || !Number.isSafeInteger(m.order) || (m.order as number)<1 || !texts(m.topics)) return fail('niepoprawny opis modułu.');
-    if(m.journeyPath!==undefined && (typeof m.journeyPath!=='string'||!/^([a-z0-9-]+)\/sciezka\.json$/.test(m.journeyPath)))return fail('niepoprawna ścieżka mapy modułu.');
+    if(m.journeyPath!==undefined && (typeof m.journeyPath!=='string'||!/^[a-z0-9-]+(?:\/[a-z0-9-]+)*\/sciezka\.json$/.test(m.journeyPath)))return fail('niepoprawna ścieżka mapy modułu.');
     if(m.courseId!==undefined && (typeof m.courseId!=='string'||!/^[a-z0-9-]+$/.test(m.courseId)))return fail('niepoprawny identyfikator kursu.');
     if(m.languageCode!==undefined && !languageCode(m.languageCode))return fail('niepoprawny kod języka.');
     if(m.explanationLanguageCode!==undefined&&!languageCode(m.explanationLanguageCode))return fail('niepoprawny język objaśnień.');
     if(m.courseOrder!==undefined&&(!Number.isSafeInteger(m.courseOrder)||(m.courseOrder as number)<1))return fail('niepoprawna kolejność w kursie.');
     if(m.instructions!==undefined&&(!obj(m.instructions)||!text(m.instructions.translationPrompt)))return fail('niepoprawne polecenia kursu.');
     if(obj(m.instructions)&&m.instructions.wordExplanationTemplate!==undefined&&!text(m.instructions.wordExplanationTemplate))return fail('niepoprawny wzór objaśnienia.');
-    if(m.journeyPaths!==undefined && (!Array.isArray(m.journeyPaths)||m.journeyPaths.length<1||m.journeyPaths.length>3||new Set(m.journeyPaths).size!==m.journeyPaths.length||!m.journeyPaths.every(path=>typeof path==='string'&&/^[a-z0-9-]+\/[a-z0-9-]+\.json$/.test(path))||m.journeyPath!==undefined))return fail('niepoprawna lista map modułu.');
+    if(m.journeyPaths!==undefined && (!Array.isArray(m.journeyPaths)||m.journeyPaths.length<1||m.journeyPaths.length>3||new Set(m.journeyPaths).size!==m.journeyPaths.length||!m.journeyPaths.every(path=>typeof path==='string'&&/^[a-z0-9-]+(?:\/[a-z0-9-]+)+\.json$/.test(path))||m.journeyPath!==undefined))return fail('niepoprawna lista map modułu.');
     // D-67: pokój z katalogu domku (nie salonik) za wszystkie mapy modułu, więc moduł musi mieć mapy.
     if(m.houseRoom!==undefined && (!rewardRooms.some(r=>r.id===m.houseRoom)||m.journeyPaths===undefined&&m.journeyPath===undefined))return fail(`niepoprawny pokój za moduł (${m.id}).`);
     if(m.level!==undefined && !['A1','A2','B1','B2','C1','C2'].includes(m.level as string))return fail('niepoprawny poziom modułu.');

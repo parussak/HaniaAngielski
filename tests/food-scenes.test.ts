@@ -7,7 +7,7 @@ import {emptyProgress,questionFor,isCorrect,keyFor} from '../src/core.ts';
 import {freshAdventure,lessons,lessonForProgress,makeLessonSession,nextLesson,validateJourney,type Journey} from '../src/adventure.ts';
 import {varyLesson} from '../src/learning/lesson-variety.ts';
 import {sceneView} from '../src/learning/scenes.ts';
-const m=modules[0],read=(f:string):Journey=>JSON.parse(readFileSync(new URL(`../public/content/02-food/${f}.json`,import.meta.url),'utf8'));
+const m=modules[0],read=(f:string):Journey=>JSON.parse(readFileSync(new URL(`../public/content/angielski-hani/02-food/${f}.json`,import.meta.url),'utf8'));
 const j=read('sciezka'),second=read('sciezka-praktyka'),scenes=m.scenes??[];
 const placed={'restaurant-dialogue-1':'food-scene-order','restaurant-dialogue-2':'food-scene-drinks','picnic-inventory':'food-scene-shopping','picnic-finale':'food-scene-picnic'};
 const words=(text:string)=>text.toLowerCase().replace(/[’]/g,"'").match(/[a-z']+/g)??[];

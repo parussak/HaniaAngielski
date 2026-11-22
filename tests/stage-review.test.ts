@@ -7,7 +7,7 @@ import {seedStageReviews,seedReviewArchive,recordStageError,stageKey,reviewState
 import {emptyProgress,recordAnswer,questionFor,next,backup,validateBackup,currentStats,keyFor,type Progress,type Session,type Item} from '../src/core.ts';
 import {compactHistory,type HistoryPage} from '../src/history.ts';
 import {fullBackup,validateFullBackup} from '../src/history-backup.ts';
-const m=modules[0],j=validateJourney(JSON.parse(readFileSync(new URL('../public/content/02-food/sciezka.json',import.meta.url),'utf8')),m),stage=j.stages[0],id=stageKey(j,stage);
+const m=modules[0],j=validateJourney(JSON.parse(readFileSync(new URL('../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8')),m),stage=j.stages[0],id=stageKey(j,stage);
 const word=(index:number):Item=>({key:keyFor(m,'word',m.words[index].id),moduleId:m.id,version:1,type:'word',id:m.words[index].id,input:'text'});
 function withErrors(count=1){
   const p=seedStageReviews(emptyProgress(),[j]);p.active=makeLessonSession(modules,j,stage.lessons[0],'text',p);

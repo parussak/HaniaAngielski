@@ -10,7 +10,7 @@ Kod pozwala zakładać wiele kont, ale nie zawiera profilu wieku, roli rodzica, 
 
 **Obecny katalog produkcyjny zawiera tylko angielski moduł Food.** Francuski i włoski są kierunkami rozwoju, nie gotowymi kursami. Pole poziomu Food ma wartość `A2`; jest to metadana materiału, a nie wynik niezależnego pomiaru poziomu.
 
-Źródła: [katalog](../../../public/content/katalog.json), [opis Food](../../../public/content/02-food/modul.json), [model danych](../../../src/learning/model.ts), [widok strony startowej](../../../src/views/home.ts), [konto](../../../src/views/account.ts).
+Źródła: [katalog](../../../public/content/katalog.json), [opis Food](../../../public/content/angielski-hani/02-food/modul.json), [model danych](../../../src/learning/model.ts), [widok strony startowej](../../../src/views/home.ts), [konto](../../../src/views/account.ts).
 
 ## Strona startowa
 
@@ -35,7 +35,7 @@ Nawigacja obejmuje naukę, domek, postępy i kopię postępów. Profil otwiera u
 
 Mapa Food „Przygotowania do kociego pikniku” ma 7 etapów i 41 lekcji. Przejście dalej zależy od ukończenia lekcji; zaległe powtórki nie blokują kolejnych lekcji.
 
-Źródła: [katalogi](../../../src/views/catalog.ts), [ustawienia ćwiczeń](../../../src/views/setup.ts), [mapa](../../../public/content/02-food/sciezka.json), [mechanika nauki](nauka.md).
+Źródła: [katalogi](../../../src/views/catalog.ts), [ustawienia ćwiczeń](../../../src/views/setup.ts), [mapa](../../../public/content/angielski-hani/02-food/sciezka.json), [mechanika nauki](nauka.md).
 
 ## Ramka następnego kroku
 

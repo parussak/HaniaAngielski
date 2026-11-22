@@ -35,9 +35,9 @@ Skorzystaj z [formatu materiałów](format-materialow.md), zamiast kopiować ca�
 
 | Miejsce | Co robimy |
 | --- | --- |
-| `public/content/<folder>/` | Dodajemy metadane, słownictwo, quiz, gramatykę, ćwiczenia i potrzebne mapy; dialogi i [sceny z kilkoma lukami](format-materialow.md#scena-dialogowa-z-kilkoma-lukami) są opcjonalne. Scena jest adaptacją: tylko słownictwo i gramatyka modułu, `source` ze stronami, recenzja językowa przed publikacją. Słuchanie (D-58/D-60) korzysta z nagrania albo głosu urządzenia w języku kursu; bez nich pokazuje zwykłe zadanie. Nagrania są opcjonalne dla nowych kursów. |
-| `public/content/katalog.json` | Dopisujemy folder modułu. |
-| `public/content/kursy.json` | Dopisujemy `module.id` w odpowiedniej kolejności kursu; nowy kurs tylko dla nowego podręcznika. |
+| `public/content/<kurs>/<folder>/` | Dodajemy metadane, słownictwo, quiz, gramatykę, ćwiczenia i potrzebne mapy; dialogi i [sceny z kilkoma lukami](format-materialow.md#scena-dialogowa-z-kilkoma-lukami) są opcjonalne. Scena jest adaptacją: tylko słownictwo i gramatyka modułu, `source` ze stronami, recenzja językowa przed publikacją. Słuchanie (D-58/D-60) korzysta z nagrania albo głosu urządzenia w języku kursu; bez nich pokazuje zwykłe zadanie. Nagrania są opcjonalne dla nowych kursów. |
+| `public/content/<kurs>/kurs.json` | Dopisujemy folder modułu w `modules`, w kolejności nauki. |
+| `public/content/katalog.json` | Zmieniamy tylko dla nowego kursu (nowego podręcznika): dopisujemy jego folder w `courseFolders`. |
 | `public/illustrations/` | Wykorzystujemy pasujące ilustracje lub dodajemy potrzebne, lekkie zasoby zgodne ze stylem aplikacji. |
 
 Folder to adres plików, a `module.id` to tożsamość materiału i wyników. Identyfikator modułu musi być unikalny między wszystkimi kursami. Samo dodanie materiału nie wymaga osobnego silnika dla języka ani zmiany zapisu użytkownika.

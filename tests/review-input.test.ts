@@ -6,7 +6,7 @@ import {requiresChoice,inputFor,emptyProgress,makeSession,questionFor,keyFor,typ
 import {validateJourney,makeLessonSession} from '../src/adventure.ts';
 import {recordStageError,makeStageReviewSession} from '../src/stage-review.ts';
 import {answerHint,isCorrect} from '../src/learning/questions.ts';
-const m=modules[0],j=validateJourney(JSON.parse(readFileSync(new URL('../public/content/02-food/sciezka.json',import.meta.url),'utf8')),m);
+const m=modules[0],j=validateJourney(JSON.parse(readFileSync(new URL('../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8')),m);
 
 test('luka wymaga fragmentu zgodnego z zadaniem, nie całego zdania; wskazówka nie zamienia wyboru ani fiszek',()=>{
   for(const [id,fragment,sentence] of [

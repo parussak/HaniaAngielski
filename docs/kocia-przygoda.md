@@ -59,7 +59,7 @@ Tło i wyposażenie to siedem małych plików SVG w `public/game`. Kotki korzyst
 
 ## Edycja
 
-- `public/content/02-food/sciezka.json`: etapy, tytuły, wprowadzenia i kolejność lekcji. `wordIds`, `exerciseIds` i `ruleIds` wskazują istniejące treści — nie kopiujemy pytań ani reguł do kodu.
+- `public/content/angielski-hani/02-food/sciezka.json`: etapy, tytuły, wprowadzenia i kolejność lekcji. `wordIds`, `exerciseIds` i `ruleIds` wskazują istniejące treści — nie kopiujemy pytań ani reguł do kodu.
 - `src/adventure.ts`: zasady postępu, nagród, ceny i miejsca dekoracji.
 - `src/adventure-view.ts`, `src/adventure.css`: wygląd.
 - `docs/historia.md`: części historii, stare kopie i publikacja reguł Firebase.

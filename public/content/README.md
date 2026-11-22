@@ -12,18 +12,20 @@ Opcjonalny układ sekcji **7 lekcji bazowych + 2 dynamiczne powtórki** włącza
 
 ```text
 public/content/
-  katalog.json                 foldery modułów i wskazanie rejestru kursów
-  kursy.json                   podręczniki, języki i kolejność modułów
-  02-food/
-    modul.json                 nazwa, numer, tematy i opis źródła
-    slownictwo.json            słówka, tłumaczenia, akceptowane odpowiedzi
-    quiz.json                  pytania słownikowe: odwołania do słówek
-    gramatyka.json             zasady i przykłady w rozwijanej ściądze
-    cwiczenia.json             zadania, odpowiedzi i wyjaśnienia
-    rozmowki.json              krótkie dialogi z jedną luką i sceny z kilkoma lukami
-    czytanki.json              opcjonalne czytanki z pytaniami (format: docs/format-materialow.md#czytanka)
-    sciezka.json               siedem etapów Food, 41 lekcji i chronione aktualizacje
-    sciezka-praktyka.json      druga mapa Food: posiłki, przepis i śniadanie
+  katalog.json                 foldery kursów (courseFolders)
+  angielski-hani/              folder kursu = jego id
+    kurs.json                  podręcznik, języki i kolejność modułów (foldery)
+    tematy-gramatyki.json      tematy zakładki Gramatyka
+    02-food/
+      modul.json                 nazwa, numer, tematy i opis źródła
+      slownictwo.json            słówka, tłumaczenia, akceptowane odpowiedzi
+      quiz.json                  pytania słownikowe: odwołania do słówek
+      gramatyka.json             zasady i przykłady w rozwijanej ściądze
+      cwiczenia.json             zadania, odpowiedzi i wyjaśnienia
+      rozmowki.json              krótkie dialogi z jedną luką i sceny z kilkoma lukami
+      czytanki.json              opcjonalne czytanki z pytaniami (format: docs/format-materialow.md#czytanka)
+      sciezka.json               siedem etapów Food, 41 lekcji i chronione aktualizacje
+      sciezka-praktyka.json      druga mapa Food: posiłki, przepis i śniadanie
 ```
 
 `src` zawiera wygląd i działanie strony. `tests` sprawdza poprawność. Zdjęcia źródłowe są w lokalnym, pomijanym przez Git folderze `.local-materials`; nie są publikowane na stronie.
@@ -40,23 +42,23 @@ Kafelek **Powtórka** na końcu każdego etapu powstaje automatycznie z błędó
 
 ### Kolejne mapy i treningi
 
-Metadane modułu mogą wskazywać `journeyPaths`, uporządkowaną listę 1–3 plików, np. `["02-food/sciezka.json", "02-food/druga-mapa.json"]`. Lista zastępuje pojedyncze `journeyPath`. Nowa mapa ma własne `id`, np. `druga-mapa`, unikalne w module. **Nie dopisuj `id` do istniejącej mapy Food** — zmieniłoby to klucze jej ukończeń. Stare klucze pozostają `moduleId/lessonId`, a nowe `moduleId/mapId/lessonId`.
+Metadane modułu mogą wskazywać `journeyPaths`, uporządkowaną listę 1–3 plików, np. `["angielski-hani/02-food/sciezka.json", "angielski-hani/02-food/druga-mapa.json"]`. Lista zastępuje pojedyncze `journeyPath`. Nowa mapa ma własne `id`, np. `druga-mapa`, unikalne w module. **Nie dopisuj `id` do istniejącej mapy Food** — zmieniłoby to klucze jej ukończeń. Stare klucze pozostają `moduleId/lessonId`, a nowe `moduleId/mapId/lessonId`.
 
 Zwykłe lekcje nowych nazwanych map mają 6–10 zadań. Istniejące krótsze lekcje Food są nadal obsługiwane. Trening na mapie to lekcja z `role: "training"`, pustymi `wordIds`, `exerciseIds`, `ruleIds` i opcjonalnym `targetCount` 6–10 (domyślnie 8). Dobiera poznany materiał wcześniejszych map tego samego kursu; nie wpisujemy pytań treningowych na stałe. Pierwszy trening umieszczamy po 2–3 lekcjach nowego materiału, kolejne co 2–3. Pierwsza mapa kursu nie ma materiału wcześniejszych map, więc nie dodajemy tam pustych treningów. Treningi są wymagane do ukończenia mapy i dają 3 ★ tylko za pierwsze ukończenie.
 
 Osobnego przycisku **Dodatkowy trening** nie dodajemy do JSON mapy. Jest dobrowolny, korzysta z poznanego zakresu kursu, może być krótszy przy małej puli i daje 1 ★ za ukończoną sesję. Nie zwiększa liczby wymaganych lekcji. Nie ma jeszcze harmonogramu SM-2 ani FSRS.
 
-Nowe podręczniki deklarujemy w `kursy.json`: osobny kurs, język nauki, język objaśnień i uporządkowana lista identyfikatorów modułów. Moduły różnych kursów muszą mieć różne `id`. Sam wspólny język nie łączy modułów w jeden podręcznik. Obecny Food pozostaje w dotychczasowym formacie; nowe słownictwo może używać znaczeń z wariantami językowymi (`version: 2`, `entries`). **Pełna instrukcja i przykłady: [format kursów i materiałów](../../docs/format-materialow.md).** Nie przepisuj identyfikatorów Food przy wprowadzaniu tego formatu.
+Nowy podręcznik to nowy folder kursu z `kurs.json` (D-75): język nauki, język objaśnień i uporządkowana lista folderów modułów; dopisz go w `courseFolders` w `katalog.json`. Moduły różnych kursów muszą mieć różne `id`. Sam wspólny język nie łączy modułów w jeden podręcznik. Obecny Food pozostaje w dotychczasowym formacie; nowe słownictwo może używać znaczeń z wariantami językowymi (`version: 2`, `entries`). **Pełna instrukcja i przykłady: [format kursów i materiałów](../../docs/format-materialow.md).** Nie przepisuj identyfikatorów Food przy wprowadzaniu tego formatu.
 
 ## Dwa zestawy fiszek
 
 „Fiszki podstawa” obejmują 38 haseł z ramek Vocabulary: Food and drink (1), Food and drink (2) i Containers (podręcznik s. 25, 27 i 29). Tłumaczenia pochodzą z Wordlist. „Fiszki” obejmują wszystkie 97 dotychczasowych haseł.
 
-Lista identyfikatorów podstawowych znajduje się w polu `basicFlashcardIds` w `02-food/modul.json`. Aby zmienić zakres, edytuj tę listę, bez kopiowania słów i bez zmiany kodu. Tłumaczenie nadal poprawia się raz w `slownictwo.json`. Postępy tego samego słowa są wspólne dla obu zestawów. Quizy i gramatyka zachowują pełny materiał modułu.
+Lista identyfikatorów podstawowych znajduje się w polu `basicFlashcardIds` w `angielski-hani/02-food/modul.json`. Aby zmienić zakres, edytuj tę listę, bez kopiowania słów i bez zmiany kodu. Tłumaczenie nadal poprawia się raz w `slownictwo.json`. Postępy tego samego słowa są wspólne dla obu zestawów. Quizy i gramatyka zachowują pełny materiał modułu.
 
 ## Poprawienie słówka lub tłumaczenia
 
-Otwórz `02-food/slownictwo.json` i znajdź słowo. Przykład:
+Otwórz `angielski-hani/02-food/slownictwo.json` i znajdź słowo. Przykład:
 
 ```json
 {
@@ -146,9 +148,9 @@ Podczas lokalnej pracy wystarczy zapisać pliki i odświeżyć stronę. Jeśli z
 
 ## Kolejny moduł
 
-1. Utwórz nowy folder obok `02-food` z tymi samymi pięcioma plikami JSON.
+1. Utwórz nowy folder obok `02-food` (w folderze kursu) z tymi samymi pięcioma plikami JSON.
 2. Nadaj mu własne `id`, numer `order` i wersję.
-3. Dopisz nazwę folderu do tablicy `modules` w `katalog.json`.
+3. Dopisz nazwę folderu do tablicy `modules` w `kurs.json` kursu.
 4. W każdym zadaniu ustaw `requires` na jego moduł i ewentualnie wcześniejsze moduły.
 5. Uruchom sprawdzenie treści. Pusty `quiz.json` jest dozwolony, jeżeli `cwiczenia.json` zawiera zadania; materiały muszą mieć przynajmniej jedno słówko i jedno zadanie.
 

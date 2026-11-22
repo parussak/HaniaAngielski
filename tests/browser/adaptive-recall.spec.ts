@@ -36,7 +36,7 @@ test.describe('PWA — powtórka',()=>{
 test('zaproszenia: bez poznanego materiału rozgrzewka odsyła do pierwszej lekcji; dobrowolny finał zachowuje zaliczenia',async({page})=>{
  // D-51: the warm-up uses known material of the current module too, so only a profile that knows nothing gets the message.
  await page.goto('./');await openMap(page);await page.getByRole('button',{name:/Rozgrzej łapki/}).click();await expect(page.getByRole('status').filter({hasText:'To początek przygody!'})).toContainText('Zacznij od pierwszej lekcji');await expect(page.locator('.study-heading')).toHaveCount(0);
- const p=sample(),maps=['sciezka','sciezka-praktyka'].map(name=>JSON.parse(readFileSync(new URL(`../../public/content/02-food/${name}.json`,import.meta.url),'utf8')) as Journey);
+ const p=sample(),maps=['sciezka','sciezka-praktyka'].map(name=>JSON.parse(readFileSync(new URL(`../../public/content/angielski-hani/02-food/${name}.json`,import.meta.url),'utf8')) as Journey);
  for(const j of maps)for(const {key} of lessons(j))p.adventure!.completed[key]={at:'2026-11-12T12:00:00Z'};
  for(const j of maps)for(const stage of j.stages)p.adventure!.stageReviews![`${j.moduleId}/${j.id?j.id+'/':''}${stage.id}`]??={round:0,items:{},rewardedAt:'2026-11-12T12:00:00Z'};
  // The old stage bonus is already settled; this test isolates the finale's 1 star.

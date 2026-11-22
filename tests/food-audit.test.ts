@@ -8,7 +8,7 @@ import {backup,emptyProgress,next,questionFor,recordAnswer,sessionCompatible,val
 import {getNextStep} from '../src/next-step.ts';
 import {earlierMapKeys,makeTrainingSession,validateTrainingPlan} from '../src/learning/training.ts';
 import {makeStageReviewSession,recordStageError,reviewStats,settleStageRewards} from '../src/stage-review.ts';
-const read=(name:string)=>JSON.parse(readFileSync(new URL(`../public/content/02-food/${name}.json`,import.meta.url),'utf8'));
+const read=(name:string)=>JSON.parse(readFileSync(new URL(`../public/content/angielski-hani/02-food/${name}.json`,import.meta.url),'utf8'));
 const m=modules[0],j=validateJourney(read('sciezka'),m),second=validateJourney(read('sciezka-praktyka'),m);
 // Only approved cue clarifications and the new article guidance are excluded
 // from the historical checksum; all IDs, revisions and source answers stay protected.

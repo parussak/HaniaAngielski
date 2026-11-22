@@ -5,7 +5,7 @@ import {freshAdventure,lessons,type Journey} from '../../src/adventure.ts';
 import {openBackup} from './navigation.ts';
 
 test('stacja za samą mapę Technology, link do zamkniętej mapy i zakupy po odświeżeniu',async({page})=>{
- const map:Journey=JSON.parse(readFileSync(new URL('../../public/content/03-technology/sciezka.json',import.meta.url),'utf8'));
+ const map:Journey=JSON.parse(readFileSync(new URL('../../public/content/angielski-hani/03-technology/sciezka.json',import.meta.url),'utf8'));
  const p=emptyProgress();
  p.adventure=freshAdventure();p.adventure.earned=30;
  for(const entry of lessons(map))p.adventure.completed[entry.key]={at:'2026-11-20T12:00:00Z'};

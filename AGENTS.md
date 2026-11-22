@@ -8,8 +8,8 @@ Aplikacja do nauki języków dla dziecka (Hania) i dorosłej (Paulina): TypeScri
 | --- | --- | --- |
 | `src/` | Mechanika: nauka, mapy, quizy, sceny, domek, zapis, widoki | mechanika |
 | `tests/*.test.ts`, `tests/browser/` | Testy Node i Playwright | mechanika |
-| `public/content/<moduł>/` | Treść kursów (JSON): słownictwo, quiz, ćwiczenia, gramatyka, rozmówki, ścieżki map | treść |
-| `public/content/katalog.json`, `kursy.json` | Lista modułów i kursów | treść |
+| `public/content/<kurs>/<moduł>/` | Treść kursów (JSON): słownictwo, quiz, ćwiczenia, gramatyka, rozmówki, ścieżki map | treść |
+| `public/content/<kurs>/kurs.json`, `tematy-gramatyki.json`, `public/content/katalog.json` | Opis kursu, jego moduły i tematy gramatyki; lista kursów | treść |
 | `public/illustrations/`, `public/game/`, `public/cats/` | Grafiki | treść / oprawa |
 | `audio/`, `scripts/audio/` | Nagrania i lokalny generator (Piper) | audio |
 | `docs/` | Dokumentacja — zacznij od [docs/README.md](docs/README.md) | dokumentacja |

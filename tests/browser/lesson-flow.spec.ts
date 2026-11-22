@@ -11,7 +11,7 @@ async function exported(page:Page){await openBackup(page);const wait=page.waitFo
 async function restore(page:Page,p:Progress){await page.goto('./');await openBackup(page);await page.locator('#import-file').setInputFiles({name:'lesson.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await resumeStudy(page);}
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 test('podsumowanie historyjki pozwala poprawić pominięty błąd i wrócić bez powtarzania poprawnych kwestii',async({page})=>{
- const j=validateJourney(JSON.parse(readFileSync(new URL('../../public/content/02-food/sciezka.json',import.meta.url),'utf8')),m),lesson=lessons(j).find(l=>l.lesson.id==='restaurant-dialogue-1')!.lesson;
+ const j=validateJourney(JSON.parse(readFileSync(new URL('../../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8')),m),lesson=lessons(j).find(l=>l.lesson.id==='restaurant-dialogue-1')!.lesson;
  const p=emptyProgress();p.adventure={version:1,earned:23,purchases:{},completed:{},reviewSchema:1};p.active=makeLessonSession(modules,j,lesson,'mixed',p);await restore(page,p);
  await answerCurrent(page,modules,false);await expect(page.getByRole('button',{name:'Popraw tę linijkę',exact:true})).toBeVisible();await page.getByRole('button',{name:/Dalej/}).click();
  for(let i=1;i<5;i++)await answerCurrent(page,modules);

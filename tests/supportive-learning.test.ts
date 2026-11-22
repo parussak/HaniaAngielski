@@ -8,7 +8,7 @@ import {vocabularyAssessment,vocabularyFullAnswer} from '../src/learning/vocabul
 import {compileVocabulary} from '../src/materials/vocabulary.ts';
 import {validateModules} from '../src/content-validation.ts';
 const m=modules[0];
-const journey=validateJourney(JSON.parse(readFileSync(new URL('../public/content/02-food/sciezka.json',import.meta.url),'utf8')),m);
+const journey=validateJourney(JSON.parse(readFileSync(new URL('../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8')),m);
 function word(id:string){return questionFor(modules,{key:`${m.id}@1:word:${id}`,moduleId:m.id,version:1,type:'word',id,input:'text'});}
 
 test('wybór słówek pokazuje własne a/an każdej opcji, także w quizie i zapisanym zestawie',()=>{

@@ -172,7 +172,7 @@ test('każdy kurs: język mowy pochodzi z kursu, a kod słuchania nie zna żadne
 });
 
 test('Food: lekcje słówek dostają słuchanie w języku kursu, a hasła mają znaczenia do wyboru',()=>{
- const food=foodModules[0],journey:Journey=JSON.parse(readFileSync(new URL('../public/content/02-food/sciezka.json',import.meta.url),'utf8')),lesson=journey.stages[0].lessons[0];
+ const food=foodModules[0],journey:Journey=JSON.parse(readFileSync(new URL('../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8')),lesson=journey.stages[0].lessons[0];
  assert.equal(food.languageCode,'en');
  for(let run=0;run<10;run++){
   const p=emptyProgress(),s=varyLesson(makeLessonSession(foodModules,journey,lesson,'mixed',p),foodModules,[journey],journey,lesson,p),marked=s.items.filter(i=>i.listen);

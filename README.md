@@ -76,15 +76,15 @@ Zacznij od [instrukcji dodawania modułu](docs/dodawanie-modulow.md) i [szablonu
 
 Treści znajdują się w **public/content**, niezależnie od kodu strony w `src`. Aplikacja pobiera je jako osobne pliki, a nie jako część programu.
 
-- `katalog.json` — lista modułów.
-- `02-food/modul.json` — opis, nazwa, numer, wersja i opcjonalny poziom `level` (A1–C2). `journeyPaths` wskazuje listę map; pojedyncza mapa może korzystać ze starszego `journeyPath`.
-- `02-food/slownictwo.json` — fiszki, tłumaczenia i akceptowane odpowiedzi.
-- `02-food/quiz.json` — pytania słownikowe wskazujące słowa; poprawka słówka aktualizuje także quiz.
-- `02-food/gramatyka.json` — zasady, objaśnienia i przykłady.
-- `02-food/cwiczenia.json` — zadania, klucze odpowiedzi i wyjaśnienia po błędzie.
-- `02-food/rozmowki.json` — 12 dialogów z lukami w osobnym trybie „Rozmówki”; wybór lub wpisywanie odpowiedzi, polskie wyjaśnienia i powtórka błędów.
-- `02-food/sciezka.json` — etapy i lekcje kociej mapy, wskazujące istniejące słówka, zadania i reguły.
-- `02-food/sciezka-praktyka.json` — druga mapa z zadaniami w kontekście posiłków, przepisu i śniadania oraz treningiem wcześniejszej mapy.
+- `katalog.json` — lista folderów kursów; `angielski-hani/kurs.json` — opis kursu i jego moduły, `angielski-hani/tematy-gramatyki.json` — tematy gramatyki.
+- `angielski-hani/02-food/modul.json` — opis, nazwa, numer, wersja i opcjonalny poziom `level` (A1–C2). `journeyPaths` wskazuje listę map; pojedyncza mapa może korzystać ze starszego `journeyPath`.
+- `angielski-hani/02-food/slownictwo.json` — fiszki, tłumaczenia i akceptowane odpowiedzi.
+- `angielski-hani/02-food/quiz.json` — pytania słownikowe wskazujące słowa; poprawka słówka aktualizuje także quiz.
+- `angielski-hani/02-food/gramatyka.json` — zasady, objaśnienia i przykłady.
+- `angielski-hani/02-food/cwiczenia.json` — zadania, klucze odpowiedzi i wyjaśnienia po błędzie.
+- `angielski-hani/02-food/rozmowki.json` — 12 dialogów z lukami w osobnym trybie „Rozmówki”; wybór lub wpisywanie odpowiedzi, polskie wyjaśnienia i powtórka błędów.
+- `angielski-hani/02-food/sciezka.json` — etapy i lekcje kociej mapy, wskazujące istniejące słówka, zadania i reguły.
+- `angielski-hani/02-food/sciezka-praktyka.json` — druga mapa z zadaniami w kontekście posiłków, przepisu i śniadania oraz treningiem wcześniejszej mapy.
 
 Słówka, gramatyka i rozmówki używają lokalnych pastelowych ilustracji SVG pasujących do kotków. Gramatyka przedstawia sytuację ze zdania (np. brak mleka, dwie butelki wody, zamawianie czy powód i skutek). [Edycja ilustracji](public/illustrations/README.md).
 

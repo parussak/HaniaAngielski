@@ -3,10 +3,10 @@ import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
-const tasks=JSON.parse(readFileSync(new URL('../../public/content/02-food/cwiczenia.json',import.meta.url),'utf8'));
+const tasks=JSON.parse(readFileSync(new URL('../../public/content/angielski-hani/02-food/cwiczenia.json',import.meta.url),'utf8'));
 async function oneQuestion(page:any,id='g-count-milk'){
-  await page.route('**/content/02-food/cwiczenia.json',(r:any)=>r.fulfill({json:tasks.filter((q:any)=>q.id===id)}));
-  await page.route('**/content/02-food/quiz.json',(r:any)=>r.fulfill({json:[]}));
+  await page.route('**/content/angielski-hani/02-food/cwiczenia.json',(r:any)=>r.fulfill({json:tasks.filter((q:any)=>q.id===id)}));
+  await page.route('**/content/angielski-hani/02-food/quiz.json',(r:any)=>r.fulfill({json:[]}));
   await page.goto('./');await openModule(page);
 }
 for(const [width,height] of [[320,640],[360,740],[844,390]])test(`I5: pytanie, opcja i Dalej dostępne nad paskiem ${width}x${height}`,async({page})=>{
@@ -39,7 +39,7 @@ test('K1/D6: po błędzie i poprawce trudność zostaje; retry przenosi fokus do
 });
 test('I7: stara kopia i zmiana wersji modułu zachowują fiszkę i jej status',async({page})=>{
   const old=JSON.parse(readFileSync(new URL('../fixtures/backup-v1.json',import.meta.url),'utf8'));
-  await page.route('**/content/02-food/modul.json',async route=>{const response=await route.fetch();const m=await response.json();m.version=7;await route.fulfill({json:m});});
+  await page.route('**/content/angielski-hani/02-food/modul.json',async route=>{const response=await route.fetch();const m=await response.json();m.version=7;await route.fulfill({json:m});});
   await page.goto('./');await openBackup(page);
   await page.locator('#import-file').setInputFiles({name:'old.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(old))});
   await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();

@@ -32,7 +32,7 @@ Praca ma trzy kroki z jednym zatrzymaniem. Zatrzymanie po kroku 1 jest ważne, b
 
 ## Krok 2. Szkic treści
 
-Pisz pliki w `public/content/<folder>/` w formacie z dokumentacji (dla nowych modułów słownictwo `version: 2`). Kolejność, która oszczędza poprawek: słownictwo, gramatyka, ćwiczenia, rozmówki, czytanki, quiz, mapy, na końcu `modul.json`, `katalog.json` i `kursy.json`.
+Pisz pliki w `public/content/<kurs>/<folder>/` w formacie z dokumentacji (dla nowych modułów słownictwo `version: 2`). Kolejność, która oszczędza poprawek: słownictwo, gramatyka, ćwiczenia, rozmówki, czytanki, quiz, mapy, na końcu `modul.json` i `kurs.json` kursu (nowy kurs także `katalog.json`).
 
 - Każdy element ma `source` ze stroną. Zadania własne oznacz jako adaptację, tak jak w Food.
 - Objaśnienia po polsku, dla jedenastolatki: odnieś się do konkretnego zdania, powiedz, dlaczego odpowiedź pasuje.

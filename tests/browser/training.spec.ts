@@ -12,7 +12,7 @@ import { openMap, openModule } from './navigation.ts';
 
 test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 const m = modules[0];
-const food: Journey = JSON.parse(readFileSync(new URL('../../public/content/02-food/sciezka.json', import.meta.url), 'utf8'));
+const food: Journey = JSON.parse(readFileSync(new URL('../../public/content/angielski-hani/02-food/sciezka.json', import.meta.url), 'utf8'));
 const word = (id: string): Item => ({ key: keyFor(m, 'word', id), moduleId: m.id, id, type: 'word', version: 1, input: 'text' });
 function fixture() {
     const p = emptyProgress();
@@ -112,12 +112,12 @@ test('druga mapa: osobna nawigacja, wymagany trening i jednorazowe 3 gwiazdki', 
         { ...structuredClone(food.stages[0].lessons[1]), id: 'new-2', wordIds: m.words.slice(6, 12).map(w => w.id) },
         { id: 'training-1', title: 'Wracamy do pierwszej mapy', intro: 'Poznane słowa i gramatyka.', role: 'training', wordIds: [], exerciseIds: [], ruleIds: [] },
     ] }] };
-    await page.route('**/content/02-food/modul.json', async route => {
+    await page.route('**/content/angielski-hani/02-food/modul.json', async route => {
         const response = await route.fetch(), metadata = await response.json();
-        delete metadata.journeyPath; metadata.journeyPaths = ['02-food/sciezka.json', '02-food/second.json'];
+        delete metadata.journeyPath; metadata.journeyPaths = ['angielski-hani/02-food/sciezka.json', 'angielski-hani/02-food/second.json'];
         await route.fulfill({ json: metadata });
     });
-    await page.route('**/content/02-food/second.json', route => route.fulfill({ json: second }));
+    await page.route('**/content/angielski-hani/02-food/second.json', route => route.fulfill({ json: second }));
     const p = fixture();
     for (const { key } of lessons(food)) p.adventure!.completed[key] = { at: '2026-11-08T12:00:00Z' };
     for (const l of second.stages[0].lessons.slice(0, 2)) p.adventure!.completed[lessonKey(second, l)] = { at: '2026-11-08T12:00:00Z' };

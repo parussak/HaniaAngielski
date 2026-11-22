@@ -45,4 +45,4 @@ Zadania są adaptacjami do krótkich sesji: nie stanowią wiernej kopii całych 
 
 ## Edycja
 
-Materiały są w `public/content/02-food`. Instrukcja znajduje się w [public/content/README.md](../public/content/README.md). `src` odpowiada za wygląd i działanie, nie zawiera zdań ani list słówek z lekcji.
+Materiały są w `public/content/angielski-hani/02-food`. Instrukcja znajduje się w [public/content/README.md](../public/content/README.md). `src` odpowiada za wygląd i działanie, nie zawiera zdań ani list słówek z lekcji.

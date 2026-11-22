@@ -6,7 +6,7 @@ import {readFileSync} from 'node:fs';
 import {foodModules as modules} from '../materials.ts';
 import {backup,emptyProgress,questionFor,type Progress} from '../../src/core.ts';
 import {freshAdventure,lessons,makeLessonSession,type Journey} from '../../src/adventure.ts';
-const read=(f:string):Journey=>JSON.parse(readFileSync(new URL(`../../public/content/02-food/${f}.json`,import.meta.url),'utf8'));
+const read=(f:string):Journey=>JSON.parse(readFileSync(new URL(`../../public/content/angielski-hani/02-food/${f}.json`,import.meta.url),'utf8'));
 const first=read('sciezka'),second=read('sciezka-praktyka'),at='2026-11-09T12:00:00.000Z';
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 function fixture(){const p=emptyProgress();p.adventure=freshAdventure();p.adventure.earned=9;p.adventure.reviewSchema=1;for(const e of lessons(second).slice(0,3))p.adventure.completed[e.key]={at};return p;}
@@ -48,31 +48,31 @@ test('pusty trening prowadzi do przygotowania, a potem działa i daje trzy gwiaz
 test('404 drugiej mapy pozostawia pierwszą, a ponowienie odzyskuje obie bez utraty aktywnej sesji',async({page})=>{
  const p=fixture();p.active=makeLessonSession(modules,first,first.stages[0].lessons[0],'text',p);
  const prompt=questionFor(modules,p.active.items[0]).prompt;
- await page.route('**/content/02-food/sciezka-praktyka.json',r=>r.fulfill({status:404,body:'missing'}));
+ await page.route('**/content/angielski-hani/02-food/sciezka-praktyka.json',r=>r.fulfill({status:404,body:'missing'}));
  await restore(page,p);await catalog(page);await expect(page.locator('.adventure-invite')).toHaveCount(1);await expect(page.locator('.map-load-error')).toBeVisible();
  await page.getByRole('button',{name:`Otwórz mapę ${first.title}`,exact:true}).tap();await expect(page.locator('.journey-stage')).toHaveCount(7);
  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await resumeStudy(page);await expect(page.locator('.question')).toHaveText(prompt);
- await catalog(page);await page.unroute('**/content/02-food/sciezka-praktyka.json');await page.getByRole('button',{name:'Spróbuj wczytać mapy ponownie',exact:true}).tap();
+ await catalog(page);await page.unroute('**/content/angielski-hani/02-food/sciezka-praktyka.json');await page.getByRole('button',{name:'Spróbuj wczytać mapy ponownie',exact:true}).tap();
  await catalog(page);await expect(page.locator('.adventure-invite')).toHaveCount(2);await expect(page.locator('.map-load-error')).toHaveCount(0);
  await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await resumeStudy(page);await expect(page.locator('.question')).toHaveText(prompt);
  await page.getByRole('button',{name:'Domek',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('9');
 });
 
 test('niepoprawna pierwsza mapa nie ukrywa drugiej; rozgrzewka może przygotować materiał bieżącej mapy',async({page})=>{
- await page.route('**/content/02-food/sciezka.json',r=>r.fulfill({contentType:'application/json',body:'{broken'}));
+ await page.route('**/content/angielski-hani/02-food/sciezka.json',r=>r.fulfill({contentType:'application/json',body:'{broken'}));
  await restore(page,fixture());await open(page,second);await resumeStudy(page);
  await expect(page.locator('.training-preparation')).toContainText('Dzienniczek posiłków');
  await expect(page.getByRole('button',{name:'Poznaj wcześniejszy materiał →',exact:true})).toBeVisible();
- await page.unroute('**/content/02-food/sciezka.json');await catalog(page);await page.getByRole('button',{name:'Spróbuj wczytać mapy ponownie',exact:true}).tap();
+ await page.unroute('**/content/angielski-hani/02-food/sciezka.json');await catalog(page);await page.getByRole('button',{name:'Spróbuj wczytać mapy ponownie',exact:true}).tap();
  await open(page,second);await resumeStudy(page);await expect(page.getByRole('button',{name:'Poznaj wcześniejszy materiał →',exact:true})).toBeVisible();
 });
 
 test('sesja uszkodzonej mapy pozostaje zapisana, po naprawie wraca do tego samego pytania',async({page})=>{
  const p=fixture();p.active=makeLessonSession(modules,first,first.stages[0].lessons[0],'text',p);const prompt=questionFor(modules,p.active.items[0]).prompt;
- await page.route('**/content/02-food/sciezka.json',r=>r.fulfill({json:{version:99}}));await restore(page,p);
+ await page.route('**/content/angielski-hani/02-food/sciezka.json',r=>r.fulfill({json:{version:99}}));await restore(page,p);
  await resumeStudy(page);await expect(page.getByRole('heading',{name:'Wczytaj mapę tej lekcji',exact:true})).toBeVisible();
  await page.getByRole('button',{name:'Wybierz inną mapę',exact:true}).tap();await expect(page.locator('.adventure-invite h2')).toHaveText(second.title);
- await page.unroute('**/content/02-food/sciezka.json');await page.getByRole('button',{name:'Spróbuj wczytać mapy ponownie',exact:true}).tap();
+ await page.unroute('**/content/angielski-hani/02-food/sciezka.json');await page.getByRole('button',{name:'Spróbuj wczytać mapy ponownie',exact:true}).tap();
  // D-51: reloading the maps keeps the catalogue open, now with both maps; the session resumes from the home screen.
  await expect(page.locator('.adventure-invite')).toHaveCount(2);await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();
  await resumeStudy(page);await expect(page.locator('.question')).toHaveText(prompt);await expect(page.locator('.study-heading .tag')).toHaveText('1 / 5');

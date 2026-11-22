@@ -66,7 +66,7 @@ test('kontrola granic wykrywa zakazany import i obiekt przeglądarki, a pomija p
  assert.deepEqual(browserGlobalsIn(source),['document','window']);
 });
 test('wydzielone klucze map zachowują stare API, klucze i kolejność lekcji',()=>{
- const j=JSON.parse(readFileSync(new URL('../public/content/02-food/sciezka.json',import.meta.url),'utf8')) as Journey;
+ const j=JSON.parse(readFileSync(new URL('../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8')) as Journey;
  assert.equal(oldJourneyAPI.journeyKey,journeyKey);assert.equal(oldJourneyAPI.lessonKey,lessonKey);assert.equal(oldJourneyAPI.lessons,lessons);
  assert.equal(journeyKey(j),'unit-2-food');assert.equal(lessons(j)[0].key,`unit-2-food/${j.stages[0].lessons[0].id}`);
  assert.equal(journeyKey({...j,id:'practice'}),'unit-2-food/practice');assert.equal(lessons(j).length,41);

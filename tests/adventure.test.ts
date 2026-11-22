@@ -5,7 +5,7 @@ import {foodModules as modules} from './materials.ts';
 import {validateJourney,lessons,nextLesson,unlocked,makeLessonSession,rewardCompletion,purchase,place,stars,freshAdventure} from '../src/adventure.ts';
 import {emptyProgress,recordAnswer,questionFor,next,validateBackup,backup,type Progress,type Session} from '../src/core.ts';
 import {settleStageRewards} from '../src/stage-review.ts';
-const j=validateJourney(JSON.parse(readFileSync(new URL('../public/content/02-food/sciezka.json',import.meta.url),'utf8')),modules[0]);
+const j=validateJourney(JSON.parse(readFileSync(new URL('../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8')),modules[0]);
 function finish(p:Progress,wrong=false){const s=p.active!;let first=true;while(p.active){const q=questionFor(modules,s.items[s.index]);recordAnswer(p,q,wrong&&first?'wrong':q.answers[0]);if(wrong&&first){s.phase='retry';recordAnswer(p,q,q.answers[0]);}first=false;next(p);}return s;}
 
 test('Food ma siedem etapów i obejmuje wszystkie 97 słówek oraz zadania bez późniejszych modułów',()=>{

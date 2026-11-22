@@ -6,7 +6,7 @@ import {freshAdventure,lessons,lessonKey,type Journey} from '../../src/adventure
 import {makeTrainingSession} from '../../src/learning/training.ts';
 import {foodModules as modules} from '../materials.ts';
 import {readFileSync} from 'node:fs';
-const maps=['sciezka','sciezka-praktyka'].map(f=>JSON.parse(readFileSync(new URL(`../../public/content/02-food/${f}.json`,import.meta.url),'utf8')) as Journey),m=modules[0],at='2026-11-12T12:00:00Z';
+const maps=['sciezka','sciezka-praktyka'].map(f=>JSON.parse(readFileSync(new URL(`../../public/content/angielski-hani/02-food/${f}.json`,import.meta.url),'utf8')) as Journey),m=modules[0],at='2026-11-12T12:00:00Z';
 function completed(){
  const p=emptyProgress();p.adventure=freshAdventure();p.adventure.earned=50;p.adventure.reviewSchema=1;p.adventure.stageReviews={};
  for(const j of maps){for(const {key} of lessons(j))p.adventure.completed[key]={at};for(const stage of j.stages)p.adventure.stageReviews[`${j.id?j.moduleId+'/'+j.id:j.moduleId}/${stage.id}`]={round:0,items:{},rewardedAt:at};}

@@ -10,13 +10,13 @@ import {sceneEntry} from '../fixtures/scenes.ts';
 import {compileScene} from '../../src/learning/scenes.ts';
 import {validateModules} from '../../src/content-validation.ts';
 import type {Progress} from '../../src/core.ts';
-const read=(file:string)=>JSON.parse(readFileSync(new URL(`../../public/content/02-food/${file}`,import.meta.url),'utf8'));
+const read=(file:string)=>JSON.parse(readFileSync(new URL(`../../public/content/angielski-hani/02-food/${file}`,import.meta.url),'utf8'));
 const entry=sceneEntry('talk',food.id),compiled=compileScene(entry);
 const modules=validateModules([{...food,exercises:[...food.exercises,...compiled.exercises],scenes:[...(food.scenes??[]),compiled.scene]}]);
 const key=(gap:string)=>`${food.id}@1:exercise:talk--${gap}`;
 /** The first lesson of the published map with three words and the scene. */
 function withScene(){const j=read('sciezka.json'),l=j.stages[0].lessons[0];l.wordIds=l.wordIds.slice(0,3);l.exerciseIds=compiled.scene.gapIds;return j;}
-async function serve(page:Page,dialogues:unknown[]){await page.route('**/content/02-food/rozmowki.json',r=>r.fulfill({json:dialogues}));await page.route('**/content/02-food/sciezka.json',r=>r.fulfill({json:withScene()}));}
+async function serve(page:Page,dialogues:unknown[]){await page.route('**/content/angielski-hani/02-food/rozmowki.json',r=>r.fulfill({json:dialogues}));await page.route('**/content/angielski-hani/02-food/sciezka.json',r=>r.fulfill({json:withScene()}));}
 async function exported(page:Page){await openBackup(page);const wait=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).click();return JSON.parse(readFileSync((await(await wait).path())!,'utf8')).progress as Progress;}
 const scene=(page:Page)=>page.locator('.scene:not(.scene-summary .scene)');
 const noScroll=async(page:Page)=>expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();

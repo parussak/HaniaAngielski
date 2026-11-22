@@ -54,6 +54,6 @@
   "dialoguesFile": "rozmowki.json",
   "readingsFile": "czytanki.json",
   "journeyPaths": [
-    "03-technology/sciezka.json"
+    "angielski-hani/03-technology/sciezka.json"
   ]
 }

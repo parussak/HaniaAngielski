@@ -8,7 +8,7 @@ Katalog zawiera `02-food`, moduł `unit-2-food`, opisany jako angielski Food, po
 
 Obecny zestaw ma 97 haseł, 38 fiszek podstawowych, 97 pytań słownikowych, 59 zadań gramatycznych, 12 dialogów i 9 zasad gramatycznych. Mapa wskazuje 41 lekcji w 7 etapach. Liczby wynikają z aktualnych plików i testów; nie są wymogiem dla każdego przyszłego modułu.
 
-Źródła: [modul.json](../../../public/content/02-food/modul.json), [tests/content.test.ts](../../../tests/content.test.ts), [tests/adventure.test.ts](../../../tests/adventure.test.ts), [kontrola materiałów](../../../scripts/check-content.mjs).
+Źródła: [modul.json](../../../public/content/angielski-hani/02-food/modul.json), [tests/content.test.ts](../../../tests/content.test.ts), [tests/adventure.test.ts](../../../tests/adventure.test.ts), [kontrola materiałów](../../../scripts/check-content.mjs).
 
 ## Podział plików
 

@@ -13,7 +13,7 @@ import { mapProgress, reviewProgressText } from '../src/learning/map-progress.ts
 import { getNextStep } from '../src/next-step.ts';
 
 const m = modules[0];
-const food = validateJourney(JSON.parse(readFileSync(new URL('../public/content/02-food/sciezka.json', import.meta.url), 'utf8')), m);
+const food = validateJourney(JSON.parse(readFileSync(new URL('../public/content/angielski-hani/02-food/sciezka.json', import.meta.url), 'utf8')), m);
 const item = (id: string, type: Item['type'] = 'word', mod = m): Item => ({ key: keyFor(mod, type, id), moduleId: mod.id, id, type, version: 1, input: 'text' });
 function attempt(p: Progress, items: Item[], wrong = false) {
     const session: Session = { id: crypto.randomUUID(), moduleId: m.id, mode: 'quiz', answerMode: 'text', previous: false, items: structuredClone(items), index: 0, phase: 'question', startedAt: new Date().toISOString(), completedAt: null, lastCorrect: null, attempts: [], repeatKeys: [] };

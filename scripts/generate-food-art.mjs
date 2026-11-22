@@ -141,7 +141,7 @@ const aliases={
  'milkshake':['glass'],'all-over-the-world':['globe'],'art':['palette'],'celebrity':['scene-fun'],'cook':['scene-cooking'],'cottage-cheese':['cottage'],'good-luck':['clover'],'have-fun':['scene-fun'],'in-the-air':['balloon'],'ingredient':['egg','flour'],'on-top':['scene-on-top'],'popular':['scene-people'],'special':['round','star'],'throw':['scene-throw'],'use':['tools'],'have-a-quick-breakfast':['scene-quick-breakfast'],'toast':['bread'],'frying-pan':['pan'],'enjoy-your-meal':['scene-breakfast-egg'],
 };
 raw.star=star(100,75,2.3);
-const words=JSON.parse(await readFile(new URL('../public/content/02-food/slownictwo.json',import.meta.url),'utf8'));
+const words=JSON.parse(await readFile(new URL('../public/content/angielski-hani/02-food/slownictwo.json',import.meta.url),'utf8'));
 for(const w of words){
  const names=aliases[w.id]??[w.id];let body,width=200,height=140;
  if(names.length===1 && scenes[names[0]]){body=scenes[names[0]];width=320;height=170;}

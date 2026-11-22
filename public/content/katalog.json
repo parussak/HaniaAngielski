@@ -1,5 +1,4 @@
 {
   "version": 1,
-  "coursesFile": "kursy.json",
-  "modules": ["02-food", "03-technology"]
+  "courseFolders": ["angielski-hani"]
 }

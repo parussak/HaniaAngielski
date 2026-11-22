@@ -2,7 +2,7 @@
 
 **Status** — szkic do recenzji.
 
-**Kurs i moduł** — `angielski-hani`, `unit-3-technology`, `public/content/03-technology/`.
+**Kurs i moduł** — `angielski-hani`, `unit-3-technology`, `public/content/angielski-hani/03-technology/`.
 
 **Odbiorca i języki** — Hania, klasa 5, angielski na poziomie A2 z polskimi objaśnieniami. Czytanki mają tekst, pytania i opcje po angielsku, a tłumaczenia, podpowiedzi i wyjaśnienia po polsku.
 

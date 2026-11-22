@@ -7,7 +7,7 @@ import {foodModules as modules} from '../materials.ts';
 import {backup,emptyProgress,questionFor,type Progress} from '../../src/core.ts';
 import {freshAdventure,lessons,makeLessonSession,type Journey} from '../../src/adventure.ts';
 import {openMap} from './navigation.ts';
-const read=(f:string):Journey=>JSON.parse(readFileSync(new URL(`../../public/content/02-food/${f}.json`,import.meta.url),'utf8'));
+const read=(f:string):Journey=>JSON.parse(readFileSync(new URL(`../../public/content/angielski-hani/02-food/${f}.json`,import.meta.url),'utf8'));
 const j=read('sciezka'),second=read('sciezka-praktyka'),at='2026-11-09T12:00:00.000Z';
 function progress(all=false){const p=emptyProgress();p.adventure=freshAdventure();p.adventure.earned=144;p.adventure.reviewSchema=1;p.adventure.stageReviews={};for(const s of j.stages.filter((_,i)=>all||i<4)){p.adventure.stageReviews[`${j.moduleId}/${s.id}`]={round:0,items:{},rewardedAt:at};for(const l of s.lessons)p.adventure.completed[`${j.moduleId}/${l.id}`]={at};}return p;}
 async function restore(page:Page,p:Progress){await page.goto('./');await openBackup(page);await page.locator('#import-file').setInputFiles({name:'food.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();}

@@ -46,7 +46,7 @@ Każda zmiana zasady nauki zaczyna się od decyzji D-xx w [rejestrze](decyzje.md
 
 ### Nowy rodzaj treści
 
-1. Opis formatu: [format materiałów](format-materialow.md); pliki w `public/content/<moduł>/`, lista w `katalog.json`.
+1. Opis formatu: [format materiałów](format-materialow.md); pliki w `public/content/<kurs>/<moduł>/`, lista modułów w `kurs.json` kursu (D-75).
 2. Wczytanie i walidacja: `content.ts`, `content-validation.ts` lub `materials/`; ta sama funkcja (`readLibrary`) dla przeglądarki, testów i budowania.
 3. `npm run check:content` musi sprawdzać nowy rodzaj dla każdego kursu, bez wyjątków dla jednego modułu.
 4. Mechanika i treść to osobne zmiany — [tory pracy](../AGENTS.md#tory-pracy--jedna-zmiana-jeden-tor).

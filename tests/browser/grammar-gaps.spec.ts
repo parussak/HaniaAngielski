@@ -6,7 +6,7 @@ import {foodModules as modules} from '../materials.ts';
 import {backup,emptyProgress,keyFor,makeSession,type Progress,type Item} from '../../src/core.ts';
 import {freshAdventure,makeLessonSession,type Journey} from '../../src/adventure.ts';
 import {makeStageReviewSession,recordStageError} from '../../src/stage-review.ts';
-const m=modules[0],j:Journey=JSON.parse(readFileSync(new URL('../../public/content/02-food/sciezka.json',import.meta.url),'utf8'));
+const m=modules[0],j:Journey=JSON.parse(readFileSync(new URL('../../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8'));
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 async function restore(page:Page,p:Progress){await page.goto('./');await openBackup(page);await page.locator('#import-file').setInputFiles({name:'gaps.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await resumeStudy(page);}
 for(const mode of ['grammar','general-review','stage-review'] as const)test(`${mode}: jedno słowo do luki także po błędzie, wznowieniu i poprawce`,async({page})=>{

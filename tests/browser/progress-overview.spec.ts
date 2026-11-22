@@ -6,7 +6,7 @@ import {lessons,type Journey} from '../../src/adventure.ts';
 import {readFileSync} from 'node:fs';
 import {courseFixture} from '../fixtures/course-materials.ts';
 import {readLibrary} from '../../src/materials/library.ts';
-const m=modules[0],j=JSON.parse(readFileSync(new URL('../../public/content/02-food/sciezka.json',import.meta.url),'utf8')) as Journey;
+const m=modules[0],j=JSON.parse(readFileSync(new URL('../../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8')) as Journey;
 const at=(day:number)=>new Date(2026,10,day,10).toISOString();
 function addSession(p:Progress,all:Module[],module:Module,day:number,wrong=false){
  const w=module.words[0],s=makeSession(all,module,'flashcards','text',false,p);p.active=s;s.items=[{key:keyFor(module,'word',w.id),moduleId:module.id,type:'word',id:w.id,version:w.rev??1,input:'text'}];recordAnswer(p,questionFor(all,s.items[0]),wrong?'wrong':w.back);if(wrong){s.phase='retry';recordAnswer(p,questionFor(all,s.items[0]),w.back);}next(p);s.completedAt=at(day);

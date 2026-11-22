@@ -6,13 +6,13 @@ import {resumeStudy} from './helpers.ts';
 import {readFileSync} from 'node:fs';
 import {food} from '../materials.ts';
 import {readingEntry,readingQuestionIds} from '../fixtures/readings.ts';
-const read=(file:string)=>JSON.parse(readFileSync(new URL(`../../public/content/02-food/${file}`,import.meta.url),'utf8'));
+const read=(file:string)=>JSON.parse(readFileSync(new URL(`../../public/content/angielski-hani/02-food/${file}`,import.meta.url),'utf8'));
 /** The first lesson of the published map becomes the whole reading (D-54). */
 function withReading(){const j=read('sciezka.json'),l=j.stages[0].lessons[0];l.wordIds=[];l.exerciseIds=readingQuestionIds();return j;}
 async function serve(page:Page,entry=readingEntry('picnic',food.id)){
- await page.route('**/content/02-food/modul.json',r=>r.fulfill({json:{...read('modul.json'),readingsFile:'czytanki.json'}}));
- await page.route('**/content/02-food/czytanki.json',r=>r.fulfill({json:[...read('czytanki.json'),entry]}));
- await page.route('**/content/02-food/sciezka.json',r=>r.fulfill({json:withReading()}));
+ await page.route('**/content/angielski-hani/02-food/modul.json',r=>r.fulfill({json:{...read('modul.json'),readingsFile:'czytanki.json'}}));
+ await page.route('**/content/angielski-hani/02-food/czytanki.json',r=>r.fulfill({json:[...read('czytanki.json'),entry]}));
+ await page.route('**/content/angielski-hani/02-food/sciezka.json',r=>r.fulfill({json:withReading()}));
 }
 const idle=(page:Page)=>expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
 const reading=(page:Page)=>page.locator('.reading:not(.reading-context)');
@@ -27,7 +27,7 @@ test.describe('telefon',()=>{
   const entry=readingEntry('picnic',food.id);
   await serve(page,entry);
   const map={...withReading(),theme:'space-station'};
-  await page.route('**/content/02-food/sciezka.json',route=>route.fulfill({json:map}));
+  await page.route('**/content/angielski-hani/02-food/sciezka.json',route=>route.fulfill({json:map}));
   await page.goto('./');await openMap(page);
   const stage=page.locator('.station-map .journey-stage').first();
   await stage.locator('summary').click();

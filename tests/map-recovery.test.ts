@@ -10,7 +10,7 @@ import {createProgressController} from '../src/controllers/progress.ts';
 import type {ProgressSync} from '../src/sync.ts';
 const m=modules[0];
 const read=(path:string)=>JSON.parse(readFileSync(new URL(`../public/content/${path}`,import.meta.url),'utf8'));
-const first:Journey=read('02-food/sciezka.json'),second:Journey=read('02-food/sciezka-praktyka.json');
+const first:Journey=read('angielski-hani/02-food/sciezka.json'),second:Journey=read('angielski-hani/02-food/sciezka-praktyka.json');
 const paths=m.journeyPaths!;
 const at='2026-11-09T12:00:00.000Z';
 

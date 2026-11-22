@@ -11,8 +11,9 @@ export function languageCode(v: unknown): v is string {
 const unique = (v: string[]) => new Set(v).size === v.length;
 
 export function validateCatalog(input: unknown): MaterialCatalog {
-    if (!object(input) || input.version !== 1 || !Array.isArray(input.modules) || !input.modules.length || !input.modules.every(identifier) || !unique(input.modules) ||
-        input.coursesFile !== undefined && (typeof input.coursesFile !== 'string' || !/^[a-z0-9-]+\.json$/.test(input.coursesFile)))
+    const list = (v: unknown) => v === undefined || Array.isArray(v) && v.length > 0 && v.every(identifier) && unique(v);
+    if (!object(input) || input.version !== 1 || !list(input.modules) || !list(input.courseFolders) || input.modules === undefined && input.courseFolders === undefined ||
+        input.coursesFile !== undefined && (typeof input.coursesFile !== 'string' || !/^[a-z0-9-]+.json$/.test(input.coursesFile)))
         throw new Error('Niepoprawny katalog materiałów.');
     return structuredClone(input) as unknown as MaterialCatalog;
 }

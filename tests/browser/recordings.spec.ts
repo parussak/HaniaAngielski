@@ -6,12 +6,12 @@ import {backup,emptyProgress,makeSession,keyFor,type Progress} from '../../src/c
 import {lessons,validateJourney,makeLessonSession} from '../../src/adventure.ts';
 import {openBackup} from './navigation.ts';
 import {resumeStudy,answerCurrent} from './helpers.ts';
-const m=modules[0],j=validateJourney(JSON.parse(readFileSync(new URL('../../public/content/02-food/sciezka.json',import.meta.url),'utf8')),m);
+const m=modules[0],j=validateJourney(JSON.parse(readFileSync(new URL('../../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8')),m);
 const manifest=JSON.parse(readFileSync(new URL('../../audio/generated/manifest.json',import.meta.url),'utf8'));
 const appleFile=manifest.modules[0].references.find((r:any)=>r.key===keyFor(m,'word','apple')).clip+'.ogg';
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 async function device(context:BrowserContext,tts=false){
- await context.route('**/content/katalog.json',r=>r.fulfill({json:{version:1,coursesFile:'kursy.json',modules:['02-food']}}));await context.route('**/content/kursy.json',r=>r.fulfill({json:{version:1,courses:[foodCourse]}}));
+ await context.route('**/content/angielski-hani/kurs.json',async r=>{const j=await(await r.fetch()).json();await r.fulfill({json:{...j,modules:['02-food']}});});
  await context.addInitScript(({tts})=>{
   const w=window as any;w.__tts=[];w.__media=[];w.__plays=[];w.__playing=0;
   w.SpeechSynthesisUtterance=class{text:string;lang='';rate=1;voice:unknown=null;constructor(text:string){this.text=text;}};

@@ -43,4 +43,5 @@ export interface Course {
 }
 
 export interface MaterialLibrary { courses: Course[]; modules: Module[] }
-export interface MaterialCatalog { version: 1; modules: string[]; coursesFile?: string }
+/** `modules` + `coursesFile` is the older flat layout; `courseFolders` (U-11) lists folders with their own `kurs.json`. */
+export interface MaterialCatalog { version: 1; modules?: string[]; coursesFile?: string; courseFolders?: string[] }

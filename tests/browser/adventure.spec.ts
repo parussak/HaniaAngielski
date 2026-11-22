@@ -6,7 +6,7 @@ import {test,expect,type Page} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
 import {foodModules as modules} from '../materials.ts';
 import {emptyProgress,makeSession,recordAnswer,questionFor,next,backup} from '../../src/core.ts';
-const journey=JSON.parse(readFileSync(new URL('../../public/content/02-food/sciezka.json',import.meta.url),'utf8'));
+const journey=JSON.parse(readFileSync(new URL('../../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8'));
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 const finishLesson=(page:Page,firstWrong=false)=>finishCurrent(page,modules,firstWrong);
 

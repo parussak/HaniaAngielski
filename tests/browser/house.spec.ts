@@ -8,7 +8,7 @@ import {foodModules as modules} from '../materials.ts';
 import {openBackup} from './navigation.ts';
 import {purchase,place,settleHouseUnlocks,stars} from '../../src/house/progress.ts';
 import {decorations} from '../../src/house/catalog.ts';
-const maps=['sciezka','sciezka-praktyka'].map(f=>JSON.parse(readFileSync(new URL(`../../public/content/02-food/${f}.json`,import.meta.url),'utf8')) as Journey);
+const maps=['sciezka','sciezka-praktyka'].map(f=>JSON.parse(readFileSync(new URL(`../../public/content/angielski-hani/02-food/${f}.json`,import.meta.url),'utf8')) as Journey);
 const at='2026-11-10T12:00:00Z';
 function fixture(count=2){const p=emptyProgress();p.adventure=freshAdventure();p.adventure.earned=100;p.adventure.purchases.pillow={cost:6,slot:'right'};p.adventure.reviewSchema=1;p.adventure.stageReviews={};
  for(const j of maps.slice(0,count))for(const s of j.stages){p.adventure.stageReviews[`${j.moduleId}/${s.id}`]={round:0,items:{},rewardedAt:at};for(const l of lessons(j))p.adventure.completed[l.key]={at};}return p;}

@@ -12,7 +12,7 @@ Nagrody domku Food są zapisane w treści (D-67): pierwsza mapa odblokowuje mise
 
 Szóstą lekcją „Kociej kuchni” jest „Naleśniki na lunch” (D-68). Tekst wykorzystuje słownictwo Food. Pytania i odpowiedzi do wyboru są po angielsku. Każde zdanie ma polskie tłumaczenie, a każde pytanie ma polskie wyjaśnienie.
 
-Źródła: [metadane](../../public/content/02-food/modul.json), [opis opracowania Food](../materialy-food.md), [aktualny format materiałów](../format-materialow.md).
+Źródła: [metadane](../../public/content/angielski-hani/02-food/modul.json), [opis opracowania Food](../materialy-food.md), [aktualny format materiałów](../format-materialow.md).
 
 ## Uzgodniony kierunek
 

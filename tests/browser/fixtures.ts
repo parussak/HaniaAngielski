@@ -8,8 +8,8 @@ export * from '@playwright/test';
 export const silentDevice=()=>{Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{getVoices:()=>[],speak(){},cancel(){},addEventListener(){}}});Object.defineProperty(HTMLMediaElement.prototype,'canPlayType',{configurable:true,value:()=>''});};
 async function foodRoutes(context:BrowserContext){
   await context.addInitScript(silentDevice);
-  await context.route('**/content/katalog.json',r=>r.fulfill({json:{version:1,coursesFile:'kursy.json',modules:['02-food']}}));
-  await context.route('**/content/kursy.json',r=>r.fulfill({json:{version:1,courses:[{...foodCourse,moduleIds:['unit-2-food']}]}}));
+  // Food only: the course folder lists both modules, so the course file is narrowed here.
+  await context.route('**/content/angielski-hani/kurs.json',async r=>{const j=await(await r.fetch()).json();await r.fulfill({json:{...j,modules:['02-food']}});});
 }
 export const test=base.extend<{foodCatalog:void}>({
  browser:[async({browser},use)=>{

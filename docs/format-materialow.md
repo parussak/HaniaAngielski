@@ -12,9 +12,9 @@ Status: **wdrożony format etapu 2**. To instrukcja edycji dla człowieka. Typy 
 
 | Plik | Zawartość |
 | --- | --- |
-| `public/content/katalog.json` | Foldery modułów do pobrania i nazwa rejestru kursów w `coursesFile` |
-| `public/content/kursy.json` | Kursy/podręczniki: języki, opis książki, uporządkowane identyfikatory modułów i polecenia |
-| `<folder>/modul.json` | Nazwa i numer działu, opis źródła, poziom działu, tematy, mapy, [pokój za moduł](#nagrody-domku) |
+| `public/content/katalog.json` | Foldery kursów do pobrania (`courseFolders`); dawny układ płaski: `modules` + `coursesFile` |
+| `public/content/<kurs>/kurs.json` | Kurs/podręcznik: języki, opis książki, polecenia, lista folderów modułów (`modules`) i opcjonalny `grammarTopicsFile` |
+| `<kurs>/<folder>/modul.json` | Nazwa i numer działu, opis źródła, poziom działu, tematy, mapy, [pokój za moduł](#nagrody-domku) |
 | `<folder>/sciezka*.json` | Mapa: sekcje i lekcje, [nagrody domku za mapę](#nagrody-domku) |
 | `<folder>/slownictwo.json` | Znaczenia, ilustracje, formy językowe i domyślne akceptowane odpowiedzi |
 | `<folder>/quiz.json` | Odwołania pytań słownikowych do znaczeń i dystraktorów |
@@ -23,13 +23,24 @@ Status: **wdrożony format etapu 2**. To instrukcja edycji dla człowieka. Typy 
 | `<folder>/rozmowki.json` | Opcjonalne dialogi z jedną luką i [sceny z kilkoma lukami](#scena-dialogowa-z-kilkoma-lukami) |
 | `<folder>/czytanki.json` | Opcjonalne [czytanki](#czytanka) z pytaniami (D-68); włącza je `readingsFile: "czytanki.json"` w `modul.json` |
 
-Folder modułu, np. `02-food`, jest adresem plików. `unit-2-food` to identyfikator materiału i zapisu postępów. **To dwie różne rzeczy.** W `katalog.modules` wpisujemy foldery, a w `course.moduleIds` identyfikatory z `modul.json`.
+Folder modułu, np. `02-food`, jest adresem plików. `unit-2-food` to identyfikator materiału i zapisu postępów. **To dwie różne rzeczy.** W `kurs.json` wpisujemy foldery, a identyfikatory (`moduleIds`) aplikacja odczytuje z `modul.json`. W pozostałych wierszach tabeli `<folder>` to `<kurs>/<folder modułu>`, np. `angielski-hani/02-food`; ścieżki `journeyPaths` w `modul.json` liczą się od `public/content/`.
 
 ## Kurs to jeden podręcznik
 
-`katalog.json` wskazuje `"coursesFile": "kursy.json"`. Wskazany plik ma `version: 1` i tablicę `courses`.
+### Układ folderów kursu (D-75)
 
-Przykładowy wpis kursu do tej tablicy, bez potwierdzonych jeszcze danych książki:
+```text
+public/content/
+  katalog.json                  { "version": 1, "courseFolders": ["angielski-hani"] }
+  angielski-hani/               nazwa folderu = id kursu
+    kurs.json                   opis kursu + "modules": ["02-food", "03-technology"]
+    tematy-gramatyki.json       tematy zakładki Gramatyka (D-74)
+    02-food/, 03-technology/    foldery modułów
+```
+
+`kurs.json` ma pola kursu jak poniżej, ale zamiast `moduleIds` listę `modules` (foldery); `id` musi równać się nazwie folderu. Kolejność `modules` wyznacza kolejność nauki. Grafiki zostają w `public/illustrations/`. Dawny układ płaski (`modules` + `coursesFile` w `katalog.json`) nadal jest czytany, co wykorzystują fikstury testów; w nim wpis kursu ma `moduleIds`.
+
+Przykładowy opis kursu (w `kurs.json` pole `moduleIds` zastępuje `modules`), bez potwierdzonych jeszcze danych książki:
 
 ```json
 {
@@ -47,7 +58,7 @@ Przykładowy wpis kursu do tej tablicy, bez potwierdzonych jeszcze danych ksią�
 }
 ```
 
-Nie dodano tego przykładowego kursu do aplikacji. Produkcyjny rejestr zawiera wyłącznie `angielski-hani` i istniejący Food. Tytułu, autorów, wydania i poziomu całego podręcznika nie ustalono, dlatego mają jawne `null`. Po potwierdzeniu autorów zapisujemy jako tablicę nazwisk, a poziomy np. jako `["A1", "A2"]`. Poziom A2 w metadanych Food nie jest automatycznie poziomem całej książki.
+Nie dodano tego przykładowego kursu do aplikacji. Produkcyjna treść zawiera wyłącznie kurs `angielski-hani` (Food i Technology). Tytułu, autorów, wydania i poziomu całego podręcznika nie ustalono, dlatego mają jawne `null`. Po potwierdzeniu autorów zapisujemy jako tablicę nazwisk, a poziomy np. jako `["A1", "A2"]`. Poziom A2 w metadanych Food nie jest automatycznie poziomem całej książki.
 
 Kody języków są niezależne od polskiego napisu wyświetlanego na kafelku: `en`, `fr`, `it`, `pl`, również poprawne kody regionalne, np. `fr-CA`. Polecenie i wzór objaśnienia są danymi kursu; nowy język nie wymaga dopisywania rozgałęzienia w silniku sesji. Wzór objaśnienia zawiera `{answer}` i `{cue}`. Nie wykonuje kodu ani HTML. Własne wyjaśnienie konkretnego pytania ma pierwszeństwo.
 
@@ -55,7 +66,7 @@ Każdy moduł należy dokładnie do jednego kursu, a wszystkie wpisy rejestru mu
 
 ### Tematy gramatyki (D-74)
 
-Kurs może wskazać plik tematów: `"grammarTopicsFile": "tematy-gramatyki/<id-kursu>.json"` w jego wpisie w `kursy.json`. Plik to tablica `{"id", "title", "summary"?}` (`id` małymi literami z myślnikami, `summary` opcjonalne). Reguła w `gramatyka.json` wskazuje temat polem `grammarTopicId`; reguły z różnych modułów kursu mogą dzielić temat, a kolejność wynika z kolejności `moduleIds`. Treść reguły zostaje tylko w `gramatyka.json`.
+Kurs może wskazać plik tematów: `"grammarTopicsFile": "tematy-gramatyki.json"` w jego `kurs.json`; ścieżka jest względem folderu kursu, domyślnie `"tematy-gramatyki.json"`. Plik to tablica `{"id", "title", "summary"?}` (`id` małymi literami z myślnikami, `summary` opcjonalne). Reguła w `gramatyka.json` wskazuje temat polem `grammarTopicId`; reguły z różnych modułów kursu mogą dzielić temat, a kolejność wynika z kolejności modułów kursu. Treść reguły zostaje tylko w `gramatyka.json`.
 
 `check:content` i wczytanie biblioteki odrzucają: regułę bez zadania `kind: "grammar"` z jej `ruleId` (w każdym kursie), a w kursie z plikiem tematów także regułę bez tematu lub z nieznanym tematem i powtórzone `id` tematu. Temat bez reguł jest dozwolony (moduły kursu mogą być wczytane częściowo) i po prostu się nie pokazuje. Kurs bez pliku tematów nie może mieć reguł z `grammarTopicId`.
 

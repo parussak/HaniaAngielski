@@ -2,11 +2,11 @@ import {resumeStudy} from './helpers.ts';
 import {openModule} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
-const dialogues=JSON.parse(readFileSync(new URL('../../public/content/02-food/rozmowki.json',import.meta.url),'utf8'));
+const dialogues=JSON.parse(readFileSync(new URL('../../public/content/angielski-hani/02-food/rozmowki.json',import.meta.url),'utf8'));
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 for(const input of ['choice','text'] as const)test(`rozmówki mobilnie: ${input}, błąd, poprawa i wznowienie`,async({page})=>{
   const q=dialogues.find((q:any)=>q.id==='d-to-drink');
-  await page.route('**/content/02-food/rozmowki.json',r=>r.fulfill({json:[q]}));
+  await page.route('**/content/angielski-hani/02-food/rozmowki.json',r=>r.fulfill({json:[q]}));
   await page.goto('./');await openModule(page);
   await page.getByText(input==='choice'?'Wybieram odpowiedź':'Wpisuję odpowiedź',{exact:true}).tap();
   await page.getByRole('button',{name:'Rozmówki',exact:true}).tap();

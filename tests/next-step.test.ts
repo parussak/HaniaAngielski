@@ -6,7 +6,7 @@ import {emptyProgress,makeSession,keyFor,backup,validateBackup,type Progress} fr
 import {freshAdventure,lessons,type Journey} from '../src/adventure.ts';
 import {getNextStep} from '../src/next-step.ts';
 import {stageKey} from '../src/stage-review.ts';
-const m=modules[0],j:Journey=JSON.parse(readFileSync(new URL('../public/content/02-food/sciezka.json',import.meta.url),'utf8'));
+const m=modules[0],j:Journey=JSON.parse(readFileSync(new URL('../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8'));
 const m2={...structuredClone(m),id:'unit-3-test',order:3,cover:'Test'},j2={...structuredClone(j),moduleId:m2.id};
 const complete=(p:Progress,map:Journey,at='2026-11-09T12:00:00.000Z')=>{
   p.adventure??=freshAdventure();for(const l of lessons(map))p.adventure.completed[l.key]={at};

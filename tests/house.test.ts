@@ -7,7 +7,7 @@ import {freshAdventure,lessons,validateJourney,makeLessonSession,rewardCompletio
 import {settleStageRewards} from '../src/stage-review.ts';
 import {homeFor,stars,creditStars,purchase,place,settleHouseUnlocks,roomAvailable,itemAvailable} from '../src/house/progress.ts';
 import {decorations} from '../src/house/catalog.ts';
-const maps=['sciezka','sciezka-praktyka'].map(file=>validateJourney(JSON.parse(readFileSync(new URL(`../public/content/02-food/${file}.json`,import.meta.url),'utf8')),modules[0]));
+const maps=['sciezka','sciezka-praktyka'].map(file=>validateJourney(JSON.parse(readFileSync(new URL(`../public/content/angielski-hani/02-food/${file}.json`,import.meta.url),'utf8')),modules[0]));
 const at='2026-11-10T12:00:00Z';
 function complete(p:ReturnType<typeof emptyProgress>,j=maps[0]){p.adventure??=freshAdventure();for(const l of lessons(j))p.adventure.completed[l.key]={at};}
 
