@@ -15,7 +15,9 @@ function lessonLinks(entry: GrammarRuleEntry) {
 
 function ruleView(state: Readonly<AppState>, entry: GrammarRuleEntry) {
     const module = state.modules.find(m => m.id === entry.moduleId)!;
-    return `<section class="grammar-rule"><h3>${e(entry.rule.title)}</h3><p class="muted">${e(module.name)} · ${stat(entry.attempts, entry.correct)}</p><p>${e(entry.rule.explanation)}</p><ul lang="${e(targetLanguage(module))}">${entry.rule.examples.map(x => `<li>${e(x)}</li>`).join('')}</ul>${lessonLinks(entry)}</section>`;
+    const examples = entry.rule.examples.map(x => `<li>${e(x)}</li>`).join('');
+    return `<section class="grammar-rule"><h3>${e(entry.rule.title)}</h3><p class="muted">${e(module.name)} · ${stat(entry.attempts, entry.correct)}</p><p>${e(entry.rule.explanation)}</p>
+        ${examples ? `<div class="grammar-examples"><strong>Przykłady</strong><ul lang="${e(targetLanguage(module))}">${examples}</ul></div>` : ''}${lessonLinks(entry)}</section>`;
 }
 
 function topicView(state: Readonly<AppState>, entry: GrammarTopicEntry) {
@@ -25,9 +27,9 @@ function topicView(state: Readonly<AppState>, entry: GrammarTopicEntry) {
 }
 
 /** D-74: grammar rules of the chosen course, grouped under topics; they appear after the first attempt. */
-export function grammarView(state: Readonly<AppState>) {
+export function grammarView(state: Readonly<AppState>, cat: string) {
     const course = currentCourse(state), anchor = courseModules(state)[0];
-    const head = `${button('home', '← Moja nauka', 'back')}${courseContext(state)}<h1>Gramatyka</h1>`;
+    const head = `${button('home', '← Moja nauka', 'back')}${courseContext(state)}<div class="grammar-heading"><h1>Gramatyka</h1><div class="grammar-cat" aria-hidden="true">${cat}</div></div>`;
     if (!course || !anchor) return `${head}<p>Ten kurs nie ma dostępnych materiałów.</p>`;
     if (!course.grammarTopics?.length) return `${head}<p class="course-empty" role="status">Ten kurs nie ma jeszcze zebranych tematów gramatyki.</p>`;
     const topics = grammarTopics(state.modules, anchor, course.grammarTopics, state.journeys, state.progress);
