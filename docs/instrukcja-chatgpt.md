@@ -22,7 +22,8 @@ Zanim cokolwiek zmienisz, przeczytaj AGENTS.md. Przy zmianie kodu przeczytaj te�
 
 - Jedna zmiana = jeden tor: treść ALBO mechanika ALBO audio ALBO dokumentacja.
 - Nowy rozdział ze zdjęć podręcznika: użyj skilla $male-kroki-modul-ze-zdjec i zatrzymaj się po planie.
-- Testy według ryzyka. Nie zmieniaj oczekiwań istniejących testów bez zgody Pauliny.
+- Kod mechaniki piszesz TDD: najpierw test, który nie przechodzi, potem minimum kodu, potem porządki. Przestrzegaj „Konstytucji kodu” z AGENTS.md (jedna odpowiedzialność, zależności w jedną stronę, czyste planery i jedna powłoka ze skutkami, najwęższy dostęp do stanu, typy zamiast napisów).
+- Nie zmieniaj oczekiwań istniejących testów bez zgody Pauliny.
 - Nie rób commita ani pushu — commituje Paulina.
 
 Przekaż pracę do Claude (napisz to wprost w „Następny krok”), gdy:

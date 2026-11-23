@@ -41,7 +41,7 @@ Nie trzeba tworzyć osobnego testu dla każdego słówka ani kopii całej bateri
 
 ## Zasady dodawania i uruchamiania
 
-1. Nowe zachowanie otrzymuje test efektu i istotnego przypadku brzegowego. Test nie powinien wyłącznie powtarzać wewnętrznej struktury funkcji.
+1. Nowe zachowanie mechaniki (D-77) powstaje metodą TDD: najpierw test efektu i istotnego przypadku brzegowego, który nie przechodzi z właściwego powodu; potem minimum kodu; potem porządki na zielonych testach. Refaktoryzację poprzedza test utrwalający dotychczasowe zachowanie. Test nie powinien wyłącznie powtarzać wewnętrznej struktury funkcji. Wyjątki: treść kursów, teksty, dokumentacja, czysto wizualne poprawki.
 2. Powracający błąd dostaje test regresji. Oczekiwania zmieniamy po ustaleniu, czy zmieniła się zasada, a nie tylko dlatego, że test przestał przechodzić. Zmiana oczekiwań istniejącego testu wymaga zgody Pauliny.
 3. Nowe materiały korzystają ze wspólnych kontroli. Regresje Food pozostają sprawdzane osobno, zamiast ograniczać cały katalog do jednego modułu.
 4. Zmiana zapisu wymaga sprawdzenia zgodności starszych danych, kont i aktywnej sesji; rzeczywista migracja wymaga własnych przypadków.
