@@ -98,3 +98,22 @@ test('Gramatyka: po odświeżeniu na ekranie Gramatyka widok wraca', async ({ pa
     await page.reload();
     await expect(page.locator('.grammar-topic summary')).toContainText('Articles');
 });
+
+test('Gramatyka: zapytanie z wyszukiwarki wraca po ukończeniu ćwiczenia tematu', async ({ page }) => {
+    await materials(page);
+    await restore(page, seed([[unit('en-unit-1'), 'g-pc-1', true], [unit('en-unit-1'), 'g-art-1', true]]));
+    await open(page);
+    const search = page.getByRole('searchbox', { name: 'Szukaj w poznanej gramatyce' });
+    const visible = page.locator('.grammar-topic:visible summary');
+    await search.fill('pc-basic');
+    await expect(visible).toHaveCount(1);
+    await visible.tap();
+    await page.getByRole('button', { name: 'Poćwicz ten temat →', exact: true }).tap();
+    await expect(page.locator('.study-heading')).toBeVisible();
+    await finishCurrent(page, modules);
+    await page.getByRole('button', { name: 'Wróć do gramatyki', exact: true }).tap();
+    await expect(search).toHaveValue('pc-basic');
+    await expect(visible).toHaveCount(1);
+    await expect(visible).toContainText('Present Continuous');
+    await expect(page.getByText('Znalezione tematy: 1')).toBeVisible();
+});
