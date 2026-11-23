@@ -1,15 +1,29 @@
-import type { Module, Progress, Session } from './model.ts';
-import { makeReadingSession } from './readings.ts';
+import type { Journey, JourneyIssue } from './journey.ts';
+import type { AnswerMode, Mode, Module, Progress, Session } from './model.ts';
 
 /**
- * Wynik decyzji „co się stanie po tej akcji”. Planer jest czystą funkcją: czyta dane,
- * nic nie zmienia i nie pyta użytkownika. Skutki (pytanie o zastąpienie sesji, zmiana
- * stanu ekranu, zapis) wykonuje jedna powłoka w `controllers/session-start.ts`.
+ * Wynik decyzji „co się stanie po tej akcji”. Planery startu sesji (`start-lesson-plans.ts`,
+ * `start-practice-plans.ts`) są czystymi funkcjami: czytają dane, niczego nie zmieniają
+ * i nie pytają użytkownika. Skutki wykonuje jedna powłoka w `controllers/session-start.ts`.
  */
-export type StartPlan =
+
+/** Wybór zapisywany w stanie ekranu; każde pole jest opcjonalne. */
+export interface Selection { module?: Module; journeyKey?: string; introLessonId?: string; answerMode?: AnswerMode; mode?: Mode }
+
+export type StartPlan = { selection?: Selection } & (
+    /** Nic do zrobienia (np. nieznany moduł). */
     | { kind: 'ignore' }
     | { kind: 'notice'; text: string }
-    | { kind: 'open'; session: Session; confirm: string; select?: Module; mode?: Session['mode']; resetRewards: boolean };
+    /** Ta sesja już trwa — wróć do ekranu ćwiczeń. */
+    | { kind: 'resume' }
+    /** Ekran wprowadzenia lekcji (bez sesji). */
+    | { kind: 'intro' }
+    /**
+     * `selection` działa zawsze; `afterConfirm` dopiero po zgodzie na zastąpienie aktywnej sesji.
+     * `confirm: null` — nie pytaj (np. powrót do tej samej lekcji).
+     */
+    | { kind: 'open'; session: Session; confirm: string | null; afterConfirm?: Selection; resetRewards: boolean }
+);
 
 /** Dane, które planery mogą czytać; żaden nie dostaje stanu aplikacji. */
 export interface StartInput {
@@ -17,16 +31,17 @@ export interface StartInput {
     courseModules: readonly Module[];
     /** Wszystkie wczytane moduły. */
     modules: Module[];
-    selectedModuleId?: string;
+    journeys: Journey[];
+    journeyIssues: readonly JourneyIssue[];
     progress: Progress;
+    answerMode: AnswerMode;
+    previous: boolean;
+    selected: Module | undefined;
+    /** Mapa wybrana na ekranie (`currentJourney`). */
+    currentJourney: Journey | undefined;
+    lastSession: Session | null;
+    /** Identyfikatory tematów gramatyki wybranego kursu. */
+    grammarTopicIds: ReadonlySet<string>;
 }
 
-const noneYet = 'Tę czytankę poznasz najpierw na mapie. Potem możesz ją tu przeczytać ponownie.';
-
-/** D-68: „Czytanki” — a reading the learner already met on a map, read again whole. */
-export function planReadingStart(input: StartInput, dataset: { module?: string; id?: string }): StartPlan {
-    const module = input.courseModules.find(m => m.id === (dataset.module ?? input.selectedModuleId));
-    const session = module && makeReadingSession(input.modules, module, dataset.id ?? '', input.progress);
-    if (!module || !session) return { kind: 'notice', text: noneYet };
-    return { kind: 'open', session, confirm: 'Rozpocząć czytankę zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.', select: module, mode: 'reading', resetRewards: false };
-}
+export const newSessionConfirm = 'Nowa sesja zastąpi niedokończoną sesję. Zakończone wyniki pozostaną zachowane. Kontynuować?';

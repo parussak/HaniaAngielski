@@ -1,20 +1,17 @@
-import { journeyKey, lessons, makeLessonSession, unlocked, type Journey } from '../adventure.ts';
-import { makeTrainingSession, mapTrainingPool } from '../learning/training.ts';
+import type { Journey } from '../adventure.ts';
+import { journeyKey } from '../adventure.ts';
 import { currentJourney, courseModules } from '../app/selectors.ts';
 import { AppState } from '../app/state.ts';
-import { makeSession, replaceActive, type Mode, type Progress, type Session } from '../core.ts';
-import { makeStageReviewSession } from '../stage-review.ts';
-import {makeRecallSession,makeRitualSession} from '../learning/recall.ts';
-import {needsSectionPlans,prepareSectionPlans} from '../learning/section-plan.ts';
-import { makeCoursePracticeSession, type CoursePracticeMode } from '../learning/course-practice.ts';
-import { makeGrammarTopicSession } from '../learning/grammar-topics.ts';
-import {followingLesson,lessonContext,legendarySession} from '../learning/lesson-flow.ts';
-import {varyLesson} from '../learning/lesson-variety.ts';
-import {planReadingStart, type StartInput, type StartPlan} from '../learning/start-plan.ts';
+import { replaceActive, type Progress, type Session } from '../core.ts';
+import { needsSectionPlans, prepareSectionPlans } from '../learning/section-plan.ts';
+import type { Selection, StartInput, StartPlan } from '../learning/start-plan.ts';
+import { planBeginLesson, planLegendary, planLessonAfterFinished, planStageReview, planStageReviewAction } from '../learning/start-lesson-plans.ts';
+import { planCourseMode, planExtraTraining, planGrammarPractice, planMode, planReadingStart, planRitual } from '../learning/start-practice-plans.ts';
 interface SessionStartPorts {
     mutate: (change: (p: Progress) => void) => Promise<void>;
 }
-// Rozpoczynanie sesji: dobór zadań, pytanie o zastąpienie aktywnej sesji i otwarcie ekranu ćwiczeń.
+// Rozpoczynanie sesji. Decyzje (jaka sesja, jaki komunikat) podejmują czyste planery w
+// `learning/start-*-plans.ts`; ta powłoka jako jedyna pyta o zastąpienie sesji i zmienia stan.
 // Nawigacja między ekranami zostaje w `learning.ts`.
 export function createSessionStartController(state: AppState, { mutate }: SessionStartPorts) {
     async function preparePlans(){
@@ -36,136 +33,59 @@ export function createSessionStartController(state: AppState, { mutate }: Sessio
     }
     /** Dane dla planerów: wycinek stanu do odczytu, bez samego `state`. */
     function startInput(): StartInput {
-        return { courseModules: courseModules(state), modules: state.modules, selectedModuleId: state.selected?.id, progress: state.progress };
+        return {
+            courseModules: courseModules(state), modules: state.modules, journeys: state.journeys, journeyIssues: state.journeyIssues,
+            progress: state.progress, answerMode: state.answerMode, previous: state.previous, selected: state.selected,
+            currentJourney: currentJourney(state), lastSession: state.lastSession,
+            grammarTopicIds: new Set(state.courses.find(c => c.id === state.selectedCourseId)?.grammarTopics?.map(t => t.id)),
+        };
     }
-    /** Jedyne miejsce, w którym plan zmienia stan: powiadomienie, pytanie o zastąpienie, wybór, otwarcie sesji. */
+    function applySelection(selection: Selection) {
+        if (selection.module) state.selected = selection.module;
+        if (selection.journeyKey !== undefined) state.selectedJourneyKey = selection.journeyKey;
+        if (selection.introLessonId !== undefined) state.introLessonId = selection.introLessonId;
+        if (selection.answerMode) state.answerMode = selection.answerMode;
+        if (selection.mode) state.mode = selection.mode;
+    }
+    /** Jedyne miejsce, w którym plan zmienia stan: wybór, komunikat, pytanie o zastąpienie, otwarcie sesji. */
     async function applyPlan(plan: StartPlan) {
-        if (plan.kind === 'ignore') return;
-        if (plan.kind === 'notice') { state.notice = plan.text; return; }
-        if (!confirmReplacement(plan.confirm)) return;
-        if (plan.select) state.selected = plan.select;
-        if (plan.mode) state.mode = plan.mode;
-        await openSession(plan.session, plan.resetRewards);
+        if (plan.selection) applySelection(plan.selection);
+        switch (plan.kind) {
+            case 'ignore': return;
+            case 'notice': state.notice = plan.text; return;
+            case 'resume': state.screen = 'study'; return;
+            case 'intro': state.screen = 'lesson-intro'; return;
+            case 'open':
+                if (plan.confirm !== null && !confirmReplacement(plan.confirm)) return;
+                if (plan.afterConfirm) applySelection(plan.afterConfirm);
+                await openSession(plan.session, plan.resetRewards);
+        }
     }
     async function startStageReview(j: Journey, stage: Journey['stages'][number]) {
-        if (state.progress.active?.stageReview?.id === `${journeyKey(j)}/${stage.id}`) {
-            state.screen = 'study';
-            return;
-        }
-        const session = makeStageReviewSession(state.modules, j, stage, state.answerMode, state.progress);
-        if (!session) {
-            state.notice = 'Brak zaległych powtórek w tym etapie.';
-            return;
-        }
-        if (!confirmReplacement('Rozpocząć powtórkę zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))
-            return;
-        await openSession(session);
+        await applyPlan(planStageReview(startInput(), j, stage));
     }
     /** The lesson after the finished one, or the finished one itself for the legendary level. */
     function lessonAfterFinished(action: 'following-lesson' | 'legendary') {
-        const finished=state.lastSession??state.progress.sessions.at(-1);
-        if(!finished?.lesson||!courseModules(state).some(m=>m.id===finished.moduleId))return;
-        const target=action==='legendary'?lessonContext(state.journeys,state.progress,finished):followingLesson(state.modules,state.journeys,state.progress,finished);
-        if(!target){state.notice='Wszystkie dostępne lekcje ukończone. Gratulacje!';return;}
-        state.selected=state.modules.find(m=>m.id===target.journey.moduleId)!;state.selectedJourneyKey=journeyKey(target.journey);state.introLessonId=target.lesson.id;state.answerMode='mixed';
-        return {finished,target};
+        const found = planLessonAfterFinished(startInput(), action);
+        if (found.kind === 'notice') state.notice = found.text;
+        if (found.kind !== 'found') return;
+        applySelection(found.selection);
+        return found;
     }
     async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
-        if(action==='legendary'){
-            const found=lessonAfterFinished(action);if(!found)return true;
-            const {finished,target}=found;
-            const session=legendarySession(state.modules,finished,{...target,progress:state.progress});
-            if(!session){state.notice='Ta starsza lekcja wymaga dostępnej wersji materiału. Wyniki pozostają zachowane.';return true;}
-            if(!confirmReplacement('Rozpocząć poziom legendarny zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))return true;
-            varyLesson(session,state.modules,state.journeys,target.journey,target.lesson,state.progress,false);
-            await openSession(session);return true;
+        const input = startInput, data = el.dataset;
+        switch (action) {
+            case 'legendary': await applyPlan(planLegendary(input())); return true;
+            case 'module-ritual': await preparePlans(); await applyPlan(planRitual(input(), data)); return true;
+            case 'course-mode': await applyPlan(planCourseMode(input(), data)); return true;
+            case 'grammar-practice': await applyPlan(planGrammarPractice(input(), data)); return true;
+            case 'stage-review': await applyPlan(planStageReviewAction(input(), data)); return true;
+            case 'begin-lesson': await preparePlans(); await applyPlan(planBeginLesson(input(), data)); return true;
+            case 'extra-training': await applyPlan(planExtraTraining(input(), data)); return true;
+            case 'mode': await applyPlan(planMode(input(), data)); return true;
+            case 'reading-start': await applyPlan(planReadingStart(input(), data)); return true;
+            default: return false;
         }
-        if(action==='module-ritual'){
-            const m=courseModules(state).find(m=>m.id===el.dataset.module),kind=el.dataset.kind;
-            if(!m||(kind!=='opening'&&kind!=='finale'))return true;
-            await preparePlans();
-            if(kind==='finale'&&state.journeyIssues.some(issue=>issue.moduleId===m.id)){state.notice='Wczytaj wszystkie mapy modułu przed misją finałową.';return true;}
-            const map=state.journeys.find(j=>j.moduleId===m.id&&journeyKey(j)===el.dataset.journey);
-            const session=makeRitualSession(state.modules,state.journeys,m,state.progress,kind,state.answerMode,map);
-            if(!session){state.notice=kind==='opening'?'To początek przygody! Zacznij od pierwszej lekcji — nie ma jeszcze materiału z wcześniejszych modułów.':'Najpierw poznaj materiał i ukończ mapy tego modułu. Misja będzie wtedy gotowa.';return true;}
-            if(!confirmReplacement('Rozpocząć kocie ćwiczenia zamiast niedokończonej sesji? Wyniki pozostaną zachowane.'))return true;
-            state.selected=m;await openSession(session);return true;
-        }
-        if (action === 'course-mode') {
-            if (!['flashcards','quiz','grammar'].includes(el.dataset.mode ?? '')) return true;
-            const anchor = courseModules(state)[0]; if (!anchor) return true;
-            const session = makeCoursePracticeSession(state.modules, anchor, state.progress, el.dataset.mode as CoursePracticeMode, state.answerMode);
-            if (!session) { state.notice = 'Nie ma jeszcze poznanego materiału dla tego ćwiczenia. Zacznij od mapy lub modułu.'; return true; }
-            if (!confirmReplacement('Nowa sesja zastąpi niedokończoną sesję. Zakończone wyniki pozostaną zachowane. Kontynuować?')) return true;
-            await openSession(session);
-            return true;
-        }
-        if (action === 'grammar-practice') {
-            // D-74: a course grammar session limited to the given topics (several ids are separated by commas).
-            const anchor = courseModules(state)[0]; if (!anchor) return true;
-            const known = new Set(state.courses.find(c => c.id === state.selectedCourseId)?.grammarTopics?.map(t => t.id));
-            const ids = (el.dataset.id ?? '').split(',').filter(id => known.has(id));
-            const session = ids.length ? makeGrammarTopicSession(state.modules, anchor, state.progress, ids, state.answerMode) : null;
-            if (!session) { state.notice = 'Nie ma jeszcze poznanych zadań z tej gramatyki. Spróbuj najpierw lekcji.'; return true; }
-            if (!confirmReplacement('Nowa sesja zastąpi niedokończoną sesję. Zakończone wyniki pozostaną zachowane. Kontynuować?')) return true;
-            await openSession(session);
-            return true;
-        }
-        if (action === 'stage-review') {
-            const j = el.dataset.journey?state.journeys.find(j=>journeyKey(j)===el.dataset.journey):currentJourney(state), stage = j?.stages.find(s => s.id === el.dataset.id);
-            if(j&&!courseModules(state).some(m=>m.id===j.moduleId))return true;
-            if(j){state.selected=state.modules.find(m=>m.id===j.moduleId)!;state.selectedJourneyKey=journeyKey(j);}
-            if (!j || !stage)
-                return true;
-            await startStageReview(j, stage);
-            return true;
-        }
-        if (action === 'begin-lesson') {
-            await preparePlans();
-            const j = currentJourney(state), l = j && lessons(j).find(l => l.lesson.id === el.dataset.id)?.lesson;
-            if (!j || !l || !unlocked(j, l, state.progress)) {
-                state.notice = 'Najpierw ukończ wcześniejszą lekcję.';
-                return true;
-            }
-            if(l.role==='training'&&!mapTrainingPool(state.modules,state.journeys,j,state.progress,l).length){state.introLessonId=l.id;state.screen='lesson-intro';return true;}
-            if (!(el.dataset.restart==='true'&&state.progress.active?.lesson?.id===`${journeyKey(j)}/${l.id}`)&&!confirmReplacement('Rozpocząć lekcję zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'))
-                return true;
-            const session = l.role === 'training'
-                ? makeTrainingSession(state.modules, state.selected, state.progress, 'mixed', { journey: j, lesson: l, journeys: state.journeys })
-                : l.role==='recall'?makeRecallSession(state.modules,state.journeys,j,l,state.progress)
-                : makeLessonSession(state.modules, j, l, 'mixed', state.progress);
-            if (!session) { state.notice = l.role==='recall'?'Najpierw spróbuj kilku wcześniejszych lekcji. Ta powtórka korzysta wyłącznie z poznanego materiału.':'Nie ma jeszcze poznanego materiału z wcześniejszych map do tego treningu.'; return true; }
-            varyLesson(session,state.modules,state.journeys,j,l,state.progress);
-            await openSession(session);
-            return true;
-        }
-        if (action === 'extra-training') {
-            const anchor=el.dataset.module?courseModules(state).find(m=>m.id===el.dataset.module):courseModules(state).find(m=>m.id===state.selected?.id)??courseModules(state)[0];
-            if(!anchor)return true;state.selected=anchor;
-            const session = makeTrainingSession(state.modules, anchor, state.progress, state.answerMode,undefined,!!el.dataset.module);
-            if (!session) { state.notice = 'Najpierw spróbuj odpowiedzieć na kilka pytań. Rozgrzewka obejmuje tylko wcześniej poznany materiał.'; return true; }
-            if (!confirmReplacement('Rozpocząć rozgrzewkę zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.')) return true;
-            await openSession(session);
-            return true;
-        }
-        if (action === 'mode') {
-            if(el.dataset.module){const m=courseModules(state).find(m=>m.id===el.dataset.module);if(!m)return true;state.selected=m;}
-            state.mode = el.dataset.mode as Mode;
-            const session = makeSession(state.modules, state.selected, state.mode, state.answerMode, state.previous, state.progress);
-            if (!session.items.length) {
-                state.notice = 'Nie ma zadań do tej sesji. Znane fiszki pomijamy. Możesz wybrać quiz lub gramatykę.';
-                return true;
-            }
-            if (!confirmReplacement('Rozpoczęcie nowej sesji zastąpi niedokończoną sesję. Zakończona historia i zapisane trudności pozostaną. Kontynuować?'))
-                return true;
-            await openSession(session, false);
-            return true;
-        }
-        if (action === 'reading-start') {
-            await applyPlan(planReadingStart(startInput(), el.dataset));
-            return true;
-        }
-        return false;
     }
     return { handleAction, preparePlans, openSession, startStageReview, lessonAfterFinished };
 }

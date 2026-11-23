@@ -59,7 +59,8 @@ Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zal
 | --- | --- |
 | Typy sesji, wyników i ćwiczeń | `learning/model.ts` |
 | Nawigacja między ekranami nauki (mapa, wprowadzenie lekcji, następny krok, wznowienie) | `controllers/learning.ts` |
-| Rozpoczęcie sesji, zastąpienie aktywnej sesji (`confirmReplacement`, `openSession`), tryb „Czytanki” | `controllers/session-start.ts` |
+| Rozpoczęcie sesji — powłoka: jedyne miejsce, które pyta o zastąpienie aktywnej sesji (`confirmReplacement`), zmienia stan i otwiera sesję (`applyPlan`, `openSession`) | `controllers/session-start.ts` |
+| Rozpoczęcie sesji — decyzje: jaką sesję zbudować, jaki komunikat, co wybrać. Czyste funkcje zwracające `StartPlan` (bez stanu aplikacji, pytań i zapisu); lekcje z mapy / ćwiczenia poza mapą / typy planu | `learning/start-lesson-plans.ts`, `learning/start-practice-plans.ts`, `learning/start-plan.ts` |
 | Odpowiedzi w trwającej sesji, plansze par i luk, przejście dalej i nagrody | `controllers/session-answers.ts` |
 | Przebieg sesji, pierwsza próba | `learning/session.ts` |
 | Pytania, warianty i ocenianie; a/an słówek; porównanie odpowiedzi | `learning/questions.ts`, `answers.ts`, `learning/vocabulary-answer.ts`, `answer-comparison.ts` |

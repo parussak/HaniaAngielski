@@ -101,6 +101,6 @@ Przy przeglądzie diffu od ostatniego przeglądu:
 
 Stan na listopad 2026; poprawiamy przy okazji przeglądu, po wyborze Pauliny.
 
-- **Duże pliki:** `views/study.ts` (~13 KB; `studyView` to jedna długa funkcja), `controllers/session-start.ts` (~12 KB), `content-validation.ts`, `views/account.ts`, `learning/reading-format.ts` (~11 KB; do podziału na format i walidację).
+- **Duże pliki:** `views/study.ts` (~13 KB; `studyView` to jedna długa funkcja), `content-validation.ts`, `views/account.ts`, `learning/reading-format.ts` (~11 KB; do podziału na format i walidację).
 - **Dwa style zapisu:** rozwinięty (wcięcia 4 spacje) i zbity w jednej linii (np. `learning/boards.ts`, `house/layout.ts`); w widokach linie do kilku tysięcy znaków. Brak automatycznego formatowania — wprowadzenie formatera to nowa zależność (zgoda Pauliny) i jednorazowy diff całych plików, osobno od innych zmian.
 - **`any`** pozostaje w `firebase.ts` (`decode`) — dane z Firebase powinny być `unknown` do czasu walidacji.
