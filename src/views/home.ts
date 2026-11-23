@@ -77,7 +77,7 @@ export function homeView({ name, modules, step, pwa, cat, courseContext = '', we
     <span class="tag">TWOJA JĘZYKOWA PRZYGODA</span>
     <h2>Wielkie rzeczy zaczynają się od małych kroków.</h2>
     <p>Wybierz przygodę, ucz się małymi krokami i zdobywaj gwiazdki do kociego domku.</p>${button('journeys', `Wybierz przygodę ${icon('arrow')}`)}</div>${heroArt()}</section>
-    <section class="practice-entry grammar-entry">
+    <section class="practice-entry grammar-entry" data-action="grammar">
     <span class="grammar-paw" aria-hidden="true">${icon('paw')}</span>
     <div>
     <h2>Gramatyka</h2>

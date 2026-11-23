@@ -45,9 +45,9 @@
 .grammar-entry>div{flex:auto;min-width:0}
 .grammar-open{display:inline-flex;align-items:center;gap:8px;padding:0;border:0;background:transparent;color:#583b74;font:inherit;font-weight:700;cursor:pointer}
 .grammar-open svg{width:19px;height:19px}
-.grammar-open::after{content:"";position:absolute;inset:0;border-radius:6px 18px 18px 6px}
+.grammar-entry{cursor:pointer}
 .grammar-open:hover{text-decoration:underline}
-.grammar-open:focus-visible::after{outline:3px solid #624582;outline-offset:3px}
+.grammar-entry:has(.grammar-open:focus-visible){outline:3px solid #624582;outline-offset:3px}
 .home-help{border-top:1px solid #e1d6ed;padding-top:8px;color:#684e7b}
 .home-help>summary{display:flex;align-items:center;gap:10px;cursor:pointer;min-height:52px;font-size:14px;font-weight:600;list-style:none}
 .home-help>summary::-webkit-details-marker{display:none}
