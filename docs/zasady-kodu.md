@@ -11,6 +11,7 @@ Status: **projekt do zatwierdzenia przez Paulinę.** Według tych zasad ChatGPT 
 5. **Zgodność danych.** Kopia zostaje w wersji 1, nowe pola są opcjonalne, brak pola = dotychczasowe zachowanie, identyfikatory i `rev` się nie zmieniają, rozpoczęta sesja wznawia się z własnej listy zadań — szczegóły w [zapisie](06-zapis.md#zasady-zgodności).
 6. **Wyliczaj zamiast zapisywać.** Co da się odtworzyć z `items`, `attempts` i treści, nie dostaje własnego pola ([lista](06-zapis.md#wyliczane-nie-zapisywane)).
 7. **Nowa forma to oprawa, nie nowa treść.** Nowy sposób pokazania zadania (jak `pairGroup`, `presentation: bank`, `listen`) korzysta z istniejących `word`/`exercise` i ich oceniania, zamiast tworzyć drugi zestaw odpowiedzi.
+8. **Decyzja osobno, skutek osobno (D-76).** Co ma się stać po akcji (jaka sesja, jaki komunikat, co wybrać), rozstrzyga czysta funkcja w `learning/`, która zwraca opis wyniku (np. `StartPlan`) i dostaje tylko dane do odczytu — nie `AppState`. Skutki (pytanie użytkownika, zmiana stanu ekranu, zapis) wykonuje jedna powłoka w kontrolerze. Zależności idą w jedną stronę: kontroler → planery → logika. Nowa akcja z tego samego obszaru dodaje planer i test planera, a nie kolejną gałąź w kontrolerze.
 
 ## 2. Jak dodać
 
