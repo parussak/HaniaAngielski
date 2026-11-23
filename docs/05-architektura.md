@@ -41,7 +41,7 @@ Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zal
 | Menu i etykiety mobilne | `views/shell.ts` |
 | Strona startowa, następny krok | `views/home.ts`, `next-step.ts` |
 | Katalog map i modułów, widok mapy i wprowadzeń | `views/catalog.ts`, `adventure-view.ts` |
-| Ekran ćwiczenia, błąd, poprawka | `views/study.ts` |
+| Ekran ćwiczenia, błąd, poprawka | `views/study.ts` (+ `study-page.ts`, `study-answer.ts`, `study-feedback.ts`) |
 | Podsumowanie zakończonej sesji | `views/summary.ts` |
 | Plansze par i luk, sceny | `views/lesson-activities.ts` |
 | Czytanka i pytanie czytanki poza nią (zdania z `refs`) | `views/reading.ts` |

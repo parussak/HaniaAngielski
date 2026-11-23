@@ -7,43 +7,14 @@ import {readingCard,readingContextView,readingQuestionPrompt} from './reading.ts
 import {listeningTask,vocabularyPlayback} from '../learning/listening.ts';
 import {speaker} from '../speech.ts';
 import {speechButtons} from './speech-controls.ts';
-import { catView } from './cat.ts';
-import { responseCat } from '../cats.ts';
-import { inputFor, optionsFor, questionFor, sessionCompatible, type Exercise, type Illustration, type Session } from '../core.ts';
-import { labels,sessionTitle } from '../learning-labels.ts';
+import { inputFor, questionFor, sessionCompatible } from '../core.ts';
 import { translationPrompt } from '../learning/scope.ts';
-import { coursePracticeLabels, type CoursePracticeMode } from '../learning/course-practice.ts';
 import { stageForSession } from '../stage-review.ts';
 import { act, button, e, icon } from '../ui.ts';
 import { answerHint } from '../learning/questions.ts';
-import { vocabularyAssessment,vocabularyFullAnswer } from '../learning/vocabulary-answer.ts';
-function illustrationView(picture: Illustration | undefined, showCaption: boolean) {
-    if (!picture)
-        return '';
-    return `<figure class="answer-illustration ${picture.scene ? 'context-illustration' : ''} ${showCaption ? '' : 'question-illustration'}" ${showCaption ? '' : 'aria-hidden="true"'}>${picture.src ? `<img src="${e(new URL(picture.src, document.baseURI).href)}" alt="${showCaption ? e(picture.caption) : ''}" width="200" height="140">` : `<span role="img" aria-label="${showCaption ? e(picture.caption) : ''}">${e(picture.symbol)}</span>`}${showCaption ? `<figcaption>${e(picture.caption)}</figcaption>` : ''}</figure>`;
-}
-function answerComparison(q: Exercise, session: Session) {
-    const attempt = session.attempts.find(a => a.key === session.items[session.index].key);
-    const answer = attempt?.lastAnswer ?? (attempt?.corrections === 0 ? attempt.answer : undefined);
-    return `<div class="answer-comparison"><div class="given-answer"><span>Twoja odpowiedź</span><p>${answer === undefined ? 'Ostatnia odpowiedź nie jest dostępna w tym starszym zapisie.' : e(answer)}</p></div><div class="expected-answer"><span>Poprawna odpowiedź</span><p>${e(vocabularyFullAnswer(q))}</p></div></div>`;
-}
-function explanationView(q: Exercise, state: Readonly<AppState>, moduleId: string) {
-    if (q.kind !== 'grammar') return `<p>${e(q.explanation)}</p>`;
-    const rule = state.modules.find(m => m.id === moduleId)?.grammar.find(r => r.id === q.ruleId);
-    return `<section class="grammar-explanation"><h3>Dlaczego tak?</h3><p>${e(q.explanation)}</p>${rule ? `<details><summary>Przypomnij zasadę: ${e(rule.title)}</summary><p>${e(rule.explanation)}</p><ul>${rule.examples.map(example => `<li>${e(example)}</li>`).join('')}</ul></details>` : ''}</section>`;
-}
-/** Feedback after an answer: praise or a gentle correction, the explanation and optional listening. */
-function feedbackView(state: Readonly<AppState>, s: Session, item: Session['items'][number], q: Exercise, audio: string) {
-    const ok = s.lastCorrect;
-    const given=s.attempts.find(a=>a.key===item.key)?.lastAnswer;
-    const article=given===undefined?null:vocabularyAssessment(q,given);
-    const articleNote=article?.note?`<aside class="article-note"><strong>${ok?'Warto zapamiętać':'Rodzajnik w tym haśle'}</strong><p>Pełna forma: <b>${e(vocabularyFullAnswer(q))}</b>. ${e(article.note)}</p></aside>`:'';
-    return `<div class="feedback ${ok ? 'correct' : 'incorrect'}" role="status"><div class="feedback-lead"><strong>${ok ? 'Tak jest! Dobra robota ✦' : 'Spokojnie, tak właśnie się uczymy.'}</strong>${state.catCatalog ? catView(state.catCatalog, responseCat(state.catCatalog, s)) : ''}</div>${!ok ? answerComparison(q, s) : ''}${articleNote}${explanationView(q,state,item.moduleId)}${illustrationView(q.illustration, true)}${audio}</div>`;
-}
-/** "Listen again" and "slower" are always there, as often as the learner likes. */
-function listenButtons(task: {text:string;language:string}, key: string, autoplay: boolean,playLabel='Posłuchaj jeszcze raz') {
-    return `<div class="listen" data-key="${e(key)}" ${autoplay?'data-autoplay="true"':''} data-say="${e(task.text)}" data-lang="${e(task.language)}">${speechButtons(task.text,task.language,{playLabel,playClass:'secondary listen-play',slowClass:'secondary listen-slow'})}</div>`;
-}
+import { feedbackView, illustrationView } from './study-feedback.ts';
+import { choiceOptionsView, listenButtons, listenOptionsView, textAnswerView } from './study-answer.ts';
+import { studyPage } from './study-page.ts';
 export function studyView(state: Readonly<AppState>) {
     const s = state.progress.active;
     if (!s)
@@ -58,7 +29,6 @@ export function studyView(state: Readonly<AppState>) {
         : current;
     const q = questionFor(state.modules, item);
     const input=inputFor(q,item.input,s.mode),hint=answerHint(q,input);
-    const percent = Math.round(s.index / s.items.length * 100);
     const scene = sceneView(state.modules, s);
     const actor=scene&&state.catCatalog?sceneActor(state.catCatalog,s,scene.scene):undefined;
     // D-58: a task marked for listening is spoken only when this device can speak the course language.
@@ -68,7 +38,7 @@ export function studyView(state: Readonly<AppState>) {
     const pronunciation=s.phase==='feedback'&&['flashcards','flashcards-basic','quiz'].includes(s.mode)?vocabularyPlayback(state.modules,item):undefined;
     const answerAudio=pronunciation&&speaker().available(pronunciation.language,pronunciation.text)?pronunciation:undefined;
     const say=(text:string)=>speaker().available(language,text)?`<span class="scene-audio">${speechButtons(text,language!,{kind:'dialogue',playLabel:'',playClass:'scene-say',slowClass:'scene-slow',playAria:'Posłuchaj tej kwestii',slowAria:'Posłuchaj tej kwestii wolniej'})}</span>`:'';
-    const page=(card:string)=>`<button class="back" ${act('home')}>← Wróć do modułów · sesja zostaje zapisana</button><div class="study-heading"><div><div class="eyebrow">${s.scope?e(state.courses.find(c=>c.id===s.scope!.courseId)?.name??'POZNANY MATERIAŁ KURSU'):'TWÓJ MAŁY KROK'}</div><h1>${e(s.scope ? coursePracticeLabels[s.mode as CoursePracticeMode] : sessionTitle(s))}</h1></div><span class="tag">${s.index + 1} / ${s.items.length}</span></div><div class="progress-track" role="progressbar" aria-label="Pytanie ${s.index + 1} z ${s.items.length}" aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100"><span style="width:${percent}%"></span></div><section class="study-card">${card}</section><p class="under-card">${icon('check')} ${state.storageError ? 'Zapis niedostępny — zapisz kopię przed zamknięciem.' : 'Każdy krok zapisuje się na tym urządzeniu.'}</p>`;
+    const page=(card:string)=>studyPage(state,s,card);
     // D-68: a whole reading, sentence by sentence; the newest sentence is read out once when listening is on.
     const reading = readingView(state.modules, s, state.readingShown?.sessionId === s.id ? state.readingShown.count : undefined);
     if (reading) {
@@ -95,7 +65,7 @@ export function studyView(state: Readonly<AppState>) {
         // A scene shows its picture once, with the first line, and then leaves room for the conversation.
         if (!asking && (!scene || scene.position === 0)) card += illustrationView(q.illustration, false);
         card += s.phase === 'retry' ? '<p class="retry-note">Teraz spróbuj ponownie. Pierwszy wynik pozostanie zapisany osobno.</p>' : scene && scene.position > 0 ? '' : '<p>Nie musisz wiedzieć wszystkiego. Po prostu spróbuj.</p>';
-        card += item.pairGroup&&input==='choice'?pairsView(state.modules,s,state.boardError):item.presentation==='bank'&&input==='choice'?bankView(state.modules,s,state.boardError):asking&&listen!.choices ? `<div class="answer-options listen-options">${optionsFor({...q,options:listen!.choices.map(c=>c.answer)}, s).map((o, i) => {const choice=listen!.choices!.find(c=>c.answer===o)!;return `<button class="option listen-option" ${act('answer')} data-answer="${e(o)}"><span aria-hidden="true">${String.fromCharCode(65 + i)}</span>${choice.illustration?.symbol?`<span class="listen-picture" aria-hidden="true">${e(choice.illustration.symbol)}</span>`:choice.illustration?.src?`<img class="listen-picture" src="${e(new URL(choice.illustration.src, document.baseURI).href)}" alt="" width="48" height="34">`:''}${e(choice.label)}</button>`;}).join('')}</div>`:input === 'choice' && q.reading?.type === 'tap' ? '<p class="reading-hint">Dotknij właściwego słowa w zdaniu.</p>' : input === 'choice' ? `<div class="answer-options">${optionsFor(q, s).map((o, i) => `<button class="option" ${act('answer')} data-answer="${e(o)}"><span aria-hidden="true">${String.fromCharCode(65 + i)}</span>${e(o)}</button>`).join('')}</div>` : `${hint&&!asking?`<p id="answer-hint">${e(hint)}</p>`:''}<form id="answer-form"><label for="answer" class="sr-only">Twoja odpowiedź</label><input id="answer" name="answer" class="answer-input" ${hint&&!asking?'aria-describedby="answer-hint"':''} placeholder="Wpisz odpowiedź…" autocomplete="off" autocorrect="off" enterkeyhint="done" autocapitalize="off" spellcheck="false" maxlength="500" required><button class="primary" type="submit">Sprawdź ${icon('check')}</button></form>`;
+        card += item.pairGroup&&input==='choice'?pairsView(state.modules,s,state.boardError):item.presentation==='bank'&&input==='choice'?bankView(state.modules,s,state.boardError):asking&&listen!.choices ? listenOptionsView(q,s,listen!.choices) : input === 'choice' && q.reading?.type === 'tap' ? '<p class="reading-hint">Dotknij właściwego słowa w zdaniu.</p>' : input === 'choice' ? choiceOptionsView(q,s) : textAnswerView(hint,asking);
     }
     if(!s.boardSummary&&s.phase!=='feedback'&&(item.pairGroup||item.presentation==='bank'))card+=`${item.presentation==='bank'?bankExplanationView(state.modules,s):''}${boardNextButton(s)}`;
     return page(card);

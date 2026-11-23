@@ -23,7 +23,7 @@ Każda zmiana zasady nauki zaczyna się od decyzji D-xx w [rejestrze](decyzje.md
 2. Typ: `learning/model.ts` — pole opcjonalne (`kind`, `presentation` lub znacznik elementu sesji).
 3. Walidacja treści: `content-validation.ts` (`assembleModule`, `validateModules`) — błędny plik ma być odrzucony z czytelnym komunikatem.
 4. Pytanie i ocena: `learning/questions.ts` (`questionFor`, `isCorrect`) albo nowy plik w `learning/` (wzór: `boards.ts`, `scenes.ts`).
-5. Widok: `views/study.ts` lub `views/lesson-activities.ts`; obsługa akcji w `controllers/session-start.ts` (rozpoczęcie sesji) lub `controllers/session-answers.ts` (odpowiedź w trwającej sesji); wzór osobnej oprawy: `learning/readings.ts` i `controllers/reading.ts`.
+5. Widok: `views/study.ts` (ekran; ramka w `study-page.ts`, odpowiedź w `study-answer.ts`, informacja zwrotna w `study-feedback.ts`) lub `views/lesson-activities.ts`; obsługa akcji w `controllers/session-start.ts` (rozpoczęcie sesji) lub `controllers/session-answers.ts` (odpowiedź w trwającej sesji); wzór osobnej oprawy: `learning/readings.ts` i `controllers/reading.ts`.
 6. Jeśli sesja dostaje nowe pole — przepis niżej.
 7. Format dla autorów treści: [format materiałów](format-materialow.md).
 8. Testy: logika na fiksturze z `tests/fixtures/`, przebieg w `tests/browser/` na wąskim ekranie.
@@ -102,6 +102,6 @@ Przy przeglądzie diffu od ostatniego przeglądu:
 
 Stan na listopad 2026; poprawiamy przy okazji przeglądu, po wyborze Pauliny.
 
-- **Duże pliki:** `views/study.ts` (~13 KB; `studyView` to jedna długa funkcja), `content-validation.ts`, `views/account.ts`, `learning/reading-format.ts` (~11 KB; do podziału na format i walidację).
+- **Duże pliki:** `content-validation.ts`, `views/account.ts`, `learning/reading-format.ts` (~11 KB; do podziału na format i walidację).
 - **Dwa style zapisu:** rozwinięty (wcięcia 4 spacje) i zbity w jednej linii (np. `learning/boards.ts`, `house/layout.ts`); w widokach linie do kilku tysięcy znaków. Brak automatycznego formatowania — wprowadzenie formatera to nowa zależność (zgoda Pauliny) i jednorazowy diff całych plików, osobno od innych zmian.
 - **`any`** pozostaje w `firebase.ts` (`decode`) — dane z Firebase powinny być `unknown` do czasu walidacji.
