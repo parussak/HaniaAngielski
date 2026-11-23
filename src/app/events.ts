@@ -14,7 +14,8 @@ import {bindNavigation} from './navigation.ts';
 import {bindGapDrag} from './gap-drag.ts';
 import {speaker} from '../speech.ts';
 import {bindReadingShortcut} from '../controllers/reading.ts';
-import {bindGrammarSearch} from '../views/grammar-search.ts';
+import {createGrammarSearchController} from '../controllers/grammar-search.ts';
+import {filterGrammarTopics} from '../views/grammar-search.ts';
 interface EventPorts {
     accounts: ReturnType<typeof createAccountController>;
     house: ReturnType<typeof createHouseController>;
@@ -27,7 +28,11 @@ interface EventPorts {
 }
 export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts, learning, house, backups, sync, scheduleSync, scheduleReviewMigration, run }: EventPorts) {
     bindNavigation(state,run);
-    bindGrammarSearch(root, state);
+    const grammarSearch = createGrammarSearchController(state);
+    root.addEventListener('input', ev => {
+        const input = ev.target;
+        if (input instanceof HTMLInputElement && grammarSearch.handleInput(input)) filterGrammarTopics(root, state.grammarQuery);
+    });
     const app = createAppController(state), speech = createSpeechController();
     // Jedyny przełącznik akcji: właściciel (spis w `actions.ts`) wskazuje kontroler. Nieznana nazwa nic nie robi.
     async function action(action: string, el: HTMLElement) {

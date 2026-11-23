@@ -45,7 +45,7 @@ Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zal
 | Podsumowanie zakończonej sesji | `views/summary.ts` |
 | Plansze par i luk, sceny | `views/lesson-activities.ts` |
 | Czytanka i pytanie czytanki poza nią (zdania z `refs`) | `views/reading.ts` |
-| Gramatyka: widok tematów i reguł; wyszukiwarka (zapytanie w stanie przejściowym `grammarQuery`, filtr stosowany po każdym renderze) | `views/grammar.ts`, `views/grammar-search.ts` |
+| Gramatyka: widok tematów i reguł; wyszukiwarka (zapytanie w stanie przejściowym `grammarQuery`; zapisuje je kontroler, widok tylko stosuje filtr do DOM) | `views/grammar.ts`, `views/grammar-search.ts`, `controllers/grammar-search.ts` |
 | Trzy akcje po lekcji, kocie łapki | `views/lesson-summary-actions.ts`, `views/lesson-rating.ts` |
 | Kocie rozmówcy w scenach, przydział kotów | `views/scene-actors.ts`, `cats.ts` |
 | Zaproszenia (rozgrzewka, finał), ekran rozgrzewek, przygotowanie treningu | `views/cat-invitation.ts`, `views/warmup.ts`, `views/training-preparation.ts` |
