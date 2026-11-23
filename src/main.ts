@@ -1,4 +1,5 @@
 import {createHouseController} from './controllers/house.ts';
+import { currentCourse } from './app/selectors.ts';
 import './style.css';
 import './theme.css';
 import './adventure.css';
@@ -59,7 +60,7 @@ const progressService = createProgressController(state, { sync, store: { save, p
 const backups = createBackupController(state, { mutate, getHistoryPage: id => progressService.getHistoryPage(id), saveHistoryPage: putHistoryPage, saveFile: downloadJsonFile, run });
 const courses = createCourseController(state, { read: key => readStored(key), write: writeStored });
 const accounts = createAccountController(state, { sync, scheduleSync, downloadProgress: backups.downloadProgress, run, restoreCourse: courses.restore, firebase: sdk, deadline, isOnline: () => navigator.onLine, confirm: message => window.confirm(message), loadGuestProgress: load, storeUser: user => writeStored('firebase-user', user) });
-const house = createHouseController(state, { mutate });
+const house = createHouseController(state, { mutate, courseId: () => currentCourse(state)!.id });
 const learning = createLearningController(state, { mutate, scheduleReviewMigration, courses });
 function scheduleReviewMigration() { progressService.scheduleReviewMigration(); }
 async function prepareProgress(p: Progress) { return progressService.prepareProgress(p); }

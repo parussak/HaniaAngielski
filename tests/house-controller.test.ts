@@ -1,6 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {AppState} from '../src/app/state.ts';
+import {currentCourse} from '../src/app/selectors.ts';
 import {createHouseController} from '../src/controllers/house.ts';
 import {createLearningController} from '../src/controllers/learning.ts';
 import {creditStars,stars,homeFor} from '../src/house/progress.ts';
@@ -16,7 +17,7 @@ function setup(){
  state.progress.active=makeSession(state.modules,state.selected,'flashcards','text',false,state.progress);
  let saves=0,fail=false;
  const mutate=async(change:(p:Progress)=>void)=>{const draft=structuredClone(state.progress);change(draft);if(fail)throw Error('Zapis niedostępny');state.progress=draft;saves++;};
- return {state,controller:createHouseController(state,{mutate}),mutate,saves:()=>saves,fail:()=>{fail=true;}};
+ return {state,controller:createHouseController(state,{mutate,courseId:()=>currentCourse(state)!.id}),mutate,saves:()=>saves,fail:()=>{fail=true;}};
 }
 
 test('nawigacja domku i wybór dekoracji nie zmieniają aktywnej lekcji ani zapisu',async()=>{
