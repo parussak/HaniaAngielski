@@ -11,6 +11,7 @@ import {currentCourse} from './selectors.ts';
 import {bindNavigation} from './navigation.ts';
 import {bindGapDrag} from './gap-drag.ts';
 import {speaker} from '../speech.ts';
+import {bindReadingShortcut} from '../controllers/reading.ts';
 import {bindGrammarSearch} from '../views/grammar-search.ts';
 interface EventPorts {
     accounts: ReturnType<typeof createAccountController>;
@@ -69,14 +70,7 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
         if (el.dataset.action === 'listen') { if (!speaker().speak(el.dataset.say ?? '', el.dataset.lang, el.dataset.slow === 'true',el.dataset.speechKind==='dialogue'?'dialogue':'word')) void run(async () => {}); return; }
         void run(() => action(el.dataset.action!, el));
     });
-    // D-68: on a computer → works like „Dalej” in a reading, but never while typing.
-    document.addEventListener('keydown', ev => {
-        if (ev.key !== 'ArrowRight' || ev.altKey || ev.ctrlKey || ev.metaKey || ev.shiftKey || (ev.target as HTMLElement | null)?.closest?.('input,textarea,select,[contenteditable]')) return;
-        const step = root.querySelector<HTMLButtonElement>('[data-reading-next]:not([disabled])');
-        if (!step) return;
-        ev.preventDefault();
-        step.click();
-    });
+    bindReadingShortcut(root);
     root.addEventListener('submit', ev => {
         if (accounts.handleSubmit(ev))
             return;
