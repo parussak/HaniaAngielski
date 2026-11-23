@@ -1,64 +1,26 @@
+import {readingTokens,questionGlossaryParts,readingWord} from './reading-words.ts';
 import {normalizeAnswer} from '../answers.ts';
 import {languageCode} from '../materials/validation.ts';
 import type {Exercise,Reading,ReadingQuestion} from './model.ts';
+
+export {readingTokens,readingParts,questionGlossaryParts} from './reading-words.ts';
 
 /**
  * D-68: the authored format of a reading. Authors write the reading once and every
  * question becomes an ordinary choice exercise (`kind: "reading"`), like the gaps of
  * a dialogue scene (D-53). Nothing here knows a course, module or language.
  */
-const fail=(message:string):never=>{throw new Error(`Błąd materiałów: ${message}`);};
-const obj=(v:unknown):v is Record<string,unknown>=>!!v&&typeof v==='object'&&!Array.isArray(v);
-const text=(v:unknown):v is string=>typeof v==='string'&&v.trim().length>0;
-const texts=(v:unknown):v is string[]=>Array.isArray(v)&&v.length>0&&v.every(text);
-const id=(v:unknown):v is string=>typeof v==='string'&&/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(v);
-const language=languageCode;
-const readingIllustration=/^illustrations\/[a-z0-9-]+\.(?:svg|png)$/;
-const word=/[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu;
+export const fail=(message:string):never=>{throw new Error(`Błąd materiałów: ${message}`);};
+export const obj=(v:unknown):v is Record<string,unknown>=>!!v&&typeof v==='object'&&!Array.isArray(v);
+export const text=(v:unknown):v is string=>typeof v==='string'&&v.trim().length>0;
+export const texts=(v:unknown):v is string[]=>Array.isArray(v)&&v.length>0&&v.every(text);
+export const id=(v:unknown):v is string=>typeof v==='string'&&/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(v);
+export const language=languageCode;
+export const readingIllustration=/^illustrations\/[a-z0-9-]+\.(?:svg|png)$/;
+const word=readingWord;
 
 const maxTapOptions=5;
 
-/** Words of a sentence, each once, in reading order. */
-export function readingTokens(sentence:string){
- const seen=new Set<string>(),tokens:string[]=[];
- for(const token of sentence.match(word)??[]){
-  const key=normalizeAnswer(token);
-  if(seen.has(key))continue;
-  seen.add(key);
-  tokens.push(token);
- }
- return tokens;
-}
-/** A sentence cut into words and the text between them, for tappable words on screen. */
-export function readingParts(sentence:string){
- const parts:{text:string;word:boolean}[]=[];
- let last=0;
- for(const match of sentence.matchAll(word)){
-  if(match.index>last)parts.push({text:sentence.slice(last,match.index),word:false});
-  parts.push({text:match[0],word:true});
-  last=match.index+match[0].length;
- }
- if(last<sentence.length)parts.push({text:sentence.slice(last),word:false});
- return parts;
-}
-
-/** Split a prompt at glossary terms, preferring the longest phrase at each position. */
-export function questionGlossaryParts(prompt:string,glossary:Record<string,string>={}){
- const terms=Object.keys(glossary).sort((a,b)=>b.length-a.length);
- const parts:{text:string;term?:string}[]=[];
- if(!terms.length)return [{text:prompt}];
- const byText=new Map(terms.map(term=>[term.toLowerCase(),term]));
- const alternatives=terms.map(term=>term.replace(/[.*+?^{}()|[\]\\]/g,'\\$&')).join('|');
- const pattern=new RegExp('(?<![\\p{L}\\p{M}\\p{N}])(?:'+alternatives+')(?![\\p{L}\\p{M}\\p{N}])','giu');
- let last=0;
- for(const match of prompt.matchAll(pattern)){
-  if(match.index>last)parts.push({text:prompt.slice(last,match.index)});
-  parts.push({text:match[0],term:byText.get(match[0].toLowerCase())});
-  last=match.index+match[0].length;
- }
- if(last<prompt.length)parts.push({text:prompt.slice(last)});
- return parts;
-}
 
 function validQuestionGlossary(prompt:string,glossary:unknown):glossary is Record<string,string>{
  if(!obj(glossary))return false;
@@ -136,24 +98,3 @@ export function compileReading(entry:unknown,metadata:{languageCode?:string}={})
  if(new Set(exercises.map(q=>q.id)).size!==exercises.length)return fail(`${where}: powtórzony identyfikator pytania.`);
  return {reading:{id:entry.id,title:entry.title,...(illustration===undefined?{}:{illustration}),questionLanguage:entry.questionLanguage,sentences:script.map(s=>({id:s.id,text:s.text,translation:s.translation})),...(glossary?{glossary:{...glossary} as Record<string,string>}:{}),questionIds:exercises.map(q=>q.id)},exercises};
 }
-
-/** Structural check of compiled readings; the question exercises are checked like any exercise. */
-export function validateReadings(m:{id:unknown;readings?:unknown;exercises:unknown[]}){
- const exercises=m.exercises as Exercise[];
- if(m.readings!==undefined&&!Array.isArray(m.readings))return fail(`niepoprawna lista czytanek (${m.id}).`);
- const readings=(m.readings??[]) as Reading[];
- if(new Set(readings.map(r=>r?.id)).size!==readings.length)return fail(`powtórzony identyfikator czytanki (${m.id}).`);
- for(const r of readings){
-  if(!obj(r)||!id(r.id)||!text(r.title)||!language(r.questionLanguage)||!Array.isArray(r.sentences)||r.sentences.length<2||!r.sentences.every(s=>obj(s)&&id(s.id)&&text(s.text)&&text(s.translation))||!Array.isArray(r.questionIds)||r.questionIds.length<1||r.questionIds.length>6)return fail(`niepoprawna czytanka (${m.id}/${(r as Reading)?.id??'?'}).`);
-  if(r.illustration!==undefined&&(!text(r.illustration)||!readingIllustration.test(r.illustration)))return fail(`niepoprawna ilustracja czytanki ${r.id}.`);
-  r.questionIds.forEach((questionId,index)=>{
-   const q=exercises.find(q=>q.id===questionId),known=(sentenceId:unknown)=>r.sentences.some(s=>s.id===sentenceId);
-   if(!q||q.kind!=='reading'||q.reading?.id!==r.id||q.reading.question!==index||!known(q.reading.after)||!q.reading.refs.every(known)||q.reading.type==='tap'&&!known(q.reading.sentence))fail(`czytanka ${r.id}: brak zadania dla pytania ${questionId}.`);
-  });
- }
- for(const q of exercises){
-  if((q.kind==='reading')!==(q.reading!==undefined))return fail(`zadanie ${q.id}: pytanie czytanki wymaga rodzaju "reading".`);
-  if(q.reading!==undefined&&readings.find(r=>r.id===q.reading!.id)?.questionIds[q.reading.question]!==q.id)return fail(`zadanie ${q.id} wskazuje nieistniejącą czytankę.`);
- }
-}
-

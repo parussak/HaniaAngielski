@@ -1,7 +1,7 @@
 import type {AppState} from '../app/state.ts';
 import {optionsFor,type Exercise,type Item,type Module,type Session} from '../core.ts';
 import {readingContext,translateInReading,type readingView} from '../learning/readings.ts';
-import {questionGlossaryParts,readingParts} from '../learning/reading-format.ts';
+import {questionGlossaryParts,readingParts} from '../learning/reading-words.ts';
 import {normalizeAnswer} from '../answers.ts';
 import {e,icon} from '../ui.ts';
 

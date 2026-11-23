@@ -6,7 +6,8 @@ import { compileVocabulary } from './materials/vocabulary.ts';
 import { languageCode } from './materials/validation.ts';
 import { wordExplanation } from './materials/presentation.ts';
 import { compileScene, isSceneEntry, validateScenes } from './learning/scenes.ts';
-import { compileReading, validateReadings } from './learning/reading-format.ts';
+import { compileReading } from './learning/reading-format.ts';
+import { validateReadings } from './learning/reading-validation.ts';
 import { rewardRooms } from './house/catalog.ts';
 
 // Opis modułu przed walidacją: pola, z których korzysta składanie. Całość sprawdza dopiero `validateModules`.
