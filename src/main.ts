@@ -17,7 +17,7 @@ import { createBackupController } from './controllers/backup.ts';
 import { type Progress } from './core.ts';
 import { createLearningController } from './controllers/learning.ts';
 import { createProgressController } from './controllers/progress.ts';
-import { putHistoryPage, readStored, writeStored } from './storage.ts';
+import { load, putHistoryPage, readStored, writeStored } from './storage.ts';
 import { downloadJsonFile } from './services/download-file.ts';
 import { createSyncScheduler } from './services/sync-scheduler.ts';
 import { ProgressSync, type AccountCache } from './sync.ts';
@@ -58,7 +58,7 @@ onSpeechChange(() => { if (!state.ready || state.busy) return; const typed = roo
 const progressService = createProgressController(state, { sync, run, render, scheduleSync });
 const backups = createBackupController(state, { mutate, getHistoryPage: id => progressService.getHistoryPage(id), saveHistoryPage: putHistoryPage, saveFile: downloadJsonFile, run });
 const courses = createCourseController(state, { read: key => readStored(key), write: writeStored });
-const accounts = createAccountController(state, { sync, scheduleSync, downloadProgress: backups.downloadProgress, run, restoreCourse: courses.restore });
+const accounts = createAccountController(state, { sync, scheduleSync, downloadProgress: backups.downloadProgress, run, restoreCourse: courses.restore, firebase: sdk, deadline, isOnline: () => navigator.onLine, confirm: message => window.confirm(message), loadGuestProgress: load, storeUser: user => writeStored('firebase-user', user) });
 const house = createHouseController(state, { mutate });
 const learning = createLearningController(state, { mutate, scheduleReviewMigration, courses });
 function scheduleReviewMigration() { progressService.scheduleReviewMigration(); }

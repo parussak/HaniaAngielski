@@ -1,89 +1,131 @@
-import { deadline, sdk } from '../services/firebase-client.ts';
-import { AppState } from '../app/state.ts';
-import { emptyProgress, type Progress } from '../core.ts';
+import type { Backup, Progress, Session } from '../core.ts';
+import { emptyProgress } from '../core.ts';
+import type { Screen } from '../app/state.ts';
 import { firebaseMessage } from '../firebase-errors.ts';
+import type * as FirebaseSdk from '../firebase.ts';
 import type { AccountUser } from '../firebase.ts';
-import { load, writeStored } from '../storage.ts';
-import { ProgressSync, hasProgress } from '../sync.ts';
+import { hasProgress, type ProgressSync } from '../sync.ts';
 import { isOwnedBy, unhandled } from '../app/actions.ts';
+/**
+ * Jedyne, co kontroler konta widzi ze stanu (najwęższy dostęp). Dane postępu (`progress`,
+ * `guestProgress`) zmienia tylko operacja `switchProgress` — przy zmianie konta wczytujemy
+ * inny zapis, to nie jest edycja wyników (te zmienia wyłącznie `mutate` gdzie indziej).
+ * Reszta to stan ekranu konta zmieniany nazwanymi operacjami kontrolera.
+ */
+export interface AccountState {
+    progress: Progress;
+    guestProgress: Progress;
+    user: AccountUser | null;
+    reauthNeeded: boolean;
+    screen: Screen;
+    accountSection: string;
+    registerAccount: boolean;
+    pending: Backup | null;
+    lastSession: Session | null;
+    accountError: string;
+    accountNotice: string;
+    authWorking: boolean;
+}
+type AccountSync = Pick<ProgressSync, 'connect' | 'disconnect' | 'sync' | 'useGuest' | 'dismissGuest' | 'resolve' | 'conflict' | 'cache'>;
+type AccountSdk = Pick<typeof FirebaseSdk, 'login' | 'logout' | 'restoreUser' | 'resetPassword' | 'changeName' | 'changeEmail' | 'changePassword'>;
 interface AccountPorts {
-    sync: ProgressSync;
+    sync: AccountSync;
     scheduleSync: (delay?: number) => void;
     downloadProgress: (p: Progress, suffix?: string) => Promise<void>;
     run: (task: () => Promise<void>) => Promise<void>;
     restoreCourse: () => Promise<void>;
+    /** Usługa Firebase (ładowana leniwie) i limit czasu połączenia. */
+    firebase: () => Promise<AccountSdk>;
+    deadline: <T>(operation: Promise<T>) => Promise<T>;
+    isOnline: () => boolean;
+    /** Pytanie o zgodę (w przeglądarce `window.confirm`). */
+    confirm: (message: string) => boolean;
+    loadGuestProgress: () => Promise<Progress>;
+    storeUser: (user: AccountUser | null) => Promise<void>;
 }
-export function createAccountController(state: AppState, { sync, scheduleSync, downloadProgress, run, restoreCourse }: AccountPorts) {
+export function createAccountController(state: AccountState, { sync, scheduleSync, downloadProgress, run, restoreCourse, firebase, deadline, isOnline, confirm, loadGuestProgress, storeUser }: AccountPorts) {
+    // Każde pole stanu ekranu zmienia jedna nazwana operacja.
+    const showAccount = () => { state.screen = 'account'; };
+    const toggleRegistration = () => { state.registerAccount = !state.registerAccount; };
+    const chooseSection = (section: string) => { state.accountSection = section; };
+    const fail = (error: unknown) => { state.accountError = firebaseMessage(error); };
+    const clearError = () => { state.accountError = ''; };
+    const notify = (message: string) => { state.accountNotice = message; };
+    const clearMessages = () => { clearError(); notify(''); };
+    const setWorking = (working: boolean) => { state.authWorking = working; };
+    const setUser = (account: AccountUser | null) => { state.user = account && { uid: account.uid, email: account.email, displayName: account.displayName ?? null }; };
+    const leaveSession = () => { state.pending = null; state.lastSession = null; };
+    const switchProgress = (progress: Progress, asGuest = false) => {
+        state.progress = progress;
+        if (asGuest)
+            state.guestProgress = structuredClone(progress);
+    };
     async function connectAccount(account: AccountUser) {
         await sync.connect(account.uid, state.guestProgress);
-        state.user = { uid: account.uid, email: account.email, displayName: account.displayName ?? null };
+        setUser(account);
         state.reauthNeeded = false;
-        await writeStored('firebase-user', state.user);
-        state.screen = 'account';
-        state.accountSection = 'name';
+        await storeUser(state.user);
+        showAccount();
+        chooseSection('name');
         state.registerAccount = false;
-        state.progress = structuredClone(sync.cache!.progress);
-        state.pending = null;
-        state.lastSession = null;
+        switchProgress(structuredClone(sync.cache!.progress));
+        leaveSession();
         await restoreCourse();
         scheduleSync(0);
     }
     async function rememberAccount(account: AccountUser) {
         if (!state.user || account.uid !== state.user.uid)
             throw new Error('Konto się zmieniło. Zaloguj się ponownie.');
-        state.user = { uid: account.uid, email: account.email, displayName: account.displayName ?? null };
-        await writeStored('firebase-user', state.user);
+        setUser(account);
+        await storeUser(state.user);
     }
     async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
         if(!isOwnedBy('account',action))return false;
         switch(action){
         case 'account':{
-            state.screen = 'account';
-            state.accountError = '';
+            showAccount();
+            clearError();
             return true;
         }
         case 'auth-toggle':{
-            state.registerAccount = !state.registerAccount;
-            state.accountError = '';
+            toggleRegistration();
+            clearError();
             return true;
         }
         case 'refresh-account':{
-            state.accountError = '';
-            state.accountNotice = '';
+            clearMessages();
             try {
-                if (!navigator.onLine)
+                if (!isOnline())
                     throw new Error('Odświeżenie danych konta wymaga internetu.');
-                const account = await deadline((await sdk()).restoreUser());
+                const account = await deadline((await firebase()).restoreUser());
                 if (!account)
                     throw new Error('Zaloguj się ponownie.');
                 await rememberAccount(account);
-                state.accountNotice = 'Dane konta zostały odświeżone.';
+                notify('Dane konta zostały odświeżone.');
             }
             catch (error) {
-                state.accountError = firebaseMessage(error);
+                fail(error);
             }
             return true;
         }
         case 'logout':case 'switch-account':{
-            state.authWorking = true;
+            setWorking(true);
             try {
-                await (await sdk()).logout();
+                await (await firebase()).logout();
                 await sync.disconnect();
-                await writeStored('firebase-user', null);
-                state.user = null;
+                await storeUser(null);
+                setUser(null);
                 state.reauthNeeded = false;
-                state.progress = await load();
-                state.guestProgress = structuredClone(state.progress);
-                state.pending = null;
-                state.lastSession = null;
+                switchProgress(await loadGuestProgress(), true);
+                leaveSession();
                 await restoreCourse();
-                state.accountNotice = 'Wylogowano. Widoczny jest osobny zapis bez konta; wyniki konta pozostały zachowane.';
+                notify('Wylogowano. Widoczny jest osobny zapis bez konta; wyniki konta pozostały zachowane.');
             }
             catch (error) {
-                state.accountError = firebaseMessage(error);
+                fail(error);
             }
             finally {
-                state.authWorking = false;
+                setWorking(false);
             }
             return true;
         }
@@ -92,7 +134,7 @@ export function createAccountController(state: AppState, { sync, scheduleSync, d
             return true;
         }
         case 'guest-copy':{
-            if (hasProgress(state.progress) && !window.confirm('Postępy z tego urządzenia zastąpią bieżące postępy konta. Zachowamy kopię dotychczasowego zapisu. Kontynuować?'))
+            if (hasProgress(state.progress) && !confirm('Postępy z tego urządzenia zastąpią bieżące postępy konta. Zachowamy kopię dotychczasowego zapisu. Kontynuować?'))
                 return true;
             await sync.useGuest(state.guestProgress);
             scheduleSync(0);
@@ -103,7 +145,7 @@ export function createAccountController(state: AppState, { sync, scheduleSync, d
             return true;
         }
         case 'resolve-local':case 'resolve-cloud':{
-            if (!window.confirm('Wybrany zapis stanie się bieżącym. Druga wersja pozostanie do pobrania jako kopia sprzed zmiany. Kontynuować?'))
+            if (!confirm('Wybrany zapis stanie się bieżącym. Druga wersja pozostanie do pobrania jako kopia sprzed zmiany. Kontynuować?'))
                 return true;
             await sync.resolve(action === 'resolve-local' ? 'local' : 'cloud');
             return true;
@@ -125,37 +167,36 @@ export function createAccountController(state: AppState, { sync, scheduleSync, d
         if (['profile-form', 'email-form', 'password-form'].includes((ev.target as HTMLElement).id)) {
             ev.preventDefault();
             const form = ev.target as HTMLFormElement, kind = form.id;
-            state.accountSection = kind === 'profile-form' ? 'name' : kind === 'email-form' ? 'email' : 'password';
+            chooseSection(kind === 'profile-form' ? 'name' : kind === 'email-form' ? 'email' : 'password');
             const value = (name: string) => (form.elements.namedItem(name) as HTMLInputElement).value;
             const data = kind === 'profile-form' ? { name: value('displayName') } : kind === 'email-form' ? { email: value('email'), password: value('currentPassword') } : { password: value('currentPassword'), next: value('newPassword'), confirm: value('confirmPassword') };
             void run(async () => {
-                state.accountError = '';
-                state.accountNotice = '';
-                state.authWorking = true;
+                clearMessages();
+                setWorking(true);
                 try {
-                    if (!navigator.onLine)
+                    if (!isOnline())
                         throw new Error('Zmiana ustawień konta wymaga internetu. Postępy pozostają zapisane.');
                     if (kind === 'password-form' && data.next !== data.confirm)
                         throw new Error('Nowe hasła nie są takie same. Wpisz je ponownie.');
-                    const firebase = await sdk();
+                    const service = await firebase();
                     if (kind === 'profile-form') {
-                        await rememberAccount(await deadline(firebase.changeName(data.name!, state.user!.uid)));
-                        state.accountNotice = 'Imię zostało zapisane.';
+                        await rememberAccount(await deadline(service.changeName(data.name!, state.user!.uid)));
+                        notify('Imię zostało zapisane.');
                     }
                     else if (kind === 'email-form') {
-                        await deadline(firebase.changeEmail(data.email!, data.password!, state.user!.uid));
-                        state.accountNotice = 'Wysłaliśmy link na nowy adres. Otwórz go, aby potwierdzić zmianę e-maila. Do tego czasu działa dotychczasowy adres.';
+                        await deadline(service.changeEmail(data.email!, data.password!, state.user!.uid));
+                        notify('Wysłaliśmy link na nowy adres. Otwórz go, aby potwierdzić zmianę e-maila. Do tego czasu działa dotychczasowy adres.');
                     }
                     else {
-                        await deadline(firebase.changePassword(data.password!, data.next!, state.user!.uid));
-                        state.accountNotice = 'Hasło zostało zmienione. Przy kolejnym logowaniu użyj nowego hasła.';
+                        await deadline(service.changePassword(data.password!, data.next!, state.user!.uid));
+                        notify('Hasło zostało zmienione. Przy kolejnym logowaniu użyj nowego hasła.');
                     }
                 }
                 catch (error) {
-                    state.accountError = firebaseMessage(error);
+                    fail(error);
                 }
                 finally {
-                    state.authWorking = false;
+                    setWorking(false);
                 }
             });
             return true;
@@ -166,28 +207,27 @@ export function createAccountController(state: AppState, { sync, scheduleSync, d
             const name = (form.elements.namedItem('displayName') as HTMLInputElement | null)?.value ?? '';
             const reset = (ev as SubmitEvent).submitter?.getAttribute('value') === 'reset';
             void run(async () => {
-                state.authWorking = true;
-                state.accountError = '';
-                state.accountNotice = '';
+                setWorking(true);
+                clearMessages();
                 try {
-                    if (!navigator.onLine)
+                    if (!isOnline())
                         throw new Error('Logowanie i odzyskanie hasła wymagają internetu. Możesz wrócić do nauki z lokalnym zapisem.');
-                    const firebase = await sdk();
+                    const service = await firebase();
                     if (reset) {
-                        await deadline(firebase.resetPassword(email));
-                        state.accountNotice = 'Jeśli dla tego adresu dostępne jest odzyskiwanie hasła, otrzymasz wiadomość. Sprawdź też spam.';
+                        await deadline(service.resetPassword(email));
+                        notify('Jeśli dla tego adresu dostępne jest odzyskiwanie hasła, otrzymasz wiadomość. Sprawdź też spam.');
                     }
                     else {
-                        const account = await deadline(firebase.login(email, password, state.registerAccount, name));
+                        const account = await deadline(service.login(email, password, state.registerAccount, name));
                         await connectAccount(account);
-                        state.accountNotice = 'Zalogowano. Postępy bez konta są przechowywane osobno.';
+                        notify('Zalogowano. Postępy bez konta są przechowywane osobno.');
                     }
                 }
                 catch (error) {
-                    state.accountError = firebaseMessage(error);
+                    fail(error);
                 }
                 finally {
-                    state.authWorking = false;
+                    setWorking(false);
                 }
             });
             return true;
