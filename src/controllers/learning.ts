@@ -10,6 +10,7 @@ import {lessonContext} from '../learning/lesson-flow.ts';
 import {createSessionAnswerController} from './session-answers.ts';
 import {createSessionStartController} from './session-start.ts';
 import {createReadingController} from './reading.ts';
+import {isOwnedBy,unhandled} from '../app/actions.ts';
 interface LearningPorts {
     courses: ReturnType<typeof createCourseController>;
     mutate: (change: (p: Progress) => void) => Promise<void>;
@@ -26,22 +27,27 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
         if(context){state.selected=state.modules.find(m=>m.id===context.journey.moduleId)!;state.selectedJourneyKey=journeyKey(context.journey);state.introLessonId=context.lesson.id;state.screen='lesson-intro';}
         else state.screen='study';
     }
+    // Akcje nauki: nawigację obsługuje ten plik, resztę jej właściciele (spis: app/actions.ts).
     async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
-        state.boardError=undefined;
-        if(await answers.handleAction(action,el))return true;
-        if(await reading.handleAction(action,el))return true;
-        if(await starts.handleAction(action,el))return true;
-        if(action==='continue-lesson'){
+        if(isOwnedBy('answers',action))return answers.handleAction(action,el);
+        if(isOwnedBy('reading',action))return reading.handleAction(action,el);
+        if(isOwnedBy('starts',action))return starts.handleAction(action,el);
+        return navigate(action,el);
+    }
+    async function navigate(action: string, el: HTMLElement): Promise<boolean> {
+        if(!isOwnedBy('navigation',action))return false;
+        switch(action){
+        case 'continue-lesson':{
             const active=state.progress.active,j=currentJourney(state);
             if(active?.lesson&&j&&active.lesson.id===`${journeyKey(j)}/${state.introLessonId}`)state.screen='study';
             return true;
         }
-        if(action==='following-lesson'){
+        case 'following-lesson':{
             if(starts.lessonAfterFinished(action))state.screen='lesson-intro';
             return true;
         }
-        if(action==='retry-maps'){window.location.reload();return true;}
-        if(action==='prepare-training'){
+        case 'retry-maps':{window.location.reload();return true;}
+        case 'prepare-training':{
             const j=currentJourney(state),l=j&&lessons(j).find(e=>e.lesson.id===state.introLessonId)?.lesson;
             if(!j||l?.role!=='training'||!unlocked(j,l,state.progress))return true;
             const source=trainingPreparation(state.modules,state.journeys,j,state.progress);
@@ -51,26 +57,26 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             state.selectedJourneyKey=journeyKey(source.journey);
             state.introLessonId=source.lesson.id;state.answerMode='mixed';state.screen='lesson-intro';return true;
         }
-        if(action==='warmup'){state.screen='warmup';return true;}
-        if (action === 'courses') { state.screen = 'courses'; return true; }
-        if (action === 'progress-course') { if (await courses.select(el.dataset.id ?? '')) state.screen = 'progress'; return true; }
-        if (action === 'select-course') { if (await courses.select(el.dataset.id ?? '')) state.screen = 'home'; return true; }
-        if (action === 'resume') { await courses.followSession(); showResume(); return true; }
-        if (action === 'module' || action === 'quick-start') {
+        case 'warmup':{state.screen='warmup';return true;}
+        case 'courses':{ state.screen = 'courses'; return true; }
+        case 'progress-course':{ if (await courses.select(el.dataset.id ?? '')) state.screen = 'progress'; return true; }
+        case 'select-course':{ if (await courses.select(el.dataset.id ?? '')) state.screen = 'home'; return true; }
+        case 'resume':{ await courses.followSession(); showResume(); return true; }
+        case 'module':case 'quick-start':{
             const m = state.modules.find(m => m.id === el.dataset.id);
             if (m) { if (courseKey(m) !== state.selectedCourseId) await courses.select(courseKey(m)); state.selected = m; state.screen = 'setup'; }
             return true;
         }
-        if (action === 'course-practice') { state.screen = 'course-practice'; return true; }
-        if (action === 'grammar') { state.screen = 'grammar'; return true; }
-        if (action === 'grammar-lesson') {
+        case 'course-practice':{ state.screen = 'course-practice'; return true; }
+        case 'grammar':{ state.screen = 'grammar'; return true; }
+        case 'grammar-lesson':{
             const j = state.journeys.find(j => j.moduleId === el.dataset.module && journeyKey(j) === el.dataset.journey), m = state.modules.find(m => m.id === el.dataset.module);
             if (j && m && courseModules(state).includes(m) && lessons(j).some(l => l.lesson.id === el.dataset.id)) {
                 state.selected = m; state.selectedJourneyKey = journeyKey(j); state.introLessonId = el.dataset.id!; state.answerMode = 'mixed'; state.screen = 'lesson-intro';
             }
             return true;
         }
-        if (action === 'next-step') {
+        case 'next-step':{
             await starts.preparePlans();
             const step = getNextStep(state.modules, state.journeys, state.progress, currentCourse(state)?.id);
             state.selected = state.modules.find(m => m.id === step.moduleId) ?? state.selected ?? state.modules[0];
@@ -106,17 +112,17 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             }
             return true;
         }
-        if (action === 'journeys') {
+        case 'journeys':{
             await starts.preparePlans();
             state.screen = 'journeys';
             scheduleReviewMigration();
             return true;
         }
-        if (action === 'module-list') {
+        case 'module-list':{
             state.screen = 'module-list';
             return true;
         }
-        if (action === 'map') {
+        case 'map':{
             const module = state.modules.find(m => m.id === el.dataset.id);
             if (module) { if (courseKey(module) !== state.selectedCourseId) await courses.select(courseKey(module)); state.selected = module; }
             state.selected ??= courseModules(state)[0];
@@ -126,7 +132,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             scheduleReviewMigration();
             return true;
         }
-        if (action === 'open-lesson') {
+        case 'open-lesson':{
             await starts.preparePlans();
             const j = currentJourney(state), l = j && lessons(j).find(l => l.lesson.id === el.dataset.id)?.lesson;
             if (!j || !l || !unlocked(j, l, state.progress)) {
@@ -138,7 +144,8 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
             state.screen = 'lesson-intro';
             return true;
         }
-        return false;
+        default:return unhandled(action);
+        }
     }
     function handleSettingsChange(input:HTMLInputElement){
         if(input.name==='answerMode')state.answerMode=input.value as AppState['answerMode'];

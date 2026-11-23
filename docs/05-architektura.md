@@ -5,7 +5,7 @@ Gdzie w kodzie jest dana odpowiedzialność i jakich granic pilnujemy. Zasady dz
 ## Warstwy i przepływ
 
 ```
-widok (views/) ──data-action──▶ app/events.ts ──▶ kontroler (controllers/)
+widok (views/) ──data-action──▶ app/events.ts ──(właściciel z app/actions.ts)──▶ kontroler (controllers/)
                                                         │
                     logika (learning/, materials/, house/) ◀┤
                                                         ▼
@@ -15,6 +15,7 @@ widok (views/) ──data-action──▶ app/events.ts ──▶ kontroler (con
 ```
 
 - **Widoki** (`src/views/`) renderują stan i przyciski z `data-action`. Nie zapisują wyników i nie zawierają reguł konkretnego języka.
+- **Spis akcji** (`app/actions.ts`): jedyne miejsce z nazwami akcji `data-action` i ich właścicielami (`app`, `speech`, `house`, `account`, `backup`, `navigation`, `starts`, `answers`, `reading`). „Kto obsługuje akcję X?” — wyszukaj `'X'` w tym pliku. Widok buduje atrybut przez `act('X')` lub `button('X', …)` z `ui.ts`, więc nazwa spoza spisu się nie skompiluje. Kontroler najpierw sprawdza `isOwnedBy('<właściciel>', action)`, potem obsługuje swoje akcje wyczerpującym `switch (action)` z `default: return unhandled(action)` — akcja ze spisu bez obsługi też się nie skompiluje. `events.ts` wybiera kontroler według właściciela; nauka (`learning.ts`) przekazuje `starts`, `answers` i `reading` ich kontrolerom. `tests/action-registry.test.ts` pilnuje: jeden właściciel na akcję, kontroler obsługuje dokładnie swoje akcje, widoki nie piszą `data-action=` ręcznie. Dane akcji (`data-*`) są nadal czytane z `el.dataset` w kontrolerze.
 - **Kontrolery** (`src/controllers/`) obsługują akcje, korzystają z logiki i usług przekazanych jako argumenty. Żaden nie importuje `main.ts`.
 - **Logika** (`src/learning/`, `src/materials/`, `src/house/`) to czyste funkcje: bez DOM, Firebase i IndexedDB. Nie zna kursów ani modułów z nazwy (np. Food).
 - **Zmiana wyników** zawsze przechodzi przez `mutate` w `controllers/progress.ts`: praca na kopii, kontrola wersji konta, potwierdzenie zapisu przed aktualizacją interfejsu.
@@ -34,6 +35,8 @@ Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zal
 | Lista ekranów (`screens`), rejestr widoków, nawigacja i cofanie | `app/state.ts`, `app/views.ts`, `app/navigation.ts` |
 | Odświeżanie ekranu, fokus, blokada przy zapisie, przerwanie dźwięku przy zmianie kontekstu | `app/renderer.ts` |
 | Kliknięcia, formularze, przeciąganie słów do luk | `app/events.ts`, `app/gap-drag.ts` |
+| Spis akcji `data-action`, typ `AppAction`, właściciel akcji | `app/actions.ts` |
+| Akcje całej aplikacji (instalacja i aktualizacja PWA, przejście na ekran) i odsłuchanie | `controllers/app.ts`, `controllers/speech.ts` |
 | Selektory stanu (np. bieżąca lekcja) | `app/selectors.ts` |
 | Menu i etykiety mobilne | `views/shell.ts` |
 | Strona startowa, następny krok | `views/home.ts`, `next-step.ts` |
@@ -112,7 +115,7 @@ Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zal
 | Siatka 24 × 15, rozmiary, kolizje, odczyt starych miejsc | `house/layout.ts` |
 | Przeciąganie (Pointer Events, warstwa aplikacji) | `app/house-drag.ts` |
 | Ekran domku, pokój, panel ustawiania | `views/house.ts`, `views/house-room.ts`, `views/house-placement.ts` |
-| Akcje domku (obsługiwane przed innymi kontrolerami) | `controllers/house.ts` |
+| Akcje domku | `controllers/house.ts` |
 
 Szczegóły: [koci domek](koci-domek.md).
 

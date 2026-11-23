@@ -1,6 +1,7 @@
 import type {AppState} from '../app/state.ts';
 import type {Progress} from '../core.ts';
 import {advanceReading,readingOf,readingView} from '../learning/readings.ts';
+import {isOwnedBy,unhandled} from '../app/actions.ts';
 interface ReadingPorts {
     mutate: (change: (p: Progress) => void) => Promise<void>;
 }
@@ -22,7 +23,9 @@ export function bindReadingShortcut(root: HTMLElement) {
  */
 export function createReadingController(state: AppState, { mutate }: ReadingPorts) {
     async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
-        if (action === 'reading-next') {
+        if(!isOwnedBy('reading',action))return false;
+        switch(action){
+        case 'reading-next':{
             const s = state.progress.active, view = s && readingView(state.modules, s, readingShown(state));
             // An open question blocks „Dalej” here too, not only on the button.
             if (!s || !view?.next || view.next === 'finish') return true;
@@ -31,7 +34,7 @@ export function createReadingController(state: AppState, { mutate }: ReadingPort
             state.readingShown = {sessionId: s.id, count: shown};
             return true;
         }
-        if (action === 'reading-peek') {
+        case 'reading-peek':{
             const s = state.progress.active, view = s && readingView(state.modules, s, readingShown(state)), sentence = el.dataset.sentence ?? '';
             if (!s || !view || sentence === view.tapSentence) return true;
             const index = view.reading.sentences.findIndex(x => x.id === sentence);
@@ -40,7 +43,7 @@ export function createReadingController(state: AppState, { mutate }: ReadingPort
             state.readingPeek = same ? undefined : {sessionId: s.id, sentence, ...(word ? {word} : {})};
             return true;
         }
-        if (action === 'reading-question-peek') {
+        case 'reading-question-peek':{
             const s = state.progress.active;
             if (!s) return true;
             const {key,term} = el.dataset, view = readingView(state.modules, s, readingShown(state));
@@ -55,7 +58,8 @@ export function createReadingController(state: AppState, { mutate }: ReadingPort
                 ? undefined : {sessionId:s.id,key,term};
             return true;
         }
-        return false;
+        default:return unhandled(action);
+        }
     }
     return { handleAction };
 }

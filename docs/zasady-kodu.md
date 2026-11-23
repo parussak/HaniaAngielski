@@ -42,7 +42,7 @@ Każda zmiana zasady nauki zaczyna się od decyzji D-xx w [rejestrze](decyzje.md
 1. Nazwa ekranu w liście `screens` w `app/state.ts` — z niej powstaje typ `Screen` i z niej korzysta cofanie w `app/navigation.ts`.
 2. Widok: funkcja w `views/<nazwa>.ts` zwracająca HTML; tekst z danych zawsze przez `e()` z `ui.ts`.
 3. Rejestracja w `views` w `app/views.ts`.
-4. Przyciski z `data-action` i `data-*`; obsługa w `handleAction` właściwego kontrolera (kolejność w `app/events.ts`: domek, nauka, kopia, konto).
+4. Nowa akcja: wpisz nazwę w `app/actions.ts` u właściciela, w widoku użyj `act('nazwa')` albo `button('nazwa', …)` (nigdy ręcznego `data-action=`), a obsługę dodaj jako `case` w `switch (action)` kontrolera tego właściciela. Pominięcie któregokolwiek kroku nie przejdzie kompilacji lub `tests/action-registry.test.ts`.
 5. Test w `tests/browser/` na telefonie 320–430 px; wiersz w [architekturze](05-architektura.md).
 
 ### Nowy rodzaj treści
@@ -57,7 +57,7 @@ Każda zmiana zasady nauki zaczyna się od decyzji D-xx w [rejestrze](decyzje.md
 - **Moduły:** importy z rozszerzeniem `.ts`, tylko eksporty nazwane, bez `export default`. Typy importujemy przez `import type` lub `type X`.
 - **Klasy** tylko tam, gdzie już są (`AppState`, `ProgressSync`, `SyncConflict`). Poza tym funkcje.
 - **Kontrolery** to fabryki `createXController(state, ports)`; zależności w interfejsie `XPorts` (np. `mutate`, `run`, `sync`). Inne części dostają je przez `ReturnType<typeof createXController>`. Kontroler nie importuje `main.ts`.
-- **Akcje:** `handleAction(action, el): Promise<boolean>` — `true`, gdy akcja obsłużona.
+- **Akcje:** `handleAction(action, el): Promise<boolean>` — `true`, gdy akcja obsłużona, `false`, gdy nie jest tego kontrolera. Nazwy akcji i ich właściciele są w `app/actions.ts` (typ `AppAction`); kontroler zaczyna od `isOwnedBy(…)`, obsługuje akcje wyczerpującym `switch (action)` i kończy `default: return unhandled(action)`.
 - **Nazwy:** kod i identyfikatory po angielsku (`camelCase` dla funkcji, `PascalCase` dla typów), pliki `kebab-case.ts`. Tekst dla użytkownika po polsku. Komentarze krótkie, wyjaśniają „dlaczego”, z numerem decyzji, np. `// D-58: …`.
 - **Typy:** `strict` TypeScript. Dane z zewnątrz (pliki, kopia, Firebase) to `unknown` do czasu walidacji. Unikaj `any` i `!` bez pewności.
 - **Błędy — spokojna odmowa czy alarm:**

@@ -3,7 +3,9 @@ import { createAccountController } from '../controllers/account.ts';
 import { AppState } from './state.ts';
 import { createBackupController } from '../controllers/backup.ts';
 import { createLearningController } from '../controllers/learning.ts';
-import { applyUpdate, installPwa, prepareOffline } from '../pwa.ts';
+import { createAppController } from '../controllers/app.ts';
+import { createSpeechController } from '../controllers/speech.ts';
+import { ownerOf, unhandled } from './actions.ts';
 import { ProgressSync } from '../sync.ts';
 import {bindHouseDrag} from './house-drag.ts';
 import {homeFor} from '../house/progress.ts';
@@ -26,33 +28,23 @@ interface EventPorts {
 export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts, learning, house, backups, sync, scheduleSync, scheduleReviewMigration, run }: EventPorts) {
     bindNavigation(state,run);
     bindGrammarSearch(root, state);
+    const app = createAppController(state), speech = createSpeechController();
+    // Jedyny przełącznik akcji: właściciel (spis w `actions.ts`) wskazuje kontroler. Nieznana nazwa nic nie robi.
     async function action(action: string, el: HTMLElement) {
         state.notice = '';
-        if (await house.handleAction(action, el))
-            return;
-        if (await learning.handleAction(action, el))
-            return;
-        if (await backups.handleAction(action, el))
-            return;
-        if (await accounts.handleAction(action, el))
-            return;
-        if (action === 'pwa-install') {
-            await installPwa();
-            return;
-        }
-        if (action === 'pwa-prepare') {
-            await prepareOffline();
-            return;
-        }
-        if (action === 'pwa-update') {
-            if (state.progress.active && !window.confirm('Wczytać nową wersję? Strona zostanie odświeżona, a zapisana sesja pozostanie zachowana.'))
-                return;
-            applyUpdate();
-            return;
-        }
-        if (['home', 'progress', 'backup'].includes(action)) {
-            state.screen = action as 'home' | 'progress' | 'backup';
-            state.pending = null;
+        const owner = ownerOf(action);
+        // Wyczyszczenie błędu planszy dotyczy każdej akcji poza domkiem (tak jak wcześniej, gdy akcje przechodziły przez naukę).
+        if (owner !== 'house')
+            state.boardError = undefined;
+        switch (owner) {
+            case 'house': await house.handleAction(action, el); return;
+            case 'navigation': case 'starts': case 'answers': case 'reading': await learning.handleAction(action, el); return;
+            case 'backup': await backups.handleAction(action, el); return;
+            case 'account': await accounts.handleAction(action, el); return;
+            case 'app': await app.handleAction(action); return;
+            case 'speech': speech.handleAction(action, el); return;
+            case undefined: return;
+            default: unhandled(owner);
         }
     }
     const drag=bindHouseDrag(root,()=>({h:homeFor(state.progress,currentCourse(state)?.id),room:state.chosenRoom,course:currentCourse(state)?.id??'',owner:state.user?.uid??'guest',editing:state.screen==='house'&&state.houseEditing,busy:state.busy,epoch:state.progress}), (id,position,scope)=>{
@@ -67,7 +59,7 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
             return;
         ev.preventDefault();
         // D-58: listening changes no progress, so it neither saves nor redraws — unless sound just failed.
-        if (el.dataset.action === 'listen') { if (!speaker().speak(el.dataset.say ?? '', el.dataset.lang, el.dataset.slow === 'true',el.dataset.speechKind==='dialogue'?'dialogue':'word')) void run(async () => {}); return; }
+        if (ownerOf(el.dataset.action!) === 'speech') { if (!speech.handleAction(el.dataset.action!, el)) void run(async () => {}); return; }
         void run(() => action(el.dataset.action!, el));
     });
     bindReadingShortcut(root);

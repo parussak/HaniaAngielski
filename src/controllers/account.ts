@@ -5,6 +5,7 @@ import { firebaseMessage } from '../firebase-errors.ts';
 import type { AccountUser } from '../firebase.ts';
 import { load, writeStored } from '../storage.ts';
 import { ProgressSync, hasProgress } from '../sync.ts';
+import { isOwnedBy, unhandled } from '../app/actions.ts';
 interface AccountPorts {
     sync: ProgressSync;
     scheduleSync: (delay?: number) => void;
@@ -34,17 +35,19 @@ export function createAccountController(state: AppState, { sync, scheduleSync, d
         await writeStored('firebase-user', state.user);
     }
     async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
-        if (action === 'account') {
+        if(!isOwnedBy('account',action))return false;
+        switch(action){
+        case 'account':{
             state.screen = 'account';
             state.accountError = '';
             return true;
         }
-        if (action === 'auth-toggle') {
+        case 'auth-toggle':{
             state.registerAccount = !state.registerAccount;
             state.accountError = '';
             return true;
         }
-        if (action === 'refresh-account') {
+        case 'refresh-account':{
             state.accountError = '';
             state.accountNotice = '';
             try {
@@ -61,7 +64,7 @@ export function createAccountController(state: AppState, { sync, scheduleSync, d
             }
             return true;
         }
-        if (action === 'logout' || action === 'switch-account') {
+        case 'logout':case 'switch-account':{
             state.authWorking = true;
             try {
                 await (await sdk()).logout();
@@ -84,36 +87,39 @@ export function createAccountController(state: AppState, { sync, scheduleSync, d
             }
             return true;
         }
-        if (action === 'sync-now') {
+        case 'sync-now':{
             await sync.sync();
             return true;
         }
-        if (action === 'guest-copy') {
+        case 'guest-copy':{
             if (hasProgress(state.progress) && !window.confirm('Postępy z tego urządzenia zastąpią bieżące postępy konta. Zachowamy kopię dotychczasowego zapisu. Kontynuować?'))
                 return true;
             await sync.useGuest(state.guestProgress);
             scheduleSync(0);
             return true;
         }
-        if (action === 'guest-skip') {
+        case 'guest-skip':{
             sync.dismissGuest();
             return true;
         }
-        if (action === 'resolve-local' || action === 'resolve-cloud') {
+        case 'resolve-local':case 'resolve-cloud':{
             if (!window.confirm('Wybrany zapis stanie się bieżącym. Druga wersja pozostanie do pobrania jako kopia sprzed zmiany. Kontynuować?'))
                 return true;
             await sync.resolve(action === 'resolve-local' ? 'local' : 'cloud');
             return true;
         }
-        if (action === 'export-cloud') {
+        case 'export-cloud':{
             await downloadProgress(sync.conflict?.remote?.progress ?? emptyProgress(), 'konto');
             return true;
         }
-        if (action === 'export-recovery' && sync.cache?.recovery) {
+        case 'export-recovery': {
+            if (!sync.cache?.recovery)
+                return false;
             await downloadProgress(sync.cache.recovery, 'sprzed-zmiany');
             return true;
         }
-        return false;
+        default:return unhandled(action);
+        }
     }
     function handleSubmit(ev: SubmitEvent): boolean {
         if (['profile-form', 'email-form', 'password-form'].includes((ev.target as HTMLElement).id)) {

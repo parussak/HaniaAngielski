@@ -13,6 +13,7 @@ import {retryAnswer} from '../learning/retry.ts';
 import {continueScene} from '../learning/scenes.ts';
 import {readingOf,readingView} from '../learning/readings.ts';
 import {readingShown} from './reading.ts';
+import {isOwnedBy,unhandled} from '../app/actions.ts';
 interface SessionAnswerPorts {
     mutate: (change: (p: Progress) => void) => Promise<void>;
 }
@@ -20,25 +21,27 @@ interface SessionAnswerPorts {
 // Rozpoczynanie sesji i nawigacja zostają w `learning.ts`.
 export function createSessionAnswerController(state: AppState, { mutate }: SessionAnswerPorts) {
     async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
-        if(action==='pair-answer'){
+        if(!isOwnedBy('answers',action))return false;
+        switch(action){
+        case 'pair-answer':{
             const active=state.progress.active;if(!active?.items[active.index].pairGroup)return true;
             const key=active.pairSelection??active.items[active.index].key,answer=el.dataset.answer??'';
             let ok:boolean|undefined;await mutate(p=>{ok=answerOnBoard(p,state.modules,state.journeys,key,answer);});
             if(ok===false)state.boardError={key,answer};return true;
         }
-        if(action==='gap-place'){
+        case 'gap-place':{
             const key=el.dataset.key??'',answer=el.dataset.answer??state.progress.active?.gapSelection??state.progress.active?.draftAnswer;
             let ok:boolean|undefined;await mutate(p=>{ok=placeGap(p,state.modules,state.journeys,key,answer);});
             if(ok===false)state.boardError={key,answer:answer??''};return true;
         }
-        if(action==='pair-select'||action==='bank-select'){
+        case 'pair-select':case 'bank-select':{
             await mutate(p=>{const s=p.active;if(!s||!['question','retry'].includes(s.phase))return;
                 const current=s.items[s.index];
                 if(action==='pair-select'&&s.phase==='question'&&current.pairGroup&&s.items.slice(s.index).some(i=>i.key===el.dataset.key&&i.pairGroup===current.pairGroup))s.pairSelection=el.dataset.key;
                 if(action==='bank-select'&&current.presentation==='bank'&&gapTokens(state.modules,s).includes(el.dataset.answer??''))s.gapSelection=el.dataset.answer;
             });return true;
         }
-        if (action === 'answer') {
+        case 'answer':{
             const s = state.progress.active;
             if (!s)
                 return true;
@@ -54,15 +57,16 @@ export function createSessionAnswerController(state: AppState, { mutate }: Sessi
             });
             return true;
         }
-        if (action === 'retry') {
+        case 'retry':{
             await mutate(p => {retryAnswer(p,el.dataset.key);});
             return true;
         }
-        if (action === 'next') {
+        case 'next':{
             await finishItem();
             return true;
         }
-        return false;
+        default:return unhandled(action);
+        }
     }
     async function finishItem() {
         const active=state.progress.active,current=active?.items[active.index];

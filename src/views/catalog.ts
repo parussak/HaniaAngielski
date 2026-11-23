@@ -1,21 +1,21 @@
 import { lessons, stars, type Journey, type JourneyIssue } from '../adventure.ts';
 import type { Module, Progress } from '../core.ts';
-import { e, icon } from '../ui.ts';
+import { act, e, icon } from '../ui.ts';
 import { mapProgress,reviewProgressText } from '../learning/map-progress.ts';
 import { journeyKey } from '../adventure.ts';
 function moduleSubtitle(m: Module) { return [m.level, `Moduł ${m.order}`, m.cover].filter(Boolean).map(e).join(' · '); }
 export function journeyList(modules: Module[], journeys: Journey[], progress: Progress,issues:JourneyIssue[]=[],courseId?:string) {
-    return `<button class="back" data-action="home">← Moja nauka</button>
+    return `<button class="back" ${act('home')}>← Moja nauka</button>
     <div class="journey-top">
     <div>
     <div class="eyebrow">MAŁE KROKI, WIELKIE PRZYGODY</div>
     <h1>Twoje kocie przygody</h1>
     </div>
-    <button class="star-wallet" data-action="house" aria-label="Koci domek, ${stars(progress,courseId)} gwiazdek">${stars(progress,courseId)} <span aria-hidden="true">★</span>
+    <button class="star-wallet" ${act('house')} aria-label="Koci domek, ${stars(progress,courseId)} gwiazdek">${stars(progress,courseId)} <span aria-hidden="true">★</span>
     </button>
     </div>
     <p class="lead">Wybierz mapę. Ucz się małymi krokami i zdobywaj gwiazdki do kociego domku.</p>
-    ${modules.filter(m=>issues.some(issue=>issue.moduleId===m.id)).map(m=>`<section class="panel map-load-error" role="status"><h2>Nie wszystkie mapy są dostępne</h2><p>Moduł: ${e(m.name)}. Pozostałe mapy i ćwiczenia możesz nadal otwierać. Zapisane postępy i gwiazdki zostają.</p><button class="secondary" data-action="retry-maps">Spróbuj wczytać mapy ponownie</button></section>`).join('')}
+    ${modules.filter(m=>issues.some(issue=>issue.moduleId===m.id)).map(m=>`<section class="panel map-load-error" role="status"><h2>Nie wszystkie mapy są dostępne</h2><p>Moduł: ${e(m.name)}. Pozostałe mapy i ćwiczenia możesz nadal otwierać. Zapisane postępy i gwiazdki zostają.</p><button class="secondary" ${act('retry-maps')}>Spróbuj wczytać mapy ponownie</button></section>`).join('')}
     <div class="journey-catalog">${journeys.map(j => {
         const m = modules.find(m => m.id === j.moduleId)!;
         const done = lessons(j).filter(l => progress.adventure?.completed[l.key]).length, total = lessons(j).length, reviews = mapProgress(j,progress);
@@ -29,14 +29,14 @@ export function journeyList(modules: Module[], journeys: Journey[], progress: Pr
     </span>
     </div>
     <p class="retention-overview ${reviews.complete?'is-mastered':''}">${e(reviewProgressText(reviews))}</p>
-    <button class="primary" data-action="map" data-id="${e(j.moduleId)}" data-journey="${e(journeyKey(j))}" aria-label="Otwórz mapę ${e(j.title)}">Otwórz mapę ${icon('arrow')}</button>
+    <button class="primary" ${act('map')} data-id="${e(j.moduleId)}" data-journey="${e(journeyKey(j))}" aria-label="Otwórz mapę ${e(j.title)}">Otwórz mapę ${icon('arrow')}</button>
     </div>
     <img src="./illustrations/word-have-a-picnic.svg" alt="" width="110" height="100">
     </article>`;
     }).join('') || '<p class="empty">Nowe przygody pojawią się tutaj, gdy dodamy mapy modułów.</p>'}</div>`;
 }
 export function moduleList(modules: Module[]) {
-    return `<button class="back" data-action="home">← Moja nauka</button>
+    return `<button class="back" ${act('home')}>← Moja nauka</button>
     <h1>Ćwicz po swojemu</h1>
     <p class="lead">Wybierz moduł, a potem fiszki, quiz, gramatykę, rozmówki lub powtórkę.</p>
     <section class="modules-section">
@@ -62,7 +62,7 @@ export function moduleList(modules: Module[]) {
     <div class="topic-tags">${m.topics.map(t => `<span>${e(t)}</span>`).join('')}</div>
     <div class="module-bottom">
     <span>${m.basicFlashcardIds?.length ?? m.words.length} podstawowych / ${m.words.length} wszystkich fiszek <br>${m.exercises.length} zadań</span>
-    <button class="round-button" data-action="module" data-id="${e(m.id)}" aria-label="Otwórz moduł ${e(m.name)}">${icon('arrow')}</button>
+    <button class="round-button" ${act('module')} data-id="${e(m.id)}" aria-label="Otwórz moduł ${e(m.name)}">${icon('arrow')}</button>
     </div>
     </div>
     </article>`).join('')}<article class="coming-card">

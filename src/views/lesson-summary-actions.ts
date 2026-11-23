@@ -3,13 +3,13 @@ import type {Session} from '../learning/model.ts';
 import {followingLesson,lessonContext} from '../learning/lesson-flow.ts';
 import {courseModules} from '../app/selectors.ts';
 import {grammarTopicPool,lessonTopicIds} from '../learning/grammar-topics.ts';
-import {button,e} from '../ui.ts';
+import { act, button,e } from '../ui.ts';
 /** D-74: after a lesson that teaches rules with topics, practise those topics (only tried exercises). */
 function grammarPractice(state:Readonly<AppState>,s:Session,context:ReturnType<typeof lessonContext>){
  const module=state.modules.find(m=>m.id===s.moduleId),anchor=courseModules(state)[0];
  if(!context||!module||!anchor||!courseModules(state).includes(module))return '';
  const topics=lessonTopicIds(module,context.lesson);
- return topics.length&&grammarTopicPool(state.modules,anchor,state.progress,topics).length?`<button class="secondary" data-action="grammar-practice" data-id="${e(topics.join(','))}">Poćwicz gramatykę</button>`:'';
+ return topics.length&&grammarTopicPool(state.modules,anchor,state.progress,topics).length?`<button class="secondary" ${act('grammar-practice')} data-id="${e(topics.join(','))}">Poćwicz gramatykę</button>`:'';
 }
 export function lessonSummaryActions(state:Readonly<AppState>,s:Session){
  const next=followingLesson(state.modules,state.journeys,state.progress,s),replay=lessonContext(state.journeys,state.progress,s);

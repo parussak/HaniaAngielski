@@ -2,7 +2,7 @@ import type { Module } from '../core.ts';
 import { heroArt } from './hero-art.ts';
 import type { NextStep } from '../next-step.ts';
 import type { PwaState } from '../pwa.ts';
-import { button, e, icon } from '../ui.ts';
+import { act, button, e, icon } from '../ui.ts';
 import type { courseWeek } from '../learning/progress-overview.ts';
 import { weekDaysView } from './progress.ts';
 function pwaCard(pwa: PwaState) {
@@ -77,12 +77,12 @@ export function homeView({ name, modules, step, pwa, cat, courseContext = '', we
     <span class="tag">TWOJA JĘZYKOWA PRZYGODA</span>
     <h2>Wielkie rzeczy zaczynają się od małych kroków.</h2>
     <p>Wybierz przygodę, ucz się małymi krokami i zdobywaj gwiazdki do kociego domku.</p>${button('journeys', `Wybierz przygodę ${icon('arrow')}`)}</div>${heroArt()}</section>
-    <section class="practice-entry grammar-entry" data-action="grammar">
+    <section class="practice-entry grammar-entry" ${act('grammar')}>
     <span class="grammar-paw" aria-hidden="true">${icon('paw')}</span>
     <div>
     <h2>Gramatyka</h2>
     <p>Wróć do zasad z Twoich lekcji i poćwicz wybrany temat.</p>
-    <button type="button" class="grammar-open" data-action="grammar" aria-label="Zobacz moje tematy — Otwórz gramatykę">Zobacz moje tematy ${icon('arrow')}</button></div>
+    <button type="button" class="grammar-open" ${act('grammar')} aria-label="Zobacz moje tematy — Otwórz gramatykę">Zobacz moje tematy ${icon('arrow')}</button></div>
     </section>
     <section class="practice-entry">
     <span class="practice-icon" aria-hidden="true">${icon('cards')}</span>

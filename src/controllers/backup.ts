@@ -3,6 +3,7 @@ import { type Backup, type Progress } from '../core.ts';
 import { fullBackup, validateFullBackup } from '../history-backup.ts';
 import { type HistoryPage } from '../history.ts';
 import { putHistoryPage } from '../storage.ts';
+import { isOwnedBy, unhandled } from '../app/actions.ts';
 interface BackupPorts {
     mutate: (change: (p: Progress) => void) => Promise<void>;
     getHistoryPage: (id: string) => Promise<HistoryPage>;
@@ -28,7 +29,10 @@ export function createBackupController(state: AppState, { mutate, getHistoryPage
     }
     async function exportProgress() { await downloadProgress(state.progress); }
     async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
-        if (action === 'older-history') {
+        if (!isOwnedBy('backup', action))
+            return false;
+        switch (action) {
+        case 'older-history': {
             if (!state.olderHead)
                 return true;
             try {
@@ -41,11 +45,15 @@ export function createBackupController(state: AppState, { mutate, getHistoryPage
             }
             return true;
         }
-        if (action === 'export')
+        case 'export':
             await exportProgress();
-        else if (action === 'cancel-import')
+            return true;
+        case 'cancel-import':
             state.pending = null;
-        else if (action === 'confirm-import' && state.pending) {
+            return true;
+        case 'confirm-import': {
+            if (!state.pending)
+                return false;
             const complete = await validateFullBackup(state.pending);
             for (const page of complete.archives ?? [])
                 await putHistoryPage(page);
@@ -54,10 +62,10 @@ export function createBackupController(state: AppState, { mutate, getHistoryPage
             state.pending = null;
             state.storageError = '';
             state.notice = 'Kopia została wczytana. Twoje postępy są już na tym urządzeniu.';
+            return true;
         }
-        else
-            return false;
-        return true;
+        default: return unhandled(action);
+        }
     }
     async function handleChange(ev: Event) {
         const input = ev.target as HTMLInputElement;

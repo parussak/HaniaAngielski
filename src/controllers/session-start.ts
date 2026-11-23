@@ -6,6 +6,7 @@ import { replaceActive, type Progress, type Session } from '../core.ts';
 import { needsSectionPlans, prepareSectionPlans } from '../learning/section-plan.ts';
 import type { Selection, StartInput, StartPlan } from '../learning/start-plan.ts';
 import { planBeginLesson, planLegendary, planLessonAfterFinished, planStageReview, planStageReviewAction } from '../learning/start-lesson-plans.ts';
+import { isOwnedBy, unhandled } from '../app/actions.ts';
 import { planCourseMode, planExtraTraining, planGrammarPractice, planMode, planReadingStart, planRitual } from '../learning/start-practice-plans.ts';
 interface SessionStartPorts {
     mutate: (change: (p: Progress) => void) => Promise<void>;
@@ -73,6 +74,7 @@ export function createSessionStartController(state: AppState, { mutate }: Sessio
         return found;
     }
     async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
+        if (!isOwnedBy('starts', action)) return false;
         const input = startInput, data = el.dataset;
         switch (action) {
             case 'legendary': await applyPlan(planLegendary(input())); return true;
@@ -84,7 +86,7 @@ export function createSessionStartController(state: AppState, { mutate }: Sessio
             case 'extra-training': await applyPlan(planExtraTraining(input(), data)); return true;
             case 'mode': await applyPlan(planMode(input(), data)); return true;
             case 'reading-start': await applyPlan(planReadingStart(input(), data)); return true;
-            default: return false;
+            default: return unhandled(action);
         }
     }
     return { handleAction, preparePlans, openSession, startStageReview, lessonAfterFinished };
