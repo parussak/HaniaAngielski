@@ -1,16 +1,25 @@
 import { journeyKey, lessons, unlocked } from '../adventure.ts';
 import { trainingPreparation } from '../learning/training.ts';
 import { currentJourney, currentCourse, courseModules } from '../app/selectors.ts';
-import { AppState } from '../app/state.ts';
-import { makeSession, type Progress } from '../core.ts';
+import { makeSession, type AnswerMode, type Progress } from '../core.ts';
 import { getNextStep } from '../next-step.ts';
 import type { createCourseController } from './courses.ts';
 import { courseKey } from '../learning/scope.ts';
 import {lessonContext} from '../learning/lesson-flow.ts';
-import {createSessionAnswerController} from './session-answers.ts';
-import {createSessionStartController} from './session-start.ts';
-import {createReadingController} from './reading.ts';
+import {createSessionAnswerController,type AnswerState} from './session-answers.ts';
+import {createSessionStartController,type SessionStartState} from './session-start.ts';
+import {createReadingController,type ReadingState} from './reading.ts';
 import {isOwnedBy,unhandled} from '../app/actions.ts';
+/**
+ * Jedyne, co kontroler nauki widzi ze stanu (najwęższy dostęp): to, czego sam potrzebuje do
+ * nawigacji, oraz wąskie stany kontrolerów, które składa (odpowiedzi, czytanka, start sesji).
+ * Nie zawiera pól domku, konta ani kopii zapasowej.
+ */
+export interface LearningState extends AnswerState, ReadingState, SessionStartState {
+    readonly progress: Progress;
+    // Oba kontrolery liczą zdania czytanki na ekranie; pole jedno, zmienia je kontroler czytanki.
+    readingShown?: ReadingState['readingShown'];
+}
 interface LearningPorts {
     courses: ReturnType<typeof createCourseController>;
     mutate: (change: (p: Progress) => void) => Promise<void>;
@@ -18,7 +27,7 @@ interface LearningPorts {
 }
 // Nawigacja między ekranami nauki. Rozpoczynanie sesji jest w `session-start.ts`,
 // odpowiedzi w trwającej sesji w `session-answers.ts`, „Dalej” w czytance w `reading.ts`.
-export function createLearningController(state: AppState, { mutate, scheduleReviewMigration, courses }: LearningPorts) {
+export function createLearningController(state: LearningState, { mutate, scheduleReviewMigration, courses }: LearningPorts) {
     const answers=createSessionAnswerController(state,{mutate,courseId:()=>currentCourse(state)!.id});
     const reading=createReadingController(state,{mutate});
     const starts=createSessionStartController(state,{mutate});
@@ -148,7 +157,7 @@ export function createLearningController(state: AppState, { mutate, scheduleRevi
         }
     }
     function handleSettingsChange(input:HTMLInputElement){
-        if(input.name==='answerMode')state.answerMode=input.value as AppState['answerMode'];
+        if(input.name==='answerMode')state.answerMode=input.value as AnswerMode;
         if(input.id==='previous')state.previous=input.checked;
     }
     return { handleAction,handleSettingsChange };

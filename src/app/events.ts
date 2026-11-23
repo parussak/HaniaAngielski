@@ -13,6 +13,7 @@ import {currentCourse} from './selectors.ts';
 import {bindNavigation} from './navigation.ts';
 import {bindGapDrag} from './gap-drag.ts';
 import {speaker} from '../speech.ts';
+import { applyUpdate, installPwa, prepareOffline } from '../pwa.ts';
 import {bindReadingShortcut} from '../controllers/reading.ts';
 import {createGrammarSearchController} from '../controllers/grammar-search.ts';
 import {filterGrammarTopics} from '../views/grammar-search.ts';
@@ -33,7 +34,7 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
         const input = ev.target;
         if (input instanceof HTMLInputElement && grammarSearch.handleInput(input)) filterGrammarTopics(root, state.grammarQuery);
     });
-    const app = createAppController(state), speech = createSpeechController();
+    const app = createAppController(state, { confirm: message => window.confirm(message), installPwa, prepareOffline, applyUpdate }), speech = createSpeechController();
     // Jedyny przełącznik akcji: właściciel (spis w `actions.ts`) wskazuje kontroler. Nieznana nazwa nic nie robi.
     async function action(action: string, el: HTMLElement) {
         state.notice = '';

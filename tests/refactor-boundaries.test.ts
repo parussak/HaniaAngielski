@@ -88,3 +88,14 @@ test('wspólne identyfikatory nie zmieniają starej kopii ani walidacji miejsc i
  assert.throws(()=>validateBackup(b));b.progress.adventure.purchases.pillow.slot=null;
  b.progress.adventure.courseHomes={[legacyCourse]:{earned:0,purchases:{}}};assert.throws(()=>validateBackup(b));
 });
+
+// Zasada 5 (docs/zasady-kodu.md): kontroler dostaje wąski interfejs *State, nigdy całe AppState.
+test('żaden kontroler nie importuje AppState — każdy ma własny wąski interfejs stanu',()=>{
+ const dir=new URL('controllers/',src),files=readdirSync(dir).filter(n=>n.endsWith('.ts'));
+ assert.ok(files.length>8);
+ const problems=files.filter(name=>{
+  const source=ts.createSourceFile(name,readFileSync(new URL(name,dir),'utf8'),ts.ScriptTarget.ES2022,true,ts.ScriptKind.TS);
+  return source.statements.some(node=>ts.isImportDeclaration(node)&&ts.isStringLiteral(node.moduleSpecifier)&&node.moduleSpecifier.text.endsWith('app/state.ts')&&/\bAppState\b/.test(node.importClause?.getText()??''));
+ });
+ assert.deepEqual(problems,[]);
+});

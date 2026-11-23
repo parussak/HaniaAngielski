@@ -1,20 +1,38 @@
-import type { Journey } from '../adventure.ts';
+import type { Journey, JourneyIssue } from '../adventure.ts';
 import { journeyKey } from '../adventure.ts';
-import { currentJourney, courseModules } from '../app/selectors.ts';
-import { AppState } from '../app/state.ts';
-import { replaceActive, type Progress, type Session } from '../core.ts';
+import { currentJourney, courseModules, type JourneyScope } from '../app/selectors.ts';
+import type { Screen } from '../app/state.ts';
+import { replaceActive, type AnswerMode, type Mode, type Module, type Progress, type Session } from '../core.ts';
 import { needsSectionPlans, prepareSectionPlans } from '../learning/section-plan.ts';
 import type { Selection, StartInput, StartPlan } from '../learning/start-plan.ts';
 import { planBeginLesson, planLegendary, planLessonAfterFinished, planStageReview, planStageReviewAction } from '../learning/start-lesson-plans.ts';
 import { isOwnedBy, unhandled } from '../app/actions.ts';
 import { planCourseMode, planExtraTraining, planGrammarPractice, planMode, planReadingStart, planRitual } from '../learning/start-practice-plans.ts';
+/**
+ * Jedyne, co kontroler rozpoczynania sesji widzi ze stanu: dane do odczytu (przez planery) oraz
+ * pola wyboru i ekranu, które zmieniają wyłącznie `applySelection`, `applyPlan` i `openSession`.
+ */
+export interface SessionStartState extends JourneyScope {
+    readonly journeyIssues: JourneyIssue[];
+    lastSession: Session | null;
+    selected: Module;
+    selectedJourneyKey: string;
+    introLessonId: string;
+    answerMode: AnswerMode;
+    previous: boolean;
+    mode: Mode;
+    notice: string;
+    lastReward: number;
+    lastStageReward: number;
+    screen: Screen;
+}
 interface SessionStartPorts {
     mutate: (change: (p: Progress) => void) => Promise<void>;
 }
 // Rozpoczynanie sesji. Decyzje (jaka sesja, jaki komunikat) podejmują czyste planery w
 // `learning/start-*-plans.ts`; ta powłoka jako jedyna pyta o zastąpienie sesji i zmienia stan.
 // Nawigacja między ekranami zostaje w `learning.ts`.
-export function createSessionStartController(state: AppState, { mutate }: SessionStartPorts) {
+export function createSessionStartController(state: SessionStartState, { mutate }: SessionStartPorts) {
     async function preparePlans(){
         // Resuming an old session must not change its accompanying saved progress.
         if(state.progress.active)return;

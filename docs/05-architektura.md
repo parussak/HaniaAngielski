@@ -20,7 +20,7 @@ widok (views/) ──data-action──▶ app/events.ts ──(właściciel z ap
 - **Logika** (`src/learning/`, `src/materials/`, `src/house/`) to czyste funkcje: bez DOM, Firebase i IndexedDB. Nie zna kursów ani modułów z nazwy (np. Food).
 - **Zmiana wyników** zawsze przechodzi przez `mutate` w `controllers/progress.ts`: praca na kopii, kontrola wersji konta, potwierdzenie zapisu przed aktualizacją interfejsu.
 - **`main.ts`** tylko uruchamia i łączy części; nie wracamy do umieszczania w nim logiki.
-- **`AppState`** (`app/state.ts`) to stan otwartego interfejsu, nie zapisywany jako całość.
+- **`AppState`** (`app/state.ts`) to stan otwartego interfejsu, nie zapisywany jako całość. Kontrolery go nie importują: każdy przyjmuje własny wąski interfejs `*State` (np. `AppControllerState`, `LearningState`), który `AppState` spełnia strukturalnie; to, co leży poza stanem (potwierdzenie, PWA, zapis), dostaje jako jawne porty. Pilnuje tego `tests/refactor-boundaries.test.ts`.
 - **`src/core.ts`** to wspólny punkt eksportu dla zgodności starszych importów.
 
 Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zależy od modułu map i nagród).
