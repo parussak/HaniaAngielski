@@ -41,6 +41,8 @@ export class AppState {
     previous = false;
     pending: Backup | null = null;
     notice = '';
+    /** Zapytanie z wyszukiwarki gramatyki; nie jest zapisywane. */
+    grammarQuery = '';
     storageError = '';
     busy = false;
     ready = false;

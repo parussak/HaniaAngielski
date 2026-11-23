@@ -1,6 +1,7 @@
 import type { AppState } from '../app/state.ts';
 import { courseModules, currentCourse } from '../app/selectors.ts';
 import { grammarTopics, type GrammarRuleEntry, type GrammarTopicEntry } from '../learning/grammar-topics.ts';
+import { matchesSearch, searchStatus } from '../learning/grammar-search.ts';
 import { targetLanguage } from '../learning/scope.ts';
 import { button, e } from '../ui.ts';
 import { courseContext } from './courses.ts';
@@ -20,10 +21,12 @@ function ruleView(state: Readonly<AppState>, entry: GrammarRuleEntry) {
         ${examples ? `<div class="grammar-examples"><strong>Przykłady</strong><ul lang="${e(targetLanguage(module))}">${examples}</ul></div>` : ''}${lessonLinks(entry)}</section>`;
 }
 
+const searchableText = (entry: GrammarTopicEntry) => [entry.topic.title, entry.topic.summary, ...entry.rules.flatMap(({ rule }) =>
+    [rule.title, rule.explanation, ...rule.examples])].join(' ');
+
 function topicView(state: Readonly<AppState>, entry: GrammarTopicEntry) {
-    const searchableText = [entry.topic.title, entry.topic.summary, ...entry.rules.flatMap(({ rule }) =>
-        [rule.title, rule.explanation, ...rule.examples])].join(' ');
-    return `<details class="panel grammar-topic" data-grammar-text="${e(searchableText)}"><summary><strong>${e(entry.topic.title)}</strong> <span class="muted">${stat(entry.attempts, entry.correct)}</span></summary>${entry.topic.summary ? `<p>${e(entry.topic.summary)}</p>` : ''}${entry.rules.map(r => ruleView(state, r)).join('')}<button class="primary" data-action="grammar-practice" data-id="${e(entry.topic.id)}">Poćwicz ten temat →</button></details>`;
+    const text = searchableText(entry);
+    return `<details class="panel grammar-topic"${matchesSearch(text, state.grammarQuery) ? '' : ' hidden'} data-grammar-text="${e(text)}"><summary><strong>${e(entry.topic.title)}</strong> <span class="muted">${stat(entry.attempts, entry.correct)}</span></summary>${entry.topic.summary ? `<p>${e(entry.topic.summary)}</p>` : ''}${entry.rules.map(r => ruleView(state, r)).join('')}<button class="primary" data-action="grammar-practice" data-id="${e(entry.topic.id)}">Poćwicz ten temat →</button></details>`;
 }
 
 /** D-74: grammar rules of the chosen course, grouped under topics; they appear after the first attempt. */
@@ -34,7 +37,9 @@ export function grammarView(state: Readonly<AppState>, cat: string) {
     if (!course.grammarTopics?.length) return `${head}<p class="course-empty" role="status">Ten kurs nie ma jeszcze zebranych tematów gramatyki.</p>`;
     const topics = grammarTopics(state.modules, anchor, course.grammarTopics, state.journeys, state.progress);
     if (!topics.length) return `${head}<p class="course-empty" role="status">Gdy spróbujesz pierwszych zadań z gramatyki, tutaj pojawią się zasady, które już poznajesz.</p>`;
+    const query = state.grammarQuery;
+    const shown = topics.filter(t => matchesSearch(searchableText(t), query)).length;
     return `${head}<label class="grammar-search">Szukaj w poznanej gramatyce
-        <input type="search" id="grammar-search" placeholder="Temat, zasada lub przykład">
-    </label><p class="grammar-search-status" role="status"></p>${topics.map(t => topicView(state, t)).join('')}`;
+        <input type="search" id="grammar-search" placeholder="Temat, zasada lub przykład" value="${e(query)}">
+    </label><p class="grammar-search-status" role="status">${e(searchStatus(query, shown))}</p>${topics.map(t => topicView(state, t)).join('')}`;
 }
