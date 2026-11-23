@@ -1,12 +1,22 @@
-import type {AppState} from '../app/state.ts';
-import type {Progress} from '../core.ts';
+import type {Module,Progress} from '../core.ts';
 import {advanceReading,readingOf,readingView} from '../learning/readings.ts';
 import {isOwnedBy,unhandled} from '../app/actions.ts';
+/**
+ * Jedyne, co kontroler czytanki widzi ze stanu (najwęższy dostęp). `progress` jest tylko
+ * czytany — zmienia go wyłącznie port `mutate`. Trzy pola `reading*` to stan ekranu.
+ */
+export interface ReadingState {
+    readonly modules: Module[];
+    readonly progress: Pick<Progress, 'active'>;
+    readingShown?: {sessionId:string;count:number};
+    readingPeek?: {sessionId:string;sentence:string;word?:string};
+    readingQuestionPeek?: {sessionId:string;key:string;term:string};
+}
 interface ReadingPorts {
     mutate: (change: (p: Progress) => void) => Promise<void>;
 }
 /** The screen's own sentence counter for the active reading, if it belongs to this session. */
-export const readingShown=(state:Readonly<AppState>)=>state.progress.active&&state.readingShown?.sessionId===state.progress.active.id?state.readingShown.count:undefined;
+export const readingShown=(state:Pick<ReadingState,'progress'|'readingShown'>)=>state.progress.active&&state.readingShown?.sessionId===state.progress.active.id?state.readingShown.count:undefined;
 /** D-68: on a computer → works like „Dalej” in a reading, but never while typing. */
 export function bindReadingShortcut(root: HTMLElement) {
     document.addEventListener('keydown', ev => {
@@ -21,7 +31,17 @@ export function bindReadingShortcut(root: HTMLElement) {
  * D-68: „Dalej” in a reading and tap translations. A new sentence and a preview are
  * screen state only; moving to the next question is the one change that is saved.
  */
-export function createReadingController(state: AppState, { mutate }: ReadingPorts) {
+export function createReadingController(state: ReadingState, { mutate }: ReadingPorts) {
+    // Każde pole stanu ekranu zmienia dokładnie jedna nazwana operacja.
+    const showSentences = (sessionId: string, count: number) => { state.readingShown = {sessionId, count}; };
+    const togglePeek = (sessionId: string, sentence: string, word?: string) => {
+        const same = state.readingPeek?.sessionId === sessionId && state.readingPeek.sentence === sentence && state.readingPeek.word === word;
+        state.readingPeek = same ? undefined : {sessionId, sentence, ...(word ? {word} : {})};
+    };
+    const toggleQuestionPeek = (sessionId: string, key: string, term: string) => {
+        const peek = state.readingQuestionPeek;
+        state.readingQuestionPeek = peek?.sessionId === sessionId && peek.key === key && peek.term === term ? undefined : {sessionId, key, term};
+    };
     async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
         if(!isOwnedBy('reading',action))return false;
         switch(action){
@@ -31,7 +51,7 @@ export function createReadingController(state: AppState, { mutate }: ReadingPort
             if (!s || !view?.next || view.next === 'finish') return true;
             const {advance, shown} = view.next;
             if (advance) await mutate(p => { advanceReading(p, state.modules); });
-            state.readingShown = {sessionId: s.id, count: shown};
+            showSentences(s.id, shown);
             return true;
         }
         case 'reading-peek':{
@@ -39,8 +59,7 @@ export function createReadingController(state: AppState, { mutate }: ReadingPort
             if (!s || !view || sentence === view.tapSentence) return true;
             const index = view.reading.sentences.findIndex(x => x.id === sentence);
             if (index < 0 || index >= view.visible) return true;
-            const word = el.dataset.word || undefined, same = state.readingPeek?.sessionId === s.id && state.readingPeek.sentence === sentence && state.readingPeek.word === word;
-            state.readingPeek = same ? undefined : {sessionId: s.id, sentence, ...(word ? {word} : {})};
+            togglePeek(s.id, sentence, el.dataset.word || undefined);
             return true;
         }
         case 'reading-question-peek':{
@@ -53,9 +72,7 @@ export function createReadingController(state: AppState, { mutate }: ReadingPort
                 : current?.key === key && current ? readingOf(state.modules, current)?.question : undefined;
             const glossary = question?.reading?.glossary;
             if (!key || !term || !glossary || !Object.hasOwn(glossary, term)) return true;
-            const peek = state.readingQuestionPeek;
-            state.readingQuestionPeek = peek?.sessionId === s.id && peek.key === key && peek.term === term
-                ? undefined : {sessionId:s.id,key,term};
+            toggleQuestionPeek(s.id, key, term);
             return true;
         }
         default:return unhandled(action);
