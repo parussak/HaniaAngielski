@@ -77,7 +77,7 @@ test('niepełny katalog nie zamyka migracji starych błędów ani nie rozlicza p
  const state=new AppState();state.modules=modules;state.journeys=[first];state.journeyIssues=[{moduleId:m.id,path:paths[1]}];
  const p=emptyProgress();p.adventure=freshAdventure();p.adventure.earned=15;
  for(const l of first.stages[0].lessons)p.adventure.completed[`${m.id}/${l.id}`]={at};
- const ports={sync:{} as ProgressSync,run:async(task:()=>Promise<void>)=>task(),render:()=>{},scheduleSync:()=>{}};
+ const ports={sync:{} as ProgressSync,store:{save:async()=>{},putHistoryPage:async()=>{},localHistoryPage:async()=>undefined},isOnline:()=>true,fetchHistoryPage:async()=>{throw new Error('brak');},run:async(task:()=>Promise<void>)=>task(),render:()=>{},scheduleSync:()=>{}};
  const controller=createProgressController(state,ports),before=structuredClone(p);
  const partial=await controller.prepareProgress(p);assert.deepEqual(partial,before);
  state.journeys=[first,second];state.journeyIssues=[];

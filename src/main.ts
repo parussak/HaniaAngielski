@@ -17,7 +17,7 @@ import { createBackupController } from './controllers/backup.ts';
 import { type Progress } from './core.ts';
 import { createLearningController } from './controllers/learning.ts';
 import { createProgressController } from './controllers/progress.ts';
-import { load, putHistoryPage, readStored, writeStored } from './storage.ts';
+import { load, localHistoryPage, putHistoryPage, readStored, save, writeStored } from './storage.ts';
 import { downloadJsonFile } from './services/download-file.ts';
 import { createSyncScheduler } from './services/sync-scheduler.ts';
 import { ProgressSync, type AccountCache } from './sync.ts';
@@ -55,7 +55,7 @@ const renderScreen = createViews(state, sync, syncLabel);
 const renderer = createRenderer(root, state, renderScreen);
 // D-58: voices can appear late or sound can fail; redraw so a task moves between listening and its ordinary form.
 onSpeechChange(() => { if (!state.ready || state.busy) return; const typed = root.querySelector<HTMLInputElement>('#answer')?.value; renderer.render(); const input = root.querySelector<HTMLInputElement>('#answer'); if (input && typed) input.value = typed; });
-const progressService = createProgressController(state, { sync, run, render, scheduleSync });
+const progressService = createProgressController(state, { sync, store: { save, putHistoryPage, localHistoryPage }, run, render, scheduleSync, isOnline: () => navigator.onLine, fetchHistoryPage: async (uid, id) => deadline((await sdk()).fetchHistoryPage(uid, id)) });
 const backups = createBackupController(state, { mutate, getHistoryPage: id => progressService.getHistoryPage(id), saveHistoryPage: putHistoryPage, saveFile: downloadJsonFile, run });
 const courses = createCourseController(state, { read: key => readStored(key), write: writeStored });
 const accounts = createAccountController(state, { sync, scheduleSync, downloadProgress: backups.downloadProgress, run, restoreCourse: courses.restore, firebase: sdk, deadline, isOnline: () => navigator.onLine, confirm: message => window.confirm(message), loadGuestProgress: load, storeUser: user => writeStored('firebase-user', user) });

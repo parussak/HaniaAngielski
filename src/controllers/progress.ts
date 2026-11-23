@@ -1,23 +1,60 @@
 import {homeFor,settleHouseUnlocks} from '../house/progress.ts';
-import { deadline, sdk } from '../services/firebase-client.ts';
-import { AppState } from '../app/state.ts';
-import { type Progress } from '../core.ts';
+import type { Screen } from '../app/state.ts';
+import type { Journey, JourneyIssue } from '../adventure.ts';
+import type { Module, Progress } from '../core.ts';
+import type { AccountUser } from '../firebase.ts';
 import { checkPage, compactHistory, type HistoryPage } from '../history.ts';
 import { seedReviewArchive, seedStageReviews, settleStageRewards } from '../stage-review.ts';
-import { localHistoryPage, putHistoryPage, save } from '../storage.ts';
-import { ProgressSync } from '../sync.ts';
+import type { ProgressSync } from '../sync.ts';
+/**
+ * Jedyne, co kontroler postępu widzi ze stanu (najwęższy dostęp). Wyniki dziecka (`progress`,
+ * `guestProgress`, `storageError`) zmienia wyłącznie `commitSaved` po udanym zapisie; komunikat
+ * po migracji — `announce`. Pozostałe pola kontroler tylko czyta.
+ */
+export interface ProgressState {
+    progress: Progress;
+    guestProgress: Progress;
+    storageError: string;
+    notice: string;
+    readonly journeys: Journey[];
+    readonly journeyIssues: JourneyIssue[];
+    readonly modules: Module[];
+    readonly selectedCourseId: string;
+    readonly user: AccountUser | null;
+    readonly ready: boolean;
+    readonly busy: boolean;
+    readonly screen: Screen;
+}
+/** Magazyn lokalny (IndexedDB) jako port — kontroler nie zna storage.ts. */
+interface ProgressStore {
+    save: (p: Progress) => Promise<void>;
+    putHistoryPage: (page: HistoryPage) => Promise<void>;
+    localHistoryPage: (id: string) => Promise<HistoryPage | undefined>;
+}
 interface ProgressPorts {
-    sync: ProgressSync;
+    sync: Pick<ProgressSync, 'save' | 'cache'>;
+    store: ProgressStore;
     run: (task: () => Promise<void>) => Promise<void>;
     render: () => void;
     scheduleSync: (delay?: number) => void;
+    isOnline: () => boolean;
+    /** Pobranie strony historii z konta (z limitem czasu). */
+    fetchHistoryPage: (uid: string, id: string) => Promise<HistoryPage>;
 }
-export function createProgressController(state: AppState, { sync, run, render, scheduleSync }: ProgressPorts) {
+export function createProgressController(state: ProgressState, { sync, store, run, render, scheduleSync, isOnline, fetchHistoryPage }: ProgressPorts) {
     let reviewMigrationTimer: ReturnType<typeof setTimeout> | undefined;
     let reviewMigrationWorking = false;
+    function announce(text: string) { state.notice = text; }
+    /** Jedyne miejsce, w którym zapisany postęp trafia do stanu ekranu (po udanym zapisie). */
+    function commitSaved(p: Progress, guest: boolean) {
+        if (guest)
+            state.guestProgress = structuredClone(p);
+        state.progress = p;
+        state.storageError = '';
+    }
     async function prepareProgress(p: Progress) {
         // Do not finish historical migration or settle bonuses against a partial catalog.
-        const prepared = await compactHistory(state.journeyIssues.length?p:seedStageReviews(p, state.journeys), putHistoryPage);
+        const prepared = await compactHistory(state.journeyIssues.length?p:seedStageReviews(p, state.journeys), store.putHistoryPage);
         if(!state.journeyIssues.length)settleStageRewards(prepared, state.journeys,undefined,state.modules);
         settleHouseUnlocks(prepared,state.modules,state.journeys,state.journeyIssues);
         return prepared;
@@ -48,13 +85,13 @@ export function createProgressController(state: AppState, { sync, run, render, s
                     const earned = homeFor(state.progress,state.selectedCourseId)?.earned ?? 0;
                     await mutate(p => { seedReviewArchive(p, page, state.journeys); });
                     if ((homeFor(state.progress,state.selectedCourseId)?.earned ?? 0) > earned)
-                        state.notice = 'Dawne lekcje uwzględnione. Gwiazdki za domknięte etapy są już w portfelu.';
+                        announce('Dawne lekcje uwzględnione. Gwiazdki za domknięte etapy są już w portfelu.');
                 });
                 again = true;
             }
             catch {
                 if ((state.screen === 'map' || state.screen === 'journeys') && (state.user?.uid ?? 'guest') === owner) {
-                    state.notice = 'Starsze błędy doliczymy po pobraniu historii. Połącz się z internetem; bieżące ćwiczenia i zapis działają.';
+                    announce('Starsze błędy doliczymy po pobraniu historii. Połącz się z internetem; bieżące ćwiczenia i zapis działają.');
                     render();
                 }
             }
@@ -66,12 +103,12 @@ export function createProgressController(state: AppState, { sync, run, render, s
         }, 300);
     }
     async function getHistoryPage(id: string): Promise<HistoryPage> {
-        const local = await localHistoryPage(id);
+        const local = await store.localHistoryPage(id);
         if (local)
             return checkPage(local);
-        if (!state.user || !navigator.onLine)
+        if (!state.user || !isOnline())
             throw new Error('Ta część historii nie jest jeszcze pobrana. Połącz się z internetem i otwórz ją lub zapisz pełną kopię. Bieżące wyniki są bezpieczne.');
-        return deadline((await sdk()).fetchHistoryPage(state.user.uid, id));
+        return fetchHistoryPage(state.user.uid, id);
     }
     async function mutate(change: (p: Progress) => void) {
         const expectedVersion = sync.cache?.localVersion;
@@ -80,14 +117,13 @@ export function createProgressController(state: AppState, { sync, run, render, s
         if (state.user) {
             await sync.save(draft, expectedVersion);
             draft = structuredClone(sync.cache!.progress);
+            commitSaved(draft, false);
         }
         else {
             draft = await prepareProgress(draft);
-            await save(draft);
-            state.guestProgress = structuredClone(draft);
+            await store.save(draft);
+            commitSaved(draft, true);
         }
-        state.progress = draft;
-        state.storageError = '';
         scheduleSync();
     }
     return { prepareProgress, scheduleReviewMigration, getHistoryPage, mutate };
