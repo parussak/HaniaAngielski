@@ -19,7 +19,7 @@ interface LearningPorts {
 // Nawigacja między ekranami nauki. Rozpoczynanie sesji jest w `session-start.ts`,
 // odpowiedzi w trwającej sesji w `session-answers.ts`, „Dalej” w czytance w `reading.ts`.
 export function createLearningController(state: AppState, { mutate, scheduleReviewMigration, courses }: LearningPorts) {
-    const answers=createSessionAnswerController(state,{mutate});
+    const answers=createSessionAnswerController(state,{mutate,courseId:()=>currentCourse(state)!.id});
     const reading=createReadingController(state,{mutate});
     const starts=createSessionStartController(state,{mutate});
     function showResume(){

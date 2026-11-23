@@ -3,23 +3,50 @@ import {mapRoom} from '../house/rewards.ts';
 import {lessonContext} from '../learning/lesson-flow.ts';
 import {homeFor,settleHouseUnlocks} from '../house/progress.ts';
 import { rewardCompletion } from '../adventure.ts';
-import { currentCourse } from '../app/selectors.ts';
-import type { AppState } from '../app/state.ts';
-import { next, questionFor, recordAnswer, type Progress } from '../core.ts';
+import type { Journey, JourneyIssue } from '../adventure.ts';
+import type { Screen } from '../app/state.ts';
+import { next, questionFor, recordAnswer, type Module, type Progress, type Session } from '../core.ts';
 import { recordStageError } from '../stage-review.ts';
 import {finishRetention,rememberError} from '../learning/retention.ts';
 import {answerOnBoard,gapTokens,placeGap,closeBoard,boardReady} from '../learning/boards.ts';
 import {retryAnswer} from '../learning/retry.ts';
 import {continueScene} from '../learning/scenes.ts';
 import {readingOf,readingView} from '../learning/readings.ts';
-import {readingShown} from './reading.ts';
+import {readingShown,type ReadingState} from './reading.ts';
 import {isOwnedBy,unhandled} from '../app/actions.ts';
+/**
+ * Jedyne, co kontroler odpowiedzi widzi ze stanu (najwęższy dostęp). Dane postępu (`progress`)
+ * zmienia wyłącznie port `mutate`; kontroler je tylko czyta. Pola stanu ekranu zmieniają
+ * nazwane operacje kontrolera (`showBoardError`, `resetRewards`, `showSummary`).
+ */
+export interface AnswerState {
+    readonly progress: Progress;
+    readonly modules: Module[];
+    readonly journeys: Journey[];
+    readonly journeyIssues: JourneyIssue[];
+    readonly readingShown?: ReadingState['readingShown'];
+    // Stan ekranu.
+    boardError?: {key:string;answer:string;keys?:string[]};
+    roomDiscovery?: {session:string;room:string};
+    lastReward: number;
+    lastStageReward: number;
+    lastSession: Session | null;
+    screen: Screen;
+}
 interface SessionAnswerPorts {
     mutate: (change: (p: Progress) => void) => Promise<void>;
+    /** Identyfikator bieżącego kursu (jego portfel gwiazdek). */
+    courseId: () => string;
 }
 // Akcje w trwającej sesji: odpowiedzi, plansze par i luk, poprawka i przejście dalej z nagrodą.
 // Rozpoczynanie sesji i nawigacja zostają w `learning.ts`.
-export function createSessionAnswerController(state: AppState, { mutate }: SessionAnswerPorts) {
+export function createSessionAnswerController(state: AnswerState, { mutate, courseId }: SessionAnswerPorts) {
+    // Każde pole stanu ekranu zmienia dokładnie jedna nazwana operacja.
+    const showBoardError = (key: string, answer: string) => { state.boardError = {key, answer}; };
+    const resetRewards = () => { state.lastReward = 0; state.lastStageReward = 0; };
+    const showSummary = (session: Session, reward: number, stageReward: number, room?: {session:string;room:string}) => {
+        state.roomDiscovery = room; state.lastReward = reward; state.lastStageReward = stageReward; state.lastSession = session; state.screen = 'summary';
+    };
     async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
         if(!isOwnedBy('answers',action))return false;
         switch(action){
@@ -27,12 +54,12 @@ export function createSessionAnswerController(state: AppState, { mutate }: Sessi
             const active=state.progress.active;if(!active?.items[active.index].pairGroup)return true;
             const key=active.pairSelection??active.items[active.index].key,answer=el.dataset.answer??'';
             let ok:boolean|undefined;await mutate(p=>{ok=answerOnBoard(p,state.modules,state.journeys,key,answer);});
-            if(ok===false)state.boardError={key,answer};return true;
+            if(ok===false)showBoardError(key,answer);return true;
         }
         case 'gap-place':{
             const key=el.dataset.key??'',answer=el.dataset.answer??state.progress.active?.gapSelection??state.progress.active?.draftAnswer;
             let ok:boolean|undefined;await mutate(p=>{ok=placeGap(p,state.modules,state.journeys,key,answer);});
-            if(ok===false)state.boardError={key,answer:answer??''};return true;
+            if(ok===false)showBoardError(key,answer??'');return true;
         }
         case 'pair-select':case 'bank-select':{
             await mutate(p=>{const s=p.active;if(!s||!['question','retry'].includes(s.phase))return;
@@ -74,10 +101,9 @@ export function createSessionAnswerController(state: AppState, { mutate }: Sessi
         // D-68: a reading ends only after its last sentence and question.
         const reading=active&&readingView(state.modules,active,readingShown(state));
         if(reading&&reading.next!=='finish')return;
-        const rewardCourse=currentCourse(state)!.id;
+        const rewardCourse=courseId();
         const earned = homeFor(state.progress,rewardCourse)?.earned ?? 0, bonuses = Object.values(state.progress.adventure?.stageReviews ?? {}).filter(r => r.rewardedAt).length;
-        state.lastReward = 0;
-        state.lastStageReward = 0;
+        resetRewards();
         const unlockedRooms:string[]=[];
         await mutate(p => { closeBoard(p,state.modules,state.journeys);if (p.active?.phase === 'feedback') {
             const finished = p.active;
@@ -94,11 +120,10 @@ export function createSessionAnswerController(state: AppState, { mutate }: Sessi
             const session=state.progress.sessions.at(-1)!;
             const context=session.lesson&&lessonContext(state.journeys,state.progress,session);
             const room=context&&mapRoom(context.journey);
-            state.roomDiscovery=room&&unlockedRooms.includes(room.id)?{session:session.id,room:room.id}:undefined;
-            state.lastReward = (homeFor(state.progress,rewardCourse)?.earned ?? 0) - earned;
-            state.lastStageReward = (Object.values(state.progress.adventure?.stageReviews ?? {}).filter(r => r.rewardedAt).length - bonuses) * rewardStars.stageMastery;
-            state.lastSession = state.progress.sessions.at(-1)!;
-            state.screen = 'summary';
+            showSummary(session,
+                (homeFor(state.progress,rewardCourse)?.earned ?? 0) - earned,
+                (Object.values(state.progress.adventure?.stageReviews ?? {}).filter(r => r.rewardedAt).length - bonuses) * rewardStars.stageMastery,
+                room&&unlockedRooms.includes(room.id)?{session:session.id,room:room.id}:undefined);
         }
     }
     return { handleAction };
