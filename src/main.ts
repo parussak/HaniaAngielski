@@ -17,7 +17,8 @@ import { createBackupController } from './controllers/backup.ts';
 import { type Progress } from './core.ts';
 import { createLearningController } from './controllers/learning.ts';
 import { createProgressController } from './controllers/progress.ts';
-import { readStored, writeStored } from './storage.ts';
+import { putHistoryPage, readStored, writeStored } from './storage.ts';
+import { downloadJsonFile } from './services/download-file.ts';
 import { createSyncScheduler } from './services/sync-scheduler.ts';
 import { ProgressSync, type AccountCache } from './sync.ts';
 import { createCourseController } from './controllers/courses.ts';
@@ -55,7 +56,7 @@ const renderer = createRenderer(root, state, renderScreen);
 // D-58: voices can appear late or sound can fail; redraw so a task moves between listening and its ordinary form.
 onSpeechChange(() => { if (!state.ready || state.busy) return; const typed = root.querySelector<HTMLInputElement>('#answer')?.value; renderer.render(); const input = root.querySelector<HTMLInputElement>('#answer'); if (input && typed) input.value = typed; });
 const progressService = createProgressController(state, { sync, run, render, scheduleSync });
-const backups = createBackupController(state, { mutate, getHistoryPage: id => progressService.getHistoryPage(id), run });
+const backups = createBackupController(state, { mutate, getHistoryPage: id => progressService.getHistoryPage(id), saveHistoryPage: putHistoryPage, saveFile: downloadJsonFile, run });
 const courses = createCourseController(state, { read: key => readStored(key), write: writeStored });
 const accounts = createAccountController(state, { sync, scheduleSync, downloadProgress: backups.downloadProgress, run, restoreCourse: courses.restore });
 const house = createHouseController(state, { mutate });
