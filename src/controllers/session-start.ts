@@ -10,7 +10,7 @@ import { makeCoursePracticeSession, type CoursePracticeMode } from '../learning/
 import { makeGrammarTopicSession } from '../learning/grammar-topics.ts';
 import {followingLesson,lessonContext,legendarySession} from '../learning/lesson-flow.ts';
 import {varyLesson} from '../learning/lesson-variety.ts';
-import {makeReadingSession} from '../learning/readings.ts';
+import {planReadingStart, type StartInput, type StartPlan} from '../learning/start-plan.ts';
 interface SessionStartPorts {
     mutate: (change: (p: Progress) => void) => Promise<void>;
 }
@@ -33,6 +33,19 @@ export function createSessionStartController(state: AppState, { mutate }: Sessio
             state.lastStageReward = 0;
         }
         state.screen = 'study';
+    }
+    /** Dane dla planerów: wycinek stanu do odczytu, bez samego `state`. */
+    function startInput(): StartInput {
+        return { courseModules: courseModules(state), modules: state.modules, selectedModuleId: state.selected?.id, progress: state.progress };
+    }
+    /** Jedyne miejsce, w którym plan zmienia stan: powiadomienie, pytanie o zastąpienie, wybór, otwarcie sesji. */
+    async function applyPlan(plan: StartPlan) {
+        if (plan.kind === 'ignore') return;
+        if (plan.kind === 'notice') { state.notice = plan.text; return; }
+        if (!confirmReplacement(plan.confirm)) return;
+        if (plan.select) state.selected = plan.select;
+        if (plan.mode) state.mode = plan.mode;
+        await openSession(plan.session, plan.resetRewards);
     }
     async function startStageReview(j: Journey, stage: Journey['stages'][number]) {
         if (state.progress.active?.stageReview?.id === `${journeyKey(j)}/${stage.id}`) {
@@ -148,14 +161,8 @@ export function createSessionStartController(state: AppState, { mutate }: Sessio
             await openSession(session, false);
             return true;
         }
-        // D-68: „Czytanki” — a reading the learner already met on a map, read again whole.
         if (action === 'reading-start') {
-            const m = courseModules(state).find(m => m.id === (el.dataset.module ?? state.selected?.id));
-            const session = m && makeReadingSession(state.modules, m, el.dataset.id ?? '', state.progress);
-            if (!m || !session) { state.notice = 'Tę czytankę poznasz najpierw na mapie. Potem możesz ją tu przeczytać ponownie.'; return true; }
-            if (!confirmReplacement('Rozpocząć czytankę zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.')) return true;
-            state.selected = m; state.mode = 'reading';
-            await openSession(session, false);
+            await applyPlan(planReadingStart(startInput(), el.dataset));
             return true;
         }
         return false;
