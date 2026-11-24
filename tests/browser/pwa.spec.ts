@@ -48,7 +48,7 @@ test('PWA: manifest, ikony i zimny start bez sieci; fiszki, quiz, gramatyka i wz
   offline.once('dialog',d=>d.accept());await openStageReview(offline);await expect(offline.locator('.review-meter')).toHaveCount(0);
   await expect(offline.locator('.option')).toHaveCount(0);await offline.getByRole('textbox').fill('apple');await offline.getByRole('button',{name:/Sprawdź/}).tap();await offline.getByRole('button',{name:/Dalej/}).tap();await expect(offline.getByRole('heading',{name:'Kocia rozgrzewka ukończona!',exact:true})).toBeVisible();
   await offline.reload();await openMap(offline);await openStageReview(offline);await expect(offline.getByRole('textbox')).toBeVisible();
-  await offline.getByRole('button',{name:'Domek',exact:true}).tap();await expect(offline.locator('.room-background')).toHaveJSProperty('complete',true);
+  await offline.getByRole('button',{name:'Domek',exact:true}).tap();await offline.getByRole('button',{name:'Koci salonik',exact:true}).tap();await expect(offline.locator('.room-background')).toHaveJSProperty('complete',true);
   expect(await offline.locator('.room-background').evaluate((img:HTMLImageElement)=>img.naturalWidth)).toBeGreaterThan(0);
 });
 
