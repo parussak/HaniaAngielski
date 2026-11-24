@@ -1,4 +1,5 @@
-import { journeyKey, lessons, unlocked } from '../adventure.ts';
+import {journeyKey, lessons} from '../learning/journey.ts';
+import {unlocked} from '../learning/journey-progress.ts';
 import { trainingPreparation } from '../learning/training.ts';
 import { currentJourney, currentCourse, courseModules } from '../app/selectors.ts';
 import { makeSession, type AnswerMode, type Progress } from '../core.ts';

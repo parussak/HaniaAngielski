@@ -1,5 +1,6 @@
 import {polishCount} from '../polish-count.ts';
-import { lessons, lessonKey, journeyForProgress, type Journey, type Stage } from '../adventure.ts';
+import {lessons, lessonKey, type Journey, type Stage} from './journey.ts';
+import {journeyForProgress} from './journey-progress.ts';
 import type { Progress } from './model.ts';
 import { reviewStats } from '../stage-review.ts';
 

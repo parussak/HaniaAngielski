@@ -1,4 +1,5 @@
-import { journeyKey,lessons,nextLesson,type Journey } from './adventure.ts';
+import {journeyKey, lessons, type Journey} from './learning/journey.ts';
+import {nextLesson} from './learning/journey-progress.ts';
 import { sessionCompatible,type Module,type Progress } from './core.ts';
 import { labels,lessonTitle,sessionTitle } from './learning-labels.ts';
 import { stageForSession } from './stage-review.ts';

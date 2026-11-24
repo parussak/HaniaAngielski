@@ -4,7 +4,7 @@ import {openBackup,openMap} from './navigation.ts';
 import {backup,emptyProgress,keyFor,type Progress} from '../../src/core.ts';
 import {foodModules} from '../materials.ts';
 import {readFileSync} from 'node:fs';
-import {lessons,type Journey} from '../../src/adventure.ts';
+import {lessons, type Journey} from '../../src/learning/journey.ts';
 const m=foodModules[0],key=keyFor(m,'word','apple');
 function sample(){const p=emptyProgress();p.encountered=[key];p.adventure={version:1,earned:20,purchases:{},completed:{},reviewSchema:1,stageReviews:{'unit-2-food/food':{round:0,items:{[key]:{item:{key,moduleId:m.id,version:1,type:'word',id:'apple',input:'text'},correct:0,due:1}}}}};return p;}
 async function restore(page:Page,p:Progress){await page.goto('./');await openBackup(page);await page.locator('#import-file').setInputFiles({name:'profile.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();await page.getByRole('button',{name:'Moja nauka',exact:true}).click();}

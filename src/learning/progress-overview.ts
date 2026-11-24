@@ -1,4 +1,5 @@
-import {journeyForProgress,journeyKey,lessons,type Journey,type JourneyIssue} from '../adventure.ts';
+import {journeyForProgress} from './journey-progress.ts';
+import {journeyKey, lessons, type Journey, type JourneyIssue} from './journey.ts';
 import {courseKey} from './scope.ts';
 import {resolveItem} from './questions.ts';
 import type {Module,Progress,Session} from './model.ts';

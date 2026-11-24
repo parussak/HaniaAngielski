@@ -1,5 +1,5 @@
 import type {Progress,Module} from '../core.ts';
-import {lessons,journeyKey,type Journey,type JourneyIssue} from '../adventure.ts';
+import {lessons, journeyKey, type Journey, type JourneyIssue} from '../learning/journey.ts';
 import {homeFor,stars,roomAvailable,itemAvailable,settleHouseUnlocks} from '../house/progress.ts';
 import {decorations,roomFor,type Room,type Decoration} from '../house/catalog.ts';
 import {decorationMaps,mapRoom} from '../house/rewards.ts';

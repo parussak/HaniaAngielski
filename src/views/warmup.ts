@@ -2,7 +2,7 @@ import type {AppState} from '../app/state.ts';
 import {courseModules,courseJourneys} from '../app/selectors.ts';
 import {practicedItems} from '../learning/training.ts';
 import {reviewStats} from '../stage-review.ts';
-import {journeyKey} from '../adventure.ts';
+import {journeyKey} from '../learning/journey.ts';
 import {keyFor} from '../core.ts';
 import { act, button,e } from '../ui.ts';
 export function warmupView(state:Readonly<AppState>){

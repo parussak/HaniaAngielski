@@ -1,7 +1,9 @@
 import {act} from './ui.ts';
 import {lessonTitle} from './learning-labels.ts';
 import {rewardStars} from './learning/rewards.ts';
-import { lessonKey,lessons,nextLesson,stars,unlocked,type Journey,type Lesson } from './adventure.ts';
+import {lessonKey, lessons, type Journey, type Lesson} from './learning/journey.ts';
+import {nextLesson, unlocked} from './learning/journey-progress.ts';
+import {stars} from './house/progress.ts';
 import type { Module,Progress } from './core.ts';
 import { mapProgress,reviewProgressText } from './learning/map-progress.ts';
 import { targetLanguage } from './learning/scope.ts';

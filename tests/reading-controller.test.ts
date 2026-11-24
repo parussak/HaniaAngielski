@@ -3,7 +3,8 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readingModule,readingJourney} from './fixtures/readings.ts';
 import {createReadingController,readingShown,type ReadingState} from '../src/controllers/reading.ts';
-import {makeLessonSession,validateJourney} from '../src/adventure.ts';
+import {makeLessonSession} from '../src/learning/lesson-session.ts';
+import {validateJourney} from '../src/learning/journey-validation.ts';
 import {varyLesson} from '../src/learning/lesson-variety.ts';
 import {emptyProgress,questionFor,recordAnswer,type Progress} from '../src/core.ts';
 

@@ -5,7 +5,9 @@ import {answerCurrent,finishCurrent} from './helpers.ts';
 import {foodModules as modules} from '../materials.ts';
 import {backup,emptyProgress,makeSession,isCorrect,type Progress} from '../../src/core.ts';
 import {readFileSync} from 'node:fs';
-import {lessons,validateJourney,makeLessonSession} from '../../src/adventure.ts';
+import {lessons} from '../../src/learning/journey.ts';
+import {validateJourney} from '../../src/learning/journey-validation.ts';
+import {makeLessonSession} from '../../src/learning/lesson-session.ts';
 const m=modules[0];
 async function exported(page:Page){await openBackup(page);const wait=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).click();return JSON.parse(readFileSync((await(await wait).path())!,'utf8')).progress as Progress;}
 async function restore(page:Page,p:Progress){await page.goto('./');await openBackup(page);await page.locator('#import-file').setInputFiles({name:'lesson.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup(p)))});await page.getByRole('button',{name:'Zastąp postępy',exact:true}).click();await page.getByRole('button',{name:'Moja nauka',exact:true}).click();await resumeStudy(page);}

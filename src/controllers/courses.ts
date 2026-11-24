@@ -1,8 +1,8 @@
-import type { Journey } from '../adventure.ts';
+import type {Journey} from '../learning/journey.ts';
 import type { Module, Progress } from '../core.ts';
 import type { Course } from '../materials/model.ts';
 import { courseKey } from '../learning/scope.ts';
-import { journeyKey } from '../adventure.ts';
+import {journeyKey} from '../learning/journey.ts';
 import { stageForSession } from '../stage-review.ts';
 
 /**

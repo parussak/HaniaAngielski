@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import {engineModule} from './fixtures/engine.ts';
 import {validateModules} from '../src/content-validation.ts';
 import {emptyProgress,type Module} from '../src/core.ts';
-import {freshAdventure,lessons,validateJourney,type Journey} from '../src/adventure.ts';
+import {freshAdventure} from '../src/learning/adventure-state.ts';
+import {lessons, type Journey} from '../src/learning/journey.ts';
+import {validateJourney} from '../src/learning/journey-validation.ts';
 import {homeFor,settleHouseUnlocks,roomAvailable,itemAvailable} from '../src/house/progress.ts';
 import {decorationMaps,houseRewardProblems,mapRoom,moduleRooms} from '../src/house/rewards.ts';
 

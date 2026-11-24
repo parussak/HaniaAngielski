@@ -1,6 +1,7 @@
 import { readLibrary } from '../src/materials/library.ts';
 import { readFileSync, existsSync } from 'node:fs';
-import { journeyKey, journeyPaths, validateJourney } from '../src/adventure.ts';
+import {journeyKey, journeyPaths} from '../src/learning/journey.ts';
+import {validateJourney} from '../src/learning/journey-validation.ts';
 import { validateTrainingPlan } from '../src/learning/training.ts';
 import { houseRewardProblems } from '../src/house/rewards.ts';
 const {courses,modules}=await readLibrary(async path=>JSON.parse(readFileSync(new URL(`../public/content/${path}`,import.meta.url),'utf8')));

@@ -1,4 +1,6 @@
-import { journeyKey, lessons, makeLessonSession, unlocked, type Journey, type Stage } from '../adventure.ts';
+import {journeyKey, lessons, type Journey, type Stage} from './journey.ts';
+import {makeLessonSession} from './lesson-session.ts';
+import {unlocked} from './journey-progress.ts';
 import { makeStageReviewSession } from '../stage-review.ts';
 import { followingLesson, lessonContext, legendarySession } from './lesson-flow.ts';
 import { varyLesson } from './lesson-variety.ts';

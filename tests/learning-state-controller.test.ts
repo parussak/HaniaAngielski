@@ -1,7 +1,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {emptyProgress,type Progress} from '../src/core.ts';
-import {makeLessonSession,type Journey} from '../src/adventure.ts';
+import {makeLessonSession} from '../src/learning/lesson-session.ts';
+import {type Journey} from '../src/learning/journey.ts';
 import {createLearningController,type LearningState} from '../src/controllers/learning.ts';
 import {engineModule} from './fixtures/engine.ts';
 import {courseFixture} from './fixtures/course-materials.ts';

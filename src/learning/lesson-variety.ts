@@ -1,4 +1,4 @@
-import type {Journey,Lesson} from '../adventure.ts';
+import type {Journey, Lesson} from './journey.ts';
 import {questionFor,inputFor,shuffle,isCorrect} from './questions.ts';
 import {mapTrainingPool} from './training.ts';
 import type {Item,Module,Progress,Session} from './model.ts';

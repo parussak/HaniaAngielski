@@ -1,5 +1,6 @@
 import {screens,type AppState} from './state.ts';
-import {lessons,journeyForProgress,journeyKey} from '../adventure.ts';
+import {lessons, journeyKey} from '../learning/journey.ts';
+import {journeyForProgress} from '../learning/journey-progress.ts';
 import {roomAvailable} from '../house/progress.ts';
 let replacing=false,pendingPop=false;
 let restoredUi:{openStages?:string[];scroll?:number}|undefined;

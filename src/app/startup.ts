@@ -1,5 +1,5 @@
 import { deadline, sdk } from '../services/firebase-client.ts';
-import { loadJourneys } from '../adventure.ts';
+import {loadJourneys} from '../services/journeys.ts';
 import { AppState } from './state.ts';
 import { loadCats } from '../cats.ts';
 import { loadLibrary } from '../content.ts';

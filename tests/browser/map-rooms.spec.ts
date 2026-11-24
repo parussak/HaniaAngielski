@@ -1,7 +1,8 @@
 import {test,expect} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {backup,emptyProgress} from '../../src/core.ts';
-import {freshAdventure,lessons,type Journey} from '../../src/adventure.ts';
+import {freshAdventure} from '../../src/learning/adventure-state.ts';
+import {lessons, type Journey} from '../../src/learning/journey.ts';
 import {openBackup} from './navigation.ts';
 
 test('stacja za samą mapę Technology, link do zamkniętej mapy i zakupy po odświeżeniu',async({page})=>{

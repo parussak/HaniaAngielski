@@ -1,7 +1,7 @@
 import {houseView} from '../views/house.ts';
 import { accountView as renderAccountView, listeningSettingsView } from '../views/account.ts';
 import { journeyView, lessonIntro } from '../adventure-view.ts';
-import { lessons,journeyKey } from '../adventure.ts';
+import {lessons, journeyKey} from '../learning/journey.ts';
 import { currentJourney, currentCourse, courseModules, courseJourneys } from './selectors.ts';
 import { AppState } from './state.ts';
 import { backupView as renderBackupView } from '../views/backup.ts';
@@ -30,7 +30,7 @@ export function createViews(state: AppState, sync: ProgressSync, syncLabel: () =
         const cat = state.catCatalog?.cats.find(c => c.id === id);
         return cat ? catView(state.catCatalog, { cat, mood: 'happy', frame: cat.happy }) : icon('cat');
     }
-    function invitations(moduleId:string,map?:import('../adventure.ts').Journey){
+    function invitations(moduleId:string,map?:import('../learning/journey.ts').Journey){
         const m=state.modules.find(m=>m.id===moduleId)!;
         const ready=!state.journeyIssues.some(issue=>issue.moduleId===moduleId)&&moduleFinished(state.modules,state.journeys,m,state.progress);
         return {

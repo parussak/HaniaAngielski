@@ -6,7 +6,10 @@ import {test,expect,type Page} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
 import {foodModules as modules} from '../materials.ts';
 import {emptyProgress,backup,recordAnswer,questionFor,next,keyFor,type Progress} from '../../src/core.ts';
-import {validateJourney,makeLessonSession,lessonKey,freshAdventure} from '../../src/adventure.ts';
+import {validateJourney} from '../../src/learning/journey-validation.ts';
+import {makeLessonSession} from '../../src/learning/lesson-session.ts';
+import {lessonKey} from '../../src/learning/journey.ts';
+import {freshAdventure} from '../../src/learning/adventure-state.ts';
 const j=validateJourney(JSON.parse(readFileSync(new URL('../../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8')),modules[0]),stage=j.stages[0],id=`${j.moduleId}/${stage.id}`;
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 function oldFixture(){

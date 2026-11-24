@@ -28,7 +28,7 @@ Nie zmieniono wersji kopii, kluczy IndexedDB, reguł Firebase ani produkcyjnych 
 
 ## Miejsca w kodzie i sprawdzenie
 
-- `src/adventure.ts`: `readJourneys` i `loadJourneys` zwracają poprawne mapy oraz problemy odczytu.
+- `src/learning/journey-validation.ts` i `src/services/journeys.ts`: `readJourneys` i `loadJourneys` zwracają poprawne mapy oraz problemy odczytu.
 - `src/learning/training.ts`: wspólna pula treningu i dobór wcześniejszej lekcji przygotowującej.
 - `src/views/training-preparation.ts`, `src/views/catalog.ts`, `src/views/study.ts`: przygotowanie, ponowienie i zachowanie sesji niedostępnej mapy.
 - `src/controllers/progress.ts`: odroczenie migracji i premii przy niepełnych danych.

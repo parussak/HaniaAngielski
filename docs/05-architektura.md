@@ -21,7 +21,7 @@ widok (views/) ──data-action──▶ app/events.ts ──(właściciel z ap
 - **Zmiana wyników** zawsze przechodzi przez `mutate` w `controllers/progress.ts`: praca na kopii, kontrola wersji konta, potwierdzenie zapisu przed aktualizacją interfejsu.
 - **`main.ts`** tylko uruchamia i łączy części; nie wracamy do umieszczania w nim logiki.
 - **`AppState`** (`app/state.ts`) to stan otwartego interfejsu, nie zapisywany jako całość. Kontrolery go nie importują: każdy przyjmuje własny wąski interfejs `*State` (np. `AppControllerState`, `LearningState`), który `AppState` spełnia strukturalnie; to, co leży poza stanem (potwierdzenie, PWA, zapis), dostaje jako jawne porty. Pilnuje tego `tests/refactor-boundaries.test.ts`.
-- **`src/core.ts`** to wspólny punkt eksportu dla zgodności starszych importów.
+- **`src/core.ts`** to czysta fasada (tylko reeksporty z `learning/*`) dla zgodności starszych importów; nowy kod importuje z właściwego modułu `learning/`.
 
 Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zależy od modułu map i nagród).
 
@@ -74,7 +74,7 @@ Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zal
 | Gramatyka (D-74): tematy kursu, reguły i ćwiczenia z nich; czyste dopasowanie zapytania wyszukiwarki; odczyt i kontrola pliku tematów | `learning/grammar-topics.ts`, `learning/grammar-search.ts`, `materials/grammar-topics.ts` |
 | „Dalej” w czytance i podgląd tłumaczenia (stan ekranu; zapisywane jest tylko przejście do kolejnego pytania) | `controllers/reading.ts` |
 | Skład nowych sesji, kolejna lekcja, poziom legendarny | `learning/lesson-variety.ts`, `learning/lesson-flow.ts` |
-| Klucze map, wersja lekcji dla postępów | `learning/journey.ts`, `adventure.ts` (`lessonForProgress`, `journeyForProgress`) |
+| Klucze map, wersja lekcji dla postępów | `learning/journey.ts`, `learning/journey-progress.ts` (`lessonForProgress`, `journeyForProgress`), `learning/journey-validation.ts` (walidacja), `learning/lesson-session.ts` (sesja lekcji, nagroda), `learning/adventure-state.ts` (typ `Adventure`) |
 | Procent ukończenia | `learning/map-progress.ts` |
 | Trening i jego rozmieszczenie | `learning/training.ts` |
 | Sekcja 7 + 2, Kocie powtórki, licznik utrwalenia | `learning/section-plan.ts`, `learning/recall.ts`, `learning/retention.ts` |
@@ -91,7 +91,7 @@ Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zal
 | Odczyt biblioteki (`readLibrary` — wspólny dla przeglądarki, testów i budowania), walidacja, słownictwo, dawny format | `materials/library.ts`, `materials/validation.ts`, `materials/vocabulary.ts`, `materials/legacy.ts` |
 | Składanie modułu z plików i walidacja treści | `content-validation.ts` |
 | Pobieranie plików materiałów | `content.ts` |
-| Wczytywanie map z izolacją błędów jednej mapy (`readJourneys` / `loadJourneys`) | `adventure.ts` |
+| Wczytywanie map z izolacją błędów jednej mapy: `readJourneys` (wstrzyknięty odczyt) / `loadJourneys` (sieć) | `learning/journey-validation.ts`, `services/journeys.ts` |
 | Objaśnienia słówek, identyfikator dawnego kursu angielskiego | `materials/presentation.ts`, `materials/identity.ts` |
 | Pliki treści | `public/content/` — [format](format-materialow.md) |
 

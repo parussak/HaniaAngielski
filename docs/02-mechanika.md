@@ -18,7 +18,7 @@ Sekcja może deklarować opcjonalny plan 7 + 2: siedem lekcji bazowych i dwa gen
 
 Kod ma `Course`, `Meaning` i `LanguageVariant` w `src/materials/` oraz zgodne typy ćwiczeń `Word`, `Exercise`, `Module`, `Session`, `Journey`, `Stage` i `Lesson`. Moduł może wskazywać do trzech map, a lekcja może mieć rolę treningu. Food ma dwie mapy: starą z siedmioma etapami i drugą z pięcioma lekcjami, w tym treningiem wcześniejszego zakresu. Lekcja ma jedną aktualną treść (`update`, jeśli istnieje, inaczej sama lekcja), wspólną dla wszystkich kont; ukończenie zależy wyłącznie od identyfikatora lekcji, a rozpoczęta sesja od własnej zapisanej listy zadań (D-52). Zapisane `edition` jest znacznikiem historycznym. [Ochrona postępów](archiwum/wdrozenie-food.md#ochrona-wyników-i-nagród). `Word` pozostaje projekcją znaczenia do istniejącego silnika, a nie drugim źródłem treści do ręcznej edycji.
 
-Źródła: [model danych](../src/learning/model.ts), [mapy](../src/adventure.ts). Szczegóły istniejącego formatu: [materiały — stan obecny](archiwum/stan-obecny/materialy.md).
+Źródła: [model danych](../src/learning/model.ts), [mapy](../src/learning/journey.ts). Szczegóły istniejącego formatu: [materiały — stan obecny](archiwum/stan-obecny/materialy.md).
 
 ## Uzgodniona hierarchia docelowa
 

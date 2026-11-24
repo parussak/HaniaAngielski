@@ -7,7 +7,8 @@ import {listeningTask,markListening,dictationWords,vocabularyPlayback} from '../
 import {engineModule} from './fixtures/engine.ts';
 import {validateModules} from '../src/content-validation.ts';
 import {backup,emptyProgress,isCorrect,keyFor,next,plainItem,questionFor,recordAnswer,validateBackup,type Item,type Module,type Session} from '../src/core.ts';
-import {makeLessonSession,type Journey} from '../src/adventure.ts';
+import {makeLessonSession} from '../src/learning/lesson-session.ts';
+import {type Journey} from '../src/learning/journey.ts';
 import {varyLesson} from '../src/learning/lesson-variety.ts';
 import {vocabularyAssessment} from '../src/learning/vocabulary-answer.ts';
 import {errorItems,rememberError} from '../src/learning/retention.ts';

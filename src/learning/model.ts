@@ -1,4 +1,4 @@
-import type { Adventure } from '../adventure.ts';
+import type {Adventure} from './adventure-state.ts';
 import type { HistoryPage, HistorySummary } from '../history.ts';
 import type { Illustration, Meaning } from '../materials/model.ts';
 export type { Illustration, Meaning, LanguageVariant, Course, GrammarTopic, MaterialLibrary } from '../materials/model.ts';

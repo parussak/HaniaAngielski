@@ -18,7 +18,7 @@ Swobodna sesja wybiera do 10 pozycji początkowych. Pierwszeństwo mają trudne,
 
 Błędne odpowiedzi mogą dopisać pozycje do końca sesji, więc końcowa liczba pytań może przekroczyć 10. Lekcja mapy zawiera 1–8 wskazanych słów/zadań; nie jest losowym przekrojem całego modułu.
 
-Źródła: [makeSession](../../../src/learning/session.ts), [eligibleModules](../../../src/learning/questions.ts), [makeLessonSession i validateJourney](../../../src/adventure.ts), [testy fiszek](../../../tests/basic-flashcards.test.ts).
+Źródła: [makeSession](../../../src/learning/session.ts), [eligibleModules](../../../src/learning/questions.ts), [makeLessonSession](../../../src/learning/lesson-session.ts), [validateJourney](../../../src/learning/journey-validation.ts), [testy fiszek](../../../tests/basic-flashcards.test.ts).
 
 ## Odpowiadanie i poprawki
 
@@ -69,4 +69,4 @@ Ponowne przejście lekcji i powtórki nie daje bez końca kolejnych nagród. Nie
 
 Domek ma 6 dekoracji. Zakup jest jednorazowy, zużywa zdobyte gwiazdki, a ustawienie można zmieniać lub schować. Gwiazdki, zakupy i pokój są wspólne w obrębie zapisu użytkownika, nie osobne dla języków.
 
-Źródła: [rewardCompletion, purchase, place](../../../src/adventure.ts), [settleStageRewards](../../../src/stage-review.ts), [test pełnej ścieżki](../../../tests/adventure.test.ts).
+Źródła: [rewardCompletion](../../../src/learning/lesson-session.ts), [purchase, place](../../../src/house/progress.ts), [settleStageRewards](../../../src/stage-review.ts), [test pełnej ścieżki](../../../tests/adventure.test.ts).

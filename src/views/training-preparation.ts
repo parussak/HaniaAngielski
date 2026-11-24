@@ -1,4 +1,4 @@
-import type {Journey} from '../adventure.ts';
+import type {Journey} from '../learning/journey.ts';
 import type {Module,Progress} from '../core.ts';
 import {trainingPreparation} from '../learning/training.ts';
 import {button,e} from '../ui.ts';

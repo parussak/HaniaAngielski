@@ -1,6 +1,6 @@
 import {validateModules} from '../../src/content-validation.ts';
 import {compileReading} from '../../src/learning/reading-format.ts';
-import type {Journey} from '../../src/adventure.ts';
+import type {Journey} from '../../src/learning/journey.ts';
 import {engineModule} from './engine.ts';
 
 /** D-68: a synthetic reading in the authored format — four sentences, two choice questions and one tap question. */

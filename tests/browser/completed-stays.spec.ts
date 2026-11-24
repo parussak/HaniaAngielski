@@ -5,7 +5,9 @@ import {finishCurrent,resumeStudy} from './helpers.ts';
 import {readFileSync} from 'node:fs';
 import {foodModules as modules} from '../materials.ts';
 import {backup,emptyProgress,questionFor,type Progress} from '../../src/core.ts';
-import {freshAdventure,lessons,makeLessonSession,type Journey} from '../../src/adventure.ts';
+import {freshAdventure} from '../../src/learning/adventure-state.ts';
+import {lessons, type Journey} from '../../src/learning/journey.ts';
+import {makeLessonSession} from '../../src/learning/lesson-session.ts';
 const read=():Journey=>JSON.parse(readFileSync(new URL('../../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8'));
 const j=read(),at='2026-11-01T12:00:00.000Z',firstKey=`${j.moduleId}/food-words-1`;
 /** The published map with its first, long completed lesson edited in place: 7 tasks instead of 5. */

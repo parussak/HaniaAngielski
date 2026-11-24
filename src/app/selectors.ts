@@ -1,6 +1,7 @@
 import type { AppState } from './state.ts';
 import { currentStats, sessionCompatible } from '../core.ts';
-import { journeyKey, journeyForProgress } from '../adventure.ts';
+import {journeyKey} from '../learning/journey.ts';
+import {journeyForProgress} from '../learning/journey-progress.ts';
 import { courseKey } from '../learning/scope.ts';
 // Wąskie wycinki stanu, które czytają selektory — kontrolery nie muszą znać całego AppState.
 export type CourseScope = Readonly<Pick<AppState, 'courses' | 'selectedCourseId' | 'selected' | 'modules'>>;

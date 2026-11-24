@@ -12,7 +12,9 @@ import { coursePracticePool, makeCoursePracticeSession } from '../src/learning/c
 import { knownMaterial } from '../src/learning/known-material.ts';
 import { compactHistory, type HistoryPage } from '../src/history.ts';
 import { currentStats } from '../src/learning/statistics.ts';
-import { rewardCompletion, stars, type Journey } from '../src/adventure.ts';
+import {rewardCompletion} from '../src/learning/lesson-session.ts';
+import {stars} from '../src/house/progress.ts';
+import {type Journey} from '../src/learning/journey.ts';
 import { getNextStep } from '../src/next-step.ts';
 import { fullBackup, validateFullBackup } from '../src/history-backup.ts';
 

@@ -1,4 +1,4 @@
-import { journeyKey } from '../adventure.ts';
+import {journeyKey} from './journey.ts';
 import { makeCoursePracticeSession, type CoursePracticeMode } from './course-practice.ts';
 import { makeGrammarTopicSession } from './grammar-topics.ts';
 import { makeRitualSession } from './recall.ts';

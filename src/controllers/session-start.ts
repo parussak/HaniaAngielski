@@ -1,5 +1,5 @@
-import type { Journey, JourneyIssue } from '../adventure.ts';
-import { journeyKey } from '../adventure.ts';
+import type {Journey, JourneyIssue} from '../learning/journey.ts';
+import {journeyKey} from '../learning/journey.ts';
 import { currentJourney, courseModules, type JourneyScope } from '../app/selectors.ts';
 import type { Screen } from '../app/state.ts';
 import { replaceActive, type AnswerMode, type Mode, type Module, type Progress, type Session } from '../core.ts';

@@ -10,7 +10,7 @@ import { backup, emptyProgress, eligibleModules, isCorrect, keyFor, makeSession,
 import { compareModules, courseKey } from '../src/learning/scope.ts';
 import { practicedItems } from '../src/learning/training.ts';
 import { getNextStep } from '../src/next-step.ts';
-import type { Journey } from '../src/adventure.ts';
+import type {Journey} from '../src/learning/journey.ts';
 
 const raw = (file: string) => JSON.parse(readFileSync(new URL(`../public/content/angielski-hani/02-food/${file}`, import.meta.url), 'utf8'));
 const item = (m: typeof modules[number], id = 'coffee-drink'): Item => ({ key: keyFor(m, 'word', id), moduleId: m.id, version: 1, type: 'word', id, input: 'text' });

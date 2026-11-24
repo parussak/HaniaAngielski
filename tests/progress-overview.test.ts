@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {engineModule} from './fixtures/engine.ts';
 import {emptyProgress,makeSession,questionFor,recordAnswer,next,keyFor,backup,validateBackup,type Module,type Progress} from '../src/core.ts';
 import {courseProgressOverview,courseWeek} from '../src/learning/progress-overview.ts';
-import {journeyKey,lessons,type Journey} from '../src/adventure.ts';
+import {journeyKey, lessons, type Journey} from '../src/learning/journey.ts';
 import {AppState} from '../src/app/state.ts';
 import {progressView} from '../src/views/progress.ts';
 import {courseFixture} from './fixtures/course-materials.ts';

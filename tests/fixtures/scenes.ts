@@ -1,6 +1,6 @@
 import {validateModules} from '../../src/content-validation.ts';
 import {compileScene} from '../../src/learning/scenes.ts';
-import type {Journey} from '../../src/adventure.ts';
+import type {Journey} from '../../src/learning/journey.ts';
 import {engineModule} from './engine.ts';
 
 /** A synthetic scene in the authored format: four gaps, bank and typing interleaved. */

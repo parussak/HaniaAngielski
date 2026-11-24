@@ -6,7 +6,8 @@ import { test, expect, type Page } from './fixtures.ts';
 import { readFileSync } from 'node:fs';
 import { foodModules as modules } from '../materials.ts';
 import { backup, emptyProgress, keyFor, makeSession, next, questionFor, recordAnswer, type Item, type Progress } from '../../src/core.ts';
-import { freshAdventure, lessonKey, lessons, type Journey } from '../../src/adventure.ts';
+import {freshAdventure} from '../../src/learning/adventure-state.ts';
+import {lessonKey, lessons, type Journey} from '../../src/learning/journey.ts';
 import { recordStageError, stageKey } from '../../src/stage-review.ts';
 import { openMap, openModule } from './navigation.ts';
 

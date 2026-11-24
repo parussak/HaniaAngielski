@@ -1,9 +1,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync,readdirSync} from 'node:fs';
+import {existsSync,readFileSync,readdirSync} from 'node:fs';
 import ts from 'typescript';
 import {journeyKey,lessonKey,lessons,type Journey} from '../src/learning/journey.ts';
-import * as oldJourneyAPI from '../src/adventure.ts';
 import {polishCount} from '../src/polish-count.ts';
 import {exerciseCount} from '../src/learning/map-progress.ts';
 import {pendingLabel} from '../src/stage-review.ts';
@@ -27,7 +26,7 @@ function reachable(file:URL,seen=new Set<string>()):Set<string>{
 }
 test('domek nie zależy w czasie działania od modułu map i przyznawania nagród',()=>{
  const imports=reachable(new URL('../src/house/progress.ts',import.meta.url));
- assert.ok(!imports.has(new URL('../src/adventure.ts',import.meta.url).href));
+ for(const file of ['learning/lesson-session.ts','learning/journey-progress.ts'])assert.ok(!imports.has(new URL(`../src/${file}`,import.meta.url).href),file);
 });
 
 // Zasada 2 (docs/zasady-kodu.md): logika nie używa wejścia/wyjścia i nie sięga do warstwy aplikacji.
@@ -67,7 +66,7 @@ test('kontrola granic wykrywa zakazany import i obiekt przeglądarki, a pomija p
 });
 test('wydzielone klucze map zachowują stare API, klucze i kolejność lekcji',()=>{
  const j=JSON.parse(readFileSync(new URL('../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8')) as Journey;
- assert.equal(oldJourneyAPI.journeyKey,journeyKey);assert.equal(oldJourneyAPI.lessonKey,lessonKey);assert.equal(oldJourneyAPI.lessons,lessons);
+  assert.ok(!existsSync(new URL('../src/adventure.ts',import.meta.url)),'adventure.ts nie wraca jako fasada');
  assert.equal(journeyKey(j),'unit-2-food');assert.equal(lessons(j)[0].key,`unit-2-food/${j.stages[0].lessons[0].id}`);
  assert.equal(journeyKey({...j,id:'practice'}),'unit-2-food/practice');assert.equal(lessons(j).length,41);
 });

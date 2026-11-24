@@ -36,7 +36,7 @@ Ilustracje mają określony format i lokalną ścieżkę SVG lub symbol. Walidac
 
 `validateJourney` sprawdza strukturę mapy, identyfikatory etapów/lekcji i ich odwołania. **Obecne `check:content` nie wywołuje tej funkcji dla wszystkich map**: składa i waliduje moduły przez pomocnik testowy. Mapy są walidowane podczas uruchomienia aplikacji oraz w wybranych testach Food.
 
-Źródła: [walidacja modułów](../../../src/content-validation.ts), [walidacja map](../../../src/adventure.ts), [pomocnik materiałów](../../../tests/materials.ts), [testy ilustracji](../../../tests/illustrations.test.ts).
+Źródła: [walidacja modułów](../../../src/content-validation.ts), [walidacja map](../../../src/learning/journey-validation.ts), [pomocnik materiałów](../../../tests/materials.ts), [testy ilustracji](../../../tests/illustrations.test.ts).
 
 ## Czego te kontrole nie potwierdzają
 

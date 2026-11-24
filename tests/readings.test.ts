@@ -7,7 +7,8 @@ import {advanceReading,knownReadings,makeReadingSession,readingContext,readingVi
 import {compileReading,readingTokens} from '../src/learning/reading-format.ts';
 import {assembleModule,validateModules} from '../src/content-validation.ts';
 import {backup,emptyProgress,makeSession,next,questionFor,recordAnswer,validateBackup,type Progress,type Session} from '../src/core.ts';
-import {makeLessonSession,validateJourney,rewardCompletion} from '../src/adventure.ts';
+import {makeLessonSession, rewardCompletion} from '../src/learning/lesson-session.ts';
+import {validateJourney} from '../src/learning/journey-validation.ts';
 import {varyLesson} from '../src/learning/lesson-variety.ts';
 import {rememberError} from '../src/learning/retention.ts';
 import {retryAnswer} from '../src/learning/retry.ts';

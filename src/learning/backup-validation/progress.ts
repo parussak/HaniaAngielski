@@ -1,5 +1,5 @@
 import type {Progress,Session} from '../model.ts';
-import type {Adventure} from '../../adventure.ts';
+import type {Adventure} from '../adventure-state.ts';
 import {obj,str,strings} from './values.ts';
 import {validSession} from './session.ts';
 import {validAdventure} from './adventure.ts';

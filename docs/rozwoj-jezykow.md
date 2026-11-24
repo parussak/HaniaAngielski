@@ -20,7 +20,7 @@ Najważniejsze porządki techniczne po audycie są wykonane — [status ustaleń
 | [questions.ts](../src/learning/questions.ts), `requiresChoice` | Obsługuje jawne `responseType: choice`, nawiasowe warianty i heurystyki rozpoznające polskie/angielskie alternatywy. Dla nowej formy polecenia użyć jawnych danych i sprawdzić formę odpowiedzi, również w powtórkach. |
 | [presentation.ts](../src/materials/presentation.ts) i [scope.ts](../src/learning/scope.ts) | Polecenia, język nauki i objaśnienia wynikają z kursu; domyślne ustawienia zgodności nadal obsługują stare materiały. Nowy podręcznik dodawać przez jawny rejestr kursów i jego instrukcje. |
 | [Widok katalogu](../src/views/catalog.ts) i [ustawienia](../src/views/setup.ts) | Pozostają obrazek pikniku i opisy Food. Nagrody domku i odznakę przypisuje już treść kursu (D-67), ale prezentację nowego materiału trzeba obejrzeć przed publikacją. |
-| [adventure.ts](../src/adventure.ts), `readJourneys` | Ma już wstrzykiwany odczyt i niezależną walidację map. Mapy każdego modułu, także Food, są deklarowane w danych modułu (`journeyPaths`); wspólna funkcja `journeyPaths` służy aplikacji i `check:content`. |
+| [journey-validation.ts](../src/learning/journey-validation.ts), `readJourneys` | Ma już wstrzykiwany odczyt i niezależną walidację map. Mapy każdego modułu, także Food, są deklarowane w danych modułu (`journeyPaths`); wspólna funkcja `journeyPaths` służy aplikacji i `check:content`. |
 
 Powyższa lista nie zatwierdza nowej tolerancji akcentów, rodzajników ani swobodnej wypowiedzi. Najpierw sprawdzamy mały, rzeczywisty zakres z podręcznika; dopiero potrzeba ujawniona w tej próbce uzasadnia rozszerzanie mechaniki.
 
@@ -86,7 +86,7 @@ Ilustracja słowa jest opcjonalna w typie i walidatorze, ale wprowadzenie do lek
 
 **Aktualizacja po etapie 4:** izolowanie awarii map jest wdrożone. Poprawne mapy pozostają dostępne, a błędy mają możliwość ponowienia. Kontrola budowania sprawdza zadeklarowane mapy, treningi i pliki ilustracji. Poniższy opis przedstawia historyczny punkt odniesienia; [obecne działanie i ograniczenia](odpornosc-map.md) zastępują tę diagnozę w tym zakresie.
 
-**Stan:** [check-content.mjs](../scripts/check-content.mjs) nie sprawdza wszystkich map ani plików ilustracji. [loadJourneys](../src/adventure.ts) używa `Promise.all`, a [startup](../src/app/startup.ts) przy błędzie zestawu map wraca do pustej listy map.
+**Stan:** [check-content.mjs](../scripts/check-content.mjs) nie sprawdza wszystkich map ani plików ilustracji. [loadJourneys](../src/services/journeys.ts) używa `Promise.all`, a [startup](../src/app/startup.ts) przy błędzie zestawu map wraca do pustej listy map.
 
 **Skutek:** pojedyncza uszkodzona mapa francuska może wyłączyć również widoczność mapy Food; ćwiczenia swobodne pozostają dostępne, zapis nie jest przez to usuwany.
 

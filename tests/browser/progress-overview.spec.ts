@@ -2,7 +2,7 @@ import {test,expect,type Page} from './fixtures.ts';
 import {openBackup} from './navigation.ts';
 import {foodModules as modules} from '../materials.ts';
 import {backup,emptyProgress,makeSession,recordAnswer,questionFor,next,keyFor,type Module,type Progress} from '../../src/core.ts';
-import {lessons,type Journey} from '../../src/adventure.ts';
+import {lessons, type Journey} from '../../src/learning/journey.ts';
 import {readFileSync} from 'node:fs';
 import {courseFixture} from '../fixtures/course-materials.ts';
 import {readLibrary} from '../../src/materials/library.ts';
