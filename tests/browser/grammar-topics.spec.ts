@@ -62,6 +62,7 @@ test('Dotknięcie okładki zeszytu poza napisem otwiera gramatykę', async ({ pa
     await page.goto('./');
     await page.locator('.grammar-entry').tap({ position: { x: 16, y: 12 } });
     await expect(page.getByRole('heading', { name: 'Gramatyka', level: 1 })).toBeVisible();
+    await expect(page.locator('.grammar-heading').getByRole('img', { name: /Albert/, includeHidden: true })).toBeVisible();
 });
 
 test('Gramatyka: bez prób jest wyjaśnienie, bez przewijania w poziomie', async ({ page }) => {

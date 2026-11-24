@@ -30,9 +30,9 @@ function topicView(state: Readonly<AppState>, entry: GrammarTopicEntry) {
 }
 
 /** D-74: grammar rules of the chosen course, grouped under topics; they appear after the first attempt. */
-export function grammarView(state: Readonly<AppState>, cat: string) {
+export function grammarView(state: Readonly<AppState>, catHtml: string) {
     const course = currentCourse(state), anchor = courseModules(state)[0];
-    const head = `${button('home', '← Moja nauka', 'back')}${courseContext(state)}<div class="grammar-heading"><h1>Gramatyka</h1><div class="grammar-cat" aria-hidden="true">${e(cat)}</div></div>`;
+    const head = `${button('home', '← Moja nauka', 'back')}${courseContext(state)}<div class="grammar-heading"><h1>Gramatyka</h1><div class="grammar-cat" aria-hidden="true">${catHtml}</div></div>`;
     if (!course || !anchor) return `${head}<p>Ten kurs nie ma dostępnych materiałów.</p>`;
     if (!course.grammarTopics?.length) return `${head}<p class="course-empty" role="status">Ten kurs nie ma jeszcze zebranych tematów gramatyki.</p>`;
     const topics = grammarTopics(state.modules, anchor, course.grammarTopics, state.journeys, state.progress);
