@@ -4,7 +4,9 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {createAccountController,type AccountState} from '../src/controllers/account.ts';
 import {emptyProgress,type Progress} from '../src/learning/model.ts';
+import type {AccountSubmit} from '../src/app/form-payloads.ts';
 
+const login=(f:{email:string,password:string,name?:string,reset?:boolean}):AccountSubmit=>({kind:'login',name:'',reset:false,...f});
 const account={uid:'u1',email:'a@b.pl',displayName:'Hania'};
 
 function setup(opts:{online?:boolean,confirm?:boolean,login?:()=>Promise<unknown>}={}){
@@ -29,16 +31,13 @@ function setup(opts:{online?:boolean,confirm?:boolean,login?:()=>Promise<unknown
   loadGuestProgress:async()=>guest,storeUser:async u=>{stored.push(u);},
  });
  const press=(action:string)=>controller.handleAction(action as never);
- const submit=async(id:string,fields:Record<string,string>,submitter?:string)=>{
-  const ev={target:{id,elements:{namedItem:(n:string)=>n in fields?{value:fields[n]}:null}},preventDefault(){},submitter:submitter?{getAttribute:()=>submitter}:null};
-  const handled=controller.handleSubmit(ev as unknown as SubmitEvent);await Promise.all(tasks);return handled;
- };
+ const submit=async(form:AccountSubmit)=>{controller.handleSubmit(form);await Promise.all(tasks);};
  return {state,press,submit,calls,stored,downloads,sync,cloud,guest,controller};
 }
 
 test('logowanie: łączy konto, przełącza postępy na chmurowe i zapamiętuje użytkownika',async()=>{
  const {state,submit,calls,stored,cloud}=setup();
- assert.equal(await submit('account-form',{email:' a@b.pl ',password:'x'}),true);
+ await submit(login({email:'a@b.pl',password:'x'}));
  assert.deepEqual(state.user,account);assert.equal(state.reauthNeeded,false);
  assert.equal(state.screen,'account');assert.equal(state.accountSection,'name');assert.equal(state.registerAccount,false);
  assert.deepEqual(state.progress,cloud);assert.notEqual(state.progress,cloud,'kopia, nie ta sama referencja');
@@ -49,19 +48,19 @@ test('logowanie: łączy konto, przełącza postępy na chmurowe i zapamiętuje 
 
 test('logowanie: błąd Firebase daje komunikat i zdejmuje blokadę',async()=>{
  const {state,submit,calls}=setup({login:async()=>{throw {code:'auth/invalid-credential'};}});
- await submit('account-form',{email:'a@b.pl',password:'x'});
+ await submit(login({email:'a@b.pl',password:'x'}));
  assert.equal(state.accountError,'Nieprawidłowy e-mail lub hasło.');assert.equal(state.authWorking,false);assert.equal(state.user,null);assert.deepEqual(calls,[]);
 });
 
 test('logowanie bez internetu: komunikat, bez wywołania Firebase',async()=>{
  const {state,submit,calls}=setup({online:false});
- await submit('account-form',{email:'a@b.pl',password:'x'});
+ await submit(login({email:'a@b.pl',password:'x'}));
  assert.match(state.accountError,/wymagają internetu/);assert.equal(state.user,null);assert.deepEqual(calls,[]);
 });
 
 test('odzyskanie hasła: wysyła reset i ustawia powiadomienie',async()=>{
  const {state,submit,calls}=setup();
- await submit('account-form',{email:'a@b.pl',password:''},'reset');
+ await submit(login({email:'a@b.pl',password:'',reset:true}));
  assert.deepEqual(calls,['reset:a@b.pl']);assert.match(state.accountNotice,/odzyskiwanie hasła/);assert.equal(state.user,null);
 });
 
@@ -77,18 +76,18 @@ test('wylogowanie: wraca do zapisu gościa, czyści sesję i zostawia komunikat'
 test('zmiana imienia: zapamiętuje konto z odpowiedzi; zmiana hasła wymaga zgodnych haseł',async()=>{
  const {state,submit,calls}=setup();
  state.user={...account};
- await submit('profile-form',{displayName:'Ala'});
+ await submit({kind:'profile',name:'Ala'});
  assert.equal(state.user?.displayName,'Ala');assert.equal(state.accountSection,'name');assert.equal(state.accountNotice,'Imię zostało zapisane.');
- await submit('password-form',{currentPassword:'a',newPassword:'b',confirmPassword:'c'});
+ await submit({kind:'password',password:'a',next:'b',confirm:'c'});
  assert.match(state.accountError,/nie są takie same/);assert.equal(state.accountSection,'password');assert.deepEqual(calls,[]);
- await submit('password-form',{currentPassword:'a',newPassword:'b',confirmPassword:'b'});
+ await submit({kind:'password',password:'a',next:'b',confirm:'b'});
  assert.deepEqual(calls,['changePassword']);assert.match(state.accountNotice,/Hasło zostało zmienione/);assert.equal(state.accountError,'');
 });
 
 test('zmiana ustawień bez internetu: komunikat, konto bez zmian',async()=>{
  const {state,submit}=setup({online:false});
  state.user={...account};
- await submit('email-form',{email:'n@b.pl',currentPassword:'a'});
+ await submit({kind:'email',email:'n@b.pl',password:'a'});
  assert.match(state.accountError,/wymaga internetu/);assert.equal(state.accountSection,'email');
 });
 

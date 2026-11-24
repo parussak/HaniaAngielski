@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import {createBackupController,type BackupState} from '../src/controllers/backup.ts';
 import {backup} from '../src/learning/backup.ts';
 import {emptyProgress,type Progress} from '../src/learning/model.ts';
+import type {ImportFile} from '../src/app/form-payloads.ts';
 import type {HistoryPage} from '../src/history.ts';
 
 function setup(){
@@ -18,7 +19,7 @@ function setup(){
   run:async task=>{await task();},
  });
  const press=(action:string)=>controller.handleAction(action as never);
- const choose=(file:{size:number,text:()=>Promise<string>}|undefined)=>controller.handleChange({target:{id:'import-file',files:file?[file]:[]}} as unknown as Event);
+ const choose=(file:ImportFile)=>controller.importFile(file);
  const jsonFile=(text:string)=>({size:text.length,text:async()=>text});
  return {state,press,choose,jsonFile,progress:()=>current,files,saves};
 }

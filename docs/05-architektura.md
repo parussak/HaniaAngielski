@@ -34,9 +34,10 @@ Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zal
 | Rozruch, odczyt konta, blokada drugiej karty | `app/startup.ts` |
 | Lista ekranów (`screens`), rejestr widoków, nawigacja i cofanie | `app/state.ts`, `app/views.ts`, `app/navigation.ts` |
 | Odświeżanie ekranu, fokus, blokada przy zapisie, przerwanie dźwięku przy zmianie kontekstu | `app/renderer.ts` |
-| Kliknięcia, formularze, przeciąganie słów do luk | `app/events.ts`, `app/gap-drag.ts` |
+| Kliknięcia, formularze, skrót → w czytance, przeciąganie słów do luk | `app/events.ts`, `app/reading-shortcut.ts`, `app/gap-drag.ts` |
 | Spis akcji `data-action`, typ `AppAction`, właściciel akcji | `app/actions.ts` |
 | Dane akcji (schemat, typy, odczyt z elementu) | `app/action-payloads.ts` |
+| Odczyt formularzy i pól do typowanych danych (konto, plik kopii, ustawienia nauki); kontrolery nie widzą DOM-u ani `window` — okno wchodzi jako port (`confirm`, `reload`) | `app/form-payloads.ts` |
 | Akcje całej aplikacji (instalacja i aktualizacja PWA, przejście na ekran) i odsłuchanie | `controllers/app.ts`, `controllers/speech.ts` |
 | Selektory stanu (np. bieżąca lekcja) | `app/selectors.ts` |
 | Menu i etykiety mobilne | `views/shell.ts` |

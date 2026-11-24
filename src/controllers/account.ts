@@ -1,4 +1,5 @@
 import type {OwnerCall} from '../app/action-payloads.ts';
+import type {AccountSubmit} from '../app/form-payloads.ts';
 import { type Backup, type Progress, type Session, emptyProgress } from '../learning/model.ts';
 import type { Screen } from '../app/state.ts';
 import { firebaseMessage } from '../firebase-errors.ts';
@@ -163,49 +164,10 @@ export function createAccountController(state: AccountState, { sync, scheduleSyn
         default:return unhandled(action);
         }
     }
-    function handleSubmit(ev: SubmitEvent): boolean {
-        if (['profile-form', 'email-form', 'password-form'].includes((ev.target as HTMLElement).id)) {
-            ev.preventDefault();
-            const form = ev.target as HTMLFormElement, kind = form.id;
-            chooseSection(kind === 'profile-form' ? 'name' : kind === 'email-form' ? 'email' : 'password');
-            const value = (name: string) => (form.elements.namedItem(name) as HTMLInputElement).value;
-            const data = kind === 'profile-form' ? { name: value('displayName') } : kind === 'email-form' ? { email: value('email'), password: value('currentPassword') } : { password: value('currentPassword'), next: value('newPassword'), confirm: value('confirmPassword') };
-            void run(async () => {
-                clearMessages();
-                setWorking(true);
-                try {
-                    if (!isOnline())
-                        throw new Error('Zmiana ustawień konta wymaga internetu. Postępy pozostają zapisane.');
-                    if (kind === 'password-form' && data.next !== data.confirm)
-                        throw new Error('Nowe hasła nie są takie same. Wpisz je ponownie.');
-                    const service = await firebase();
-                    if (kind === 'profile-form') {
-                        await rememberAccount(await deadline(service.changeName(data.name!, state.user!.uid)));
-                        notify('Imię zostało zapisane.');
-                    }
-                    else if (kind === 'email-form') {
-                        await deadline(service.changeEmail(data.email!, data.password!, state.user!.uid));
-                        notify('Wysłaliśmy link na nowy adres. Otwórz go, aby potwierdzić zmianę e-maila. Do tego czasu działa dotychczasowy adres.');
-                    }
-                    else {
-                        await deadline(service.changePassword(data.password!, data.next!, state.user!.uid));
-                        notify('Hasło zostało zmienione. Przy kolejnym logowaniu użyj nowego hasła.');
-                    }
-                }
-                catch (error) {
-                    fail(error);
-                }
-                finally {
-                    setWorking(false);
-                }
-            });
-            return true;
-        }
-        if ((ev.target as HTMLElement).id === 'account-form') {
-            ev.preventDefault();
-            const form = ev.target as HTMLFormElement, email = (form.elements.namedItem('email') as HTMLInputElement).value.trim(), password = (form.elements.namedItem('password') as HTMLInputElement).value;
-            const name = (form.elements.namedItem('displayName') as HTMLInputElement | null)?.value ?? '';
-            const reset = (ev as SubmitEvent).submitter?.getAttribute('value') === 'reset';
+    /** Formularz konta odczytany przez granicę zdarzeń (`app/form-payloads.ts`); kontroler nie widzi DOM-u. */
+    function handleSubmit(form: AccountSubmit): void {
+        if (form.kind === 'login') {
+            const { email, password, name, reset } = form;
             void run(async () => {
                 setWorking(true);
                 clearMessages();
@@ -230,9 +192,38 @@ export function createAccountController(state: AccountState, { sync, scheduleSyn
                     setWorking(false);
                 }
             });
-            return true;
+            return;
         }
-        return false;
+        chooseSection(form.kind === 'profile' ? 'name' : form.kind === 'email' ? 'email' : 'password');
+        void run(async () => {
+            clearMessages();
+            setWorking(true);
+            try {
+                if (!isOnline())
+                    throw new Error('Zmiana ustawień konta wymaga internetu. Postępy pozostają zapisane.');
+                if (form.kind === 'password' && form.next !== form.confirm)
+                    throw new Error('Nowe hasła nie są takie same. Wpisz je ponownie.');
+                const service = await firebase();
+                if (form.kind === 'profile') {
+                    await rememberAccount(await deadline(service.changeName(form.name, state.user!.uid)));
+                    notify('Imię zostało zapisane.');
+                }
+                else if (form.kind === 'email') {
+                    await deadline(service.changeEmail(form.email, form.password, state.user!.uid));
+                    notify('Wysłaliśmy link na nowy adres. Otwórz go, aby potwierdzić zmianę e-maila. Do tego czasu działa dotychczasowy adres.');
+                }
+                else {
+                    await deadline(service.changePassword(form.password, form.next, state.user!.uid));
+                    notify('Hasło zostało zmienione. Przy kolejnym logowaniu użyj nowego hasła.');
+                }
+            }
+            catch (error) {
+                fail(error);
+            }
+            finally {
+                setWorking(false);
+            }
+        });
     }
     return { handleAction, handleSubmit, connectAccount, rememberAccount };
 }

@@ -30,11 +30,13 @@ export interface SessionStartState extends JourneyScope {
 }
 interface SessionStartPorts {
     mutate: (change: (p: Progress) => void) => Promise<void>;
+    /** Pytanie o zastąpienie trwającej sesji (w przeglądarce `window.confirm`). */
+    confirm: (message: string) => boolean;
 }
 // Rozpoczynanie sesji. Decyzje (jaka sesja, jaki komunikat) podejmują czyste planery w
 // `learning/start-*-plans.ts`; ta powłoka jako jedyna pyta o zastąpienie sesji i zmienia stan.
 // Nawigacja między ekranami zostaje w `learning.ts`.
-export function createSessionStartController(state: SessionStartState, { mutate }: SessionStartPorts) {
+export function createSessionStartController(state: SessionStartState, { mutate, confirm }: SessionStartPorts) {
     async function preparePlans(){
         // Resuming an old session must not change its accompanying saved progress.
         if(state.progress.active)return;
@@ -42,7 +44,7 @@ export function createSessionStartController(state: SessionStartState, { mutate 
         if(needsSectionPlans(maps,state.progress))await mutate(p=>prepareSectionPlans(maps,p));
     }
     function confirmReplacement(message: string): boolean {
-        return !state.progress.active || window.confirm(message);
+        return !state.progress.active || confirm(message);
     }
     async function openSession(session: Session, resetRewards = true) {
         await mutate(p => { replaceActive(p, session); });

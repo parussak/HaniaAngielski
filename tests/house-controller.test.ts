@@ -57,7 +57,7 @@ test('błąd zapisu zakupu lub ustawienia nie zmienia postępów i nie ogłasza 
 test('kontrolery przekazują nieswoje akcje dalej bez modyfikowania stanu',async()=>{
  const f=setup(),before=JSON.stringify(f.state.progress);
  for(const action of ['answer','next','mode','unknown'])assert.equal(await f.controller.handleAction(action,element()),false);
- const learning=createLearningController(f.state,{mutate:f.mutate,scheduleReviewMigration:()=>{},courses:{select:async()=>false,restore:async()=>{},followSession:async()=>{}}});
+ const learning=createLearningController(f.state,{mutate:f.mutate,scheduleReviewMigration:()=>{},reload:()=>{},confirm:()=>true,courses:{select:async()=>false,restore:async()=>{},followSession:async()=>{}}});
  for(const action of ['house','select-room','select-decoration','buy-decoration','place-decoration'])assert.equal(await learning.handleAction(action,element({id:'pillow'})),false);
  assert.equal(JSON.stringify(f.state.progress),before);assert.equal(f.saves(),0);
 });

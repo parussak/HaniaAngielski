@@ -3,7 +3,7 @@ import {unlocked} from '../learning/journey-progress.ts';
 import { trainingPreparation } from '../learning/training.ts';
 import { currentJourney, currentCourse, courseModules } from '../app/selectors.ts';
 import { makeSession } from '../learning/session.ts';
-import { type AnswerMode, type Progress } from '../learning/model.ts';
+import { type Progress } from '../learning/model.ts';
 import { getNextStep } from '../next-step.ts';
 import type { createCourseController } from './courses.ts';
 import { courseKey } from '../learning/scope.ts';
@@ -12,6 +12,7 @@ import {createSessionAnswerController,type AnswerState} from './session-answers.
 import {createSessionStartController,type SessionStartState} from './session-start.ts';
 import {createReadingController,type ReadingState} from './reading.ts';
 import {unhandled} from '../app/actions.ts';
+import type {SettingChange} from '../app/form-payloads.ts';
 import {isCallOwnedBy,type OwnerCall} from '../app/action-payloads.ts';
 /**
  * Jedyne, co kontroler nauki widzi ze stanu (najwęższy dostęp): to, czego sam potrzebuje do
@@ -24,16 +25,20 @@ export interface LearningState extends AnswerState, ReadingState, SessionStartSt
     readingShown?: ReadingState['readingShown'];
 }
 interface LearningPorts {
+    /** Ponowne wczytanie strony (w przeglądarce `location.reload`) — ponowienie ładowania map. */
+    reload: () => void;
+    /** Pytanie o zgodę przed zastąpieniem trwającej sesji (w przeglądarce `window.confirm`). */
+    confirm: (message: string) => boolean;
     courses: ReturnType<typeof createCourseController>;
     mutate: (change: (p: Progress) => void) => Promise<void>;
     scheduleReviewMigration: () => void;
 }
 // Nawigacja między ekranami nauki. Rozpoczynanie sesji jest w `session-start.ts`,
 // odpowiedzi w trwającej sesji w `session-answers.ts`, „Dalej” w czytance w `reading.ts`.
-export function createLearningController(state: LearningState, { mutate, scheduleReviewMigration, courses }: LearningPorts) {
+export function createLearningController(state: LearningState, { mutate, scheduleReviewMigration, courses, reload, confirm }: LearningPorts) {
     const answers=createSessionAnswerController(state,{mutate,courseId:()=>currentCourse(state)!.id});
     const reading=createReadingController(state,{mutate});
-    const starts=createSessionStartController(state,{mutate});
+    const starts=createSessionStartController(state,{mutate,confirm});
     function showResume(){
         const active=state.progress.active,context=active?.lesson&&lessonContext(state.journeys,state.progress,active);
         if(context){state.selected=state.modules.find(m=>m.id===context.journey.moduleId)!;state.selectedJourneyKey=journeyKey(context.journey);state.introLessonId=context.lesson.id;state.screen='lesson-intro';}
@@ -57,7 +62,7 @@ export function createLearningController(state: LearningState, { mutate, schedul
             if(starts.lessonAfterFinished(action))state.screen='lesson-intro';
             return true;
         }
-        case 'retry-maps':{window.location.reload();return true;}
+        case 'retry-maps':{reload();return true;}
         case 'prepare-training':{
             const j=currentJourney(state),l=j&&lessons(j).find(e=>e.lesson.id===state.introLessonId)?.lesson;
             if(!j||l?.role!=='training'||!unlocked(j,l,state.progress))return true;
@@ -158,9 +163,10 @@ export function createLearningController(state: LearningState, { mutate, schedul
         default:return unhandled(action);
         }
     }
-    function handleSettingsChange(input:HTMLInputElement){
-        if(input.name==='answerMode')state.answerMode=input.value as AnswerMode;
-        if(input.id==='previous')state.previous=input.checked;
+    /** Ustawienie nauki odczytane przez granicę zdarzeń (`app/form-payloads.ts`). */
+    function handleSettingsChange(change:SettingChange){
+        if(change.kind==='answerMode')state.answerMode=change.value;
+        else state.previous=change.checked;
     }
     return { handleAction,handleSettingsChange };
 }

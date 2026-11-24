@@ -61,7 +61,7 @@ const backups = createBackupController(state, { mutate, getHistoryPage: id => pr
 const courses = createCourseController(state, { read: key => readStored(key), write: writeStored });
 const accounts = createAccountController(state, { sync, scheduleSync, downloadProgress: backups.downloadProgress, run, restoreCourse: courses.restore, firebase: sdk, deadline, isOnline: () => navigator.onLine, confirm: message => window.confirm(message), loadGuestProgress: load, storeUser: user => writeStored('firebase-user', user) });
 const house = createHouseController(state, { mutate, courseId: () => currentCourse(state)!.id });
-const learning = createLearningController(state, { mutate, scheduleReviewMigration, courses });
+const learning = createLearningController(state, { mutate, scheduleReviewMigration, courses, reload: () => window.location.reload(), confirm: message => window.confirm(message) });
 function scheduleReviewMigration() { progressService.scheduleReviewMigration(); }
 async function prepareProgress(p: Progress) { return progressService.prepareProgress(p); }
 async function mutate(change: (p: Progress) => void) { return progressService.mutate(change); }

@@ -231,7 +231,7 @@ test('kontroler: tłumaczenie zostaje po „Dalej”, podgląd niczego nie zapis
  state.modules=modules;state.selected=m;state.journeys=[j];state.courses=[course];state.selectedCourseId=course.id;
  state.progress.active=started(state.progress);
  let saves=0;
- const controller=createLearningController(state,{courses:{select:async()=>false,restore:async()=>{},followSession:async()=>{}} as any,scheduleReviewMigration:()=>{},
+ const controller=createLearningController(state,{courses:{select:async()=>false,restore:async()=>{},followSession:async()=>{}} as any,scheduleReviewMigration:()=>{},reload:()=>{},confirm:()=>true,
   mutate:async(change:(p:Progress)=>void)=>{const draft=structuredClone(state.progress);change(draft);state.progress=draft;saves++;}});
  const press=(action:string,data:Record<string,string>={})=>controller.handleAction(action as never,data as never);
  const key=state.progress.active!.items[0].key;

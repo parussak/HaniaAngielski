@@ -11,11 +11,12 @@ import { ProgressSync } from '../sync.ts';
 import {bindHouseDrag} from './house-drag.ts';
 import {homeFor} from '../house/progress.ts';
 import {currentCourse} from './selectors.ts';
+import { readAccountSubmit, readImportFile, readSetting } from './form-payloads.ts';
 import {bindNavigation} from './navigation.ts';
 import {bindGapDrag} from './gap-drag.ts';
 import {speaker} from '../speech.ts';
 import { applyUpdate, installPwa, prepareOffline } from '../pwa.ts';
-import {bindReadingShortcut} from '../controllers/reading.ts';
+import {bindReadingShortcut} from './reading-shortcut.ts';
 import {createGrammarSearchController} from '../controllers/grammar-search.ts';
 import {filterGrammarTopics} from '../views/grammar-search.ts';
 interface EventPorts {
@@ -72,8 +73,12 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
     });
     bindReadingShortcut(root);
     root.addEventListener('submit', ev => {
-        if (accounts.handleSubmit(ev))
+        const accountForm = readAccountSubmit(ev);
+        if (accountForm) {
+            ev.preventDefault();
+            accounts.handleSubmit(accountForm);
             return;
+        }
         if ((ev.target as HTMLElement).id !== 'answer-form')
             return;
         ev.preventDefault();
@@ -85,7 +90,7 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
         void run(() => action('answer', ['answer', { answer: input.value }]));
     });
     root.addEventListener('change', ev => { const input = ev.target as HTMLInputElement; if (input.id === 'listening') { speaker().setEnabled(input.checked); void run(async () => {}); return; }
-        learning.handleSettingsChange(ev.target as HTMLInputElement); void backups.handleChange(ev); });
+        const setting = readSetting(ev.target); if (setting) learning.handleSettingsChange(setting); const file = readImportFile(ev.target); if (file) void backups.importFile(file); });
     window.addEventListener('online', () => { if (sync.cache?.dirty || !state.progress.active)
         scheduleSync(0); });
     window.addEventListener('focus', () => { if (state.user && !state.progress.active)

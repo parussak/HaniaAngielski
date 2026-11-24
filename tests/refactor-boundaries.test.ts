@@ -107,3 +107,30 @@ test('core.ts nie wraca jako fasada: plik nie istnieje i nikt go nie importuje',
   .filter(f=>/(?:from\s*|import\s*\(\s*|import\s+)['"][^'"]*\/core(?:\.ts)?['"]/.test(readFileSync(f,'utf8')));
  assert.deepEqual(users,[]);
 });
+
+// W1 (D-78, punkt 3 Konstytucji): kontrolery nie dotykają DOM-u ani okna. Zdarzenia i elementy czyta granica w `app/`,
+// a okno (potwierdzenie, ponowne wczytanie) wchodzi do kontrolera jako jawny port.
+const domTypes=new Set(['HTMLElement','HTMLInputElement','HTMLFormElement','HTMLButtonElement','Element','Event','SubmitEvent','MouseEvent','KeyboardEvent','EventTarget','Node']);
+function domUsesIn(source:ts.SourceFile){
+ const used=new Set<string>();
+ const visit=(node:ts.Node)=>{
+  if(ts.isIdentifier(node)){
+   const p=node.parent,isMember=(ts.isPropertyAccessExpression(p)||ts.isPropertyAssignment(p)||ts.isMethodDeclaration(p)||ts.isPropertyDeclaration(p)||ts.isPropertySignature(p))&&p.name===node;
+   if(!isMember&&(browserGlobals.has(node.text)||domTypes.has(node.text)))used.add(node.text);
+  }
+  ts.forEachChild(node,visit);
+ };
+ visit(source);
+ return [...used].sort();
+}
+const parseTs=(name:string,text:string)=>ts.createSourceFile(name,text,ts.ScriptTarget.ES2022,true,ts.ScriptKind.TS);
+test('kontrolery nie odwołują się do document, window, zdarzeń ani typów elementów DOM',()=>{
+ const dir=new URL('controllers/',src),files=readdirSync(dir).filter(n=>n.endsWith('.ts'));
+ assert.ok(files.length>8);
+ const problems=files.flatMap(name=>domUsesIn(parseTs(name,readFileSync(new URL(name,dir),'utf8'))).map(use=>`${name}: ${use}`));
+ assert.deepEqual(problems,[]);
+});
+test('kontrola kontrolerów wykrywa DOM w parametrach i wartościach, a pomija pola o tej samej nazwie',()=>{
+ const source=parseTs('x.ts',"export function f(ev: SubmitEvent, el: HTMLInputElement){ return window.confirm(String(document.title)); }\nexport const g={window:1,history:g};");
+ assert.deepEqual(domUsesIn(source),['HTMLInputElement','SubmitEvent','document','window']);
+});

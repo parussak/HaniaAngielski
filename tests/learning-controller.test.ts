@@ -19,7 +19,7 @@ const entries = [
  {action:'extra-training',data:{},message:'Rozpocząć rozgrzewkę zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'},
  {action:'stage-review',data:{id:'stage'},message:'Rozpocząć powtórkę zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.'},
 ];
-function setup() {
+function setup(confirm:(message:string)=>boolean=()=>true) {
  const state=new AppState(),course=courseFixture().courses[0];
  state.modules=[engineModule('controller-unit',course.id)];state.selected=state.modules[0];
  course.moduleIds=[state.selected.id];state.courses=[course];state.selectedCourseId=course.id;
@@ -34,19 +34,17 @@ function setup() {
  state.lastReward=7;state.lastStageReward=3;state.screen='setup';
  let saves=0,fail=false;
  const controller=createLearningController(state,{
-  courses:{select:async()=>false,restore:async()=>{},followSession:async()=>{}},scheduleReviewMigration:()=>{},
+  courses:{select:async()=>false,restore:async()=>{},followSession:async()=>{}},scheduleReviewMigration:()=>{},reload:()=>{},confirm,
   mutate:async(change:(p:Progress)=>void)=>{const draft=structuredClone(state.progress);change(draft);if(fail)throw Error('Zapis niedostępny');state.progress=draft;saves++;},
  });
  return {state,controller,saves:()=>saves,fail:()=>{fail=true;}};
 }
 for(const entry of entries) for(const scenario of ['odmowa','zgoda','bez aktywnej sesji','błąd zapisu']) {
  test(`${entry.action}: ${scenario} zachowuje kontrakt zastępowania sesji`,async(t)=>{
-  const f=setup();if(scenario==='bez aktywnej sesji')f.state.progress.active=null;
+  const messages:string[]=[];
+  const f=setup(message=>{messages.push(message);return scenario!=='odmowa';});if(scenario==='bez aktywnej sesji')f.state.progress.active=null;
   if(scenario==='błąd zapisu')f.fail();
-  const before=structuredClone(f.state.progress),messages:string[]=[];
-  const original=Object.getOwnPropertyDescriptor(globalThis,'window');
-  Object.defineProperty(globalThis,'window',{configurable:true,value:{confirm:(message:string)=>{messages.push(message);return scenario!=='odmowa';}}});
-  t.after(()=>{if(original)Object.defineProperty(globalThis,'window',original);else Reflect.deleteProperty(globalThis,'window');});
+  const before=structuredClone(f.state.progress);
   const run=()=>f.controller.handleAction(entry.action as never,entry.data as never);
   if(scenario==='błąd zapisu')await assert.rejects(run(),/Zapis niedostępny/);
   else assert.equal(await run(),true);

@@ -1,4 +1,5 @@
 import type {OwnerCall} from '../app/action-payloads.ts';
+import type {ImportFile} from '../app/form-payloads.ts';
 import { type Backup, type Progress, type Session } from '../learning/model.ts';
 import { fullBackup, validateFullBackup } from '../history-backup.ts';
 import { type HistoryPage } from '../history.ts';
@@ -84,13 +85,8 @@ export function createBackupController(state: BackupState, { mutate, getHistoryP
         default: return unhandled(action);
         }
     }
-    async function handleChange(ev: Event) {
-        const input = ev.target as HTMLInputElement;
-        if (input.id !== 'import-file')
-            return;
-        const file = input.files?.[0];
-        if (!file)
-            return;
+    /** Plik kopii wybrany przez użytkownika, odczytany przez granicę zdarzeń (`app/form-payloads.ts`). */
+    async function importFile(file: ImportFile) {
         await run(async () => {
             setPending(null);
             try {
@@ -104,5 +100,5 @@ export function createBackupController(state: BackupState, { mutate, getHistoryP
             }
         });
     }
-    return { handleAction, handleChange, downloadProgress };
+    return { handleAction, importFile, downloadProgress };
 }

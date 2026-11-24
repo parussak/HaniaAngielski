@@ -20,12 +20,12 @@ function setup(){
   selectedJourneyKey:'',introLessonId:'',answerMode:'mixed',previous:false,notice:'',mode:'flashcards-basic',
   lastReward:5,lastStageReward:2,lastSession:null,screen:'home',
  };
- let saves=0;
+ let saves=0,reloads=0;
  const controller=createLearningController(state,{
-  courses:{select:async()=>false,restore:async()=>{},followSession:async()=>{}},scheduleReviewMigration:()=>{},
+  courses:{select:async()=>false,restore:async()=>{},followSession:async()=>{}},scheduleReviewMigration:()=>{},reload:()=>{reloads++;},confirm:()=>true,
   mutate:async(change:(p:Progress)=>void)=>{const draft=structuredClone(state.progress);change(draft);state.progress=draft;saves++;},
  });
- return {state,controller,journey,saves:()=>saves};
+ return {state,controller,journey,saves:()=>saves,reloads:()=>reloads};
 }
 
 test('proste przejścia zmieniają tylko ekran',async()=>{
@@ -55,8 +55,8 @@ test('„Wznów” bez sesji wraca do nauki, z sesją lekcji otwiera jej wprowad
 
 test('ustawienia zapisują tryb odpowiedzi i przełącznik „poprzednie”',()=>{
  const f=setup();
- f.controller.handleSettingsChange({name:'answerMode',value:'text'} as HTMLInputElement);
- f.controller.handleSettingsChange({id:'previous',checked:true} as HTMLInputElement);
+ f.controller.handleSettingsChange({kind:'answerMode',value:'text'});
+ f.controller.handleSettingsChange({kind:'previous',checked:true});
  assert.equal(f.state.answerMode,'text');assert.equal(f.state.previous,true);
 });
 
@@ -66,4 +66,10 @@ test('akcja odpowiedzi trafia do właściciela i działa na tym samym wąskim st
  await f.controller.handleAction('begin-lesson',element({id:'first'}));
  assert.ok(f.state.progress.active);assert.equal(f.state.screen,'study');
  assert.equal(await f.controller.handleAction('answer',element({answer:'  '})),true);
+});
+
+test('ponowienie ładowania map przechodzi przez port reload, bez dotykania okna',async()=>{
+ const f=setup();
+ assert.equal(await f.controller.handleAction('retry-maps',element()),true);
+ assert.equal(f.reloads(),1);
 });
