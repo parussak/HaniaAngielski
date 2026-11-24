@@ -30,7 +30,7 @@ Spis bieżącej dokumentacji. Czytaj tylko dokument potrzebny do zadania — nie
 | [Decyzje](decyzje.md) | Co ustalono (D-xx) i co czeka na rozstrzygnięcie (U-xx)? |
 | [Karty kursów](kursy/README.md) | Co jest właściwe dla angielskiego Hani, francuskiego Hani i włoskiego Pauliny? |
 
-Tematyczne: [koci domek](koci-domek.md), [mapa i domek](kocia-przygoda.md), [odporność map](odpornosc-map.md), [generowanie audio](generowanie-audio.md), [PWA](pwa.md), [Firebase](firebase.md), [historia sesji](historia.md), [moduł Food](materialy-food.md), [sceny Food do recenzji](recenzja-scen-food.md), [gotowość na francuski i włoski](rozwoj-jezykow.md).
+Tematyczne: [koci domek](koci-domek.md), [mapa i domek](kocia-przygoda.md), [odporność map](odpornosc-map.md), [generowanie audio](generowanie-audio.md), [PWA](pwa.md), [Firebase](firebase.md), [zgłaszanie problemów](zgloszenia-problemow.md), [historia sesji](historia.md), [moduł Food](materialy-food.md), [sceny Food do recenzji](recenzja-scen-food.md), [gotowość na francuski i włoski](rozwoj-jezykow.md).
 
 ## Zasada podziału
 

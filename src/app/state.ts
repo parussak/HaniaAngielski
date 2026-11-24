@@ -3,6 +3,7 @@ import type { CatCatalog } from '../cats.ts';
 import { emptyProgress, type AnswerMode, type Backup, type Mode, type Module, type Progress, type Session } from '../learning/model.ts';
 import type { AccountUser } from '../firebase.ts';
 import type { Course } from '../materials/model.ts';
+import type { ReportDraft } from '../learning/problem-report.ts';
 // Jedyna lista ekranów: typ `Screen` i przywracanie historii (`navigation.ts`) korzystają z niej obie.
 export const screens = ['home', 'setup', 'study', 'progress', 'backup', 'account', 'summary', 'map', 'lesson-intro', 'house', 'journeys', 'module-list', 'courses', 'course-practice', 'grammar', 'warmup'] as const;
 export type Screen = typeof screens[number];
@@ -14,6 +15,8 @@ export class AppState {
     /** D-68: the translation the learner tapped; a preview changes no progress. */
     readingPeek?: {sessionId:string;sentence:string;word?:string};
     readingQuestionPeek?: {sessionId:string;key:string;term:string};
+    /** D-80: zgłoszenie problemu, które Hania właśnie robi; nie jest zapisywane z postępami. */
+    report?: ReportDraft;
     courses: Course[] = [];
     selectedCourseId = '';
     modules: Module[] = [];

@@ -1,0 +1,18 @@
+/* D-80: zgłaszanie problemu. Importowany jako ostatni arkusz, bo tylko dopisuje własne klasy. */
+.report-open{display:block;flex-shrink:0;margin:12px auto 0;min-height:44px;padding:10px 18px;border:0;background:transparent;color:#5c7850;text-decoration:underline;font-size:15px}
+.report-dialog{width:min(92vw,460px);max-height:88vh;overflow:auto;border:1px solid #dbe2d5;border-radius:16px;padding:22px 20px;background:#fff;color:#283c32;box-shadow:0 20px 50px #2d584455}
+.report-dialog::backdrop{background:#283c3288}
+.report-dialog h2{font-size:21px;line-height:1.4;margin-bottom:14px}
+.report-dialog p{font-size:15px;line-height:1.6}
+.report-choices{display:grid;gap:10px;margin:14px 0}
+.report-choice{width:100%;min-height:48px;font-size:15px;text-align:left;cursor:pointer}
+.report-choice small{color:#5d6a60;font-size:14px;line-height:1.5}
+.report-form{display:grid;gap:10px}
+.report-form label{font-size:15px;font-weight:600}
+.report-form textarea{width:100%;border:1px solid #dce3d2;border-radius:8px;padding:12px 14px;font:inherit;font-size:16px;color:#344c30;background:#fcfdf9;resize:vertical}
+.report-form textarea:focus{outline:2px solid #92ac7d}
+.report-problem{background:#fff0e9;border:1px solid #eed1bc;color:#94583f;border-radius:9px;padding:10px 14px}
+.report-dialog .actions{justify-content:flex-start;margin-top:12px}
+.report-dialog .secondary,.report-dialog .primary{min-height:46px;font-size:15px}
+.report-dialog .report-close{margin-top:4px}
+.report-dialog .report-back{margin-top:10px}
