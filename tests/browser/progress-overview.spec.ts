@@ -1,7 +1,10 @@
 import {test,expect,type Page} from './fixtures.ts';
 import {openBackup} from './navigation.ts';
 import {foodModules as modules} from '../materials.ts';
-import {backup,emptyProgress,makeSession,recordAnswer,questionFor,next,keyFor,type Module,type Progress} from '../../src/core.ts';
+import {backup} from '../../src/learning/backup.ts';
+import {emptyProgress,keyFor,type Module,type Progress} from '../../src/learning/model.ts';
+import {makeSession,recordAnswer,next} from '../../src/learning/session.ts';
+import {questionFor} from '../../src/learning/questions.ts';
 import {lessons, type Journey} from '../../src/learning/journey.ts';
 import {readFileSync} from 'node:fs';
 import {courseFixture} from '../fixtures/course-materials.ts';

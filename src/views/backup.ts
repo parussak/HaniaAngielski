@@ -1,5 +1,5 @@
 import { AppState } from '../app/state.ts';
-import { sessionCompatible } from '../core.ts';
+import { sessionCompatible } from '../learning/questions.ts';
 import { sessionCount } from '../history.ts';
 import { button, date, e, icon } from '../ui.ts';
 export function backupView(state: Readonly<AppState>) {

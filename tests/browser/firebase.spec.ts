@@ -4,7 +4,8 @@ import {openBackup} from './navigation.ts';
 import {openModule,openMap} from './navigation.ts';
 import {test,expect,type BrowserContext,type Page} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
-import {backup,emptyProgress} from '../../src/core.ts';
+import {backup} from '../../src/learning/backup.ts';
+import {emptyProgress} from '../../src/learning/model.ts';
 async function savedWords(page:Page){await openBackup(page);const download=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz kopię postępów',exact:true}).click();return JSON.parse(readFileSync((await(await download).path())!,'utf8')).progress.words;}
 const mockSDK=String.raw`
 export const restoreUser=async()=>JSON.parse(localStorage.getItem('test-user')??'null');

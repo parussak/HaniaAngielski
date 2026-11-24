@@ -1,4 +1,5 @@
-import { backup,validateBackup,type Backup,type Progress } from './core.ts';
+import { backup,validateBackup } from './learning/backup.ts';
+import { type Backup,type Progress } from './learning/model.ts';
 import { checkPage,historyPages,type HistoryPage } from './history.ts';
 
 export async function validateFullBackup(input:unknown):Promise<Backup>{

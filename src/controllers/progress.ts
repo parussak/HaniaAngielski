@@ -1,7 +1,7 @@
 import {homeFor,settleHouseUnlocks} from '../house/progress.ts';
 import type { Screen } from '../app/state.ts';
 import type {Journey, JourneyIssue} from '../learning/journey.ts';
-import type { Module, Progress } from '../core.ts';
+import type { Module, Progress } from '../learning/model.ts';
 import type { AccountUser } from '../firebase.ts';
 import { checkPage, compactHistory, type HistoryPage } from '../history.ts';
 import { seedReviewArchive, seedStageReviews, settleStageRewards } from '../stage-review.ts';

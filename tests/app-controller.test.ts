@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {emptyProgress,type Backup} from '../src/core.ts';
+import {emptyProgress,type Backup} from '../src/learning/model.ts';
 import {createAppController,type AppControllerState} from '../src/controllers/app.ts';
 
 // Kontroler aplikacji dostaje zwykły obiekt z wąskim AppControllerState i jawne porty — bez AppState, window i PWA.

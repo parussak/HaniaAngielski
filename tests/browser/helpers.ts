@@ -1,5 +1,6 @@
 import {expect,type Page} from '@playwright/test';
-import {questionFor,isCorrect,type Exercise,type Module} from '../../src/core.ts';
+import {questionFor,isCorrect} from '../../src/learning/questions.ts';
+import {type Exercise,type Module} from '../../src/learning/model.ts';
 // Buttons are disabled while a change is being saved; read and click only an idle screen.
 const idle=(page:Page)=>expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
 function fromKey(modules:Module[],key:string){const match=key.match(/^(.+)@(\d+):(word|exercise):(.+)$/)!;return questionFor(modules,{key,moduleId:match[1],version:Number(match[2]),type:match[3] as 'word'|'exercise',id:match[4],input:'choice'});}

@@ -6,7 +6,9 @@ import {createReadingController,readingShown,type ReadingState} from '../src/con
 import {makeLessonSession} from '../src/learning/lesson-session.ts';
 import {validateJourney} from '../src/learning/journey-validation.ts';
 import {varyLesson} from '../src/learning/lesson-variety.ts';
-import {emptyProgress,questionFor,recordAnswer,type Progress} from '../src/core.ts';
+import {emptyProgress,type Progress} from '../src/learning/model.ts';
+import {questionFor} from '../src/learning/questions.ts';
+import {recordAnswer} from '../src/learning/session.ts';
 
 const m=readingModule(),modules=[m],j=validateJourney(readingJourney(),m),lesson=j.stages[0].lessons[1];
 

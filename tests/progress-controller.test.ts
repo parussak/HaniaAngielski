@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { emptyProgress, type Progress } from '../src/core.ts';
+import { emptyProgress, type Progress } from '../src/learning/model.ts';
 import { createProgressController, type ProgressState } from '../src/controllers/progress.ts';
 
 // Kontroler dostaje zwykły obiekt z wąskim ProgressState — bez AppState, DOM-u i prawdziwego magazynu.

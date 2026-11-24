@@ -2,7 +2,9 @@ import {test} from 'node:test';
 import {existsSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import {foodModules as modules} from './materials.ts';
-import {emptyProgress,makeSession,inputFor,questionFor,requiresChoice} from '../src/core.ts';
+import {emptyProgress} from '../src/learning/model.ts';
+import {makeSession} from '../src/learning/session.ts';
+import {inputFor,questionFor,requiresChoice} from '../src/learning/questions.ts';
 import {validateModules} from '../src/content-validation.ts';
 
 test('Food: ilustracje słówek, quizu i gramatyki są częścią treści',()=>{

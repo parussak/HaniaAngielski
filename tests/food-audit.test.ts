@@ -8,7 +8,10 @@ import {journeyForProgress, lessonForProgress} from '../src/learning/journey-pro
 import {lessons} from '../src/learning/journey.ts';
 import {makeLessonSession, rewardCompletion} from '../src/learning/lesson-session.ts';
 import {validateJourney} from '../src/learning/journey-validation.ts';
-import {backup,emptyProgress,next,questionFor,recordAnswer,sessionCompatible,validateBackup,type Progress,type Session} from '../src/core.ts';
+import {backup,validateBackup} from '../src/learning/backup.ts';
+import {emptyProgress,type Progress,type Session} from '../src/learning/model.ts';
+import {next,recordAnswer} from '../src/learning/session.ts';
+import {questionFor,sessionCompatible} from '../src/learning/questions.ts';
 import {getNextStep} from '../src/next-step.ts';
 import {earlierMapKeys,makeTrainingSession,validateTrainingPlan} from '../src/learning/training.ts';
 import {makeStageReviewSession,recordStageError,reviewStats,settleStageRewards} from '../src/stage-review.ts';

@@ -2,7 +2,9 @@ import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
 import {foodModules as modules} from '../materials.ts';
-import {backup,emptyProgress,makeSession} from '../../src/core.ts';
+import {backup} from '../../src/learning/backup.ts';
+import {emptyProgress} from '../../src/learning/model.ts';
+import {makeSession} from '../../src/learning/session.ts';
 
 test.use({isMobile:true,hasTouch:true});
 for(const width of [320,390])test(`strona startowa ${width}px: trzy wejścia, kotek, pomoc i osobne katalogi`,async({page})=>{

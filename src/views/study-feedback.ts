@@ -1,7 +1,7 @@
 import { AppState } from '../app/state.ts';
 import { catView } from './cat.ts';
 import { responseCat } from '../cats.ts';
-import type { Exercise, Illustration, Session } from '../core.ts';
+import type { Exercise, Illustration, Session } from '../learning/model.ts';
 import { e } from '../ui.ts';
 import { vocabularyAssessment,vocabularyFullAnswer } from '../learning/vocabulary-answer.ts';
 export function illustrationView(picture: Illustration | undefined, showCaption: boolean) {

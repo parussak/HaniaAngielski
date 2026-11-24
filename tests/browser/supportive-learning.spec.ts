@@ -2,7 +2,9 @@ import {resumeStudy} from './helpers.ts';
 import {test,expect,type Page} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
 import {foodModules as modules} from '../materials.ts';
-import {emptyProgress,makeSession,backup,keyFor} from '../../src/core.ts';
+import {emptyProgress,keyFor} from '../../src/learning/model.ts';
+import {makeSession} from '../../src/learning/session.ts';
+import {backup} from '../../src/learning/backup.ts';
 import {openBackup} from './navigation.ts';
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 async function start(page:Page,id:string,input:'text'|'choice'='text'){

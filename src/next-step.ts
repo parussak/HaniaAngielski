@@ -1,6 +1,7 @@
 import {journeyKey, lessons, type Journey} from './learning/journey.ts';
 import {nextLesson} from './learning/journey-progress.ts';
-import { sessionCompatible,type Module,type Progress } from './core.ts';
+import { sessionCompatible } from './learning/questions.ts';
+import { type Module,type Progress } from './learning/model.ts';
 import { labels,lessonTitle,sessionTitle } from './learning-labels.ts';
 import { stageForSession } from './stage-review.ts';
 import { compareModules, courseKey, sameCourse } from './learning/scope.ts';

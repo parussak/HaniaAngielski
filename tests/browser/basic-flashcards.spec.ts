@@ -4,7 +4,8 @@ import {openModule} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
 import {foodModules as modules} from '../materials.ts';
-import {questionFor,keyFor} from '../../src/core.ts';
+import {questionFor} from '../../src/learning/questions.ts';
+import {keyFor} from '../../src/learning/model.ts';
 import {vocabularyFullAnswer} from '../../src/learning/vocabulary-answer.ts';
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 test('telefon: wybór podstawy i pełnych fiszek, zakres zapisany w kopii',async({page})=>{

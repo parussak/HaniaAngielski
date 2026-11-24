@@ -4,7 +4,7 @@ import {rewardStars} from './learning/rewards.ts';
 import {lessonKey, lessons, type Journey, type Lesson} from './learning/journey.ts';
 import {nextLesson, unlocked} from './learning/journey-progress.ts';
 import {stars} from './house/progress.ts';
-import type { Module,Progress } from './core.ts';
+import type { Module,Progress } from './learning/model.ts';
 import { mapProgress,reviewProgressText } from './learning/map-progress.ts';
 import { targetLanguage } from './learning/scope.ts';
 import {catInvitation} from './views/cat-invitation.ts';

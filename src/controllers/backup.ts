@@ -1,4 +1,4 @@
-import { type Backup, type Progress, type Session } from '../core.ts';
+import { type Backup, type Progress, type Session } from '../learning/model.ts';
 import { fullBackup, validateFullBackup } from '../history-backup.ts';
 import { type HistoryPage } from '../history.ts';
 import { isOwnedBy, unhandled } from '../app/actions.ts';

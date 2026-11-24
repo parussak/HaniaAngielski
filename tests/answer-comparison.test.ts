@@ -2,7 +2,10 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {compareAnswer,closestAnswer} from '../src/answer-comparison.ts';
 import {engineModules as modules} from './fixtures/engine.ts';
-import {backup,emptyProgress,makeSession,questionFor,recordAnswer,validateBackup} from '../src/core.ts';
+import {backup,validateBackup} from '../src/learning/backup.ts';
+import {emptyProgress} from '../src/learning/model.ts';
+import {makeSession,recordAnswer} from '../src/learning/session.ts';
+import {questionFor} from '../src/learning/questions.ts';
 
 test('porównanie wyróżnia brakujące, nadmiarowe i zamienione litery i słowa',()=>{
   const missing=compareAnswer('botle','bottle');

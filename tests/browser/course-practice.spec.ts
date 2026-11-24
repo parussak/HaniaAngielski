@@ -5,7 +5,10 @@ import { readFileSync } from 'node:fs';
 import { courseFixture } from '../fixtures/course-materials.ts';
 import { foodModules as modules } from '../materials.ts';
 import { readLibrary } from '../../src/materials/library.ts';
-import { backup, emptyProgress, keyFor, makeSession, next, questionFor, recordAnswer, type Item, type Module, type Progress } from '../../src/core.ts';
+import { backup } from '../../src/learning/backup.ts';
+import { emptyProgress, keyFor, type Item, type Module, type Progress } from '../../src/learning/model.ts';
+import { makeSession, next, recordAnswer } from '../../src/learning/session.ts';
+import { questionFor } from '../../src/learning/questions.ts';
 import { openModule } from './navigation.ts';
 import {vocabularyFullAnswer} from '../../src/learning/vocabulary-answer.ts';
 

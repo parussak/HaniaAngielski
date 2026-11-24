@@ -1,4 +1,4 @@
-import type {Module,Progress} from '../core.ts';
+import type {Module,Progress} from '../learning/model.ts';
 import {advanceReading,readingOf,readingView} from '../learning/readings.ts';
 import {isOwnedBy,unhandled} from '../app/actions.ts';
 /**

@@ -8,7 +8,9 @@ import {creditStars,stars,homeFor} from '../src/house/progress.ts';
 import {legacyCourse} from '../src/materials/identity.ts';
 import {engineModule} from './fixtures/engine.ts';
 import {courseFixture} from './fixtures/course-materials.ts';
-import {backup,validateBackup,makeSession,type Progress} from '../src/core.ts';
+import {backup,validateBackup} from '../src/learning/backup.ts';
+import {makeSession} from '../src/learning/session.ts';
+import {type Progress} from '../src/learning/model.ts';
 const element=(dataset:Record<string,string>={})=>({dataset}) as HTMLElement;
 function setup(){
  const state=new AppState();state.modules=[engineModule('house-controller-unit',legacyCourse)];state.selected=state.modules[0];

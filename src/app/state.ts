@@ -1,6 +1,6 @@
 import type {Journey, JourneyIssue} from '../learning/journey.ts';
 import type { CatCatalog } from '../cats.ts';
-import { emptyProgress, type AnswerMode, type Backup, type Mode, type Module, type Progress, type Session } from '../core.ts';
+import { emptyProgress, type AnswerMode, type Backup, type Mode, type Module, type Progress, type Session } from '../learning/model.ts';
 import type { AccountUser } from '../firebase.ts';
 import type { Course } from '../materials/model.ts';
 // Jedyna lista ekranów: typ `Screen` i przywracanie historii (`navigation.ts`) korzystają z niej obie.

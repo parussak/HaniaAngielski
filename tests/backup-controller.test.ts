@@ -3,7 +3,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {createBackupController,type BackupState} from '../src/controllers/backup.ts';
-import {backup,emptyProgress,type Progress} from '../src/core.ts';
+import {backup} from '../src/learning/backup.ts';
+import {emptyProgress,type Progress} from '../src/learning/model.ts';
 import type {HistoryPage} from '../src/history.ts';
 
 function setup(){

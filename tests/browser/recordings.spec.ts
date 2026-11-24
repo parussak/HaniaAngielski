@@ -2,7 +2,9 @@
 import {test,expect,type Page,type BrowserContext} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {foodModules as modules,foodCourse} from '../materials.ts';
-import {backup,emptyProgress,makeSession,keyFor,type Progress} from '../../src/core.ts';
+import {backup} from '../../src/learning/backup.ts';
+import {emptyProgress,keyFor,type Progress} from '../../src/learning/model.ts';
+import {makeSession} from '../../src/learning/session.ts';
 import {lessons} from '../../src/learning/journey.ts';
 import {validateJourney} from '../../src/learning/journey-validation.ts';
 import {makeLessonSession} from '../../src/learning/lesson-session.ts';

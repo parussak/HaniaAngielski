@@ -1,5 +1,5 @@
 import { AppState } from '../app/state.ts';
-import { emptyProgress, type Progress } from '../core.ts';
+import { emptyProgress, type Progress, type Module, keyFor } from '../learning/model.ts';
 import { sessionCount } from '../history.ts';
 import { ProgressSync, hasProgress } from '../sync.ts';
 import { button, date, e } from '../ui.ts';
@@ -25,8 +25,7 @@ function cloudError(error: unknown) {
 }
 import { speaker } from '../speech.ts';
 import {speechButtons} from './speech-controls.ts';
-import type { Module } from '../core.ts';
-import {keyFor,questionFor} from '../core.ts';
+import {questionFor} from '../learning/questions.ts';
 import {vocabularyFullAnswer} from '../learning/vocabulary-answer.ts';
 /** D-58: the listening switch lives on the device, outside the saved progress. */
 export function listeningSettingsView(modules: Module[]) {

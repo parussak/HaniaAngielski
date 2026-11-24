@@ -1,7 +1,8 @@
 import {finishCurrent} from './helpers.ts';
 import {test,expect,type Page} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
-import {backup,emptyProgress,type Progress} from '../../src/core.ts';
+import {backup} from '../../src/learning/backup.ts';
+import {emptyProgress,type Progress} from '../../src/learning/model.ts';
 import {freshAdventure} from '../../src/learning/adventure-state.ts';
 import {lessons, type Journey} from '../../src/learning/journey.ts';
 import {courseFixture} from '../fixtures/course-materials.ts';

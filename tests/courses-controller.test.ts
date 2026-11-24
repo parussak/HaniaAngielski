@@ -3,7 +3,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {createCourseController,coursePreferenceKey,type CourseState} from '../src/controllers/courses.ts';
-import {emptyProgress,makeSession} from '../src/core.ts';
+import {emptyProgress} from '../src/learning/model.ts';
+import {makeSession} from '../src/learning/session.ts';
 import {readLibrary} from '../src/materials/library.ts';
 import {courseFixture} from './fixtures/course-materials.ts';
 

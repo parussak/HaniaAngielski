@@ -1,12 +1,13 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {emptyProgress} from '../src/core.ts';
+import {emptyProgress} from '../src/learning/model.ts';
 import {ProgressSync,SyncConflict,validateCache,type AccountCache,type RemoteProgress,type SyncPorts} from '../src/sync.ts';
 import {readStored,writeStored,load,save} from '../src/storage.ts';
 import {indexedDB} from 'fake-indexeddb';
 import {compactHistory,sessionCount,type HistoryPage} from '../src/history.ts';
 import {engineModules as modules} from './fixtures/engine.ts';
-import {makeSession,questionFor,recordAnswer,next} from '../src/core.ts';
+import {makeSession,recordAnswer,next} from '../src/learning/session.ts';
+import {questionFor} from '../src/learning/questions.ts';
 import {creditStars,purchase,place,moveOnGrid,stars,homeFor} from '../src/house/progress.ts';
 
 const copy=<T>(value:T)=>structuredClone(value);

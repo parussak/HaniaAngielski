@@ -7,7 +7,10 @@ import { createCourseController, coursePreferenceKey } from '../src/controllers/
 import { courseModules } from '../src/app/selectors.ts';
 import { readLibrary } from '../src/materials/library.ts';
 import { courseFixture } from './fixtures/course-materials.ts';
-import { backup, emptyProgress, keyFor, makeSession, next, questionFor, recordAnswer, replaceActive, sessionCompatible, validateBackup, type Item, type Module, type Progress } from '../src/core.ts';
+import { backup, validateBackup } from '../src/learning/backup.ts';
+import { emptyProgress, keyFor, type Item, type Module, type Progress } from '../src/learning/model.ts';
+import { makeSession, next, recordAnswer, replaceActive } from '../src/learning/session.ts';
+import { questionFor, sessionCompatible } from '../src/learning/questions.ts';
 import { coursePracticePool, makeCoursePracticeSession } from '../src/learning/course-practice.ts';
 import { knownMaterial } from '../src/learning/known-material.ts';
 import { compactHistory, type HistoryPage } from '../src/history.ts';

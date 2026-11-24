@@ -1,10 +1,11 @@
 import {currentCourse} from '../app/selectors.ts';
 import {AppState} from '../app/state.ts';
-import {score,sessionCompatible,type Session} from '../core.ts';
+import {score,currentStats} from '../learning/statistics.ts';
+import {sessionCompatible} from '../learning/questions.ts';
+import {type Session} from '../learning/model.ts';
 import {sessionTitle} from '../learning-labels.ts';
 import {coursePracticeLabels,type CoursePracticeMode} from '../learning/course-practice.ts';
 import {courseProgressOverview,type courseWeek} from '../learning/progress-overview.ts';
-import {currentStats} from '../learning/statistics.ts';
 import {getNextStep} from '../next-step.ts';
 import {homeFor,stars} from '../house/progress.ts';
 import {polishCount} from '../polish-count.ts';

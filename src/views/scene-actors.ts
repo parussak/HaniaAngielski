@@ -1,5 +1,5 @@
 import {sceneCats,type CatCatalog} from '../cats.ts';
-import type {Scene,Session} from '../core.ts';
+import type {Scene,Session} from '../learning/model.ts';
 import {catView} from './cat.ts';
 export type SceneActor=(speaker:string,line:number,whole:boolean)=>string;
 export function sceneActor(catalog:CatCatalog|null,session:Pick<Session,'id'>,scene:Scene):SceneActor{

@@ -2,11 +2,12 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {foodModules as modules} from './materials.ts';
-import {requiresChoice,inputFor,emptyProgress,makeSession,questionFor,keyFor,type AnswerMode,type Item} from '../src/core.ts';
+import {requiresChoice,inputFor,questionFor,answerHint,isCorrect} from '../src/learning/questions.ts';
+import {emptyProgress,keyFor,type AnswerMode,type Item} from '../src/learning/model.ts';
+import {makeSession} from '../src/learning/session.ts';
 import {validateJourney} from '../src/learning/journey-validation.ts';
 import {makeLessonSession} from '../src/learning/lesson-session.ts';
 import {recordStageError,makeStageReviewSession} from '../src/stage-review.ts';
-import {answerHint,isCorrect} from '../src/learning/questions.ts';
 const m=modules[0],j=validateJourney(JSON.parse(readFileSync(new URL('../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8')),m);
 
 test('luka wymaga fragmentu zgodnego z zadaniem, nie całego zdania; wskazówka nie zamienia wyboru ani fiszek',()=>{

@@ -4,7 +4,9 @@ import {openModule} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
 import {readFileSync} from 'node:fs';
 import {foodModules as modules} from '../materials.ts';
-import {backup,emptyProgress,makeSession} from '../../src/core.ts';
+import {backup} from '../../src/learning/backup.ts';
+import {emptyProgress} from '../../src/learning/model.ts';
+import {makeSession} from '../../src/learning/session.ts';
 import {serveSingleTask} from './single-task.ts';
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 

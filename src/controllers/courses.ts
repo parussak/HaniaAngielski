@@ -1,5 +1,5 @@
 import type {Journey} from '../learning/journey.ts';
-import type { Module, Progress } from '../core.ts';
+import type { Module, Progress } from '../learning/model.ts';
 import type { Course } from '../materials/model.ts';
 import { courseKey } from '../learning/scope.ts';
 import {journeyKey} from '../learning/journey.ts';

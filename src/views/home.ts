@@ -1,4 +1,4 @@
-import type { Module } from '../core.ts';
+import type { Module } from '../learning/model.ts';
 import { heroArt } from './hero-art.ts';
 import type { NextStep } from '../next-step.ts';
 import type { PwaState } from '../pwa.ts';

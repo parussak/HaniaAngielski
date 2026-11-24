@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {engineModule} from './fixtures/engine.ts';
 import {validateModules} from '../src/content-validation.ts';
-import {emptyProgress,type Module} from '../src/core.ts';
+import {emptyProgress,type Module} from '../src/learning/model.ts';
 import {freshAdventure} from '../src/learning/adventure-state.ts';
 import {lessons, type Journey} from '../src/learning/journey.ts';
 import {validateJourney} from '../src/learning/journey-validation.ts';

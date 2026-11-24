@@ -7,11 +7,10 @@ import {readingCard,readingContextView,readingQuestionPrompt} from './reading.ts
 import {listeningTask,vocabularyPlayback} from '../learning/listening.ts';
 import {speaker} from '../speech.ts';
 import {speechButtons} from './speech-controls.ts';
-import { inputFor, questionFor, sessionCompatible } from '../core.ts';
+import { inputFor, questionFor, sessionCompatible, answerHint } from '../learning/questions.ts';
 import { translationPrompt } from '../learning/scope.ts';
 import { stageForSession } from '../stage-review.ts';
 import { act, button, e, icon } from '../ui.ts';
-import { answerHint } from '../learning/questions.ts';
 import { feedbackView, illustrationView } from './study-feedback.ts';
 import { choiceOptionsView, listenButtons, listenOptionsView, textAnswerView } from './study-answer.ts';
 import { studyPage } from './study-page.ts';

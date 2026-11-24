@@ -1,5 +1,7 @@
 import {test,expect,type Page} from './fixtures.ts';
-import {backup,emptyProgress,makeSession,type Progress} from '../../src/core.ts';
+import {backup} from '../../src/learning/backup.ts';
+import {emptyProgress,type Progress} from '../../src/learning/model.ts';
+import {makeSession} from '../../src/learning/session.ts';
 import {creditStars,purchase} from '../../src/house/progress.ts';
 import {foodModules} from '../materials.ts';
 import {openBackup} from './navigation.ts';

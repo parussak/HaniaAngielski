@@ -1,5 +1,4 @@
-import type { Backup, Progress, Session } from '../core.ts';
-import { emptyProgress } from '../core.ts';
+import { type Backup, type Progress, type Session, emptyProgress } from '../learning/model.ts';
 import type { Screen } from '../app/state.ts';
 import { firebaseMessage } from '../firebase-errors.ts';
 import type * as FirebaseSdk from '../firebase.ts';

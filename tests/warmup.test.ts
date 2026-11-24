@@ -1,6 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {emptyProgress,keyFor,backup,validateBackup,type Progress} from '../src/core.ts';
+import {emptyProgress,keyFor,type Progress} from '../src/learning/model.ts';
+import {backup,validateBackup} from '../src/learning/backup.ts';
 import {engineModule} from './fixtures/engine.ts';
 import {makeTrainingSession,mapTrainingPool,validateTrainingPlan} from '../src/learning/training.ts';
 import {freshAdventure} from '../src/learning/adventure-state.ts';

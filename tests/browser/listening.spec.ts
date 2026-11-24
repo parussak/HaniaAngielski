@@ -5,7 +5,8 @@ import {openBackup,openMap} from './navigation.ts';
 import {answerCurrent,resumeStudy} from './helpers.ts';
 import {readFileSync} from 'node:fs';
 import {foodModules as modules} from '../materials.ts';
-import {isCorrect,questionFor,keyFor,type Progress} from '../../src/core.ts';
+import {isCorrect,questionFor} from '../../src/learning/questions.ts';
+import {keyFor,type Progress} from '../../src/learning/model.ts';
 import {vocabularyFullAnswer} from '../../src/learning/vocabulary-answer.ts';
 
 interface Device {voices:{lang:string;localService:boolean}[];fails?:boolean}

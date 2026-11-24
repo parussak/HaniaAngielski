@@ -3,7 +3,7 @@ import {courseModules,courseJourneys} from '../app/selectors.ts';
 import {practicedItems} from '../learning/training.ts';
 import {reviewStats} from '../stage-review.ts';
 import {journeyKey} from '../learning/journey.ts';
-import {keyFor} from '../core.ts';
+import {keyFor} from '../learning/model.ts';
 import { act, button,e } from '../ui.ts';
 export function warmupView(state:Readonly<AppState>){
  const modules=courseModules(state),anchor=modules[0],known=anchor?practicedItems(state.modules,anchor,state.progress):[];

@@ -15,7 +15,7 @@ import { startApplication } from './app/startup.ts';
 import { AppState } from './app/state.ts';
 import { createViews } from './app/views.ts';
 import { createBackupController } from './controllers/backup.ts';
-import { type Progress } from './core.ts';
+import { type Progress } from './learning/model.ts';
 import { createLearningController } from './controllers/learning.ts';
 import { createProgressController } from './controllers/progress.ts';
 import { load, localHistoryPage, putHistoryPage, readStored, save, writeStored } from './storage.ts';

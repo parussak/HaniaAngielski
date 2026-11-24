@@ -3,7 +3,10 @@ import { finishCurrent } from './helpers.ts';
 import { test, expect, type Page } from './fixtures.ts';
 import { grammarTopicsFixture } from '../fixtures/grammar-topics.ts';
 import { readLibrary } from '../../src/materials/library.ts';
-import { backup, emptyProgress, keyFor, makeSession, next, questionFor, recordAnswer, type Item, type Module, type Progress } from '../../src/core.ts';
+import { backup } from '../../src/learning/backup.ts';
+import { emptyProgress, keyFor, type Item, type Module, type Progress } from '../../src/learning/model.ts';
+import { makeSession, next, recordAnswer } from '../../src/learning/session.ts';
+import { questionFor } from '../../src/learning/questions.ts';
 
 test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 

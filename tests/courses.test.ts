@@ -6,7 +6,10 @@ import { validateCatalog, validateCourses } from '../src/materials/validation.ts
 import { courseFixture } from './fixtures/course-materials.ts';
 import { foodCourses as courses, foodModules as modules } from './materials.ts';
 import { assembleModule, validateModules } from '../src/content-validation.ts';
-import { backup, emptyProgress, eligibleModules, isCorrect, keyFor, makeSession, next, questionFor, recordAnswer, sessionCompatible, validateBackup, type Item } from '../src/core.ts';
+import { backup, validateBackup } from '../src/learning/backup.ts';
+import { emptyProgress, keyFor, type Item } from '../src/learning/model.ts';
+import { eligibleModules, isCorrect, questionFor, sessionCompatible } from '../src/learning/questions.ts';
+import { makeSession, next, recordAnswer } from '../src/learning/session.ts';
 import { compareModules, courseKey } from '../src/learning/scope.ts';
 import { practicedItems } from '../src/learning/training.ts';
 import { getNextStep } from '../src/next-step.ts';

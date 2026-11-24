@@ -1,7 +1,10 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {engineModule} from './fixtures/engine.ts';
-import {emptyProgress,makeSession,questionFor,recordAnswer,next,keyFor,backup,validateBackup,type Module,type Progress} from '../src/core.ts';
+import {emptyProgress,keyFor,type Module,type Progress} from '../src/learning/model.ts';
+import {makeSession,recordAnswer,next} from '../src/learning/session.ts';
+import {questionFor} from '../src/learning/questions.ts';
+import {backup,validateBackup} from '../src/learning/backup.ts';
 import {courseProgressOverview,courseWeek} from '../src/learning/progress-overview.ts';
 import {journeyKey, lessons, type Journey} from '../src/learning/journey.ts';
 import {AppState} from '../src/app/state.ts';

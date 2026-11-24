@@ -2,7 +2,8 @@ import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import { test, expect, type Page } from './fixtures.ts';
 import { courseFixture } from '../fixtures/course-materials.ts';
-import { backup, emptyProgress } from '../../src/core.ts';
+import { backup } from '../../src/learning/backup.ts';
+import { emptyProgress } from '../../src/learning/model.ts';
 
 test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 

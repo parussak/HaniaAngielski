@@ -1,6 +1,6 @@
 import { compatible } from '../app/selectors.ts';
 import { AppState } from '../app/state.ts';
-import { isFlashcardMode, type Mode } from '../core.ts';
+import { isFlashcardMode, type Mode } from '../learning/model.ts';
 import { labels } from '../learning-labels.ts';
 import { act, button, e, icon } from '../ui.ts';
 import { compareModules, sameCourse } from '../learning/scope.ts';

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {emptyProgress,type Progress} from '../src/core.ts';
+import {emptyProgress,type Progress} from '../src/learning/model.ts';
 import {creditStars,stars,homeFor} from '../src/house/progress.ts';
 import {legacyCourse} from '../src/materials/identity.ts';
 import {createHouseController,type HouseState} from '../src/controllers/house.ts';

@@ -6,7 +6,10 @@ import {readingEntry,readingModule,readingJourney,readingQuestionIds} from './fi
 import {advanceReading,knownReadings,makeReadingSession,readingContext,readingView,translateInReading} from '../src/learning/readings.ts';
 import {compileReading,readingTokens} from '../src/learning/reading-format.ts';
 import {assembleModule,validateModules} from '../src/content-validation.ts';
-import {backup,emptyProgress,makeSession,next,questionFor,recordAnswer,validateBackup,type Progress,type Session} from '../src/core.ts';
+import {backup,validateBackup} from '../src/learning/backup.ts';
+import {emptyProgress,type Progress,type Session} from '../src/learning/model.ts';
+import {makeSession,next,recordAnswer} from '../src/learning/session.ts';
+import {questionFor} from '../src/learning/questions.ts';
 import {makeLessonSession, rewardCompletion} from '../src/learning/lesson-session.ts';
 import {validateJourney} from '../src/learning/journey-validation.ts';
 import {varyLesson} from '../src/learning/lesson-variety.ts';

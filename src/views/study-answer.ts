@@ -1,4 +1,5 @@
-import { optionsFor, type Exercise, type Session } from '../core.ts';
+import { optionsFor } from '../learning/questions.ts';
+import { type Exercise, type Session } from '../learning/model.ts';
 import type { listeningTask } from '../learning/listening.ts';
 import { speechButtons } from './speech-controls.ts';
 import { act, e, icon } from '../ui.ts';

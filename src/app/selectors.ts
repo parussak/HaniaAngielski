@@ -1,5 +1,6 @@
 import type { AppState } from './state.ts';
-import { currentStats, sessionCompatible } from '../core.ts';
+import { currentStats } from '../learning/statistics.ts';
+import { sessionCompatible } from '../learning/questions.ts';
 import {journeyKey} from '../learning/journey.ts';
 import {journeyForProgress} from '../learning/journey-progress.ts';
 import { courseKey } from '../learning/scope.ts';

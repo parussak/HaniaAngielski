@@ -1,6 +1,7 @@
 import {test,expect} from '@playwright/test';
 import {readFileSync} from 'node:fs';
-import {backup,emptyProgress} from '../../src/core.ts';
+import {backup} from '../../src/learning/backup.ts';
+import {emptyProgress} from '../../src/learning/model.ts';
 import {freshAdventure} from '../../src/learning/adventure-state.ts';
 import {lessons, type Journey} from '../../src/learning/journey.ts';
 import {openBackup} from './navigation.ts';

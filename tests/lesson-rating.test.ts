@@ -1,11 +1,11 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {emptyProgress,makeSession} from '../src/core.ts';
+import {emptyProgress} from '../src/learning/model.ts';
+import {makeSession,recordAnswer,next} from '../src/learning/session.ts';
 import {engineModule} from './fixtures/engine.ts';
 import {lessonRating} from '../src/learning/statistics.ts';
 import {retryAnswer} from '../src/learning/retry.ts';
-import {recordAnswer,questionFor} from '../src/core.ts';
-import {next} from '../src/core.ts';
+import {questionFor} from '../src/learning/questions.ts';
 const m=engineModule();
 test('łapki: połówki w dół, komplet wyłącznie za wszystkie poprawne pierwsze odpowiedzi',()=>{
  const s=makeSession([m],m,'quiz','text',false,emptyProgress());s.items=s.items.slice(0,8);

@@ -1,7 +1,10 @@
 import {test,expect,type Page} from './fixtures.ts';
 import {openBackup,openMap} from './navigation.ts';
 import {resumeStudy,answerCurrent,finishCurrent} from './helpers.ts';
-import {backup,emptyProgress,makeSession,questionFor,isCorrect,type Progress} from '../../src/core.ts';
+import {backup} from '../../src/learning/backup.ts';
+import {emptyProgress,type Progress} from '../../src/learning/model.ts';
+import {makeSession} from '../../src/learning/session.ts';
+import {questionFor,isCorrect} from '../../src/learning/questions.ts';
 import {foodModules as modules} from '../materials.ts';
 import {pwaServer} from './pwa-server.ts';
 import {readFileSync} from 'node:fs';

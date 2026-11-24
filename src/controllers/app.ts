@@ -1,5 +1,5 @@
 import type { Screen } from '../app/state.ts';
-import type { Backup, Progress } from '../core.ts';
+import type { Backup, Progress } from '../learning/model.ts';
 import { isOwnedBy, unhandled } from '../app/actions.ts';
 /**
  * Jedyne, co kontroler aplikacji widzi ze stanu (najwęższy dostęp): czyta, czy trwa sesja,

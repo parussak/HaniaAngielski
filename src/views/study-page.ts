@@ -1,5 +1,5 @@
 import { AppState } from '../app/state.ts';
-import type { Session } from '../core.ts';
+import type { Session } from '../learning/model.ts';
 import { sessionTitle } from '../learning-labels.ts';
 import { coursePracticeLabels, type CoursePracticeMode } from '../learning/course-practice.ts';
 import { act, e, icon } from '../ui.ts';

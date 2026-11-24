@@ -1,7 +1,9 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {foodModules as modules} from './materials.ts';
-import {emptyProgress,makeSession,backup,validateBackup} from '../src/core.ts';
+import {emptyProgress} from '../src/learning/model.ts';
+import {makeSession} from '../src/learning/session.ts';
+import {backup,validateBackup} from '../src/learning/backup.ts';
 const m=modules[0];
 test('dwa zestawy fiszek: 38 z ramek i 97 wszystkich, bez dublowania słówek',()=>{
   const basic=m.basicFlashcardIds!;

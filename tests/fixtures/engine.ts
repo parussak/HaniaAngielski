@@ -1,5 +1,5 @@
 import {validateModules} from '../../src/content-validation.ts';
-import type {Module} from '../../src/core.ts';
+import type {Module} from '../../src/learning/model.ts';
 /** Enough varied data to test session limits without relying on a textbook. */
 export function engineModule(id='engine-unit',courseId='engine-course',order=2):Module{
  const words=Array.from({length:12},(_,i)=>({id:`word-${i}`,front:`Hasło ${i}`,back:`answer ${i}`,source:'Dane syntetyczne'}));

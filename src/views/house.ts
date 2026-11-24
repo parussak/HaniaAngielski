@@ -1,4 +1,4 @@
-import type {Progress,Module} from '../core.ts';
+import type {Progress,Module} from '../learning/model.ts';
 import {lessons, journeyKey, type Journey, type JourneyIssue} from '../learning/journey.ts';
 import {homeFor,stars,roomAvailable,itemAvailable,settleHouseUnlocks} from '../house/progress.ts';
 import {decorations,roomFor,type Room,type Decoration} from '../house/catalog.ts';

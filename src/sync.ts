@@ -1,4 +1,5 @@
-import { backup,emptyProgress,validateBackup,type Progress } from './core.ts';
+import { backup,validateBackup } from './learning/backup.ts';
+import { emptyProgress,type Progress } from './learning/model.ts';
 
 export interface RemoteProgress { revision: number; progress: Progress }
 export interface AccountCache {

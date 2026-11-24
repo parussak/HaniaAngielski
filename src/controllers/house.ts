@@ -2,7 +2,7 @@ import type {Screen} from '../app/state.ts';
 import {purchase,place,roomAvailable,homeFor,moveOnGrid} from '../house/progress.ts';
 import {decorations} from '../house/catalog.ts';
 import {itemRoom,boxFor,placementError} from '../house/layout.ts';
-import type {Progress} from '../core.ts';
+import type {Progress} from '../learning/model.ts';
 import type {AccountUser} from '../firebase.ts';
 import {isOwnedBy,unhandled} from '../app/actions.ts';
 

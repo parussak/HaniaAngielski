@@ -3,7 +3,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {createAccountController,type AccountState} from '../src/controllers/account.ts';
-import {emptyProgress,type Progress} from '../src/core.ts';
+import {emptyProgress,type Progress} from '../src/learning/model.ts';
 
 const account={uid:'u1',email:'a@b.pl',displayName:'Hania'};
 

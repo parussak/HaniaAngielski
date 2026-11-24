@@ -1,5 +1,5 @@
 import {readFileSync} from 'node:fs';
-import type {Backup,Session} from '../../src/core.ts';
+import type {Backup,Session} from '../../src/learning/model.ts';
 const at='2026-11-11T10:00:00.000Z',head='a'.repeat(64);
 export function backupValidationCases(){
  const empty:Backup={app:'hania-language',version:1,exportedAt:at,progress:{version:1,sessions:[],active:null,words:{},difficult:[]}};

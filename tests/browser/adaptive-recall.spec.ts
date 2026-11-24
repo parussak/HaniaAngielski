@@ -1,7 +1,8 @@
 import {resumeStudy} from './helpers.ts';
 import {test,expect,type Page} from './fixtures.ts';
 import {openBackup,openMap} from './navigation.ts';
-import {backup,emptyProgress,keyFor,type Progress} from '../../src/core.ts';
+import {backup} from '../../src/learning/backup.ts';
+import {emptyProgress,keyFor,type Progress} from '../../src/learning/model.ts';
 import {foodModules} from '../materials.ts';
 import {readFileSync} from 'node:fs';
 import {lessons, type Journey} from '../../src/learning/journey.ts';

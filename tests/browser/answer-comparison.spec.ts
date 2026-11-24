@@ -2,7 +2,10 @@ import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {test,expect} from './fixtures.ts';
 import {foodModules as modules} from '../materials.ts';
-import {backup,emptyProgress,isCorrect,makeSession,questionFor,type Mode} from '../../src/core.ts';
+import {backup} from '../../src/learning/backup.ts';
+import {emptyProgress,type Mode} from '../../src/learning/model.ts';
+import {isCorrect,questionFor} from '../../src/learning/questions.ts';
+import {makeSession} from '../../src/learning/session.ts';
 
 test.use({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 

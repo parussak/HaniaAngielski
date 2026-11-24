@@ -1,7 +1,10 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {foodModules as modules} from './materials.ts';
-import {emptyProgress,makeSession,recordAnswer,markWord,isCorrect,backup,validateBackup} from '../src/core.ts';
+import {emptyProgress} from '../src/learning/model.ts';
+import {makeSession,recordAnswer,markWord} from '../src/learning/session.ts';
+import {isCorrect} from '../src/learning/questions.ts';
+import {backup,validateBackup} from '../src/learning/backup.ts';
 const m=modules[0];
 test('K1: poprawka w tej samej sesji nie usuwa trudności, nowa pierwsza próba usuwa',()=>{
   const p=emptyProgress();p.active=makeSession(modules,m,'grammar','text',false,p);

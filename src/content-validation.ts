@@ -1,5 +1,5 @@
 import { normalizeAnswer } from './answers.ts';
-import type { Exercise,Module,Word } from './core.ts';
+import type { Exercise,Module,Word } from './learning/model.ts';
 import { compareModules, sameCourse, translationPrompt } from './learning/scope.ts';
 import type { Course } from './materials/model.ts';
 import { compileVocabulary } from './materials/vocabulary.ts';

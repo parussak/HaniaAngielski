@@ -1,4 +1,4 @@
-import type { Session,Scene } from './core.ts';
+import type { Session,Scene } from './learning/model.ts';
 
 export type CatMood='teacher'|'happy'|'celebrating'|'funny';
 export interface CatFrame { sheet:string; x:number; y:number; width:number; height:number; clip?:number[][] }

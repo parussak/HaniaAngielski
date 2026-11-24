@@ -2,7 +2,11 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {engineModules as modules} from './fixtures/engine.ts';
 import { indexedDB } from 'fake-indexeddb';
-import { backup, emptyProgress, eligibleModules, isCorrect, makeSession, markWord, next, recordAnswer, score, sessionCompatible, validateBackup, type Module } from '../src/core.ts';
+import { backup, validateBackup } from '../src/learning/backup.ts';
+import { emptyProgress, type Module } from '../src/learning/model.ts';
+import { eligibleModules, isCorrect, sessionCompatible } from '../src/learning/questions.ts';
+import { makeSession, markWord, next, recordAnswer } from '../src/learning/session.ts';
+import { score } from '../src/learning/statistics.ts';
 import { load, save } from '../src/storage.ts';
 
 const m = modules[0];

@@ -1,6 +1,6 @@
 import {lessons, type Journey, type JourneyIssue} from '../learning/journey.ts';
 import {stars} from '../house/progress.ts';
-import type { Module, Progress } from '../core.ts';
+import type { Module, Progress } from '../learning/model.ts';
 import { act, e, icon } from '../ui.ts';
 import { mapProgress,reviewProgressText } from '../learning/map-progress.ts';
 import {journeyKey} from '../learning/journey.ts';

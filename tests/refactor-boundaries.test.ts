@@ -1,12 +1,13 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync,readFileSync,readdirSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
 import ts from 'typescript';
 import {journeyKey,lessonKey,lessons,type Journey} from '../src/learning/journey.ts';
 import {polishCount} from '../src/polish-count.ts';
 import {exerciseCount} from '../src/learning/map-progress.ts';
 import {pendingLabel} from '../src/stage-review.ts';
-import {validateBackup,backup} from '../src/core.ts';
+import {validateBackup,backup} from '../src/learning/backup.ts';
 import {slotIds} from '../src/house/catalog.ts';
 import {legacyCourse} from '../src/materials/identity.ts';
 
@@ -97,4 +98,12 @@ test('żaden kontroler nie importuje AppState — każdy ma własny wąski inter
   return source.statements.some(node=>ts.isImportDeclaration(node)&&ts.isStringLiteral(node.moduleSpecifier)&&node.moduleSpecifier.text.endsWith('app/state.ts')&&/\bAppState\b/.test(node.importClause?.getText()??''));
  });
  assert.deepEqual(problems,[]);
+});
+test('core.ts nie wraca jako fasada: plik nie istnieje i nikt go nie importuje',()=>{
+ assert.ok(!existsSync(new URL('../src/core.ts',import.meta.url)),'core.ts nie wraca jako fasada');
+ const self=fileURLToPath(import.meta.url);
+ const walk=(dir:URL):string[]=>readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(new URL(`${e.name}/`,dir)):/\.(ts|mjs|js)$/.test(e.name)?[fileURLToPath(new URL(e.name,dir))]:[]);
+ const users=['../src/','../tests/','../scripts/'].flatMap(d=>walk(new URL(d,import.meta.url))).filter(f=>f!==self)
+  .filter(f=>/(?:from\s*|import\s*\(\s*|import\s+)['"][^'"]*\/core(?:\.ts)?['"]/.test(readFileSync(f,'utf8')));
+ assert.deepEqual(users,[]);
 });

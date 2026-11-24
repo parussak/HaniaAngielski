@@ -1,7 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { browserLocalPersistence,createUserWithEmailAndPassword,EmailAuthProvider,getAuth,reauthenticateWithCredential,reload,sendPasswordResetEmail,setPersistence,signInWithEmailAndPassword,signOut,updatePassword,updateProfile,verifyBeforeUpdateEmail,type User } from 'firebase/auth';
 import { doc,getDocFromServer,getFirestore,runTransaction,serverTimestamp } from 'firebase/firestore';
-import { backup,validateBackup,type Progress } from './core.ts';
+import { backup,validateBackup } from './learning/backup.ts';
+import { type Progress } from './learning/model.ts';
 import { firebaseConfig } from './firebase-config.ts';
 import { byteSize,checkPage,publishHistory,type HistoryPage } from './history.ts';
 import { cleanName } from './profile.ts';

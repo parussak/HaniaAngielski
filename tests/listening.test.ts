@@ -6,7 +6,10 @@ import {createSpeaker,speechRate,type SpeechEnvironment} from '../src/speech.ts'
 import {listeningTask,markListening,dictationWords,vocabularyPlayback} from '../src/learning/listening.ts';
 import {engineModule} from './fixtures/engine.ts';
 import {validateModules} from '../src/content-validation.ts';
-import {backup,emptyProgress,isCorrect,keyFor,next,plainItem,questionFor,recordAnswer,validateBackup,type Item,type Module,type Session} from '../src/core.ts';
+import {backup,validateBackup} from '../src/learning/backup.ts';
+import {emptyProgress,keyFor,plainItem,type Item,type Module,type Session} from '../src/learning/model.ts';
+import {isCorrect,questionFor} from '../src/learning/questions.ts';
+import {next,recordAnswer} from '../src/learning/session.ts';
 import {makeLessonSession} from '../src/learning/lesson-session.ts';
 import {type Journey} from '../src/learning/journey.ts';
 import {varyLesson} from '../src/learning/lesson-variety.ts';

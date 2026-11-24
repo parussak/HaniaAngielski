@@ -8,7 +8,10 @@ import {nextLesson, unlocked} from '../src/learning/journey-progress.ts';
 import {makeLessonSession, rewardCompletion} from '../src/learning/lesson-session.ts';
 import {purchase, place, stars} from '../src/house/progress.ts';
 import {freshAdventure} from '../src/learning/adventure-state.ts';
-import {emptyProgress,recordAnswer,questionFor,next,validateBackup,backup,type Progress,type Session} from '../src/core.ts';
+import {emptyProgress,type Progress,type Session} from '../src/learning/model.ts';
+import {recordAnswer,next} from '../src/learning/session.ts';
+import {questionFor} from '../src/learning/questions.ts';
+import {validateBackup,backup} from '../src/learning/backup.ts';
 import {settleStageRewards} from '../src/stage-review.ts';
 const j=validateJourney(JSON.parse(readFileSync(new URL('../public/content/angielski-hani/02-food/sciezka.json',import.meta.url),'utf8')),modules[0]);
 function finish(p:Progress,wrong=false){const s=p.active!;let first=true;while(p.active){const q=questionFor(modules,s.items[s.index]);recordAnswer(p,q,wrong&&first?'wrong':q.answers[0]);if(wrong&&first){s.phase='retry';recordAnswer(p,q,q.answers[0]);}first=false;next(p);}return s;}

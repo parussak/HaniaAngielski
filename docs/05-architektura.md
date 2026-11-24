@@ -21,7 +21,7 @@ widok (views/) ──data-action──▶ app/events.ts ──(właściciel z ap
 - **Zmiana wyników** zawsze przechodzi przez `mutate` w `controllers/progress.ts`: praca na kopii, kontrola wersji konta, potwierdzenie zapisu przed aktualizacją interfejsu.
 - **`main.ts`** tylko uruchamia i łączy części; nie wracamy do umieszczania w nim logiki.
 - **`AppState`** (`app/state.ts`) to stan otwartego interfejsu, nie zapisywany jako całość. Kontrolery go nie importują: każdy przyjmuje własny wąski interfejs `*State` (np. `AppControllerState`, `LearningState`), który `AppState` spełnia strukturalnie; to, co leży poza stanem (potwierdzenie, PWA, zapis), dostaje jako jawne porty. Pilnuje tego `tests/refactor-boundaries.test.ts`.
-- **`src/core.ts`** to czysta fasada (tylko reeksporty z `learning/*`) dla zgodności starszych importów; nowy kod importuje z właściwego modułu `learning/`.
+- **Brak fasad.** Kod importuje wprost z właściwego modułu `learning/` (`model`, `questions`, `session`, `statistics`, `backup`); `src/core.ts` i `src/adventure.ts` nie istnieją, a test granic pilnuje, żeby nie wróciły.
 
 Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zależy od modułu map i nagród).
 

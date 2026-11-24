@@ -2,7 +2,8 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {validateBackup,type Backup} from '../src/core.ts';
+import {validateBackup} from '../src/learning/backup.ts';
+import {type Backup} from '../src/learning/model.ts';
 import {validateFullBackup} from '../src/history-backup.ts';
 import {backupValidationCases} from './fixtures/backup-validation-cases.ts';
 

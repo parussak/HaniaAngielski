@@ -2,7 +2,10 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { grammarTopicsFixture } from './fixtures/grammar-topics.ts';
 import { readLibrary } from '../src/materials/library.ts';
-import { backup, emptyProgress, keyFor, makeSession, next, questionFor, recordAnswer, sessionCompatible, validateBackup, type Item, type Module, type Progress } from '../src/core.ts';
+import { backup, validateBackup } from '../src/learning/backup.ts';
+import { emptyProgress, keyFor, type Item, type Module, type Progress } from '../src/learning/model.ts';
+import { makeSession, next, recordAnswer } from '../src/learning/session.ts';
+import { questionFor, sessionCompatible } from '../src/learning/questions.ts';
 import { grammarTopicPool, grammarTopics, makeGrammarTopicSession } from '../src/learning/grammar-topics.ts';
 
 const fixture = grammarTopicsFixture();

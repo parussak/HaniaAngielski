@@ -5,9 +5,9 @@ import {creditStars} from './house/progress.ts';
 import {freshAdventure} from './learning/adventure-state.ts';
 import {journeyKey, lessonKey, type Journey, type Stage} from './learning/journey.ts';
 import {journeyForProgress} from './learning/journey-progress.ts';
-import { inputFor,questionFor,resolveItem,type AnswerMode,type Item,type Module,type Progress,type Session } from './core.ts';
+import { inputFor,questionFor,resolveItem } from './learning/questions.ts';
+import { type AnswerMode,type Item,type Module,type Progress,type Session,plainItem } from './learning/model.ts';
 import type { HistoryPage } from './history.ts';
-import {plainItem} from './learning/model.ts';
 
 export interface ReviewItem {item:Item;correct:number;due:number}
 export interface StageReview {round:number;items:Record<string,ReviewItem>;rewardedAt?:string}
