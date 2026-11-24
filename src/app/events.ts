@@ -17,6 +17,7 @@ import {bindGapDrag} from './gap-drag.ts';
 import {speaker} from '../speech.ts';
 import { applyUpdate, installPwa, prepareOffline } from '../pwa.ts';
 import {bindReadingShortcut} from './reading-shortcut.ts';
+import type {createReportController} from '../controllers/report.ts';
 import {createGrammarSearchController} from '../controllers/grammar-search.ts';
 import {filterGrammarTopics} from '../views/grammar-search.ts';
 interface EventPorts {
@@ -24,12 +25,13 @@ interface EventPorts {
     house: ReturnType<typeof createHouseController>;
     learning: ReturnType<typeof createLearningController>;
     backups: ReturnType<typeof createBackupController>;
+    report: ReturnType<typeof createReportController>;
     sync: ProgressSync;
     scheduleSync: (delay?: number) => void;
     scheduleReviewMigration: () => void;
     run: (task: () => Promise<void>) => Promise<void>;
 }
-export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts, learning, house, backups, sync, scheduleSync, scheduleReviewMigration, run }: EventPorts) {
+export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts, learning, house, backups, report, sync, scheduleSync, scheduleReviewMigration, run }: EventPorts) {
     bindNavigation(state,run);
     const grammarSearch = createGrammarSearchController(state);
     root.addEventListener('input', ev => {
@@ -52,6 +54,7 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
             case 'account': await accounts.handleAction(...owned(owner)); return;
             case 'app': await app.handleAction(...owned(owner)); return;
             case 'speech': speech.handleAction(...owned(owner)); return;
+            case 'report': await report.handleAction(...owned(owner)); return;
             case undefined: return;
             default: unhandled(owner);
         }
@@ -68,6 +71,8 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
         ev.preventDefault();
         // D-58: listening changes no progress, so it neither saves nor redraws — unless sound just failed.
         const name = el.dataset.action!, call = readCall(name, el);
+        // D-80: the report window opens over the task without redrawing it, so a typed answer and the lesson stay as they are.
+        if (call && isCallOwnedBy('report', call)) { void report.handleAction(...call); return; }
         if (call && isCallOwnedBy('speech', call)) { if (!speech.handleAction(...call)) void run(async () => {}); return; }
         void run(() => action(name, call));
     });

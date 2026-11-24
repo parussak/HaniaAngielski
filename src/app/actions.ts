@@ -7,6 +7,8 @@ export const actionOwners = {
     app: ['pwa-install', 'pwa-prepare', 'pwa-update', 'home', 'progress', 'backup'],
     /** Odsłuchanie: nie zmienia postępów, więc nie zapisuje i nie przerysowuje (D-58). */
     speech: ['listen'],
+    /** Zgłoszenie problemu z zadania (D-80): nie zmienia postępów i nie przerysowuje ekranu nauki. */
+    report: ['report-open', 'report-category', 'report-utterance', 'report-close'],
     house: ['house-edit', 'grid-move', 'grid-nudge', 'grid-place', 'select-room', 'house', 'house-tab', 'select-decoration', 'buy-decoration', 'place-decoration'],
     account: ['account', 'auth-toggle', 'refresh-account', 'logout', 'switch-account', 'sync-now', 'guest-copy', 'guest-skip', 'resolve-local', 'resolve-cloud', 'export-cloud', 'export-recovery'],
     backup: ['older-history', 'export', 'cancel-import', 'confirm-import'],

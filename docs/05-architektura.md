@@ -106,6 +106,7 @@ Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zal
 | Dobór słuchania w sesji, odsłuch odpowiedzi | `learning/listening.ts` |
 | Przyciski zwykły / „Wolniej” | `views/speech-controls.ts` |
 | Sygnały nagród (D-79): decyzja, który zagrać (czysta) / odtwarzacz z cichą awarią; kontroler woła port `playCue` dopiero po udanym zapisie | `learning/sound-cues.ts` / `sounds.ts`, `controllers/session-answers.ts`; pliki w `public/sounds/` |
+| Zgłaszanie problemu (D-80): wypowiedzi na ekranie, kategorie, dokument (czyste) / kolejka, wysyłka i szkic okienka / okno `<dialog>` poza `#app` / zapis `sendReport` | `learning/problem-report.ts` / `controllers/report.ts` / `app/report-dialog.ts`, `views/report-dialog.ts`, `report.css` / `firebase.ts`; ostatnia próba odtwarzania: `speech/recorded-speaker.ts`, `speech/playback.ts`; reguły `firestore.rules` — [opis](zgloszenia-problemow.md) |
 | Generator nagrań (poza aplikacją; aplikacja go nie importuje) | `scripts/audio/` — [generowanie audio](generowanie-audio.md) |
 
 ### Domek

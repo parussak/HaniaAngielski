@@ -8,7 +8,7 @@ Projekt: `male-kroki-nauka`. Strona pozostaje na GitHub Pages. Nie potrzeba Fire
 2. W **Build → Authentication → Get started → Sign-in method** włącz **Email/Password (E-mail/hasło)**. Logowanie przez link e-mail nie jest potrzebne.
 3. W **Authentication → Settings → Authorized domains** dodaj `parussak.github.io`. Wpisz samą nazwę hosta, bez `https://` i `/HaniaAngielski/`. Do pracy lokalnej dodaj `localhost` i `127.0.0.1`.
 4. W **Build → Firestore Database → Create database** utwórz bazę **Standard**, identyfikator `(default)`, w regionie europejskim, np. Frankfurt `europe-west3`. Wybierz **tryb produkcyjny**, a nie testowy.
-5. W zakładce **Rules / Reguły** zastąp zawartość całym plikiem `firestore.rules` z projektu. Kliknij **Publish / Opublikuj**. Reguły dopuszczają odczyt i zapis wyłącznie własnego rekordu zalogowanego użytkownika; brak ogólnego publicznego dostępu.
+5. W zakładce **Rules / Reguły** zastąp zawartość całym plikiem `firestore.rules` z projektu. Kliknij **Publish / Opublikuj**. Reguły dopuszczają odczyt i zapis wyłącznie własnego rekordu zalogowanego użytkownika, a dodatkowo (D-80) utworzenie własnego zgłoszenia problemu w kolekcji `zgloszenia` bez prawa odczytu listy; brak ogólnego publicznego dostępu. [Zgłaszanie problemów](zgloszenia-problemow.md).
 6. Pozostań na bezpłatnym planie **Spark**. Do tych funkcji nie trzeba dodawać karty ani włączać Analytics.
 
 Alternatywnie osoba korzystająca z Firebase CLI może wdrożyć same reguły przez `firebase deploy --only firestore:rules --project male-kroki-nauka`. Nie uruchamia tego workflow GitHub Pages.

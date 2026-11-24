@@ -55,3 +55,10 @@ export function readSetting(target: EventTarget | null): SettingChange | null {
     if (input.id === 'previous') return { kind: 'previous', checked: input.checked };
     return null;
 }
+
+/** Opis zgłoszenia problemu (D-80); `null`, gdy to inny formularz. */
+export function readReportSubmit(ev: SubmitEvent): { comment: string } | null {
+    const form = ev.target as HTMLFormElement;
+    if (form.id !== 'report-form') return null;
+    return { comment: (form.elements.namedItem('comment') as HTMLTextAreaElement).value };
+}

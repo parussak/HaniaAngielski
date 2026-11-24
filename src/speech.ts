@@ -68,7 +68,7 @@ export function createSpeaker(env: SpeechEnvironment): Speaker {
 
 let shared: RecordedSpeaker | undefined, redraw: (() => void) | undefined;
 /** The app's speaker. Outside a browser it is simply unavailable. */
-export function speaker(): Speaker {
+export function speaker(): RecordedSpeaker {
     if (shared) return shared;
     const w = typeof window === 'undefined' ? undefined : window as unknown as { speechSynthesis?: SpeechEnvironment['synth']; SpeechSynthesisUtterance?: SpeechEnvironment['Utterance']; localStorage?: Storage };
     let storage: Storage | undefined;

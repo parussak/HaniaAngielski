@@ -13,6 +13,7 @@ Gdzie aplikacja przechowuje wyniki, jakie pola mają znaczenie i jak chronimy do
 | Kopia zewnętrzna | Eksport JSON, format `hania-language`, **wersja 1**, z archiwami |
 | Materiały kursów, nagrania, indeks audio | Pliki statyczne i cache PWA — nie są częścią postępów ani Firebase |
 | Wybór kursu | IndexedDB `course-selection:guest` / `course-selection:account:<uid>` — lokalna preferencja, poza kopią i synchronizacją |
+| Zgłoszenia problemów czekające na wysłanie (D-80) | IndexedDB, klucz `reports-outbox` — kolejka na urządzeniu, poza postępami, kopią i synchronizacją; po wysłaniu wpis znika. [Opis](zgloszenia-problemow.md) |
 | Przełącznik słuchania | `localStorage` `male-kroki:sluchanie` — na urządzeniu, poza postępami |
 
 - Jedna aktywna sesja na użytkownika (nie na kurs). Wznowienie obejmuje pytanie, fazę, pierwszą odpowiedź i poprawki.

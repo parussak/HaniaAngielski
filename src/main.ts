@@ -6,11 +6,14 @@ import './adventure.css';
 import './home.css';
 import './courses.css';
 import './progress.css';
+import './report.css';
 import { deadline, sdk } from './services/firebase-client.ts';
 import { createAccountController } from './controllers/account.ts';
 import { bindAppEvents } from './app/events.ts';
 import { createRenderer } from './app/renderer.ts';
-import { onSpeechChange } from './speech.ts';
+import { onSpeechChange, speaker } from './speech.ts';
+import { createReportController } from './controllers/report.ts';
+import { bindReportDialog } from './app/report-dialog.ts';
 import { cuePlayer } from './sounds.ts';
 import { startApplication } from './app/startup.ts';
 import { AppState } from './app/state.ts';
@@ -41,6 +44,9 @@ const sync = new ProgressSync({
         scheduleReviewMigration();
     if (sync.status === 'saved' && !state.reauthNeeded)
         state.accountError = '';
+    // D-80: a signed-in, connected account is the moment waiting problem reports can leave the device.
+    if (sync.status === 'saved')
+        void reports.flush();
     if (!state.ready || state.busy)
         return;
     if (state.screen === 'account' && document.activeElement?.closest('form')) {
@@ -61,6 +67,16 @@ const progressService = createProgressController(state, { sync, store: { save, p
 const backups = createBackupController(state, { mutate, getHistoryPage: id => progressService.getHistoryPage(id), saveHistoryPage: putHistoryPage, saveFile: downloadJsonFile, run });
 const courses = createCourseController(state, { read: key => readStored(key), write: writeStored });
 const accounts = createAccountController(state, { sync, scheduleSync, downloadProgress: backups.downloadProgress, run, restoreCourse: courses.restore, firebase: sdk, deadline, isOnline: () => navigator.onLine, confirm: message => window.confirm(message), loadGuestProgress: load, storeUser: user => writeStored('firebase-user', user) });
+const reports = createReportController(state, {
+    speech: { available: (language, text) => speaker().available(language, text), last: () => speaker().lastPlayback(), recordingOf: (text, language) => speaker().recordingOf(text, language) },
+    outbox: { read: () => readStored<unknown>('reports-outbox'), write: list => writeStored('reports-outbox', list) },
+    send: async (uid, report) => deadline((await sdk()).sendReport(uid, report)),
+    isOnline: () => navigator.onLine, now: () => new Date(), newId: () => crypto.randomUUID().replaceAll('-', ''),
+    changed: () => drawReport(),
+});
+const reportDialog = document.createElement('dialog');
+document.body.append(reportDialog);
+const drawReport = bindReportDialog(reportDialog, state, reports);
 const house = createHouseController(state, { mutate, courseId: () => currentCourse(state)!.id });
 const learning = createLearningController(state, { mutate, scheduleReviewMigration, courses, reload: () => window.location.reload(), confirm: message => window.confirm(message), playCue: cue => cuePlayer().play(cue) });
 function scheduleReviewMigration() { progressService.scheduleReviewMigration(); }
@@ -71,5 +87,8 @@ async function run(task: () => Promise<void>) { await renderer.run(task); }
 function syncLabel() { return scheduler.syncLabel(); }
 function refreshSyncLabel() { scheduler.refreshSyncLabel(); }
 function scheduleSync(delay?: number) { scheduler.scheduleSync(delay); }
-bindAppEvents(root, state, { accounts, learning, house, backups, sync, scheduleSync, scheduleReviewMigration, run });
+// D-80: waiting problem reports leave the device when the connection returns or the app is brought back.
+window.addEventListener('online', () => { void reports.flush(); });
+window.addEventListener('focus', () => { void reports.flush(); });
+bindAppEvents(root, state, { accounts, learning, house, backups, report: reports, sync, scheduleSync, scheduleReviewMigration, run });
 void startApplication({ root, state, sync, prepareProgress, rememberAccount: accounts.rememberAccount, scheduleSync, scheduleReviewMigration, render, refreshSyncLabel, restoreCourse: courses.restore });

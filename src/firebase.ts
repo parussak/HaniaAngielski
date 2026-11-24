@@ -1,11 +1,12 @@
 import { initializeApp } from 'firebase/app';
 import { browserLocalPersistence,createUserWithEmailAndPassword,EmailAuthProvider,getAuth,reauthenticateWithCredential,reload,sendPasswordResetEmail,setPersistence,signInWithEmailAndPassword,signOut,updatePassword,updateProfile,verifyBeforeUpdateEmail,type User } from 'firebase/auth';
-import { doc,getDocFromServer,getFirestore,runTransaction,serverTimestamp } from 'firebase/firestore';
+import { doc,getDocFromServer,getFirestore,runTransaction,serverTimestamp,setDoc } from 'firebase/firestore';
 import { backup,validateBackup } from './learning/backup.ts';
 import { type Progress } from './learning/model.ts';
 import { firebaseConfig } from './firebase-config.ts';
 import { byteSize,checkPage,publishHistory,type HistoryPage } from './history.ts';
 import { cleanName } from './profile.ts';
+import { reportDocument,type ProblemReport } from './learning/problem-report.ts';
 import { localHistoryPage,putHistoryPage } from './storage.ts';
 import { SyncConflict,type RemoteProgress } from './sync.ts';
 
@@ -87,5 +88,10 @@ export async function pushProgress(uid:string,progress:Progress,expectedRevision
     transaction.set(ref,{format:1,revision,payload,updatedAt:serverTimestamp()});
     return {revision,progress};
   });
+}
+/** D-80: one report = one document in `zgloszenia`, under the report's own id, so sending it again changes nothing. Resolves once the server has confirmed the write. */
+export async function sendReport(uid:string,report:ProblemReport){
+  await requireUser(uid);
+  await setDoc(doc(db,'zgloszenia',report.id),reportDocument(report,uid));
 }
 export { firebaseMessage } from './firebase-errors.ts';

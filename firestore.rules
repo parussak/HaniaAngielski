@@ -27,5 +27,37 @@ service cloud.firestore {
       allow create: if owner() && valid() && request.resource.data.revision == 1;
       allow update: if owner() && valid() && request.resource.data.revision == resource.data.revision + 1;
     }
+    // D-80: zgłoszenia problemów z zadania. Zalogowany może tylko dodać własny wpis; nie ma get, list ani delete.
+    // Wpisy czyta właściciel projektu w konsoli Firebase (konsola nie podlega tym regułom).
+    match /zgloszenia/{reportId} {
+      function signedIn() { return request.auth != null; }
+      function short(value, max) { return value is string && value.size() > 0 && value.size() <= max; }
+      function validAudio(audio) {
+        return audio is map
+          && audio.keys().hasAll(['text', 'language'])
+          && audio.keys().hasOnly(['text', 'language', 'line', 'speaker', 'recordingFile', 'playback', 'recordingFailed'])
+          && short(audio.text, 500) && short(audio.language, 20)
+          && (!('line' in audio) || (audio.line is int && audio.line > 0 && audio.line < 1000))
+          && (!('speaker' in audio) || short(audio.speaker, 100))
+          && (!('recordingFile' in audio) || (audio.recordingFile is string && audio.recordingFile.matches('^clips/[a-f0-9]{64}[.]ogg$')))
+          && (!('playback' in audio) || audio.playback in ['recording', 'device-voice', 'none'])
+          && (!('recordingFailed' in audio) || audio.recordingFailed == true);
+      }
+      function valid() {
+        let data = request.resource.data;
+        return data.keys().hasAll(['format', 'uid', 'createdAt', 'category', 'module', 'item', 'excerpt'])
+          && data.keys().hasOnly(['format', 'uid', 'createdAt', 'category', 'comment', 'course', 'module', 'item', 'excerpt', 'audio'])
+          && data.format == 1 && data.uid == request.auth.uid && data.createdAt is timestamp
+          && data.category in ['no-sound', 'unclear', 'wrong-content', 'other']
+          && short(data.module, 200) && short(data.item, 300)
+          && data.excerpt is string && data.excerpt.size() <= 160
+          && (!('comment' in data) || short(data.comment, 500))
+          && (!('course' in data) || short(data.course, 200))
+          && (!('audio' in data) || validAudio(data.audio));
+      }
+      allow create: if signedIn() && reportId.matches('^[a-f0-9]{32}$') && valid();
+      // Ponowna wysyłka tego samego zgłoszenia (np. po zerwanym połączeniu) nic nie zmienia i nie tworzy kopii.
+      allow update: if signedIn() && resource.data.uid == request.auth.uid && request.resource.data == resource.data;
+    }
   }
 }

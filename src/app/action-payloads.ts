@@ -18,6 +18,7 @@ const gridScope = { id: maybeText, owner: maybeText, course: maybeText, room: ma
 export const payloadSchema = {
     'pwa-install': none, 'pwa-prepare': none, 'pwa-update': none, home: none, progress: none, backup: none,
     listen: { speechKind: maybeText, say: maybeText, lang: maybeText, slow: flag },
+    'report-open': none, 'report-category': { category: text }, 'report-utterance': { index: num }, 'report-close': none,
     'house-edit': none, 'grid-move': { ...gridScope, x: num, y: num }, 'grid-nudge': { ...gridScope, dx: maybeNum, dy: maybeNum }, 'grid-place': gridScope,
     'select-room': { id: maybeText }, house: none, 'house-tab': { tab: maybeText },
     // Ramka (x, y, w, h) czyta tylko przeciąganie; kontroler potrzebuje samego `id`.
