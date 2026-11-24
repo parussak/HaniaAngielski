@@ -1,3 +1,4 @@
+import type {OwnerCall} from '../app/action-payloads.ts';
 import {rewardStars} from '../learning/rewards.ts';
 import {mapRoom} from '../house/rewards.ts';
 import {lessonContext} from '../learning/lesson-flow.ts';
@@ -49,35 +50,35 @@ export function createSessionAnswerController(state: AnswerState, { mutate, cour
     const showSummary = (session: Session, reward: number, stageReward: number, room?: {session:string;room:string}) => {
         state.roomDiscovery = room; state.lastReward = reward; state.lastStageReward = stageReward; state.lastSession = session; state.screen = 'summary';
     };
-    async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
+    async function handleAction(...[action, payload]: OwnerCall<'answers'>): Promise<boolean> {
         if(!isOwnedBy('answers',action))return false;
         switch(action){
         case 'pair-answer':{
             const active=state.progress.active;if(!active?.items[active.index].pairGroup)return true;
-            const key=active.pairSelection??active.items[active.index].key,answer=el.dataset.answer??'';
+            const key=active.pairSelection??active.items[active.index].key,answer=payload.answer??'';
             let ok:boolean|undefined;await mutate(p=>{ok=answerOnBoard(p,state.modules,state.journeys,key,answer);});
             if(ok===false)showBoardError(key,answer);return true;
         }
         case 'gap-place':{
-            const key=el.dataset.key??'',answer=el.dataset.answer??state.progress.active?.gapSelection??state.progress.active?.draftAnswer;
+            const key=payload.key??'',answer=payload.answer??state.progress.active?.gapSelection??state.progress.active?.draftAnswer;
             let ok:boolean|undefined;await mutate(p=>{ok=placeGap(p,state.modules,state.journeys,key,answer);});
             if(ok===false)showBoardError(key,answer??'');return true;
         }
         case 'pair-select':case 'bank-select':{
             await mutate(p=>{const s=p.active;if(!s||!['question','retry'].includes(s.phase))return;
                 const current=s.items[s.index];
-                if(action==='pair-select'&&s.phase==='question'&&current.pairGroup&&s.items.slice(s.index).some(i=>i.key===el.dataset.key&&i.pairGroup===current.pairGroup))s.pairSelection=el.dataset.key;
-                if(action==='bank-select'&&current.presentation==='bank'&&gapTokens(state.modules,s).includes(el.dataset.answer??''))s.gapSelection=el.dataset.answer;
+                if(action==='pair-select'&&s.phase==='question'&&current.pairGroup&&s.items.slice(s.index).some(i=>i.key===payload.key&&i.pairGroup===current.pairGroup))s.pairSelection=payload.key;
+                if(action==='bank-select'&&current.presentation==='bank'&&gapTokens(state.modules,s).includes(payload.answer??''))s.gapSelection=payload.answer;
             });return true;
         }
         case 'answer':{
             const s = state.progress.active;
             if (!s)
                 return true;
-            if(!el.dataset.answer?.trim())return true;
+            if(!payload.answer.trim())return true;
             await mutate(p => { const session = p.active!;
                 const q=questionFor(state.modules,session.items[session.index]);
-                if (recordAnswer(p, q, el.dataset.answer ?? '') === false){
+                if (recordAnswer(p, q, payload.answer) === false){
                 rememberError(p,session.items[session.index]);
                 recordStageError(p, session, session.items[session.index], state.journeys);
             }
@@ -87,7 +88,7 @@ export function createSessionAnswerController(state: AnswerState, { mutate, cour
             return true;
         }
         case 'retry':{
-            await mutate(p => {retryAnswer(p,el.dataset.key);});
+            await mutate(p => {retryAnswer(p,payload.key);});
             return true;
         }
         case 'next':{

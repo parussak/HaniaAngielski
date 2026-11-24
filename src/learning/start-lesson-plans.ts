@@ -38,8 +38,8 @@ export function planLegendary(input: StartInput): StartPlan {
 }
 
 /** `restart`: wznowienie tej samej, trwającej lekcji nie pyta o zastąpienie sesji. */
-export function planBeginLesson(input: StartInput, dataset: { id?: string; restart?: string }): StartPlan {
-    const j = input.currentJourney, l = j && lessons(j).find(l => l.lesson.id === dataset.id)?.lesson;
+export function planBeginLesson(input: StartInput, payload: { id?: string; restart?: boolean }): StartPlan {
+    const j = input.currentJourney, l = j && lessons(j).find(l => l.lesson.id === payload.id)?.lesson;
     if (!j || !l || !unlocked(j, l, input.progress)) return { kind: 'notice', text: 'Najpierw ukończ wcześniejszą lekcję.' };
     if (l.role === 'training' && !mapTrainingPool(input.modules, input.journeys, j, input.progress, l).length) return { kind: 'intro', selection: { introLessonId: l.id } };
     const session = l.role === 'training'
@@ -48,7 +48,7 @@ export function planBeginLesson(input: StartInput, dataset: { id?: string; resta
         : makeLessonSession(input.modules, j, l, 'mixed', input.progress);
     if (!session) return { kind: 'notice', text: l.role === 'recall' ? 'Najpierw spróbuj kilku wcześniejszych lekcji. Ta powtórka korzysta wyłącznie z poznanego materiału.' : 'Nie ma jeszcze poznanego materiału z wcześniejszych map do tego treningu.' };
     varyLesson(session, input.modules, input.journeys, j, l, input.progress);
-    const sameRunning = dataset.restart === 'true' && input.progress.active?.lesson?.id === `${journeyKey(j)}/${l.id}`;
+    const sameRunning = payload.restart && input.progress.active?.lesson?.id === `${journeyKey(j)}/${l.id}`;
     return { kind: 'open', session, confirm: sameRunning ? null : 'Rozpocząć lekcję zamiast niedokończonej sesji? Ukończone wyniki pozostaną zachowane.', resetRewards: true };
 }
 
@@ -61,9 +61,9 @@ export function planStageReview(input: StartInput, j: Journey, stage: Stage): St
 }
 
 /** Akcja „stage-review” z ekranu: wybiera mapę, a potem planuje powtórkę etapu. */
-export function planStageReviewAction(input: StartInput, dataset: { journey?: string; id?: string }): StartPlan {
-    const j = dataset.journey ? input.journeys.find(j => journeyKey(j) === dataset.journey) : input.currentJourney;
-    const stage = j?.stages.find(s => s.id === dataset.id);
+export function planStageReviewAction(input: StartInput, payload: { journey?: string; id?: string }): StartPlan {
+    const j = payload.journey ? input.journeys.find(j => journeyKey(j) === payload.journey) : input.currentJourney;
+    const stage = j?.stages.find(s => s.id === payload.id);
     if (j && !input.courseModules.some(m => m.id === j.moduleId)) return { kind: 'ignore' };
     const selection = j ? { module: input.modules.find(m => m.id === j.moduleId)!, journeyKey: journeyKey(j) } : undefined;
     if (!j || !stage) return { kind: 'ignore', selection };

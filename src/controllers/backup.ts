@@ -1,3 +1,4 @@
+import type {OwnerCall} from '../app/action-payloads.ts';
 import { type Backup, type Progress, type Session } from '../learning/model.ts';
 import { fullBackup, validateFullBackup } from '../history-backup.ts';
 import { type HistoryPage } from '../history.ts';
@@ -48,7 +49,7 @@ export function createBackupController(state: BackupState, { mutate, getHistoryP
         notify('Plik kopii został przygotowany do pobrania. Zachowaj go, aby móc odtworzyć postępy.');
     }
     async function exportProgress() { await downloadProgress(state.progress); }
-    async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
+    async function handleAction(...[action]: OwnerCall<'backup'>): Promise<boolean> {
         if (!isOwnedBy('backup', action))
             return false;
         switch (action) {

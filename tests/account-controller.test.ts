@@ -28,7 +28,7 @@ function setup(opts:{online?:boolean,confirm?:boolean,login?:()=>Promise<unknown
   firebase:async()=>sdk as never,deadline:p=>p,isOnline:()=>opts.online??true,confirm:()=>opts.confirm??true,
   loadGuestProgress:async()=>guest,storeUser:async u=>{stored.push(u);},
  });
- const press=(action:string)=>controller.handleAction(action,{dataset:{}} as unknown as HTMLElement);
+ const press=(action:string)=>controller.handleAction(action as never);
  const submit=async(id:string,fields:Record<string,string>,submitter?:string)=>{
   const ev={target:{id,elements:{namedItem:(n:string)=>n in fields?{value:fields[n]}:null}},preventDefault(){},submitter:submitter?{getAttribute:()=>submitter}:null};
   const handled=controller.handleSubmit(ev as unknown as SubmitEvent);await Promise.all(tasks);return handled;

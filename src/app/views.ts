@@ -34,8 +34,8 @@ export function createViews(state: AppState, sync: ProgressSync, syncLabel: () =
         const m=state.modules.find(m=>m.id===moduleId)!;
         const ready=!state.journeyIssues.some(issue=>issue.moduleId===moduleId)&&moduleFinished(state.modules,state.journeys,m,state.progress);
         return {
-            opening:catInvitation(decorativeCat('albert'),'Kocia rozgrzewka','Do 5 krótkich pytań z poznanego materiału. Rozruszaj łapki przed tą mapą!','module-ritual','Rozgrzej łapki',`data-kind="opening" data-module="${moduleId}" ${map?`data-journey="${journeyKey(map)}"`:''}`),
-            finale:catInvitation(decorativeCat('krzywolap'),'Misja Kociego Mistrza',ready?'Wszystkie mapy za Tobą! Do 8 poznanych pytań, jeden mały finał i +1 ★.':'Dobrowolny finał otworzy się po ukończeniu wszystkich map tego modułu.','module-ritual',ready?'Podejmuję misję!':'Najpierw poznaj moduł',`data-kind="finale" data-module="${moduleId}" ${ready?'':'disabled'}`,'finale'),
+            opening:catInvitation(decorativeCat('albert'),'Kocia rozgrzewka','Do 5 krótkich pytań z poznanego materiału. Rozruszaj łapki przed tą mapą!','module-ritual','Rozgrzej łapki',{kind:'opening',module:moduleId,journey:map?journeyKey(map):undefined}),
+            finale:catInvitation(decorativeCat('krzywolap'),'Misja Kociego Mistrza',ready?'Wszystkie mapy za Tobą! Do 8 poznanych pytań, jeden mały finał i +1 ★.':'Dobrowolny finał otworzy się po ukończeniu wszystkich map tego modułu.','module-ritual',ready?'Podejmuję misję!':'Najpierw poznaj moduł',{kind:'finale',module:moduleId},'finale',!ready),
         };
     }
     function mapView() {

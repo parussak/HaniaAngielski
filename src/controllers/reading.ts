@@ -1,3 +1,4 @@
+import type {OwnerCall} from '../app/action-payloads.ts';
 import type {Module,Progress} from '../learning/model.ts';
 import {advanceReading,readingOf,readingView} from '../learning/readings.ts';
 import {isOwnedBy,unhandled} from '../app/actions.ts';
@@ -42,7 +43,7 @@ export function createReadingController(state: ReadingState, { mutate }: Reading
         const peek = state.readingQuestionPeek;
         state.readingQuestionPeek = peek?.sessionId === sessionId && peek.key === key && peek.term === term ? undefined : {sessionId, key, term};
     };
-    async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
+    async function handleAction(...[action, payload]: OwnerCall<'reading'>): Promise<boolean> {
         if(!isOwnedBy('reading',action))return false;
         switch(action){
         case 'reading-next':{
@@ -55,17 +56,17 @@ export function createReadingController(state: ReadingState, { mutate }: Reading
             return true;
         }
         case 'reading-peek':{
-            const s = state.progress.active, view = s && readingView(state.modules, s, readingShown(state)), sentence = el.dataset.sentence ?? '';
+            const s = state.progress.active, view = s && readingView(state.modules, s, readingShown(state)), sentence = payload.sentence ?? '';
             if (!s || !view || sentence === view.tapSentence) return true;
             const index = view.reading.sentences.findIndex(x => x.id === sentence);
             if (index < 0 || index >= view.visible) return true;
-            togglePeek(s.id, sentence, el.dataset.word || undefined);
+            togglePeek(s.id, sentence, payload.word || undefined);
             return true;
         }
         case 'reading-question-peek':{
             const s = state.progress.active;
             if (!s) return true;
-            const {key,term} = el.dataset, view = readingView(state.modules, s, readingShown(state));
+            const {key,term} = payload, view = readingView(state.modules, s, readingShown(state));
             const current = s.items[s.index];
             const question = view
                 ? view.questions.find(q => q.status !== 'hidden' && q.item.key === key)?.question

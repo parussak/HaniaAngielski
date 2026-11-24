@@ -5,7 +5,8 @@ import { createBackupController } from '../controllers/backup.ts';
 import { createLearningController } from '../controllers/learning.ts';
 import { createAppController } from '../controllers/app.ts';
 import { createSpeechController } from '../controllers/speech.ts';
-import { ownerOf, unhandled } from './actions.ts';
+import { ownerOf, unhandled, type ActionOwner } from './actions.ts';
+import { isCallOwnedBy, readCall, type ActionCall, type OwnerCall } from './action-payloads.ts';
 import { ProgressSync } from '../sync.ts';
 import {bindHouseDrag} from './house-drag.ts';
 import {homeFor} from '../house/progress.ts';
@@ -35,29 +36,29 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
         if (input instanceof HTMLInputElement && grammarSearch.handleInput(input)) filterGrammarTopics(root, state.grammarQuery);
     });
     const app = createAppController(state, { confirm: message => window.confirm(message), installPwa, prepareOffline, applyUpdate }), speech = createSpeechController();
-    // Jedyny przełącznik akcji: właściciel (spis w `actions.ts`) wskazuje kontroler. Nieznana nazwa nic nie robi.
-    async function action(action: string, el: HTMLElement) {
+    // Jedyny przełącznik akcji: właściciel (spis w `actions.ts`) wskazuje kontroler. Nieznana nazwa albo brak wymaganych
+    // danych (`call === null`) nic nie robi. Rzutowanie na akcje właściciela jest bezpieczne: `owner` wynika z nazwy akcji.
+    async function action(name: string, call: ActionCall | null) {
         state.notice = '';
-        const owner = ownerOf(action);
+        const owner = ownerOf(name), owned = <O extends ActionOwner>(_owner: O) => call as OwnerCall<O>;
         // Wyczyszczenie błędu planszy dotyczy każdej akcji poza domkiem (tak jak wcześniej, gdy akcje przechodziły przez naukę).
         if (owner !== 'house')
             state.boardError = undefined;
         switch (owner) {
-            case 'house': await house.handleAction(action, el); return;
-            case 'navigation': case 'starts': case 'answers': case 'reading': await learning.handleAction(action, el); return;
-            case 'backup': await backups.handleAction(action, el); return;
-            case 'account': await accounts.handleAction(action, el); return;
-            case 'app': await app.handleAction(action); return;
-            case 'speech': speech.handleAction(action, el); return;
+            case 'house': await house.handleAction(...owned(owner)); return;
+            case 'navigation': case 'starts': case 'answers': case 'reading': await learning.handleAction(...owned(owner)); return;
+            case 'backup': await backups.handleAction(...owned(owner)); return;
+            case 'account': await accounts.handleAction(...owned(owner)); return;
+            case 'app': await app.handleAction(...owned(owner)); return;
+            case 'speech': speech.handleAction(...owned(owner)); return;
             case undefined: return;
             default: unhandled(owner);
         }
     }
     const drag=bindHouseDrag(root,()=>({h:homeFor(state.progress,currentCourse(state)?.id),room:state.chosenRoom,course:currentCourse(state)?.id??'',owner:state.user?.uid??'guest',editing:state.screen==='house'&&state.houseEditing,busy:state.busy,epoch:state.progress}), (id,position,scope)=>{
-        const proxy=document.createElement('button');Object.assign(proxy.dataset,{id,x:String(position.x),y:String(position.y),room:scope.room,course:scope.course,owner:scope.owner});
-        void run(()=>action('grid-move',proxy));
+        void run(()=>action('grid-move',['grid-move',{id,x:position.x,y:position.y,room:scope.room,course:scope.course,owner:scope.owner}]));
     });
-    const gaps=bindGapDrag(root,(key,answer)=>{const proxy=document.createElement('button');Object.assign(proxy.dataset,{key,answer});void run(()=>action('gap-place',proxy));});
+    const gaps=bindGapDrag(root,(key,answer)=>{void run(()=>action('gap-place',['gap-place',{key,answer}]));});
     root.addEventListener('click', ev => {
         if(gaps.consumeClick()||drag.consumeClick(ev)){ev.preventDefault();return;}
         const el = (ev.target as HTMLElement).closest<HTMLElement>('[data-action]');
@@ -65,8 +66,9 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
             return;
         ev.preventDefault();
         // D-58: listening changes no progress, so it neither saves nor redraws — unless sound just failed.
-        if (ownerOf(el.dataset.action!) === 'speech') { if (!speech.handleAction(el.dataset.action!, el)) void run(async () => {}); return; }
-        void run(() => action(el.dataset.action!, el));
+        const name = el.dataset.action!, call = readCall(name, el);
+        if (call && isCallOwnedBy('speech', call)) { if (!speech.handleAction(...call)) void run(async () => {}); return; }
+        void run(() => action(name, call));
     });
     bindReadingShortcut(root);
     root.addEventListener('submit', ev => {
@@ -80,9 +82,7 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
             input.focus();
             return;
         }
-        const proxy = document.createElement('button');
-        proxy.dataset.answer = input.value;
-        void run(() => action('answer', proxy));
+        void run(() => action('answer', ['answer', { answer: input.value }]));
     });
     root.addEventListener('change', ev => { const input = ev.target as HTMLInputElement; if (input.id === 'listening') { speaker().setEnabled(input.checked); void run(async () => {}); return; }
         learning.handleSettingsChange(ev.target as HTMLInputElement); void backups.handleChange(ev); });

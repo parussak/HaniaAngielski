@@ -30,7 +30,7 @@ export function journeyList(modules: Module[], journeys: Journey[], progress: Pr
     </span>
     </div>
     <p class="retention-overview ${reviews.complete?'is-mastered':''}">${e(reviewProgressText(reviews))}</p>
-    <button class="primary" ${act('map')} data-id="${e(j.moduleId)}" data-journey="${e(journeyKey(j))}" aria-label="Otwórz mapę ${e(j.title)}">Otwórz mapę ${icon('arrow')}</button>
+    <button class="primary" ${act('map',{id:j.moduleId,journey:journeyKey(j)})} aria-label="Otwórz mapę ${e(j.title)}">Otwórz mapę ${icon('arrow')}</button>
     </div>
     <img src="./illustrations/word-have-a-picnic.svg" alt="" width="110" height="100">
     </article>`;
@@ -63,7 +63,7 @@ export function moduleList(modules: Module[]) {
     <div class="topic-tags">${m.topics.map(t => `<span>${e(t)}</span>`).join('')}</div>
     <div class="module-bottom">
     <span>${m.basicFlashcardIds?.length ?? m.words.length} podstawowych / ${m.words.length} wszystkich fiszek <br>${m.exercises.length} zadań</span>
-    <button class="round-button" ${act('module')} data-id="${e(m.id)}" aria-label="Otwórz moduł ${e(m.name)}">${icon('arrow')}</button>
+    <button class="round-button" ${act('module',{id:m.id})} aria-label="Otwórz moduł ${e(m.name)}">${icon('arrow')}</button>
     </div>
     </div>
     </article>`).join('')}<article class="coming-card">

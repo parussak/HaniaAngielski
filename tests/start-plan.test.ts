@@ -53,7 +53,7 @@ test('lekcja z mapy: nieznana daje komunikat, znana otwiera sesję, wznowienie t
  if(plan.kind!=='open')return;
  assert.ok(plan.confirm);assert.equal(plan.resetRewards,true);
  const p=emptyProgress();p.active=plan.session;
- const again=planBeginLesson(input({progress:p}),{id:lesson.id,restart:'true'});
+ const again=planBeginLesson(input({progress:p}),{id:lesson.id,restart:true});
  assert.equal(again.kind==='open'&&again.confirm,null);
  const other=planBeginLesson(input({progress:p}),{id:lesson.id});
  assert.ok(other.kind==='open'&&other.confirm);

@@ -1,3 +1,4 @@
+import type {OwnerCall} from '../app/action-payloads.ts';
 import { type Backup, type Progress, type Session, emptyProgress } from '../learning/model.ts';
 import type { Screen } from '../app/state.ts';
 import { firebaseMessage } from '../firebase-errors.ts';
@@ -78,7 +79,7 @@ export function createAccountController(state: AccountState, { sync, scheduleSyn
         setUser(account);
         await storeUser(state.user);
     }
-    async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
+    async function handleAction(...[action]: OwnerCall<'account'>): Promise<boolean> {
         if(!isOwnedBy('account',action))return false;
         switch(action){
         case 'account':{

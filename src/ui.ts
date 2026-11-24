@@ -1,4 +1,5 @@
 import type { AppAction } from './app/actions.ts';
+import type { BareAction, PayloadArgs } from './app/action-payloads.ts';
 export const e = (value: unknown) => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
 const icons: Record<string, string> = {
     paw:'<ellipse cx="5" cy="8" rx="2.3" ry="3"/><ellipse cx="10" cy="5" rx="2.2" ry="3"/><ellipse cx="15" cy="5" rx="2.2" ry="3"/><ellipse cx="20" cy="8" rx="2.3" ry="3"/><path d="M6 16c0-3 3-6 6-6s6 3 6 6c0 6-4 3-6 3s-6 3-6-3Z"/>',
@@ -18,8 +19,13 @@ const icons: Record<string, string> = {
   repeat: '<path d="M20 8a8 8 0 0 0-14-3L3 8m0-5v5h5m-4 8a8 8 0 0 0 14 3l3-3m0 5v-5h-5"/>',
 };
 export const icon = (name: string) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name] ?? icons.spark}</svg>`;
-/** Jedyne miejsce, które zapisuje `data-action`: nazwa musi być w spisie akcji (app/actions.ts). */
-export const act = (action: AppAction) => `data-action="${action}"`;
-export const button = (action: AppAction, text: string, cls = 'primary') => `<button class="${cls}" ${act(action)}>${text}</button>`;
+/** Jedyne miejsce, które zapisuje `data-action` i dane akcji (`data-*`): nazwa jest w spisie, a pola muszą pasować do typu (app/action-payloads.ts). */
+export const act = <A extends AppAction>(action: A, ...[payload]: PayloadArgs<A>) => {
+    const fields = Object.entries((payload ?? {}) as Record<string, string | number | boolean | undefined>)
+        .filter(([, value]) => value !== undefined && value !== false)
+        .map(([key, value]) => ` data-${key.replace(/[A-Z]/g, c => '-' + c.toLowerCase())}="${e(value)}"`);
+    return `data-action="${action}"${fields.join('')}`;
+};
+export const button = (action: BareAction, text: string, cls = 'primary') => `<button class="${cls}" ${act(action)}>${text}</button>`;
 
 export const date = (value: string) => new Intl.DateTimeFormat('pl-PL', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(value));

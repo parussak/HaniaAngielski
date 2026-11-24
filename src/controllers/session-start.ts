@@ -1,4 +1,5 @@
 import type {Journey, JourneyIssue} from '../learning/journey.ts';
+import type {OwnerCall} from '../app/action-payloads.ts';
 import {journeyKey} from '../learning/journey.ts';
 import { currentJourney, courseModules, type JourneyScope } from '../app/selectors.ts';
 import type { Screen } from '../app/state.ts';
@@ -92,19 +93,19 @@ export function createSessionStartController(state: SessionStartState, { mutate 
         applySelection(found.selection);
         return found;
     }
-    async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
+    async function handleAction(...[action, payload]: OwnerCall<'starts'>): Promise<boolean> {
         if (!isOwnedBy('starts', action)) return false;
-        const input = startInput, data = el.dataset;
+        const input = startInput;
         switch (action) {
             case 'legendary': await applyPlan(planLegendary(input())); return true;
-            case 'module-ritual': await preparePlans(); await applyPlan(planRitual(input(), data)); return true;
-            case 'course-mode': await applyPlan(planCourseMode(input(), data)); return true;
-            case 'grammar-practice': await applyPlan(planGrammarPractice(input(), data)); return true;
-            case 'stage-review': await applyPlan(planStageReviewAction(input(), data)); return true;
-            case 'begin-lesson': await preparePlans(); await applyPlan(planBeginLesson(input(), data)); return true;
-            case 'extra-training': await applyPlan(planExtraTraining(input(), data)); return true;
-            case 'mode': await applyPlan(planMode(input(), data)); return true;
-            case 'reading-start': await applyPlan(planReadingStart(input(), data)); return true;
+            case 'module-ritual': await preparePlans(); await applyPlan(planRitual(input(), payload)); return true;
+            case 'course-mode': await applyPlan(planCourseMode(input(), payload)); return true;
+            case 'grammar-practice': await applyPlan(planGrammarPractice(input(), payload)); return true;
+            case 'stage-review': await applyPlan(planStageReviewAction(input(), payload)); return true;
+            case 'begin-lesson': await preparePlans(); await applyPlan(planBeginLesson(input(), payload)); return true;
+            case 'extra-training': await applyPlan(planExtraTraining(input(), payload)); return true;
+            case 'mode': await applyPlan(planMode(input(), payload)); return true;
+            case 'reading-start': await applyPlan(planReadingStart(input(), payload)); return true;
             default: return unhandled(action);
         }
     }

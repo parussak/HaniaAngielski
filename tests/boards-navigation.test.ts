@@ -74,7 +74,7 @@ function state(){const s=new AppState();s.modules=[m];s.courses=[course];s.selec
 test('kontroler blokuje obejście Dalej przy pustej luce bez zapisu lub rozliczenia nagrody',async()=>{
  const s=state();s.progress=active(1);s.lastReward=7;const before=structuredClone(s.progress);let writes=0;
  const controller=createLearningController(s,{courses:{select:async()=>false,restore:async()=>{},followSession:async()=>{}},scheduleReviewMigration:()=>{},mutate:async change=>{writes++;change(s.progress);}});
- assert.equal(await controller.handleAction('next',{dataset:{}} as HTMLElement),true);assert.deepEqual(s.progress,before);assert.equal(writes,0);assert.equal(s.lastReward,7);
+ assert.equal(await controller.handleAction('next'),true);assert.deepEqual(s.progress,before);assert.equal(writes,0);assert.equal(s.lastReward,7);
 });
 test('historia zapisuje ekrany, nie odpowiedzi, i przywraca lekcję tylko właściwemu kontu',t=>{
  const originalHistory=Object.getOwnPropertyDescriptor(globalThis,'history'),originalLocation=Object.getOwnPropertyDescriptor(globalThis,'location');const entries:unknown[]=[];

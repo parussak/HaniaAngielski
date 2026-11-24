@@ -1,3 +1,4 @@
+import type {OwnerCall} from '../app/action-payloads.ts';
 import type {Screen} from '../app/state.ts';
 import {purchase,place,roomAvailable,homeFor,moveOnGrid} from '../house/progress.ts';
 import {decorations} from '../house/catalog.ts';
@@ -40,31 +41,31 @@ export function createHouseController(state:HouseState,{mutate,courseId}:HousePo
     }
     function showTab(tab:string|undefined){if(tab==='shop'||tab==='storage')state.houseTab=tab;}
     function chooseDecoration(id:string,room?:string){state.chosenDecoration=id;if(room!==undefined)state.chosenRoom=room;}
-    async function handleAction(action:string,el:HTMLElement):Promise<boolean>{
+    async function handleAction(...[action,payload]:OwnerCall<'house'>):Promise<boolean>{
         if(!isOwnedBy('house',action))return false;
         switch(action){
         case 'house-edit':{toggleEditing();return true;}
         case 'grid-move':case 'grid-nudge':case 'grid-place':{
             if(!state.houseEditing)return true;
-            const course=courseId(),room=state.chosenRoom,id=el.dataset.id??state.chosenDecoration;
-            if(el.dataset.owner&&el.dataset.owner!==(state.user?.uid??'guest'))return true;
-            if(el.dataset.course&&el.dataset.course!==course||el.dataset.room&&el.dataset.room!==room)return true;
+            const course=courseId(),room=state.chosenRoom,id=payload.id??state.chosenDecoration;
+            if(payload.owner&&payload.owner!==(state.user?.uid??'guest'))return true;
+            if(payload.course&&payload.course!==course||payload.room&&payload.room!==room)return true;
             const h=homeFor(state.progress,course),old=boxFor(h,id,room);
-            const position=action==='grid-move'?{x:Number(el.dataset.x),y:Number(el.dataset.y)}:{x:old.x+Number(el.dataset.dx??0),y:old.y+Number(el.dataset.dy??0)};
+            const position=action==='grid-move'?{x:payload.x,y:payload.y}:{x:old.x+(action==='grid-nudge'?payload.dx??0:0),y:old.y+(action==='grid-nudge'?payload.dy??0:0)};
             const error=placementError(h,id,position,room);
             if(error){announce(error);return true;}
             let moved=false;await mutate(p=>{moved=moveOnGrid(p,id,position,course,room);});
             chooseDecoration(id);announce(moved?'Pozycja zapisana.':'Nie udało się ustawić przedmiotu.');return true;
         }
         case 'select-room':{
-            const room=el.dataset.id??'salon';
+            const room=payload.id??'salon';
             if(roomAvailable(state.progress,courseId(),room))openRoom(room);
             return true;
         }
         case 'house':{openOverview();return true;}
-        case 'house-tab':{showTab(el.dataset.tab);return true;}
+        case 'house-tab':{showTab(payload.tab);return true;}
         case 'select-decoration':{
-            const id=el.dataset.id??'pillow',d=decorations.find(d=>d.id===id),course=courseId();
+            const id=payload.id??'pillow',d=decorations.find(d=>d.id===id),course=courseId();
             chooseDecoration(id);
             if(d){
                 const ownRoom=itemRoom(homeFor(state.progress,course),d.id);
@@ -74,7 +75,7 @@ export function createHouseController(state:HouseState,{mutate,courseId}:HousePo
         }
         case 'buy-decoration':{
             let bought=false;
-            await mutate(p=>{bought=purchase(p,el.dataset.id??'',courseId(),state.chosenRoom);});
+            await mutate(p=>{bought=purchase(p,payload.id??'',courseId(),state.chosenRoom);});
             announce(bought?'Nowa dekoracja jest Twoja! Możesz wybrać dla niej miejsce.':'Przedmiot jest już Twój albo potrzeba jeszcze kilku gwiazdek.');
             return true;
         }
@@ -82,8 +83,8 @@ export function createHouseController(state:HouseState,{mutate,courseId}:HousePo
             let placed=false;const hidden:string[]=[];
             await mutate(p=>{
                 const course=courseId(),before=structuredClone(homeFor(p,course)?.purchases??{});
-                const id=el.dataset.id??'';
-                placed=itemRoom(homeFor(p,course),id)===state.chosenRoom&&place(p,id,el.dataset.slot||null,course,state.chosenRoom);
+                const id=payload.id??'';
+                placed=itemRoom(homeFor(p,course),id)===state.chosenRoom&&place(p,id,payload.slot||null,course,state.chosenRoom);
                 if(placed)for(const [id,v] of Object.entries(homeFor(p,course)!.purchases))if(before[id]?.slot&&!v.slot)hidden.push(decorations.find(d=>d.id===id)?.name??id);
             });
             announce(placed?`Ustawienie domku zapisane.${hidden.length?` W schowku: ${hidden.join(', ')}.`:''}`:'Nie można ustawić tutaj tego przedmiotu. Wybierz dostępne miejsce.');

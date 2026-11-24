@@ -59,3 +59,16 @@ test('widoki budują data-action tylko z typu, a użyte nazwy są w spisie',()=>
  }
  assert.ok(used.size>20,'test nie znalazł akcji w widokach — zmienił się sposób ich budowania?');
 });
+
+// Konstytucja, pkt 6: dane akcji są typowane. `dataset` czyta tylko granica zdarzeń (src/app/), więc kontrolery
+// i planery dostają gotowy payload i nie wiedzą, że istnieje DOM.
+test('kontrolery i planery nie sięgają do dataset — payload czyta granica zdarzeń',()=>{
+ const files=[...sourceFiles(new URL('controllers/',src)),...sourceFiles(new URL('learning/',src))];
+ assert.ok(files.length>20);
+ const offenders:string[]=[];
+ for(const file of files)walk(parse(file),node=>{
+  if(ts.isPropertyAccessExpression(node)&&node.name.text==='dataset')offenders.push(file.href.slice(src.href.length));
+  if(ts.isTypeReferenceNode(node)&&node.typeName.getText()==='DOMStringMap')offenders.push(file.href.slice(src.href.length));
+ });
+ assert.deepEqual(offenders,[]);
+});

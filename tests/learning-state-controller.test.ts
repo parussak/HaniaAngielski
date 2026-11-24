@@ -8,7 +8,7 @@ import {engineModule} from './fixtures/engine.ts';
 import {courseFixture} from './fixtures/course-materials.ts';
 
 // Kontroler nauki dostaje zwykły obiekt z wąskim LearningState — bez klasy AppState, DOM-u i prawdziwego zapisu.
-const element=(dataset:Record<string,string>={})=>({dataset}) as HTMLElement;
+const element=(payload:Record<string,string|number|boolean>={})=>payload as never;
 function setup(){
  const course=courseFixture().courses[0],m=engineModule('learning-state-unit',course.id);
  course.moduleIds=[m.id];

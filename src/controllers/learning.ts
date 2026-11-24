@@ -11,7 +11,8 @@ import {lessonContext} from '../learning/lesson-flow.ts';
 import {createSessionAnswerController,type AnswerState} from './session-answers.ts';
 import {createSessionStartController,type SessionStartState} from './session-start.ts';
 import {createReadingController,type ReadingState} from './reading.ts';
-import {isOwnedBy,unhandled} from '../app/actions.ts';
+import {unhandled} from '../app/actions.ts';
+import {isCallOwnedBy,type OwnerCall} from '../app/action-payloads.ts';
 /**
  * Jedyne, co kontroler nauki widzi ze stanu (najwęższy dostęp): to, czego sam potrzebuje do
  * nawigacji, oraz wąskie stany kontrolerów, które składa (odpowiedzi, czytanka, start sesji).
@@ -39,14 +40,13 @@ export function createLearningController(state: LearningState, { mutate, schedul
         else state.screen='study';
     }
     // Akcje nauki: nawigację obsługuje ten plik, resztę jej właściciele (spis: app/actions.ts).
-    async function handleAction(action: string, el: HTMLElement): Promise<boolean> {
-        if(isOwnedBy('answers',action))return answers.handleAction(action,el);
-        if(isOwnedBy('reading',action))return reading.handleAction(action,el);
-        if(isOwnedBy('starts',action))return starts.handleAction(action,el);
-        return navigate(action,el);
+    async function handleAction(...call: OwnerCall<'navigation' | 'starts' | 'answers' | 'reading'>): Promise<boolean> {
+        if(isCallOwnedBy('answers',call))return answers.handleAction(...call);
+        if(isCallOwnedBy('reading',call))return reading.handleAction(...call);
+        if(isCallOwnedBy('starts',call))return starts.handleAction(...call);
+        return navigate(...call as OwnerCall<'navigation'>);
     }
-    async function navigate(action: string, el: HTMLElement): Promise<boolean> {
-        if(!isOwnedBy('navigation',action))return false;
+    async function navigate(...[action, payload]: OwnerCall<'navigation'>): Promise<boolean> {
         switch(action){
         case 'continue-lesson':{
             const active=state.progress.active,j=currentJourney(state);
@@ -70,20 +70,20 @@ export function createLearningController(state: LearningState, { mutate, schedul
         }
         case 'warmup':{state.screen='warmup';return true;}
         case 'courses':{ state.screen = 'courses'; return true; }
-        case 'progress-course':{ if (await courses.select(el.dataset.id ?? '')) state.screen = 'progress'; return true; }
-        case 'select-course':{ if (await courses.select(el.dataset.id ?? '')) state.screen = 'home'; return true; }
+        case 'progress-course':{ if (await courses.select(payload.id)) state.screen = 'progress'; return true; }
+        case 'select-course':{ if (await courses.select(payload.id)) state.screen = 'home'; return true; }
         case 'resume':{ await courses.followSession(); showResume(); return true; }
         case 'module':case 'quick-start':{
-            const m = state.modules.find(m => m.id === el.dataset.id);
+            const m = state.modules.find(m => m.id === payload.id);
             if (m) { if (courseKey(m) !== state.selectedCourseId) await courses.select(courseKey(m)); state.selected = m; state.screen = 'setup'; }
             return true;
         }
         case 'course-practice':{ state.screen = 'course-practice'; return true; }
         case 'grammar':{ state.screen = 'grammar'; return true; }
         case 'grammar-lesson':{
-            const j = state.journeys.find(j => j.moduleId === el.dataset.module && journeyKey(j) === el.dataset.journey), m = state.modules.find(m => m.id === el.dataset.module);
-            if (j && m && courseModules(state).includes(m) && lessons(j).some(l => l.lesson.id === el.dataset.id)) {
-                state.selected = m; state.selectedJourneyKey = journeyKey(j); state.introLessonId = el.dataset.id!; state.answerMode = 'mixed'; state.screen = 'lesson-intro';
+            const j = state.journeys.find(j => j.moduleId === payload.module && journeyKey(j) === payload.journey), m = state.modules.find(m => m.id === payload.module);
+            if (j && m && courseModules(state).includes(m) && lessons(j).some(l => l.lesson.id === payload.id)) {
+                state.selected = m; state.selectedJourneyKey = journeyKey(j); state.introLessonId = payload.id; state.answerMode = 'mixed'; state.screen = 'lesson-intro';
             }
             return true;
         }
@@ -134,18 +134,18 @@ export function createLearningController(state: LearningState, { mutate, schedul
             return true;
         }
         case 'map':{
-            const module = state.modules.find(m => m.id === el.dataset.id);
+            const module = state.modules.find(m => m.id === payload.id);
             if (module) { if (courseKey(module) !== state.selectedCourseId) await courses.select(courseKey(module)); state.selected = module; }
             state.selected ??= courseModules(state)[0];
             await starts.preparePlans();
-            if (el.dataset.journey !== undefined) state.selectedJourneyKey = el.dataset.journey;
+            if (payload.journey !== undefined) state.selectedJourneyKey = payload.journey;
             state.screen = 'map';
             scheduleReviewMigration();
             return true;
         }
         case 'open-lesson':{
             await starts.preparePlans();
-            const j = currentJourney(state), l = j && lessons(j).find(l => l.lesson.id === el.dataset.id)?.lesson;
+            const j = currentJourney(state), l = j && lessons(j).find(l => l.lesson.id === payload.id)?.lesson;
             if (!j || !l || !unlocked(j, l, state.progress)) {
                 state.notice = 'Najpierw ukończ wcześniejszą lekcję.';
                 return true;

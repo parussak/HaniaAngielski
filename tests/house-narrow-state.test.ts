@@ -6,7 +6,7 @@ import {legacyCourse} from '../src/materials/identity.ts';
 import {createHouseController,type HouseState} from '../src/controllers/house.ts';
 
 // Kontroler domku dostaje zwykły obiekt z wąskim HouseState — bez AppState, DOM-u i prawdziwego zapisu.
-const element=(dataset:Record<string,string>={})=>({dataset}) as HTMLElement;
+const element=(payload:Record<string,string|number|boolean>={})=>payload as never;
 function setup(over:Partial<HouseState>={}){
  const state:HouseState={progress:emptyProgress(),notice:'',screen:'home',houseOverview:false,houseEditing:false,houseTab:'shop',chosenRoom:'salon',chosenDecoration:'pillow',user:null,...over};
  creditStars(state.progress,20,legacyCourse);
@@ -43,15 +43,15 @@ test('ustawienie i ruch po siatce: tylko w edycji, dla swojego konta; błąd zap
  await f.controller.handleAction('place-decoration',element({id:'pillow',slot:'window'}));
  assert.equal(homeFor(f.state.progress,legacyCourse)!.purchases.pillow.slot,'window');
  const before=structuredClone(f.state.progress),count=f.saves();
- await f.controller.handleAction('grid-move',element({id:'pillow',x:'5',y:'12'}));
+ await f.controller.handleAction('grid-move',element({id:'pillow',x:5,y:12}));
  assert.deepEqual(f.state.progress,before);
  await f.controller.handleAction('house-edit',element());assert.equal(f.state.houseEditing,true);
- await f.controller.handleAction('grid-move',element({id:'pillow',x:'5',y:'12',owner:'inne-konto'}));
+ await f.controller.handleAction('grid-move',element({id:'pillow',x:5,y:12,owner:'inne-konto'}));
  assert.equal(f.saves(),count);
- await f.controller.handleAction('grid-move',element({id:'pillow',x:'5',y:'12'}));
+ await f.controller.handleAction('grid-move',element({id:'pillow',x:5,y:12}));
  assert.deepEqual(homeFor(f.state.progress,legacyCourse)!.purchases.pillow.position,{x:5,y:12});
  const saved=structuredClone(f.state.progress);f.state.notice='Przed zapisem';f.fail();
- await assert.rejects(f.controller.handleAction('grid-move',element({id:'pillow',x:'6',y:'12'})),/Zapis niedostępny/);
+ await assert.rejects(f.controller.handleAction('grid-move',element({id:'pillow',x:6,y:12})),/Zapis niedostępny/);
  assert.deepEqual(f.state.progress,saved);assert.equal(f.state.notice,'Przed zapisem');
 });
 

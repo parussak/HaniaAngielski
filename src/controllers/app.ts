@@ -1,3 +1,4 @@
+import type {OwnerCall} from '../app/action-payloads.ts';
 import type { Screen } from '../app/state.ts';
 import type { Backup, Progress } from '../learning/model.ts';
 import { isOwnedBy, unhandled } from '../app/actions.ts';
@@ -21,7 +22,7 @@ interface AppPorts {
 export function createAppController(state: AppControllerState, { confirm, installPwa, prepareOffline, applyUpdate }: AppPorts) {
     // Przejście na ekran zawsze porzuca niezatwierdzoną kopię.
     const goTo = (screen: Screen) => { state.screen = screen; state.pending = null; };
-    async function handleAction(action: string): Promise<boolean> {
+    async function handleAction(...[action]: OwnerCall<'app'>): Promise<boolean> {
         if (!isOwnedBy('app', action))
             return false;
         switch (action) {

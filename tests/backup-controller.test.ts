@@ -17,7 +17,7 @@ function setup(){
   saveFile:(name,text)=>{files.push({name,text});},
   run:async task=>{await task();},
  });
- const press=(action:string)=>controller.handleAction(action,{dataset:{}} as unknown as HTMLElement);
+ const press=(action:string)=>controller.handleAction(action as never);
  const choose=(file:{size:number,text:()=>Promise<string>}|undefined)=>controller.handleChange({target:{id:'import-file',files:file?[file]:[]}} as unknown as Event);
  const jsonFile=(text:string)=>({size:text.length,text:async()=>text});
  return {state,press,choose,jsonFile,progress:()=>current,files,saves};

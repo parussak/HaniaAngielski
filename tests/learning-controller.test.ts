@@ -47,7 +47,7 @@ for(const entry of entries) for(const scenario of ['odmowa','zgoda','bez aktywne
   const original=Object.getOwnPropertyDescriptor(globalThis,'window');
   Object.defineProperty(globalThis,'window',{configurable:true,value:{confirm:(message:string)=>{messages.push(message);return scenario!=='odmowa';}}});
   t.after(()=>{if(original)Object.defineProperty(globalThis,'window',original);else Reflect.deleteProperty(globalThis,'window');});
-  const run=()=>f.controller.handleAction(entry.action,{dataset:entry.data} as HTMLElement);
+  const run=()=>f.controller.handleAction(entry.action as never,entry.data as never);
   if(scenario==='błąd zapisu')await assert.rejects(run(),/Zapis niedostępny/);
   else assert.equal(await run(),true);
   assert.deepEqual(messages,scenario==='bez aktywnej sesji'?[]:[entry.message]);

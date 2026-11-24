@@ -233,7 +233,7 @@ test('kontroler: tłumaczenie zostaje po „Dalej”, podgląd niczego nie zapis
  let saves=0;
  const controller=createLearningController(state,{courses:{select:async()=>false,restore:async()=>{},followSession:async()=>{}} as any,scheduleReviewMigration:()=>{},
   mutate:async(change:(p:Progress)=>void)=>{const draft=structuredClone(state.progress);change(draft);state.progress=draft;saves++;}});
- const press=(action:string,data:Record<string,string>={})=>controller.handleAction(action,{dataset:data} as unknown as HTMLElement);
+ const press=(action:string,data:Record<string,string>={})=>controller.handleAction(action as never,data as never);
  const key=state.progress.active!.items[0].key;
  await press('reading-question-peek',{key,term:'are they sitting'});
  assert.deepEqual(state.readingQuestionPeek,{sessionId:state.progress.active!.id,key,term:'are they sitting'});

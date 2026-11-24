@@ -10,10 +10,10 @@ export function listenButtons(task: {text:string;language:string}, key: string, 
 }
 /** Choices of a listening task: each option is shown as the word (and picture) it stands for. */
 export function listenOptionsView(q: Exercise, s: Session, choices: ListeningChoices) {
-    return `<div class="answer-options listen-options">${optionsFor({...q,options:choices.map(c=>c.answer)}, s).map((o, i) => {const choice=choices.find(c=>c.answer===o)!;return `<button class="option listen-option" ${act('answer')} data-answer="${e(o)}"><span aria-hidden="true">${String.fromCharCode(65 + i)}</span>${choice.illustration?.symbol?`<span class="listen-picture" aria-hidden="true">${e(choice.illustration.symbol)}</span>`:choice.illustration?.src?`<img class="listen-picture" src="${e(new URL(choice.illustration.src, document.baseURI).href)}" alt="" width="48" height="34">`:''}${e(choice.label)}</button>`;}).join('')}</div>`;
+    return `<div class="answer-options listen-options">${optionsFor({...q,options:choices.map(c=>c.answer)}, s).map((o, i) => {const choice=choices.find(c=>c.answer===o)!;return `<button class="option listen-option" ${act('answer',{answer:o})}><span aria-hidden="true">${String.fromCharCode(65 + i)}</span>${choice.illustration?.symbol?`<span class="listen-picture" aria-hidden="true">${e(choice.illustration.symbol)}</span>`:choice.illustration?.src?`<img class="listen-picture" src="${e(new URL(choice.illustration.src, document.baseURI).href)}" alt="" width="48" height="34">`:''}${e(choice.label)}</button>`;}).join('')}</div>`;
 }
 export function choiceOptionsView(q: Exercise, s: Session) {
-    return `<div class="answer-options">${optionsFor(q, s).map((o, i) => `<button class="option" ${act('answer')} data-answer="${e(o)}"><span aria-hidden="true">${String.fromCharCode(65 + i)}</span>${e(o)}</button>`).join('')}</div>`;
+    return `<div class="answer-options">${optionsFor(q, s).map((o, i) => `<button class="option" ${act('answer',{answer:o})}><span aria-hidden="true">${String.fromCharCode(65 + i)}</span>${e(o)}</button>`).join('')}</div>`;
 }
 /** The typed answer: optional hint, input and the check button. */
 export function textAnswerView(hint: string | null | undefined, asking: boolean) {

@@ -13,7 +13,7 @@ import {createSessionAnswerController,type AnswerState} from '../src/controllers
 // Kontroler odpowiedzi dostaje zwykły obiekt z wąskim AnswerState — bez AppState, DOM-u i prawdziwego zapisu.
 const course=courseFixture().courses[0],m=engineModule('answers-unit',course.id);
 const j:Journey={version:1,moduleId:m.id,title:'Mapa',stages:[{id:'stage',title:'Etap',cat:'albert',illustration:'illustrations/test.svg',lessons:[{id:'words',title:'Słowa',intro:'',wordIds:m.words.slice(0,5).map(w=>w.id),exerciseIds:[],ruleIds:[]},{id:'gaps',title:'Luki',intro:'',wordIds:[],exerciseIds:m.exercises.filter(q=>q.kind==='grammar').slice(0,6).map(q=>q.id),ruleIds:[]}]}]};
-const element=(dataset:Record<string,string>={})=>({dataset}) as HTMLElement;
+const element=(payload:Record<string,string|number|boolean>={})=>payload as never;
 function setup(lesson=0,mode:'mixed'|'text'='mixed'){
  const progress=emptyProgress(),l=j.stages[0].lessons[lesson];
  progress.active=varyLesson(makeLessonSession([m],j,l,mode,progress),[m],[j],j,l,progress);

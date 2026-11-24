@@ -21,17 +21,17 @@ function sentenceView(view:ReadingOnScreen,s:Session,peek:AppState['readingPeek'
  const sentence=view.reading.sentences[index],language=view.module.languageCode;
  const isTarget=sentence.id===view.tapSentence;
  const words=readingParts(sentence.text).map(part=>!part.word||isTarget?e(part.text)
-  :`<button class="reading-word" ${act('reading-peek')} data-sentence="${e(sentence.id)}" data-word="${e(part.text)}" aria-label="${e(`Przetłumacz: ${part.text}`)}">${e(part.text)}</button>`).join('');
+  :`<button class="reading-word" ${act('reading-peek',{sentence:sentence.id,word:part.text})} aria-label="${e(`Przetłumacz: ${part.text}`)}">${e(part.text)}</button>`).join('');
  const shown=!isTarget&&peek?.sessionId===s.id&&peek.sentence===sentence.id?translateInReading(view.module,view.reading,sentence.id,peek.word):undefined;
  const translation=shown?`<p class="reading-translation" role="status">${shown.from==='sentence'?`<span>${peek!.word?`„${e(peek!.word)}” — tłumaczenie całego zdania:`:'Tłumaczenie zdania:'}</span> `:`<span>„${e(peek!.word)}” —</span> `}<b>${e(shown.text)}</b></p>`:'';
- const tools=`<div class="reading-tools">${parts.say(sentence.text)}${isTarget?'':`<button class="secondary reading-translate" ${act('reading-peek')} data-sentence="${e(sentence.id)}" aria-label="Pokaż tłumaczenie zdania">PL</button>`}</div>`;
+ const tools=`<div class="reading-tools">${parts.say(sentence.text)}${isTarget?'':`<button class="secondary reading-translate" ${act('reading-peek',{sentence:sentence.id})} aria-label="Pokaż tłumaczenie zdania">PL</button>`}</div>`;
  return `<div class="reading-sentence ${sentence.id===view.newest?'reading-new':''}" data-sentence="${e(sentence.id)}"><p ${language?`lang="${e(language)}"`:''}>${words}</p>${tools}${translation}</div>`;
 }
 
 function tapWords(sentence:string,options:string[]){
  const unused=new Set(options.map(option=>normalizeAnswer(option)));
  return readingParts(sentence).map(part=>part.word&&unused.delete(normalizeAnswer(part.text))
-  ?`<button type="button" class="reading-word reading-answer" ${act('answer')} data-answer="${e(part.text)}">${e(part.text)}</button>`
+  ?`<button type="button" class="reading-word reading-answer" ${act('answer',{answer:part.text})}>${e(part.text)}</button>`
   :e(part.text)).join('');
 }
 
@@ -39,7 +39,7 @@ export function readingQuestionPrompt(state:Readonly<AppState>,s:Session,item:It
  const glossary=question.reading?.glossary,peek=state.readingQuestionPeek;
  const active=peek?.sessionId===s.id&&peek.key===item.key?peek.term:undefined;
  const text=questionGlossaryParts(question.prompt,glossary).map(part=>part.term
-  ?`<button type="button" class="reading-word" ${act('reading-question-peek')} data-key="${e(item.key)}" data-term="${e(part.term)}" aria-pressed="${part.term===active}">${e(part.text)}</button>`
+  ?`<button type="button" class="reading-word" ${act('reading-question-peek',{key:item.key,term:part.term})} aria-pressed="${part.term===active}">${e(part.text)}</button>`
   :e(part.text)).join('');
  const translation=active&&glossary&&Object.hasOwn(glossary,active)
   ?`<p class="reading-translation" role="status">„${e(active)}” — <b>${e(glossary[active])}</b></p>`:'';
@@ -56,12 +56,12 @@ function questionView(state:Readonly<AppState>,view:ReadingOnScreen,s:Session,in
  if(status==='open'){
   const answer=target
    ?`<p class="reading-hint">Dotknij jednego z wyróżnionych słów.</p>${repeated}`
-   :`<div class="answer-options" ${lang}>${optionsFor(question,s).map((o,i)=>`<button class="option" ${act('answer')} data-answer="${e(o)}"><span aria-hidden="true">${String.fromCharCode(65+i)}</span>${e(o)}</button>`).join('')}</div>`;
+   :`<div class="answer-options" ${lang}>${optionsFor(question,s).map((o,i)=>`<button class="option" ${act('answer',{answer:o})}><span aria-hidden="true">${String.fromCharCode(65+i)}</span>${e(o)}</button>`).join('')}</div>`;
   return `<section class="reading-question reading-open" aria-label="Pytanie do czytanki">${heading}${s.phase==='retry'?'<p class="retry-note">Teraz spróbuj ponownie. Pierwszy wynik pozostanie zapisany osobno.</p>':''}${answer}</section>`;
  }
  if(index===view.position)return `<section class="reading-question reading-current">${heading}${repeated}${parts.feedback(item,question)}</section>`;
  const attempt=s.attempts.find(a=>a.key===item.key)!,ok=attempt.first||attempt.corrected;
- return `<div class="reading-question reading-done ${ok?'correct':'incorrect'}"><p><span ${lang}>${text}</span> <b>${ok?'✓':'✗'} ${e(attempt.lastAnswer??attempt.answer)}</b></p>${translation}${ok?'':`<button class="secondary" ${act('retry')} data-key="${e(item.key)}">Popraw odpowiedź</button>`}</div>`;
+ return `<div class="reading-question reading-done ${ok?'correct':'incorrect'}"><p><span ${lang}>${text}</span> <b>${ok?'✓':'✗'} ${e(attempt.lastAnswer??attempt.answer)}</b></p>${translation}${ok?'':`<button class="secondary" ${act('retry',{key:item.key})}>Popraw odpowiedź</button>`}</div>`;
 }
 
 /** D-68: the text so far, sentence by sentence, with its questions in place. */

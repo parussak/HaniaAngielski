@@ -19,7 +19,7 @@ function setup(){
  const state:ReadingState={modules,get progress(){return current;}};
  let saves=0;
  const controller=createReadingController(state,{mutate:async(change:(p:Progress)=>void)=>{const draft=structuredClone(current);change(draft);current=draft;saves++;}});
- const press=(action:string,data:Record<string,string>={})=>controller.handleAction(action,{dataset:data} as unknown as HTMLElement);
+ const press=(action:string,data:Record<string,string>={})=>controller.handleAction(action as never,data as never);
  return {state,press,saves:()=>saves,progress:()=>current};
 }
 
