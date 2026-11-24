@@ -102,6 +102,6 @@ Przy przeglądzie diffu od ostatniego przeglądu:
 
 Stan na listopad 2026; poprawiamy przy okazji przeglądu, po wyborze Pauliny.
 
-- **Duże pliki:** `content-validation.ts`, `views/account.ts`, `learning/reading-format.ts` (~11 KB; do podziału na format i walidację).
+- **Duże pliki:** `content-validation.ts` (~11,8 KB) i `controllers/account.ts` (~10,1 KB; w jednym kontrolerze logowanie, przełączanie kont, synchronizacja, rozstrzyganie konfliktu lokalnego z chmurą i eksporty — do podziału). Na granicy progu: `views/account.ts` (~9,9 KB) i `adventure-view.ts` (~9,7 KB).
 - **Dwa style zapisu:** rozwinięty (wcięcia 4 spacje) i zbity w jednej linii (np. `learning/boards.ts`, `house/layout.ts`); w widokach linie do kilku tysięcy znaków. Brak automatycznego formatowania — wprowadzenie formatera to nowa zależność (zgoda Pauliny) i jednorazowy diff całych plików, osobno od innych zmian.
 - **`any`** pozostaje w `firebase.ts` (`decode`) — dane z Firebase powinny być `unknown` do czasu walidacji.
