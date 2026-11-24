@@ -1,6 +1,6 @@
 # Architektura — mapa kodu
 
-Gdzie w kodzie jest dana odpowiedzialność i jakich granic pilnujemy. Zasady działania opisują [nauka](03-nauka.md) i [zapis](06-zapis.md); tu jest tylko „gdzie”. Poprzednia wersja, z opisem realizacji kolejnych decyzji i etapów refaktoringu: [archiwum](archiwum/architektura-do-2026-11-13.md).
+Gdzie w kodzie jest dana odpowiedzialność i jakich granic pilnujemy. Zasady działania opisują [nauka](03-nauka.md) i [zapis](06-zapis.md); tu jest tylko „gdzie”. Diagramy (warstwy, przepływ akcji, start sesji, kontrolery, model danych i zapis, treść i audio): [diagramy architektury](diagramy-architektury.md). Poprzednia wersja, z opisem realizacji kolejnych decyzji i etapów refaktoringu: [archiwum](archiwum/architektura-do-2026-11-13.md).
 
 ## Warstwy i przepływ
 

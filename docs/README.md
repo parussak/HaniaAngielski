@@ -24,7 +24,7 @@ Spis bieżącej dokumentacji. Czytaj tylko dokument potrzebny do zadania — nie
 | [02 · Mechanika](02-mechanika.md) | Jakie obiekty istnieją i co mogą: kurs, moduł, mapa, lekcja, hasło, pytanie, quiz, sesja? |
 | [03 · Nauka](03-nauka.md) | Jak prowadzimy przez materiał, dobieramy treningi, zbieramy błędy i przyznajemy nagrody? |
 | [04 · Merytoryka](04-merytoryka.md) | Skąd pochodzą treści i co oznacza ich poprawność językowa? |
-| [05 · Architektura](05-architektura.md) | Gdzie w kodzie jest dana odpowiedzialność i gdzie wprowadzać zmiany? |
+| [05 · Architektura](05-architektura.md) | Gdzie w kodzie jest dana odpowiedzialność i gdzie wprowadzać zmiany? ([diagramy](diagramy-architektury.md)) |
 | [06 · Zapis](06-zapis.md) | Co i gdzie zapisujemy oraz jak chronimy wyniki? |
 | [07 · Testy](07-testy.md) | Jak kontrolujemy każdą część i kiedy dodajemy lub uruchamiamy testy? |
 | [Decyzje](decyzje.md) | Co ustalono (D-xx) i co czeka na rozstrzygnięcie (U-xx)? |
