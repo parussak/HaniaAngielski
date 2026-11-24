@@ -27,7 +27,7 @@ export const payloadSchema = {
     'guest-copy': none, 'guest-skip': none, 'resolve-local': none, 'resolve-cloud': none, 'export-cloud': none, 'export-recovery': none,
     'older-history': none, export: none, 'cancel-import': none, 'confirm-import': none,
     'continue-lesson': none, 'following-lesson': none, 'retry-maps': none, 'prepare-training': none, warmup: none, courses: none,
-    'progress-course': { id: text }, 'select-course': { id: text }, resume: none, module: { id: text }, 'quick-start': { id: text },
+    'progress-course': { id: text }, 'select-course': { id: text }, resume: none, module: { id: text },
     'course-practice': none, grammar: none, 'grammar-lesson': { module: text, journey: text, id: text }, 'next-step': none, journeys: none,
     'module-list': none, map: { id: maybeText, journey: maybeText }, 'open-lesson': { id: maybeText },
     legendary: none, 'module-ritual': { kind: maybeText, module: maybeText, journey: maybeText }, 'course-mode': { mode: maybeText },

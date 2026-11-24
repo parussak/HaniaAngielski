@@ -11,7 +11,7 @@ export const actionOwners = {
     account: ['account', 'auth-toggle', 'refresh-account', 'logout', 'switch-account', 'sync-now', 'guest-copy', 'guest-skip', 'resolve-local', 'resolve-cloud', 'export-cloud', 'export-recovery'],
     backup: ['older-history', 'export', 'cancel-import', 'confirm-import'],
     /** Nawigacja między ekranami nauki. */
-    navigation: ['continue-lesson', 'following-lesson', 'retry-maps', 'prepare-training', 'warmup', 'courses', 'progress-course', 'select-course', 'resume', 'module', 'quick-start', 'course-practice', 'grammar', 'grammar-lesson', 'next-step', 'journeys', 'module-list', 'map', 'open-lesson'],
+    navigation: ['continue-lesson', 'following-lesson', 'retry-maps', 'prepare-training', 'warmup', 'courses', 'progress-course', 'select-course', 'resume', 'module', 'course-practice', 'grammar', 'grammar-lesson', 'next-step', 'journeys', 'module-list', 'map', 'open-lesson'],
     /** Rozpoczynanie sesji (planery w `learning/start-*-plans.ts`). */
     starts: ['legendary', 'module-ritual', 'course-mode', 'grammar-practice', 'stage-review', 'begin-lesson', 'extra-training', 'mode', 'reading-start'],
     /** Odpowiedzi w trwającej sesji. */

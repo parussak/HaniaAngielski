@@ -78,7 +78,7 @@ export function createLearningController(state: LearningState, { mutate, schedul
         case 'progress-course':{ if (await courses.select(payload.id)) state.screen = 'progress'; return true; }
         case 'select-course':{ if (await courses.select(payload.id)) state.screen = 'home'; return true; }
         case 'resume':{ await courses.followSession(); showResume(); return true; }
-        case 'module':case 'quick-start':{
+        case 'module':{
             const m = state.modules.find(m => m.id === payload.id);
             if (m) { if (courseKey(m) !== state.selectedCourseId) await courses.select(courseKey(m)); state.selected = m; state.screen = 'setup'; }
             return true;
