@@ -17,6 +17,7 @@ import {continueScene} from '../learning/scenes.ts';
 import {readingOf,readingView} from '../learning/readings.ts';
 import {readingShown,type ReadingState} from './reading.ts';
 import {isOwnedBy,unhandled} from '../app/actions.ts';
+import {answerCue,finishCue,type SoundCue} from '../learning/sound-cues.ts';
 /**
  * Jedyne, co kontroler odpowiedzi widzi ze stanu (najwęższy dostęp). Dane postępu (`progress`)
  * zmienia wyłącznie port `mutate`; kontroler je tylko czyta. Pola stanu ekranu zmieniają
@@ -40,10 +41,14 @@ interface SessionAnswerPorts {
     mutate: (change: (p: Progress) => void) => Promise<void>;
     /** Identyfikator bieżącego kursu (jego portfel gwiazdek). */
     courseId: () => string;
+    /** Sygnał dźwiękowy; wołany dopiero po udanym zapisie. Brak portu = cisza. */
+    playCue?: (cue: SoundCue) => void;
 }
 // Akcje w trwającej sesji: odpowiedzi, plansze par i luk, poprawka i przejście dalej z nagrodą.
 // Rozpoczynanie sesji i nawigacja zostają w `learning.ts`.
-export function createSessionAnswerController(state: AnswerState, { mutate, courseId }: SessionAnswerPorts) {
+export function createSessionAnswerController(state: AnswerState, { mutate, courseId, playCue }: SessionAnswerPorts) {
+    // Dźwięk to skutek po zapisie: jego błąd nigdy nie przerywa nauki.
+    const cue = (sound: SoundCue | undefined) => { if (sound) try { playCue?.(sound); } catch { /* cisza */ } };
     // Każde pole stanu ekranu zmienia dokładnie jedna nazwana operacja.
     const showBoardError = (key: string, answer: string) => { state.boardError = {key, answer}; };
     const resetRewards = () => { state.lastReward = 0; state.lastStageReward = 0; };
@@ -57,12 +62,12 @@ export function createSessionAnswerController(state: AnswerState, { mutate, cour
             const active=state.progress.active;if(!active?.items[active.index].pairGroup)return true;
             const key=active.pairSelection??active.items[active.index].key,answer=payload.answer??'';
             let ok:boolean|undefined;await mutate(p=>{ok=answerOnBoard(p,state.modules,state.journeys,key,answer);});
-            if(ok===false)showBoardError(key,answer);return true;
+            if(ok===false)showBoardError(key,answer);cue(answerCue(ok));return true;
         }
         case 'gap-place':{
             const key=payload.key??'',answer=payload.answer??state.progress.active?.gapSelection??state.progress.active?.draftAnswer;
             let ok:boolean|undefined;await mutate(p=>{ok=placeGap(p,state.modules,state.journeys,key,answer);});
-            if(ok===false)showBoardError(key,answer??'');return true;
+            if(ok===false)showBoardError(key,answer??'');cue(answerCue(ok));return true;
         }
         case 'pair-select':case 'bank-select':{
             await mutate(p=>{const s=p.active;if(!s||!['question','retry'].includes(s.phase))return;
@@ -76,15 +81,18 @@ export function createSessionAnswerController(state: AnswerState, { mutate, cour
             if (!s)
                 return true;
             if(!payload.answer.trim())return true;
+            let correct:boolean|undefined;
             await mutate(p => { const session = p.active!;
                 const q=questionFor(state.modules,session.items[session.index]);
-                if (recordAnswer(p, q, payload.answer) === false){
+                correct=recordAnswer(p, q, payload.answer);
+                if (correct === false){
                 rememberError(p,session.items[session.index]);
                 recordStageError(p, session, session.items[session.index], state.journeys);
             }
                 // D-68: a reading question keeps its feedback until „Dalej”; a scene gap continues at once.
                 else if(!readingOf(state.modules,session.items[session.index]))continueScene(p);
             });
+            cue(answerCue(correct));
             return true;
         }
         case 'retry':{
@@ -107,13 +115,15 @@ export function createSessionAnswerController(state: AnswerState, { mutate, cour
         const rewardCourse=courseId();
         const earned = homeFor(state.progress,rewardCourse)?.earned ?? 0, bonuses = Object.values(state.progress.adventure?.stageReviews ?? {}).filter(r => r.rewardedAt).length;
         resetRewards();
-        const unlockedRooms:string[]=[];
+        const unlockedRooms:string[]=[],before=state.progress;
+        let finishedNow=false;
         await mutate(p => { closeBoard(p,state.modules,state.journeys);if (p.active?.phase === 'feedback') {
             const finished = p.active;
             delete finished.pairSelection;delete finished.draftAnswer;
             delete finished.boardSummary;delete finished.gapSelection;delete finished.gapPlacements;
             next(p);
             if (!p.active) {
+                finishedNow=true;
                 finishRetention(p, finished);
                 rewardCompletion(p, finished,state.modules);
                 unlockedRooms.push(...settleHouseUnlocks(p,state.modules,state.journeys,state.journeyIssues));
@@ -127,6 +137,8 @@ export function createSessionAnswerController(state: AnswerState, { mutate, cour
                 (homeFor(state.progress,rewardCourse)?.earned ?? 0) - earned,
                 (Object.values(state.progress.adventure?.stageReviews ?? {}).filter(r => r.rewardedAt).length - bonuses) * rewardStars.stageMastery,
                 room&&unlockedRooms.includes(room.id)?{session:session.id,room:room.id}:undefined);
+            // Tylko akcja, która właśnie zakończyła sesję; powrót do podsumowania nie przechodzi tędy.
+            if(finishedNow)cue(finishCue(state.journeys,before,state.progress,session));
         }
     }
     return { handleAction };

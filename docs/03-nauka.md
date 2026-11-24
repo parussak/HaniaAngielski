@@ -144,6 +144,7 @@ Wybór algorytmu (prosty harmonogram, SM-2, FSRS) jest świadomie odłożony. Ob
 - **Odsłuch odpowiedzi** (D-63): klasyczne fiszki, fiszki podstawowe i quiz słownictwa mają po sprawdzeniu „Posłuchaj odpowiedzi” i „Wolniej”, bez autoodtwarzania i bez zdradzania odpowiedzi przed sprawdzeniem.
 - **Ustawienie:** przełącznik „Ćwiczenia ze słuchu” z próbą dźwięku w „Konto”, zapamiętany na urządzeniu, nie w postępach. Odsłuch nie zapisuje prób ani nie daje nagród.
 - Zmiana ekranu, zadania, konta lub wyłączenie słuchania przerywa dźwięk.
+- **Sygnały nagród** (D-79): poprawna odpowiedź (także poprawka, para, luka, dialog, pytanie czytanki) — jeden krótki sygnał po zapisie; ukończenie lekcji — drugi przy przejściu do podsumowania; pierwsze domknięcie mapy (obecny warunek `mapProgress().complete`) — trzeci, zamiast sygnału lekcji. Głośność 0,3, offline w PWA, bez komunikatu przy awarii. Źródło i licencja: `public/sounds/ZRODLO.md`.
 
 ## 9. Ćwiczenia swobodne
 

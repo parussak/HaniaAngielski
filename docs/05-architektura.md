@@ -105,6 +105,7 @@ Granice importów pilnuje `tests/refactor-boundaries.test.ts` (np. domek nie zal
 | Odtwarzacz nagrań, indeks, normalizacja tekstu, tempa | `speech/recorded-speaker.ts`, `speech/recordings.ts`, `speech/text.ts`, `speech/tempo.ts` |
 | Dobór słuchania w sesji, odsłuch odpowiedzi | `learning/listening.ts` |
 | Przyciski zwykły / „Wolniej” | `views/speech-controls.ts` |
+| Sygnały nagród (D-79): decyzja, który zagrać (czysta) / odtwarzacz z cichą awarią; kontroler woła port `playCue` dopiero po udanym zapisie | `learning/sound-cues.ts` / `sounds.ts`, `controllers/session-answers.ts`; pliki w `public/sounds/` |
 | Generator nagrań (poza aplikacją; aplikacja go nie importuje) | `scripts/audio/` — [generowanie audio](generowanie-audio.md) |
 
 ### Domek

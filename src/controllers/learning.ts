@@ -9,6 +9,7 @@ import type { createCourseController } from './courses.ts';
 import { courseKey } from '../learning/scope.ts';
 import {lessonContext} from '../learning/lesson-flow.ts';
 import {createSessionAnswerController,type AnswerState} from './session-answers.ts';
+import type {SoundCue} from '../learning/sound-cues.ts';
 import {createSessionStartController,type SessionStartState} from './session-start.ts';
 import {createReadingController,type ReadingState} from './reading.ts';
 import {unhandled} from '../app/actions.ts';
@@ -32,11 +33,13 @@ interface LearningPorts {
     courses: ReturnType<typeof createCourseController>;
     mutate: (change: (p: Progress) => void) => Promise<void>;
     scheduleReviewMigration: () => void;
+    /** Sygnały nagród (poprawna odpowiedź, lekcja, mapa); w przeglądarce `cuePlayer().play`. */
+    playCue?: (cue: SoundCue) => void;
 }
 // Nawigacja między ekranami nauki. Rozpoczynanie sesji jest w `session-start.ts`,
 // odpowiedzi w trwającej sesji w `session-answers.ts`, „Dalej” w czytance w `reading.ts`.
-export function createLearningController(state: LearningState, { mutate, scheduleReviewMigration, courses, reload, confirm }: LearningPorts) {
-    const answers=createSessionAnswerController(state,{mutate,courseId:()=>currentCourse(state)!.id});
+export function createLearningController(state: LearningState, { mutate, scheduleReviewMigration, courses, reload, confirm, playCue }: LearningPorts) {
+    const answers=createSessionAnswerController(state,{mutate,courseId:()=>currentCourse(state)!.id,playCue});
     const reading=createReadingController(state,{mutate});
     const starts=createSessionStartController(state,{mutate,confirm});
     function showResume(){
