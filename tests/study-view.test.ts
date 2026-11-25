@@ -97,15 +97,19 @@ test('bank słów pokazuje instrukcje nad jednym zdaniem także po uzupełnieniu
  const item=session.items[0],task=module.exercises.find(q=>q.id===item.id)!;
  item.presentation='bank';
  for(const separator of [' ','\n\n']){
-  task.prompt=`Wybierz:${separator}I ___ apples.`;
+  task.prompt=`Wybierz:${separator}I am hungry. I eat ___.`;
   for(const boardSummary of [false,true]){
    session.boardSummary=boardSummary;
    const html=studyView(stateFor(modules,session));
-   assert.match(html, /<p[^>]*>Wybierz:<\/p>[\s\S]*Wybierz słowo z banku[\s\S]*class="gap-sentences"[\s\S]*class="bank-options"/);
-   assert.equal(html.split('apples.').length-1,2); // Treść zdania i etykieta luki.
+   assert.match(html, /Wybierz słowo z banku i dotknij luki\.<\/p>[\s\S]*class="gap-sentences"[\s\S]*class="bank-options"[\s\S]*<details[^>]*><summary>Jak przenieść lub odłożyć słowo\?/);
+   assert.doesNotMatch(html, />Wybierz:<\/p>|class="board-required"/);
+   assert.match(html, /I am hungry\.[\s\S]*<br>I eat [\s\S]*<\/button>\.<\/span>/);
+   assert.equal(html.split('I am hungry.').length-1,2); // Treść zdania i etykieta luki.
    assert.doesNotMatch(html, /class="question"/);
   }
  }
+ task.prompt='Wybierz nazwę owocu.\n\nI eat ___.';
+ assert.match(studyView(stateFor(modules,session)), />Wybierz nazwę owocu\.<\/p>/);
 });
 test('wzorzec obejmuje widoki sesji, informacji zwrotnej, sceny i czytanki',()=>{
  const html=cases();

@@ -15,3 +15,9 @@ export function bankExercisePrompt(question: Exercise, item: Pick<Item, 'present
     const legacy = question.prompt.match(/^(Wybierz(?: słowo)?:)[ \t]+(.+)$/);
     if (legacy?.[2].includes('___')) return { instruction: legacy[1], sentence: legacy[2] };
 }
+
+export function bankSentenceLines(text: string, language?: string) {
+    if (typeof Intl.Segmenter !== 'function') return [text];
+    const sentences = new Intl.Segmenter(language, { granularity: 'sentence' }).segment(text);
+    return Array.from(sentences, ({ segment }) => segment.trim()).filter(Boolean);
+}

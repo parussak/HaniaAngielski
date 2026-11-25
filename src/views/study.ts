@@ -66,7 +66,7 @@ export function studyView(state: Readonly<AppState>) {
         card += readingContextView(state.modules, item, s);
     else if (q.dialogue&&item.presentation!=='bank')
         card += `<div class="dialogue" aria-label="Dialog do uzupełnienia">${q.dialogue.map((line, i) => `<div class="dialogue-line ${i % 2 ? 'dialogue-reply' : ''}"><span class="dialogue-speaker">${e(line.speaker)}</span><p>${line.text.split('___').map(e).join('<span class="dialogue-gap" aria-label="luka">'+e(s.draftAnswer??'…')+'</span>')}</p></div>`).join('')}</div>`;
-    if(s.boardSummary){card=scene?sceneSummaryView(state.modules,s,scene,actor,say):card+(item.presentation==='bank'?illustrationView(q.illustration,false):'')+boardSummaryView(state.modules,s);}
+    if(s.boardSummary){card=scene?sceneSummaryView(state.modules,s,scene,actor,say):card+(item.presentation==='bank'?illustrationView(q.illustration,false):'')+boardSummaryView(state.modules,s,Boolean(formattedBank));}
     else if (s.phase === 'feedback') {
         const ok = s.lastCorrect;
         card += `${feedbackView(state,s,item,q,listen?listenButtons(listen,item.key,false):answerAudio?listenButtons(answerAudio,item.key,false,'Posłuchaj odpowiedzi'):'')}<div class="actions">${!ok&&!scene ? button('retry', 'Spróbuję jeszcze raz', 'secondary') : ''}${button('next', `Dalej ${icon('arrow')}`)}</div>`;
@@ -77,6 +77,6 @@ export function studyView(state: Readonly<AppState>) {
         card += s.phase === 'retry' ? '<p class="retry-note">Teraz spróbuj ponownie. Pierwszy wynik pozostanie zapisany osobno.</p>' : formattedBank || (scene && scene.position > 0) ? '' : '<p>Nie musisz wiedzieć wszystkiego. Po prostu spróbuj.</p>';
         card += item.pairGroup&&input==='choice'?pairsView(state.modules,s,state.boardError):item.presentation==='bank'&&input==='choice'?bankView(state.modules,s,state.boardError):asking&&listen!.choices ? listenOptionsView(q,s,listen!.choices) : input === 'choice' && q.reading?.type === 'tap' ? '<p class="reading-hint">Dotknij właściwego słowa w zdaniu.</p>' : input === 'choice' ? choiceOptionsView(q,s) : textAnswerView(hint,asking);
     }
-    if(!s.boardSummary&&s.phase!=='feedback'&&(item.pairGroup||item.presentation==='bank'))card+=`${item.presentation==='bank'?bankExplanationView(state.modules,s):''}${boardNextButton(s)}`;
+    if(!s.boardSummary&&s.phase!=='feedback'&&(item.pairGroup||item.presentation==='bank'))card+=`${item.presentation==='bank'?bankExplanationView(state.modules,s):''}${boardNextButton(s,Boolean(formattedBank))}`;
     return page(card);
 }
