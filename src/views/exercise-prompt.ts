@@ -1,4 +1,4 @@
-import type { Exercise, Item } from '../learning/model.ts';
+import type { Exercise } from '../learning/model.ts';
 import { e } from '../ui.ts';
 
 type PromptParts = { instruction: string; sentence: string };
@@ -40,14 +40,14 @@ function promptView(text: string, parts?: PromptParts, layout?: 'written-gap-pro
     return `<div class="exercise-prompt${layout ? ` ${layout}` : ''}">${instruction}${heading}</div>`;
 }
 
-export function bankExercisePrompt(question: Exercise, item: Pick<Item, 'presentation' | 'gapGroup'>) {
-    if (item.presentation !== 'bank' || item.gapGroup || question.kind !== 'grammar' || question.dialogue) return;
+export function bankExercisePrompt(question: Exercise) {
+    if (question.kind !== 'grammar' || question.dialogue) return;
     const parts = splitExercisePrompt(question.prompt);
-    if (parts) return parts.sentence.includes('___') ? parts : undefined;
-
-    // Older choice tasks use this fixed prefix without a blank line.
-    const legacy = question.prompt.match(/^(Wybierz(?: słowo)?:)[ \t]+(.+)$/);
-    if (legacy?.[2].includes('___')) return { instruction: legacy[1], sentence: legacy[2] };
+    if (parts?.sentence.includes('___')) return parts;
+    if (parts) return;
+    const command = question.prompt.match(/^(Wybierz(?: słowo)?:)[ \t]+(.+)$/);
+    if (command?.[2].includes('___')) return { instruction: command[1], sentence: command[2] };
+    return legacyWrittenGapPrompt(question.prompt);
 }
 
 export function bankSentenceLines(text: string, language?: string) {

@@ -1,5 +1,5 @@
 import { AppState } from '../app/state.ts';
-import {pairsView,bankView,bankExplanationView,boardSummaryView,sceneScriptView,sceneSummaryView,boardNextButton} from './lesson-activities.ts';
+import {pairsView,bankView,bankHasSentences,bankExplanationView,boardSummaryView,sceneScriptView,sceneSummaryView,boardNextButton} from './lesson-activities.ts';
 import {sceneActor} from './scene-actors.ts';
 import {sceneView} from '../learning/scenes.ts';
 import {readingView} from '../learning/readings.ts';
@@ -14,7 +14,7 @@ import { act, button, e, icon } from '../ui.ts';
 import { feedbackView, illustrationView } from './study-feedback.ts';
 import { choiceOptionsView, listenButtons, listenOptionsView, textAnswerView } from './study-answer.ts';
 import { studyPage } from './study-page.ts';
-import { bankExercisePrompt, choiceExercisePromptView, exercisePromptView } from './exercise-prompt.ts';
+import { choiceExercisePromptView, exercisePromptView } from './exercise-prompt.ts';
 
 export function studyView(state: Readonly<AppState>) {
     const s = state.progress.active;
@@ -48,7 +48,8 @@ export function studyView(state: Readonly<AppState>) {
     }
     let card = '';
     const writtenGap = input === 'text' && q.kind === 'grammar' && !q.dialogue && q.prompt.includes('___');
-    const formattedBank = (input === 'choice' || s.boardSummary) && bankExercisePrompt(q, item);
+    const formattedBank = item.presentation === 'bank' && (input === 'choice' || s.boardSummary === true)
+        && !scene && bankHasSentences(state.modules,s);
     const readingPrompt = q.reading ? readingQuestionPrompt(state,s,item,q) : undefined;
     const choicePrompt = input === 'choice' && q.kind === 'grammar' && !item.pairGroup
         && !item.presentation && !scene && !listen && !q.dialogue && !readingPrompt
@@ -64,7 +65,7 @@ export function studyView(state: Readonly<AppState>) {
         card += readingContextView(state.modules, item, s);
     else if (q.dialogue&&item.presentation!=='bank')
         card += `<div class="dialogue" aria-label="Dialog do uzupełnienia">${q.dialogue.map((line, i) => `<div class="dialogue-line ${i % 2 ? 'dialogue-reply' : ''}"><span class="dialogue-speaker">${e(line.speaker)}</span><p>${line.text.split('___').map(e).join('<span class="dialogue-gap" aria-label="luka">'+e(s.draftAnswer??'…')+'</span>')}</p></div>`).join('')}</div>`;
-    if(s.boardSummary){card=scene?sceneSummaryView(state.modules,s,scene,actor,say):card+(item.presentation==='bank'?illustrationView(q.illustration,false):'')+boardSummaryView(state.modules,s,Boolean(formattedBank));}
+    if(s.boardSummary){card=scene?sceneSummaryView(state.modules,s,scene,actor,say):card+(item.presentation==='bank'?illustrationView(q.illustration,false):'')+boardSummaryView(state.modules,s,formattedBank);}
     else if (s.phase === 'feedback') {
         const ok = s.lastCorrect;
         card += `${feedbackView(state,s,item,q,listen?listenButtons(listen,item.key,false):answerAudio?listenButtons(answerAudio,item.key,false,'Posłuchaj odpowiedzi'):'')}<div class="actions">${!ok&&!scene ? button('retry', 'Spróbuję jeszcze raz', 'secondary') : ''}${button('next', `Dalej ${icon('arrow')}`)}</div>`;
@@ -73,8 +74,8 @@ export function studyView(state: Readonly<AppState>) {
         // A scene shows its picture once, with the first line, and then leaves room for the conversation.
         if (!asking && (!scene || scene.position === 0)) card += illustrationView(q.illustration, false);
         card += s.phase === 'retry' ? '<p class="retry-note">Teraz spróbuj ponownie. Pierwszy wynik pozostanie zapisany osobno.</p>' : writtenGap || formattedBank || choicePrompt || (scene && scene.position > 0) ? '' : '<p>Nie musisz wiedzieć wszystkiego. Po prostu spróbuj.</p>';
-        card += item.pairGroup&&input==='choice'?pairsView(state.modules,s,state.boardError):item.presentation==='bank'&&input==='choice'?bankView(state.modules,s,state.boardError):asking&&listen!.choices ? listenOptionsView(q,s,listen!.choices) : input === 'choice' && q.reading?.type === 'tap' ? '<p class="reading-hint">Dotknij właściwego słowa w zdaniu.</p>' : input === 'choice' ? choiceOptionsView(q,s) : textAnswerView(hint,asking);
+        card += item.pairGroup&&input==='choice'?pairsView(state.modules,s,state.boardError):item.presentation==='bank'&&input==='choice'?bankView(state.modules,s,formattedBank,state.boardError):asking&&listen!.choices ? listenOptionsView(q,s,listen!.choices) : input === 'choice' && q.reading?.type === 'tap' ? '<p class="reading-hint">Dotknij właściwego słowa w zdaniu.</p>' : input === 'choice' ? choiceOptionsView(q,s) : textAnswerView(hint,asking);
     }
-    if(!s.boardSummary&&s.phase!=='feedback'&&(item.pairGroup||item.presentation==='bank'))card+=`${item.presentation==='bank'?bankExplanationView(state.modules,s):''}${boardNextButton(s,Boolean(formattedBank))}`;
+    if(!s.boardSummary&&s.phase!=='feedback'&&(item.pairGroup||item.presentation==='bank'))card+=`${item.presentation==='bank'?bankExplanationView(state.modules,s):''}${boardNextButton(s,formattedBank)}`;
     return page(card);
 }

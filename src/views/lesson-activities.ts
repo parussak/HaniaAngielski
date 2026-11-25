@@ -13,38 +13,48 @@ export function pairsView(modules:Module[],s:Session,error?:ErrorFlash){
  const group=boardItems(s).slice().sort((a,b)=>a.key<b.key?-1:1),selected=s.pairSelection??s.items[s.index].key;
  return `<section class="pair-board" aria-label="Dobierz w pary"><p>Połącz wszystkie pary. Wybierz hasło, potem tłumaczenie.</p><div class="pair-columns"><div>${group.map(i=>`<button class="pair-source ${selected===i.key?'is-selected':''} ${solved(s,i.key)?'pair-correct':''} ${error?.key===i.key?'match-flash':''}" ${act('pair-select',{key:i.key})} aria-pressed="${selected===i.key}" ${settled(s,i.key)?'disabled':''}>${e(questionFor(modules,i).prompt)}${solved(s,i.key)?' ✓':''}</button>`).join('')}</div><div>${group.slice().reverse().map(i=>{const answer=vocabularyFullAnswer(questionFor(modules,i));return `<button class="option pair-target ${solved(s,i.key)?'pair-correct':''} ${error?.answer===answer?'match-flash':''}" ${act('pair-answer',{answer})} ${solved(s,i.key)?'disabled':''}>${e(answer)}</button>`;}).join('')}</div></div>${group.filter(i=>boardError(s,i.key)).map(i=>retryButton(i.key,'Spróbuj jeszcze raz: '+questionFor(modules,i).prompt)).join('')}</section>`;
 }
-export function bankView(modules:Module[],s:Session,error?:ErrorFlash){
- const current=s.items[s.index],question=questionFor(modules,current),parts=bankExercisePrompt(question,current);
+export function bankHasSentences(modules:Module[],s:Session){
+ return boardItems(s).some(item=>!questionFor(modules,item).dialogue);
+}
+export function bankView(modules:Module[],s:Session,compact:boolean,error?:ErrorFlash){
+ const current=s.items[s.index],question=questionFor(modules,current);
  const group=boardItems(s).slice().sort((a,b)=>a.key.localeCompare(b.key)),tokens=current.gapGroup?gapTokens(modules,s).slice().reverse():optionsFor(question,s),selected=s.gapSelection??s.draftAnswer;
+ const entries=group.map(item=>{
+  const q=item===current?question:questionFor(modules,item);
+  const parts=compact?bankExercisePrompt(q):undefined;
+  const instruction=parts?.instruction??(compact&&q.dialogue?q.prompt:undefined);
+  return {item,q,parts,instruction:/^Wybierz(?: słowo)?[:.!]?$/.test(instruction??'')?undefined:instruction};
+ });
  const sentence=(text:string,key:string,label=text)=>{
   const placed=gapPlacement(s,key);
   const gap=`<button class="gap-target ${boardError(s,key)?'gap-incorrect':''} ${placed&&selected===placed?'is-selected':''} ${error?.key===key||error?.keys?.includes(key)?'match-flash':''} ${solved(s,key)?'gap-correct':''}" ${act('gap-place',{key,token:placed||undefined})} ${placed?'draggable="true"':''} aria-label="Luka w zdaniu: ${e(label)}" ${solved(s,key)?'disabled':''}>${e(placed??'…')}</button>`;
   const [start,...ends]=text.split('___');
   return e(start)+ends.map(end=>{
-   const punctuation=parts?end.match(/^[.!?…,:;]+/)?.[0]:undefined;
+   const punctuation=compact?end.match(/^[.!?…,:;]+/)?.[0]:undefined;
    return punctuation?`<span class="bank-gap-end">${gap}${e(punctuation)}</span>${e(end.slice(punctuation.length))}`:gap+e(end);
   }).join('');
  };
- const specificInstruction=parts&&!/^Wybierz(?: słowo)?[:.!]?$/.test(parts.instruction)
-  ? `<p class="exercise-instruction">${e(parts.instruction)}</p>`
-  : '';
- const help = parts
-  ? `<div class="bank-instructions">${specificInstruction}<p>Wybierz słowo z banku i dotknij luki.</p></div>`
+ const firstInstruction=entries[0]?.instruction;
+ const commonInstruction=entries.every(entry=>entry.instruction===firstInstruction)?firstInstruction:undefined;
+ const instructionView=(text:string)=>`<p class="exercise-instruction">${e(text)}</p>`;
+ const help = compact
+  ? `<div class="bank-instructions">${commonInstruction?instructionView(commonInstruction):''}<p>Wybierz słowo z banku i dotknij luki.</p></div>`
   : '<p>Wstaw słowo — sprawdzę od razu. Aby je przenieść, kliknij je w luce, a potem inną lukę lub puste miejsce w banku. Możesz też przeciągać.</p>';
- const extraHelp=parts
+ const extraHelp=compact
   ? '<details class="bank-help"><summary>Jak przenieść lub odłożyć słowo?</summary><p>Możesz przeciągnąć słowo do luki. Aby je odłożyć, dotknij słowa w luce, a potem pustego miejsca w banku.</p></details>'
   : '';
- const sentences=group.map(i=>{
-  const q=i===current?question:questionFor(modules,i);
-  const language=parts?modules.find(module=>module.id===i.moduleId)?.languageCode:undefined;
+ const sentences=entries.map(({item,q,parts,instruction})=>{
+  const language=compact?modules.find(module=>module.id===item.moduleId)?.languageCode:undefined;
+  const lang=language?` lang="${e(language)}"`:'';
+  const localInstruction=instruction&&instruction!==commonInstruction?instructionView(instruction):'';
   const text=q.dialogue
-   ? q.dialogue.map(line=>`<p><strong>${e(line.speaker)}:</strong> ${sentence(line.text,i.key,q.prompt)}</p>`).join('')
+   ? q.dialogue.map(line=>`<p${lang}><strong>${e(line.speaker)}:</strong> ${sentence(line.text,item.key,compact?line.text:q.prompt)}</p>`).join('')
    : parts
-    ? `<p${language?` lang="${e(language)}"`:''}>${bankSentenceLines(parts.sentence,language).map(line=>sentence(line,i.key,parts.sentence)).join('<br>')}</p>`
-    : `<p>${sentence(q.prompt,i.key)}</p>`;
-  return `<article class="gap-sentence">${text}${boardError(s,i.key)?retryButton(i.key,'Popraw lukę'):''}</article>`;
+    ? `<p${lang}>${bankSentenceLines(parts.sentence,language).map(line=>sentence(line,item.key,parts.sentence)).join('<br>')}</p>`
+    : `<p>${sentence(q.prompt,item.key)}</p>`;
+  return `<article class="gap-sentence">${localInstruction}${text}${boardError(s,item.key)?retryButton(item.key,'Popraw lukę'):''}</article>`;
  }).join('');
- return `<section class="answer-bank${parts?' bank-with-instructions':''}" aria-label="Uzupełnij luki">${help}<div class="gap-sentences">${sentences}</div><div class="bank-options" aria-label="Bank słów">${tokens.map(token=>{const used=group.find(i=>s.gapPlacements?.[i.key]===token);return `<button class="option bank-token ${used?'bank-empty':''} ${!used&&selected===token?'is-selected':''}" draggable="${!used}" ${used?act('gap-place',{key:'',answer:token}):act('bank-select',{answer:token}).replace(' data-answer','  data-answer')} aria-label="${e(used?`Odłóż ${token} do banku`:token)}" aria-pressed="${!used&&selected===token}" ${used&&solved(s,used.key)?'disabled':''}><span ${used?'aria-hidden="true"':''}>${e(token)}</span></button>`;}).join('')}</div>${extraHelp}</section>`;
+ return `<section class="answer-bank${compact?' bank-with-instructions':''}" aria-label="Uzupełnij luki">${help}<div class="gap-sentences">${sentences}</div><div class="bank-options" aria-label="Bank słów">${tokens.map(token=>{const used=group.find(i=>s.gapPlacements?.[i.key]===token);return `<button class="option bank-token ${used?'bank-empty':''} ${!used&&selected===token?'is-selected':''}" draggable="${!used}" ${used?act('gap-place',{key:'',answer:token}):act('bank-select',{answer:token}).replace(' data-answer','  data-answer')} aria-label="${e(used?`Odłóż ${token} do banku`:token)}" aria-pressed="${!used&&selected===token}" ${used&&solved(s,used.key)?'disabled':''}><span ${used?'aria-hidden="true"':''}>${e(token)}</span></button>`;}).join('')}</div>${extraHelp}</section>`;
 }
 type SceneOnScreen=NonNullable<ReturnType<typeof sceneView>>;
 /** D-53: the conversation so far. Earlier lines stay, later lines wait for their gap. */
@@ -73,7 +83,7 @@ export function bankExplanationView(modules:Module[],s:Session){
  return `<div class="feedback ${complete?'correct':'incorrect'} board-explanation" role="status"><h2>${complete?'Tak jest! Dobra robota ✦':'Sprawdźmy zdania'}</h2><p>${complete?'Plansza ukończona.':'Możesz poprawić luki albo przejść dalej — błędy poćwiczymy w powtórkach.'}</p>${group.map((i,index)=>{const q=questionFor(modules,i);return `<section class="gap-explanation"><strong>Zdanie ${index+1}: <span class="scene-filled">${e(vocabularyFullAnswer(q))}</span></strong><p>${e(q.explanation)}</p></section>`;}).join('')}</div>`;
 }
 export function boardSummaryView(modules:Module[],s:Session,compact=false){
- if(s.items[s.index].presentation==='bank')return `<div class="board-summary">${bankView(modules,s)}${bankExplanationView(modules,s)}</div>${boardNextButton(s,compact)}`;
+ if(s.items[s.index].presentation==='bank')return `<div class="board-summary">${bankView(modules,s,compact)}${bankExplanationView(modules,s)}</div>${boardNextButton(s,compact)}`;
  const group=boardItems(s);
  return `<div class="feedback correct board-summary" role="status"><h2>Plansza ukończona!</h2><p>Dobra robota! Wszystkie pary są połączone.</p><ul>${group.map(i=>{const q=questionFor(modules,i);return `<li><strong>${e(q.prompt)} → ${e(vocabularyFullAnswer(q))}</strong><p>${e(q.explanation)}</p></li>`;}).join('')}</ul></div><button class="primary" ${act('next')}>Dalej →</button>`;
 }

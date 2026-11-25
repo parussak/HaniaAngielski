@@ -153,6 +153,39 @@ test('bank słów pokazuje instrukcje nad jednym zdaniem także po uzupełnieniu
  task.prompt='Wybierz nazwę owocu.\n\nI eat ___.';
  assert.match(studyView(stateFor(modules,session)), />Wybierz nazwę owocu\.<\/p>/);
 });
+test('bank z kilkoma lukami pokazuje wspólną instrukcję raz i nie powtarza zdań po zmianie bieżącej luki',()=>{
+ const module=engineModule(),modules=[module];
+ const progress=emptyProgress(),session=makeSession(modules,module,'grammar','choice',false,progress);
+ session.items=session.items.slice(0,2);
+ const [first,second]=session.items;
+ const prompts=['Uzupełnij opis:\n\nI ___ apples.','Uzupełnij opis: We ___ pears.'];
+ for(const [index,item] of session.items.entries()){
+  item.presentation='bank';
+  item.gapGroup=first.key;
+  module.exercises.find(q=>q.id===item.id)!.prompt=prompts[index];
+ }
+ for(const index of [0,1]){
+  session.index=index;
+  session.boardSummary=index===1;
+  const html=studyView(stateFor(modules,session));
+  assert.equal(html.split('>Uzupełnij opis:</p>').length-1,1);
+  assert.equal(html.split('class="gap-sentence"').length-1,2);
+  assert.ok(html.includes(first.key)&&html.includes(second.key));
+  assert.match(html, /Wybierz słowo z banku i dotknij luki\.[\s\S]*bank-options[\s\S]*<details/);
+  assert.doesNotMatch(html, /class="question"/);
+ }
+});
+test('bank pokazuje pełne niejednoznaczne polecenie raz i zachowuje interaktywną lukę',()=>{
+ const module=engineModule(),modules=[module];
+ const progress=emptyProgress(),session=makeSession(modules,module,'grammar','choice',false,progress);
+ const item=session.items[0],task=module.exercises.find(q=>q.id===item.id)!;
+ item.presentation='bank';
+ task.prompt='Notatka: „I have bread”. Uzupełnij: I need ___.';
+ const html=studyView(stateFor(modules,session));
+ assert.match(html, /<article class="gap-sentence"><p[^>]*>Notatka: „I have bread”\. Uzupełnij: I need <span/);
+ assert.match(html, /data-action="gap-place"/);
+ assert.doesNotMatch(html, /class="question"/);
+});
 test('wzorzec obejmuje widoki sesji, informacji zwrotnej, sceny i czytanki',()=>{
  const html=cases();
  assert.match(html['sesja bez modułu'],/Potrzebny jest moduł/);
