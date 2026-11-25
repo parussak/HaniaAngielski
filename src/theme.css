@@ -216,7 +216,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
 .exercise-prompt{flex-shrink:0;text-align:left;white-space:pre-line;overflow-wrap:anywhere}
 .exercise-prompt .exercise-instruction{margin:0 0 8px;font-size:1rem;font-weight:600;line-height:1.5}
 .exercise-prompt .question{margin:0 0 12px}
-.written-gap-prompt .question{font-size:22px;font-weight:600;line-height:1.45}
+.written-gap-prompt .question,
+.choice-prompt .question,
+.study-card:has(> .answer-options:not(.listen-options)):not(:has(> .dialogue, > .reading-context)) > .question{font-size:22px;font-weight:600;line-height:1.45;text-align:left}
 
 .session-settings{font-size:13px;line-height:1.7;color:var(--muted)}
 .session-settings summary{min-height:44px;cursor:pointer;padding:10px 0;font-weight:600}

@@ -118,6 +118,21 @@ test('niejednoznaczne polecenie i luka bez zdania zachowują pełny tekst',()=>{
   assert.match(html, /id="answer-form"/);
  }
 });
+test('wspólny wybór oddziela polecenie od pytania i pokazuje przyciski zamiast pola tekstowego',()=>{
+ for(const [moduleId,instruction,sentence] of [
+  ['choice-first','Wybierz:','Where is the library?'],
+  ['choice-second','Uzupełnij:','My sister is in the ___.'],
+ ]){
+  const module=engineModule(moduleId),modules=[module];
+  const progress=emptyProgress(),session=makeSession(modules,module,'grammar','choice',false,progress);
+  const task=module.exercises.find(q=>q.id===session.items[0].id)!;
+  task.prompt=`${instruction} ${sentence}`;
+  const html=studyView(stateFor(modules,session));
+  assert.ok(html.includes(`<p class="exercise-instruction">${instruction}</p><h2 class="question">${sentence}</h2>`));
+  assert.match(html, /class="answer-options"[\s\S]*data-action="answer"/);
+  assert.doesNotMatch(html, /id="answer-form"/);
+ }
+});
 test('bank słów pokazuje instrukcje nad jednym zdaniem także po uzupełnieniu luki',()=>{
  const modules=structuredClone(engineModules),module=modules[0];
  const progress=emptyProgress(),session=makeSession(modules,module,'grammar','choice',false,progress);
