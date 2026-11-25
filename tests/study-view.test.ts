@@ -82,6 +82,15 @@ test('HTML ekranu nauki zgadza się ze wzorcem',()=>{
  assert.deepEqual(Object.keys(html),Object.keys(expected));
  for(const name of Object.keys(expected))assert.equal(html[name],expected[name],name);
 });
+test('polecenie z dwoma krokami jest osobno od zdania z luką',()=>{
+ const modules=structuredClone(engineModules),module=modules[0];
+ const progress=emptyProgress(),session=makeSession(modules,module,'grammar','text',false,progress);
+ const task=module.exercises.find(q=>q.id===session.items[0].id)!;
+ task.prompt='Przeczytaj zdanie.\nWpisz brakujące słowo.\n\nI ___ apples & pears.';
+ const html=studyView(stateFor(modules,session));
+ assert.match(html, />Przeczytaj zdanie\.\nWpisz brakujące słowo\.<\/p>\s*<h2[^>]*>I ___ apples &amp; pears\.<\/h2>/);
+ assert.match(html, /id="answer-form"/);
+});
 test('wzorzec obejmuje widoki sesji, informacji zwrotnej, sceny i czytanki',()=>{
  const html=cases();
  assert.match(html['sesja bez modułu'],/Potrzebny jest moduł/);

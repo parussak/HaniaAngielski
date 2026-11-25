@@ -213,6 +213,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
   .studying .alert{flex-shrink:0;margin:4px 12px;font-size:12px;padding:6px 10px;max-height:70px;overflow:auto}
 }
 
+.exercise-prompt{flex-shrink:0;text-align:left;white-space:pre-line;overflow-wrap:anywhere}
+.exercise-prompt .exercise-instruction{margin:0 0 8px;font-size:1rem;font-weight:600;line-height:1.5}
+.exercise-prompt .question{margin:0 0 12px}
+
 .session-settings{font-size:13px;line-height:1.7;color:var(--muted)}
 .session-settings summary{min-height:44px;cursor:pointer;padding:10px 0;font-weight:600}
 .session-settings .checkbox{margin-top:12px}
