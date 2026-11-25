@@ -1,7 +1,7 @@
 import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
-import {answerQuestion} from './helpers.ts';
+import {answerQuestion,exerciseOnScreen} from './helpers.ts';
 import { test, expect } from './fixtures.ts';
 import { readFileSync } from 'node:fs';
 import { foodModules as modules } from '../materials.ts';
@@ -47,8 +47,7 @@ test.describe('telefon — dotyk i małe ekrany', () => {
     await openModule(page);
     await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();
     await page.getByRole('button',{name:/^Gramatyka/}).tap();
-    const question = await page.locator('.question').innerText();
-    const exercise=module.exercises.find((q:any)=>q.prompt===question);
+    const exercise=(await exerciseOnScreen(page,module.exercises))!;
     await answerQuestion(page,exercise,false);
     await expect(page.getByText('Spokojnie, tak właśnie się uczymy.')).toBeVisible();
     await page.screenshot({path:'test-results/cat-feedback-mobile.png',fullPage:true});
@@ -63,8 +62,7 @@ test.describe('telefon — dotyk i małe ekrany', () => {
     await page.setViewportSize({width:390,height:844});
     for(let i=0;i<12;i++) {
       if(await page.getByRole('heading',{name:'Dobra robota, Haniu!'}).isVisible()) break;
-      const prompt=await page.locator('.question').innerText();
-      const q=module.exercises.find((q:any)=>q.prompt===prompt);
+      const q=(await exerciseOnScreen(page,module.exercises))!;
       await answerQuestion(page,q);
       await page.getByRole('button',{name:'Dalej',exact:false}).tap();
       await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');

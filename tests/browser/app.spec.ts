@@ -1,7 +1,7 @@
 import {resumeStudy} from './helpers.ts';
 import {openBackup} from './navigation.ts';
 import {openModule} from './navigation.ts';
-import {answerQuestion} from './helpers.ts';
+import {answerQuestion,exerciseOnScreen} from './helpers.ts';
 import { test, expect } from './fixtures.ts';
 import { readFileSync } from 'node:fs';
 import { foodModules as modules } from '../materials.ts';
@@ -14,8 +14,7 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   await openModule(page);
   await page.getByText('Wpisuję odpowiedź',{exact:true}).click();
   await page.getByRole('button',{name:/^Gramatyka/}).click();
-  const prompt = await page.locator('.question').innerText();
-  const q = data.exercises.find((q:any)=>q.prompt===prompt);
+  const q = (await exerciseOnScreen(page,data.exercises))!;
   await answerQuestion(page,q,false);
   await expect(page.getByText('Spokojnie, tak właśnie się uczymy.')).toBeVisible();
   await page.reload();
@@ -27,8 +26,7 @@ test('pełna nauka, błędy, wznowienie, eksport i odtworzenie na innym urządze
   await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');
   for(let i=0;i<12;i++) {
     if(await page.getByRole('heading',{name:'Dobra robota, Haniu!'}).isVisible()) break;
-    const text = await page.locator('.question').innerText();
-    const exercise=data.exercises.find((q:any)=>q.prompt===text);
+    const exercise=(await exerciseOnScreen(page,data.exercises))!;
     await answerQuestion(page,exercise);
     await page.getByRole('button',{name:'Dalej',exact:false}).click();
     await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');

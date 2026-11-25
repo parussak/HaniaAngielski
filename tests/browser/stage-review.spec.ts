@@ -1,4 +1,4 @@
-import {resumeStudy} from './helpers.ts';
+import {exerciseOnScreen,resumeStudy} from './helpers.ts';
 import {openWarmup,openStageReview} from './navigation.ts';
 import {openBackup} from './navigation.ts';
 import {openMap} from './navigation.ts';
@@ -29,7 +29,8 @@ async function importProgress(page:Page,p:Progress){
 async function openFirstStage(page:Page){const node=page.locator('.journey-stage').first();if(await node.getAttribute('open')===null)await node.locator('summary').tap();return node;}
 async function correct(page:Page){
   await expect(page.locator('#answer, .option').first()).toBeVisible();
-  const text=await page.locator('.question').innerText(),word=modules[0].words.find(w=>w.front===text),q=modules[0].exercises.find(q=>q.prompt===text),value=word?.back??q!.answers[0];
+  const text=await page.locator('.question').innerText(),word=modules[0].words.find(w=>w.front===text);
+  const value=word?.back??(await exerciseOnScreen(page,modules[0].exercises))!.answers[0];
   if(await page.getByRole('textbox').isVisible()){await page.getByRole('textbox').fill(value);await page.getByRole('button',{name:/Sprawdź/}).tap();}else await page.getByRole('button',{name:value,exact:true}).tap();
   await expect(page.locator('.feedback.correct')).toBeVisible();
 }

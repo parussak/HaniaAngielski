@@ -1,9 +1,26 @@
 import type { Exercise, Item } from '../learning/model.ts';
+import { e } from '../ui.ts';
 
 export function splitExercisePrompt(text: string) {
     const parts = text.trim().match(/^([\s\S]+?)\r?\n[ \t]*\r?\n([\s\S]+)$/);
     if (!parts) return;
     return { instruction: parts[1].trim(), sentence: parts[2].trim() };
+}
+
+function legacyWrittenGapPrompt(text: string) {
+    const parts = text.trim().match(/^((?:Uzupełnij|Wpisz|Wybierz)\b[^:]*:)\s+([^:]+)$/u);
+    if (!parts) return;
+    const sentence = parts[2].trim();
+    if (!sentence.includes('___') || !/\p{L}/u.test(sentence) || parts[1].includes('___')) return;
+    return { instruction: parts[1], sentence };
+}
+
+export function exercisePromptView(text: string, writtenGap: boolean) {
+    const parts = splitExercisePrompt(text) ?? (writtenGap ? legacyWrittenGapPrompt(text) : undefined);
+    const heading = `<h2 class="question">${e(parts?.sentence ?? text)}</h2>`;
+    if (!parts && !writtenGap) return heading;
+    const instruction = parts ? `<p class="exercise-instruction">${e(parts.instruction)}</p>` : '';
+    return `<div class="exercise-prompt${writtenGap ? ' written-gap-prompt' : ''}">${instruction}${heading}</div>`;
 }
 
 export function bankExercisePrompt(question: Exercise, item: Pick<Item, 'presentation' | 'gapGroup'>) {

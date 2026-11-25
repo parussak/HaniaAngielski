@@ -16,6 +16,13 @@ export async function answerQuestion(page:Page,q:Exercise,correct=true){
  await expect(page.locator('#answer,.option').first()).toBeVisible();const answer=correct?q.answers[0]:q.options.find(o=>!q.answers.includes(o))!;
  if(await page.getByRole('textbox').isVisible()){await page.getByRole('textbox').fill(answer);await page.getByRole('button',{name:/Sprawdź/}).click();}else await page.getByRole('button',{name:answer,exact:true}).click();
 }
+export async function exerciseOnScreen(page:Page,exercises:Exercise[]){
+ const question=await page.locator('.question').innerText();
+ const [instruction]=await page.locator('.exercise-prompt .exercise-instruction').allTextContents();
+ const normalize=(text:string)=>text.trim().replace(/\s+/gu,' ');
+ const prompt=normalize(instruction?`${instruction} ${question}`:question);
+ return exercises.find(exercise=>normalize(exercise.prompt)===prompt);
+}
 export async function answerCurrent(page:Page,modules:Module[],correct=true){
  await idle(page);await expect(page.locator('#answer,.option').first()).toBeVisible();
  if(await page.locator('.pair-board').count()){
@@ -35,7 +42,10 @@ export async function answerCurrent(page:Page,modules:Module[],correct=true){
  const sceneKey=await page.locator('.scene[data-key]').count()?await page.locator('.scene[data-key]').getAttribute('data-key'):null;
  // A listening task hides its written prompt and names its item instead.
  const heardKey=await page.locator('.listen[data-autoplay]').count()?await page.locator('.listen[data-autoplay]').getAttribute('data-key'):null;
- const prompt=await page.locator('.question').innerText();let q:Exercise|undefined=sceneKey?fromKey(modules,sceneKey):heardKey?fromKey(modules,heardKey):undefined;if(!q)for(const m of modules){const w=m.words.find(w=>w.front===prompt);q??=w?fromKey(modules,`${m.id}@${w.rev??1}:word:${w.id}`):m.exercises.find(q=>q.prompt===prompt);}if(!q)throw Error(`Nieznane pytanie: ${prompt}`);
+ const prompt=await page.locator('.question').innerText();let q:Exercise|undefined=sceneKey?fromKey(modules,sceneKey):heardKey?fromKey(modules,heardKey):undefined;
+ if(!q)for(const m of modules){const w=m.words.find(w=>w.front===prompt);if(w){q=fromKey(modules,`${m.id}@${w.rev??1}:word:${w.id}`);break;}}
+ q??=await exerciseOnScreen(page,modules.flatMap(m=>m.exercises));
+ if(!q)throw Error(`Nieznane pytanie: ${prompt}`);
  if(await page.getByRole('textbox').isVisible()){await page.getByRole('textbox').fill(correct?q.answers[0]:'wrong');await page.getByRole('button',{name:/Sprawdź/}).click();}else{const choices=page.locator('.option'),values=await choices.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.answer!));await choices.nth(values.findIndex(value=>isCorrect(q!,value)===correct)).click();}
  // A correct scene gap continues to the next gap without a feedback step.
  if(sceneKey&&correct){await idle(page);await expect(page.locator(`.scene[data-key=${JSON.stringify(sceneKey)}]:not(.scene-summary .scene)`)).toHaveCount(0);return;}

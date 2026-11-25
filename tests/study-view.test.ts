@@ -9,7 +9,7 @@ import {makeLessonSession} from '../src/learning/lesson-session.ts';
 import {validateJourney} from '../src/learning/journey-validation.ts';
 import {varyLesson} from '../src/learning/lesson-variety.ts';
 import {studyView} from '../src/views/study.ts';
-import {engineModules} from './fixtures/engine.ts';
+import {engineModule,engineModules} from './fixtures/engine.ts';
 import {sceneJourney,sceneModule} from './fixtures/scenes.ts';
 import {readingJourney,readingModule} from './fixtures/readings.ts';
 
@@ -90,6 +90,33 @@ test('polecenie z dwoma krokami jest osobno od zdania z luką',()=>{
  const html=studyView(stateFor(modules,session));
  assert.match(html, />Przeczytaj zdanie\.\nWpisz brakujące słowo\.<\/p>\s*<h2[^>]*>I ___ apples &amp; pears\.<\/h2>/);
  assert.match(html, /id="answer-form"/);
+});
+test('wpisywanie brakującego słowa używa wspólnego układu dla starszych poleceń z różnych modułów',()=>{
+ for(const [moduleId,instruction,sentence] of [
+  ['first-unit','Wpisz nazwę opakowania (butelka):','a ___ of water.'],
+  ['second-unit','Uzupełnij krótką odpowiedź:','Is there any milk? Yes, there ___.'],
+ ]){
+  const module=engineModule(moduleId),modules=[module];
+  const progress=emptyProgress(),session=makeSession(modules,module,'grammar','text',false,progress);
+  const item=session.items[0],task=module.exercises.find(q=>q.id===item.id)!;
+  task.prompt=`${instruction} ${sentence}`;
+  const html=studyView(stateFor(modules,session));
+  assert.ok(html.includes(`<p class="exercise-instruction">${instruction}</p><h2 class="question">${sentence}</h2>`));
+  assert.match(html, /id="answer-hint"[\s\S]*id="answer-form"/);
+  item.input='choice';
+  assert.ok(studyView(stateFor(modules,session)).includes(`<h2 class="question">${task.prompt}</h2>`));
+ }
+});
+test('niejednoznaczne polecenie i luka bez zdania zachowują pełny tekst',()=>{
+ const module=engineModule(),modules=[module];
+ const progress=emptyProgress(),session=makeSession(modules,module,'grammar','text',false,progress);
+ const task=module.exercises.find(q=>q.id===session.items[0].id)!;
+ for(const prompt of ['Przeczytaj notatkę: „Milk and bread”. Wpisz składnik: I need ___.','Wpisz nazwę składnika: ___.']){
+  task.prompt=prompt;
+  const html=studyView(stateFor(modules,session));
+  assert.ok(html.includes(`<h2 class="question">${prompt}</h2>`));
+  assert.match(html, /id="answer-form"/);
+ }
 });
 test('bank słów pokazuje instrukcje nad jednym zdaniem także po uzupełnieniu luki',()=>{
  const modules=structuredClone(engineModules),module=modules[0];

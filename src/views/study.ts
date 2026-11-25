@@ -14,13 +14,7 @@ import { act, button, e, icon } from '../ui.ts';
 import { feedbackView, illustrationView } from './study-feedback.ts';
 import { choiceOptionsView, listenButtons, listenOptionsView, textAnswerView } from './study-answer.ts';
 import { studyPage } from './study-page.ts';
-import { bankExercisePrompt, splitExercisePrompt } from './exercise-prompt.ts';
-
-function exercisePrompt(text: string) {
-    const parts = splitExercisePrompt(text);
-    if (!parts) return `<h2 class="question">${e(text)}</h2>`;
-    return `<div class="exercise-prompt"><p class="exercise-instruction">${e(parts.instruction)}</p><h2 class="question">${e(parts.sentence)}</h2></div>`;
-}
+import { bankExercisePrompt, exercisePromptView } from './exercise-prompt.ts';
 
 export function studyView(state: Readonly<AppState>) {
     const s = state.progress.active;
@@ -53,11 +47,12 @@ export function studyView(state: Readonly<AppState>) {
         return page(readingCard(state, reading, s, {say, autoplay: speaker().available(language, newest), feedback: (current, question) => feedbackView(state, s, current, question, '') + (s.lastCorrect === false ? `<button class="secondary reading-retry" ${act('retry')}>Popraw odpowiedź</button>` : '')}));
     }
     let card = '';
+    const writtenGap = input === 'text' && q.kind === 'grammar' && !q.dialogue && q.prompt.includes('___');
     const formattedBank = (input === 'choice' || s.boardSummary) && bankExercisePrompt(q, item);
     const readingPrompt = q.reading ? readingQuestionPrompt(state,s,item,q) : undefined;
     const prompt = formattedBank ? '' : readingPrompt
         ? `<h2 class="question"${language ? ` lang="${e(language)}"` : ''}>${readingPrompt.text}</h2>${readingPrompt.translation}`
-        : q.kind === 'grammar' ? exercisePrompt(q.prompt) : `<h2 class="question">${e(q.prompt)}</h2>`;
+        : q.kind === 'grammar' ? exercisePromptView(q.prompt,writtenGap) : `<h2 class="question">${e(q.prompt)}</h2>`;
     if(asking)card=`<div class="exercise-label">${icon('sound')} POSŁUCHAJ</div><h2 class="question">${listen!.choices?'Posłuchaj i wybierz, co to znaczy.':'Posłuchaj i wpisz to, co słyszysz.'}</h2>${listenButtons(listen!,item.key,true)}`;
     else card = `<div class="exercise-label">${icon(item.type === 'word' ? 'cards' : q.kind === 'grammar' || q.kind === 'reading' ? 'book' : 'spark')} ${item.type === 'word' ? 'FISZKA · '+translationPrompt(state.modules.find(m=>m.id===item.moduleId)!).toLocaleUpperCase('pl') : q.kind === 'dialogue' ? 'POROZMAWIAJMY'+(scene?' · '+e(scene.scene.title.toLocaleUpperCase('pl')):'') : q.kind === 'reading' ? 'CZYTANKA' : q.kind === 'grammar' ? 'MAŁY KROK W GRAMATYCE' : 'SŁÓWKO PO SŁÓWKU'}</div>${prompt}`;
     if (scene)
@@ -74,7 +69,7 @@ export function studyView(state: Readonly<AppState>) {
     else {
         // A scene shows its picture once, with the first line, and then leaves room for the conversation.
         if (!asking && (!scene || scene.position === 0)) card += illustrationView(q.illustration, false);
-        card += s.phase === 'retry' ? '<p class="retry-note">Teraz spróbuj ponownie. Pierwszy wynik pozostanie zapisany osobno.</p>' : formattedBank || (scene && scene.position > 0) ? '' : '<p>Nie musisz wiedzieć wszystkiego. Po prostu spróbuj.</p>';
+        card += s.phase === 'retry' ? '<p class="retry-note">Teraz spróbuj ponownie. Pierwszy wynik pozostanie zapisany osobno.</p>' : writtenGap || formattedBank || (scene && scene.position > 0) ? '' : '<p>Nie musisz wiedzieć wszystkiego. Po prostu spróbuj.</p>';
         card += item.pairGroup&&input==='choice'?pairsView(state.modules,s,state.boardError):item.presentation==='bank'&&input==='choice'?bankView(state.modules,s,state.boardError):asking&&listen!.choices ? listenOptionsView(q,s,listen!.choices) : input === 'choice' && q.reading?.type === 'tap' ? '<p class="reading-hint">Dotknij właściwego słowa w zdaniu.</p>' : input === 'choice' ? choiceOptionsView(q,s) : textAnswerView(hint,asking);
     }
     if(!s.boardSummary&&s.phase!=='feedback'&&(item.pairGroup||item.presentation==='bank'))card+=`${item.presentation==='bank'?bankExplanationView(state.modules,s):''}${boardNextButton(s,Boolean(formattedBank))}`;
