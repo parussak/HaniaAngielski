@@ -125,6 +125,11 @@
 .gap-target{display:inline-block;min-width:80px;min-height:44px;margin:4px;padding:7px 12px;border:2px dashed #a68bc9;border-radius:12px;background:#f1eaff;color:#503865;vertical-align:middle;white-space:normal;overflow-wrap:anywhere}
 .gap-sentence{padding:10px 12px;margin:10px 0;border:1px solid #decfea;border-radius:16px;background:#fff}
 .gap-sentence p{line-height:2;margin:4px 0}
+.bank-instructions{text-align:left;margin-bottom:12px;white-space:pre-line;overflow-wrap:anywhere}
+.bank-instructions p{margin:0 0 4px;line-height:1.5}
+.bank-instructions .exercise-instruction{font-size:1rem;font-weight:600}
+.bank-with-instructions .gap-sentence{margin-bottom:8px;text-align:left}
+.bank-with-instructions .bank-options{margin-top:8px}
 .gap-correct{background:#e4f4e8;border-style:solid;border-color:#8fbc9c}
 .gap-target.gap-incorrect{background:#fce2e8;border-style:solid;border-color:#c85a74;color:#852b45}.gap-explanation{margin:14px 0;text-align:left}.gap-explanation p{margin:6px 0}.board-explanation{margin-top:16px}.board-summary>.answer-bank{margin-bottom:16px}
 .studying .study-card:has(.answer-bank),.studying .study-card:has(>.scene){overflow-y:auto}.studying .study-card .board-explanation,.studying .study-card:has(>.scene)>.feedback{flex:none;overflow:visible;min-height:auto}.studying .study-card:has(.answer-bank)>.primary{flex-shrink:0}

@@ -91,6 +91,22 @@ test('polecenie z dwoma krokami jest osobno od zdania z luką',()=>{
  assert.match(html, />Przeczytaj zdanie\.\nWpisz brakujące słowo\.<\/p>\s*<h2[^>]*>I ___ apples &amp; pears\.<\/h2>/);
  assert.match(html, /id="answer-form"/);
 });
+test('bank słów pokazuje instrukcje nad jednym zdaniem także po uzupełnieniu luki',()=>{
+ const modules=structuredClone(engineModules),module=modules[0];
+ const progress=emptyProgress(),session=makeSession(modules,module,'grammar','choice',false,progress);
+ const item=session.items[0],task=module.exercises.find(q=>q.id===item.id)!;
+ item.presentation='bank';
+ for(const separator of [' ','\n\n']){
+  task.prompt=`Wybierz:${separator}I ___ apples.`;
+  for(const boardSummary of [false,true]){
+   session.boardSummary=boardSummary;
+   const html=studyView(stateFor(modules,session));
+   assert.match(html, /<p[^>]*>Wybierz:<\/p>[\s\S]*Wybierz słowo z banku[\s\S]*class="gap-sentences"[\s\S]*class="bank-options"/);
+   assert.equal(html.split('apples.').length-1,2); // Treść zdania i etykieta luki.
+   assert.doesNotMatch(html, /class="question"/);
+  }
+ }
+});
 test('wzorzec obejmuje widoki sesji, informacji zwrotnej, sceny i czytanki',()=>{
  const html=cases();
  assert.match(html['sesja bez modułu'],/Potrzebny jest moduł/);
