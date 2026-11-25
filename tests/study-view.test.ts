@@ -9,6 +9,7 @@ import {makeLessonSession} from '../src/learning/lesson-session.ts';
 import {validateJourney} from '../src/learning/journey-validation.ts';
 import {varyLesson} from '../src/learning/lesson-variety.ts';
 import {studyView} from '../src/views/study.ts';
+import {speaker} from '../src/speech.ts';
 import {engineModule,engineModules} from './fixtures/engine.ts';
 import {sceneJourney,sceneModule} from './fixtures/scenes.ts';
 import {readingJourney,readingModule} from './fixtures/readings.ts';
@@ -193,4 +194,23 @@ test('wzorzec obejmuje widoki sesji, informacji zwrotnej, sceny i czytanki',()=>
  assert.match(html['quiz informacja poprawna'],/Tak jest/);
  assert.ok(Object.values(html).some(v=>v.includes('class="dialogue')||v.includes('scene')));
  assert.ok(Object.values(html).some(v=>v.includes('reading')));
+});
+test('oba zadania ze słuchu oferują ukryte tłumaczenie z fiszki i nie pokazują go na zwykłej fiszce',()=>{
+ const device=speaker(),available=device.available;
+ device.available=()=>true;
+ try{
+  for(const input of ['text','choice'] as const){
+   const module=engineModule(),modules=[module];
+   module.languageCode='en';
+   const progress=emptyProgress(),session=makeSession(modules,module,'flashcards',input,false,progress);
+   const item=session.items[0],word=module.words.find(entry=>entry.id===item.id)!;
+   word.front='ser & twaróg';
+   item.listen=true;
+   const html=studyView(stateFor(modules,session));
+   assert.match(html, /<details class="listen-translation">[\s\S]*Pokaż tłumaczenie[\s\S]*<template><p>ser &amp; twaróg<\/p><\/template>/);
+   assert.match(html,input==='text'?/id="answer-form"/:/class="answer-options listen-options"/);
+   item.listen=false;
+   assert.doesNotMatch(studyView(stateFor(modules,session)), /Pokaż tłumaczenie/);
+  }
+ }finally{device.available=available;}
 });

@@ -151,6 +151,10 @@
 .scene-summary li{text-align:left}
 .listen{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:12px 0}
 .listen button{min-height:48px;padding:10px 16px}
+.listen-translation{flex-shrink:0;margin:0 0 12px;text-align:left;font-size:15px}
+.listen-translation summary{min-height:44px;align-content:center;cursor:pointer;color:var(--green);font-weight:600}
+.listen-translation:not([open]) .listen-translation-hide,.listen-translation[open] .listen-translation-show{display:none}
+.listen-translation p{margin:0;padding:8px 12px;border-radius:8px;background:#f4effb;font-size:18px;overflow-wrap:anywhere}
 .listen-options .listen-option{min-height:56px}
 .listen-picture{display:inline-block;margin:0 8px;font-size:26px;vertical-align:middle;object-fit:contain}
 .scene-audio{display:inline-flex;flex-wrap:wrap;gap:6px;max-width:100%}.scene-say,.scene-slow{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;margin-top:6px;border:1px solid #d8c6ed;border-radius:12px;background:#fff;color:#65468d;cursor:pointer}

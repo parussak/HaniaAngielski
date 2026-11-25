@@ -12,7 +12,7 @@ import { translationPrompt } from '../learning/scope.ts';
 import { stageForSession } from '../stage-review.ts';
 import { act, button, e, icon } from '../ui.ts';
 import { feedbackView, illustrationView } from './study-feedback.ts';
-import { choiceOptionsView, listenButtons, listenOptionsView, textAnswerView } from './study-answer.ts';
+import { choiceOptionsView, listenButtons, listeningTranslation, listenOptionsView, textAnswerView } from './study-answer.ts';
 import { studyPage } from './study-page.ts';
 import { choiceExercisePromptView, exercisePromptView } from './exercise-prompt.ts';
 
@@ -57,7 +57,7 @@ export function studyView(state: Readonly<AppState>) {
     const prompt = formattedBank ? '' : readingPrompt
         ? `<h2 class="question"${language ? ` lang="${e(language)}"` : ''}>${readingPrompt.text}</h2>${readingPrompt.translation}`
         : q.kind === 'grammar' ? choicePrompt ?? exercisePromptView(q.prompt,writtenGap) : `<h2 class="question">${e(q.prompt)}</h2>`;
-    if(asking)card=`<div class="exercise-label">${icon('sound')} POSŁUCHAJ</div><h2 class="question">${listen!.choices?'Posłuchaj i wybierz, co to znaczy.':'Posłuchaj i wpisz to, co słyszysz.'}</h2>${listenButtons(listen!,item.key,true)}`;
+    if(asking)card=`<div class="exercise-label">${icon('sound')} POSŁUCHAJ</div><h2 class="question">${listen!.choices?'Posłuchaj i wybierz, co to znaczy.':'Posłuchaj i wpisz to, co słyszysz.'}</h2>${listenButtons(listen!,item.key,true)}${listeningTranslation(q.prompt)}`;
     else card = `<div class="exercise-label">${icon(item.type === 'word' ? 'cards' : q.kind === 'grammar' || q.kind === 'reading' ? 'book' : 'spark')} ${item.type === 'word' ? 'FISZKA · '+translationPrompt(state.modules.find(m=>m.id===item.moduleId)!).toLocaleUpperCase('pl') : q.kind === 'dialogue' ? 'POROZMAWIAJMY'+(scene?' · '+e(scene.scene.title.toLocaleUpperCase('pl')):'') : q.kind === 'reading' ? 'CZYTANKA' : q.kind === 'grammar' ? 'MAŁY KROK W GRAMATYCE' : 'SŁÓWKO PO SŁÓWKU'}</div>${prompt}`;
     if (scene)
         card += sceneScriptView(state.modules, scene,false,actor,s,say);

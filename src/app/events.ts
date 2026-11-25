@@ -19,6 +19,7 @@ import {bindGapDrag} from './gap-drag.ts';
 import {speaker} from '../speech.ts';
 import { applyUpdate, installPwa, prepareOffline } from '../pwa.ts';
 import {bindReadingShortcut} from './reading-shortcut.ts';
+import {bindListeningTranslation} from './listening-translation.ts';
 import type {createReportController} from '../controllers/report.ts';
 import {createGrammarSearchController} from '../controllers/grammar-search.ts';
 import {filterGrammarTopics} from '../views/grammar-search.ts';
@@ -35,6 +36,7 @@ interface EventPorts {
 }
 export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts, learning, house, backups, report, sync, scheduleSync, scheduleReviewMigration, run }: EventPorts) {
     bindNavigation(state,run);
+    bindListeningTranslation(root);
     const grammarSearch = createGrammarSearchController(state);
     root.addEventListener('input', ev => {
         const input = ev.target;

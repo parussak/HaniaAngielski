@@ -8,6 +8,9 @@ type ListeningChoices = NonNullable<NonNullable<ReturnType<typeof listeningTask>
 export function listenButtons(task: {text:string;language:string}, key: string, autoplay: boolean,playLabel='Posłuchaj jeszcze raz') {
     return `<div class="listen" data-key="${e(key)}" ${autoplay?'data-autoplay="true"':''} data-say="${e(task.text)}" data-lang="${e(task.language)}">${speechButtons(task.text,task.language,{playLabel,playClass:'secondary listen-play',slowClass:'secondary listen-slow'})}</div>`;
 }
+export function listeningTranslation(translation: string) {
+    return `<details class="listen-translation"><summary><span class="listen-translation-show">Pokaż tłumaczenie</span><span class="listen-translation-hide">Ukryj tłumaczenie</span></summary><template><p>${e(translation)}</p></template></details>`;
+}
 /** Choices of a listening task: each option is shown as the word (and picture) it stands for. */
 export function listenOptionsView(q: Exercise, s: Session, choices: ListeningChoices) {
     return `<div class="answer-options listen-options">${optionsFor({...q,options:choices.map(c=>c.answer)}, s).map((o, i) => {const choice=choices.find(c=>c.answer===o)!;return `<button class="option listen-option" ${act('answer',{answer:o})}><span aria-hidden="true">${String.fromCharCode(65 + i)}</span>${choice.illustration?.symbol?`<span class="listen-picture" aria-hidden="true">${e(choice.illustration.symbol)}</span>`:choice.illustration?.src?`<img class="listen-picture" src="${e(new URL(choice.illustration.src, document.baseURI).href)}" alt="" width="48" height="34">`:''}${e(choice.label)}</button>`;}).join('')}</div>`;
