@@ -41,7 +41,7 @@
   {
     "id": "paper-in",
     "kind": "grammar",
-    "prompt": "Wybierz: To print my homework, I put paper in the ___.",
+    "prompt": "Wybierz:\n\nTo print my homework, I put paper in the ___.",
     "answers": [
       "printer"
     ],
@@ -81,7 +81,7 @@
   {
     "id": "send-email",
     "kind": "grammar",
-    "prompt": "Wpisz czasownik z wyrażenia „wysłać e-mail”. I ___ an email to my teacher every Friday.",
+    "prompt": "Wpisz czasownik z wyrażenia „wysłać e-mail”.\n\nI ___ an email to my teacher every Friday.",
     "answers": [
       "send"
     ],
