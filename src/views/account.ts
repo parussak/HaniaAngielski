@@ -3,6 +3,8 @@ import { emptyProgress, type Progress, type Module, keyFor } from '../learning/m
 import { sessionCount } from '../history.ts';
 import { ProgressSync, hasProgress } from '../sync.ts';
 import { button, date, e } from '../ui.ts';
+import { volumeSettingsView } from './volume-settings.ts';
+import { volumeSettings } from '../volume.ts';
 export function accountView(state: Readonly<AppState>, sync: ProgressSync, syncText: string) {
     const heading = '<div class="eyebrow">TWOJE MAŁE KROKI, NA RÓŻNYCH URZĄDZENIACH</div><h1>Konto i synchronizacja</h1>';
     if (!state.user || state.reauthNeeded)
@@ -33,5 +35,5 @@ export function listeningSettingsView(modules: Module[]) {
     const word=sample?.words[0],text=sample&&word?vocabularyFullAnswer(questionFor(modules,{key:keyFor(sample,'word',word.id),moduleId:sample.id,id:word.id,version:word.rev??1,type:'word',input:'text'})):'';
     const ready=speech.available(language,text);
     const status = !on ? 'Słuchanie jest wyłączone. Zadania mają zwykłą formę.' : ready ? 'Dźwięk dla tego kursu jest dostępny: nagrania lub głos urządzenia.' : 'Dźwięk jest teraz niedostępny. Zadania mają zwykłą formę — nic nie trzeba robić.';
-    return `<section class="panel listening-settings"><h2>Ćwiczenia ze słuchu</h2><p>W lekcjach można posłuchać słówek i rozmów. Bez dźwięku te same zadania pokazują się w zwykłej formie.</p><label for="listening"><input type="checkbox" id="listening" ${on ? 'checked' : ''}> Włącz ćwiczenia ze słuchu</label><p class="listening-status" aria-live="polite">${status}</p>${ready && sample ? `<div class="listen">${speechButtons(text,language!,{playLabel:'Sprawdź dźwięk'})}</div>` : ''}</section>`;
+    return `<section class="panel listening-settings"><h2>Ćwiczenia ze słuchu</h2><p>W lekcjach można posłuchać słówek i rozmów. Bez dźwięku te same zadania pokazują się w zwykłej formie.</p><label for="listening"><input type="checkbox" id="listening" ${on ? 'checked' : ''}> Włącz ćwiczenia ze słuchu</label><p class="listening-status" aria-live="polite">${status}</p>${ready && sample ? `<div class="listen">${speechButtons(text,language!,{playLabel:'Sprawdź dźwięk'})}</div>` : ''}</section>${volumeSettingsView({speech: volumeSettings().speech(), cues: volumeSettings().cues()}, language && text ? {text, language} : undefined)}`;
 }

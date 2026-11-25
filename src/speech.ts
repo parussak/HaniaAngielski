@@ -4,6 +4,7 @@
  */
 import {createRecordedSpeaker,type RecordedSpeaker} from './speech/recorded-speaker.ts';
 import {recordingCatalog} from './speech/recordings.ts';
+import {volumeSettings} from './volume.ts';
 import {speakingRate,type SpeechKind} from './speech/tempo.ts';
 export interface Speaker {
     /** True when this device can speak the language right now. */
@@ -16,7 +17,7 @@ export interface Speaker {
     setEnabled(on: boolean): void;
 }
 interface Voice { lang: string; localService?: boolean; default?: boolean }
-interface Utterance { lang: string; rate: number; voice: unknown; onerror: ((event: { error?: string }) => void) | null }
+interface Utterance { lang: string; rate: number; volume?: number; voice: unknown; onerror: ((event: { error?: string }) => void) | null }
 export interface SpeechEnvironment {
     synth?: { getVoices(): Voice[]; speak(utterance: never): void; cancel(): void; addEventListener?: (type: string, listener: () => void) => void };
     Utterance?: new (text: string) => Utterance;
@@ -24,6 +25,8 @@ export interface SpeechEnvironment {
     storage?: Pick<Storage, 'getItem' | 'setItem'>;
     /** Called when availability may have changed, so the screen can be drawn again. */
     changed?: () => void;
+    /** Poziom 0–1 czytany przy każdym odtworzeniu. */
+    volume?: () => number;
 }
 const preference = 'male-kroki:sluchanie';
 const primary = (language: string) => language.toLowerCase().split(/[-_]/)[0];
@@ -56,7 +59,7 @@ export function createSpeaker(env: SpeechEnvironment): Speaker {
             try {
                 env.synth!.cancel();
                 const utterance = new env.Utterance!(text);
-                utterance.voice = voice; utterance.lang = voice.lang; utterance.rate = speakingRate(slow,kind);
+                utterance.voice = voice; utterance.lang = voice.lang; utterance.rate = speakingRate(slow,kind); if (env.volume) utterance.volume = env.volume();
                 utterance.onerror = event => { if (!quiet.includes(event?.error ?? '')) fail(); };
                 env.synth!.speak(utterance as never);
                 return true;
@@ -73,8 +76,8 @@ export function speaker(): RecordedSpeaker {
     const w = typeof window === 'undefined' ? undefined : window as unknown as { speechSynthesis?: SpeechEnvironment['synth']; SpeechSynthesisUtterance?: SpeechEnvironment['Utterance']; localStorage?: Storage };
     let storage: Storage | undefined;
     try { storage = w?.localStorage; } catch { /* blocked storage */ }
-    const fallback=createSpeaker({ synth: w?.speechSynthesis, Utterance: w?.SpeechSynthesisUtterance, online: () => typeof navigator === 'undefined' || navigator.onLine !== false, storage, changed: () => redraw?.() });
-    return shared=createRecordedSpeaker({fallback,changed:()=>redraw?.(),supported:()=>{try{return typeof Audio!=='undefined'&&!!new Audio().canPlayType('audio/ogg; codecs="opus"');}catch{return false;}},createAudio:url=>new Audio(url),url:file=>new URL(`audio/${file}`,document.baseURI).href});
+    const fallback=createSpeaker({ synth: w?.speechSynthesis, Utterance: w?.SpeechSynthesisUtterance, online: () => typeof navigator === 'undefined' || navigator.onLine !== false, storage, changed: () => redraw?.(), volume: () => volumeSettings().speech() / 100 });
+    return shared=createRecordedSpeaker({fallback,changed:()=>redraw?.(),supported:()=>{try{return typeof Audio!=='undefined'&&!!new Audio().canPlayType('audio/ogg; codecs="opus"');}catch{return false;}},createAudio:url=>new Audio(url),volume:()=>volumeSettings().speech()/100,url:file=>new URL(`audio/${file}`,document.baseURI).href});
 }
 export function onSpeechChange(listener: () => void) { redraw = listener; }
 /** Missing/old indexes fall back silently. Startup waits at most three seconds for the small catalog. */

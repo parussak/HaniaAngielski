@@ -4,7 +4,7 @@ import {speechKey} from './text.ts';
 import {speakingRate} from './tempo.ts';
 import type {PlaybackRecord} from './playback.ts';
 export interface AudioPlayer {
- playbackRate:number;preservesPitch:boolean;
+ playbackRate:number;preservesPitch:boolean;volume?:number;
  play():Promise<void>|void;pause():void;
  addEventListener(type:string,listener:()=>void):void;
 }
@@ -14,6 +14,8 @@ export interface RecordedEnvironment {
  createAudio:(url:string)=>AudioPlayer;
  url:(file:string)=>string;
  changed:()=>void;
+ /** Poziom 0–1 czytany przy każdym odtworzeniu. */
+ volume?:()=>number;
  timeoutMs?:number;
 }
 export interface RecordedSpeaker extends Speaker {
@@ -53,7 +55,7 @@ export function createRecordedSpeaker(env:RecordedEnvironment):RecordedSpeaker {
     broken.add(entry.file);const spoken=env.fallback.speak(text,language,slow,kind);last={text,language:language!,via:spoken?'device-voice':'none',...file,recordingFailed:true};if(!spoken)env.changed();return spoken;
    };
    try{
-    active=env.createAudio(env.url(entry.file));active.playbackRate=speakingRate(slow,kind);active.preservesPitch=true;
+    active=env.createAudio(env.url(entry.file));active.playbackRate=speakingRate(slow,kind);active.preservesPitch=true;if(env.volume)active.volume=env.volume();
     active.addEventListener('error',()=>fail(Error('Nagranie niedostępne.')));
     active.addEventListener('playing',()=>{if(current===epoch)clear();});
     active.addEventListener('ended',()=>{if(current===epoch){finished=true;clear();active=undefined;}});

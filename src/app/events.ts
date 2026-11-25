@@ -4,6 +4,8 @@ import { AppState } from './state.ts';
 import { createBackupController } from '../controllers/backup.ts';
 import { createLearningController } from '../controllers/learning.ts';
 import { createAppController } from '../controllers/app.ts';
+import { cuePlayer } from '../sounds.ts';
+import { volumeSettings } from '../volume.ts';
 import { createSpeechController } from '../controllers/speech.ts';
 import { ownerOf, unhandled, type ActionOwner } from './actions.ts';
 import { isCallOwnedBy, readCall, type ActionCall, type OwnerCall } from './action-payloads.ts';
@@ -65,6 +67,8 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
     const gaps=bindGapDrag(root,(key,answer)=>{void run(()=>action('gap-place',['gap-place',{key,answer}]));});
     root.addEventListener('click', ev => {
         if(gaps.consumeClick()||drag.consumeClick(ev)){ev.preventDefault();return;}
+        // Głośność: „Posłuchaj” przy efektach gra aktualny sygnał poprawnej odpowiedzi; nic nie zapisuje i nie przerysowuje ekranu.
+        if ((ev.target as HTMLElement).closest('[data-preview-cue]')) { ev.preventDefault(); cuePlayer().play('correct'); return; }
         const el = (ev.target as HTMLElement).closest<HTMLElement>('[data-action]');
         if (!el)
             return;
@@ -94,6 +98,8 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
         }
         void run(() => action('answer', ['answer', { answer: input.value }]));
     });
+    // Przeciąganie suwaka jest ciche: zmienia tylko poziom i napis, bez dźwięku, zapisu postępów i przerysowania.
+    root.addEventListener('input', ev => { const input = ev.target as HTMLInputElement, group = input.dataset?.volume; if (group !== 'speech' && group !== 'cues') return; const percent = Number(input.value); if (group === 'speech') volumeSettings().setSpeech(percent); else volumeSettings().setCues(percent); const level = group === 'speech' ? volumeSettings().speech() : volumeSettings().cues(); const out = root.querySelector(`#volume-${group}-value`); if (out) out.textContent = `${level}%`; input.setAttribute('aria-valuetext', `${level}%`); });
     root.addEventListener('change', ev => { const input = ev.target as HTMLInputElement; if (input.id === 'listening') { speaker().setEnabled(input.checked); void run(async () => {}); return; }
         const setting = readSetting(ev.target); if (setting) learning.handleSettingsChange(setting); const file = readImportFile(ev.target); if (file) void backups.importFile(file); });
     window.addEventListener('online', () => { if (sync.cache?.dirty || !state.progress.active)
