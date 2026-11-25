@@ -2,7 +2,7 @@
   {
     "id": "keys-g",
     "kind": "grammar",
-    "prompt": "Uzupełnij nazwą urządzenia z klawiszami: The letter G is on the ___.",
+    "prompt": "Uzupełnij nazwą urządzenia z klawiszami:\n\nThe letter G is on the ___.",
     "answers": [
       "keyboard"
     ],
