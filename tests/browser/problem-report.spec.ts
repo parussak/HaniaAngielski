@@ -64,7 +64,7 @@ test('telefon: niewyraźna druga kwestia dialogu trafia do wpisu z numerem kwest
  // The learner replays the second line, then starts typing the last gap.
  await scene.locator('.scene-say').nth(1).click();
  await expect.poll(()=>page.evaluate(()=>(window as any).__spoken.at(-1)?.text)).toBe('Beta duo and gamma trio.');
- await page.getByRole('textbox').fill('qua');const tag=await page.locator('.study-heading .tag').innerText();
+ await page.getByRole('textbox').fill('qua');const tag=await page.locator('.task-status').innerText();
 
  await page.getByRole('button',{name:'Zgłoś problem',exact:true}).click();
  await expect(dialog(page).getByRole('heading',{name:'Co jest nie tak?'})).toBeVisible();
@@ -86,7 +86,7 @@ test('telefon: niewyraźna druga kwestia dialogu trafia do wpisu z numerem kwest
  await dialog(page).getByRole('button',{name:'Wróć do zadania'}).click();
  await expect(dialog(page)).toHaveCount(0);
  // Same task, same typed answer, same place in the lesson.
- await expect(page.getByRole('textbox')).toHaveValue('qua');await expect(page.locator('.study-heading .tag')).toHaveText(tag);
+ await expect(page.getByRole('textbox')).toHaveValue('qua');await expect(page.locator('.task-status')).toHaveText(tag);
  await page.getByRole('textbox').fill('quattro');await page.getByRole('button',{name:/Sprawdź/}).click();await idle(page);
  await expect(page.locator('.board-summary')).toBeVisible();
 });

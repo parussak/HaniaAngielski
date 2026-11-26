@@ -52,7 +52,7 @@ test('telefon: dodatkowy trening, wznowienie po odświeżeniu i jedna gwiazdka z
     await page.getByText('Wpisuję odpowiedź', { exact: true }).tap();
     await openAdditionalWarmup(page);
     await expect(page.locator('.study-heading h1')).toHaveText('Kocia rozgrzewka');
-    await expect(page.locator('.study-heading .tag')).toHaveText('1 / 3');
+    await expect(page.locator('.task-status')).toContainText('Zadanie 1 z 3 ·');
     await answer(page); const prompt = await page.locator('.question').innerText();
     await page.reload(); await resumeStudy(page);
     await expect(page.locator('.question')).toHaveText(prompt);

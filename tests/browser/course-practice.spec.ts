@@ -52,7 +52,7 @@ test('Food: globalne fiszki wracają do zaliczonych słów, a modułowe i gwiazd
     await expect(page.getByRole('button',{name:/Quiz z poznanego materiału/})).toContainText('2 poznane pytania');
     await expect(page.getByRole('button',{name:/Gramatyka z poznanego materiału/})).toContainText('1 poznane pytanie');
     await page.getByText('Wybieram odpowiedź',{exact:true}).tap();await page.getByRole('button',{name:/Fiszki z poznanego materiału/}).tap();
-    await expect(page.locator('.study-heading .tag')).toHaveText('1 / 2');
+    await expect(page.locator('.task-status')).toContainText('Zadanie 1 z 2 ·');
     while(await page.locator('.question').count()){
         const cue=await page.locator('.question').innerText(),word=m.words.find(w=>w.front===cue)!;expect(['apple','bread']).toContain(word.id);
         expect((await page.locator('.option').allTextContents()).join(' ')).not.toContain('water');
@@ -80,7 +80,7 @@ test('globalny quiz zachowuje opcje, błąd i poprawę po odświeżeniu',async({
 test('globalna gramatyka pokazuje tylko wcześniej próbowane pytanie i wyjaśnia regułę',async({page})=>{
     await restore(page,seed(modules,[item(m,'g-so-sport','exercise')]));await global(page);
     await page.getByText('Wpisuję odpowiedź',{exact:true}).tap();await page.getByRole('button',{name:/Gramatyka z poznanego materiału/}).tap();
-    await expect(page.locator('.study-heading .tag')).toHaveText('1 / 1');await expect(page.locator('.question')).toHaveText(m.exercises.find(q=>q.id==='g-so-sport')!.prompt);
+    await expect(page.locator('.task-status')).toContainText('Zadanie 1 z 1 ·');await expect(page.locator('.question')).toHaveText(m.exercises.find(q=>q.id==='g-so-sport')!.prompt);
     await expect(page.locator('.option')).toHaveCount(2);await page.getByRole('button',{name:'so',exact:true}).tap();
     await expect(page.locator('.grammar-explanation')).toContainText('Dlaczego tak?');
 });

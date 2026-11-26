@@ -22,7 +22,7 @@ test('telefon: D-52 — ukończona restauracja zostaje ukończona, a jej powtór
  const stage=page.locator('.journey-stage').nth(4);
  await expect(stage.locator('.lesson-step').first()).toHaveClass(/lesson-done/);await stage.getByRole('button',{name:/Pierwsze zamówienie/}).tap();
  await expect(page.locator('.lesson-begin')).toContainText('do 10 zadań');await expect(page.locator('.lesson-rule')).toHaveCount(1);
- await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await expect(page.locator('.study-heading .tag')).toHaveText('1 / 6');
+ await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await expect(page.locator('.task-status')).toContainText('Zadanie 1 z 6 ·');
  await restore(page,progress());await openMap(page);await stage.getByRole('button',{name:/Pierwsze zamówienie/}).tap();
  await expect(page.locator('.lesson-begin')).toContainText('do 10 zadań');await expect(page.locator('.lesson-rule')).toHaveCount(1);
  await page.setViewportSize({width:320,height:640});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
@@ -33,7 +33,7 @@ test('telefon: dawna rozpoczęta sesja wznawia te same pytania i nie zmienia sal
  const p=progress(),l=structuredClone(j.stages[4].lessons[0]);delete l.update;p.active=makeLessonSession(modules,j,l,'text',p);
  const prompt=questionFor(modules,p.active.items[0]).prompt;
  await restore(page,p);await page.reload();await resumeStudy(page);
- await expect(page.locator('.question')).toHaveText(prompt);await expect(page.locator('.study-heading .tag')).toHaveText('1 / 5');
+ await expect(page.locator('.question')).toHaveText(prompt);await expect(page.locator('.task-status')).toContainText('Zadanie 1 z 5 ·');
  await page.getByRole('button',{name:'Domek',exact:true}).tap();await page.getByRole('button',{name:'Koci salonik',exact:true}).tap();await expect(page.locator('.star-wallet')).toContainText('144');
 });
 
@@ -63,8 +63,8 @@ test.describe('PWA Food',()=>{
   await offline.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();
   await answerCurrent(offline,modules);
   // D-51: a pair board is settled as a whole, so the counter stands on its last pair.
-  const tag=offline.locator('.study-heading .tag'),answered=await tag.innerText(),position=Number(answered.split(' / ')[0]);expect(answered).toMatch(/^[1-3] \/ 6$/);
+  const tag=offline.locator('.task-status'),answered=await tag.innerText(),position=Number(answered.match(/^Zadanie (\d+) z/)?.[1]);expect(answered).toMatch(/^Zadanie [1-3] z 6 ·/);
   await offline.reload();await resumeStudy(offline);await expect(offline.locator('.feedback.correct')).toBeVisible();await expect(tag).toHaveText(answered);
-  await offline.getByRole('button',{name:/Dalej/}).tap();await expect(offline.locator('.question')).toContainText('Dzienniczek:');await expect(tag).toHaveText(`${position+1} / 6`);
+  await offline.getByRole('button',{name:/Dalej/}).tap();await expect(offline.locator('.question')).toContainText('Dzienniczek:');await expect(tag).toContainText(`Zadanie ${position+1} z 6 ·`);
  });
 });

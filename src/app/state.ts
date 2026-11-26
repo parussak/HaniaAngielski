@@ -4,12 +4,15 @@ import { emptyProgress, type AnswerMode, type Backup, type Mode, type Module, ty
 import type { AccountUser } from '../firebase.ts';
 import type { Course } from '../materials/model.ts';
 import type { ReportDraft } from '../learning/problem-report.ts';
+import type { TaskPreview } from '../learning/task-progress.ts';
 // Jedyna lista ekranów: typ `Screen` i przywracanie historii (`navigation.ts`) korzystają z niej obie.
 export const screens = ['home', 'setup', 'study', 'progress', 'backup', 'account', 'summary', 'map', 'lesson-intro', 'house', 'journeys', 'module-list', 'courses', 'course-practice', 'grammar', 'warmup'] as const;
 export type Screen = typeof screens[number];
 // Transient application state only. Stored Progress and Backup formats are unchanged.
 export class AppState {
     boardError?: {key:string;answer:string;keys?:string[]};
+    /** D-81: podglądane ukończone zadanie; nie jest zapisywane — po odświeżeniu wraca bieżące. */
+    taskPreview?: TaskPreview;
     /** D-68: sentences of the reading on screen; not saved — a refresh returns to the last answered question. */
     readingShown?: {sessionId:string;count:number};
     /** D-68: the translation the learner tapped; a preview changes no progress. */

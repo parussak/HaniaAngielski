@@ -191,7 +191,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,.segmented input:focus-
   .studying .study-heading{flex-shrink:0;min-height:30px}
   .studying .study-heading .eyebrow{display:none}
   .studying .study-heading h1{font-size:19px;line-height:1.4;letter-spacing:-.4px}
-  .studying .study-heading .tag{font-size:12px;padding:4px 8px;letter-spacing:0}
   .studying .progress-track{flex-shrink:0;height:4px;margin:6px 0 10px}
   .studying .study-card{display:flex;flex-direction:column;flex:1;width:100%;min-height:0;overflow-y:auto;padding:14px;margin:0 auto;border-radius:12px;scroll-padding-bottom:10px}
   .studying .exercise-label{font-size:10px;line-height:1.5;margin:0 0 10px;flex-shrink:0}

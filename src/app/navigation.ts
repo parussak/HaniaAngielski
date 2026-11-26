@@ -9,6 +9,7 @@ const route=(v:ReturnType<typeof snapshot>)=>JSON.stringify([v.owner,v.screen,v.
 export function restoreNavigation(s:AppState,value:unknown=history.state){
  replacing=true;
  restoredUi=undefined;
+ s.taskPreview=undefined;
  const v=value as ReturnType<typeof snapshot>|null;
  if(!v||v.app!=='male-kroki'||v.owner!==(s.user?.uid??'guest')||!screens.includes(v.screen)){s.screen='home';return;}
  if(v.course&&!s.courses.some(c=>c.id===v.course)){s.screen='home';return;}

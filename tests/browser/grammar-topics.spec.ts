@@ -85,7 +85,7 @@ test('Gramatyka: temat pojawia się po próbie, pokazuje tylko próbowane reguł
     await expect(topic.locator('.grammar-rule h3')).toHaveText(['Reguła pc-basic', 'Reguła pc-more']);
     await expect(page.getByText('Reguła art')).toHaveCount(0);
     await page.getByRole('button', { name: 'Poćwicz ten temat →', exact: true }).tap();
-    await expect(page.locator('.study-heading .tag')).toHaveText('1 / 2');
+    await expect(page.locator('.task-status')).toContainText('Zadanie 1 z 2 ·');
     await page.reload();
     await expect(page.locator('.study-heading')).toBeVisible();
     await finishCurrent(page, modules);

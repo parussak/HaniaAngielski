@@ -78,7 +78,7 @@ test('PWA: dodatkowy trening offline, wznowienie i synchronizacja jednej gwiazdk
     const prompt=await page.locator('.question').innerText(),word=modules[0].words.find(w=>w.front===prompt)!;
     await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await expect(page.locator('.feedback.correct')).toBeVisible();
     await page.getByRole('button',{name:'Moja nauka',exact:true}).tap();await moduleSetup(page);await context.setOffline(true);
-    page.once('dialog',d=>d.accept());await openAdditionalWarmup(page);await expect(page.locator('.study-heading .tag')).toHaveText('1 / 1');
+    page.once('dialog',d=>d.accept());await openAdditionalWarmup(page);await expect(page.locator('.task-status')).toContainText('Zadanie 1 z 1 ·');
     await page.reload();await resumeStudy(page);await expect(page.locator('.question')).toHaveText(prompt);
     await page.getByRole('textbox').fill(word.back);await page.getByRole('button',{name:/Sprawdź/}).tap();await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('.lesson-reward')).toContainText('+1 ★');
     // D-51: a refresh restores the summary; the home screen is one tap away.

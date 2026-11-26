@@ -83,7 +83,7 @@ sequenceDiagram
 
 - Brak właściciela (`undefined`) albo brak wymaganego pola (`call === null`) oznacza, że nic się nie dzieje. Nieznana nazwa akcji nie skompiluje się w widoku, bo `act()` przyjmuje tylko `AppAction`.
 - Nie każda akcja ma planer ani zapis: akcje stanu ekranu (np. `home`, `house-tab`) kończą się na zmianie stanu i renderze. Kroki z planerem i `mutate` dotyczą tylko akcji, które rozstrzyga logika i zapisują postępy.
-- Właściciele `navigation`, `starts`, `answers`, `reading` trafiają do jednego kontrolera `learning`, który przekazuje je dalej (diagram 4). Pozostali właściciele (`house`, `backup`, `account`, `app`, `speech`) mają po jednym kontrolerze.
+- Właściciele `navigation`, `starts`, `answers`, `reading` trafiają do jednego kontrolera `learning`, który przekazuje je dalej (diagram 4). Pozostali właściciele (`house`, `backup`, `account`, `app`, `speech`, `preview`) mają po jednym kontrolerze.
 
 ## 3 · Rozpoczynanie sesji (D-76)
 
@@ -238,6 +238,7 @@ flowchart LR
 | `reading.ts` | `ReadingState` | `mutate` |
 | `grammar-search.ts` | `GrammarQueryStore` | — (tylko `grammarQuery`) |
 | `speech.ts` | — | — (nie zapisuje) |
+| `task-preview.ts` | `TaskPreviewState` | — (nie zapisuje) |
 
 ## 5 · Model danych i zapis
 

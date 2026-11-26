@@ -13,8 +13,7 @@ import { progressView as renderProgressView } from '../views/progress.ts';
 import { pwa } from '../pwa.ts';
 import { setupView } from '../views/setup.ts';
 import { shellView } from '../views/shell.ts';
-import { studyView } from '../views/study.ts';
-import { withReportButton } from '../views/report-dialog.ts';
+import { taskScreenView } from '../views/task-screen.ts';
 import { summaryView } from '../views/summary.ts';
 import { ProgressSync } from '../sync.ts';
 import { button, icon } from '../ui.ts';
@@ -61,8 +60,7 @@ export function createViews(state: AppState, sync: ProgressSync, syncLabel: () =
     function journeyList() { return courseContext(state) + renderJourneyList(courseModules(state), courseJourneys(state), state.progress,state.journeyIssues,currentCourse(state)?.id); }
     function moduleList() { return courseContext(state) + renderModuleList(courseModules(state)) + button('course-practice','Ćwicz cały poznany materiał →','secondary'); }
     function setup() { const cards=invitations(state.selected.id);return setupView(state,cards.opening+cards.finale); }
-    // D-80: the report button sits under the task but is not part of it, so the task's own markup stays as it was.
-    function study() { return state.progress.active ? withReportButton(studyView(state)) : studyView(state); }
+    function study() { return taskScreenView(state); }
     function summary() { return summaryView(state, home); }
     function progressView() { return renderProgressView(state); }
     function backupView() { return renderBackupView(state); }

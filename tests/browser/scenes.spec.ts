@@ -27,9 +27,9 @@ test.describe('telefon',()=>{
   await serve(page,[...read('rozmowki.json'),entry]);
   await page.goto('./');await openMap(page);await resumeStudy(page);await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();
   // The three words come first; the scene closes the lesson.
-  await expect(page.locator('.study-heading .tag')).toHaveText('1 / 7');
+  await expect(page.locator('.task-status')).toContainText('Zadanie 1 z 7 ·');
   for(let step=0;!await scene(page).count();step++){expect(step).toBeLessThan(4);await answerCurrent(page,modules);await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');}
-  await expect(page.locator('.study-heading .tag')).toHaveText('4 / 7');await expect(page.locator('.exercise-label')).toContainText('ROZMOWA TALK');
+  await expect(page.locator('.task-status')).toContainText('Zadanie 4 z 7 ·');await expect(page.locator('.exercise-label')).toContainText('ROZMOWA TALK');
   // Gap 1, bank: only the first line is shown; every answer button is at least 44 px high.
   await expect(scene(page)).toHaveAttribute('data-key',key('one'));await expect(scene(page).locator('.dialogue-line')).toHaveCount(1);await expect(scene(page).locator('.scene-current')).toHaveCount(1);
   await expect(page.locator('.option')).toHaveCount(3);await expect(page.getByRole('textbox')).toHaveCount(0);
@@ -37,11 +37,11 @@ test.describe('telefon',()=>{
   await page.locator('.option[data-answer="uno"]').tap();
   // Correct: no feedback step, the second line appears and the first keeps its answer.
   await expect(scene(page)).toHaveAttribute('data-key',key('two'));await expect(page.locator('.feedback')).toHaveCount(0);await expect(page.getByRole('button',{name:/Dalej/})).toHaveCount(0);
-  await expect(scene(page).locator('.dialogue-line')).toHaveCount(2);await expect(scene(page).locator('.scene-filled')).toHaveText(['uno']);await expect(page.locator('.study-heading .tag')).toHaveText('5 / 7');
+  await expect(scene(page).locator('.dialogue-line')).toHaveCount(2);await expect(scene(page).locator('.scene-filled')).toHaveText(['uno']);await expect(page.locator('.task-status')).toContainText('Zadanie 5 z 7 ·');
   // Gap 2, typing: a mistake shows the Polish explanation and both ways forward.
   await expect(page.locator('.option')).toHaveCount(0);await page.getByRole('textbox').fill('wrong');await page.getByRole('button',{name:/Sprawdź/}).tap();
   await expect(page.locator('.feedback.incorrect')).toContainText('Wyjaśnienie drugiej luki.');await expect(page.locator('.given-answer')).toContainText('wrong');await expect(page.locator('.expected-answer')).toContainText('duo');
-  await expect(page.locator('.study-heading .tag')).toHaveText('5 / 7');await noScroll(page);
+  await expect(page.locator('.task-status')).toContainText('Zadanie 5 z 7 ·');await noScroll(page);
   // Refresh in the middle of the scene: the same gap, the same mistake, earlier answers kept.
   await page.reload();await resumeStudy(page);await expect(page.locator('.feedback.incorrect')).toContainText('Wyjaśnienie drugiej luki.');await expect(scene(page)).toHaveAttribute('data-key',key('two'));await expect(scene(page).locator('.scene-filled')).toHaveText(['uno']);
   await page.getByRole('button',{name:'Popraw tę linijkę'}).tap();await page.getByRole('textbox').fill('duo');await page.getByRole('button',{name:/Sprawdź/}).tap();
@@ -50,7 +50,7 @@ test.describe('telefon',()=>{
   await page.setViewportSize({width:320,height:640});await noScroll(page);await page.screenshot({path:'test-results/scene-middle-320.png',fullPage:true});await page.setViewportSize({width:390,height:844});
   // Gap 3 wrong and left with "Dalej": the conversation goes on, the session does not grow.
   await page.locator('.option[data-answer="nope"]').tap();await expect(page.locator('.feedback.incorrect')).toContainText('Wyjaśnienie trzeciej luki.');await page.getByRole('button',{name:/Dalej/}).tap();
-  await expect(scene(page)).toHaveAttribute('data-key',key('four'));await expect(scene(page).locator('.dialogue-line')).toHaveCount(4);await expect(page.locator('.study-heading .tag')).toHaveText('7 / 7');
+  await expect(scene(page)).toHaveAttribute('data-key',key('four'));await expect(scene(page).locator('.dialogue-line')).toHaveCount(4);await expect(page.locator('.task-status')).toContainText('Zadanie 7 z 7 ·');
   await page.screenshot({path:'test-results/scene-last-gap-mobile.png',fullPage:true});
   await page.getByRole('textbox').fill('quattro');await page.getByRole('button',{name:/Sprawdź/}).tap();
   // One summary for the whole conversation.
@@ -70,7 +70,7 @@ test.describe('telefon',()=>{
 test('klawiatura: scena w trybie Rozmówki — Enter wybiera z banku i zatwierdza wpisaną odpowiedź',async({page})=>{
  await serve(page,[read('rozmowki.json')[0],entry]);
  await page.goto('./');await openModule(page);await page.getByText('Wybieram odpowiedź',{exact:true}).click();await page.getByRole('button',{name:'Rozmówki',exact:true}).click();
- await expect(page.locator('.study-heading .tag')).toHaveText('1 / 5');
+ await expect(page.locator('.task-status')).toContainText('Zadanie 1 z 5 ·');
  if(!await scene(page).count()){await answerCurrent(page,modules);await page.getByRole('button',{name:/Dalej/}).click();}
  await expect(scene(page)).toHaveAttribute('data-key',key('one'));
  // The way of answering comes from the scene, not from the session setting.
@@ -97,7 +97,7 @@ test.describe('Food',()=>{
   const lesson=stage.locator('.lesson-step[data-id="restaurant-dialogue-1"]');await expect(lesson).toHaveClass(/lesson-done/);await expect(lesson.locator('.lesson-scene-badge')).toBeVisible();await expect(page.locator('.star-wallet')).toContainText('23');
   await page.setViewportSize({width:320,height:844});await noScroll(page);await stage.screenshot({path:'test-results/story-map-badges-mobile.png'});
   await lesson.click();await expect(page.locator('.lesson-scene-badge')).toBeVisible();await expect(page.locator('.lesson-begin')).toContainText('już ukończona');
-  await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).click();await expect(scene(page)).toHaveAttribute('data-position','1');await expect(page.locator('.study-heading .tag')).toHaveText('1 / 5');
+  await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).click();await expect(scene(page)).toHaveAttribute('data-position','1');await expect(page.locator('.task-status')).toContainText('Zadanie 1 z 5 ·');
   for(let i=0;i<5;i++)await answerCurrent(page,real);
   await page.getByRole('button',{name:/Dalej/}).click();await expect(page.locator('.lesson-reward')).toContainText('+1 ★');
   const saved=await exported(page);expect(saved.adventure!.completed).toEqual(p.adventure!.completed);expect(saved.adventure!.earned).toBe(24);
@@ -105,7 +105,7 @@ test.describe('Food',()=>{
  async function openDialogueLesson(page:Page){
   await openMap(page);const stage=page.locator('.journey-stage').nth(4);if(await stage.getAttribute('open')===null)await stage.locator('summary').tap();
   await stage.getByRole('button',{name:/Rozmowa przy stoliku(?! —)/}).first().tap();await expect(page.locator('#app')).toContainText('Uzupełniaj historyjkę krok po kroku');
-  await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await expect(page.locator('.study-heading .tag')).toHaveText('1 / 5');
+  await page.getByRole('button',{name:'Zaczynam ćwiczenia →'}).tap();await expect(page.locator('.task-status')).toContainText('Zadanie 1 z 5 ·');
  }
  async function untilScene(page:Page){for(let step=0;!await scene(page).count();step++){expect(step).toBeLessThan(6);await answerCurrent(page,real);await page.getByRole('button',{name:/Dalej/}).tap();await expect(page.locator('#app')).toHaveAttribute('aria-busy','false');}}
  test('telefon: „Zamówienie w restauracji” zamyka lekcję Rozmowa przy stoliku i daje +3 ★',async({page})=>{

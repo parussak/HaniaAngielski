@@ -19,6 +19,8 @@ export const actionOwners = {
     /** Odpowiedzi w trwającej sesji. */
     answers: ['pair-answer', 'gap-place', 'pair-select', 'bank-select', 'answer', 'retry', 'next'],
     reading: ['reading-next', 'reading-peek', 'reading-question-peek'],
+    /** D-81: podgląd ukończonego zadania; stan ekranu, nic nie zapisuje. */
+    preview: ['task-preview', 'task-preview-close'],
 } as const;
 
 export type ActionOwner = keyof typeof actionOwners;

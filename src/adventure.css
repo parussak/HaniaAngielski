@@ -269,3 +269,27 @@
 .volume-control input[type=range]{flex:1 1 140px;min-width:0;min-height:44px}
 .volume-control output{min-width:3.5ch;font-weight:700;text-align:right}
 .volume-control button{min-height:48px;padding:10px 16px}
+
+/* D-81: numery zadań sesji i podgląd ukończonego zadania. */
+.task-navigator{flex-shrink:0;min-width:0}
+.task-status{margin:2px 0 4px;font-size:12px;line-height:1.5;color:#736581}
+.task-numbers{position:relative;display:flex;gap:6px;margin:0;padding:3px;list-style:none;overflow-x:auto;scrollbar-width:thin}
+.task-number{display:flex;align-items:center;justify-content:center;gap:2px;min-width:44px;height:44px;padding:0 6px;border:1px solid #dfd0ef;border-radius:10px;background:#fffcff;color:#52416b;font:inherit;font-weight:600;cursor:pointer}
+.task-number.is-done{background:#f2ebff}
+.task-number[aria-current]{border:2px solid #78539e;background:#e3d6f6;cursor:default}
+.task-number:disabled{opacity:.4;cursor:default}
+.task-preview{min-width:0;overflow-wrap:anywhere}
+.task-preview-label{font-size:10px;font-weight:700;letter-spacing:.5px;color:#78539e}
+.studying .study-card>.task-preview{flex:1;min-height:0;overflow-y:auto}
+.studying .task-preview .feedback{flex:none;overflow:visible;min-height:auto}
+/* Telefon poziomo: „Wróć” dzieli wiersz z tytułem, a licznik z numerami, żeby zadanie i „Dalej” mieściły się nad paskiem. */
+@media(max-height:500px) and (min-width:600px){
+  .studying .content:has(>.task-navigator){display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto auto minmax(0,1fr);column-gap:16px}
+  .studying .content:has(>.task-navigator)>*{grid-column:1/-1}
+  .studying .content:has(>.task-navigator)>.back{grid-column:1;grid-row:1;align-self:center}
+  .studying .content:has(>.task-navigator)>.study-heading{grid-column:2;grid-row:1}
+  .studying .content>.task-navigator{display:flex;align-items:center;gap:10px}
+  .studying .task-status{flex-shrink:0;margin:0}
+  .studying .task-numbers{flex:1;min-width:0;padding:1px}
+  .studying .content:has(>.task-navigator)>.progress-track{margin:3px 0 5px}
+}

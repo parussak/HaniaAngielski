@@ -91,6 +91,13 @@ Status: wdrożone. Format: [czytanka](format-materialow.md#czytanka).
 - **Wyjaśnienia gramatyki** (D-31) po odpowiedzi poprawnej i błędnej mówią, *dlaczego* forma pasuje lub nie pasuje do konkretnego zdania. Tekst pochodzi z `explanation` zadania; przy `ruleId` dostępne jest przypomnienie reguły. Nie ma analizy odpowiedzi przez AI podczas nauki.
 - Oceniamy według wspólnych zasad odpowiedzi, także a/an: brak wymaganego rodzajnika jest zaliczany z pomarańczowym wyjaśnieniem, błędny lub zbędny rodzajnik jest błędem (D-37). Informacja zwrotna jest łagodna: zielony sukces, jasnoróżowy błąd bez przekreśleń (D-36).
 
+### Przeglądanie ukończonych zadań (D-81)
+
+- Pod licznikiem trwającej sesji są numery wszystkich zadań. Liczone są zadania sesji, więc każda luka sceny lub planszy i każde pytanie czytanki ma własny numer.
+- ✓ dostaje zadanie z odpowiedzią, od którego sesja przeszła dalej — także z błędem. Zadanie na ekranie (z informacją zwrotną lub poprawką) i nietrafiona para na otwartej planszy jeszcze go nie mają.
+- Podgląd służy do czytania i odsłuchu: nie ma w nim odpowiadania, poprawki ani „Dalej”. Podgląd nie podpowiada: odpowiedzi na nieukończone luki sceny zostają zakryte.
+- Podgląd nie jest zapisywany; po odświeżeniu wraca bieżące zadanie.
+
 ## 6. Ocena sesji i nagrody
 
 ### Kocie łapki (D-64)

@@ -37,6 +37,7 @@ export const payloadSchema = {
     'pair-answer': { answer: maybeText }, 'gap-place': { key: maybeText, token: maybeText, answer: maybeText }, 'pair-select': { key: maybeText },
     'bank-select': { answer: maybeText }, answer: { answer: text }, retry: { key: maybeText }, next: none,
     'reading-next': none, 'reading-peek': { sentence: maybeText, word: maybeText }, 'reading-question-peek': { key: maybeText, term: maybeText },
+    'task-preview': { task: num }, 'task-preview-close': none,
 } as const satisfies Record<AppAction, Fields>;
 
 type Value<S extends Spec> = S['kind'] extends 'number' ? number : S['kind'] extends 'flag' ? boolean : string;

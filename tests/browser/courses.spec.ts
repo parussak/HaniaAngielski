@@ -31,7 +31,7 @@ for (const [book, target, incorrect, prompt] of [['french-book','café','cafe','
         await page.locator('.session-settings summary').tap(); await page.locator('#previous').check();
         await page.getByRole('button', { name: 'Quiz słownictwa', exact: true }).tap();
         await expect(page.locator('.question')).toHaveText(`${prompt}: kawa`);
-        await expect(page.locator('.study-heading .tag')).toHaveText('1 / 1');
+        await expect(page.locator('.task-status')).toContainText('Zadanie 1 z 1 ·');
         await page.getByRole('textbox').fill(incorrect); await page.getByRole('button', { name: /Sprawdź/ }).tap();
         await expect(page.locator('.feedback.incorrect')).toBeVisible();
         await expect(page.locator('.expected-answer')).toContainText(target);
@@ -65,7 +65,7 @@ test('dwa podręczniki francuskiego nie współdzielą zaliczonych słówek', as
     await expect(page.locator('#app')).toHaveAttribute('aria-busy', 'false');
     await page.getByRole('button', { name: 'Moja nauka', exact: true }).tap(); await open(page, 'italian-book');
     await page.getByRole('button', { name: 'Fiszki', exact: true }).tap();
-    await expect(page.locator('.question')).toBeVisible(); await expect(page.locator('.study-heading .tag')).toHaveText('1 / 2');
+    await expect(page.locator('.question')).toBeVisible(); await expect(page.locator('.task-status')).toContainText('Zadanie 1 z 2 ·');
     await expect(page.locator('.exercise-label')).toContainText('PODAJ PO FRANCUSKU');
     expect(await page.locator('.option').allTextContents()).not.toContain('coffee');
 });

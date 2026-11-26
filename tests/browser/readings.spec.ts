@@ -80,7 +80,7 @@ test.describe('telefon',()=>{
  });
  test('czytanka w lekcji: zdania po „Dalej”, pytania blokują przejście, tłumaczenie na dotknięcie, wznowienie i ponowne czytanie',async({page})=>{
   await startReading(page);
-  await expect(page.locator('.exercise-label')).toContainText('CZYTANKA PICNIC');await expect(page.locator('.study-heading .tag')).toHaveText('1 / 3');
+  await expect(page.locator('.exercise-label')).toContainText('CZYTANKA PICNIC');await expect(page.locator('.task-status')).toContainText('Zadanie 1 z 3 ·');
   // A choice question holds „Dalej”, but the displayed text stays interactive.
   await expect(reading(page)).toHaveAttribute('data-visible','1');await expect(reading(page).locator('.reading-sentence')).toHaveCount(1);
   const question=reading(page).locator('.reading-open');
@@ -116,7 +116,7 @@ test.describe('telefon',()=>{
   await earlier.getByRole('button',{name:'Przetłumacz: garden'}).tap();await idle(page);
   await expect(earlier.locator('.reading-translation')).toHaveText('„garden” — ogród');
   await expect(reading(page).locator('.reading-tap .reading-translate')).toHaveCount(0);
-  await expect(page.locator('.reading-done.incorrect')).toContainText('In the kitchen');await expect(page.locator('.study-heading .tag')).toHaveText('2 / 3');
+  await expect(page.locator('.reading-done.incorrect')).toContainText('In the kitchen');await expect(page.locator('.task-status')).toContainText('Zadanie 2 z 3 ·');
   await expect(page.locator('.reading-tap .reading-answer')).toHaveText(['Olek','has','got','some','apples']);await expect(next(page)).toBeDisabled();
   await page.locator('.reading-answer',{hasText:'apples'}).tap();await idle(page);await expect(page.locator('.reading .feedback.correct')).toContainText('Apples to jabłka.');
   await page.setViewportSize({width:320,height:640});await noScroll(page);await page.screenshot({path:'test-results/reading-middle-320.png',fullPage:true});await page.setViewportSize({width:390,height:844});

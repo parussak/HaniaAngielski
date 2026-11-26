@@ -22,6 +22,7 @@ import {bindReadingShortcut} from './reading-shortcut.ts';
 import {bindListeningTranslation} from './listening-translation.ts';
 import type {createReportController} from '../controllers/report.ts';
 import {createGrammarSearchController} from '../controllers/grammar-search.ts';
+import {createTaskPreviewController} from '../controllers/task-preview.ts';
 import {filterGrammarTopics} from '../views/grammar-search.ts';
 interface EventPorts {
     accounts: ReturnType<typeof createAccountController>;
@@ -42,7 +43,7 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
         const input = ev.target;
         if (input instanceof HTMLInputElement && grammarSearch.handleInput(input)) filterGrammarTopics(root, state.grammarQuery);
     });
-    const app = createAppController(state, { confirm: message => window.confirm(message), installPwa, prepareOffline, applyUpdate }), speech = createSpeechController();
+    const app = createAppController(state, { confirm: message => window.confirm(message), installPwa, prepareOffline, applyUpdate }), speech = createSpeechController(), preview = createTaskPreviewController(state);
     // Jedyny przełącznik akcji: właściciel (spis w `actions.ts`) wskazuje kontroler. Nieznana nazwa albo brak wymaganych
     // danych (`call === null`) nic nie robi. Rzutowanie na akcje właściciela jest bezpieczne: `owner` wynika z nazwy akcji.
     async function action(name: string, call: ActionCall | null) {
@@ -51,6 +52,9 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
         // Wyczyszczenie błędu planszy dotyczy każdej akcji poza domkiem (tak jak wcześniej, gdy akcje przechodziły przez naukę).
         if (owner !== 'house')
             state.boardError = undefined;
+        // D-81: każda inna akcja kończy podgląd ukończonego zadania.
+        if (owner !== 'preview')
+            state.taskPreview = undefined;
         switch (owner) {
             case 'house': await house.handleAction(...owned(owner)); return;
             case 'navigation': case 'starts': case 'answers': case 'reading': await learning.handleAction(...owned(owner)); return;
@@ -59,6 +63,7 @@ export function bindAppEvents(root: HTMLDivElement, state: AppState, { accounts,
             case 'app': await app.handleAction(...owned(owner)); return;
             case 'speech': speech.handleAction(...owned(owner)); return;
             case 'report': await report.handleAction(...owned(owner)); return;
+            case 'preview': preview.handleAction(...owned(owner)); return;
             case undefined: return;
             default: unhandled(owner);
         }

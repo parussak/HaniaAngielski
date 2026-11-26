@@ -1,10 +1,12 @@
 import { AppState } from './state.ts';
 import {saveNavigation,restoreViewContext} from './navigation.ts';
 import {speaker} from '../speech.ts';
+import {createAnswerDraft} from './answer-draft.ts';
 export function createRenderer(root: HTMLDivElement, state: AppState, renderScreen: () => string) {
     let spoken = '';
     let speechContext='';
     let readingPlace='';
+    const draft=createAnswerDraft(root,state);
     function render() {
         saveNavigation(state);
         const historyContext = `${state.user?.uid ?? 'guest'}:${state.progress.history?.head ?? 'none'}`;
@@ -22,12 +24,17 @@ export function createRenderer(root: HTMLDivElement, state: AppState, renderScre
         const focusId = focused?.id;
         const viewKey=state.screen==='house'?`house/${state.houseOverview?'overview':state.chosenRoom}`:state.screen;
         const changedScreen = state.renderedScreen !== viewKey;
-        const nextSpeechContext=[state.user?.uid??'guest',state.screen,state.selectedCourseId,state.progress.active?.id,state.progress.active?.index].join(':');
+        const nextSpeechContext=[state.user?.uid??'guest',state.screen,state.selectedCourseId,state.progress.active?.id,state.progress.active?.index,state.taskPreview?.position].join(':');
         if(nextSpeechContext!==speechContext){speaker().stop();spoken='';speechContext=nextSpeechContext;}
         const helpOpen = !changedScreen && !!root.querySelector<HTMLDetailsElement>('.home-help')?.open;
         const progressDetails=root.querySelector<HTMLDetailsElement>('.progress-details');
         const progressOpen=!changedScreen&&!!progressDetails?.open,progressCourse=progressDetails?.dataset.course;
+        draft.keep();
         root.innerHTML = renderScreen();
+        draft.restore();
+        // D-81: na wąskim ekranie numery przewijają się w bok; oglądane zadanie ma być widoczne.
+        const numbers = root.querySelector<HTMLElement>('.task-numbers'), shownNumber = numbers?.querySelector<HTMLElement>('[aria-current]');
+        if (numbers && shownNumber) numbers.scrollLeft = shownNumber.offsetLeft - (numbers.clientWidth - shownNumber.offsetWidth) / 2;
         const help = root.querySelector<HTMLDetailsElement>('.home-help');
         if (help)
             help.open = helpOpen;

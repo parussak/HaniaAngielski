@@ -85,6 +85,7 @@ Każda luka sceny ma własny wpis w `attempts` pod kluczem zwykłego zadania (`m
 Te informacje powstają przy odczycie i **nie mają własnych pól**:
 
 - ocena w kocich łapkach — z `items` i `attempts` (D-64),
+- ukończone zadania trwającej sesji (✓ i licznik) — z `items`, `index` i `attempts`; podgląd zadania to tylko stan ekranu (D-81),
 - kolor błędnej luki — z `attempts` (D-56),
 - obsada kocich rozmówców — z identyfikatora sesji i sceny (D-54),
 - rodzajniki w opcjach wyboru — dodawane do pytania, bez zmiany `options` (D-55),

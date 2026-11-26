@@ -16,7 +16,7 @@ import { choiceOptionsView, listenButtons, listeningTranslation, listenOptionsVi
 import { studyPage } from './study-page.ts';
 import { choiceExercisePromptView, exercisePromptView } from './exercise-prompt.ts';
 
-export function studyView(state: Readonly<AppState>) {
+export function studyView(state: Readonly<AppState>, navigator = '') {
     const s = state.progress.active;
     if (!s)
         return `<h1>Sesja zakończona</h1>${button('home', 'Wróć do modułów')}`;
@@ -39,7 +39,7 @@ export function studyView(state: Readonly<AppState>) {
     const pronunciation=s.phase==='feedback'&&['flashcards','flashcards-basic','quiz'].includes(s.mode)?vocabularyPlayback(state.modules,item):undefined;
     const answerAudio=pronunciation&&speaker().available(pronunciation.language,pronunciation.text)?pronunciation:undefined;
     const say=(text:string)=>speaker().available(language,text)?`<span class="scene-audio">${speechButtons(text,language!,{kind:'dialogue',playLabel:'',playClass:'scene-say',slowClass:'scene-slow',playAria:'Posłuchaj tej kwestii',slowAria:'Posłuchaj tej kwestii wolniej'})}</span>`:'';
-    const page=(card:string)=>studyPage(state,s,card);
+    const page=(card:string)=>studyPage(state,s,card,navigator);
     // D-68: a whole reading, sentence by sentence; the newest sentence is read out once when listening is on.
     const reading = readingView(state.modules, s, state.readingShown?.sessionId === s.id ? state.readingShown.count : undefined);
     if (reading) {

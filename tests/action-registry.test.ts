@@ -14,7 +14,7 @@ const walk=(node:ts.Node,visit:(n:ts.Node)=>void)=>{visit(node);node.forEachChil
 // Plik kontrolera, który obsługuje akcje danego właściciela.
 const handlers:Record<ActionOwner,string>={
  app:'controllers/app.ts',speech:'controllers/speech.ts',house:'controllers/house.ts',account:'controllers/account.ts',backup:'controllers/backup.ts',
- navigation:'controllers/learning.ts',starts:'controllers/session-start.ts',answers:'controllers/session-answers.ts',reading:'controllers/reading.ts',
+ navigation:'controllers/learning.ts',starts:'controllers/session-start.ts',answers:'controllers/session-answers.ts',reading:'controllers/reading.ts',preview:'controllers/task-preview.ts',
 };
 const all=Object.entries(actionOwners).flatMap(([owner,actions])=>(actions as readonly string[]).map(action=>({owner,action})));
 
